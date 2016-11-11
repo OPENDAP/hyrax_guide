@@ -1,0 +1,61 @@
+Hyrax - Configuration - OPeNDAP Documentation
+=============================================
+
+[[firstHeading]]
+Hyrax - Configuration
+---------------------
+
+From OPeNDAP Documentation
+
+*When you install Hyrax for the first time it is pre-configured to serve
+test data sets that come with each of the installed data handlers. This
+will allow you to test the server and make sure it is functioning
+correctly. After that you can customize it for your data.*
+
+Contents
+~~~~~~~~
+
+* link:#BES_configuration[1 BES configuration]
+* link:#OLFS_configuration[2 OLFS configuration]
+* link:#THREDDS_Configuration[3 THREDDS Configuration]
+* link:#Logging_configuration[4 Logging configuration]
+* link:#Robots[5 Robots]
+
+1 link:../index.php/Hyrax_-_BES_Configuration[BES configuration]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+2 link:../index.php/Hyrax_-_OLFS_Configuration[OLFS configuration]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+3 link:../index.php/Hyrax_-_THREDDS_Configuration[THREDDS Configuration]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+4 link:../index.php/Hyrax_-_Logging_Configuration[Logging configuration]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+5 Robots
+~~~~~~~~
+
+To correctly deploy a robots.txt file for Hyrax, you must correctly
+deploy it for Tomcat. This means that your robots.txt file must be
+accessible here:
+
+----------------------------------
+   http://you.host:port/robots.txt
+----------------------------------
+
+For example:
+
+------------------------------------
+   http://www.opendap.org/robots.txt
+------------------------------------
+
+Placing it lower in the URL path doesn't seem to work.
+
+In order to get Tomcat to serve the file from that location you must
+place it in *$CATALINA_HOME/webapps/ROOT*
+
+If you still find that you system is being cruelly burdened with robot
+traffic then you might want to try the
+link:../index.php/Hyrax_-_OLFS_Configuration#BotBlocker_.28optional.29[BotBlocker
+handler for the OLFS].

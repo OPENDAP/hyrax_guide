@@ -1,0 +1,95 @@
+Australian BOM System Administrator's Agenda and Presentations - OPeNDAP
+Documentation
+======================================================================================
+
+[[firstHeading]]
+Australian BOM System Administrator's Agenda and Presentations
+--------------------------------------------------------------
+
+From OPeNDAP Documentation
+
+1 System Administrator's Workshop
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Monday 15 October to Tuesday 16 October
+
+This workshop targets the system administrator whose task is to setup a
+data service for interactive users, batch processes, and high level web
+services, that will access netcdf, hdf, or freeform data in a file
+system or SQL data in a database. The workshop will provide them with
+the information they need to install and configure Hyrax along with some
+background on available clients so they can test their servers and give
+basic advice to users.
+
+2 Agenda and Presentations
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+9:00am Monday - Start of System Administrator's workshop
+http://www.opendap.org/support/bom_saw/OPeNDAP_BOM_intro_20071015.ppt[Overview
+of OPeNDAP server and client technology]
+
+10:00 am Monday - break around 10:30am
+http://www.opendap.org/support/bom_saw/SAW_2r3_HyraxArchitecture.ppt[Architecture
+and Design of Hyrax (system admin point of view)]
+http://www.opendap.org/support/bom_saw/SAW_3_4r1_Installation.ppt[Installation
+of Hyrax]
+
+12:30pm Monday - Lunch
+
+1:30pm Monday
+http://www.opendap.org/support/bom_saw/SAW_5r1_hyrax_hands_on.ppt[Hands-on
+to installation and setup of Hyrax]
+
+2:30pm Monday
+http://www.opendap.org/support/bom_saw/SAW_6r0_Testing_the_installation.ppt[Testing
+the server installation]
+
+3:00pm Monday
+http://www.opendap.org/support/bom_saw/SAW_15r0_Clients_and_Searching.ppt[Commonly
+used clients and their different characteristics]
+
+4:00pm Monday
+http://www.opendap.org/support/bom_saw/OPeNDAP_BOM_usecases_20071015.ppt[Use-Case
+for operational services (10 min. presentation on Tuesday)]
+
+5:00pm Monday - Retire until Tuesday morning at 9:00am
+
+Workshop dinner
+
+9:00am Tuesday - start of 2nd day of workshop +
+ _Presentations of Use-Case for operational services_ [not yet complete]
+
+10:30am Tuesday
+http://www.opendap.org/support/bom_saw/SAW_7r0_DataHandlers.ppt[Configuration
+of the data handlers]
+
+12:30pm Tuesday - Lunch
+
+1:30pm Tuesday
+http://www.opendap.org/support/bom_saw/SAW_10r1_InstallationAdvancedTopics.ppt[Installation
+Advanced issues]
+
+2:00pm Tuesday _Use-Case presentations_ [not yet complete]
+
+3:00pm Tuesday http://www.opendap.org/support/bom_saw/SAW_12r1.ppt[Other
+services hosted within Hyrax]
+http://www.opendap.org/support/bom_saw/SAW_13r1.ppt[Future Development
+Plans]
+
+4:00pm Tuesday
+http://www.opendap.org/support/bom_saw/OPeNDAP_BOM_workinggroups_20071015.ppt[Hands-on
+advanced topics and issues]
+
+5:00pm Tuesday - End of System Administrator's Workshop
+
+All attendees are asked to bring a PC laptop and will be given a Linux
+virtual machine. If people want to use a Mac, they will have to be able
+to 'roll with the punches' when it comes to building code in that
+environment.
+
+We will provide attendees with a binder for the lecture and hands-on
+info.
+
+More information about the
+http://opendap.bom.gov.au/opendap_workshops/[OPeNDAP workshops is
+available here].

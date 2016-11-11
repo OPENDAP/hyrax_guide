@@ -1,0 +1,47 @@
+Wiki Testing/OpeNDAP User's Guide - OPeNDAP Documentation
+=========================================================
+
+[[firstHeading]]
+Wiki Testing/OpeNDAP User's Guide
+---------------------------------
+
+From OPeNDAP Documentation
+
+Organization of this Document
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This Guide is divided into five chapters.
+
+_______________________________________________________________________
+ link:../index.php/Wiki_Testing/OPeNDAPUserGuide1[Chapter 1] ::
+
+What is OPeNDAP
+
+ link:../index.php/Wiki_Testing/OPeNDAPUserGuide2[Chapter 2] ::
+
+Using OPeNDAP
+
+ link:../index.php/Wiki_Testing/OPeNDAPUserGuide3[Chapter 3] ::
+
+The OPeNDAP Client
+
+ link:../index.php/Wiki_Testing/OPeNDAPUserGuide4[Chapter 4] ::
+
+Data Analysis with OPeNDAP
+
+ link:../index.php/Wiki_Testing/OPeNDAPUserGuide5[Chapter 5] ::
+
+The OPeNDAP Server
+
+ link:../index.php/Wiki_Testing/OPeNDAPUserGuide6[Chapter 6] ::
+
+Data and Data Models
+
+ link:../index.php/Wiki_Testing/OPeNDAPUserGuideA[Appendix] ::
+
+Appendices
+
+ link:../index.php/Wiki_Testing/OPeNDAPUserGuideFootnotes[Footnotes] ::
+
+Footnotes
+_______________________________________________________________________

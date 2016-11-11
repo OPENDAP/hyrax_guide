@@ -1,0 +1,722 @@
+BES XML Commands - OPeNDAP Documentation
+========================================
+
+[[firstHeading]]
+BES XML Commands
+----------------
+
+From OPeNDAP Documentation
+
+Contents
+~~~~~~~~
+
+* link:#BES_XML_Command_syntax.[1 BES XML Command syntax.]
+** link:#Requests[1.1 Requests]
+** link:#Responses[1.2 Responses]
+* link:#BES_Error_Response[2 BES Error Response]
+* link:#BES_Command_Set[3 BES Command Set]
+** link:#setContext[3.1 setContext]
+*** link:#name_attribute[3.1.1 _name_ attribute]
+**** link:#Request_Example[3.1.1.1 Request Example]
+**** link:#Response_Example[3.1.1.2 Response Example]
+** link:#setContainer[3.2 setContainer]
+*** link:#Request_Example_2[3.2.1 Request Example]
+*** link:#Response_Example_2[3.2.2 Response Example]
+** link:#define[3.3 define]
+*** link:#Request_Example_3[3.3.1 Request Example]
+*** link:#Response_Example_3[3.3.2 Response Example]
+** link:#get[3.4 get]
+*** link:#Request_Example_4[3.4.1 Request Example]
+*** link:#Response_Example_4[3.4.2 Response Example]
+** link:#Multiple_command_example[3.5 Multiple command example]
+*** link:#Request_Example_5[3.5.1 Request Example]
+** link:#Show_version[3.6 Show version]
+*** link:#Request_Example_6[3.6.1 Request Example]
+*** link:#Response[3.6.2 Response]
+** link:#Show_help[3.7 Show help]
+*** link:#Request_Example_7[3.7.1 Request Example]
+*** link:#Response_Example_5[3.7.2 Response Example]
+** link:#showProcess[3.8 showProcess]
+*** link:#Request_Example_8[3.8.1 Request Example]
+*** link:#Response_Example_6[3.8.2 Response Example]
+** link:#showConfig[3.9 showConfig]
+*** link:#Request_Example_9[3.9.1 Request Example]
+*** link:#Response_Example_7[3.9.2 Response Example]
+** link:#showStatus[3.10 showStatus]
+*** link:#Request_Example_10[3.10.1 Request Example]
+*** link:#Response_Example_8[3.10.2 Response Example]
+** link:#showContainers[3.11 showContainers]
+*** link:#Request_Example_11[3.11.1 Request Example]
+*** link:#Response_Example_9[3.11.2 Response Example]
+** link:#deleteContainer.28s.29.2C_deleteDefinition.28s.29[3.12
+deleteContainer(s), deleteDefinition(s)]
+*** link:#Request_Example_12[3.12.1 Request Example]
+*** link:#Response_Example_10[3.12.2 Response Example]
+** link:#showDefinitions[3.13 showDefinitions]
+*** link:#Request_Example_13[3.13.1 Request Example]
+*** link:#Response_Example_11[3.13.2 Response Example]
+** link:#showContext[3.14 showContext]
+*** link:#Request_Example_14[3.14.1 Request Example]
+*** link:#Response_Example_12[3.14.2 Response Example]
+** link:#showCatalog[3.15 showCatalog]
+*** link:#Request[3.15.1 Request]
+*** link:#Response_2[3.15.2 Response]
+** link:#showInfo[3.16 showInfo]
+*** link:#Request_2[3.16.1 Request]
+*** link:#Current_Response[3.16.2 Current Response]
+*** link:#Proposed_Response[3.16.3 Proposed Response]
+** link:#showServices[3.17 showServices]
+*** link:#Request_3[3.17.1 Request]
+*** link:#Response_3[3.17.2 Response]
+
+1 BES XML Command syntax.
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The BES will accept commands encoded in XML documents (BES XML
+Commands), and provide responses in kind. Some requests specifically
+indicate a non XML response (such as a DAP2 binary response) in which
+case the response will be as requested.
+
+1.1 Requests
+^^^^^^^^^^^^
+
+All elements mentioned in the following are in the
+http://xml.opendap.org/ns/bes/1.0# namespace unless otherwise noted.
+
+1.  Each request document *must* have a <request> root element.
+2.  Each <request> *must* contain one or more BesCommand elements.
+3.  A <request> *may* contain multiple BesCommands as long as zero more
+of those commands returns a response. +
+Examples (expand with abbreviated xml):
+* we can do a set context, set container, define and a get das in the
+same request document as only the get das request command returns a
+response.
+* There can not be two show commands within the request document, or a
+show and a get, or multiple gets.
+4.  . Each request element *must* have an attribute _reqID_ the value of
+which will be used in the response document. There is no guarantee that
+the value of _reqID_ be unique within the operational domain of the BES.
+(It might be unique within the software of the requesting client, but
+that's of no concern to the BES).
+
+1.2 Responses
+^^^^^^^^^^^^^
+
+Need a description and such here.
+
+2 BES Error Response
+~~~~~~~~~~~~~~~~~~~~
+
+----------------------------------------------------------------------
+<BES>
+    <response reqID="####">
+        <BESError>
+            <Type>3</Type>
+            <Message>Unable to find command for showVersions</Message>
+            <Administrator>ndp@opendap.org</Administrator>
+        </BESError>
+    </response>
+</BES>
+----------------------------------------------------------------------
+
+Where Type is one of the following:
+
+* 1. Internal Error - the error is internal to the BES Server
+* 2. Internal Fatal Error - error is fatal, can not continue
+* 3. Syntax User Error - the requester has a syntax error in request or
+config
+* 4. Forbidden Error - the requester is forbidden to see the resource
+* 5. Not Found Error - the resource can not be found
+
+If debugging is enabled during build then the Error object will include
+the file name and line number where the exception was thrown.
+
+3 BES Command Set
+~~~~~~~~~~~~~~~~~
+
+3.1 setContext
+^^^^^^^^^^^^^^
+
+Example:
+
+-------------------------------------------------
+<setContext  name="contextName>Value</setContext>
+-------------------------------------------------
+
+Changes the state of the BES for the current client connection. This
+allows the client to ask the BES to utilize various response formats.
+
+3.1.1 _name_ attribute
+++++++++++++++++++++++
+
+Identifies which context value is being set.
+
+*dap_format* context
+
+Value:
+
+* _Major.Minor_ where both _Major_ and _Minor_ are integer values.
+
+*errors* context
+
+Current Values:
+
+* _xml_ -
+* _dap2_ - When error context is set to _dap2_ then all errors will
+returned as DAP2 error objects (definitely *not* XML).
+
+Proposed Values:
+
+* _dap_ - When error context is set to _dap_ then all errors will
+returned as DAP error objects. The version of the DAP that error must
+conform to is controlled by the dap_format context. It is possible
+(likely) that in the future DAP errors will be XML documents.
+* _bes_ - Returns a BES Error response XML Document:
+
+3.1.1.1 Request Example
+
+--------------------------------------------------
+   <?xml version="1.0" encoding="UTF-8"?>
+   <request reqID ="####" >
+       <setContext name="errors">dap2</setContext>
+   </request>
+--------------------------------------------------
+
+3.1.1.2 Response Example
+
+Normally no response. May return a
+link:../index.php/BES_XML_Commands#BES_Error_Response[BESError].
+
+ +
+
+'''''
+
+3.2 setContainer
+^^^^^^^^^^^^^^^^
+
+3.2.1 Request Example
+
+-----------------------------------------------------------------------------
+   <?xml version="1.0" encoding="UTF-8"?>
+   <request reqID ="####" >
+       <setContainer name="c" space="catalog">data/nc/fnoc1.nc</setContainer>
+   </request>
+-----------------------------------------------------------------------------
+
+3.2.2 Response Example
+
+Normally no response. May return a
+link:../index.php/BES_XML_Commands#BES_Error_Response[BESError].
+
+ +
+
+'''''
+
+3.3 define
+^^^^^^^^^^
+
+3.3.1 Request Example
+
+-----------------------------------------------------------------
+   <?xml version="1.0" encoding="UTF-8"?>
+   <request reqID ="####" >
+        <define name="d" space="default">
+            <constraint>a valid default ce</constraint>
+            <container name="c1">
+                <constraint>a valid ce</constraint>
+               <attributes>list of attributes</attributes>
+            </container>
+            <container name="c2">
+                <constraint>a valid ce</constraint>
+               <attributes>list of attributes</attributes>
+            </container>
+            <aggregate handler="someHandler" cmd="someCommand" />
+        </define> 
+   </request>
+-----------------------------------------------------------------
+
+3.3.2 Response Example
+
+Normally no response. May return a
+link:../index.php/BES_XML_Commands#BES_Error_Response[BESError].
+
+ +
+
+'''''
+
+3.4 get
+^^^^^^^
+
+*This needs to be expanded to illuminate the missing details from the
+previoius command set:*
+
+* get 'type' for 'definition' using 'URL';
+
+Type:
+
+* *dds* -
+* *das* -
+* *dods* -
+* *stream* -
+* *ascii* -
+* *html_form* -
+* *info_page* -
+
+3.4.1 Request Example
+
+-----------------------------------------------------------------------------------
+   <?xml version="1.0" encoding="UTF-8"?>
+   <request reqID ="####" >
+        <get type="data_product" definition="def_name" returnAs="name" url="url" />
+   </request>
+-----------------------------------------------------------------------------------
+
+3.4.2 Response Example
+
+Explain about DAP2 responses etc...
+
+3.5 Multiple command example
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Multiple command transaction resulting in a DDS (non XML DAP2) response:
+
+3.5.1 Request Example
+
+-----------------------------------------------------------------------------
+   <?xml version="1.0" encoding="UTF-8"?>
+   <request reqID ="####" >
+       <setContext name="error">dap2</setContext>
+       <setContainer name="c" space="catalog">data/nc/fnoc1.nc</setContainer>
+        <define name="d" space="default">
+            <container name="c">
+                <constraint>a valid ce</constraint>
+               <attributes>list of attributes</attributes>
+            </container>
+            <aggregate handler="someHandler" cmd="someCommand" />
+        </define> 
+        <get  type="dds" definition="d" returnAs="name" />
+   </request>
+-----------------------------------------------------------------------------
+
+ +
+
+'''''
+
+3.6 Show version
+^^^^^^^^^^^^^^^^
+
+3.6.1 Request Example
+
+-----------------------------------------
+   <?xml version="1.0" encoding="UTF-8"?>
+   <request reqID ="####" >
+        <showVersion />
+   </request>
+-----------------------------------------
+
+3.6.2 Response
+
+Current:
+
+-------------------------------------------
+   <showVersion>
+       <response>
+           <DAP>
+               <version>2.0</version>
+               <version>3.0</version>
+               <version>3.2</version>
+           </DAP>
+           <BES>
+               <lib>
+                   <name>libdap</name>
+                   <version>3.5.3</version>
+               </lib>
+               <lib>
+                   <name>bes</name>
+                   <version>3.1.0</version>
+               </lib>
+           </BES>
+           <Handlers>
+               <lib>
+                   <name>libnc-dods</name>
+                   <version>0.9</version>
+               </lib>
+           </Handlers>
+        </response>
+   </showVersion>
+-------------------------------------------
+
+ +
+ Proposed:
+
+---------------------------------------------------------
+   <?xml version="1.0" encoding="UTF-8"?>
+   <response reqID="####">
+       <showVersion>
+           <service name="dap">
+               <version>2.0</version>
+               <version>3.0</version>
+               <version>3.2</version>
+           </service>
+           <library name="bes">3.5.3</library>
+           <library name="libdap">3.10.0</library>
+           <module name="netcdf_handler">3.7.9</module>
+           <module name="freeform_handler">3.7.9</module>
+       </showVersion>
+   </response>
+---------------------------------------------------------
+
+'''''
+
+3.7 Show help
+^^^^^^^^^^^^^
+
+3.7.1 Request Example
+
+-----------------------------------------
+   <?xml version="1.0" encoding="UTF-8"?>
+   <request reqID ="####" >
+        <showHelp />
+   </request>
+-----------------------------------------
+
+3.7.2 Response Example
+
+-------------------------------------------------------------------------------------------------------------------------
+  <?xml version="1.0" encoding="UTF-8"?>
+   <response  reqID="####">
+       <showHelp>
+           <module name="bes" version="3.6.2"><html xmlns= http://www.w3.org/1999/xhtml >Help Information</html></module>
+           <module name="dap" version="3.10.1">Help Information</module>
+           <module name="netcdf_handler" version="3.7.9">Help Information including supported responses</module>
+       </showHelp>
+   </response>
+-------------------------------------------------------------------------------------------------------------------------
+
+'''''
+
+3.8 showProcess
+^^^^^^^^^^^^^^^
+
+This is available only if the BES is compiled in developer mode. A
+'production' BES does not support this command.
+
+3.8.1 Request Example
+
+-----------------------------------------
+   <?xml version="1.0" encoding="UTF-8"?>
+   <request reqID ="####" >
+        <showProcess />
+   </request>
+-----------------------------------------
+
+3.8.2 Response Example
+
+-----------------------------------------
+   <?xml version="1.0" encoding="UTF-8"?>
+   <response reqID="####">
+       <showProcess>
+           <process pid="10831" />
+       </showProcess>
+   </response>
+-----------------------------------------
+
+'''''
+
+3.9 showConfig
+^^^^^^^^^^^^^^
+
+This is available only if the BES is compiled in developer mode. A
+'production' BES does not support this command.
+
+3.9.1 Request Example
+
+-----------------------------------------
+   <?xml version="1.0" encoding="UTF-8"?>
+   <request reqID ="####" >
+        <showConfig />
+   </request>
+-----------------------------------------
+
+3.9.2 Response Example
+
+----------------------------------------------------------------------
+   <?xml version="1.0" encoding="UTF-8"?>
+   <response reqID="####">
+       <showConfig>
+           <file>/Users/pwest/opendap/chunking/etc/bes/bes.conf</file>
+           <key name="BES.CacheDir">/tmp</key>
+           ....
+       </showConfig>
+   </response>
+----------------------------------------------------------------------
+
+'''''
+
+3.10 showStatus
+^^^^^^^^^^^^^^^
+
+3.10.1 Request Example
+
+-----------------------------------------
+   <?xml version="1.0" encoding="UTF-8"?>
+   <request reqID ="####" >
+        <showStatus />
+   </request>
+-----------------------------------------
+
+3.10.2 Response Example
+
+--------------------------------------------------------
+   <?xml version="1.0" encoding="UTF-8"?>
+   <response reqID="####">
+       <showStatus>
+           <status>MST Thu Dec 18 11:51:36 2008</status>
+       </showStatus>
+   </response>
+--------------------------------------------------------
+
+'''''
+
+3.11 showContainers
+^^^^^^^^^^^^^^^^^^^
+
+3.11.1 Request Example
+
+-----------------------------------------
+   <?xml version="1.0" encoding="UTF-8"?>
+   <request reqID ="####" >
+        <showContainers />
+   </request>
+-----------------------------------------
+
+3.11.2 Response Example
+
+-------------------------------------------------------------------------
+   <?xml version="1.0" encoding="UTF-8"?>
+   <response  reqID="####">
+       <showContainers>
+           <store name="volatile">
+               <container name="c" type="nc">data/nc/fnoc1.nc</container>
+           </store>
+       </showContainers>
+   </response>
+-------------------------------------------------------------------------
+
+'''''
+
+3.12 deleteContainer(s), deleteDefinition(s)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+3.12.1 Request Example
+
+------------------------------------------------------------------
+   <?xml version="1.0" encoding="UTF-8"?>
+   <request reqID ="####" >
+        <deleteContainers store="storeName" />
+        <deleteContainer name="containerName" store="storeName" />
+        <deleteDefinitions store="storeName" />
+        <deleteDefinition name="defName" store="storeName" />
+   </request>
+------------------------------------------------------------------
+
+3.12.2 Response Example
+
+Normally no response. May return a
+link:../index.php/BES_XML_Commands#BES_Error_Response[BESError].
+
+ +
+
+'''''
+
+3.13 showDefinitions
+^^^^^^^^^^^^^^^^^^^^
+
+3.13.1 Request Example
+
+-----------------------------------------
+   <?xml version="1.0" encoding="UTF-8"?>
+   <request reqID ="####" >
+        <showDefinitions />
+   </request>
+-----------------------------------------
+
+3.13.2 Response Example
+
+-------------------------------------------------------------------------------------------
+   <?xml version="1.0" encoding="UTF-8"?>
+   <response  reqID="####">
+       <showDefinitions>
+           <store name="volatile">
+               <definition name="d">
+                   <container name="c" type="nc" constraint="">data/nc/fnoc1.nc</container>
+                   <aggregation handler="agg">aggregation_command</aggregation>
+               </definition>
+           </store>
+       </showDefinitions>
+   </response>
+-------------------------------------------------------------------------------------------
+
+'''''
+
+3.14 showContext
+^^^^^^^^^^^^^^^^
+
+3.14.1 Request Example
+
+-----------------------------------------
+   <?xml version="1.0" encoding="UTF-8"?>
+   <request reqID ="####" >
+        <showContext />
+   </request>
+-----------------------------------------
+
+3.14.2 Response Example
+
+--------------------------------------------------
+  <?xml version="1.0" encoding="UTF-8"?>
+  <response reqID ="####" >
+       <showContext>
+            <context name="name1">value1</context>
+            <context name="name2">value2</context>
+             ...
+            <context name="namen">valuen</context>
+       <showContext>
+  </response>
+--------------------------------------------------
+
+'''''
+
+3.15 showCatalog
+^^^^^^^^^^^^^^^^
+
+3.15.1 Request
+
+-------------------------------------------------
+   <?xml version="1.0" encoding="UTF-8"?>
+   <request reqID="####" >
+        <showCatalog node="[catalog:]nodeName" />
+   </request>
+-------------------------------------------------
+
+The catalog name is optional, defaulting to the default catalog
+specified in the BES configuration file. So if you had a catalog named
+rdh you could specify node="rdh:/" and it would give you the root node
+for the rdh catalog.
+
+3.15.2 Response
+
+------------------------------------------------------------------------------------------------------------------------------
+  <?xml version="1.0" encoding="UTF-8"?>
+   <response reqID="####" >
+       <showCatalog>
+           <dataset name="nc/test" size="408" lastModified="2006-01-04T19:48:24" catalog="catalog" node="true" count="5">
+               <dataset name="test.nc" size="12148" lastModified="2005-09-29T16:31:28" node="false">
+                   <service>DAP</service>
+               </dataset>
+               <dataset name="testfile.nc" size="43392" lastModified="2005-09-29T16:31:28" catalog="catalog" node="false">
+                   <service>DAP</service>
+               </dataset>
+               <dataset name="TestPat.nc" size="262452" lastModified="2005-09-29T16:31:27" catalog="catalog" node="false">
+                   <service>DAP</service>
+               </dataset>
+               <dataset name="TestPatDbl.nc" size="2097464" lastModified="2005-09-29T16:31:28" catalog="catalog" node="false">
+                   <service>DAP</service>
+               </dataset>
+               <dataset name="TestPatFlt.nc" size="1048884" lastModified="2005-09-29T16:31:27" catalog="catalog" node="false">
+                   <service>DAP</service>
+               </dataset>
+           </dataset>
+       </showCatalog>
+   </response>
+------------------------------------------------------------------------------------------------------------------------------
+
+'''''
+
+3.16 showInfo
+^^^^^^^^^^^^^
+
+3.16.1 Request
+
+-----------------------------------------
+   <?xml version="1.0" encoding="UTF-8"?>
+   <request reqID="####" >
+        <showInfo node="nodeName />
+   </request>
+-----------------------------------------
+
+3.16.2 Current Response
+
+---------------------------------------------
+   <?xml version="1.0" encoding="UTF-8"?>
+   <response reqID="####">
+       <showInfo>
+           <dataset thredds_container="true">
+               <name>nc/test</name>
+               <size>408</size>
+               <lastmodified>
+                   <date>2006-01-04</date>
+                   19:48:24
+               </lastmodified>
+               <count>5</count>
+           </dataset>
+       </showInfo>
+   </response>
+---------------------------------------------
+
+-------------------------------------------------
+   <?xml version="1.0" encoding="UTF-8"?>
+   <response reqID="####">
+       <showInfo>
+           <dataset thredds_container="false">
+               <name>nc/test/TestPatFlt.nc</name>
+               <size>1048884</size>
+               <lastmodified>
+                   <date>2005-09-29</date>
+                   16:31:27
+               </lastmodified>
+           </dataset>
+       </showInfo>
+   </response>
+-------------------------------------------------
+
+3.16.3 Proposed Response
+
+-------------------------------------------------------------------------------------------------
+   <dataset name="testfile.nc" size="43392" lastModified="YYYY-MM-DDThh:mm:ss" catalog="catalog" 
+                    node="true|false" count="#ofChildDatSets">
+       <service>DAP</service>
+   </dataset>
+-------------------------------------------------------------------------------------------------
+
+3.17 showServices
+^^^^^^^^^^^^^^^^^
+
+3.17.1 Request
+
+-----------------------------------------
+   <?xml version="1.0" encoding="UTF-8"?>
+   <request reqID="####" >
+        <showServiceDescriptions />
+   </request>
+-----------------------------------------
+
+3.17.2 Response
+
+--------------------------------------------------------------
+   <?xml version="1.0" encoding="UTF-8"?>
+   <response reqID="####">
+       <showServices>
+           <service name="DAP">
+               <command name="ddx">
+                   <description>Words For Humans</description>
+                   <format name="dap2"/>
+               </command>
+               <command name="dds">
+                   <description>Words For Humans</description>
+                   <format name="dap2"/>
+               </command>
+           </service>
+       </showServices>
+   </response>
+--------------------------------------------------------------

@@ -1,0 +1,141 @@
+Hyrax - Installation Instructions - OPeNDAP Documentation
+=========================================================
+
+[[firstHeading]]
+Hyrax - Installation Instructions
+---------------------------------
+
+From OPeNDAP Documentation
+
+This page is deprecated ::
+  These instructions apply to Hyrax version 1.10 and older.
+  +
+  link:../index.php/Hyrax#Install[Current Installation Instructions Can
+  Be Found Here.]
+
+Hyrax is fairly easy to configure, but because there are several
+different components involved, it can seem complicated. Essentially you
+need to install two pieces of software: the BES and the OLFS. The BES
+reads data files and builds various kinds of responses and the OLFS is
+an interface to the BES that provides a web presence for the data and
+services. Because Hyrax uses a web server to work with web browsers and
+other kinds of programs, you will need to install the Apache Tomcat
+software too.
+
+What you will need to install a binary distribution:
+
+* 5 minutes
+* Java 1.7 Runtime
+* Tomcat 7 or newer
+* The two pieces of software the make up Hyrax
+
+Contents
+~~~~~~~~
+
+* link:#System_Requirements[1 System Requirements]
+* link:#Secure_Installation_Guidelines[2 Secure Installation Guidelines]
+* link:#Install_the_BES[3 Install the BES]
+* link:#Install_the_OLFS[4 Install the OLFS]
+* link:#Starting_and_Stopping_Hyrax[5 Starting and Stopping Hyrax]
+** link:#Starting[5.1 Starting]
+** link:#Stopping[5.2 Stopping]
+* link:#Test_the_server[6 Test the server]
+* link:#Configure_Your_Hyrax_Installation[7 Configure Your Hyrax
+Installation]
+* link:#Miscellaneous[8 Miscellaneous]
+
+1 System Requirements
+~~~~~~~~~~~~~~~~~~~~~
+
+Hyrax is supported on Linux and OS/X, although we only build binary
+versions for Linux. We do not support Hyrax on Windows or Vista,
+although see the
+link:../index.php/Using_Virtual_Machines_to_Serve_Data[Using Virtual
+Machines to Serve Data] project for a solution applicable to Win32
+platforms. While that information is somewhat dated since it describes
+an older version of Hyrax, the approach is generally applicable to the
+current version of Hyrax.
+
+For our binary distribution of Hyrax for CentOS/RedHat/Fedora, use
+either _yum_ or _rpm_ to install the libdap and BES RPM packages. We
+also have DEB packages for Ubuntu/Debian. Either _yum_ or _apt-get_ will
+find and install any dependencies the libdap or BES package needs.
+
+2 Secure Installation Guidelines
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+link:../index.php/Hyrax_-_Secure_Installation_Guidelines[Making Hyrax
+Secure]
+
+3 Install the BES
+~~~~~~~~~~~~~~~~~
+
+link:../index.php/Hyrax_-_BES_Installation[Install and configure the
+BES.]
+
+4 Install the OLFS
+~~~~~~~~~~~~~~~~~~
+
+link:../index.php/Hyrax_-_OLFS_Installation[Next You need to install and
+configure the OLFS inside of a Tomcat server]
+
+5 Starting and Stopping Hyrax
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To correctly start and stop Hyrax, follow these simple recipes.
+
+5.1 Starting
+
+1.  Start the BES first using the _besctl_ program with the _start_
+argument. See
+link:../index.php/Hyrax_-_Starting_and_stopping_the_BES[Starting and
+stopping the BES] for more information.
+2.  Start the OLFS using the Tomcat startup script. See
+link:../index.php/Hyrax_-_OLFS_Installation#Start_Tomcat[Starting
+Tomcat] for more information.
+
+5.2 Stopping
+
+1.  Stop the OLFS first using the tomcat shutdown script.
+2.  Stop the BES using the _besctl_ program with the _stop_ argument.
+
+6 Test the server
+~~~~~~~~~~~~~~~~~
+
+To test/use the server, open a web browser and open the URL:
+http://localhost:8080/ and you should see the Tomcat default page.
+
+Open the URL: http://localhost:8080/opendap/ to see an HTML directory of
+the top of your data archive.
+
+You can get the HTML view THREDDS catalog by appending "catalog.html" to
+the end of any URL that returns an HTML directory, like so:
+http://localhost:8080/opendap/catalog.html But you may need to do some
+additional configuration that to work.
+
+7 Configure Your Hyrax Installation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+At this point, Hyrax should be working. When you install Hyrax for the
+first time it is pre-configured to serve test data sets that come with
+each of the installed data handlers. This will allow you to test the
+server and make sure it is functioning correctly. After that you will
+want to configure so that it works with your data.
+
+8 Miscellaneous
+~~~~~~~~~~~~~~~
+
+Once opendap.war is expanded, manually copy the file favicon.ico file:
+
+------------------------------------------------------
+$CATALINA_HOME/webapps/opendap/docs/images/favicon.ico
+------------------------------------------------------
+
+to
+
+----------------------------
+$CATALINA_HOME/webapps/ROOT/
+----------------------------
+
+The favicon.ico file is mostly a convenience to keep browsers from
+constantly asking for it (substitute your own icon if you like!).

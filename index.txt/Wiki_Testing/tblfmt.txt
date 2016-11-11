@@ -1,0 +1,429 @@
+Wiki Testing/tblfmt - OPeNDAP Documentation
+===========================================
+
+[[firstHeading]]
+Wiki Testing/tblfmt
+-------------------
+
+From OPeNDAP Documentation
+
+link:../index.php/FreeForm[return to FreeForm]
+
+Contents
+~~~~~~~~
+
+* link:#Format_Descriptions_for_Tabular_Data[1 Format Descriptions for
+Tabular Data]
+** link:#FreeForm_ND_Variable_Types[1.1 FreeForm ND Variable Types]
+** link:#FreeForm_ND_File_Types[1.2 FreeForm ND File Types]
+** link:#Format_Description_Files[1.3 Format Description Files]
+** link:#Format_Descriptions[1.4 Format Descriptions]
+*** link:#Format_Type_and_Title[1.4.1 Format Type and Title]
+**** link:#Format_Descriptors[1.4.1.1 Format Descriptors]
+*** link:#Variable_Descriptions[1.4.2 Variable Descriptions]
+
+1 Format Descriptions for Tabular Data
+--------------------------------------
+
+Format descriptions define the formats of input and output data and
+headers. FreeForm ND provides an easy-to-use mechanism for describing
+data. FreeForm ND programs and FreeForm ND-based applications that you
+develop use these format descriptions to correctly access data. Any data
+file used by FreeForm ND programs must be described in a format
+description file.
+
+This page explains how to write format descriptions for data arranged in
+tabular format---rows and columns---only. For data in non-tabular
+formats, see link:../index.php/Wiki_Testing/arrayfmt[Array Format].
+
+1.1 FreeForm ND Variable Types
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The data sets you produce and use may contain a variety of variable
+types. The characteristics of the types that FreeForm ND supports are
+summarized in the table below, which is followed by a description of
+each type.
+
+------------------------------
+OPeNDAP FreeForm ND Data Types
+------------------------------
+
+Name
+
+Minimum Value
+
+Maximum Value
+
+Size in Bytes
+
+Precision*
+
+char
+
+**
+
+uchar
+
+0
+
+255
+
+1
+
+short
+
+-32,767
+
+32,767
+
+2
+
+ushort
+
+0
+
+65,535
+
+2
+
+long
+
+-2,147,483,647
+
+2,147,483,647
+
+4
+
+ulong
+
+0
+
+4,294,967,295
+
+4
+
+float
+
+<math>10^\{-37}</math>
+
+<math>10^\{38}</math>
+
+4
+
+6***
+
+double
+
+<math>10^\{-307}</math>
+
+<math>10^\{308}</math>
+
+8
+
+15***
+
+constant
+
+**
+
+initial
+
+record length
+
+convert
+
+**
+
+* Expressed as the number of significant digits
+
+** User-specified
+
+*** Can vary depending on environment
+
+_______________________________________________________________________________________________
+NOTE: The sizes in table 3.1 are machine-dependent. Those given are for
+most Unix workstations.
+_______________________________________________________________________________________________
+
+ +
+
+ char ::
+  The char variable type is used for character strings. Variables of
+  this type, including numerals, are interpreted as characters, not as
+  numbers.
+
+ uchar ::
+  The uchar (unsigned character) variable type can be used for integers
+  between 0 and 255 (28- 1). Variables that can be represented by the
+  uchar type (for example: month, day, hour, minute) occur in many data
+  sets. An advantage of using the uchar type in binary formats is that
+  only one byte is used for each variable. Variables of this type are
+  interpreted as numbers, not characters.
+
+ short ::
+  A short variable can hold integers between -32,767 and 32,767
+  (<math>2^\{15}- 1</math>). This type can be used for signed integers
+  with less than 5 digits, or for real numbers with a total of 4 or
+  fewer digits on both sides of the decimal point (-99 to 99 with a
+  precision of 2, -999 to 999 with a precision of 1, and so on).
+
+ ushort ::
+  A ushort (unsigned short) variable can hold integers between 0 and
+  65,535 (<math>2^\{16} - 1</math>).
+
+ long ::
+  A long variable can hold integers between -2,147,483,647 and
+  +2,147,483,647 (<math>2^\{31} - 1</math>). This variable type is
+  commonly used to represent floating point data as integers, which may
+  be more portable. It can be used for numbers with 9 or fewer digits
+  with up to 9 digits of precision, for example, latitude or longitude
+  (-180.000000 to 180.000000).
+
+ ulong ::
+  The ulong (unsigned long) variable type can be used for integers
+  between 0 and 4,294,967,295 (<math>2^\{32} - 1</math>).
+
+ float, double ::
+  Numbers that include explicit decimal points are either float or
+  double depending on the desired number of digits. A float has a
+  maximum of 6 significant digits, a double has 15 maximum. The extra
+  digits of a double are useful, for example, for precisely specifying
+  time of day within a month as decimal days. One second of time is
+  approximately 0.00001 day. The number specifying day (maximum = 31)
+  can occupy up to 2 digits. A float can therefore only specify decimal
+  days to a whole second (31.00001 occupies seven digits). A double can,
+  however, be used to track decimal parts of a second (for example,
+  31.000001).
+
+ +
+
+1.2 FreeForm ND File Types
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+FreeForm ND supports binary, ASCII, and dBASE file types. Binary data
+are stored in a fixed amount of space with a fixed range of values. This
+is a very efficient way to store data, but the files are
+machine-readable rather than human-readable. Binary numbers can be
+integers or floating point numbers.
+
+Numbers and character strings are stored as text strings in ASCII. The
+amount of space used to store a string is variable, with each character
+occupying one byte.
+
+The dBASE file type, used by the dBASE product, is ASCII text without
+end-of-line markers.
+
+1.3 Format Description Files
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Format description files accompany data files. A format description file
+can contain descriptions for one or more formats. You include
+descriptions for header, input, and output formats as appropriate.
+Format descriptions for more than one file may be included in a single
+format description file.
+
+An example format description file is shown next. The sections that
+follow describe each element of a format description file.
+
+---------------------------------------
+/ This format description file is for
+/ data files latlon.bin and latlon.dat.
+
+binary_data "Default binary format"
+latitude 1 4 long 6
+longitude 5 8 long 6
+
+ASCII_data "Default ASCII format"
+latitude 1 10 double 6
+longitude 12 22 double 6
+---------------------------------------
+
+Lines 1 and 2 are comment lines. Lines 4 and 8 give the format type and
+title. Lines 5, 6, 9, and 10 contain variable descriptions. Blank lines
+signify the end of a format description
+
+ +
+ You can include blank lines between format descriptions and comments in
+a format description file as necessary. Comment lines begin with a slash
+(/). FreeForm ND ignores comments.
+
+1.4 Format Descriptions
+~~~~~~~~~~~~~~~~~~~~~~~
+
+A format description file comprises one or more format descriptions. A
+format description consists of a line specifying the format type and
+title followed by one or more variable descriptions, as in the following
+example:
+
+-----------------------------------
+binary_data "Default binary format"
+latitude 1 4 long 6
+longitude 5 8 long 6
+-----------------------------------
+
+1.4.1 Format Type and Title
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A line specifying the format type and title begins a format description.
+A __format descriptor__, for example, binary_data, is used to indicate
+format type to FreeForm ND. The __format title__, for example, "Default
+binary format", briefly describes the format. It must be surrounded by
+quotes and follow the format descriptor on the same line. The maximum
+number of characters for the format title is 80 including the quotes.
+
+1.4.1.1 Format Descriptors
+++++++++++++++++++++++++++
+
+Format descriptors indicate (in the order given) file type, read/write
+type, and file section. Possible values for each descriptor component
+are shown in the following table.
+
+Format Descriptor Components
+
+File Type
+
+Read/Write Type (optional)
+
+File Section
+
+.
+[cols="",]
+|======
+|ASCII
+|binary
+|dBASE
+|======
+
+.
+[cols="",]
+|======
+|input
+|output
+|======
+
+.
+[cols="",]
+|=======================
+|data
+|file_header
+|record_header
+|file_header_separate*
+|record_header_separate*
+|=======================
+
+* The qualifier separate indicates there is a header file separate from
+the data file.
+
+The components of a format descriptor are separated by underscores (_).
+For example, ASCII_output_data indicates that the format description is
+for ASCII data in an output file. The order of descriptors in a format
+description should reflect the order of format types in the file. For
+instance, the descriptor ASCII_file_header would be listed in the format
+description file before ASCII_data. The format descriptors you can use
+in FreeForm ND are listed in the next table, where XXX stands for ASCII,
+binary, or dBASE. (Example: XXX_data = ASCII_data, binary_data, or
+dBASE_data.)
+
+Format Descriptors
+
+Data
+
+Header
+
+Special
+
+.
+[cols="",]
+|===============
+|XXX_data
+|XXX_input_data
+|XXX_output_data
+|===============
+
+.
+[cols="",]
+|=================================
+|XXX_file_header
+|XXX_file_header_separate
+|XXX_record_header
+|XXX_record_header_separate
+|XXX_input_file_header
+|XXX_input_file_header_separate
+|XXX_input_record_header
+|XXX_input_record_header_separate
+|XXX_output_file_header
+|XXX_output_file_header_separate
+|XXX_output_record_header
+|XXX_output_record_header_separate
+|=================================
+
+[cols="",]
+|=======
+|RETURN*
+|EOL**
+|=======
+
+* The RETURN descriptor lets FreeForm ND skip
+
+over end-of-line characters in the data.
+
+** The EOL descriptor is a constant
+
+indicating an end-of-line character should be inserted in a multi-line
+record.
+
+For more information about header formats, see
+(link:../index.php/Wiki_Testing/hdrfmts[Header Formats]).
+
+1.4.2 Variable Descriptions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A variable description defines the name, start and end column position,
+type, and precision for each variable. The fields in a variable
+description are separated by white space. Two variable descriptions are
+shown below with the fields indicated. Each field is then described.
+
+Here are two example variable descriptions. Each one consists of a name,
+a start position, and end position, a type, and a precision.
+
+----------------------------
+latitude    1  10  double  6
+longitude  12  22  double  6
+----------------------------
+
+________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+ Name ::
+
+The variable name is case-sensitive, up to 63 characters long with no
+blanks. The variable names in the example are latitude and longitude. If
+the same variable is included in more than one format description within
+a format description file, its name must be the same in each format
+description.
+
+ Start Position ::
+
+The column position where the first character (ASCII) or byte (binary)
+of a variable value is placed. The first position is 1, not 0. In the
+example, the variable latitude is defined to start at position 1 and
+longitude at 12.
+
+ End Position ::
+
+The column position where the last character (ASCII) or byte (binary) of
+a variable value is placed. In the example, the variable latitude is
+defined to end at position 10 and longitude at 22.
+
+ Type ::
+
+The variable type can be a standard type such as char, float, double, or
+a special FreeForm ND type. The type for both variables in the example
+is double. See above for descriptions of supported types.
+
+ Precision ::
+
+Precision defines the number of digits to the right of the decimal
+point. For float or double variables, precision only controls the number
+of digits printed or displayed to the right of the decimal point in an
+ASCII representation. The precision for both variables in the example is
+6.
+________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________

@@ -1,0 +1,16 @@
+Create BES Module - OPeNDAP Documentation
+=========================================
+
+[[firstHeading]]
+Create BES Module
+-----------------
+
+From OPeNDAP Documentation
+
+Redirect page
+
+image:../skins/common/images/redirectltr.png[#REDIRECT]../index.php?title=Hyrax:_Create_BES_Module&action=edit&redlink=1[Hyrax:
+Create BES Module]
+
+Retrieved from
+"http://docs.opendap.org/index.php?title=Create_BES_Module&oldid=644"

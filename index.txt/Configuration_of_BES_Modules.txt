@@ -1,0 +1,219 @@
+Configuration of BES Modules - OPeNDAP Documentation
+====================================================
+
+[[firstHeading]]
+Configuration of BES Modules
+----------------------------
+
+From OPeNDAP Documentation
+
+Under construction 11/20/14
+
+Use the _modules_ branch of _bes_ to automatically build modules.
+
+Tis pages describes how to take an existing BES module and incorporate
+it into the _modules_ branch of the BES so that it can build both as a
+standalone module and as part of an ensemble of modules built using a
+single _configure_ script and _Makefile._ The first step is to add the
+module as a git submodule and then make a handful of edits to the bes
+and module's configure.ac and Makefile.am files. The changes are minimal
+and the resulting module code will build both as a standalone module and
+as part of the 'combined modules' build. The BES will also build as a
+standalone program, and because of the way git's submodules work, it's
+easy to checkout just the BES with the baggage of the modules.
+
+Contents
+~~~~~~~~
+
+* link:#To_add_a_new_handler_to_the_BES_repo_on_github[1 To add a new
+handler to the BES repo on github]
+* link:#Changes_to_the_module.27s_Makefile.am[2 Changes to the module's
+_Makefile.am_]
+* link:#Changes_to_the_module.27s_configure.ac[3 Changes to the module's
+_configure.ac_]
+* link:#Additions_to_the_module.27s_files[4 Additions to the module's
+files]
+* link:#Changes_to_the_BES.27_configure.ac[5 Changes to the BES'
+_configure.ac_]
+* link:#Changes_to_the_BES.27_modules.2FMakefile.am[6 Changes to the
+BES' _modules/Makefile.am_]
+* link:#Pushing_the_new_branch_to_the_remote_repo[7 Pushing the new
+branch to the remote repo]
+* link:#Git_Hacks[8 Git Hacks]
+
+1 To add a new handler to the BES repo on github
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following assumes that you have cloned the BES repo from github and
+are on the _master_ branch.
+
+For each module to be added:
+
+check it out in the _bes/modules_ directory::
+  git submodule add <github repo url>
+make a _modules_ branch::
+  cd <module dir>; git branch modules
+switch to the new branch::
+  git checkout modules
+set the _modules_ branch in the _.gitmodules_ file::
+  emacs .gitmodules; _branch = master_
+
+Now follow the recipe outlined in the following sections of the page...
+
+2 Changes to the module's _Makefile.am_
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Hack the module's Makefile.am so that CPPFLAGS and LIBADD reference the
+correct places given that the code will build w/o bes first being
+installed
+
+code,de1---------------------------------------------------------------------------
+code,de1
+if DAP_MODULES
+AM_CPPFLAGS = -I$(top_srcdir)/dispatch -I$(top_srcdir)/dap $(DAP_CFLAGS)
+LIBADD = $(DAP_SERVER_LIBS) $(DAP_CLIENT_LIBS)
+else
+AM_CPPFLAGS = $(BES_CPPFLAGS) # or wahtever was set here or in ..._CPPFLAGS
+LIBADD = $(BES_DAP_LIBS)      # and ..._LIBADD
+endif
+---------------------------------------------------------------------------
+
+then
+
+code,de1------------------------------------------------------------------------------
+code,de1
+# comment this out to force use of AM_CPPFLAGS libcsv_module_la_CPPFLAGS = ...
+libcsv_module_la_LIBADD = $(LIBADD)
+------------------------------------------------------------------------------
+
+For unit-test code you may need to add some of the bes code to the link
+line. To do that, use the makefile variables:
+
+* BES_DISPATCH_LIB
+* BES_XML_CMD_LIB
+* BES_PPT_LIB
+* BES_EXTRA_LIBS
+
+where you almost certainly want to use $BES_DISPATCH_LIB $BES_EXTRA_LIBS
+
+Look for a line like
+
+code,de1-------------------------------------------------------------
+code,de1
+xml_data_handler.conf: xml_data_handler.conf.in config.status
+-------------------------------------------------------------
+
+and add _$(top_srcdir)/_ in front of _config.status_
+
+If the module uses _besstandalone,_ add _bes.conf.modules.in_ to the
+EXTRA_DIST variable in the _Makefile.am._
+
+3 Changes to the module's _configure.ac_
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Add "AM_CONDITIONAL([DAP_MODULES], [false])" to the modules configure.ac
+
+If the module uses autotest to run a set of regression tests using
+_besstandalone,_ add generation of _bes.conf_ from _bes.conf.in._ You'll
+also need to make corresponding changes in other places, documented on
+this page.
+
+4 Additions to the module's files
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Add __bes.conf.modules.in__. The key parts of this file that are
+different from the existing _bes.conf.in_ are:
+
+code,de1----------------------------------------------------------------------------
+code,de1
+BES.modules=dap,cmd,csv
+BES.module.dap=@abs_top_builddir@/dap/.libs/libdap_module.so
+BES.module.cmd=@abs_top_builddir@/xmlcommand/.libs/libdap_xml_module.so
+BES.module.csv=@abs_top_builddir@/modules/csv_handler/.libs/libcsv_module.so
+ 
+BES.Catalog.catalog.RootDirectory=@abs_top_srcdir@/modules/csv_handler
+BES.Data.RootDirectory=/dev/null
+----------------------------------------------------------------------------
+
+Note how the BES libraries are referenced
+(__@abs_top_builddir@/dap/.libs/...__ ...) and how the
+_BES.Catalog.catalog.RootDirectory_ is specified.
+
+Add a _.gitignore_
+
+Make sure to add the _bes.conf.modules.in_ file to git.
+
+5 Changes to the BES' _configure.ac_
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Add files to be build by BES' configure:
+
+code,de1--------------------------------------------------------------------------------------------------------------------
+code,de1
+    AC_CONFIG_FILES([
+    ...
+    modules/dap-server/Makefile
+    modules/dap-server/asciival/Makefile
+    modules/dap-server/asciival/unit-tests/Makefile
+    modules/dap-server/asciival/unit-tests/test_config.h
+    modules/dap-server/www-interface/Makefile
+ 
+    modules/dap-server/bes-testsuite/bes.conf:modules/dap-server/bes-testsuite/bes.conf.modules.in    ...])
+ 
+    AC_CONFIG_FILES([modules/dap-server/www-interface/js2h.pl], [chmod +x modules/dap-server/www-interface/js2h.pl])
+--------------------------------------------------------------------------------------------------------------------
+
+using the trusty cut and paste and prefixing them all with _modules/<dir
+name>._ Put that in the the AM_COND_IF that's at the _configure.ac_
+file. *NB:* The highlighted line show how to make autoconf use a
+template with an arbitrary name (__bes.conf__ is made from
+_bes.conf.modules.in_ instead of _bes.conf.in_ in this case).
+
+If the module uses a m4 macro defined in a file in its conf directory,
+copy that to the bes/conf dir. You then should add a call to that macro
+to the bes' configure.ac script mirroring the call in the modules's
+configure.ac script. If the macro looks for a library, etc., that will
+possibly/likely be in the hyrax-dependencies bundle, hack the macro so
+that it takes an extra parameter that is the 'master deps' directory.
+Look at a macro like the ones for hdf5 or netcdf to see how to do that
+easily. If the module looks for a library using autoconf calls in line
+(in configure.ac), just copy those in, hacking as needed. Most of the
+handler-specific code in configure.ac is grouped toward the end of the
+script.
+
+6 Changes to the BES' _modules/Makefile.am_
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Given the code is in _modules/<dir name>,_ add _<dir name>_ to the
+_modules/Makefile.am_ as a subdir.
+
+7 Pushing the new branch to the remote repo
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+double check the _.gitignore_ file and that you have _git add_ the
+_bes.conf.modules.in_ file::
+  git status
+commit changes to the local repo::
+  git commit -a
+push those local changes to the remote repo and set this new branch to
+be the one the code tracks::
+  git push --set-upstream origin modules
+check the bes and commit there::
+  git commit -a
+and push those changes (the upstream repo was already set)::
+  git push
+
+8 Git Hacks
+~~~~~~~~~~~
+
+To manage an empty dir in git, put a .gitignore file in it that ignores
+everything except itself:
+
+code,de1---------------------------------------------------------------------
+code,de1
+# Ignore everything in this directory; this hack enables git to track
+# and fetch, etc., an otherwise empty directory.
+*
+# Except this file
+!.gitignore
+---------------------------------------------------------------------
