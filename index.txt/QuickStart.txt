@@ -1,9 +1,23 @@
 QuickStart - OPeNDAP Documentation
 ==================================
 
-[[firstHeading]]
-Introduction
-------------
+* link:#Introduction[Introduction]
+** link:#Key_Terms[Key Terms]
+* link:#What_to_do[What to do With an OPeNDAP URL]
+** link:#The_Easy_Way[The Easy Way: Using the Browser-Based OPeNDAP Server Dataset Access Form]
+** link:#A_More_Flexible_Way[A More Flexible Way: Using Commands in a Browser]
+** link:#Peeking_at_Data[Peeking at Data]
+*** link:#Server_Functions[Server Functions: Looking at geo-referenced data using Hyrax]
+*** link:#More_Fun[More Fun with Server Functions]
+** link:#Sequence_Data[Sequence Data]
+* link:#Finding_URLs[Finding OPeNDAP URLs]
+** link:#GCMD[GCMD]
+** link:#Web_Interface[Web Interface]
+** link:#File_Servers[File Servers]
+* link:#Further_Analysis[Further Analysis]
+
+[[Introduction]]Introduction
+----------------------------
 
 http://www.opendap.org/[OPeNDAP] is the developer of client/server software, of the same name, that enables scientists to share data more easily over the internet. The OPeNDAP group is also the original developer of the http://www.opendap.org/pdf/ESE-RFC-004v1.1.pdf[Data Access Protocol] (DAP) that the software uses. Many other groups have adopted DAP and provide compatible clients, servers, and SDKs. OPeNDAP's DAP is also a NASA community standard. For the rest of this document, "OPeNDAP" will refer to the software.
 
@@ -11,9 +25,8 @@ With OPeNDAP, you can access data using an OPeNDAP URL of any database server th
 
 This quick start guide covers how to use OPeNDAP in a typical web browser, such as Firefox, Chrome, or Safari, to discover information about data that is useful when creating database queries.
 
-Key Terms
-~~~~~~~~~
-
+[[Key_Terms]]Key Terms
+~~~~~~~~~~~~~~~~~~~~~~
 * *Constraint Expressions:* Criteria that limits what data is returned from a database. Because most databases will have far more data than you want, you'll want to find out something out about the data and then use that information to constrain your queries.
 * *DAS (Data Attribute Structure):* Similar to a DDS but contains information about the data, such as units and the name of the variable.
 * *DAP (Data Access Protocol):* A data transmission protocol designed by OPeNDAP
@@ -22,24 +35,8 @@ specifically for science data. The protocol relies on the widely used and stable
 * *Hyrax:* The server half of OPeNDAP, developed by the OPeNDAP group.
 * *OPeNDAP URL* An OPeNDAP URL is a URL that enables you to access data on a database server on which OPeNDAP is implemente. An OPeNDAP URL will include "opendap.org" in its path.
 
-Contents
-~~~~~~~~
-
-* link:#What_To_Do_With_An_OPeNDAP_URL[What To Do With An OPeNDAP URL]
-** link:#The_Easy_Way[The Easy Way: Using the Browser-Based OPeNDAP Server Dataset Access Form]
-** link:#A_More_Flexible_Way[A More Flexible Way: Using Commands in a Browser]
-** link:#Peeking_at_Data[Peeking at Data]
-*** link:#Server_Functions_Looking_at_geo-referenced_data_using_Hyrax[Server Functions: Looking at geo-referenced data using Hyrax]
-*** link:#More_fun_with_Server_Functions[More fun with Server Functions]
-** link:#Sequence_Data[Sequence Data]
-* link:#Finding_OPeNDAP_URLs[Finding OPeNDAP URLs]
-** link:#GCMD[GCMD]
-** link:#Web_Interface[Web Interface]
-** link:#File_Servers[File Servers]
-* link:#Further_analysis[Further analysis]
-
-What to do With an OPeNDAP URL
-------------------------------
+[[What_to_do]]What to do With an OPeNDAP URL
+--------------------------------------------
 
 Suppose someone gives you a hot tip that there is a lot of good data at...
 ----------------------------------------------------
@@ -52,8 +49,8 @@ The simplest thing you can is to download the data to which the URL points. You 
 
 NOTE: Because you will rarely want to request an entire archive, OPeNDAP provides sophisticated sub-sampling capabilities, and you need to know something about the data in order to use them.
 
-The Easy Way: Using the Browser-Based OPeNDAP Server Dataset Access Form
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[[The_Easy_Way]]The Easy Way: Using the Browser-Based OPeNDAP Server Dataset Access Form
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 OPeNDAP includes a way to sample data that makes writing a constraint expression somewhat easier than using only a URL to do the same thing. Append *.html* to an OPeNDAP URL, and you will get an OPeNDAP Server Dataset Access Form that simplifies the process for sampling data.
 
@@ -90,8 +87,8 @@ can add conditions by entering values in the text boxes. See what you
 get when you limit the selection to records where the Depth is greater
 than 2 meters.
 
-A More Flexible Way: Using Commands in a Browser
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[[A_More_Flexible_Way]]A More Flexible Way: Using Commands in a Browser
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you would perfer to not use the OPeNDAP Server Data Access Form, you can use just a browser instead. This section describes how to do that.
 
@@ -160,8 +157,8 @@ http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.info[this]:
 http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.info
 ---------------------------------------------------------
 
-Peeking at Data
-~~~~~~~~~~~~~~~
+[[Peeking_at_Data]]Peeking at Data
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Now that we know a little about the shape of the data and the data
 attributes, we will look at some of the data.
@@ -198,8 +195,8 @@ data points in the *sst* array should be ignored when the value is the
 missing data flag (32767) as these pixels are probably coincident with
 land (although there can be other reasons for missing data).
 
-Server Functions: Looking at Geo-Referenced Data Using Hyrax
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[[Server_Functions]]Server Functions: Looking at Geo-Referenced Data Using Hyrax
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 There are a number of different DAP servers that have been developed by
 different organizations. Hyrax, the DAP server developed by the OPeNDAP
@@ -243,8 +240,8 @@ parameter list and get some documentation for that function. For
 example, try
 http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.ascii?geogrid()[...?geogrid()].
 
-More Fun With Server Functions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[[More_Fun]]More Fun With Server Functions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Server functions can be composed to form pipelines, feeding the value of
 one function to another. Since the values in this data set are scaled up
@@ -270,8 +267,8 @@ http://test.opendap.org/opendap/data/nc/sst.mnmean.nc.gz.ascii?linear_scale(geog
 
 image::../images/9/96/Reynolds_sst_linear_scale_geogrid.png[]
 
-Sequence Data
-~~~~~~~~~~~~~
+[[Sequence_Data]]Sequence Data
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Gridded data works well for satellite images, model data, and data
 compilations such as the Reynolds data we have just looked at. Other data,
@@ -319,20 +316,20 @@ http://test.opendap.org/dap/data/ff/gsodock.dat.ascii?URI_GSO-Dock.Salinity&URI_
 
 Try it yourself with three or four conditions or more.
 
-Finding OPeNDAP URLs
---------------------
+[[Finding_URLs]]Finding OPeNDAP URLs
+------------------------------------
 
 Data often comes in the form of a URL enclosed in an email message, and there are several other ways to find data served by OPeNDAP servers.
 
-GCMD
-~~~~
+[[GCMD]]GCMD
+~~~~~~~~~~~~
 
 The http://gcmd.gsfc.nasa.gov[Global Change Master Directory] provides a huge amount of earth science data and catalogs OPeNDAP URLs for the datasets that have them. You can search on "OPeNDAP" from the main page to find many of these datasets.
 
 If you make that search, check the list for the Reynolds data; it should be there.
 
-Web Interface
-~~~~~~~~~~~~~
+[[Web_Interface]]Web Interface
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Many sites that serve one OPeNDAP dataset also serve others. The OPeNDAP web interface (if it is enabled by the site) allows you to check the directory structure for other datasets. For example, we will look at the Reynolds data we saw previously: http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.html
 
@@ -354,8 +351,8 @@ hold data stored in other file types.
 makes it simple to serve data stored in files and documented using plain
 text files. Essentially, the person or organization providing data does not need to do anything besides link:../index.php/Hyrax[installing the server].
 
-File Servers
-~~~~~~~~~~~~
+[[File_Servers]]File Servers
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Some datasets that you will find are actually lists of other datasets. These
 are called _file servers_ and are themselves OPeNDAP datasets, organized
@@ -378,8 +375,8 @@ list of URLs, and then add some conditions (try limiting the files to
 data from 2003), and click **Get ASCII**. Now you can cut and paste the
 resulting URLs to get more data.
 
-Further Analysis
-----------------
+[[Further_Analysis]]Further Analysis
+------------------------------------
 
 This guide is about forming an OPeNDAP URL. After you have figured out
 how to request the data, there are a variety of things you can do with
