@@ -421,10 +421,34 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <body class="article">
 <div id="header">
 <h1>QuickStart - OPeNDAP Documentation</h1>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#trueintroduction">Introduction</a>
+<ul class="sectlevel2">
+<li><a href="#truekey-terms">Key Terms</a></li>
+</ul>
+</li>
+<li><a href="#truewhat-to-do-with-an-opendap-url">What to do With an OPeNDAP URL</a>
+<ul class="sectlevel2">
+<li><a href="#truean-easy-way-using-the-browser-based-opendap-server-dataset-access-form">An Easy Way: Using the Browser-Based OPeNDAP Server Dataset Access Form</a></li>
+<li><a href="#truea-more-flexible-way-using-commands-in-a-browser">A More Flexible Way: Using Commands in a Browser</a></li>
+</ul>
+</li>
+<li><a href="#truefinding-opendap-urls">Finding OPeNDAP URLs</a>
+<ul class="sectlevel2">
+<li><a href="#truegcmd">GCMD</a></li>
+<li><a href="#trueweb-interface">Web Interface</a></li>
+<li><a href="#truefile-servers">File Servers</a></li>
+</ul>
+</li>
+<li><a href="#truefurther-analysis">Further Analysis</a></li>
+</ul>
+</div>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="firstHeading"><a class="anchor" href="#firstHeading"></a>Introduction</h2>
+<h2 id="trueintroduction"><a class="anchor" href="#trueintroduction"></a>Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><a href="http://www.opendap.org/">OPeNDAP</a> is the developer of client/server software, of the same name, that enables scientists to share data more easily over the internet. The OPeNDAP group is also the original developer of the <a href="http://www.opendap.org/pdf/ESE-RFC-004v1.1.pdf">Data Access Protocol</a> (DAP) that the software uses. Many other groups have adopted DAP and provide compatible clients, servers, and SDKs. OPeNDAP&#8217;s DAP is also a NASA community standard. For the rest of this document, "OPeNDAP" will refer to the software.</p>
@@ -456,62 +480,7 @@ specifically for science data. The protocol relies on the widely used and stable
 <p><strong>Hyrax:</strong> The server half of OPeNDAP, developed by the OPeNDAP group.</p>
 </li>
 <li>
-<p><strong>OPeNDAP URL</strong> An OPeNDAP URL is a URL that enables you to access data on a database server on which OPeNDAP is implemente. An OPeNDAP URL will include "opendap.org" in its path.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="truecontents"><a class="anchor" href="#truecontents"></a>Contents</h3>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="#What_To_Do_With_An_OPeNDAP_URL">1 What To Do With An OPeNDAP URL</a></p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="#The_Easy_Way">1.1 The Easy Way: Using the Browser-Based OPeNDAP Server Dataset Access Form</a></p>
-</li>
-<li>
-<p><a href="#A_More_Flexible_Way">1.2 A More Flexible Way: Using Commands in a Browser</a></p>
-</li>
-<li>
-<p><a href="#Peeking_at_Data">1.3 Peeking at Data</a></p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="#Server_Functions_Looking_at_geo-referenced_data_using_Hyrax">1.3.1 Server Functions: Looking at geo-referenced data using Hyrax</a></p>
-</li>
-<li>
-<p><a href="#More_fun_with_Server_Functions">1.3.2 More fun with Server Functions</a></p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><a href="#Sequence_Data">1.4  Sequence Data</a></p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><a href="#Finding_OPeNDAP_URLs">2 Finding OPeNDAP URLs</a></p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="#GCMD">2.1 GCMD</a></p>
-</li>
-<li>
-<p><a href="#Web_Interface">2.2 Web Interface</a></p>
-</li>
-<li>
-<p><a href="#File_Servers">2.3 File Servers</a></p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><a href="#Further_analysis">3 Further analysis</a></p>
+<p><strong>OPeNDAP URL</strong> An OPeNDAP URL is a URL that enables you to access data on a database server on which OPeNDAP is implemented. An OPeNDAP URL will include "opendap.org" in its path.</p>
 </li>
 </ul>
 </div>
@@ -519,7 +488,7 @@ specifically for science data. The protocol relies on the widely used and stable
 </div>
 </div>
 <div class="sect1">
-<h2 id="true1-what-to-do-with-an-opendap-url"><a class="anchor" href="#true1-what-to-do-with-an-opendap-url"></a>1 What to do With an OPeNDAP URL</h2>
+<h2 id="truewhat-to-do-with-an-opendap-url"><a class="anchor" href="#truewhat-to-do-with-an-opendap-url"></a>What to do With an OPeNDAP URL</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Suppose someone gives you a hot tip that there is a lot of good data at&#8230;&#8203;</p>
@@ -548,12 +517,14 @@ Because you will rarely want to request an entire archive, OPeNDAP provides soph
 </table>
 </div>
 <div class="sect2">
-<h3 id="true1-1-the-easy-way-using-the-browser-based-opendap-server-dataset-access-form"><a class="anchor" href="#true1-1-the-easy-way-using-the-browser-based-opendap-server-dataset-access-form"></a>1.1 The Easy Way: Using the Browser-Based OPeNDAP Server Dataset Access Form</h3>
+<h3 id="truean-easy-way-using-the-browser-based-opendap-server-dataset-access-form"><a class="anchor" href="#truean-easy-way-using-the-browser-based-opendap-server-dataset-access-form"></a>An Easy Way: Using the Browser-Based OPeNDAP Server Dataset Access Form</h3>
 <div class="paragraph">
 <p>OPeNDAP includes a way to sample data that makes writing a constraint expression somewhat easier than using only a URL to do the same thing. Append <strong>.html</strong> to an OPeNDAP URL, and you will get an OPeNDAP Server Dataset Access Form that simplifies the process for sampling data.</p>
 </div>
-<div class="paragraph">
-<p><span class="image"><img src="../images/0/05/Reynolds_ifh.png" alt="Reynolds ifh.png"></span></p>
+<div class="imageblock">
+<div class="content">
+<img src="../images/0/05/Reynolds_ifh.png" alt="Reynolds ifh.png">
+</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -617,8 +588,10 @@ as grids. However, since sequence constraint expressions look different
 from grid expressions, the form also looks slightly different. The variable selection boxes allow you to enter relational
 expressions for each variable. Apart from that, the function is exactly the same.</p>
 </div>
-<div class="paragraph">
-<p><span class="image"><img src="../images/d/d9/Gsodock-html.png" alt="Gsodock-html.png"></span></p>
+<div class="imageblock">
+<div class="content">
+<img src="../images/d/d9/Gsodock-html.png" alt="images\d\d9\Gsodock html.png">
+</div>
 </div>
 <div class="paragraph">
 <p>Click <a href="http://test.opendap.org/dap/data/ff/gsodock.dat.html">here</a> to see
@@ -633,15 +606,17 @@ than 2 meters.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="true1-2-a-more-flexible-way-using-commands-in-a-browser"><a class="anchor" href="#true1-2-a-more-flexible-way-using-commands-in-a-browser"></a>1.2 A More Flexible Way: Using Commands in a Browser</h3>
+<h3 id="truea-more-flexible-way-using-commands-in-a-browser"><a class="anchor" href="#truea-more-flexible-way-using-commands-in-a-browser"></a>A More Flexible Way: Using Commands in a Browser</h3>
 <div class="paragraph">
 <p>If you would perfer to not use the OPeNDAP Server Data Access Form, you can use just a browser instead. This section describes how to do that.</p>
 </div>
 <div class="paragraph">
 <p>OPeNDAP has sophisticated methods for subsampling data at a remote site, but you need some information about the data first. First, we will look at data&#8217;s Dataset Descriptor Structure (DDS). This provides a description of the "shape" of the data, using a vaguely C-like syntax. You get a dataset&#8217;s DDS by appending <strong>.dds</strong> to the URL. Click <a href="http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.dds">here</a> to see an example of an OPeNDAP DDS at sst.mnmean.nc.gz.dds. The DDS looks like this:</p>
 </div>
-<div class="paragraph">
-<p><span class="image"><img src="../images/a/a4/Reynolds_dds.png" alt="actual size"></span></p>
+<div class="imageblock">
+<div class="content">
+<img src="../images/a/a4/Reynolds_dds.png" alt="Reynolds dds.png">
+</div>
 </div>
 <div class="paragraph">
 <p>From the sst.mnmean.nc.gz DDS, you can see that the dataset consists of two different pieces:</p>
@@ -673,8 +648,10 @@ than 2 meters.</p>
 <div class="paragraph">
 <p>The Grid is a special OPeNDAP data type that includes a multidimensional array and map vectors that indicate independent variable values. That is, you can use a Grid to store an array in which rows appear in irregular intervals. Here is a diagram of a simple grid:</p>
 </div>
-<div class="paragraph">
-<p><span class="image"><img src="../images/d/d4/Gridpts.gif" alt="Gridpts.gif"></span></p>
+<div class="imageblock">
+<div class="content">
+<img src="../images/d/d4/Gridpts.gif" alt="Gridpts.gif">
+</div>
 </div>
 <div class="paragraph">
 <p>The array part of the grid (like <strong>sst</strong> in the example above) contains the data points measured at each one of the squares. The X map vector contains the horizontal positions of the columns (like the <strong>lon</strong> vector above). The Y map vector contains the vertical positions of the rows (like the <strong>lat</strong> vector above).</p>
@@ -695,8 +672,10 @@ the data, such as units and the name of the variable. Part of the DAS
 for the Reynolds data taht we saw above is shown in the figure below. Click <a href="http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.das">sst.mnmean.nc.gz.das</a>
 to see the rest of it.</p>
 </div>
-<div class="paragraph">
-<p><span class="image"><img src="../images/f/f9/Reynolds_das.png" alt="Reynolds das.png"></span></p>
+<div class="imageblock">
+<div class="content">
+<img src="../images/f/f9/Reynolds_das.png" alt="Reynolds das.png">
+</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -745,9 +724,8 @@ described above. You can see what information is available by appending
 <pre>http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.info</pre>
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="true1-3-peeking-at-data"><a class="anchor" href="#true1-3-peeking-at-data"></a>1.3 Peeking at Data</h3>
+<div class="sect3">
+<h4 id="truepeeking-at-data"><a class="anchor" href="#truepeeking-at-data"></a>Peeking at Data</h4>
 <div class="paragraph">
 <p>Now that we know a little about the shape of the data and the data
 attributes, we will look at some of the data.</p>
@@ -756,8 +734,10 @@ attributes, we will look at some of the data.</p>
 <p>You can request a piece of an array with subscripts, just like in a C
 program, Matlab, or many other computer languages. Use a colon to indicate a subscript range. For example, <a href="http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.ascii?time%5b0:6%5d">http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.ascii?time%5b0:6%5d</a> will produce a time vecor that looks like this:</p>
 </div>
-<div class="paragraph">
-<p><span class="image"><img src="../images/0/01/Reynolds_time_vector.png" alt="Reynolds time vector.png"></span></p>
+<div class="imageblock">
+<div class="content">
+<img src="../images/0/01/Reynolds_time_vector.png" alt="Reynolds time vector.png">
+</div>
 </div>
 <div class="paragraph">
 <p>If you are interested in the Reynolds dataset, you are probably more
@@ -765,8 +745,10 @@ interested in the sea surface temperature data than the dependent
 variable vectors. The temperature data is a three-dimensional grid. To
 sample the sst grid, you just add a dimension for time: "&#8230;&#8203;sst/mnmean.nc.ascii?sst[0:1][13:16][103:105]". Click <a href="http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.ascii?sst%5b0:1%5d%5b13:16%5d%5b103:105%5d">here</a> to see this example in action. You will see something like this:</p>
 </div>
-<div class="paragraph">
-<p><span class="image"><img src="../images/a/a8/Reynolds_sst.png" alt="Reynolds sst.png"></span></p>
+<div class="imageblock">
+<div class="content">
+<img src="../images/a/a8/Reynolds_sst.png" alt="Reynolds sst.png">
+</div>
 </div>
 <div class="paragraph">
 <p>Notice that when you ask for part of an OPeNDAP grid, you get the array
@@ -791,8 +773,8 @@ data points in the <strong>sst</strong> array should be ignored when the value i
 missing data flag (32767) as these pixels are probably coincident with
 land (although there can be other reasons for missing data).</p>
 </div>
-<div class="sect3">
-<h4 id="true1-3-1-server-functions-looking-at-geo-referenced-data-using-hyrax"><a class="anchor" href="#true1-3-1-server-functions-looking-at-geo-referenced-data-using-hyrax"></a>1.3.1 Server Functions: Looking at geo-referenced data using Hyrax</h4>
+<div class="sect4">
+<h5 id="trueserver-functions-looking-at-geo-referenced-data-using-hyrax"><a class="anchor" href="#trueserver-functions-looking-at-geo-referenced-data-using-hyrax"></a>Server Functions: Looking at Geo-Referenced Data Using Hyrax</h5>
 <div class="paragraph">
 <p>There are a number of different DAP servers that have been developed by
 different organizations. Hyrax, the DAP server developed by the OPeNDAP
@@ -808,8 +790,10 @@ real-world locations, and then made our accesses using those indexes.</p>
 operations for you. For example, we could rewrite the example above like
 this: "&#8230;&#8203;mnmean.nc.gz.ascii?geogrid(sst,62,206,56,210,"19722&lt;time&lt;19755")". Click <a href="http://test.opendap.org/opendap/data/nc/sst.mnmean.nc.gz.ascii?geogrid(sst,62,206,56,210,%2219722%3Ctime%3C19755%22)">here</a> to see this in action. The results look like this:</p>
 </div>
-<div class="paragraph">
-<p><span class="image"><img src="../images/c/c8/Reynolds_sst_geogrid.png" alt="Reynolds sst geogrid.png"></span></p>
+<div class="imageblock">
+<div class="content">
+<img src="../images/c/c8/Reynolds_sst_geogrid.png" alt="Reynolds sst geogrid.png">
+</div>
 </div>
 <div class="paragraph">
 <p>The Syntax for <code>geogrid()</code> is: "geogrid(grid variable, upper latitude, left longitude, lower latitude,
@@ -853,8 +837,8 @@ example, try
 <a href="http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.ascii?geogrid()">&#8230;&#8203;?geogrid()</a>.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="true1-3-2-more-fun-with-server-functions"><a class="anchor" href="#true1-3-2-more-fun-with-server-functions"></a>1.3.2 More fun with Server Functions</h4>
+<div class="sect4">
+<h5 id="truecreating-server-function-pipelines"><a class="anchor" href="#truecreating-server-function-pipelines"></a>Creating Server Function Pipelines</h5>
 <div class="paragraph">
 <p>Server functions can be composed to form pipelines, feeding the value of
 one function to another. Since the values in this data set are scaled up
@@ -888,13 +872,15 @@ the second form when Hyrax can guess the values using data set metadata.
 <div class="paragraph">
 <p><a href="http://test.opendap.org/opendap/data/nc/sst.mnmean.nc.gz.ascii?linear_scale(geogrid(sst,78,0,56,10,%22time=19723%22),0.01,0)">&#8230;&#8203;nc.gz.ascii?linear_scale(geogrid(sst,78,0,56,10,"time=19723"),0.01,0)</a> produces the following:</p>
 </div>
-<div class="paragraph">
-<p><span class="image"><img src="../images/9/96/Reynolds_sst_linear_scale_geogrid.png" alt="Reynolds sst linear scale geogrid.png"></span></p>
+<div class="imageblock">
+<div class="content">
+<img src="../images/9/96/Reynolds_sst_linear_scale_geogrid.png" alt="Reynolds sst linear scale geogrid.png">
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="true1-4-sequence-data"><a class="anchor" href="#true1-4-sequence-data"></a>1.4 Sequence Data</h3>
+</div>
+<div class="sect3">
+<h4 id="trueworking-with-sequence-data"><a class="anchor" href="#trueworking-with-sequence-data"></a>Working With Sequence Data</h4>
 <div class="paragraph">
 <p>Gridded data works well for satellite images, model data, and data
 compilations such as the Reynolds data we have just looked at. Other data,
@@ -922,14 +908,18 @@ measurements of each of the twelve variables.</p>
 <div class="paragraph">
 <p><a href="http://test.opendap.org/dap/data/ff/gsodock.dat.dds">Ask for the DDS</a>, and you will see the twelve variables, all contained in a Sequence called URI_GSO-Dock:</p>
 </div>
-<div class="paragraph">
-<p><span class="image"><img src="../images/7/71/Gsodock-dds.png" alt="Gsodock-dds.png"></span></p>
+<div class="imageblock">
+<div class="content">
+<img src="../images/7/71/Gsodock-dds.png" alt="Gsodock dds.png">
+</div>
 </div>
 <div class="paragraph">
 <p><a href="http://test.opendap.org/dap/data/ff/gsodock.dat.das">The DAS</a> contains the units for each data type and some additional information:</p>
 </div>
-<div class="paragraph">
-<p><span class="image"><img src="../images/8/85/Gsodock-das.png" alt="Gsodock-das.png"></span></p>
+<div class="imageblock">
+<div class="content">
+<img src="../images/8/85/Gsodock-das.png" alt="Gsodock das.png">
+</div>
 </div>
 <div class="paragraph">
 <p>To select the data you want from a server, use a constraint
@@ -956,14 +946,15 @@ Here is an example of applying two conditions:</p>
 </div>
 </div>
 </div>
+</div>
 <div class="sect1">
-<h2 id="true2-finding-opendap-urls"><a class="anchor" href="#true2-finding-opendap-urls"></a>2 Finding OPeNDAP URLs</h2>
+<h2 id="truefinding-opendap-urls"><a class="anchor" href="#truefinding-opendap-urls"></a>Finding OPeNDAP URLs</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Data often comes in the form of a URL enclosed in an email message, and there are several other ways to find data served by OPeNDAP servers.</p>
 </div>
 <div class="sect2">
-<h3 id="true2-1-gcmd"><a class="anchor" href="#true2-1-gcmd"></a>2.1 GCMD</h3>
+<h3 id="truegcmd"><a class="anchor" href="#truegcmd"></a>GCMD</h3>
 <div class="paragraph">
 <p>The <a href="http://gcmd.gsfc.nasa.gov">Global Change Master Directory</a> provides a huge amount of earth science data and catalogs OPeNDAP URLs for the datasets that have them. You can search on "OPeNDAP" from the main page to find many of these datasets.</p>
 </div>
@@ -972,20 +963,21 @@ Here is an example of applying two conditions:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="true2-2-web-interface"><a class="anchor" href="#true2-2-web-interface"></a>2.2 Web Interface</h3>
+<h3 id="trueweb-interface"><a class="anchor" href="#trueweb-interface"></a>Web Interface</h3>
 <div class="paragraph">
 <p>Many sites that serve one OPeNDAP dataset also serve others. The OPeNDAP web interface (if it is enabled by the site) allows you to check the directory structure for other datasets. For example, we will look at the Reynolds data we saw previously: <a href="http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.html" class="bare">http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.html</a></p>
 </div>
 <div class="paragraph">
-<p>If we use the same URL, but without the file name at the end, we can browse the directory of data:
- <a href="http://test.opendap.org/dap/data/nc/" class="bare">http://test.opendap.org/dap/data/nc/</a></p>
+<p>If we use the same URL, but without the file name at the end, we can browse the directory of data: <a href="http://test.opendap.org/dap/data/nc/" class="bare">http://test.opendap.org/dap/data/nc/</a></p>
 </div>
 <div class="paragraph">
 <p>The OPeNDAP server checks to see whether the URL is a directory, and if
 it is, it generates a directory listing, like <a href="http://test.opendap.org/dap/data/nc/">this:</a></p>
 </div>
-<div class="paragraph">
-<p><span class="image"><img src="../images/9/9e/Test.oopendap.org_directory_view.png" alt="Test.oopendap.org directory view.png"></span></p>
+<div class="imageblock">
+<div class="content">
+<img src="../images/9/9e/Test.oopendap.org_directory_view.png" alt="Test.oopendap.org directory view.png">
+</div>
 </div>
 <div class="paragraph">
 <p>You can see from the directory listing that the monthly mean dataset
@@ -1002,7 +994,7 @@ text files. Essentially, the person or organization providing data does not need
 </div>
 </div>
 <div class="sect2">
-<h3 id="true2-3-file-servers"><a class="anchor" href="#true2-3-file-servers"></a>2.3 File Servers</h3>
+<h3 id="truefile-servers"><a class="anchor" href="#truefile-servers"></a>File Servers</h3>
 <div class="paragraph">
 <p>Some datasets that you will find are actually lists of other datasets. These
 are called <em>file servers</em> and are themselves OPeNDAP datasets, organized
@@ -1032,7 +1024,7 @@ resulting URLs to get more data.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="true3-further-analysis"><a class="anchor" href="#true3-further-analysis"></a>3 Further analysis</h2>
+<h2 id="truefurther-analysis"><a class="anchor" href="#truefurther-analysis"></a>Further Analysis</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This guide is about forming an OPeNDAP URL. After you have figured out
@@ -1097,7 +1089,7 @@ data you find, is beyond the scope of this document.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-11-21 09:30:23 CST
+Last updated 2016-11-26 11:03:40 CST
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css">
