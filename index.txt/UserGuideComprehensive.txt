@@ -1,7 +1,7 @@
-User Guide - OPeNDAP Documentation
-==================================
+= User Guide - OPeNDAP Documentation
 Leonard Porrello <lporrel@gmail.com>
 2016-12-31
+:numbered:
 :toc:
 
 == About This Guide ==
@@ -39,8 +39,7 @@ access APIs they use, or by modifying the programs to use one of the
 OPeNDAP data access APIs. In addition to providing a sophisticated set
 of network-compatible APIs in several languages, there are also
 libraries of legacy APIs available in OPeNDAP-aware versions. The
-popular
-http://www.unidata.ucar.edu/packages/netcdf/guide.txn_toc.html[NetCDF]
+popular http://www.unidata.ucar.edu/packages/netcdf/guide.txn_toc.html[NetCDF]
 library, for example, can read data from remote OPeNDAP data sources as
 easily as it reads from a local file.
 
@@ -81,7 +80,6 @@ OPeNDAP, as do many of the real-time observing systems that make up the
 http://www.ioos.gov[Integrated Ocean Observing System (IOOS)], like the
 http://gomoos.org[Gulf of Maine Ocean Observing System (GoMOOS)].
 
- 
 The population of people who may be interested in a system such as
 OPeNDAP may be divided into data consumers and data providers. Though it
 was an important observation to the development of OPeNDAP that the two
@@ -109,9 +107,8 @@ defined by that API to access the data, which is typically stored on the
 same host machine. Some APIs are somewhat more sophisticated than this,
 of course, but their general operation is as simple.
 
+.The Architecture of a Data Analysis Package
 image:../images/7/76/Unlinked.png[]
-
-The Architecture of a Data Analysis Package
 
 The operation of an OPeNDAP client is illustrated in the
 ../index.php/File:Unlinked.gif[figure below]. Here, the _same
@@ -142,8 +139,7 @@ irrelevant to the client. If the client was originally designed to read
 netCDF format files, the data returned by the OPeNDAP-netCDF library
 will appear to have been read from a netCDF file, whatever the actual
 format of the files from which the data were
-read(link:../index.php?title=Wiki_Testing/OPeNDAPUserGuideFootNotes&action=edit&redlink=1[4]).
-If the program expects JGOFS data, the OPeNDAP-JGOFS library will return
+read(link:../index.php?title=Wiki_Testing/OPeNDAPUserGuideFootNotes&action=edit&redlink=1[4]). If the program expects JGOFS data, the OPeNDAP-JGOFS library will return
 data that seem to have come from a JGOFS dataset, and so on.
 
 OPeNDAP does not pretend to remove all the overhead of data searches. A
@@ -173,55 +169,47 @@ required messages.
 
 The requests messages a server is required to understand are these:
 
-Data Description ::
-  Data values come in types and sizes. An array, for example, might
+Data Description:: Data values come in types and sizes. An array, for example, might
   consist of 10 integers. The value "ten" and the type "integer"
   describe the array. This request returns information about data types,
   so that a receiving program can allocate space appropriately. See
   link:../index.php/UserGuideDataModel#DDS[Data Description Structure
   (DDS)].
 
-Data Attribute ::
-  This is a request to provide information _about_ data, and typically
+Data Attribute:: This is a request to provide information _about_ data, and typically
   includes information like units, names of data types, reference
   information and so on. See
   link:../index.php/UserGuideDataModel#DAS[Data Attribute Structure
   (DAS)].
 
-Data ::
-  The server also must be able to respond to a request for the data
+Data:: The server also must be able to respond to a request for the data
   itself. See link:../index.php/UserGuideDataModel#DataDDS[data
   response].
 
 A server may respond to requests like these, too:
 
-ASCII ::
-  Some servers can convert data to ASCII values on the fly. This allows
+ASCII:: Some servers can convert data to ASCII values on the fly. This allows
   users to view data using a standard web browser, assuming the data are
   not too large. See link:../index.php/UserGuideServer#ASCII[ASCII
   return].
 
-Info ::
-  The info response is a formatted page containing information from the
+Info:: The info response is a formatted page containing information from the
   Data Attributes and Data Description responses. It's meant to be a
   human-readable way to show what's available in a dataset via a
   standard web browser. See link:../index.php/UserGuideServer#Info[Info
   response].
 
-HTML ::
-  Very similar to the info response is the HTML response. This provides
+HTML:: Very similar to the info response is the HTML response. This provides
   not only the information from the info response, but also includes a
   Javascript form to help you build a request for data from the same
   data file. The best description of the HTML form is in the
   link:../index.php/QuickStart[Quick Start Guide].
 
-SOAP ::
-  OPeNDAP servers can provide their data in terms of a SOAP request and
+SOAP:: OPeNDAP servers can provide their data in terms of a SOAP request and
   response. For more information see
   link:../index.php/UserGuideDataModel#SOAP[SOAP Request].
 
-DDX ::
-  The DDX is an XML version of the Data Attribute and Data Description
+DDX:: The DDX is an XML version of the Data Attribute and Data Description
   replies. See link:../index.php/UserGuideServer#DDX[DDX Request].
 
 === The OPeNDAP Server ===
@@ -268,7 +256,6 @@ a description of how to install and configure an OPeNDAP data server
 (Hyrax).
 
 === Administration and Centralization of Data ===
-
 
 Under OPeNDAP, there is no central archive of data. Data under OPeNDAP
 is organized in a manner similar to the World Wide Web itself. That is,
@@ -550,10 +537,10 @@ client.
 
 The DAP consists of several components:
 
-1.  An "intermediate data representation" for data sets. This is used to
+. An "intermediate data representation" for data sets. This is used to
 transport data from the remote source to the client. The data types that
 make up this representation may be thought of as the OPeNDAP data model.
-2.  A format for the "ancillary data" needed to translate a data set
+. A format for the "ancillary data" needed to translate a data set
 into the intermediate representation, and to translate the intermediate
 representation into the target data model. The ancillary data in turn
 consists of two pieces:
@@ -562,9 +549,9 @@ in some given data set. This is called the Data Description Structure
 (DDS).
 * Capsule descriptions of some of the properties of the data stored in
 some given data set. This is the Data Attribute Structure (DAS).
-3.  A "procedure" for retrieving data and ancillary data from remote
+. A "procedure" for retrieving data and ancillary data from remote
 platforms.
-4.  An "API" consisting of OPeNDAP classes and data access calls
+. An "API" consisting of OPeNDAP classes and data access calls
 designed to implement the protocol,
 
 The intermediate data representation and the ancillary data formats are
@@ -595,24 +582,18 @@ any data storage format.
 
 The elements of the OPeNDAP data access protocol are...
 
-Base Types ::
-  These are the simple data types, like integers, floating point
+Base Types:: These are the simple data types, like integers, floating point
   numbers, strings, and character data.
-Constructor ::
-  Types These are the more complex data types that can be constructed
+Constructor:: Types These are the more complex data types that can be constructed
   from the simple base types. Examples are structures, sequences,
   arrays, and grids.
-Operators ::
-  Access to data can be operationally defined with operators defined on
+Operators:: Access to data can be operationally defined with operators defined on
   the various data types.
- External Data Representation ::
-  In order to transmit the data across the Internet, there needs to be a
-  machine-independent definition of what the various data types look
+External Data Representation:: In order to transmit the data across the Internet, there needs to be a machine-independent definition of what the various data types look
   like. For example, the client and server need to agree on the most
   significant digit of a particular byte in the message
 
-These elements are defined in greater detail in the sections that
-follow.
+These elements are defined in greater detail in the sections that follow.
 
 ===== Base Types =====
 
@@ -635,15 +616,11 @@ possible to access parts of that structure using the DAP. Base type
 variables in the DAP have two predefined attributes (or
 characteristics): name, and type. They are defined as follows:
 
---
-Name ::
-  A unique identifier that can be used to reference the part of the
+Name:: A unique identifier that can be used to reference the part of the
   dataset associated with this variable.
 
-
-Type ::
-  The data type contained by the variable. This can be one of Byte,
-  Int32, UInt32, Float64, String, and URL. Where:
+Type:: The data type contained by the variable. This can be one of Byte,
+  Int32, UInt32, Float64, String, and URL. Where...
 
 * Byte is a single byte of data. This is the same as unsigned char in
 ANSI C.
@@ -701,10 +678,8 @@ middle value in the first subscript range indicates that the output
 array values are to be selected from alternate input array rows. The
 array temp[2:3:10][3:4] would select from every third row, and so on.
 
-A
-link:../index.php/UserGuideOPeNDAPMessages#Data_Descriptor_Structure[DDS]
-declaration of a 5x6 array of floating point numbers would look like
-this:
+A link:../index.php/UserGuideOPeNDAPMessages#Data_Descriptor_Structure[DDS]
+declaration of a 5x6 array of floating point numbers would look like this:
 
 -------------------
 Float64 data[5][6];
@@ -758,7 +733,6 @@ Thus a Sequence can be represented as...
 |. |... |... |.
 |s~i0~ |s~i1~ |... |s~in~
 |========================
-
  
 Every instance of Sequence S has the same number, order, and class of
 its member variables. A Sequence implies that each of the variables is
@@ -814,7 +788,7 @@ array will be inadequate. To adequately describe the positions of each
 of the points in the grid, the precise location of each column and row
 must be described.
 
-.An Irregular Grid of Data
+.A Sample of an Irregular Grid of Data
 image:../images/6/64/Grid.gif[]
 
 The secondary vectors in the Grid data type provide a solution to this
@@ -1601,7 +1575,6 @@ would be:
 ?station.02cal[0:4]
 -------------------
 
- 
 By specifying a stride value, we can also select a hyperslab of the
 oxygen calibration array:
 
@@ -1723,7 +1696,7 @@ Most characters in a regular expression match themselves. That is, an
 are several special characters, however, that provide more sophisticated
 pattern-matching capabilities.
 
-. ::
+ "." ::
   The period matches any single character except a newline.
  * + ? ::
   These are postfix operators, which indicate to try to match the
@@ -1793,8 +1766,7 @@ station. However, consider the following expression:
 ?station&station.cast.O2>15.0&station.month={3,4,5}
 ---------------------------------------------------
 
- 
- For each station there is only one month value, while there are many
+For each station there is only one month value, while there are many
 oxygen values. Passing a constraint expression like this one will force
 the server to sort through all the oxygen data for each station (which
 could be in the thousands of points), only to throw the data away when
@@ -1826,7 +1798,6 @@ This section provides information about the structure of the OPeNDAP server, inc
 
 === The OPeNDAP Server ===
 
-
 Any server that responds to the messages described in
 link:../index.php/UserGuideOPeNDAPMessages[OPeNDAP Messages] using the
 link:../index.php/UserGuideDataModel[OPeNDAP Data Model] is an OPeNDAP
@@ -1838,7 +1809,6 @@ standards described here, maintains a server that complies with the
 standard. This is link:../index.php/Hyrax[Hyrax].
 
 ==== Hyrax ====
-
 
 The OPeNDAP group produces and supports link:../index.php/Hyrax[Hyrax],
 a modular data server that can be used in a variety of ways to serve a
@@ -2201,7 +2171,6 @@ data:
 ...
 -----------------------------------------------------------
 
-
 ===== Client Libraries =====
 
 Several libraries exist that you can link with other software to create
@@ -2251,7 +2220,6 @@ version of the netCDF library.
 
 See the http://www.unidata.ucar.edu/software/netcdf[netCDF home page]
 for information about how to use that library.
-
 
 .Python library
 http://pydap.org[Pydap] is an implementation of the OPeNDAP client in

@@ -5,6 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.5.dev">
+<meta name="author" content="2016-12-31">
 <title>QuickStart - OPeNDAP Documentation</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -421,34 +422,37 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <body class="article">
 <div id="header">
 <h1>QuickStart - OPeNDAP Documentation</h1>
+<div class="details">
+<span id="author" class="author">2016-12-31</span><br>
+</div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#trueintroduction">Introduction</a>
+<li><a href="#trueintroduction">1. Introduction</a>
 <ul class="sectlevel2">
-<li><a href="#truekey-terms">Key Terms</a></li>
+<li><a href="#truekey-terms">1.1. Key Terms</a></li>
 </ul>
 </li>
-<li><a href="#truewhat-to-do-with-an-opendap-url">What to do With an OPeNDAP URL</a>
+<li><a href="#truewhat-to-do-with-an-opendap-url">2. What to do With an OPeNDAP URL</a>
 <ul class="sectlevel2">
-<li><a href="#truean-easy-way-using-the-browser-based-opendap-server-dataset-access-form">An Easy Way: Using the Browser-Based OPeNDAP Server Dataset Access Form</a></li>
-<li><a href="#truea-more-flexible-way-using-commands-in-a-browser">A More Flexible Way: Using Commands in a Browser</a></li>
+<li><a href="#truean-easy-way-using-the-browser-based-opendap-server-dataset-access-form">2.1. An Easy Way: Using the Browser-Based OPeNDAP Server Dataset Access Form</a></li>
+<li><a href="#truea-more-flexible-way-using-commands-in-a-browser">2.2. A More Flexible Way: Using Commands in a Browser</a></li>
 </ul>
 </li>
-<li><a href="#truefinding-opendap-urls">Finding OPeNDAP URLs</a>
+<li><a href="#truefinding-opendap-urls">3. Finding OPeNDAP URLs</a>
 <ul class="sectlevel2">
-<li><a href="#truegcmd">GCMD</a></li>
-<li><a href="#trueweb-interface">Web Interface</a></li>
-<li><a href="#truefile-servers">File Servers</a></li>
+<li><a href="#truegcmd">3.1. GCMD</a></li>
+<li><a href="#trueweb-interface">3.2. Web Interface</a></li>
+<li><a href="#truefile-servers">3.3. File Servers</a></li>
 </ul>
 </li>
-<li><a href="#truefurther-analysis">Further Analysis</a></li>
+<li><a href="#truefurther-analysis">4. Further Analysis</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="trueintroduction"><a class="anchor" href="#trueintroduction"></a>Introduction</h2>
+<h2 id="trueintroduction"><a class="anchor" href="#trueintroduction"></a>1. Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><a href="http://www.opendap.org/">OPeNDAP</a> is the developer of client/server software, of the same name, that enables scientists to share data more easily over the internet. The OPeNDAP group is also the original developer of the <a href="http://www.opendap.org/pdf/ESE-RFC-004v1.1.pdf">Data Access Protocol</a> (DAP) that the software uses. Many other groups have adopted DAP and provide compatible clients, servers, and SDKs. OPeNDAP&#8217;s DAP is also a NASA community standard. For the rest of this document, "OPeNDAP" will refer to the software.</p>
@@ -460,7 +464,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>This quick start guide covers how to use OPeNDAP in a typical web browser, such as Firefox, Chrome, or Safari, to discover information about data that is useful when creating database queries.</p>
 </div>
 <div class="sect2">
-<h3 id="truekey-terms"><a class="anchor" href="#truekey-terms"></a>Key Terms</h3>
+<h3 id="truekey-terms"><a class="anchor" href="#truekey-terms"></a>1.1. Key Terms</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -488,7 +492,7 @@ specifically for science data. The protocol relies on the widely used and stable
 </div>
 </div>
 <div class="sect1">
-<h2 id="truewhat-to-do-with-an-opendap-url"><a class="anchor" href="#truewhat-to-do-with-an-opendap-url"></a>What to do With an OPeNDAP URL</h2>
+<h2 id="truewhat-to-do-with-an-opendap-url"><a class="anchor" href="#truewhat-to-do-with-an-opendap-url"></a>2. What to do With an OPeNDAP URL</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Suppose someone gives you a hot tip that there is a lot of good data at&#8230;&#8203;</p>
@@ -517,7 +521,7 @@ Because you will rarely want to request an entire archive, OPeNDAP provides soph
 </table>
 </div>
 <div class="sect2">
-<h3 id="truean-easy-way-using-the-browser-based-opendap-server-dataset-access-form"><a class="anchor" href="#truean-easy-way-using-the-browser-based-opendap-server-dataset-access-form"></a>An Easy Way: Using the Browser-Based OPeNDAP Server Dataset Access Form</h3>
+<h3 id="truean-easy-way-using-the-browser-based-opendap-server-dataset-access-form"><a class="anchor" href="#truean-easy-way-using-the-browser-based-opendap-server-dataset-access-form"></a>2.1. An Easy Way: Using the Browser-Based OPeNDAP Server Dataset Access Form</h3>
 <div class="paragraph">
 <p>OPeNDAP includes a way to sample data that makes writing a constraint expression somewhat easier than using only a URL to do the same thing. Append <strong>.html</strong> to an OPeNDAP URL, and you will get an OPeNDAP Server Dataset Access Form that simplifies the process for sampling data.</p>
 </div>
@@ -606,7 +610,7 @@ than 2 meters.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="truea-more-flexible-way-using-commands-in-a-browser"><a class="anchor" href="#truea-more-flexible-way-using-commands-in-a-browser"></a>A More Flexible Way: Using Commands in a Browser</h3>
+<h3 id="truea-more-flexible-way-using-commands-in-a-browser"><a class="anchor" href="#truea-more-flexible-way-using-commands-in-a-browser"></a>2.2. A More Flexible Way: Using Commands in a Browser</h3>
 <div class="paragraph">
 <p>If you would perfer to not use the OPeNDAP Server Data Access Form, you can use just a browser instead. This section describes how to do that.</p>
 </div>
@@ -725,7 +729,7 @@ described above. You can see what information is available by appending
 </div>
 </div>
 <div class="sect3">
-<h4 id="truepeeking-at-data"><a class="anchor" href="#truepeeking-at-data"></a>Peeking at Data</h4>
+<h4 id="truepeeking-at-data"><a class="anchor" href="#truepeeking-at-data"></a>2.2.1. Peeking at Data</h4>
 <div class="paragraph">
 <p>Now that we know a little about the shape of the data and the data
 attributes, we will look at some of the data.</p>
@@ -880,7 +884,7 @@ the second form when Hyrax can guess the values using data set metadata.
 </div>
 </div>
 <div class="sect3">
-<h4 id="trueworking-with-sequence-data"><a class="anchor" href="#trueworking-with-sequence-data"></a>Working With Sequence Data</h4>
+<h4 id="trueworking-with-sequence-data"><a class="anchor" href="#trueworking-with-sequence-data"></a>2.2.2. Working With Sequence Data</h4>
 <div class="paragraph">
 <p>Gridded data works well for satellite images, model data, and data
 compilations such as the Reynolds data we have just looked at. Other data,
@@ -948,13 +952,13 @@ Here is an example of applying two conditions:</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="truefinding-opendap-urls"><a class="anchor" href="#truefinding-opendap-urls"></a>Finding OPeNDAP URLs</h2>
+<h2 id="truefinding-opendap-urls"><a class="anchor" href="#truefinding-opendap-urls"></a>3. Finding OPeNDAP URLs</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Data often comes in the form of a URL enclosed in an email message, and there are several other ways to find data served by OPeNDAP servers.</p>
 </div>
 <div class="sect2">
-<h3 id="truegcmd"><a class="anchor" href="#truegcmd"></a>GCMD</h3>
+<h3 id="truegcmd"><a class="anchor" href="#truegcmd"></a>3.1. GCMD</h3>
 <div class="paragraph">
 <p>The <a href="http://gcmd.gsfc.nasa.gov">Global Change Master Directory</a> provides a huge amount of earth science data and catalogs OPeNDAP URLs for the datasets that have them. You can search on "OPeNDAP" from the main page to find many of these datasets.</p>
 </div>
@@ -963,7 +967,7 @@ Here is an example of applying two conditions:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="trueweb-interface"><a class="anchor" href="#trueweb-interface"></a>Web Interface</h3>
+<h3 id="trueweb-interface"><a class="anchor" href="#trueweb-interface"></a>3.2. Web Interface</h3>
 <div class="paragraph">
 <p>Many sites that serve one OPeNDAP dataset also serve others. The OPeNDAP web interface (if it is enabled by the site) allows you to check the directory structure for other datasets. For example, we will look at the Reynolds data we saw previously: <a href="http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.html" class="bare">http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.html</a></p>
 </div>
@@ -988,13 +992,13 @@ directory are stored in NetCDF files; other directories under <em>/data</em>
 hold data stored in other file types.</p>
 </div>
 <div class="paragraph">
-<p><strong>Note:</strong> In general, this list is produced by an OPeNDAP server and this feature works on all servers. However, it only really understands OPeNDAP data files, so other file types will simply be sent without any interpretation. This can be useful if the <em>other file</em> happens to be a README or other documentation file since this
+<p><strong>Note:</strong> In general, this list is produced by an OPeNDAP server and this feature works on all servers. However, it only really understands OPeNDAP data files, so other file types will simply be sent without any interpretation. This can be useful if the 'other file' happens to be a README or other documentation file since this
 makes it simple to serve data stored in files and documented using plain
 text files. Essentially, the person or organization providing data does not need to do anything besides <a href="../index.php/Hyrax">installing the server</a>.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="truefile-servers"><a class="anchor" href="#truefile-servers"></a>File Servers</h3>
+<h3 id="truefile-servers"><a class="anchor" href="#truefile-servers"></a>3.3. File Servers</h3>
 <div class="paragraph">
 <p>Some datasets that you will find are actually lists of other datasets. These
 are called <em>file servers</em> and are themselves OPeNDAP datasets, organized
@@ -1024,7 +1028,7 @@ resulting URLs to get more data.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="truefurther-analysis"><a class="anchor" href="#truefurther-analysis"></a>Further Analysis</h2>
+<h2 id="truefurther-analysis"><a class="anchor" href="#truefurther-analysis"></a>4. Further Analysis</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This guide is about forming an OPeNDAP URL. After you have figured out
@@ -1089,7 +1093,7 @@ data you find, is beyond the scope of this document.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-11-26 11:03:40 CST
+Last updated 2016-12-05 18:36:05 CST
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css">

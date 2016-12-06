@@ -1,7 +1,6 @@
-QuickStart - OPeNDAP Documentation
-==================================
-Leonard Porrello <lporrel@gmail.com>
+= QuickStart - OPeNDAP Documentation
 2016-12-31
+:numbered:
 :toc:
 
 == Introduction ==
