@@ -39,7 +39,7 @@ access APIs they use, or by modifying the programs to use one of the
 OPeNDAP data access APIs. In addition to providing a sophisticated set
 of network-compatible APIs in several languages, there are also
 libraries of legacy APIs available in OPeNDAP-aware versions. The
-popular http://www.unidata.ucar.edu/packages/netcdf/guide.txn_toc.html[NetCDF]
+popular http://www.unidata.ucar.edu/downloads/netcdf/index.jsp[NetCDF]
 library, for example, can read data from remote OPeNDAP data sources as
 easily as it reads from a local file.
 
@@ -77,7 +77,7 @@ tasks. For example, NOAA's
 http://ferret.pmel.noaa.gov/Ferret/LAS/home/[Live Access Server (LAS)]
 (see, for example, http://mynasadata.larc.nasa.gov/data.html) uses
 OPeNDAP, as do many of the real-time observing systems that make up the
-http://www.ioos.gov[Integrated Ocean Observing System (IOOS)], like the
+https://ioos.noaa.gov/[Integrated Ocean Observing System (IOOS)], like the
 http://gomoos.org[Gulf of Maine Ocean Observing System (GoMOOS)].
 
 The population of people who may be interested in a system such as
@@ -100,7 +100,7 @@ than locally, from a file.
 
 Without OPeNDAP, an application program that uses one of the common data
 access APIs such as netCDF will operate as shown in
-../index.php/File:Unlinked.gif[the figure below]. The user makes a
+The Architecture of a Data Analysis Package figure, below. The user makes a
 request for data from the application program. This program uses some
 data access API to read and write data. The program uses procedures
 defined by that API to access the data, which is typically stored on the
@@ -110,10 +110,9 @@ of course, but their general operation is as simple.
 .The Architecture of a Data Analysis Package
 image:../images/7/76/Unlinked.png[]
 
-The operation of an OPeNDAP client is illustrated in the
-../index.php/File:Unlinked.gif[figure below]. Here, the _same
-application program_ that was used in ../index.php/File:Unlinked.gif[the
-figure above] has been modified to use one of the OPeNDAP API libraries.
+The operation of an OPeNDAP client is illustrated in the The Architecture of a Data Analysis Package Using OPeNDAP figure, below. Here, the _same
+application program_ that was used in The Architecture of a Data Analysis Package
+figure, above, has been modified to use one of the OPeNDAP API libraries.
 Now, in addition to being able to use local data as before, the
 application program is able to access data from OPeNDAP servers anywhere
 on the Internet in the same manner as the local data.
@@ -139,7 +138,7 @@ irrelevant to the client. If the client was originally designed to read
 netCDF format files, the data returned by the OPeNDAP-netCDF library
 will appear to have been read from a netCDF file, whatever the actual
 format of the files from which the data were
-read(link:../index.php?title=Wiki_Testing/OPeNDAPUserGuideFootNotes&action=edit&redlink=1[4]). If the program expects JGOFS data, the OPeNDAP-JGOFS library will return
+read. If the program expects JGOFS data, the OPeNDAP-JGOFS library will return
 data that seem to have come from a JGOFS dataset, and so on.
 
 OPeNDAP does not pretend to remove all the overhead of data searches. A
@@ -152,9 +151,7 @@ it does make the access to that data simpler and quicker.
 
 The OPeNDAP group provides a whole array of client software to implement
 this communication standard. These range from standalone clients to
-libraries to link with existing software. There is more about these in
-link:../index.php?title=UserGuideOPeNDAPClient&action=edit&redlink=1[OPeNDAP
-Client].
+libraries to link with existing software.
 
 === OPeNDAP Services ===
 
@@ -173,8 +170,7 @@ Data Description:: Data values come in types and sizes. An array, for example, m
   consist of 10 integers. The value "ten" and the type "integer"
   describe the array. This request returns information about data types,
   so that a receiving program can allocate space appropriately. See
-  link:../index.php/UserGuideDataModel#DDS[Data Description Structure
-  (DDS)].
+  link:../index.php/UserGuideOPeNDAPMessages#Dataset_Descriptor_Structure[Data Description Structure (DDS)].
 
 Data Attribute:: This is a request to provide information _about_ data, and typically
   includes information like units, names of data types, reference
@@ -1211,8 +1207,8 @@ data set is located at http:/tests.opendap.org/data/mydata.dat then
 you'll find the data at http:/tests.opendap.org/data/mydata.dat.dods
 
 The data is returned in a MIME document that consists of two parts: the
-link:#Dataset_Descriptor_Structure[DDS], and the data encoded according
-to the description in
+link:../index.php/UserGuideOPeNDAPMessages#Data_Descriptor_Structure[DDS], 
+and the data encoded according to the description in
 link:../index.php/UserGuideDataModel#External_Data_Representation[External
 Data Representation]. (The returned document is sometimes called the
 DataDDS.) The two parts are separated by this string:
@@ -1240,10 +1236,7 @@ Dataset {
 } sst.mnmean.nc;
 ----------------------------------------------------
 
-This is the
-http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.dds[DDS] of a
-typical gridded dataset. Suppose, though, that you ask for only the time
-values of the data set. The DDS of the result will look like this:
+This is the DDS of a typical gridded dataset. Suppose, though, that you ask for only the time values of the data set. The DDS of the result will look like this:
 
 ------------------------------
 Dataset {
@@ -1251,12 +1244,11 @@ Dataset {
 } sst.mnmean.nc;
 ------------------------------
 
-This http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.dds?time[DDS]
-will be included in the DataDDS return, ahead of the encoded array of
+This DDS will be included in the DataDDS return, ahead of the encoded array of
 1857 64-bit time values.
 
 For more information about sampling OPeNDAP data sets, see the section
-below about link:#Constraint_Expressions[constraint expressions].
+below about constraint expressions.
 
 NOTE: A request for data from an OPeNDAP client will generally make three different service requests, for data attributes
 (DAS), data descriptors (DDS), and for data. The prepackaged OPeNDAP
@@ -1264,9 +1256,7 @@ clients do this for you, so you may not be aware that three requests are made fo
 
 ==== Other Services ====
 
-In addition to the link:#Data_Transmission[data],
-link:#Dataset_Descriptor_Structure[DDS], and
-link:#Dataset_Attribute_Structure[DAS], an OPeNDAP server _may_ provide
+In addition to the data, DSS, and DAS, an OPeNDAP server _may_ provide
 any or all of the services described in the sections that follow.
 
 ===== ASCII Service =====
@@ -1276,16 +1266,11 @@ can make the data available to a wide variety of standard web browsers.
 This service is activated when the server receives a URL ending with
 .asc or .ascii.
 
-Click
-http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.asc?sst%5B1:3%5D%5B45:48%5D%5B90:95%5D[http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.asc?sst[1:3][45:48][90:95]]
-to see an ASCII response.
-
 Note that unlike the data response, the ASCII response does not contain
 a DDS for the returned data. Instead it just returns the simple text
 message.
 
-The link:../index.php/QuickStart[Quick Start Guide] contains many
-examples of the ASCII response.
+The link:../index.php/QuickStart[Quick Start Guide] contains examples of the ASCII response.
 
 ===== Info Service =====
 
@@ -1309,7 +1294,7 @@ entities that look like files).
 
 The server uses a data set's DDS and DAS to construct a web form you can
 use to construct a URL that subsamples the data set (using a
-link:#Constraint_Expressions[constraint expression]). You can copy the
+constraint expression). You can copy the
 resulting URL into another browser, or use one of the buttons on the
 form to download data.
 
@@ -1353,8 +1338,7 @@ The DDX is designed to contain data, too, but this is not yet
 implemented. You will see an empty dataBLOB element at the end of each
 DDX, which will eventually hold returned data.
 
-The DDX response can be modified with a
-link:#Constraint_Expressions[constraint expression]. Like the DDS, the
+The DDX response can be modified with a constraint expression. Like the DDS, the
 DDX will describe only the data actually returned.
 
 The DDX and the DataDDX (containing the dataBLOB) are the nucleus of
@@ -1440,24 +1424,16 @@ can also include functional expressions of the form:
 -----------------------------------
 
 where the arguments are variables from the dataset, scalar values, or
-other functions. (See link:#Constraint_Expression_Functions[Constraint
-Expression Functions] below.)
+other functions. (See Constraint Expression Functions below.)
 
 A selection expression leads with an ampersand and is a boolean
 expression of the form "variable operator variable", "variable operator
 value" or "function(arg_1,arg_2,...,arg_n)", where
 
-operator ::
-  Can be one of the relational operators listed in the table below.
-variable ::
-  Can be any variable recorded in the dataset.
-value ::
-  Can be any scalar, string, function, or list of numbers (Lists are
-  denoted by comma-separated items enclosed in curly braces ,for
-  example, \{3,11,4.5}.); and
-function ::
-  Is a function defined by the server to operate on variables or values,
-  and to return a boolean value.
+operator:: Can be one of the relational operators listed in the table below.
+variable:: Can be any variable recorded in the dataset.
+value:: Can be any scalar, string, function, or list of numbers (Lists are denoted by comma-separated items enclosed in curly braces ,for example, \{3,11,4.5}.); and
+function:: Is a function defined by the server to operate on variables or values, and to return a boolean value.
 
 Each selection clause begins with an ampersand (&). You can think of
 this as representing the "AND" boolean operation, but remember that it
@@ -1475,8 +1451,7 @@ criteria, then only that part will be returned.
 
 NOTE: Due to the differences in data model paradigms, selection is not implemented for the OPeNDAP array data types, such as
 Grid or Array. However, many OPeNDAP servers implement selection
-functions you can use for the same effect. (See
-link:#Constraint_Expression_Functions[Constraint Expression Functions] below for more about functions.)
+functions you can use for the same effect. (See Constraint Expression Functions below for more information about functions.)
 
 .Simple Constraint Expression Examples
 Consider the DDS below. This is the description of a dataset containing
@@ -1630,9 +1605,8 @@ fields time and temperature, then those fields may be accessed using
 s.time and s.temperature or as s/time and s/temperature.
 
 The ~= operator returns true when the character string on the left of
-the operator matches the regular expression on the right. See
-link:#Pattern_Matching_with_Constraint_Expressions[Pattern Matching with
-Constraint Expressions] for a discussion of regular expressions.
+the operator matches the regular expression on the right. See Pattern Matching with
+Constraint Expressions for a discussion of regular expressions.
 
 The array operator [] is used to subsample the given array. You can find
 several examples of its use in the
@@ -1669,7 +1643,7 @@ And...
 
 http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.asc?geogrid()
 
-Note: When using functions, be careful to remember that a function used
+NOTE: When using functions, be careful to remember that a function used
 in a projection can return any value, but when used in a selection
 clause, it must either return a boolean value, or be part of a test that returns a boolean value.
 
@@ -1696,16 +1670,13 @@ Most characters in a regular expression match themselves. That is, an
 are several special characters, however, that provide more sophisticated
 pattern-matching capabilities.
 
- "." ::
-  The period matches any single character except a newline.
- * + ? ::
-  These are postfix operators, which indicate to try to match the
+ ".":: The period matches any single character except a newline.
+ * + ?:: These are postfix operators, which indicate to try to match the
   preceding regular expression repetitively (as many times as possible).
   Thus, o* matches any number of o's. The operators differ in that o*
   also matches zero o's, o+ matches only a series of one or more o's,
   and o? matches only zero or one o.
-"[ ... ]" ::
-  Define a "character set," which begins with [ and is terminated by ].
+"[ ... ]":: Define a "character set," which begins with [ and is terminated by ].
   In the simplest case, the characters between the two brackets are what
   this set can match. The expression [Ss] matches either an upper or
   lower case s. Brackets can also contain character ranges, so [0-9]
@@ -1713,18 +1684,13 @@ pattern-matching capabilities.
   is a caret ( ), the expression will only match characters that do not
   appear in the brackets. For example, [ 0-9]* only matches character
   strings that contain no numerals.
-^$ ::
-  These are special characters that match the empty string at the
+^$:: These are special characters that match the empty string at the
   beginning or end of a line.
- \| ::
-  These two characters define a logical OR between the largest possible
+ \|:: These two characters define a logical OR between the largest possible
   expression on either side of the operator. So, for example, the string
   Endeavor\|Oceanus matches either Endeavor or Oceanus. The scope of the
   OR can be contained with the grouping operators, \( and \).
- \( \) ::
-  These are used to group a series of characters into an expression, or
-  for the OR function. So, for example, \(abc\)* matches zero or more
-  repetitions of the string abc2.
+ \( \):: These are used to group a series of characters into an expression, or for the OR function. So, for example, \(abc\)* matches zero or more repetitions of the string abc2.
 
  
  There are several more special characters and several other features of
@@ -1810,7 +1776,7 @@ standard. This is link:../index.php/Hyrax[Hyrax].
 
 ==== Hyrax ====
 
-The OPeNDAP group produces and supports link:../index.php/Hyrax[Hyrax],
+The OPeNDAP group produces and supports Hyrax,
 a modular data server that can be used in a variety of ways to serve a
 wide variety of data with OPeNDAP.
 
@@ -1825,7 +1791,7 @@ features you don't need.
 
 ===== How Hyrax Works =====
 
-The link:../index.php/Hyrax[Hyrax] server is actually a combination of
+The Hyrax server is actually a combination of
 two distinct servers, running on the same machine, or on two machines
 connected with a very fast link. One server serves as the user-facing
 "front end" to the system, while the other provides the "engine room",
@@ -1873,12 +1839,10 @@ execute it.
 After that, though, there are several configuration options you'll need
 to address by installing software on your machine, and by editing the
 link:../index.php/Hyrax_-_BES_Configuration[Hyrax configuration file],
-called bes.xml. Details of these options are in the
-link:../index.php/Hyrax[Hyrax] documentation, but these are the
+called bes.xml. Details of these options are in the Hyrax documentation, but these are the
 decisions you'll have to make:
 
-What kind of data ::
-  Hyrax is equipped to serve data stored in any of several different
+What kind of data:: Hyrax is equipped to serve data stored in any of several different
   file formats, HDF, netCDF and others. Each different format requires
   its own handler, and your machine must have shared libraries
   containing these handlers installed. For example, in order to serve
@@ -1890,28 +1854,9 @@ What kind of data ::
   link:../index.php/Hyrax_-_BES_Configuration#Loading_Handlers[Loading
   Handlers].
 
-Where the data lives ::
-  A server equipped to serve data must be able to find that data. Lines
-  in the bes.xml file identify the disk location of your data files.
-  Hyrax can provide a limited amount of browsing capacity to users,
-  through its
-  link:../index.php/UserGuideOPeNDAPMessages#WWW_Interface_Service[WWW
-  interface]. Access is specified by identifying directories where data
-  resides. See
-  link:../index.php/Hyrax_-_BES_Configuration[Pointing_to_data].
+Where the data lives:: A server equipped to serve data must be able to find that data. Lines in the bes.xml file identify the disk location of your data files. Hyrax can provide a limited amount of browsing capacity to users, through its link:../index.php/UserGuideOPeNDAPMessages#WWW_Interface_Service[WWW interface]. Access is specified by identifying directories where data resides. See link:../index.php/Hyrax_-_BES_Configuration[Pointing_to_data].
 
-What kinds of services ::
-  Along with simply supplying data, Hyrax can supply several different
-  services, including
-  link:../index.php/UserGuideOPeNDAPMessages#ASCII_Service[serving the
-  data as ASCII values], and the form-driven
-  link:../index.php/UserGuideOPeNDAPMessages#WWW_Interface_Service[WWW
-  interface]. The bes.xml file is used to specify the list of services.
-  The drivers for these services are installed as part of the default
-  installation of Hyrax, but they need to be chosen and identified in
-  bes.xml. See instructions at
-  link:../index.php/Hyrax_-_BES_Configuration#Loading_Handlers[Loading
-  Handlers].
+What kinds of services:: Along with simply supplying data, Hyrax can supply several different services, including link:../index.php/UserGuideOPeNDAPMessages#ASCII_Service[serving the data as ASCII values], and the form-driven link:../index.php/UserGuideOPeNDAPMessages#WWW_Interface_Service[WWW interface]. The bes.xml file is used to specify the list of services. The drivers for these services are installed as part of the default installation of Hyrax, but they need to be chosen and identified in bes.xml. See instructions at link:../index.php/Hyrax_-_BES_Configuration#Loading_Handlers[Loading Handlers].
 
 Once these three tasks are accomplished, and once data is moved into the
 appropriate directories, your server should be ready to provide data to
@@ -1940,30 +1885,23 @@ Use the
 link:../index.php/Hyrax_-_OLFS_Configuration#olfs.xml_Configuration_File[olfs.xml]
 file to specify these important features of the OLFS operation:
 
-Address of BES ::
-  The OLFS is the front door to data from the BES. Use the olfs.xml file
-  to identify where to find this server. See the instructions for the
-  link:../index.php/Hyrax_-_OLFS_Configuration#BESManager[BESManager].
+Address of BES:: The OLFS is the front door to data from the BES. Use the olfs.xml file to identify where to find this server. See the instructions for the link:../index.php/Hyrax_-_OLFS_Configuration#BESManager[BESManager].
 
-Dispatch handlers ::
-  The OLFS "offers" the incoming URL to a series of "dispatch handlers"
+Dispatch handlers:: The OLFS "offers" the incoming URL to a series of "dispatch handlers"
   until one accepts it and executes. This allows the OLFS to offer
   directory and catalog services, as well as data services and more. Use
   the olfs.xml file to nominate the dispatch handlers (they come with
   the OLFS, and do not need to be separately installed). See
-  link:../index.php/Hyrax_-_OLFS_Configuration#HTTP_GET_Handlers[handler
-  instructions] for more.
+  link:../index.php/Hyrax_-_OLFS_Configuration#HTTP_GET_Handlers[handler instructions] for more.
 
-Catalog requests ::
-  The OLFS can handle
+Catalog requests:: The OLFS can handle
   link:../index.php/Hyrax_-_THREDDS_Configuration[THREDDS] catalog
   requests, as well as directory requests, an older part of the DAP
   standard that also involves data about a collection of data files. The
   THREDDS information can be static (provided from a file) or dynamic
   (generated by a review of the available data).
 
-File access ::
-  You may have individual files you want served intact via this server.
+File access:: You may have individual files you want served intact via this server.
   These might include documentation of the data files, or of the server.
   See
   link:../index.php/Hyrax_-_OLFS_Configuration#File_Dispatch_Handler[File
@@ -1977,7 +1915,7 @@ and you'll find more information about them at the link.
 
 The other configuration file you might need to edit is
 http://www.unidata.ucar.edu/projects/THREDDS/tech/TDS.html[catalog.xml],
-briefly reviewed under link:#THREDDS[THREDDS], below.
+briefly reviewed under THREDDS, below.
 
 .THREDDS
 http://www.unidata.ucar.edu/projects/THREDDS/tech/TDS.html[THREDDS] is a
