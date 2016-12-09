@@ -109,7 +109,7 @@ to see the rest of it.
 
 image::../images/f/f9/Reynolds_das.png[]
 
-NOTE: Unlike the DDS, the DAS is populated at the data provider's discretion. Cosenquently, the quality of the data in it (the "metadata") varies widely. The data in the Reynolds dataset used in this example are COARDS compliant. Other metadata standards you may encounter with OPeNDAP data are HDF-EOS, EPIC, FGDC, or no metadata at all.
+NOTE: Unlike the DDS, the DAS is populated at the data provider's discretion. Consequently, the quality of the data in it (the "metadata") varies widely. The data in the Reynolds dataset used in this example are COARDS compliant. Other metadata standards you may encounter with OPeNDAP data are HDF-EOS, EPIC, FGDC, or no metadata at all.
 
 We can now understand the data better. Apparently the *lat*
 vector contains latitude, in degrees north, and the range is from 89.5

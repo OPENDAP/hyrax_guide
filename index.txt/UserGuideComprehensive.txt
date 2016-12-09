@@ -6,15 +6,14 @@ Leonard Porrello <lporrel@gmail.com>
 
 == About This Guide ==
 
-This guide introduces the important concepts behind the OPeNDAP data
+This guide introduces important concepts behind the OPeNDAP data
 model and transmission format as well as the clients and servers that
-use them. It is not a reference for any particular client or server,
-though you will find links to particluar clients and servers in this documentation.
+use them. While it is not a reference for any particular client or server, you will find links to particluar clients and servers in it.
 
 === What is OPeNDAP ===
 
 OPeNDAP provides a way for researchers to access scientific data
-anywhere on the Internet from a wide variety of new _and existing_
+anywhere on the Internet, from a wide variety of new _and existing_
 programs.
 
 It is used widely in earth-science research settings but it is not limited
@@ -24,18 +23,17 @@ OPeNDAP servers, allowing researchers to enjoy flexibility similar to
 the flexibility of the web.
 
 The OPeNDAP architecture uses a client/server model, with a _client_
-that sends requests for data out onto the network to some __server__,
-that answers with the requested data. This is exactly the model used by
+that sends requests for data out onto the network to a __server__,
+that answers with the requested data. This is the same model used by
 the http://www.w3.org/hypertext/WWW/TheProject.html[World Wide Web]
 where client browsers submit requests to web servers for the data that
-make up web pages. Of course, OPeNDAP clients can do much more than
-browse this data. Using flexible data types suitable for many uses,
-including scientific data, the OPeNDAP servers deliver real data
-directly to the client program in the format needed by that client.
+compose web pages. Using flexible, multi-purpose data types,
+including scientific data, OPeNDAP servers deliver real data
+directly to client programs in the format needed by that client.
 
 OPeNDAP clients are very specialized browsers, constructed by linking
 legacy data analysis programs with OPeNDAP-enabled versions of the data
-access APIs they use, or by modifying the programs to use one of the
+access APIs they use or by modifying programs to use one of the
 OPeNDAP data access APIs. In addition to providing a sophisticated set
 of network-compatible APIs in several languages, there are also
 libraries of legacy APIs available in OPeNDAP-aware versions. The
@@ -45,49 +43,39 @@ easily as it reads from a local file.
 
 To expand the universe of data available to a user, OPeNDAP incorporates
 a powerful data translation facility, so that data may be stored in data
-structures and formats defined by the data provider, but accessed by the
-user in a manner identical to the access of local data files on the
-user's own system. Though there are limitations on the types of data
+structures and formats that are defined by the data provider but can be accessed by the
+users just like they access of local data files on the
+user's own system. Alhough there are limitations on the types of data
 that may be translated (see
 link:../index.php/UserGuideDataModel#Translation[Translation]), the
-facility is flexible and general enough to handle many of the possible
-translations. There are two important results:
+facility is flexible and general enough to handle many translations. The upshot of this is... 
 
 * A user may not need to know that data from one set are stored in a
-format different from data in another set. Further, it may be possible
+format different from data in another set. Also, it may be possible
 that _neither_ data set is stored in a format readable by the original
 version of the data analysis and display program he or she uses.
-
-* No segment of OPeNDAP users will be effectively cut off from accessing
-data because of its storage format. A scientist who wishes to make his
+* No segment of OPeNDAP users will be cut off from accessing
+data because of its storage format. A scientist who wants to make his
 or her data available to other OPeNDAP users may do so while keeping
-that data in what may actually be a highly idiosyncratic storage format.
-(Of course, it doesn't _have_ to be in a highly idiosyncratic format.)
+that data in what may be even a highly idiosyncratic storage format.
 
 The combination of the OPeNDAP network communication model and the data
 translation facility make OPeNDAP a powerful tool for the retrieval,
-sampling, and display of large distributed datasets. Though OPeNDAP was
+sampling, and display of large distributed datasets. Although OPeNDAP was
 developed by oceanographers, its application is not limited to
 oceanographic data. The organizing principles and algorithms may be
 applied to many other fields.
 
-The uniformity with which data appears that makes the system so useful
-for data analysis also eases automating data transport and manipulation
+The uniformity with which data appears, which makes the system useful
+for data analysis, also enables you to automate data transport and manipulation
 tasks. For example, NOAA's
 http://ferret.pmel.noaa.gov/Ferret/LAS/home/[Live Access Server (LAS)]
 (see, for example, http://mynasadata.larc.nasa.gov/data.html) uses
 OPeNDAP, as do many of the real-time observing systems that make up the
-https://ioos.noaa.gov/[Integrated Ocean Observing System (IOOS)], like the
+https://ioos.noaa.gov/[Integrated Ocean Observing System (IOOS)], such as the
 http://gomoos.org[Gulf of Maine Ocean Observing System (GoMOOS)].
 
-The population of people who may be interested in a system such as
-OPeNDAP may be divided into data consumers and data providers. Though it
-was an important observation to the development of OPeNDAP that the two
-roles are often assumed by the same scientists, the division is a useful
-one for the introduction of the system. The following two sections
-provide a broad introduction to the roles of data consumer and data
-provider. The remainder of this guide is organized around this
-distinction between classes of users.
+Users who may be interested in OPeNDAP may be divided into data consumers and data providers (and these two roles are often assumed by the same scientists). The remainder of this guide is organized around this distinction between classes of users.
 
 === The OPeNDAP Client ===
 
@@ -95,59 +83,52 @@ OPeNDAP uses a client/server model. The OPeNDAP servers are web servers
 equipped to interpret an OPeNDAP URL sent to them. An OPeNDAP client
 composes and sends messages to those servers. There are standalone
 OPeNDAP clients, but most clients are constructed from data analysis
-programs modified to get their data remotely, from the internet, rather
+programs that are modified to get their data remotely, from the internet, rather
 than locally, from a file.
 
-Without OPeNDAP, an application program that uses one of the common data
-access APIs such as netCDF will operate as shown in
-The Architecture of a Data Analysis Package figure, below. The user makes a
-request for data from the application program. This program uses some
-data access API to read and write data. The program uses procedures
+Without OPeNDAP, a program that uses one of the common data
+access APIs (such as netCDF) operates as shown in
+The Architecture of a Data Analysis Package figure, shown below. Here is how it works:
+The user makes a request for data from the program; the program uses a
+data access API to read and write data; the program uses procedures
 defined by that API to access the data, which is typically stored on the
-same host machine. Some APIs are somewhat more sophisticated than this,
-of course, but their general operation is as simple.
+same host machine. Some APIs are somewhat more sophisticated than this, but their general operation is similar.
 
 .The Architecture of a Data Analysis Package
 image:../images/7/76/Unlinked.png[]
 
-The operation of an OPeNDAP client is illustrated in the The Architecture of a Data Analysis Package Using OPeNDAP figure, below. Here, the _same
-application program_ that was used in The Architecture of a Data Analysis Package
-figure, above, has been modified to use one of the OPeNDAP API libraries.
-Now, in addition to being able to use local data as before, the
-application program is able to access data from OPeNDAP servers anywhere
-on the Internet in the same manner as the local data.
+The operation of an OPeNDAP client is illustrated in the The Architecture of a Data Analysis Package Using OPeNDAP figure, shown below. Here, the _same program_ that was used in The Architecture of a Data Analysis Package
+figure (above) has been modified to use one of the OPeNDAP API libraries.
+Now, in addition to being able to use local data as before, the program is able to access data from OPeNDAP servers anywhere on the internet just as it would local data.
 
-To make some analysis program into an OPeNDAP client, just re-link it
-with the OPeNDAP API library. (Or, if your program uses one of the
+To make any analysis program into an OPeNDAP client, it just needs to be linked with the OPeNDAP API library. (Or, if your program uses one of the
 supported legacy API libraries, like netCDF, you can link with the
 OPeNDAP version of that library.) This will create a program that
-accepts URLs as well as file pathnames to identify data to be read. (See
+accepts URLs as well as file pathnames to identify needed data. (See
 link:../index.php/UserGuideClient[the OPeNDAP Client]).
 
 .The Architecture of a Data Analysis Package Using OPeNDAP
 image:../images/8/87/Linked.png[]
 
-OPeNDAP also provides a data translation facility. Data from the
+OPeNDAP also provides data translation functionality. Data from the
 original data file is translated by the OPeNDAP server into the OPeNDAP
 data model for transmission to the client. Upon receiving the data, the
 client translates the data into the
 link:../index.php/UserGuideDataModel[data model] it understands. Because
 the data transmitted from an OPeNDAP server to the client travel in the
 OPeNDAP format, the dataset's original storage format is completely
-irrelevant to the client. If the client was originally designed to read
+irrelevant to the client. For example, if the client was originally designed to read
 netCDF format files, the data returned by the OPeNDAP-netCDF library
-will appear to have been read from a netCDF file, whatever the actual
-format of the files from which the data were
-read. If the program expects JGOFS data, the OPeNDAP-JGOFS library will return
+will appear to have been read from a netCDF file. Similarly, if the program expects JGOFS data, the OPeNDAP-JGOFS library will return
 data that seem to have come from a JGOFS dataset, and so on.
 
-OPeNDAP does not pretend to remove all the overhead of data searches. A
+OPeNDAP does not claim to remove all of the overhead of data searches. A
 user will still have to keep track of the URLs of interesting data in
 the same way a user must now keep track of the names of files. (You may
 run across datasets where the data consists of OPeNDAP URLs. These are
-the OPeNDAP file servers, and have been developed by OPeNDAP users to
+the OPeNDAP file servers and have been developed by OPeNDAP users to
 organize datasets consisting of large numbers of individual files.) But
-it does make the access to that data simpler and quicker.
+OPeNDAP does make the access to that data simpler and quicker.
 
 The OPeNDAP group provides a whole array of client software to implement
 this communication standard. These range from standalone clients to
@@ -159,83 +140,58 @@ The communication between an OPeNDAP client and server is specified by
 the Data Access Protocol (DAP). This defines the range of messages a
 server must understand and the kinds of replies it makes.
 
-There are two categories of messages an OPeNDAP server can understand.
-Some are required by the DAP, and others are merely suggested. A server
+There are two categories of messages that an OPeNDAP server can understand.
+Some are required by the DAP and others are merely suggested. A server
 is considered to be DAP-compliant if it can respond intelligibly to the
-required messages.
+required messages. Following are the requests messages a server is required to understand:
 
-The requests messages a server is required to understand are these:
+Data Description:: Data values come in types and sizes. An array, for example, might consist of 10 integers. The value "ten" and the type "integer" describe the array. This request returns information about data types, so that a receiving program can allocate space appropriately. See link:../index.php/UserGuideOPeNDAPMessages#Dataset_Descriptor_Structure[Data Description Structure (DDS)].
 
-Data Description:: Data values come in types and sizes. An array, for example, might
-  consist of 10 integers. The value "ten" and the type "integer"
-  describe the array. This request returns information about data types,
-  so that a receiving program can allocate space appropriately. See
-  link:../index.php/UserGuideOPeNDAPMessages#Dataset_Descriptor_Structure[Data Description Structure (DDS)].
+Data Attribute:: This is a request to provide information _about_ data and typically includes information like units, names of data types, reference information and so on. See link:../index.php/UserGuideDataModel#DAS[Data Attribute Structure (DAS)].
 
-Data Attribute:: This is a request to provide information _about_ data, and typically
-  includes information like units, names of data types, reference
-  information and so on. See
-  link:../index.php/UserGuideDataModel#DAS[Data Attribute Structure
-  (DAS)].
+Data:: The server also must be able to respond to a request for the data itself. See link:../index.php/UserGuideDataModel#DataDDS[data response].
 
-Data:: The server also must be able to respond to a request for the data
-  itself. See link:../index.php/UserGuideDataModel#DataDDS[data
-  response].
+In addition, a server may respond to requests like these:
 
-A server may respond to requests like these, too:
+ASCII:: Some servers can convert data to ASCII values on the fly. This allows users to view data using a standard web browser, assuming the data are not too large. See link:../index.php/UserGuideServer#ASCII[ASCII return].
 
-ASCII:: Some servers can convert data to ASCII values on the fly. This allows
-  users to view data using a standard web browser, assuming the data are
-  not too large. See link:../index.php/UserGuideServer#ASCII[ASCII
-  return].
+Info:: The info response is a formatted page containing information from the Data Attributes and Data Description responses. It is meant to be a human-readable means to show what is available in a dataset via a standard web browser. See link:../index.php/UserGuideServer#Info[Info response].
 
-Info:: The info response is a formatted page containing information from the
-  Data Attributes and Data Description responses. It's meant to be a
-  human-readable way to show what's available in a dataset via a
-  standard web browser. See link:../index.php/UserGuideServer#Info[Info
-  response].
+HTML:: Very similar to the info response, the HTML response provides the information from the info response and also includes a Javascript form to help you build a request for data from the same data file. The best description of the HTML form is in the link:../index.php/QuickStart[Quick Start Guide].
 
-HTML:: Very similar to the info response is the HTML response. This provides
-  not only the information from the info response, but also includes a
-  Javascript form to help you build a request for data from the same
-  data file. The best description of the HTML form is in the
-  link:../index.php/QuickStart[Quick Start Guide].
+SOAP:: OPeNDAP servers can provide their data in terms of a SOAP request and response. For more information see link:../index.php/UserGuideDataModel#SOAP[SOAP Request].
 
-SOAP:: OPeNDAP servers can provide their data in terms of a SOAP request and
-  response. For more information see
-  link:../index.php/UserGuideDataModel#SOAP[SOAP Request].
+DDX:: The DDX is an XML version of the Data Attribute and Data Description replies. See link:../index.php/UserGuideServer#DDX[DDX Request].
 
-DDX:: The DDX is an XML version of the Data Attribute and Data Description
-  replies. See link:../index.php/UserGuideServer#DDX[DDX Request].
-
-=== The OPeNDAP Server ===
+=== The OPeNDAP Server (Hyrax) ===
 
 OPeNDAP provides a definition of the communication between client and
-server. Servers and clients who conform to that standard can communicate
-with each other. In addition to the OPeNDAP communication standard
-itself, the OPeNDAP group also provides an implementation of that
+server and enables servers and clients that conform to DAP standard to communicate
+with each other. In addition to the DAP communication standard
+itself, the OPeNDAP group also provides an implementation of a
 standard server protocol, called _Hyrax._
 
-The OPeNDAP data server is made up of two pieces. You can think of them
+The OPeNDAP data server is made up of two pieces. You can think of them 
 as a front-end and a back-end, though a client will not be aware of the
 separation. They will often be run on the same machine, and even when
 they are not, a client will see only the front end.
 
-The front-end server is a Tomcat servlet, and is also called the
+** The front-end server is a Tomcat servlet and is also called the
 *OPeNDAP Lightweight Front-End Servlet* (OLFS). Its job is to receive
-your request for data and manage all the different forms such a request
+your request for data and manage all the different forms a request
 might take. For example, you might be asking for the data, an ASCII
 version of the data, or a reply to a SOAP message looking for data. The
 front-end server can also reply to THREDDS catalog requests, for
 information about the data, and can directly provide some information
 about the data, too.
 
-The *Back-End Server* (BES) is more strictly about performance, and is
+** The *Back-End Server* (BES) is more strictly about performance and is
 designed to respond quickly and efficiently to requests from the OLFS.
-It is a pure data server, and has only one format of request and
+It is a pure data server and has only one format of request and
 response, relying on the OLFS to convert messages to whatever format
-will accommodate the user. Most users won't make requests directly to
-the BES.
+the user needs.
+
+NOTE: Most users will not make requests directly to the BES.
 
 .Hyrax Architecture
 image:../images/thumb/c/c5/HyraxArchitecture.jpg/600px-HyraxArchitecture.jpg[]
@@ -243,9 +199,9 @@ image:../images/thumb/c/c5/HyraxArchitecture.jpg/600px-HyraxArchitecture.jpg[]
 _Hyrax_ is an alternative name for the OPeNDAP 4 Data Server.
 
 See link:../index.php/UserGuideDataModel[Data Model] for a description
-of the data returned by these requests and see
+of the data returned by requests and see
 link:../index.php/UserGuideServer[OPeNDAP Server] for a description of
-the URL syntax used to send these requests.
+the URL syntax used to send requests.
 
 See link:../index.php/Hyrax[the OPeNDAP 4 Data Server documentation] for
 a description of how to install and configure an OPeNDAP data server
@@ -254,55 +210,52 @@ a description of how to install and configure an OPeNDAP data server
 === Administration and Centralization of Data ===
 
 Under OPeNDAP, there is no central archive of data. Data under OPeNDAP
-is organized in a manner similar to the World Wide Web itself. That is,
-all one need do to make one's data available is to start up a properly
+is organized similar to the World Wide Web. To make your data accessable, all that you need to do is to start up a properly
 configured server on an Internet node that has access to the data to be
-served. Each data provider is free to join and to leave the system when
-it is convenient, just as any proprietor of a web page is free to delete
-it or add to it as whimsy demands.
+served. Data providers are free to join and to leave the system as doing so is convenient, just as any proprietor of a web page is free to delete it or add to it as needed.
 
-Of course, as can also be seen on the World Wide Web, there are some
+Similar to the World Wide Web, there are some
 disadvantages to the lack of central authority. If no one knows about a
 web site, no one will visit it. Similarly, listing a dataset in a
 central data catalog, such as the Global Change Master Directory
-(http://gcmd.gsfc.nasa.gov[http://gcmd.gsfc.nasa.gov/]),can make data
+(http://gcmd.gsfc.nasa.gov[http://gcmd.gsfc.nasa.gov/]), can make data
 available to other researchers in a way that simply configuring an
-OPeNDAP server does not. OPeNDAP provided a facility for registering a
-data set with the GCMD catalog, which makes the data set known to the
+OPeNDAP server would not. OPeNDAP provided a facility for registering a
+data set with the GCMD catalog. This makes the data set known to the
 OPeNDAP data location service. The THREDDS catalog service is another
 way to make information about your data widely available.
 
- 
-The remainder of this book will be divided into three major sections:
-instructions on the building and operating of OPeNDAP clients; a
-tutorial and reference on running OPeNDAP servers and making data
-available to OPeNDAP clients; and technical documentation describing the
+The remainder of this section will be divided into three sections:
+
+** Instructions on the building and operating of OPeNDAP clients
+** A tutorial and reference on running OPeNDAP servers and making data
+available to OPeNDAP clients
+** A technical documentation describing the
 implementation details (and the motivation behind many of the design
 decisions) of the OPeNDAP software.
   
 == OPeNDAP Data Model ==
 
-This section provides a review of the data types OPeNDAP sends between client and server and issues involved in translating one to another. Researchers who will be using OPeNDAP to transfer data may find this useful.
+This section provides a review of the data types OPeNDAP sends between client and server and issues involved in translating one to another. This information may be useful to researchers who will be using OPeNDAP to transfer data.
 
 === Data and Data Models ===
 
-Basic to the operation of OPeNDAP is its data model, and the set of
+Basic to the operation of OPeNDAP is its data model and the set of
 messages that define the communication between client and server. This
-chapter presents the data model; the next chapter presents the messages.
+section presents the data model (the next section presents the messages).
 
 ==== Data Models ====
 
 Any data set is made up of data and a data model. The data model defines
-the type and arrangement of data values, and may be thought of as an
+the type and arrangement of data values and may be thought of as an
 abstract representation of the relationship between one data value and
-another. Though it may seem paradoxical, it is precisely this
-relationship that defines the meaning of some number. Without the
+another. Although it may seem paradoxical, it is precisely this
+relationship that defines the meaning of a number. Without the
 context provided by a data model, a number does not represent anything.
 For example, within some data set, it may be apparent that a number
 represents the value of temperature at some point in space and time.
 Without its neighboring temperature measurements, and without the
-latitude, longitude, height (or depth), and time, the same number means
-nothing.
+latitude, longitude, height (or depth), and time, the same number is meaningless.
 
 As the model only defines an abstract set of relationships, two data
 sets containing different data may share the same data model. For
@@ -319,7 +272,7 @@ In a computational sense, a data model may be considered to be the data
 type or collection of data types used to represent that data. A
 temperature measurement might occur as half an entry in a sequence of
 temperature and depth pairs. However the data model also includes the
-scalar latitude, longitude and date that identify the time and place
+scalar latitude, longitude, and date that identify the time and place
 where the temperature measurements were taken. Thus the data set might
 be represented in a C-like syntax like this:
 
@@ -339,15 +292,13 @@ Dataset {
 --------------------------
 
 The above example describes a data set that contains all the data from
-a single XBT. The data set is called xbt-station, and contains
+a single XBT. The data set is called xbt-station and contains
 floating-point representations of the latitude and longitude of the
-station, and three integers that specify _when_ the XBT measurements
+station and three integers that specify _when_ the XBT measurements
 were made. The xbt-station contains a single sequence (called cast) of
-measurements, which are here represented as values for depth and
-temperature.
+measurements, which are represented here as values for depth and temperature.
 
-A slightly different data model representing the same data might look
-like this:
+A slightly different data model representing the same data might look like this:
 
 .Example Data Description of XBT Station Using Structures
 --------------------------
@@ -368,20 +319,19 @@ Dataset {
 } xbt-station;
 --------------------------
 
-In this example, several of the data have been grouped, implying a
+In this example, some of the data have been grouped, implying a
 relation between them. The nature of the relationship is not defined,
-but it is clear that lat and lon are both components of location, and
-that each measurement in the cast sequence is made up of depth and
-temperature values.
+but it is clear that lat and lon are both components of location and
+that each measurement in the cast sequence is made up of depth and temperature values.
 
 In these two examples, meaning was added to the data set only by
 providing a more refined context for the data values. No other data was
-added, but still the second example can be said to contain more
+added, but the second example can be said to contain more
 information than the first one.
 
 These two examples are refinements of the same basic arrangement of
 data. However, there is nothing that says that a completely different
-data model can't be just as useful or just as accurate. For example, the
+data model can not be just as useful or just as accurate. For example, the
 depth and temperature data, instead of being represented by a sequence
 of pairs could be represented by a pair of sequences or arrays:
 
@@ -403,18 +353,16 @@ Dataset {
 ----------------------------
 
 The relationship between the depth and temperature variables is no
-longer quite as clear, but, depending on what sort of processing is
-intended, this may not be that important a loss.
+longer quite as clear, but depending on what sort of processing is
+intended, the loss may be unimportant.
 
-The choice of a computational data model to contain some data set
-depends in many cases on the whims and preferences of the user, as well
+The choice of a computational data model to contain a data set
+depends in many cases on the whims and preferences of the user as well
 as on the data analysis software to be used. Several different data
-models may be equally useful for a given task. Of course, some data
-models will contain more information about the data than others, but
-this information can also be carried in a researcher's head.
+models may be equally useful for a given task and not all data models will contain the same quantity of informaiton.
 
 Note that with a carefully chosen set of data type constructors, such as
-those we've used in the preceding examples, a user can implement an
+those we have  used in the preceding examples, a user can implement an
 infinite number of data models. The examples above use the OPeNDAP
 Dataset Descriptor Structure (DDS) format, which will become important
 in later discussions of the details of the OPeNDAP Data Access Protocol.
@@ -425,12 +373,8 @@ link:../index.php/UserGuideOPeNDAPMessages#Dataset_Descriptor_Structure[DDS].
 
 A data access Application Program Interface (API) is a library of
 functions designed to be used by a computer program to read, write, and
-sample data. Any given data access API can be said to define implicitly
-some data model. (Or, at least, it will define restrictions on the data
-model you can use.) That is, the functions that make up the API accept
-and return data using a certain collection of computational data types:
-multi-dimensional arrays might be required for some data, scalars for
-others, sequences for others. This collection of data types, and their
+sample data. Any given data access API can be said to implicitly define a data model. (Or, at least, it will define restrictions on the data model.) That is, the functions that compose the API accept and return data using a certain collection of computational data types: multi-dimensional arrays might be required for some data, scalars for
+others, and sequences for others. This collection of data types and their
 use constitute the data model represented by that API. (Or data
 models—there is no reason an API cannot accommodate several different
 models.)
@@ -443,26 +387,24 @@ originally designed to read netCDF data can have some access to data
 sets that use an incompatible data model, such as JGOFS.
 
 In general, it is not possible to define an algorithm that will
-translate data from any model to any other, without losing information
+translate data from any model to any other model without losing information
 defined by the position of data values or the relations between them.
-Some of these incompatibilities are obvious; a data model designed for
+Some of these incompatibilities are obvious. For example, a data model designed for
 time series data may not be able to accommodate multi-dimensional
 arrays. Others are more subtle. For example, a Sequence looks very
-similar to a collection of Arrays in many respects. But this does not
+similar to a collection of Arrays in many respects, but this does not
 mean they can always be translated from one to the other. For example,
-some APIs only return one Sequence "instance" at a time. This means that
+some APIs return only one Sequence "instance" at a time. This means that
 even if a Sequence of sets of three numbers is more or less the same
 shape as three parallel Arrays, it will be very difficult to model the
 one kind of behavior on the other kind of API.
 
-However, even though the general problem isn't solvable, there are many
-useful translations that can be done, and there are many others that are
+However, even though the general problem is not solvable, there are many
+useful translations that can be done and there are many others that are
 still useful despite their inherent information loss.
 
-For example, consider a relational structure like the one below. This is
-similar to the examples in #Data_Models, but contains two nested
-Sequences. The outer Sequence represents all the XBT drops in a cruise,
-and the inner Sequence represents each XBT drop. The JGOFS API was
+For example, consider a relational structure below, which contains two nested
+Sequences. The outer sequence represents all the XBT drops in a cruise; the inner sequence represents each XBT drop. The JGOFS API was
 designed to use this sort of data type.
 
 .Example Data Description of XBT Cruise
@@ -497,7 +439,7 @@ id   lat   lon   depth  temp
                   20     34 
 ----------------------------
 
-This can be made into an array, although that introduces redundancy.
+This can be made into an array, although doing so introduces redundancy:
 
 ----------------------------
 id   lat   lon   depth  temp
@@ -512,23 +454,23 @@ id   lat   lon   depth  temp
 3   11.6   61.2   20     34
 ----------------------------
 
-The data is now in a form that may be read by an API such as netCDF. But
+The data is now in a form that may be read by an API such as netCDF. However, 
 consider the analysis stage. Suppose a user wants to see graphs of each
 station's data. It is not obvious simply from the arrangement of the
-array where a station stops and the next one begins. Analyzing data in
+array where one station stops and the next one begins. Analyzing data in
 this format is not a function likely to be accommodated by a program
 that uses the netCDF API, even though it is theoretically possible to
 implement.
 
-==== Data Access Protocol ====
+==== Data Access Protocol (DAP) ====
 
-The OPeNDAP Data Access Protocol (DAP) defines how an OPeNDAP client and
+The OPeNDAP Data Access Protocol defines how an OPeNDAP client and
 an OPeNDAP server communicate with one another to pass data from the
 server to the client. The job of the functions in the OPeNDAP client
 library is to translate data from the DAP into the form expected by the
 data access API for which the OPeNDAP library is substituting. The job
-of an OPeNDAP server is to translate data stored on a disk in whatever
-format they happen to be stored in to the DAP for transmission to the
+of an OPeNDAP server is to translate data stored on a disk (in whatever
+format they happen to be stored in) to the DAP for transmission to the
 client.
 
 The DAP consists of several components:
@@ -537,7 +479,7 @@ The DAP consists of several components:
 transport data from the remote source to the client. The data types that
 make up this representation may be thought of as the OPeNDAP data model.
 . A format for the "ancillary data" needed to translate a data set
-into the intermediate representation, and to translate the intermediate
+into the intermediate representation and to translate the intermediate
 representation into the target data model. The ancillary data in turn
 consists of two pieces:
 * A description of the shape and size of the various data types stored
@@ -559,35 +501,32 @@ the documentation of the respective software.
 ==== Data Representation ====
 
 There are many popular data storage formats, and many more than that in
-use. These formats are optimized (it they are optimized at all) for data
-storage, and are not generally suitable for data transmission. In order
+use. When these formats are optimized, they are optimized for data
+storage and are not generally suitable for data transmission. In order
 to transmit data over the Internet, OPeNDAP must translate the data
 model used by a particular storage format into the data model used for
 transmission.
 
 If the data model for transmission is defined to be general enough to
-encompass the abstractions of several data models for storage, than this
+encompass the abstractions of several data models for storage, then this
 intermediate representation—the transmission format—can be used to
 translate between one data model and another.
 
 The OPeNDAP data model consists of a fairly elementary set of base
-types, combined with an advanced set of constructs and operators that
+types combined with an advanced set of constructs and operators that
 allows it to define data types of arbitrary complexity. This way, the
 OPeNDAP data access protocol can be used to transmit data from virtually
 any data storage format.
 
-The elements of the OPeNDAP data access protocol are...
+OPeNDAP comprises the following elements:
 
 Base Types:: These are the simple data types, like integers, floating point
   numbers, strings, and character data.
 Constructor:: Types These are the more complex data types that can be constructed
   from the simple base types. Examples are structures, sequences,
   arrays, and grids.
-Operators:: Access to data can be operationally defined with operators defined on
-  the various data types.
-External Data Representation:: In order to transmit the data across the Internet, there needs to be a machine-independent definition of what the various data types look
-  like. For example, the client and server need to agree on the most
-  significant digit of a particular byte in the message
+Operators:: Access to data can be operationally defined with operators defined on the various data types.
+External Data Representation:: In order to transmit the data across the Internet, there needs to be a machine-independent definition of what the various data types look like. For example, the client and server need to agree on the most significant digit of a particular byte in the message
 
 These elements are defined in greater detail in the sections that follow.
 
@@ -598,7 +537,7 @@ Each data set is defined by a set of one or more variables, and each
 variable is defined by a set of attributes. A variable's
 __attributes__—such as units, name and type—must not be confused with
 the data _value_ (or values) that may be represented by that variable. A
-variable called time may contain an integer number of minutes, but it
+variable called __time__ may contain an integer number of minutes, but it
 does not contain a particular number of minutes until a context, such as
 a specific event recorded in a data set, is provided. Each variable may
 further be the object of an operator that defines a subset of the
@@ -607,23 +546,21 @@ available data set.
 Variables in the DAP have two forms. They are either base types or type
 constructors. Base type variables are similar to predefined variables in
 procedural programming languages like C or Fortran (such as int or
-integer*4). While these certainly have an internal structure, it is not
+integer*4). While these have an internal structure, it is not
 possible to access parts of that structure using the DAP. Base type
 variables in the DAP have two predefined attributes (or
-characteristics): name, and type. They are defined as follows:
+characteristics): name and type. They are defined as follows:
 
 Name:: A unique identifier that can be used to reference the part of the
   dataset associated with this variable.
-
-Type:: The data type contained by the variable. This can be one of Byte,
-  Int32, UInt32, Float64, String, and URL. Where...
+Type:: The data type contained by the variable. Data types include the following:
 
 * Byte is a single byte of data. This is the same as unsigned char in
 ANSI C.
-* Int16 is a 16 bit two's complement integer—it is synonymous with long
+* Int16 is a 16 bit two's complement integer. This is synonymous with long
 in ANSI C when that type is implemented as 16 bits.
 * UInt16 is a 16 bit unsigned integer.
-* Int32 is a 32 bit two's complement integer—it is synonymous with long
+* Int32 is a 32 bit two's complement integer. This is synonymous with long
 in ANSI C when that type is implemented as 32 bits.
 * UInt32 is a 32 bit unsigned integer.
 * Float32 is the IEEE 32 bit floating point data type.
@@ -634,8 +571,8 @@ in ANSI C when that type is implemented as 32 bits.
 The declaration in a
 link:../index.php/UserGuideOPeNDAPMessages#Data_Descriptor_Structure[DDS]
 of a variable of any of the base types is simply the type of the
-variable, followed by its name, and a semicolon. For example, to declare
-a month variable to be a 32-bit integer, one would type...
+variable followed by its name and a semicolon. For example, to declare
+a month variable to be a 32-bit integer, you would type...
 
 ------------
 Int32 month;
@@ -652,9 +589,8 @@ spatial relation to one another, whereas a structure might indicate a
 grouping of measurements of disparate quantities that happened at the
 same place and time.
 
-There are six classes of type constructor variables defined by the
-OPeNDAP DAP: arrays, structures, sequences, functions, and grids. The
-types are defined as:
+There are six classes of type constructor variables defined by 
+OPeNDAP: arrays, structures, sequences, functions, and grids. These are explained below.
 
 .Array
 An array is a one dimensional indexed data structure as defined by ANSI
@@ -682,7 +618,7 @@ Float64 data[5][6];
 -------------------
 
 In addition to its magnitude, every dimension of an array may also have
-a name. The previous declaration could be written:
+a name. The previous declaration could be written as...
 
 ------------------------------------
 Float64 data[height = 5][width = 6];
@@ -712,7 +648,7 @@ measurement.month would identify the integer member of the Structure
 defined in the above declaration.
 
 .Sequence
-A Sequence is an ordered set of variables each of which may have several
+A Sequence is an ordered set of variables, each of which may have several
 values. The variables may be of different classes. Each element of a
 Sequence consists of a value for each member variable, so a Sequence is
 sort of like an ordered set of Structures.
@@ -739,7 +675,7 @@ Sequence is different from a Structure because its constituent variables
 have several instances while a Structure's variables have only one
 instance (or value).
 
-A Sequence declaration is similar to a Structure's. For example, the
+A Sequence declaration is similar to a Structure's declaration. For example, the
 following would define a Sequence that would contain many members like
 the Structure defined above:
 
@@ -759,8 +695,8 @@ As with a Structure, the variable measurement.month has a single value.
 The distinction is that this variable's value changes depending on the
 state of the Sequence. You can think of a Sequence as composed of the
 data you get from successive reads of data from a file. The data values
-available at any point are the last values read from the file. But you
-don't have immediate access to any of the other values in that file.
+available at any point are the last values read from the file, and you
+will not have immediate access to any of the other values in that file.
 
 .Grid
 A Grid is an association of an N dimensional array with N named vectors
@@ -769,7 +705,7 @@ as the corresponding dimension of the array. Each data value in the Grid
 is associated with the data values in the vectors associated with its
 dimensions.
 
-As an example, consider an array of temperature values that has six
+For example, consider an array of temperature values that has six
 columns and five rows. Suppose that this array represents measurements
 of temperature at five different depths in six different locations. The
 problem is the indication of the precise location of each temperature
@@ -779,8 +715,7 @@ If the six locations are evenly spaced, and the five depths are also
 evenly spaced, then the data set can be completely described using the
 array and two scalar values indicating the distance between adjacent
 vertices of the array. However, if the spacing of the measurements is
-_not_ regular, as in ../index.php/File:Grid.gif[figure 6.3.2] then an
-array will be inadequate. To adequately describe the positions of each
+_not_ regular, as in the figure below, then an array will be inadequate. To adequately describe the positions of each
 of the points in the grid, the precise location of each column and row
 must be described.
 
@@ -790,7 +725,7 @@ image:../images/6/64/Grid.gif[]
 The secondary vectors in the Grid data type provide a solution to this
 problem. Each member of these vectors associates a value for all the
 data points in the corresponding rank of the array. The value can
-represent location or time or some other quantity, and can even be a
+represent location or time or some other quantity and can even be a
 constructor data type. The following declaration would define a data
 type that could accommodate a structure like this:
 
@@ -800,15 +735,14 @@ type that could accommodate a structure like this:
       Float64 distance[6];
       Float64 depth[5];
    } measurement;
- 
 --------------------------------------------
 
-In the above example, an vector called depth contains five values
+In this example, a vector called __depth__ contains five values, each
 corresponding to the depths of each row of the array, while another
-vector called distance contains the scalar distance between the location
-of the corresponding column, and some reference point.
+vector called __distance__ contains the scalar distance between the location
+of the corresponding column and a reference point.
 
-In a similar arrangement, a location array could instead contain six
+In a similar arrangement, a location array could contain six
 (latitude, longitude) pairs indicating the absolute location of each
 column of the grid.
 
@@ -826,7 +760,7 @@ column of the grid.
 ===== External Data Representation =====
 
 Now that you know what the data types are, the next step is to define
-their external representation. The DAP defines an external
+their external representation. The data access protocol defines an external
 representation for each of the base-type and constructor-type variables.
 This is used when an object of the given type is transferred from one
 computer to another. Defining a single external representation makes
@@ -855,12 +789,7 @@ The XDR data types corresponding to OPeNDAP base-type variables.
 |URL |xdr string
 |==========================
 
-A base type variable is always either transmitted or not. You won't ever
-see a fraction of an String type transmitted. The constructor type
-variables, being made up of the bast type variables, are transmitted as
-sets of base type variables, and these may be sampled, with a
-link:../index.php/UserGuideOPeNDAPMessages#Constraint_Expression[constraint
-expression].
+A base type variable is always either transmitted or not. You will not see a fraction of an String type transmitted. Constructor type variables, being composed of the bast type variables, are transmitted as sets of base type variables, and these may be sampled, with a link:../index.php/UserGuideOPeNDAPMessages#Constraint_Expression[constraint expression].
 
 Constraint expressions do not affect _how_ a base-type variable is
 transmitted from a client to a server; they determine _if_ a variable is
@@ -874,28 +803,24 @@ What remains is to define the external representation of the constructor
 type variables. For each of the six constructor types these definitions
 are:
 
-Array ::
-  An Array is sent using the xdr_array function. This means that an
+Array:: An Array is sent using the xdr_array function. This means that an
   Array of 100 Int32s is sent as a single block of 100 xdr longs, not
   100 separate "xdr long"s.
-Structure ::
-  A Structure is sent by encoding each field in the order those fields
+Structure:: A Structure is sent by encoding each field in the order those fields
   are declared in the
   link:../index.php/UserGuideOPeNDAPMessages#Data_Descriptor_Structure[DDS]
   and transmitting the resulting block of bytes.
-Sequence ::
-  A Sequence is transmitted by encoding each item in the sequence as if
+Sequence:: A Sequence is transmitted by encoding each item in the sequence as if
   it were a Structure, and ending each such structure after the other,
   in the order of their occurrence in the sequence. The entire sequence
   is sent, subject to the constraint expression. In other words, if no
   constraint expression is supplied then the entire sequence is sent.
   However, if a constraint expression is given all the records in the
   sequence that satisfy the expression are sent.
-Grid ::
-  A Grid is encoded as if it were a Structure (one component after the
+Grid:: A Grid is encoded as if it were a Structure (one component after the
   other, in the order of their declaration).
 
-The external data representation used by an OPeNDAP server and client
+The external data representation used by OPeNDAP
 may be compressed, depending on the configuration of the respective
 machines. The compression is done using the gzip program. Only the data
 transmission itself will be affected by this; the transmission of the
@@ -903,19 +828,15 @@ ancillary data is not compressed.
   
 == OPeNDAP Messages ==
 
-This section provides A closer look at the messages passed to and from an OPeNDAP server and
-  the various services that may be provided. Also reviews constraint
-  expressions, which can be used to select data from specific datasets.
-  Researchers who will use OPeNDAP to get data for analysis will find
-  this useful.
+This section provides A closer look at the messages passed to and from an OPeNDAP server and the various services that may be provided. Also reviews constraint expressions, which can be used to select data from specific datasets. Researchers who will use OPeNDAP to get data for analysis will find this useful.
 
 === The OPeNDAP Messages ===
 
 An OPeNDAP server is in the business of making replies to queries for
 data and other services. The queries come in the form of specially
-formed URLs and the replies consist of MIME documents whose contents are
+formed URLs, and the replies consist of MIME documents whose contents are
 described in the sections below. (Technically speaking, the response
-document headers aren't exactly right, but they function in the same
+document headers are not exactly right, but they function in the same
 way.)
 
 All the requests start with a root URL, and they all are in the form of
@@ -931,22 +852,22 @@ with the ancillary data messages.
 
 ==== Ancillary Data ====
 
-In order to use some data set, a user must have some information at his
+In order to use a data set, a user must have some information at his
 or her disposal that is not strictly included in the data itself. This
 information, called ancillary data, describes the shape and size of the
 data types that make up the data set, and provides information about
-many of the data set's attributes, as well. OPeNDAP uses two different
-structures, to supply this ancillary information about an OPeNDAP data
+many of the data set's attributes. OPeNDAP uses two different
+structures to supply this ancillary information about an OPeNDAP data
 set. The Dataset Descriptor Structure (DDS) describes the data set's
 structure and the relationships between its variables, and the Dataset
 Attribute Structure (DAS) provides information about the variables
 themselves. Both structures are described in the following sections.
 
-===== Dataset Descriptor Structure =====
+===== Dataset Descriptor Structure (DDS) =====
 
 In order to translate data from one data model into another, OPeNDAP
-must have some knowledge about the types of the variables, and their
-semantics, that comprise a given data set. It must also know something
+must have some knowledge about the types of the variables and their
+semantics that comprise a given data set. It must also know something
 about the relations of those variables—even those relations which are
 only implicit in the dataset's own API. This knowledge about the
 dataset's structure is contained in a text description of the dataset
@@ -1024,7 +945,7 @@ explanation of the information implied by the data model.)
 } data;
 --------------------------
 
-===== Dataset Attribute Structure =====
+===== Dataset Attribute Structure (DAS) =====
 
 The "Dataset Attribute Structure" (DAS) is used to store attributes for
 variables in the dataset. An attribute is any piece of information about
@@ -1040,10 +961,10 @@ In effect, attributes are used to store information that is used "by
 convention" rather than "by design". OPeNDAP can effectively support
 these conventions by passing the attributes from data set to user
 program via the DAS. (Of course, OPeNDAP cannot enforce conventions in
-datasets where they were not followed in the first place.0
+datasets where they were not followed in the first place.)
 
-The syntax for attributes in a DAS is given in the table below. Every
-attribute of a variable is a triple: attribute name, type and value. The
+The syntax for attributes in a DAS is shown in the table below. Every
+attribute of a variable is a triple: attribute name, type, and value. The
 name of an attribute is an identifier, consisting of alphanumeric
 characters, plus "_" and "/". The type of an attribute may be one of:
 "Byte", "Int32", "UInt32", "Float64", "String" or "Url". An attribute
@@ -1244,14 +1165,13 @@ Dataset {
 } sst.mnmean.nc;
 ------------------------------
 
-This DDS will be included in the DataDDS return, ahead of the encoded array of
-1857 64-bit time values.
+This DDS will be included in the DataDDS return, ahead of the encoded array of 1857 64-bit time values.
 
 For more information about sampling OPeNDAP data sets, see the section
 below about constraint expressions.
 
 NOTE: A request for data from an OPeNDAP client will generally make three different service requests, for data attributes
-(DAS), data descriptors (DDS), and for data. The prepackaged OPeNDAP
+(DAS), data descriptors (DDS), and data. The prepackaged OPeNDAP
 clients do this for you, so you may not be aware that three requests are made for each URL.
 
 ==== Other Services ====
@@ -1263,12 +1183,13 @@ any or all of the services described in the sections that follow.
 
 This service returns an ASCII representation of the requested data. This
 can make the data available to a wide variety of standard web browsers.
-This service is activated when the server receives a URL ending with
-.asc or .ascii.
+This service is activated when the server receives a URL ending with .asc or .ascii.
 
 Note that unlike the data response, the ASCII response does not contain
 a DDS for the returned data. Instead it just returns the simple text
 message.
+
+NOTE: While ASCII is fine for moving small amounts of data, it generally is best to move data in binary whenever possible becuase servers can generate binary data more quickly than ASCII data, and binary data is more compact. You can then process locally if you need ASCII. To process binary data, you could use getdap if you retrieve DAP2 binary response (.dods); getdap4 if you retrieve a DAP4 binary response; or ncdump for a NetCDF3 or NetCDF4 binary response.
 
 The link:../index.php/QuickStart[Quick Start Guide] contains examples of the ASCII response.
 
@@ -1277,18 +1198,17 @@ The link:../index.php/QuickStart[Quick Start Guide] contains examples of the ASC
 The Info service formats information from a data set's DAS and DDS into
 a single HTML document suitable for viewing in a web browser. The
 returned document may include information about both the data server
-itself (such as server functions implemented), and the dataset
+itself (such as server functions implemented) and the dataset
 referenced in the URL. The server administrator determines what
 information is returned in response to such a request. The services is
 activated by a URL ending in .info.
 
-Click http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.info to see
-an Info response.
+Click http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.info to see an Info response.
 
 ===== WWW Interface Service =====
 
 The WWW service is another way to browse a server's data interactively.
-You can use this either to look at an individual data file, or a
+You can use a browser to look at an individual data file, or a
 directory of files (or "files" since a server may contain logical
 entities that look like files).
 
@@ -1323,7 +1243,7 @@ relevant version numbers.
 ===== SOAP =====
 
 The OPeNDAP server provided by the OPeNDAP group contains an
-experimental SOAP service, allowing users to make requests and get
+experimental SOAP service, enabling users to make requests and get
 responses by exchanging SOAP XML documents. This is an experimental
 service, and if you're writing an application depending on it, it's best
 to contact the OPeNDAP developer team.
@@ -1334,8 +1254,7 @@ The DDX is an XML version of the DAS and DDS, combined. It is triggered
 by a URL ending with .ddx. You can find the schema for the DDX at
 http://xml.opendap.org/dap/dap2.xsd.
 
-The DDX is designed to contain data, too, but this is not yet
-implemented. You will see an empty dataBLOB element at the end of each
+The DDX is designed to contain data, too, but this is not yet implemented. You will see an empty dataBLOB element at the end of each
 DDX, which will eventually hold returned data.
 
 The DDX response can be modified with a constraint expression. Like the DDS, the
@@ -1356,9 +1275,7 @@ page.
 
 === Constraint Expressions ===
 
-The OPeNDAP software is not only a data transport mechanism. Using
-OPeNDAP, you can subsample the data you are looking at. That is, you can
-request an entire data file, or just a small piece of it.
+Using OPeNDAP, you can subsample the data you are looking at. That is, you can request an entire data file or just a small piece of it.
 
 ==== Selecting Data: Using Constraint Expressions ====
 
@@ -1368,78 +1285,72 @@ The URL such as this one...
 http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz
 ----------------------------------------------------
 
-... refers to the entire dataset contained in the mnmean.nc file. A user
-may, however, choose to sample the dataset simply by modifying the
-submitted URL. The constraint expression attached to the URL directs
+...refers to the entire dataset contained in the mnmean.nc file. A user
+may also choose to sample the dataset simply by modifying the submitted URL. The constraint expression attached to the URL directs
 that the data set specified by the first part of the URL be sampled to
 select only the data of interest from a dataset.
 
 Because the expression modifies the URL used to access data, this works
 even for programs that do not have a built-in way to accomplish such
 selections. This can vastly reduce the amount of data a program needs to
-process, and reduce the network load of transmitting that data to the
-client.
+process and thus reduce the network load of transmitting the given data to the client.
 
 ===== Constraint Expression Syntax =====
 
-A constraint expression is appended to the target URL following a
-question mark, as in the following examples:
+A constraint expression is appended to the target URL following a question mark, as in the following examples:
 
-http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.asc?sst%5B3%5D%5B4%5D%5B5%5D[.../nc/sst.mnmean.nc.gz?sst[3][4][5]]
+.../nc/sst.mnmean.nc.gz?sst[3][4][5] http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.asc?sst%5B3%5D%5B4%5D%5B5%5D[Click here for sample output.]
 
-http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.asc?sst%5B0:1%5D%5B13:16%5D%5B103:105%5D[.../nc/sst.mnmean.nc.gz?sst[0:1][13:16][103:105]]
+.../nc/sst.mnmean.nc.gz?sst[0:1][13:16][103:105]   
+http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.asc?sst%5B0:1%5D%5B13:16%5D%5B103:105%5D[Click here for sample output.]
 
-http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.asc?geogrid(sst,62,206,56,210,%2219722%3Ctime%3C19755%22)[.../nc/sst.mnmean.nc.gz?geogrid(sst,62,206,56,210,"19722<time<19755")]
+.../n.../ff/gsodock.dat?Time,Sea_Tempc/sst.mnmean.nc.gz?geogrid(sst,62,206,56,210,"19722<time<19755")
+http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.asc?geogrid(sst,62,206,56,210,%2219722%3Ctime%3C19755%22)[Click here for sample output.]
 
-http://test.opendap.org/dap/data/ff/gsodock.dat.asc?Time,Sea_Temp[.../ff/gsodock.dat?Time,Sea_Temp]
+.../ff/gsodock.dat?Time,Sea_Temp
+http://test.opendap.org/dap/data/ff/gsodock.dat.asc?Time,Sea_Temp[Click here for sample output.]
 
-http://test.opendap.org/dap/data/ff/gsodock.dat.asc?Time,Sea_Temp&Time%3C35234.1[.../ff/gsodock.dat?Time,Sea_Temp&Time%3C35234.1]
+.../ff/gsodock.dat?Time,Sea_Temp&Time%3C35234.1
+http://test.opendap.org/dap/data/ff/gsodock.dat.asc?Time,Sea_Temp&Time%3C35234.1[Click here for sample output.]
 
-http://test.opendap.org/dap/data/ff/gsodock.dat.asc?Time,Sea_Temp&Time%3C35234.1&Sea_Temp%3C18[.../ff/gsodock.dat?Time,Sea_Temp&Time%3C35234.1&Sea_Temp%3C18]
+.../ff/gsodock.dat?Time,Sea_Temp&Time%3C35234.1&Sea_Temp%3C18
+http://test.opendap.org/dap/data/ff/gsodock.dat.asc?Time,Sea_Temp&Time%3C35234.1&Sea_Temp%3C18[Click here for sample input.]
 
 CAUTION: An OPeNDAP data set can contain an extraordinary amount of
 data. You almost certainly do _not_ want to make an unconstrained
 request to a data set without knowing something about it. Familiarize
-yourself with the DDS and DAS before asking for data; it can prevent
-overload.
+yourself with the DDS and DAS before asking for data.
 
 A constraint expression consists of two parts: a projection and a
 selection, separated by an ampersand (&). Either part may contain
-several sub-expressions. Either part may be present, or both.
+several sub-expressions. Either part or both parts may be used.
 
 --------------------------------------------------
 ...?proj_1,proj_2,...,proj_n&sel_1&sel_2&...&sel_m
 --------------------------------------------------
 
-A projection is simply a comma-separated list of the variables that are
-to be returned to the client. If an array is to be subsampled, the
-projection specifies the manner in which the sampling is to be done. If
-the selection is omitted, all the variables in the projection list are
-returned. If the projection is omitted, the entire dataset is returned,
-subject to the evaluation of the selection expression. The projection
-can also include functional expressions of the form:
+A *projection* is simply a comma-separated list of the variables that are to be returned to the client. If an array is to be subsampled, the
+projection specifies the manner in which the sampling is to be done. If the selection is omitted, all the variables in the projection list are
+returned. If the projection is omitted, the entire dataset is returned, subject to the evaluation of the selection expression. The projection
+can also include functional expressions of the form...
 
 -----------------------------------
 ...?function(arg_1,arg_2,...,arg_n)
 -----------------------------------
 
-where the arguments are variables from the dataset, scalar values, or
-other functions. (See Constraint Expression Functions below.)
+...where the arguments are variables from the dataset, scalar values, or other functions. (See Constraint Expression Functions below.)
 
-A selection expression leads with an ampersand and is a boolean
-expression of the form "variable operator variable", "variable operator
-value" or "function(arg_1,arg_2,...,arg_n)", where
+A *selection* expression leads with an ampersand and is a boolean expression of the form "variable operator variable", "variable operator
+value" or "function(arg_1,arg_2,...,arg_n)", where...
 
 operator:: Can be one of the relational operators listed in the table below.
 variable:: Can be any variable recorded in the dataset.
-value:: Can be any scalar, string, function, or list of numbers (Lists are denoted by comma-separated items enclosed in curly braces ,for example, \{3,11,4.5}.); and
+value:: Can be any scalar, string, function, or list of numbers (Lists are denoted by comma-separated items enclosed in curly braces ,for example, \{3,11,4.5}.).
 function:: Is a function defined by the server to operate on variables or values, and to return a boolean value.
 
 Each selection clause begins with an ampersand (&). You can think of
 this as representing the "AND" boolean operation, but remember that it
-is actually a prefix operator, not an infix operator. That is, it must
-appear at the beginning of each selection clause, no matter what. This
-means that a constraint expression that contains no projection clause
+is actually a prefix operator, not an infix operator. That is, it must always appear at the beginning of each selection clause. This means that a constraint expression that contains no projection clause
 must still have an & in front of the first selection clause.
 
 There is no limit on the number of selection clauses that can be
@@ -1449,15 +1360,14 @@ included in the data returned to the client by the server. If only a
 part of some data structure, such as a Sequence, satisfies the selection
 criteria, then only that part will be returned.
 
-NOTE: Due to the differences in data model paradigms, selection is not implemented for the OPeNDAP array data types, such as
+NOTE: Due to differences between data model paradigms, selection is not implemented for the OPeNDAP array data types, such as
 Grid or Array. However, many OPeNDAP servers implement selection
 functions you can use for the same effect. (See Constraint Expression Functions below for more information about functions.)
 
 .Simple Constraint Expression Examples
 Consider the DDS below. This is the description of a dataset containing
 station data including temperature, oxygen, and salinity. Each station
-also contains 20 oxygen data points, taken at 20 fixed depths, used for
-calibration of the data.
+also contains 20 oxygen data points, taken at 20 fixed depths, used for calibration of the data.
 
 .Sample Data Descriptor
 ------------------------
@@ -1480,11 +1390,10 @@ Dataset {
 } arabian-sea;
 ------------------------
 
-The following URL will return only the pressure and temperature pairs of
-this dataset. (Note that the constraint expression parser removes all
+The following URL will return only the pressure and temperature pairs of this dataset. (Note that the constraint expression parser removes all
 spaces, tabs, and newline characters before the expression is parsed.)
 There is only a projection clause, without a selection, in this
-constraint expression.
+constraint expression:
 
 -----------------------------------------------------------------------
 http://oceans.edu/jg/exp1O2/cruise?station.cast.press,station.cast.temp
@@ -1492,22 +1401,20 @@ http://oceans.edu/jg/exp1O2/cruise?station.cast.press,station.cast.temp
 
 We have assumed that the dataset was stored in the JGOFS format on the
 remote host oceans.edu, in a file called explO2/cruise. For the sake of
-brevity, from here on we will omit the first part of the URL, to
-concentrate on the constraint expression alone.
+brevity, from here on we will omit the first part of the URL so as to
+concentrate on only the constraint expression.
 
-If we only want to see pressure and temperature pairs below 500 meters
-deep, we can modify the constraint expression by adding a selection
-clause.
+If we only want to see pressure and temperature pairs below 500 meters deep, we can modify the constraint expression by adding a selection clause:
 
 --------------------------------------------------------------
-?station.cast.press,station.cast.temp&station.cast.press>500.0
+ ?station.cast.press,station.cast.temp&station.cast.press>500.0
 --------------------------------------------------------------
 
 In order to retrieve all of each cast that has any temperature reading
 greater than 22 degrees, use the following:
 
 ------------------------------------
-?station.cast&station.cast.temp>22.0
+ ?station.cast&station.cast.temp>22.0
 ------------------------------------
 
 Simple constraint expressions may be combined into compound expressions
@@ -1520,45 +1427,38 @@ degrees West and north of the equator:
 
 As was mentioned, the logical OR can be implemented using a list of
 scalars. The following expression will select only stations taken north
-of the equator in April, May, June, or July.
+of the equator in April, May, June, or July:
 
 ------------------------------------------------
 ?station&station.lat>0.0&station.month={4,5,6,7}
 ------------------------------------------------
 
-If our dataset contained a field called monsoon-month, indicating the
-month in which monsoons happened that year, we could modify the last
-example search to include those months as follows:
+If our dataset contained a field called monsoon-month, indicating the month in which monsoons happened that year, we could modify the last example search to include those months as follows:
 
 ----------------------------------------------------------------------
 ?station&station.lat>O.O&station.month={4,5,6,7,station.monsoon-month}
 ----------------------------------------------------------------------
 
-In other words, a list can contain both values and other variables. If
-monsoon-month was itself a list of months, a search could be written as:
+In other words, a list can contain both values and other variables. If monsoon-month was itself a list of months, a search could be written as:
 
 ------------------------------------------------------------
 ?station&station.lat>0.0&station.month=station.monsoon-month
 ------------------------------------------------------------
 
-For arrays and grids, there is a special way to select data within the
-projection clause. Suppose we want to see only the first five oxygen
-calibration points for each station. The constraint expression for this
+For arrays and grids, there is a special way to select data within the projection clause. Suppose we want to see only the first five oxygen calibration points for each station. The constraint expression for this
 would be:
 
 -------------------
 ?station.02cal[0:4]
 -------------------
 
-By specifying a stride value, we can also select a hyperslab of the
-oxygen calibration array:
+By specifying a stride value, we can also select a hyperslab of the oxygen calibration array:
 
 ----------------------
 ?station.02cal[0:5:19]
 ----------------------
 
-This expression will return every fifth member of the 02cal array. In
-other words, the result will be a four-element array containing only the
+This expression will return every fifth member of the 02cal array. In other words, the result will be a four-element array containing only the
 first, sixth, eleventh, and sixteenth members of the 02cal array. Each
 dimension of a multi-dimensional arrays may be subsampled in an
 analogous way. The return value is an array of the same number of
@@ -1570,7 +1470,7 @@ number of elements selected from it.
 The constraint expression syntax defines a number of operators for each
 data type. These operators are listed below.
 
-All the operators defined for the scalar base types are boolean
+NOTE: All the operators defined for the scalar base types are boolean
 operators whose result depends on the specified comparison between its
 arguments.
 
@@ -1600,7 +1500,7 @@ Byte, Int*, UInt*, Float* |< > = != <= >=
 |================================================
  
 Individual fields of type constructors may be accessed using the dot
-(.) operator or the virtual file system syntax. If a structure s has two
+(.) operator or the virtual file system syntax. If a structure __s__ has two
 fields time and temperature, then those fields may be accessed using
 s.time and s.temperature or as s/time and s/temperature.
 
@@ -1616,10 +1516,10 @@ link:../index.php/QuickStart#Peeking_at_Data[Quick Start Guide].
 
 An OPeNDAP data server may define its own set of functions that may be
 used in a constraint expression. For example, the oceans.edu data server
-we've been imagining might define a sigma1() function to return the
-density of the water at the given temperature, salinity and pressure. A
+we have been imagining might define a sigma1() function to return the
+density of the water at the given temperature, salinity, and pressure. A
 query like the following would return all the stations containing water
-samples whose density exceeded 1.0275g/cm3.
+samples whose density exceeded 1.0275g/cm3:
 
 ---------------------------------------------
 ?station.cast&sigma1(station.cast.temp,
@@ -1639,13 +1539,11 @@ For example...
 
 http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.asc?version()
 
-And...
+and...
 
 http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.asc?geogrid()
 
-NOTE: When using functions, be careful to remember that a function used
-in a projection can return any value, but when used in a selection
-clause, it must either return a boolean value, or be part of a test that returns a boolean value.
+NOTE: When using functions, remember that a function used in a projection can return any value, but when used in a selection clause, it must either return a boolean value, or be part of a test that returns a boolean value.
 
 ===== Pattern Matching with Constraint Expressions =====
 

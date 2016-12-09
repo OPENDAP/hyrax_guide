@@ -468,16 +468,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="trueabout-this-guide"><a class="anchor" href="#trueabout-this-guide"></a>1. About This Guide</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This guide introduces the important concepts behind the OPeNDAP data
+<p>This guide introduces important concepts behind the OPeNDAP data
 model and transmission format as well as the clients and servers that
 use them. It is not a reference for any particular client or server,
-though you will find links to particluar clients and servers in this documentation.</p>
+but you will find links to particluar clients and servers.</p>
 </div>
 <div class="sect2">
 <h3 id="truewhat-is-opendap"><a class="anchor" href="#truewhat-is-opendap"></a>1.1. What is OPeNDAP</h3>
 <div class="paragraph">
 <p>OPeNDAP provides a way for researchers to access scientific data
-anywhere on the Internet from a wide variety of new <em>and existing</em>
+anywhere on the Internet, from a wide variety of new <em>and existing</em>
 programs.</p>
 </div>
 <div class="paragraph">
@@ -489,19 +489,18 @@ the flexibility of the web.</p>
 </div>
 <div class="paragraph">
 <p>The OPeNDAP architecture uses a client/server model, with a <em>client</em>
-that sends requests for data out onto the network to some <em>server</em>,
-that answers with the requested data. This is exactly the model used by
+that sends requests for data out onto the network to a <em>server</em>,
+that answers with the requested data. This is the same model used by
 the <a href="http://www.w3.org/hypertext/WWW/TheProject.html">World Wide Web</a>
 where client browsers submit requests to web servers for the data that
-make up web pages. Of course, OPeNDAP clients can do much more than
-browse this data. Using flexible data types suitable for many uses,
-including scientific data, the OPeNDAP servers deliver real data
-directly to the client program in the format needed by that client.</p>
+compose web pages. Using flexible, multi-purpose data types,
+including scientific data, OPeNDAP servers deliver real data
+directly to client programs in the format needed by that client.</p>
 </div>
 <div class="paragraph">
 <p>OPeNDAP clients are very specialized browsers, constructed by linking
 legacy data analysis programs with OPeNDAP-enabled versions of the data
-access APIs they use, or by modifying the programs to use one of the
+access APIs they use or by modifying programs to use one of the
 OPeNDAP data access APIs. In addition to providing a sophisticated set
 of network-compatible APIs in several languages, there are also
 libraries of legacy APIs available in OPeNDAP-aware versions. The
@@ -512,58 +511,49 @@ easily as it reads from a local file.</p>
 <div class="paragraph">
 <p>To expand the universe of data available to a user, OPeNDAP incorporates
 a powerful data translation facility, so that data may be stored in data
-structures and formats defined by the data provider, but accessed by the
-user in a manner identical to the access of local data files on the
-user&#8217;s own system. Though there are limitations on the types of data
+structures and formats that are defined by the data provider but can be accessed by the
+users just like they access of local data files on the
+user&#8217;s own system. Alhough there are limitations on the types of data
 that may be translated (see
 <a href="../index.php/UserGuideDataModel#Translation">Translation</a>), the
-facility is flexible and general enough to handle many of the possible
-translations. There are two important results:</p>
+facility is flexible and general enough to handle many translations. The upshot of this is&#8230;&#8203;</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p>A user may not need to know that data from one set are stored in a
-format different from data in another set. Further, it may be possible
+format different from data in another set. Also, it may be possible
 that <em>neither</em> data set is stored in a format readable by the original
 version of the data analysis and display program he or she uses.</p>
 </li>
 <li>
-<p>No segment of OPeNDAP users will be effectively cut off from accessing
-data because of its storage format. A scientist who wishes to make his
+<p>No segment of OPeNDAP users will be cut off from accessing
+data because of its storage format. A scientist who wants to make his
 or her data available to other OPeNDAP users may do so while keeping
-that data in what may actually be a highly idiosyncratic storage format.
-(Of course, it doesn&#8217;t <em>have</em> to be in a highly idiosyncratic format.)</p>
+that data in what may be even a highly idiosyncratic storage format.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
 <p>The combination of the OPeNDAP network communication model and the data
 translation facility make OPeNDAP a powerful tool for the retrieval,
-sampling, and display of large distributed datasets. Though OPeNDAP was
+sampling, and display of large distributed datasets. Although OPeNDAP was
 developed by oceanographers, its application is not limited to
 oceanographic data. The organizing principles and algorithms may be
 applied to many other fields.</p>
 </div>
 <div class="paragraph">
-<p>The uniformity with which data appears that makes the system so useful
-for data analysis also eases automating data transport and manipulation
+<p>The uniformity with which data appears, which makes the system useful
+for data analysis, also enables you to automate data transport and manipulation
 tasks. For example, NOAA&#8217;s
 <a href="http://ferret.pmel.noaa.gov/Ferret/LAS/home/">Live Access Server (LAS)</a>
 (see, for example, <a href="http://mynasadata.larc.nasa.gov/data.html" class="bare">http://mynasadata.larc.nasa.gov/data.html</a>) uses
 OPeNDAP, as do many of the real-time observing systems that make up the
-<a href="https://ioos.noaa.gov/">Integrated Ocean Observing System (IOOS)</a>, like the
+<a href="https://ioos.noaa.gov/">Integrated Ocean Observing System (IOOS)</a>, such as the
 <a href="http://gomoos.org">Gulf of Maine Ocean Observing System (GoMOOS)</a>.</p>
 </div>
 <div class="paragraph">
-<p>The population of people who may be interested in a system such as
-OPeNDAP may be divided into data consumers and data providers. Though it
-was an important observation to the development of OPeNDAP that the two
-roles are often assumed by the same scientists, the division is a useful
-one for the introduction of the system. The following two sections
-provide a broad introduction to the roles of data consumer and data
-provider. The remainder of this guide is organized around this
-distinction between classes of users.</p>
+<p>Users who may be interested in OPeNDAP may be divided into data consumers and data providers (and these two roles are often assumed by the same scientists). The remainder of this guide is organized around this distinction between classes of users.</p>
 </div>
 </div>
 <div class="sect2">
@@ -573,37 +563,32 @@ distinction between classes of users.</p>
 equipped to interpret an OPeNDAP URL sent to them. An OPeNDAP client
 composes and sends messages to those servers. There are standalone
 OPeNDAP clients, but most clients are constructed from data analysis
-programs modified to get their data remotely, from the internet, rather
+programs that are modified to get their data remotely, from the internet, rather
 than locally, from a file.</p>
 </div>
 <div class="paragraph">
-<p>Without OPeNDAP, an application program that uses one of the common data
-access APIs such as netCDF will operate as shown in
-The Architecture of a Data Analysis Package figure, below. The user makes a
-request for data from the application program. This program uses some
-data access API to read and write data. The program uses procedures
+<p>Without OPeNDAP, a program that uses one of the common data
+access APIs (such as netCDF) operates as shown in
+The Architecture of a Data Analysis Package figure, shown below. Here is how it works:
+The user makes a request for data from the program; the program uses a
+data access API to read and write data; the program uses procedures
 defined by that API to access the data, which is typically stored on the
-same host machine. Some APIs are somewhat more sophisticated than this,
-of course, but their general operation is as simple.</p>
+same host machine. Some APIs are somewhat more sophisticated than this, but their general operation is similar.</p>
 </div>
 <div class="paragraph">
 <div class="title">The Architecture of a Data Analysis Package</div>
 <p><span class="image"><img src="../images/7/76/Unlinked.png" alt="Unlinked.png"></span></p>
 </div>
 <div class="paragraph">
-<p>The operation of an OPeNDAP client is illustrated in the The Architecture of a Data Analysis Package Using OPeNDAP figure, below. Here, the <em>same
-application program</em> that was used in The Architecture of a Data Analysis Package
-figure, above, has been modified to use one of the OPeNDAP API libraries.
-Now, in addition to being able to use local data as before, the
-application program is able to access data from OPeNDAP servers anywhere
-on the Internet in the same manner as the local data.</p>
+<p>The operation of an OPeNDAP client is illustrated in the The Architecture of a Data Analysis Package Using OPeNDAP figure, shown below. Here, the <em>same program</em> that was used in The Architecture of a Data Analysis Package
+figure (above) has been modified to use one of the OPeNDAP API libraries.
+Now, in addition to being able to use local data as before, the program is able to access data from OPeNDAP servers anywhere on the internet just as it would local data.</p>
 </div>
 <div class="paragraph">
-<p>To make some analysis program into an OPeNDAP client, just re-link it
-with the OPeNDAP API library. (Or, if your program uses one of the
+<p>To make any analysis program into an OPeNDAP client, it just needs to be linked with the OPeNDAP API library. (Or, if your program uses one of the
 supported legacy API libraries, like netCDF, you can link with the
 OPeNDAP version of that library.) This will create a program that
-accepts URLs as well as file pathnames to identify data to be read. (See
+accepts URLs as well as file pathnames to identify needed data. (See
 <a href="../index.php/UserGuideClient">the OPeNDAP Client</a>).</p>
 </div>
 <div class="paragraph">
@@ -611,28 +596,26 @@ accepts URLs as well as file pathnames to identify data to be read. (See
 <p><span class="image"><img src="../images/8/87/Linked.png" alt="Linked.png"></span></p>
 </div>
 <div class="paragraph">
-<p>OPeNDAP also provides a data translation facility. Data from the
+<p>OPeNDAP also provides data translation functionality. Data from the
 original data file is translated by the OPeNDAP server into the OPeNDAP
 data model for transmission to the client. Upon receiving the data, the
 client translates the data into the
 <a href="../index.php/UserGuideDataModel">data model</a> it understands. Because
 the data transmitted from an OPeNDAP server to the client travel in the
 OPeNDAP format, the dataset&#8217;s original storage format is completely
-irrelevant to the client. If the client was originally designed to read
+irrelevant to the client. For example, if the client was originally designed to read
 netCDF format files, the data returned by the OPeNDAP-netCDF library
-will appear to have been read from a netCDF file, whatever the actual
-format of the files from which the data were
-read. If the program expects JGOFS data, the OPeNDAP-JGOFS library will return
+will appear to have been read from a netCDF file. Similarly, if the program expects JGOFS data, the OPeNDAP-JGOFS library will return
 data that seem to have come from a JGOFS dataset, and so on.</p>
 </div>
 <div class="paragraph">
-<p>OPeNDAP does not pretend to remove all the overhead of data searches. A
+<p>OPeNDAP does not claim to remove all of the overhead of data searches. A
 user will still have to keep track of the URLs of interesting data in
 the same way a user must now keep track of the names of files. (You may
 run across datasets where the data consists of OPeNDAP URLs. These are
-the OPeNDAP file servers, and have been developed by OPeNDAP users to
+the OPeNDAP file servers and have been developed by OPeNDAP users to
 organize datasets consisting of large numbers of individual files.) But
-it does make the access to that data simpler and quicker.</p>
+OPeNDAP does make the access to that data simpler and quicker.</p>
 </div>
 <div class="paragraph">
 <p>The OPeNDAP group provides a whole array of client software to implement
@@ -648,78 +631,51 @@ the Data Access Protocol (DAP). This defines the range of messages a
 server must understand and the kinds of replies it makes.</p>
 </div>
 <div class="paragraph">
-<p>There are two categories of messages an OPeNDAP server can understand.
-Some are required by the DAP, and others are merely suggested. A server
+<p>There are two categories of messages that an OPeNDAP server can understand.
+Some are required by the DAP and others are merely suggested. A server
 is considered to be DAP-compliant if it can respond intelligibly to the
-required messages.</p>
-</div>
-<div class="paragraph">
-<p>The requests messages a server is required to understand are these:</p>
+required messages. Following are the requests messages a server is required to understand:</p>
 </div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Data Description</dt>
 <dd>
-<p>Data values come in types and sizes. An array, for example, might
-consist of 10 integers. The value "ten" and the type "integer"
-describe the array. This request returns information about data types,
-so that a receiving program can allocate space appropriately. See
-<a href="../index.php/UserGuideOPeNDAPMessages#Dataset_Descriptor_Structure">Data Description Structure (DDS)</a>.</p>
+<p>Data values come in types and sizes. An array, for example, might consist of 10 integers. The value "ten" and the type "integer" describe the array. This request returns information about data types, so that a receiving program can allocate space appropriately. See <a href="../index.php/UserGuideOPeNDAPMessages#Dataset_Descriptor_Structure">Data Description Structure (DDS)</a>.</p>
 </dd>
 <dt class="hdlist1">Data Attribute</dt>
 <dd>
-<p>This is a request to provide information <em>about</em> data, and typically
-includes information like units, names of data types, reference
-information and so on. See
-<a href="../index.php/UserGuideDataModel#DAS">Data Attribute Structure
-(DAS)</a>.</p>
+<p>This is a request to provide information <em>about</em> data and typically includes information like units, names of data types, reference information and so on. See <a href="../index.php/UserGuideDataModel#DAS">Data Attribute Structure (DAS)</a>.</p>
 </dd>
 <dt class="hdlist1">Data</dt>
 <dd>
-<p>The server also must be able to respond to a request for the data
-itself. See <a href="../index.php/UserGuideDataModel#DataDDS">data
-response</a>.</p>
+<p>The server also must be able to respond to a request for the data itself. See <a href="../index.php/UserGuideDataModel#DataDDS">data response</a>.</p>
 </dd>
 </dl>
 </div>
 <div class="paragraph">
-<p>A server may respond to requests like these, too:</p>
+<p>In addition, a server may respond to requests like these:</p>
 </div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">ASCII</dt>
 <dd>
-<p>Some servers can convert data to ASCII values on the fly. This allows
-users to view data using a standard web browser, assuming the data are
-not too large. See <a href="../index.php/UserGuideServer#ASCII">ASCII
-return</a>.</p>
+<p>Some servers can convert data to ASCII values on the fly. This allows users to view data using a standard web browser, assuming the data are not too large. See <a href="../index.php/UserGuideServer#ASCII">ASCII return</a>.</p>
 </dd>
 <dt class="hdlist1">Info</dt>
 <dd>
-<p>The info response is a formatted page containing information from the
-Data Attributes and Data Description responses. It&#8217;s meant to be a
-human-readable way to show what&#8217;s available in a dataset via a
-standard web browser. See <a href="../index.php/UserGuideServer#Info">Info
-response</a>.</p>
+<p>The info response is a formatted page containing information from the Data Attributes and Data Description responses. It is meant to be a human-readable means to show what is available in a dataset via a standard web browser. See <a href="../index.php/UserGuideServer#Info">Info response</a>.</p>
 </dd>
 <dt class="hdlist1">HTML</dt>
 <dd>
-<p>Very similar to the info response is the HTML response. This provides
-not only the information from the info response, but also includes a
-Javascript form to help you build a request for data from the same
-data file. The best description of the HTML form is in the
-<a href="../index.php/QuickStart">Quick Start Guide</a>.</p>
+<p>Very similar to the info response, the HTML response provides the information from the info response and also includes a Javascript form to help you build a request for data from the same data file. The best description of the HTML form is in the <a href="../index.php/QuickStart">Quick Start Guide</a>.</p>
 </dd>
 <dt class="hdlist1">SOAP</dt>
 <dd>
-<p>OPeNDAP servers can provide their data in terms of a SOAP request and
-response. For more information see
-<a href="../index.php/UserGuideDataModel#SOAP">SOAP Request</a>.</p>
+<p>OPeNDAP servers can provide their data in terms of a SOAP request and response. For more information see <a href="../index.php/UserGuideDataModel#SOAP">SOAP Request</a>.</p>
 </dd>
 <dt class="hdlist1">DDX</dt>
 <dd>
-<p>The DDX is an XML version of the Data Attribute and Data Description
-replies. See <a href="../index.php/UserGuideServer#DDX">DDX Request</a>.</p>
+<p>The DDX is an XML version of the Data Attribute and Data Description replies. See <a href="../index.php/UserGuideServer#DDX">DDX Request</a>.</p>
 </dd>
 </dl>
 </div>
@@ -728,9 +684,9 @@ replies. See <a href="../index.php/UserGuideServer#DDX">DDX Request</a>.</p>
 <h3 id="truethe-opendap-server"><a class="anchor" href="#truethe-opendap-server"></a>1.4. The OPeNDAP Server</h3>
 <div class="paragraph">
 <p>OPeNDAP provides a definition of the communication between client and
-server. Servers and clients who conform to that standard can communicate
-with each other. In addition to the OPeNDAP communication standard
-itself, the OPeNDAP group also provides an implementation of that
+server and enables servers and clients that conform to DAP standard to communicate
+with each other. In addition to the DAP communication standard
+itself, the OPeNDAP group also provides an implementation of a
 standard server protocol, called <em>Hyrax.</em></p>
 </div>
 <div class="paragraph">
@@ -739,23 +695,38 @@ as a front-end and a back-end, though a client will not be aware of the
 separation. They will often be run on the same machine, and even when
 they are not, a client will see only the front end.</p>
 </div>
-<div class="paragraph">
-<p>The front-end server is a Tomcat servlet, and is also called the
+<div class="ulist">
+<ul>
+<li>
+<p>The front-end server is a Tomcat servlet and is also called the
 <strong>OPeNDAP Lightweight Front-End Servlet</strong> (OLFS). Its job is to receive
-your request for data and manage all the different forms such a request
+your request for data and manage all the different forms a request
 might take. For example, you might be asking for the data, an ASCII
 version of the data, or a reply to a SOAP message looking for data. The
 front-end server can also reply to THREDDS catalog requests, for
 information about the data, and can directly provide some information
 about the data, too.</p>
-</div>
-<div class="paragraph">
-<p>The <strong>Back-End Server</strong> (BES) is more strictly about performance, and is
+</li>
+<li>
+<p>The <strong>Back-End Server</strong> (BES) is more strictly about performance  and is
 designed to respond quickly and efficiently to requests from the OLFS.
-It is a pure data server, and has only one format of request and
+It is a pure data server and has only one format of request and
 response, relying on the OLFS to convert messages to whatever format
-will accommodate the user. Most users won&#8217;t make requests directly to
-the BES.</p>
+the user needs.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Most users will not make requests directly to the BES.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <div class="title">Hyrax Architecture</div>
@@ -766,9 +737,9 @@ the BES.</p>
 </div>
 <div class="paragraph">
 <p>See <a href="../index.php/UserGuideDataModel">Data Model</a> for a description
-of the data returned by these requests and see
+of the data returned by requests and see
 <a href="../index.php/UserGuideServer">OPeNDAP Server</a> for a description of
-the URL syntax used to send these requests.</p>
+the URL syntax used to send requests.</p>
 </div>
 <div class="paragraph">
 <p>See <a href="../index.php/Hyrax">the OPeNDAP 4 Data Server documentation</a> for
@@ -780,32 +751,42 @@ a description of how to install and configure an OPeNDAP data server
 <h3 id="trueadministration-and-centralization-of-data"><a class="anchor" href="#trueadministration-and-centralization-of-data"></a>1.5. Administration and Centralization of Data</h3>
 <div class="paragraph">
 <p>Under OPeNDAP, there is no central archive of data. Data under OPeNDAP
-is organized in a manner similar to the World Wide Web itself. That is,
-all one need do to make one&#8217;s data available is to start up a properly
+is organized similar to the World Wide Web. To make your data accessable, all that you need to do is to start up a properly
 configured server on an Internet node that has access to the data to be
-served. Each data provider is free to join and to leave the system when
+served. Data providers are free to join and to leave the system when
 it is convenient, just as any proprietor of a web page is free to delete
-it or add to it as whimsy demands.</p>
+it or add to it as needed.</p>
 </div>
 <div class="paragraph">
-<p>Of course, as can also be seen on the World Wide Web, there are some
+<p>Similar to the World Wide Web, there are some
 disadvantages to the lack of central authority. If no one knows about a
 web site, no one will visit it. Similarly, listing a dataset in a
 central data catalog, such as the Global Change Master Directory
-(<a href="http://gcmd.gsfc.nasa.gov">http://gcmd.gsfc.nasa.gov/</a>),can make data
+(<a href="http://gcmd.gsfc.nasa.gov">http://gcmd.gsfc.nasa.gov/</a>), can make data
 available to other researchers in a way that simply configuring an
-OPeNDAP server does not. OPeNDAP provided a facility for registering a
-data set with the GCMD catalog, which makes the data set known to the
+OPeNDAP server would not. OPeNDAP provided a facility for registering a
+data set with the GCMD catalog.This makes the data set known to the
 OPeNDAP data location service. The THREDDS catalog service is another
 way to make information about your data widely available.</p>
 </div>
 <div class="paragraph">
-<p>The remainder of this book will be divided into three major sections:
-instructions on the building and operating of OPeNDAP clients; a
-tutorial and reference on running OPeNDAP servers and making data
-available to OPeNDAP clients; and technical documentation describing the
+<p>The remainder of this chapter will be divided into three sections:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Instructions on the building and operating of OPeNDAP clients</p>
+</li>
+<li>
+<p>A tutorial and reference on running OPeNDAP servers and making data
+available to OPeNDAP clients</p>
+</li>
+<li>
+<p>A technical documentation describing the
 implementation details (and the motivation behind many of the design
 decisions) of the OPeNDAP software.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -814,29 +795,28 @@ decisions) of the OPeNDAP software.</p>
 <h2 id="trueopendap-data-model"><a class="anchor" href="#trueopendap-data-model"></a>2. OPeNDAP Data Model</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This section provides a review of the data types OPeNDAP sends between client and server and issues involved in translating one to another. Researchers who will be using OPeNDAP to transfer data may find this useful.</p>
+<p>This section provides a review of the data types OPeNDAP sends between client and server and issues involved in translating one to another. This information may be useful to researchers who will be using OPeNDAP to transfer data.</p>
 </div>
 <div class="sect2">
 <h3 id="truedata-and-data-models"><a class="anchor" href="#truedata-and-data-models"></a>2.1. Data and Data Models</h3>
 <div class="paragraph">
-<p>Basic to the operation of OPeNDAP is its data model, and the set of
+<p>Basic to the operation of OPeNDAP is its data model and the set of
 messages that define the communication between client and server. This
-chapter presents the data model; the next chapter presents the messages.</p>
+section presents the data model (the next section presents the messages).</p>
 </div>
 <div class="sect3">
 <h4 id="truedata-models"><a class="anchor" href="#truedata-models"></a>2.1.1. Data Models</h4>
 <div class="paragraph">
 <p>Any data set is made up of data and a data model. The data model defines
-the type and arrangement of data values, and may be thought of as an
+the type and arrangement of data values and may be thought of as an
 abstract representation of the relationship between one data value and
-another. Though it may seem paradoxical, it is precisely this
-relationship that defines the meaning of some number. Without the
+another. Although it may seem paradoxical, it is precisely this
+relationship that defines the meaning of a number. Without the
 context provided by a data model, a number does not represent anything.
 For example, within some data set, it may be apparent that a number
 represents the value of temperature at some point in space and time.
 Without its neighboring temperature measurements, and without the
-latitude, longitude, height (or depth), and time, the same number means
-nothing.</p>
+latitude, longitude, height (or depth), and time, the same number is meaningless.</p>
 </div>
 <div class="paragraph">
 <p>As the model only defines an abstract set of relationships, two data
@@ -855,7 +835,7 @@ the stored data.</p>
 type or collection of data types used to represent that data. A
 temperature measurement might occur as half an entry in a sequence of
 temperature and depth pairs. However the data model also includes the
-scalar latitude, longitude and date that identify the time and place
+scalar latitude, longitude, and date that identify the time and place
 where the temperature measurements were taken. Thus the data set might
 be represented in a C-like syntax like this:</p>
 </div>
@@ -877,16 +857,14 @@ be represented in a C-like syntax like this:</p>
 </div>
 <div class="paragraph">
 <p>The above example describes a data set that contains all the data from
-a single XBT. The data set is called xbt-station, and contains
+a single XBT. The data set is called xbt-station and contains
 floating-point representations of the latitude and longitude of the
-station, and three integers that specify <em>when</em> the XBT measurements
+station and three integers that specify <em>when</em> the XBT measurements
 were made. The xbt-station contains a single sequence (called cast) of
-measurements, which are here represented as values for depth and
-temperature.</p>
+measurements, which are represented here as values for depth and temperature.</p>
 </div>
 <div class="paragraph">
-<p>A slightly different data model representing the same data might look
-like this:</p>
+<p>A slightly different data model representing the same data might look like this:</p>
 </div>
 <div class="listingblock">
 <div class="title">Example Data Description of XBT Station Using Structures</div>
@@ -911,20 +889,19 @@ like this:</p>
 <div class="paragraph">
 <p>In this example, several of the data have been grouped, implying a
 relation between them. The nature of the relationship is not defined,
-but it is clear that lat and lon are both components of location, and
-that each measurement in the cast sequence is made up of depth and
-temperature values.</p>
+but it is clear that lat and lon are both components of location and
+that each measurement in the cast sequence is made up of depth and temperature values.</p>
 </div>
 <div class="paragraph">
 <p>In these two examples, meaning was added to the data set only by
 providing a more refined context for the data values. No other data was
-added, but still the second example can be said to contain more
+added, but the second example can be said to contain more
 information than the first one.</p>
 </div>
 <div class="paragraph">
 <p>These two examples are refinements of the same basic arrangement of
 data. However, there is nothing that says that a completely different
-data model can&#8217;t be just as useful or just as accurate. For example, the
+data model can not be just as useful or just as accurate. For example, the
 depth and temperature data, instead of being represented by a sequence
 of pairs could be represented by a pair of sequences or arrays:</p>
 </div>
@@ -948,20 +925,18 @@ of pairs could be represented by a pair of sequences or arrays:</p>
 </div>
 <div class="paragraph">
 <p>The relationship between the depth and temperature variables is no
-longer quite as clear, but, depending on what sort of processing is
-intended, this may not be that important a loss.</p>
+longer quite as clear, but depending on what sort of processing is
+intended, the loss may be unimportant.</p>
 </div>
 <div class="paragraph">
-<p>The choice of a computational data model to contain some data set
-depends in many cases on the whims and preferences of the user, as well
+<p>The choice of a computational data model to contain a data set
+depends in many cases on the whims and preferences of the user as well
 as on the data analysis software to be used. Several different data
-models may be equally useful for a given task. Of course, some data
-models will contain more information about the data than others, but
-this information can also be carried in a researcher&#8217;s head.</p>
+models may be equally useful for a given task and not all data models will contain the same quantity of informaiton.</p>
 </div>
 <div class="paragraph">
 <p>Note that with a carefully chosen set of data type constructors, such as
-those we&#8217;ve used in the preceding examples, a user can implement an
+those we have  used in the preceding examples, a user can implement an
 infinite number of data models. The examples above use the OPeNDAP
 Dataset Descriptor Structure (DDS) format, which will become important
 in later discussions of the details of the OPeNDAP Data Access Protocol.
@@ -973,12 +948,10 @@ The precise details of the DDS syntax are described in
 <div class="paragraph">
 <p>A data access Application Program Interface (API) is a library of
 functions designed to be used by a computer program to read, write, and
-sample data. Any given data access API can be said to define implicitly
-some data model. (Or, at least, it will define restrictions on the data
-model you can use.) That is, the functions that make up the API accept
+sample data. Any given data access API can be said to implicitly define a data model. (Or, at least, it will define restrictions on the data model.) That is, the functions that compose the API accept
 and return data using a certain collection of computational data types:
 multi-dimensional arrays might be required for some data, scalars for
-others, sequences for others. This collection of data types, and their
+others, and sequences for others. This collection of data types and their
 use constitute the data model represented by that API. (Or data
 models—there is no reason an API cannot accommodate several different
 models.)</p>
@@ -994,28 +967,26 @@ sets that use an incompatible data model, such as JGOFS.</p>
 </div>
 <div class="paragraph">
 <p>In general, it is not possible to define an algorithm that will
-translate data from any model to any other, without losing information
+translate data from any model to any other model without losing information
 defined by the position of data values or the relations between them.
-Some of these incompatibilities are obvious; a data model designed for
+Some of these incompatibilities are obvious. For example, a data model designed for
 time series data may not be able to accommodate multi-dimensional
 arrays. Others are more subtle. For example, a Sequence looks very
-similar to a collection of Arrays in many respects. But this does not
+similar to a collection of Arrays in many respects, but this does not
 mean they can always be translated from one to the other. For example,
-some APIs only return one Sequence "instance" at a time. This means that
+some APIs return only one Sequence "instance" at a time. This means that
 even if a Sequence of sets of three numbers is more or less the same
 shape as three parallel Arrays, it will be very difficult to model the
 one kind of behavior on the other kind of API.</p>
 </div>
 <div class="paragraph">
-<p>However, even though the general problem isn&#8217;t solvable, there are many
-useful translations that can be done, and there are many others that are
+<p>However, even though the general problem is not solvable, there are many
+useful translations that can be done and there are many others that are
 still useful despite their inherent information loss.</p>
 </div>
 <div class="paragraph">
-<p>For example, consider a relational structure like the one below. This is
-similar to the examples in #Data_Models, but contains two nested
-Sequences. The outer Sequence represents all the XBT drops in a cruise,
-and the inner Sequence represents each XBT drop. The JGOFS API was
+<p>For example, consider a relational structure below, which contains two nested
+Sequences. The outer sequence represents all the XBT drops in a cruise; the inner sequence represents each XBT drop. The JGOFS API was
 designed to use this sort of data type.</p>
 </div>
 <div class="listingblock">
@@ -1054,7 +1025,7 @@ these data values as a table, they might look like this:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>This can be made into an array, although that introduces redundancy.</p>
+<p>This can be made into an array, although doing so introduces redundancy:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1071,10 +1042,10 @@ these data values as a table, they might look like this:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The data is now in a form that may be read by an API such as netCDF. But
+<p>The data is now in a form that may be read by an API such as netCDF. However,
 consider the analysis stage. Suppose a user wants to see graphs of each
 station&#8217;s data. It is not obvious simply from the arrangement of the
-array where a station stops and the next one begins. Analyzing data in
+array where one station stops and the next one begins. Analyzing data in
 this format is not a function likely to be accommodated by a program
 that uses the netCDF API, even though it is theoretically possible to
 implement.</p>
@@ -1105,7 +1076,7 @@ make up this representation may be thought of as the OPeNDAP data model.</p>
 </li>
 <li>
 <p>A format for the "ancillary data" needed to translate a data set
-into the intermediate representation, and to translate the intermediate
+into the intermediate representation and to translate the intermediate
 representation into the target data model. The ancillary data in turn
 consists of two pieces:</p>
 <div class="ulist">
@@ -1144,21 +1115,21 @@ the documentation of the respective software.</p>
 <h4 id="truedata-representation"><a class="anchor" href="#truedata-representation"></a>2.1.3. Data Representation</h4>
 <div class="paragraph">
 <p>There are many popular data storage formats, and many more than that in
-use. These formats are optimized (it they are optimized at all) for data
-storage, and are not generally suitable for data transmission. In order
+use. When these formats are optimized, they are optimized for data
+storage and are not generally suitable for data transmission. In order
 to transmit data over the Internet, OPeNDAP must translate the data
 model used by a particular storage format into the data model used for
 transmission.</p>
 </div>
 <div class="paragraph">
 <p>If the data model for transmission is defined to be general enough to
-encompass the abstractions of several data models for storage, than this
+encompass the abstractions of several data models for storage, then this
 intermediate representation—the transmission format—can be used to
 translate between one data model and another.</p>
 </div>
 <div class="paragraph">
 <p>The OPeNDAP data model consists of a fairly elementary set of base
-types, combined with an advanced set of constructs and operators that
+types combined with an advanced set of constructs and operators that
 allows it to define data types of arbitrary complexity. This way, the
 OPeNDAP data access protocol can be used to transmit data from virtually
 any data storage format.</p>
@@ -1181,14 +1152,11 @@ arrays, and grids.</p>
 </dd>
 <dt class="hdlist1">Operators</dt>
 <dd>
-<p>Access to data can be operationally defined with operators defined on
-the various data types.</p>
+<p>Access to data can be operationally defined with operators defined on the various data types.</p>
 </dd>
 <dt class="hdlist1">External Data Representation</dt>
 <dd>
-<p>In order to transmit the data across the Internet, there needs to be a machine-independent definition of what the various data types look
-like. For example, the client and server need to agree on the most
-significant digit of a particular byte in the message</p>
+<p>In order to transmit the data across the Internet, there needs to be a machine-independent definition of what the various data types look like. For example, the client and server need to agree on the most significant digit of a particular byte in the message</p>
 </dd>
 </dl>
 </div>
@@ -1203,7 +1171,7 @@ Each data set is defined by a set of one or more variables, and each
 variable is defined by a set of attributes. A variable&#8217;s
 <em>attributes</em>—such as units, name and type—must not be confused with
 the data <em>value</em> (or values) that may be represented by that variable. A
-variable called time may contain an integer number of minutes, but it
+variable called <em>time</em> may contain an integer number of minutes, but it
 does not contain a particular number of minutes until a context, such as
 a specific event recorded in a data set, is provided. Each variable may
 further be the object of an operator that defines a subset of the
@@ -1216,7 +1184,7 @@ procedural programming languages like C or Fortran (such as int or
 integer*4). While these certainly have an internal structure, it is not
 possible to access parts of that structure using the DAP. Base type
 variables in the DAP have two predefined attributes (or
-characteristics): name, and type. They are defined as follows:</p>
+characteristics): name and type. They are defined as follows:</p>
 </div>
 <div class="dlist">
 <dl>
@@ -1270,8 +1238,8 @@ in ANSI C when that type is implemented as 32 bits.</p>
 <p>The declaration in a
 <a href="../index.php/UserGuideOPeNDAPMessages#Data_Descriptor_Structure">DDS</a>
 of a variable of any of the base types is simply the type of the
-variable, followed by its name, and a semicolon. For example, to declare
-a month variable to be a 32-bit integer, one would type&#8230;&#8203;</p>
+variable followed by its name and a semicolon. For example, to declare
+a month variable to be a 32-bit integer, you would type&#8230;&#8203;</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1293,8 +1261,7 @@ same place and time.</p>
 </div>
 <div class="paragraph">
 <p>There are six classes of type constructor variables defined by the
-OPeNDAP DAP: arrays, structures, sequences, functions, and grids. The
-types are defined as:</p>
+OPeNDAP DAP: arrays, structures, sequences, functions, and grids. These are explained below.</p>
 </div>
 <div class="paragraph">
 <div class="title">Array</div>
@@ -1337,7 +1304,7 @@ declaration of a 5x6 array of floating point numbers would look like this:</p>
 </div>
 <div class="paragraph">
 <p>In addition to its magnitude, every dimension of an array may also have
-a name. The previous declaration could be written:</p>
+a name. The previous declaration could be written as&#8230;&#8203;</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1373,7 +1340,7 @@ defined in the above declaration.</p>
 </div>
 <div class="paragraph">
 <div class="title">Sequence</div>
-<p>A Sequence is an ordered set of variables each of which may have several
+<p>A Sequence is an ordered set of variables, each of which may have several
 values. The variables may be of different classes. Each element of a
 Sequence consists of a value for each member variable, so a Sequence is
 sort of like an ordered set of Structures.</p>
@@ -1444,7 +1411,7 @@ have several instances while a Structure&#8217;s variables have only one
 instance (or value).</p>
 </div>
 <div class="paragraph">
-<p>A Sequence declaration is similar to a Structure&#8217;s. For example, the
+<p>A Sequence declaration is similar to a Structure&#8217;s declaration. For example, the
 following would define a Sequence that would contain many members like
 the Structure defined above:</p>
 </div>
@@ -1467,8 +1434,8 @@ Sequence.</p>
 The distinction is that this variable&#8217;s value changes depending on the
 state of the Sequence. You can think of a Sequence as composed of the
 data you get from successive reads of data from a file. The data values
-available at any point are the last values read from the file. But you
-don&#8217;t have immediate access to any of the other values in that file.</p>
+available at any point are the last values read from the file, and you
+will not have immediate access to any of the other values in that file.</p>
 </div>
 <div class="paragraph">
 <div class="title">Grid</div>
@@ -1479,7 +1446,7 @@ is associated with the data values in the vectors associated with its
 dimensions.</p>
 </div>
 <div class="paragraph">
-<p>As an example, consider an array of temperature values that has six
+<p>For example, consider an array of temperature values that has six
 columns and five rows. Suppose that this array represents measurements
 of temperature at five different depths in six different locations. The
 problem is the indication of the precise location of each temperature
@@ -1490,8 +1457,7 @@ measurement, relative to one another.</p>
 evenly spaced, then the data set can be completely described using the
 array and two scalar values indicating the distance between adjacent
 vertices of the array. However, if the spacing of the measurements is
-<em>not</em> regular, as in ../index.php/File:Grid.gif[figure 6.3.2] then an
-array will be inadequate. To adequately describe the positions of each
+<em>not</em> regular, as in the figure below, then an array will be inadequate. To adequately describe the positions of each
 of the points in the grid, the precise location of each column and row
 must be described.</p>
 </div>
@@ -1517,13 +1483,13 @@ type that could accommodate a structure like this:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>In the above example, an vector called depth contains five values
+<p>In this example, a vector called <em>depth</em> contains five values, each
 corresponding to the depths of each row of the array, while another
-vector called distance contains the scalar distance between the location
-of the corresponding column, and some reference point.</p>
+vector called <em>distance</em> contains the scalar distance between the location
+of the corresponding column and a reference point.</p>
 </div>
 <div class="paragraph">
-<p>In a similar arrangement, a location array could instead contain six
+<p>In a similar arrangement, a location array could contain six
 (latitude, longitude) pairs indicating the absolute location of each
 column of the grid.</p>
 </div>
@@ -3435,7 +3401,7 @@ more information about it.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-12-06 20:10:48 CST
+Last updated 2016-12-07 15:29:41 CST
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css">
