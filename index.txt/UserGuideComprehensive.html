@@ -435,7 +435,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#truewhat-is-opendap">1.1. What is OPeNDAP</a></li>
 <li><a href="#truethe-opendap-client">1.2. The OPeNDAP Client</a></li>
 <li><a href="#trueopendap-services">1.3. OPeNDAP Services</a></li>
-<li><a href="#truethe-opendap-server">1.4. The OPeNDAP Server</a></li>
+<li><a href="#truethe-opendap-server-hyrax">1.4. The OPeNDAP Server (Hyrax)</a></li>
 <li><a href="#trueadministration-and-centralization-of-data">1.5. Administration and Centralization of Data</a></li>
 </ul>
 </li>
@@ -450,9 +450,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#trueconstraint-expressions">3.2. Constraint Expressions</a></li>
 </ul>
 </li>
-<li><a href="#trueopendap-server">4. OPeNDAP Server</a>
+<li><a href="#trueopendap-server-hyrax">4. OPeNDAP Server (Hyrax)</a>
 <ul class="sectlevel2">
-<li><a href="#truethe-opendap-server-2">4.1. The OPeNDAP Server</a></li>
+<li><a href="#truethe-opendap-server">4.1. The OPeNDAP Server</a></li>
 </ul>
 </li>
 <li><a href="#trueopendap-client">5. OPeNDAP Client</a>
@@ -470,8 +470,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>This guide introduces important concepts behind the OPeNDAP data
 model and transmission format as well as the clients and servers that
-use them. It is not a reference for any particular client or server,
-but you will find links to particluar clients and servers.</p>
+use them. While it is not a reference for any particular client or server, you will find links to particluar clients and servers in it.</p>
 </div>
 <div class="sect2">
 <h3 id="truewhat-is-opendap"><a class="anchor" href="#truewhat-is-opendap"></a>1.1. What is OPeNDAP</h3>
@@ -481,11 +480,19 @@ anywhere on the Internet, from a wide variety of new <em>and existing</em>
 programs.</p>
 </div>
 <div class="paragraph">
-<p>It is used widely in earth-science research settings but it is not limited
-to that. Using a flexible data model and a well-defined transmission
-format, an OPeNDAP client can request data from a wide variety of
-OPeNDAP servers, allowing researchers to enjoy flexibility similar to
-the flexibility of the web.</p>
+<p>It is used widely in earth-science research settings but it is not limited to that. Using a flexible data model and a well-defined transmission format, an OPeNDAP client can request data from a wide variety of OPeNDAP servers, allowing researchers to enjoy flexibility similar to the flexibility of the web.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+There are different implementations of OPeNDAP produced by various open source organizations. This guide covers the implementation of OPeNDAP produced by the OPeNDAP group.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>The OPeNDAP architecture uses a client/server model, with a <em>client</em>
@@ -681,7 +688,7 @@ required messages. Following are the requests messages a server is required to u
 </div>
 </div>
 <div class="sect2">
-<h3 id="truethe-opendap-server"><a class="anchor" href="#truethe-opendap-server"></a>1.4. The OPeNDAP Server</h3>
+<h3 id="truethe-opendap-server-hyrax"><a class="anchor" href="#truethe-opendap-server-hyrax"></a>1.4. The OPeNDAP Server (Hyrax)</h3>
 <div class="paragraph">
 <p>OPeNDAP provides a definition of the communication between client and
 server and enables servers and clients that conform to DAP standard to communicate
@@ -708,7 +715,7 @@ information about the data, and can directly provide some information
 about the data, too.</p>
 </li>
 <li>
-<p>The <strong>Back-End Server</strong> (BES) is more strictly about performance  and is
+<p>The <strong>Back-End Server</strong> (BES) is more strictly about performance and is
 designed to respond quickly and efficiently to requests from the OLFS.
 It is a pure data server and has only one format of request and
 response, relying on the OLFS to convert messages to whatever format
@@ -753,9 +760,7 @@ a description of how to install and configure an OPeNDAP data server
 <p>Under OPeNDAP, there is no central archive of data. Data under OPeNDAP
 is organized similar to the World Wide Web. To make your data accessable, all that you need to do is to start up a properly
 configured server on an Internet node that has access to the data to be
-served. Data providers are free to join and to leave the system when
-it is convenient, just as any proprietor of a web page is free to delete
-it or add to it as needed.</p>
+served. Data providers are free to join and to leave the system as doing so is convenient, just as any proprietor of a web page is free to delete it or add to it as needed.</p>
 </div>
 <div class="paragraph">
 <p>Similar to the World Wide Web, there are some
@@ -765,12 +770,12 @@ central data catalog, such as the Global Change Master Directory
 (<a href="http://gcmd.gsfc.nasa.gov">http://gcmd.gsfc.nasa.gov/</a>), can make data
 available to other researchers in a way that simply configuring an
 OPeNDAP server would not. OPeNDAP provided a facility for registering a
-data set with the GCMD catalog.This makes the data set known to the
+data set with the GCMD catalog. This makes the data set known to the
 OPeNDAP data location service. The THREDDS catalog service is another
 way to make information about your data widely available.</p>
 </div>
 <div class="paragraph">
-<p>The remainder of this chapter will be divided into three sections:</p>
+<p>The remainder of this section will be divided into three sections:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -887,7 +892,7 @@ measurements, which are represented here as values for depth and temperature.</p
 </div>
 </div>
 <div class="paragraph">
-<p>In this example, several of the data have been grouped, implying a
+<p>In this example, some of the data have been grouped, implying a
 relation between them. The nature of the relationship is not defined,
 but it is clear that lat and lon are both components of location and
 that each measurement in the cast sequence is made up of depth and temperature values.</p>
@@ -948,9 +953,7 @@ The precise details of the DDS syntax are described in
 <div class="paragraph">
 <p>A data access Application Program Interface (API) is a library of
 functions designed to be used by a computer program to read, write, and
-sample data. Any given data access API can be said to implicitly define a data model. (Or, at least, it will define restrictions on the data model.) That is, the functions that compose the API accept
-and return data using a certain collection of computational data types:
-multi-dimensional arrays might be required for some data, scalars for
+sample data. Any given data access API can be said to implicitly define a data model. (Or, at least, it will define restrictions on the data model.) That is, the functions that compose the API accept and return data using a certain collection of computational data types: multi-dimensional arrays might be required for some data, scalars for
 others, and sequences for others. This collection of data types and their
 use constitute the data model represented by that API. (Or data
 models—there is no reason an API cannot accommodate several different
@@ -1053,15 +1056,15 @@ implement.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="truedata-access-protocol"><a class="anchor" href="#truedata-access-protocol"></a>2.1.2. Data Access Protocol</h4>
+<h4 id="truedata-access-protocol-dap"><a class="anchor" href="#truedata-access-protocol-dap"></a>2.1.2. Data Access Protocol (DAP)</h4>
 <div class="paragraph">
-<p>The OPeNDAP Data Access Protocol (DAP) defines how an OPeNDAP client and
+<p>The OPeNDAP Data Access Protocol defines how an OPeNDAP client and
 an OPeNDAP server communicate with one another to pass data from the
 server to the client. The job of the functions in the OPeNDAP client
 library is to translate data from the DAP into the form expected by the
 data access API for which the OPeNDAP library is substituting. The job
-of an OPeNDAP server is to translate data stored on a disk in whatever
-format they happen to be stored in to the DAP for transmission to the
+of an OPeNDAP server is to translate data stored on a disk (in whatever
+format they happen to be stored in) to the DAP for transmission to the
 client.</p>
 </div>
 <div class="paragraph">
@@ -1135,7 +1138,7 @@ OPeNDAP data access protocol can be used to transmit data from virtually
 any data storage format.</p>
 </div>
 <div class="paragraph">
-<p>The elements of the OPeNDAP data access protocol are&#8230;&#8203;</p>
+<p>OPeNDAP comprises the following elements:</p>
 </div>
 <div class="dlist">
 <dl>
@@ -1181,7 +1184,7 @@ available data set.</p>
 <p>Variables in the DAP have two forms. They are either base types or type
 constructors. Base type variables are similar to predefined variables in
 procedural programming languages like C or Fortran (such as int or
-integer*4). While these certainly have an internal structure, it is not
+integer*4). While these have an internal structure, it is not
 possible to access parts of that structure using the DAP. Base type
 variables in the DAP have two predefined attributes (or
 characteristics): name and type. They are defined as follows:</p>
@@ -1195,8 +1198,7 @@ dataset associated with this variable.</p>
 </dd>
 <dt class="hdlist1">Type</dt>
 <dd>
-<p>The data type contained by the variable. This can be one of Byte,
-Int32, UInt32, Float64, String, and URL. Where&#8230;&#8203;</p>
+<p>The data type contained by the variable. Data types include the following:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1204,14 +1206,14 @@ Int32, UInt32, Float64, String, and URL. Where&#8230;&#8203;</p>
 ANSI C.</p>
 </li>
 <li>
-<p>Int16 is a 16 bit two&#8217;s complement integer—it is synonymous with long
+<p>Int16 is a 16 bit two&#8217;s complement integer. This is synonymous with long
 in ANSI C when that type is implemented as 16 bits.</p>
 </li>
 <li>
 <p>UInt16 is a 16 bit unsigned integer.</p>
 </li>
 <li>
-<p>Int32 is a 32 bit two&#8217;s complement integer—it is synonymous with long
+<p>Int32 is a 32 bit two&#8217;s complement integer. This is synonymous with long
 in ANSI C when that type is implemented as 32 bits.</p>
 </li>
 <li>
@@ -1260,8 +1262,8 @@ grouping of measurements of disparate quantities that happened at the
 same place and time.</p>
 </div>
 <div class="paragraph">
-<p>There are six classes of type constructor variables defined by the
-OPeNDAP DAP: arrays, structures, sequences, functions, and grids. These are explained below.</p>
+<p>There are six classes of type constructor variables defined by
+OPeNDAP: arrays, structures, sequences, functions, and grids. These are explained below.</p>
 </div>
 <div class="paragraph">
 <div class="title">Array</div>
@@ -1469,7 +1471,7 @@ must be described.</p>
 <p>The secondary vectors in the Grid data type provide a solution to this
 problem. Each member of these vectors associates a value for all the
 data points in the corresponding rank of the array. The value can
-represent location or time or some other quantity, and can even be a
+represent location or time or some other quantity and can even be a
 constructor data type. The following declaration would define a data
 type that could accommodate a structure like this:</p>
 </div>
@@ -1510,7 +1512,7 @@ column of the grid.</p>
 <h5 id="trueexternal-data-representation"><a class="anchor" href="#trueexternal-data-representation"></a>External Data Representation</h5>
 <div class="paragraph">
 <p>Now that you know what the data types are, the next step is to define
-their external representation. The DAP defines an external
+their external representation. The data access protocol defines an external
 representation for each of the base-type and constructor-type variables.
 This is used when an object of the given type is transferred from one
 computer to another. Defining a single external representation makes
@@ -1578,12 +1580,7 @@ variables.</p>
 </tbody>
 </table>
 <div class="paragraph">
-<p>A base type variable is always either transmitted or not. You won&#8217;t ever
-see a fraction of an String type transmitted. The constructor type
-variables, being made up of the bast type variables, are transmitted as
-sets of base type variables, and these may be sampled, with a
-<a href="../index.php/UserGuideOPeNDAPMessages#Constraint_Expression">constraint
-expression</a>.</p>
+<p>A base type variable is always either transmitted or not. You will not see a fraction of an String type transmitted. Constructor type variables, being composed of the bast type variables, are transmitted as sets of base type variables, and these may be sampled, with a <a href="../index.php/UserGuideOPeNDAPMessages#Constraint_Expression">constraint expression</a>.</p>
 </div>
 <div class="paragraph">
 <p>Constraint expressions do not affect <em>how</em> a base-type variable is
@@ -1601,20 +1598,20 @@ are:</p>
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Array </dt>
+<dt class="hdlist1">Array</dt>
 <dd>
 <p>An Array is sent using the xdr_array function. This means that an
 Array of 100 Int32s is sent as a single block of 100 xdr longs, not
 100 separate "xdr long"s.</p>
 </dd>
-<dt class="hdlist1">Structure </dt>
+<dt class="hdlist1">Structure</dt>
 <dd>
 <p>A Structure is sent by encoding each field in the order those fields
 are declared in the
 <a href="../index.php/UserGuideOPeNDAPMessages#Data_Descriptor_Structure">DDS</a>
 and transmitting the resulting block of bytes.</p>
 </dd>
-<dt class="hdlist1">Sequence </dt>
+<dt class="hdlist1">Sequence</dt>
 <dd>
 <p>A Sequence is transmitted by encoding each item in the sequence as if
 it were a Structure, and ending each such structure after the other,
@@ -1624,7 +1621,7 @@ constraint expression is supplied then the entire sequence is sent.
 However, if a constraint expression is given all the records in the
 sequence that satisfy the expression are sent.</p>
 </dd>
-<dt class="hdlist1">Grid </dt>
+<dt class="hdlist1">Grid</dt>
 <dd>
 <p>A Grid is encoded as if it were a Structure (one component after the
 other, in the order of their declaration).</p>
@@ -1632,7 +1629,7 @@ other, in the order of their declaration).</p>
 </dl>
 </div>
 <div class="paragraph">
-<p>The external data representation used by an OPeNDAP server and client
+<p>The external data representation used by OPeNDAP
 may be compressed, depending on the configuration of the respective
 machines. The compression is done using the gzip program. Only the data
 transmission itself will be affected by this; the transmission of the
@@ -1647,20 +1644,16 @@ ancillary data is not compressed.</p>
 <h2 id="trueopendap-messages"><a class="anchor" href="#trueopendap-messages"></a>3. OPeNDAP Messages</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This section provides A closer look at the messages passed to and from an OPeNDAP server and
-  the various services that may be provided. Also reviews constraint
-  expressions, which can be used to select data from specific datasets.
-  Researchers who will use OPeNDAP to get data for analysis will find
-  this useful.</p>
+<p>This section provides A closer look at the messages passed to and from an OPeNDAP server and the various services that may be provided. Also reviews constraint expressions, which can be used to select data from specific datasets. Researchers who will use OPeNDAP to get data for analysis will find this useful.</p>
 </div>
 <div class="sect2">
 <h3 id="truethe-opendap-messages"><a class="anchor" href="#truethe-opendap-messages"></a>3.1. The OPeNDAP Messages</h3>
 <div class="paragraph">
 <p>An OPeNDAP server is in the business of making replies to queries for
 data and other services. The queries come in the form of specially
-formed URLs and the replies consist of MIME documents whose contents are
+formed URLs, and the replies consist of MIME documents whose contents are
 described in the sections below. (Technically speaking, the response
-document headers aren&#8217;t exactly right, but they function in the same
+document headers are not exactly right, but they function in the same
 way.)</p>
 </div>
 <div class="paragraph">
@@ -1680,23 +1673,23 @@ with the ancillary data messages.</p>
 <div class="sect3">
 <h4 id="trueancillary-data"><a class="anchor" href="#trueancillary-data"></a>3.1.1. Ancillary Data</h4>
 <div class="paragraph">
-<p>In order to use some data set, a user must have some information at his
+<p>In order to use a data set, a user must have some information at his
 or her disposal that is not strictly included in the data itself. This
 information, called ancillary data, describes the shape and size of the
 data types that make up the data set, and provides information about
-many of the data set&#8217;s attributes, as well. OPeNDAP uses two different
-structures, to supply this ancillary information about an OPeNDAP data
+many of the data set&#8217;s attributes. OPeNDAP uses two different
+structures to supply this ancillary information about an OPeNDAP data
 set. The Dataset Descriptor Structure (DDS) describes the data set&#8217;s
 structure and the relationships between its variables, and the Dataset
 Attribute Structure (DAS) provides information about the variables
 themselves. Both structures are described in the following sections.</p>
 </div>
 <div class="sect4">
-<h5 id="truedataset-descriptor-structure"><a class="anchor" href="#truedataset-descriptor-structure"></a>Dataset Descriptor Structure</h5>
+<h5 id="truedataset-descriptor-structure-dds"><a class="anchor" href="#truedataset-descriptor-structure-dds"></a>Dataset Descriptor Structure (DDS)</h5>
 <div class="paragraph">
 <p>In order to translate data from one data model into another, OPeNDAP
-must have some knowledge about the types of the variables, and their
-semantics, that comprise a given data set. It must also know something
+must have some knowledge about the types of the variables and their
+semantics that comprise a given data set. It must also know something
 about the relations of those variables—even those relations which are
 only implicit in the dataset&#8217;s own API. This knowledge about the
 dataset&#8217;s structure is contained in a text description of the dataset
@@ -1838,7 +1831,7 @@ explanation of the information implied by the data model.)</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="truedataset-attribute-structure"><a class="anchor" href="#truedataset-attribute-structure"></a>Dataset Attribute Structure</h5>
+<h5 id="truedataset-attribute-structure-das"><a class="anchor" href="#truedataset-attribute-structure-das"></a>Dataset Attribute Structure (DAS)</h5>
 <div class="paragraph">
 <p>The "Dataset Attribute Structure" (DAS) is used to store attributes for
 variables in the dataset. An attribute is any piece of information about
@@ -1855,11 +1848,11 @@ In effect, attributes are used to store information that is used "by
 convention" rather than "by design". OPeNDAP can effectively support
 these conventions by passing the attributes from data set to user
 program via the DAS. (Of course, OPeNDAP cannot enforce conventions in
-datasets where they were not followed in the first place.0</p>
+datasets where they were not followed in the first place.)</p>
 </div>
 <div class="paragraph">
-<p>The syntax for attributes in a DAS is given in the table below. Every
-attribute of a variable is a triple: attribute name, type and value. The
+<p>The syntax for attributes in a DAS is shown in the table below. Every
+attribute of a variable is a triple: attribute name, type, and value. The
 name of an attribute is an identifier, consisting of alphanumeric
 characters, plus "_" and "/". The type of an attribute may be one of:
 "Byte", "Int32", "UInt32", "Float64", "String" or "Url". An attribute
@@ -2167,8 +2160,7 @@ like this:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>This DDS will be included in the DataDDS return, ahead of the encoded array of
-1857 64-bit time values.</p>
+<p>This DDS will be included in the DataDDS return, ahead of the encoded array of 1857 64-bit time values.</p>
 </div>
 <div class="paragraph">
 <p>For more information about sampling OPeNDAP data sets, see the section
@@ -2182,7 +2174,7 @@ below about constraint expressions.</p>
 </td>
 <td class="content">
 A request for data from an OPeNDAP client will generally make three different service requests, for data attributes
-(DAS), data descriptors (DDS), and for data. The prepackaged OPeNDAP
+(DAS), data descriptors (DDS), and data. The prepackaged OPeNDAP
 clients do this for you, so you may not be aware that three requests are made for each URL.
 </td>
 </tr>
@@ -2200,13 +2192,24 @@ any or all of the services described in the sections that follow.</p>
 <div class="paragraph">
 <p>This service returns an ASCII representation of the requested data. This
 can make the data available to a wide variety of standard web browsers.
-This service is activated when the server receives a URL ending with
-.asc or .ascii.</p>
+This service is activated when the server receives a URL ending with .asc or .ascii.</p>
 </div>
 <div class="paragraph">
 <p>Note that unlike the data response, the ASCII response does not contain
 a DDS for the returned data. Instead it just returns the simple text
 message.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+While ASCII is fine for moving small amounts of data, it generally is best to move data in binary whenever possible becuase servers can generate binary data more quickly than ASCII data, and binary data is more compact. You can then process locally if you need ASCII. To process binary data, you could use getdap if you retrieve DAP2 binary response (.dods); getdap4 if you retrieve a DAP4 binary response; or ncdump for a NetCDF3 or NetCDF4 binary response.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>The <a href="../index.php/QuickStart">Quick Start Guide</a> contains examples of the ASCII response.</p>
@@ -2218,21 +2221,20 @@ message.</p>
 <p>The Info service formats information from a data set&#8217;s DAS and DDS into
 a single HTML document suitable for viewing in a web browser. The
 returned document may include information about both the data server
-itself (such as server functions implemented), and the dataset
+itself (such as server functions implemented) and the dataset
 referenced in the URL. The server administrator determines what
 information is returned in response to such a request. The services is
 activated by a URL ending in .info.</p>
 </div>
 <div class="paragraph">
-<p>Click <a href="http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.info" class="bare">http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.info</a> to see
-an Info response.</p>
+<p>Click <a href="http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.info" class="bare">http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.info</a> to see an Info response.</p>
 </div>
 </div>
 <div class="sect4">
 <h5 id="truewww-interface-service"><a class="anchor" href="#truewww-interface-service"></a>WWW Interface Service</h5>
 <div class="paragraph">
 <p>The WWW service is another way to browse a server&#8217;s data interactively.
-You can use this either to look at an individual data file, or a
+You can use a browser to look at an individual data file, or a
 directory of files (or "files" since a server may contain logical
 entities that look like files).</p>
 </div>
@@ -2277,7 +2279,7 @@ relevant version numbers.</p>
 <h5 id="truesoap"><a class="anchor" href="#truesoap"></a>SOAP</h5>
 <div class="paragraph">
 <p>The OPeNDAP server provided by the OPeNDAP group contains an
-experimental SOAP service, allowing users to make requests and get
+experimental SOAP service, enabling users to make requests and get
 responses by exchanging SOAP XML documents. This is an experimental
 service, and if you&#8217;re writing an application depending on it, it&#8217;s best
 to contact the OPeNDAP developer team.</p>
@@ -2291,8 +2293,7 @@ by a URL ending with .ddx. You can find the schema for the DDX at
 <a href="http://xml.opendap.org/dap/dap2.xsd" class="bare">http://xml.opendap.org/dap/dap2.xsd</a>.</p>
 </div>
 <div class="paragraph">
-<p>The DDX is designed to contain data, too, but this is not yet
-implemented. You will see an empty dataBLOB element at the end of each
+<p>The DDX is designed to contain data, too, but this is not yet implemented. You will see an empty dataBLOB element at the end of each
 DDX, which will eventually hold returned data.</p>
 </div>
 <div class="paragraph">
@@ -2307,7 +2308,7 @@ what will become version 4 of the DAP.</p>
 <div class="sect4">
 <h5 id="truethredds"><a class="anchor" href="#truethredds"></a>THREDDS</h5>
 <div class="paragraph">
-<p>Some OPeNDAP servers (including <a href="../index.php/Hyrax">Hyrax</a>, the
+<p>Some OPeNDAP servers (including <a href="./Hyrax.txt">Hyrax</a>, the
 server supplied by the OPeNDAP group) can make sensible replies to
 requests for THREDDS catalog information. This can serve to "advertise"
 a server&#8217;s data by having it appear in catalogs accumulated by THREDDS
@@ -2321,9 +2322,7 @@ page.</p>
 <div class="sect2">
 <h3 id="trueconstraint-expressions"><a class="anchor" href="#trueconstraint-expressions"></a>3.2. Constraint Expressions</h3>
 <div class="paragraph">
-<p>The OPeNDAP software is not only a data transport mechanism. Using
-OPeNDAP, you can subsample the data you are looking at. That is, you can
-request an entire data file, or just a small piece of it.</p>
+<p>Using OPeNDAP, you can subsample the data you are looking at. That is, you can request an entire data file or just a small piece of it.</p>
 </div>
 <div class="sect3">
 <h4 id="trueselecting-data-using-constraint-expressions"><a class="anchor" href="#trueselecting-data-using-constraint-expressions"></a>3.2.1. Selecting Data: Using Constraint Expressions</h4>
@@ -2335,47 +2334,45 @@ request an entire data file, or just a small piece of it.</p>
 <pre>http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz</pre>
 </div>
 </div>
-<div class="olist lowerroman">
-<ol class="lowerroman" type="i">
-<li>
-<p>refers to the entire dataset contained in the mnmean.nc file. A user
-may, however, choose to sample the dataset simply by modifying the
-submitted URL. The constraint expression attached to the URL directs
+<div class="paragraph">
+<p>&#8230;&#8203;refers to the entire dataset contained in the mnmean.nc file. A user
+may also choose to sample the dataset simply by modifying the submitted URL. The constraint expression attached to the URL directs
 that the data set specified by the first part of the URL be sampled to
 select only the data of interest from a dataset.</p>
-</li>
-</ol>
 </div>
 <div class="paragraph">
 <p>Because the expression modifies the URL used to access data, this works
 even for programs that do not have a built-in way to accomplish such
 selections. This can vastly reduce the amount of data a program needs to
-process, and reduce the network load of transmitting that data to the
-client.</p>
+process and thus reduce the network load of transmitting the given data to the client.</p>
 </div>
 <div class="sect4">
 <h5 id="trueconstraint-expression-syntax"><a class="anchor" href="#trueconstraint-expression-syntax"></a>Constraint Expression Syntax</h5>
 <div class="paragraph">
-<p>A constraint expression is appended to the target URL following a
-question mark, as in the following examples:</p>
+<p>A constraint expression is appended to the target URL following a question mark, as in the following examples:</p>
 </div>
 <div class="paragraph">
-<p><a href="http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.asc?sst%5B3%5D%5B4%5D%5B5%5D">&#8230;&#8203;/nc/sst.mnmean.nc.gz?sst[3</a>[4][5]]</p>
+<p>&#8230;&#8203;/nc/sst.mnmean.nc.gz?sst[3][4][5] <a href="http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.asc?sst%5B3%5D%5B4%5D%5B5%5D">Click here for sample output.</a></p>
 </div>
 <div class="paragraph">
-<p><a href="http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.asc?sst%5B0:1%5D%5B13:16%5D%5B103:105%5D">&#8230;&#8203;/nc/sst.mnmean.nc.gz?sst[0:1</a>[13:16][103:105]]</p>
+<p>&#8230;&#8203;/nc/sst.mnmean.nc.gz?sst[0:1][13:16][103:105]
+<a href="http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.asc?sst%5B0:1%5D%5B13:16%5D%5B103:105%5D">Click here for sample output.</a></p>
 </div>
 <div class="paragraph">
-<p><a href="http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.asc?geogrid(sst,62,206,56,210,%2219722%3Ctime%3C19755%22)">&#8230;&#8203;/nc/sst.mnmean.nc.gz?geogrid(sst,62,206,56,210,"19722&lt;time&lt;19755")</a></p>
+<p>&#8230;&#8203;/n&#8230;&#8203;/ff/gsodock.dat?Time,Sea_Tempc/sst.mnmean.nc.gz?geogrid(sst,62,206,56,210,"19722&lt;time&lt;19755")
+<a href="http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.asc?geogrid(sst,62,206,56,210,%2219722%3Ctime%3C19755%22)">Click here for sample output.</a></p>
 </div>
 <div class="paragraph">
-<p><a href="http://test.opendap.org/dap/data/ff/gsodock.dat.asc?Time,Sea_Temp">&#8230;&#8203;/ff/gsodock.dat?Time,Sea_Temp</a></p>
+<p>&#8230;&#8203;/ff/gsodock.dat?Time,Sea_Temp
+<a href="http://test.opendap.org/dap/data/ff/gsodock.dat.asc?Time,Sea_Temp">Click here for sample output.</a></p>
 </div>
 <div class="paragraph">
-<p><a href="http://test.opendap.org/dap/data/ff/gsodock.dat.asc?Time,Sea_Temp&amp;Time%3C35234.1">&#8230;&#8203;/ff/gsodock.dat?Time,Sea_Temp&amp;Time%3C35234.1</a></p>
+<p>&#8230;&#8203;/ff/gsodock.dat?Time,Sea_Temp&amp;Time%3C35234.1
+<a href="http://test.opendap.org/dap/data/ff/gsodock.dat.asc?Time,Sea_Temp&amp;Time%3C35234.1">Click here for sample output.</a></p>
 </div>
 <div class="paragraph">
-<p><a href="http://test.opendap.org/dap/data/ff/gsodock.dat.asc?Time,Sea_Temp&amp;Time%3C35234.1&amp;Sea_Temp%3C18">&#8230;&#8203;/ff/gsodock.dat?Time,Sea_Temp&amp;Time%3C35234.1&amp;Sea_Temp%3C18</a></p>
+<p>&#8230;&#8203;/ff/gsodock.dat?Time,Sea_Temp&amp;Time%3C35234.1&amp;Sea_Temp%3C18
+<a href="http://test.opendap.org/dap/data/ff/gsodock.dat.asc?Time,Sea_Temp&amp;Time%3C35234.1&amp;Sea_Temp%3C18">Click here for sample input.</a></p>
 </div>
 <div class="admonitionblock caution">
 <table>
@@ -2387,8 +2384,7 @@ question mark, as in the following examples:</p>
 An OPeNDAP data set can contain an extraordinary amount of
 data. You almost certainly do <em>not</em> want to make an unconstrained
 request to a data set without knowing something about it. Familiarize
-yourself with the DDS and DAS before asking for data; it can prevent
-overload.
+yourself with the DDS and DAS before asking for data.
 </td>
 </tr>
 </table>
@@ -2396,7 +2392,7 @@ overload.
 <div class="paragraph">
 <p>A constraint expression consists of two parts: a projection and a
 selection, separated by an ampersand (&amp;). Either part may contain
-several sub-expressions. Either part may be present, or both.</p>
+several sub-expressions. Either part or both parts may be used.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2404,13 +2400,10 @@ several sub-expressions. Either part may be present, or both.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>A projection is simply a comma-separated list of the variables that are
-to be returned to the client. If an array is to be subsampled, the
-projection specifies the manner in which the sampling is to be done. If
-the selection is omitted, all the variables in the projection list are
-returned. If the projection is omitted, the entire dataset is returned,
-subject to the evaluation of the selection expression. The projection
-can also include functional expressions of the form:</p>
+<p>A <strong>projection</strong> is simply a comma-separated list of the variables that are to be returned to the client. If an array is to be subsampled, the
+projection specifies the manner in which the sampling is to be done. If the selection is omitted, all the variables in the projection list are
+returned. If the projection is omitted, the entire dataset is returned, subject to the evaluation of the selection expression. The projection
+can also include functional expressions of the form&#8230;&#8203;</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2418,13 +2411,11 @@ can also include functional expressions of the form:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>where the arguments are variables from the dataset, scalar values, or
-other functions. (See Constraint Expression Functions below.)</p>
+<p>&#8230;&#8203;where the arguments are variables from the dataset, scalar values, or other functions. (See Constraint Expression Functions below.)</p>
 </div>
 <div class="paragraph">
-<p>A selection expression leads with an ampersand and is a boolean
-expression of the form "variable operator variable", "variable operator
-value" or "function(arg_1,arg_2,&#8230;&#8203;,arg_n)", where</p>
+<p>A <strong>selection</strong> expression leads with an ampersand and is a boolean expression of the form "variable operator variable", "variable operator
+value" or "function(arg_1,arg_2,&#8230;&#8203;,arg_n)", where&#8230;&#8203;</p>
 </div>
 <div class="dlist">
 <dl>
@@ -2438,7 +2429,7 @@ value" or "function(arg_1,arg_2,&#8230;&#8203;,arg_n)", where</p>
 </dd>
 <dt class="hdlist1">value</dt>
 <dd>
-<p>Can be any scalar, string, function, or list of numbers (Lists are denoted by comma-separated items enclosed in curly braces ,for example, \{3,11,4.5}.); and</p>
+<p>Can be any scalar, string, function, or list of numbers (Lists are denoted by comma-separated items enclosed in curly braces ,for example, \{3,11,4.5}.).</p>
 </dd>
 <dt class="hdlist1">function</dt>
 <dd>
@@ -2449,9 +2440,7 @@ value" or "function(arg_1,arg_2,&#8230;&#8203;,arg_n)", where</p>
 <div class="paragraph">
 <p>Each selection clause begins with an ampersand (&amp;). You can think of
 this as representing the "AND" boolean operation, but remember that it
-is actually a prefix operator, not an infix operator. That is, it must
-appear at the beginning of each selection clause, no matter what. This
-means that a constraint expression that contains no projection clause
+is actually a prefix operator, not an infix operator. That is, it must always appear at the beginning of each selection clause. This means that a constraint expression that contains no projection clause
 must still have an &amp; in front of the first selection clause.</p>
 </div>
 <div class="paragraph">
@@ -2469,7 +2458,7 @@ criteria, then only that part will be returned.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Due to the differences in data model paradigms, selection is not implemented for the OPeNDAP array data types, such as
+Due to differences between data model paradigms, selection is not implemented for the OPeNDAP array data types, such as
 Grid or Array. However, many OPeNDAP servers implement selection
 functions you can use for the same effect. (See Constraint Expression Functions below for more information about functions.)
 </td>
@@ -2480,8 +2469,7 @@ functions you can use for the same effect. (See Constraint Expression Functions 
 <div class="title">Simple Constraint Expression Examples</div>
 <p>Consider the DDS below. This is the description of a dataset containing
 station data including temperature, oxygen, and salinity. Each station
-also contains 20 oxygen data points, taken at 20 fixed depths, used for
-calibration of the data.</p>
+also contains 20 oxygen data points, taken at 20 fixed depths, used for calibration of the data.</p>
 </div>
 <div class="listingblock">
 <div class="title">Sample Data Descriptor</div>
@@ -2506,11 +2494,10 @@ calibration of the data.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The following URL will return only the pressure and temperature pairs of
-this dataset. (Note that the constraint expression parser removes all
+<p>The following URL will return only the pressure and temperature pairs of this dataset. (Note that the constraint expression parser removes all
 spaces, tabs, and newline characters before the expression is parsed.)
 There is only a projection clause, without a selection, in this
-constraint expression.</p>
+constraint expression:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2520,17 +2507,15 @@ constraint expression.</p>
 <div class="paragraph">
 <p>We have assumed that the dataset was stored in the JGOFS format on the
 remote host oceans.edu, in a file called explO2/cruise. For the sake of
-brevity, from here on we will omit the first part of the URL, to
-concentrate on the constraint expression alone.</p>
+brevity, from here on we will omit the first part of the URL so as to
+concentrate on only the constraint expression.</p>
 </div>
 <div class="paragraph">
-<p>If we only want to see pressure and temperature pairs below 500 meters
-deep, we can modify the constraint expression by adding a selection
-clause.</p>
+<p>If we only want to see pressure and temperature pairs below 500 meters deep, we can modify the constraint expression by adding a selection clause:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>?station.cast.press,station.cast.temp&amp;station.cast.press&gt;500.0</pre>
+<pre> ?station.cast.press,station.cast.temp&amp;station.cast.press&gt;500.0</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2539,7 +2524,7 @@ greater than 22 degrees, use the following:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>?station.cast&amp;station.cast.temp&gt;22.0</pre>
+<pre> ?station.cast&amp;station.cast.temp&gt;22.0</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2549,61 +2534,51 @@ degrees West and north of the equator:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>?station&amp;station.lat&gt;0.0&amp;station.lon&lt;-60.0</pre>
+<pre> ?station&amp;station.lat&gt;0.0&amp;station.lon&lt;-60.0</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>As was mentioned, the logical OR can be implemented using a list of
-scalars. The following expression will select only stations taken north
-of the equator in April, May, June, or July.</p>
+<p>As mentioned earler, the logical OR can be implemented using a list of scalars. The following expression will select only stations taken north of the equator in April, May, June, or July:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>?station&amp;station.lat&gt;0.0&amp;station.month={4,5,6,7}</pre>
+<pre> ?station&amp;station.lat&gt;0.0&amp;station.month={4,5,6,7}</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>If our dataset contained a field called monsoon-month, indicating the
-month in which monsoons happened that year, we could modify the last
-example search to include those months as follows:</p>
+<p>If our dataset contained a field called monsoon-month, indicating the month in which monsoons happened that year, we could modify the last example search to include those months as follows:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>?station&amp;station.lat&gt;O.O&amp;station.month={4,5,6,7,station.monsoon-month}</pre>
+<pre> ?station&amp;station.lat&gt;O.O&amp;station.month={4,5,6,7,station.monsoon-month}</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>In other words, a list can contain both values and other variables. If
-monsoon-month was itself a list of months, a search could be written as:</p>
+<p>In other words, a list can contain both values and other variables. If monsoon-month was itself a list of months, a search could be written as:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>?station&amp;station.lat&gt;0.0&amp;station.month=station.monsoon-month</pre>
+<pre> ?station&amp;station.lat&gt;0.0&amp;station.month=station.monsoon-month</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>For arrays and grids, there is a special way to select data within the
-projection clause. Suppose we want to see only the first five oxygen
-calibration points for each station. The constraint expression for this
-would be:</p>
+<p>For arrays and grids, there is a special way to select data within the projection clause. Suppose we want to see only the first five oxygen calibration points for each station. The constraint expression for this would be:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>?station.02cal[0:4]</pre>
+<pre> ?station.02cal[0:4]</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>By specifying a stride value, we can also select a hyperslab of the
-oxygen calibration array:</p>
+<p>By specifying a stride value, we can also select a hyperslab of the oxygen calibration array:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>?station.02cal[0:5:19]</pre>
+<pre> ?station.02cal[0:5:19]</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This expression will return every fifth member of the 02cal array. In
-other words, the result will be a four-element array containing only the
+<p>This expression will return every fifth member of the 02cal array. In other words, the result will be a four-element array containing only the
 first, sixth, eleventh, and sixteenth members of the 02cal array. Each
 dimension of a multi-dimensional arrays may be subsampled in an
 analogous way. The return value is an array of the same number of
@@ -2617,10 +2592,19 @@ number of elements selected from it.</p>
 <p>The constraint expression syntax defines a number of operators for each
 data type. These operators are listed below.</p>
 </div>
-<div class="paragraph">
-<p>All the operators defined for the scalar base types are boolean
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+All the operators defined for the scalar base types are boolean
 operators whose result depends on the specified comparison between its
-arguments.</p>
+arguments.
+</td>
+</tr>
+</table>
 </div>
 <table class="tableblock frame-all grid-all spread">
 <caption class="title">Table 3. Constraint Expression Operators</caption>
@@ -2661,11 +2645,11 @@ arguments.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Structure</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">. /</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Sequence</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">. /</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Grid</p></td>
@@ -2675,14 +2659,13 @@ arguments.</p>
 </table>
 <div class="paragraph">
 <p>Individual fields of type constructors may be accessed using the dot
-(.) operator or the virtual file system syntax. If a structure s has two
+(.) operator or the virtual file system syntax. If a structure <em>s</em> has two
 fields time and temperature, then those fields may be accessed using
 s.time and s.temperature or as s/time and s/temperature.</p>
 </div>
 <div class="paragraph">
 <p>The ~= operator returns true when the character string on the left of
-the operator matches the regular expression on the right. See Pattern Matching with
-Constraint Expressions for a discussion of regular expressions.</p>
+the operator matches the regular expression on the right. See <em>Pattern Matching with Constraint Expressions</em> for a discussion of regular expressions.</p>
 </div>
 <div class="paragraph">
 <p>The array operator [] is used to subsample the given array. You can find
@@ -2695,10 +2678,10 @@ several examples of its use in the
 <div class="paragraph">
 <p>An OPeNDAP data server may define its own set of functions that may be
 used in a constraint expression. For example, the oceans.edu data server
-we&#8217;ve been imagining might define a sigma1() function to return the
-density of the water at the given temperature, salinity and pressure. A
+we have been imagining might define a sigma1() function to return the
+density of the water at the given temperature, salinity, and pressure. A
 query like the following would return all the stations containing water
-samples whose density exceeded 1.0275g/cm3.</p>
+samples whose density exceeded 1.0275g/cm3:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2708,8 +2691,8 @@ samples whose density exceeded 1.0275g/cm3.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Functions like this one are not a standard part of the OPeNDAP
-architecture, and may vary from one server to another. A user may query
+<p>Functions like this are not a standard part of the OPeNDAP
+architecture and may vary from one server to another. A user may query
 a server for a list of such functions by sending a URL with a constraint
 expression that calls the "version()" function.</p>
 </div>
@@ -2724,7 +2707,7 @@ functions with no arguments to see a description of the arguments.</p>
 <p><a href="http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.asc?version(" class="bare">http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.asc?version(</a>)</p>
 </div>
 <div class="paragraph">
-<p>And&#8230;&#8203;</p>
+<p>and&#8230;&#8203;</p>
 </div>
 <div class="paragraph">
 <p><a href="http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.asc?geogrid(" class="bare">http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.asc?geogrid(</a>)</p>
@@ -2736,9 +2719,7 @@ functions with no arguments to see a description of the arguments.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-When using functions, be careful to remember that a function used
-in a projection can return any value, but when used in a selection
-clause, it must either return a boolean value, or be part of a test that returns a boolean value.
+When using functions, remember that a function used in a projection can return any value, but when used in a selection clause, it must either return a boolean value, or be part of a test that returns a boolean value.
 </td>
 </tr>
 </table>
@@ -2748,17 +2729,29 @@ clause, it must either return a boolean value, or be part of a test that returns
 <h5 id="truepattern-matching-with-constraint-expressions"><a class="anchor" href="#truepattern-matching-with-constraint-expressions"></a>Pattern Matching with Constraint Expressions</h5>
 <div class="paragraph">
 <p>There are three operators defined to compare one String data type to
-another. The = operator returns TRUE if its two input character strings
-are identical, and the != operator returns TRUE if the Strings do not
-match. A third operator, ~= is provided that returns TRUE if the String
-to the left of the operator matches the regular expression in the String
-on the right.</p>
+another:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The = operator returns TRUE if its two input character strings
+are identical.</p>
+</li>
+<li>
+<p>The != operator returns TRUE if the Strings do not
+match.</p>
+</li>
+<li>
+<p>The ~= operator is provided that returns TRUE if the String
+to the left of the operator matches the regular expression in the String on the right.</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p>A regular expression is simply a character string containing wildcard
 characters that allow it to match patterns within a longer string. For
 example, the following constraint expression might return all the
-stations on the sample cruise at which a shark was sighted:</p>
+stations on the sample cruise on which a shark was sighted:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2789,11 +2782,11 @@ and o? matches only zero or one o.</p>
 <dd>
 <p>Define a "character set," which begins with [ and is terminated by ].
 In the simplest case, the characters between the two brackets are what
-this set can match. The expression [Ss] matches either an upper or
+this set can match. For example, [Ss] matches either an upper or
 lower case s. Brackets can also contain character ranges, so [0-9]
 matches all the numerals. If the first character within the brackets
 is a caret ( ), the expression will only match characters that do not
-appear in the brackets. For example, [ 0-9]* only matches character
+appear in the brackets. For example, [ 0-9]* matches only character
 strings that contain no numerals.</p>
 </dd>
 <dt class="hdlist1">^$</dt>
@@ -2810,71 +2803,60 @@ OR can be contained with the grouping operators, \( and \).</p>
 </dd>
 <dt class="hdlist1">\( \)</dt>
 <dd>
-<p>These are used to group a series of characters into an expression, or for the OR function. So, for example, \(abc\)* matches zero or more repetitions of the string abc2.</p>
-<div class="literalblock">
-<div class="content">
-<pre> There are several more special characters and several other features of
+<p>These are used to group a series of characters into an expression, or for the OR function. For example, \(abc\)* matches zero or more repetitions of the string abc2.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>There are several more special characters and several other features of
 the characters described here, but they are beyond the scope of this
 guide. The OPeNDAP regular expression syntax is the same as that used in
 the Emacs editor. See the documentation for Emacs for a complete
 description of all the pattern- matching capabilities of regular
-expressions.</pre>
-</div>
-</div>
-</dd>
-</dl>
+expressions.</p>
 </div>
 </div>
 <div class="sect4">
 <h5 id="trueoptimizing-the-query"><a class="anchor" href="#trueoptimizing-the-query"></a>Optimizing the Query</h5>
 <div class="paragraph">
-<p>Using the tools provided by OPeNDAP, a user can build quite elaborate
-and sophisticated constraint expressions that will return precisely the
-data he or she wishes to examine. However, as the complexity of the
-constraint expression increases, so does the time necessary to process
-that expression. There are some techniques a user may user to optimize
-the evaluation of a constraint that will ease the load on the server,
-and provide faster replies to OPeNDAP dataset queries.</p>
+<p>Using the tools provided by OPeNDAP, a user can buil elaborate and sophisticated constraint expressions that will return precisely the data he or she wants. However, as the complexity of a constraint expression increases, so does the time necessary to process the expression. There are some techniques for optimizing the evaluation of a constraint that will ease the load on the server and provide faster replies to OPeNDAP dataset queries.</p>
 </div>
 <div class="paragraph">
 <p>The OPeNDAP constraint expression evaluator uses a "lazy evaluation"
 algorithm. This means that the sub-clauses of the selection clause are
-evaluated in order, and parsing halts when any sub-clause returns FALSE.
+evaluated in order and parsing halts when any sub-clause returns FALSE.
 Consider a constraint expression that looks like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>?station&amp;station.cast.O2&gt;15.0&amp;station.cast.temp&gt;22.0</pre>
+<pre> ?station&amp;station.cast.O2&gt;15.0&amp;station.cast.temp&gt;22.0</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>If the server encounters a station with no oxygen values over 15.0, it
-does not bother to look at the temperature records at all. The first
-sub- clause evaluates FALSE, so the second clause is never even parsed.</p>
+<p>If the server encounters a station with no oxygen values over 15.0, it does not bother to look at the temperature records at all. The first sub- clause evaluates FALSE, so the second clause is never even parsed.</p>
 </div>
 <div class="paragraph">
-<p>A careful user may use this feature to his or her advantage. In the
-above example, the order of the clauses does not really matter; there
+<p>A careful user may use this feature to his or her advantage. In the example above, the order of the clauses does not really matter; there
 are the same number of temperature and oxygen measurements at each
 station. However, consider the following expression:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>?station&amp;station.cast.O2&gt;15.0&amp;station.month={3,4,5}</pre>
+<pre> ?station&amp;station.cast.O2&gt;15.0&amp;station.month={3,4,5}</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>For each station there is only one month value, while there are many
+<p>For each station there is only one month value and many
 oxygen values. Passing a constraint expression like this one will force
 the server to sort through all the oxygen data for each station (which
 could be in the thousands of points), only to throw the data away when
-it finds that the month requested does not match the month value stored
+it finds that the requested month does not match the month value stored
 in the station data. This would be far better done with the clauses
 reversed:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>?station&amp;station.month={3,4,5}&amp;station.cast.O2&gt;15.0</pre>
+<pre> ?station&amp;station.month={3,4,5}&amp;station.cast.O2&gt;15.0</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2896,22 +2878,17 @@ necessary to evaluate the constraint expression.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="trueopendap-server"><a class="anchor" href="#trueopendap-server"></a>4. OPeNDAP Server</h2>
+<h2 id="trueopendap-server-hyrax"><a class="anchor" href="#trueopendap-server-hyrax"></a>4. OPeNDAP Server (Hyrax)</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This section provides information about the structure of the OPeNDAP server, including a closer look at the
-  server software provided by the OPeNDAP group itself. People involved
-  in providing data to OPeNDAP users should read this before looking at
-  the documentation for the server they will install.</p>
+<p>This section provides information about the structure of the OPeNDAP server, including a closer look at the server software provided by the OPeNDAP group itself. People involved in providing data to OPeNDAP users should read this before looking at the documentation for the server they will install.</p>
 </div>
 <div class="sect2">
-<h3 id="truethe-opendap-server-2"><a class="anchor" href="#truethe-opendap-server-2"></a>4.1. The OPeNDAP Server</h3>
+<h3 id="truethe-opendap-server"><a class="anchor" href="#truethe-opendap-server"></a>4.1. The OPeNDAP Server</h3>
 <div class="paragraph">
 <p>Any server that responds to the messages described in
 <a href="../index.php/UserGuideOPeNDAPMessages">OPeNDAP Messages</a> using the
-<a href="../index.php/UserGuideDataModel">OPeNDAP Data Model</a> is an OPeNDAP
-server. The messages and the data model are published standards,
-available to anyone to use.</p>
+<a href="../index.php/UserGuideDataModel">OPeNDAP Data Model</a> is an OPeNDAP server. The messages and the data model are published standards, available to anyone.</p>
 </div>
 <div class="paragraph">
 <p>The OPeNDAP group, in addition to publishing and maintaining the
@@ -2921,36 +2898,29 @@ standard. This is <a href="../index.php/Hyrax">Hyrax</a>.</p>
 <div class="sect3">
 <h4 id="truehyrax"><a class="anchor" href="#truehyrax"></a>4.1.1. Hyrax</h4>
 <div class="paragraph">
-<p>The OPeNDAP group produces and supports Hyrax,
-a modular data server that can be used in a variety of ways to serve a
-wide variety of data with OPeNDAP.</p>
+<p>Hyrax, the modular OPeNDAP server, is flexible enough that it can serve data that currently exist in
+a wide variety of data storage formats, including HDF4 data files, netCDF data, and, using the FreeForm module, data in arbitrary, non-standard formats.</p>
 </div>
 <div class="paragraph">
-<p>Hyrax is flexible enough that it can serve data that currently exist in
-a wide variety of data storage formats, ranging from HDF4 data files to
-netCDF data to data in some arbitrary non-standard format using the
-FreeForm module.</p>
-</div>
-<div class="paragraph">
-<p>Hyrax is modular, too, which means it can be outfitted to serve the
-particular needs of your data without weighing down its performance with
+<p>Because Hyrax is modular, it can be outfitted to serve the
+particular needs of your data without weighing down performance with
 features you don&#8217;t need.</p>
 </div>
 <div class="sect4">
 <h5 id="truehow-hyrax-works"><a class="anchor" href="#truehow-hyrax-works"></a>How Hyrax Works</h5>
 <div class="paragraph">
 <p>The Hyrax server is actually a combination of
-two distinct servers, running on the same machine, or on two machines
+two distinct servers, running on the same machine or on two machines
 connected with a very fast link. One server serves as the user-facing
-"front end" to the system, while the other provides the "engine room",
-optimized to turn requests around quickly.</p>
+"front end" to the system while the other provides the "engine room",
+optimized to turn around requests quickly.</p>
 </div>
 <div class="paragraph">
 <p>The front end server is called the <strong>O</strong>PeNDAP <strong>L</strong>ightweight <strong>F</strong>ront
 end <strong>S</strong>erver (OLFS). It receives requests for data and services in
 multiple formats and forms, and is meant to be as "user friendly" as a
-server can be. It also handles such chores as authentication and
-authorization-checking, and responding to catalog and bot requests. It
+server can be. It also handles chores such as authentication and
+authorization-checking and responding to catalog and bot requests. It
 can also construct complex data requests from multiple requests from its
 parner server.</p>
 </div>
@@ -2958,8 +2928,8 @@ parner server.</p>
 <p><span class="image"><img src="../images/thumb/c/c5/HyraxArchitecture.jpg/300px-HyraxArchitecture.jpg" alt="300px HyraxArchitecture.jpg"></span></p>
 </div>
 <div class="paragraph">
-<p>This other server, called the <strong>B</strong>ack <strong>E</strong>nd <strong>S</strong>erver (BES), does
-only one thing—provide data—and is designed to do it fast. It handles
+<p>This "engine room" server, called the <strong>B</strong>ack <strong>E</strong>nd <strong>S</strong>erver (BES), does
+only one thing: it provides data. It is designed to do it fast. It handles
 the compute-intensive parts of processing an OPeNDAP client request for
 data. This results in higher performance for small requests while not
 penalizing the larger requests.</p>
@@ -2979,10 +2949,10 @@ sending requests directly to the BES.</p>
 <div class="sect4">
 <h5 id="trueinstalling-hyrax"><a class="anchor" href="#trueinstalling-hyrax"></a>Installing Hyrax</h5>
 <div class="paragraph">
-<p>The two parts of <a href="../index.php/Hyrax">Hyrax</a> are both installed by
-the same script, but they are two different animals, which may require
+<p>The two parts of <a href="../index.php/Hyrax">Hyrax</a> are installed by
+the same script. However, because they are discrete, they may require
 different kinds of attention from an administrator. Testing OLFS
-requires a working BES, so it&#8217;s typical to start the post-unpacking
+requires a working BES, so it is best to start the post-unpacking
 process with the BES.</p>
 </div>
 <div class="paragraph">
@@ -2992,10 +2962,10 @@ code somewhere to be run as a daemon and configuring your system to
 execute it.</p>
 </div>
 <div class="paragraph">
-<p>After that, though, there are several configuration options you&#8217;ll need
-to address by installing software on your machine, and by editing the
+<p>After that, there are several configuration options that you will need
+to address by installing software on your computer and by editing the
 <a href="../index.php/Hyrax_-_BES_Configuration">Hyrax configuration file</a>,
-called bes.xml. Details of these options are in the Hyrax documentation, but these are the
+called bes.xml. Details of these options are in the Hyrax documentation, but following are the
 decisions you&#8217;ll have to make:</p>
 </div>
 <div class="dlist">
@@ -3004,8 +2974,8 @@ decisions you&#8217;ll have to make:</p>
 <dd>
 <p>Hyrax is equipped to serve data stored in any of several different
 file formats, HDF, netCDF and others. Each different format requires
-its own handler, and your machine must have shared libraries
-containing these handlers installed. For example, in order to serve
+its own handler, and your computer must have shared libraries
+containing these handlers. For example, in order to serve
 netCDF data, the netCDF handler library must be available to Hyrax,
 and identified in its
 <a href="../index.php/Hyrax_-<em>BES_Configuration">configuration file</a>. The
@@ -3025,17 +2995,17 @@ Handlers</a>.</p>
 </dl>
 </div>
 <div class="paragraph">
-<p>Once these three tasks are accomplished, and once data is moved into the
+<p>Once these three tasks are accomplished and data is moved into the
 appropriate directories, your server should be ready to provide data to
-all comers, but most specifically to its OLFS.</p>
+all comers, but specifically to its OLFS.</p>
 </div>
 <div class="paragraph">
 <div class="title">The FreeForm Module</div>
 <p>One of the shared libraries to use for serving data is called the
 FreeForm module. This module allows you to serve data in fairly
 arbitrary formats by writing a format description file to sit alongside
-your data file. If you have data that isn&#8217;t in one of the supported file
-formats, consider writing format descriptions using FreeForm, and
+your data file. If you have data that is not in one of the supported file
+formats, consider writing format descriptions using FreeForm and
 serving the data that way.</p>
 </div>
 <div class="paragraph">
@@ -3045,9 +3015,9 @@ information.</p>
 <div class="paragraph">
 <div class="title">Installing OLFS</div>
 <p>The OLFS is a Java servlet, so its installation involves installing the
-Tomcat servlet infrastructure, and then configuring that with the OLFS.
-There are four configuration files, but unless yours is an unusual case,
-you&#8217;ll likely only have to look at two of them. See
+Tomcat servlet infrastructure and then configuring that with the OLFS.
+There are four configuration files, but unless your&#8217;s is an unusual case,
+you will likely have to look at only two of them. See
 <a href="../index.php/Hyrax_-<em>OLFS_Configuration">Hyrax</em>-_OLFS_Configuration</a>
 for more information.</p>
 </div>
@@ -3066,16 +3036,16 @@ file to specify these important features of the OLFS operation:</p>
 <dd>
 <p>The OLFS "offers" the incoming URL to a series of "dispatch handlers"
 until one accepts it and executes. This allows the OLFS to offer
-directory and catalog services, as well as data services and more. Use
+directory and catalog services as well as data services and more. Use
 the olfs.xml file to nominate the dispatch handlers (they come with
-the OLFS, and do not need to be separately installed). See
+the OLFS and do not need to be separately installed). See
 <a href="../index.php/Hyrax_-_OLFS_Configuration#HTTP_GET_Handlers">handler instructions</a> for more.</p>
 </dd>
 <dt class="hdlist1">Catalog requests</dt>
 <dd>
 <p>The OLFS can handle
 <a href="../index.php/Hyrax_-_THREDDS_Configuration">THREDDS</a> catalog
-requests, as well as directory requests, an older part of the DAP
+requests as well as directory requests, which are an older part of the DAP
 standard that also involves data about a collection of data files. The
 THREDDS information can be static (provided from a file) or dynamic
 (generated by a review of the available data).</p>
@@ -3083,7 +3053,7 @@ THREDDS information can be static (provided from a file) or dynamic
 <dt class="hdlist1">File access</dt>
 <dd>
 <p>You may have individual files you want served intact via this server.
-These might include documentation of the data files, or of the server.
+These might include documentation of the data files or of the server.
 See
 <a href="../index.php/Hyrax_-_OLFS_Configuration#File_Dispatch_Handler">File
 Dispatch Handler</a> instructions.</p>
@@ -3091,14 +3061,13 @@ Dispatch Handler</a> instructions.</p>
 </dl>
 </div>
 <div class="paragraph">
-<p>There are some other features, too, like a bot blocker and a version
-message, as well as the experimental SOAP message handler. These are
+<p>There are additional features, such as a bot blocker and a version
+message as well as the experimental SOAP message handler. These are
 also configured with
-<a href="../index.php/Hyrax_-_OLFS_Configuration#olfs.xml_Configuration_File">olfs.xml</a>,
-and you&#8217;ll find more information about them at the link.</p>
+<a href="../index.php/Hyrax_-_OLFS_Configuration#olfs.xml_Configuration_File">olfs.xml</a>.</p>
 </div>
 <div class="paragraph">
-<p>The other configuration file you might need to edit is
+<p>The other configuration file that you might need to edit is
 <a href="http://www.unidata.ucar.edu/projects/THREDDS/tech/TDS.html">catalog.xml</a>,
 briefly reviewed under THREDDS, below.</p>
 </div>
@@ -3110,17 +3079,15 @@ catalog standard for scientific data promoted by scientists at
 </div>
 <div class="paragraph">
 <p>The default file will allow dynamic catalogs to be created and should
-allow your server to respond to THREDDS requests properly. It&#8217;s possible
-you may want to serve a static THREDDS catalog, too. This can be done by
-editing the catalog.xml file, and you&#8217;ll find links to instructions for
+allow your server to respond to THREDDS requests properly. You may want to serve a static THREDDS catalog as well. This can be done by
+editing the catalog.xml file, and you will find links to instructions for
 that at <a href="../index.php/Hyrax_-_THREDDS_Configuration">Hyrax - THREDDS
 Configuration</a>.</p>
 </div>
 <div class="paragraph">
 <div class="title">Multiple BES Configuration</div>
 <p>You can configure a single OLFS to work with multiple BES instances.
-This offers an opportunity to do rudimentary load balancing, or to
-isolate data on one server or another. See the
+This enables rudimentary load balancing the isolation of data on one server or another. See the
 <a href="../index.php/Hyrax_-_Configuring_The_OLFS_To_Work_With_Multiple_BES%27s">Hyrax
 configuration chapter</a> for more information on the subject.</p>
 </div>
@@ -3401,7 +3368,7 @@ more information about it.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-12-07 15:29:41 CST
+Last updated 2016-12-09 16:02:57 CST
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css">

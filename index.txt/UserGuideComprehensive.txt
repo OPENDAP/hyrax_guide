@@ -16,11 +16,9 @@ OPeNDAP provides a way for researchers to access scientific data
 anywhere on the Internet, from a wide variety of new _and existing_
 programs.
 
-It is used widely in earth-science research settings but it is not limited
-to that. Using a flexible data model and a well-defined transmission
-format, an OPeNDAP client can request data from a wide variety of
-OPeNDAP servers, allowing researchers to enjoy flexibility similar to
-the flexibility of the web.
+It is used widely in earth-science research settings but it is not limited to that. Using a flexible data model and a well-defined transmission format, an OPeNDAP client can request data from a wide variety of OPeNDAP servers, allowing researchers to enjoy flexibility similar to the flexibility of the web.
+
+NOTE: There are different implementations of OPeNDAP produced by various open source organizations. This guide covers the implementation of OPeNDAP produced by the OPeNDAP group.
 
 The OPeNDAP architecture uses a client/server model, with a _client_
 that sends requests for data out onto the network to a __server__,
@@ -1265,7 +1263,7 @@ what will become version 4 of the DAP.
 
 ===== THREDDS =====
 
-Some OPeNDAP servers (including link:../index.php/Hyrax[Hyrax], the
+Some OPeNDAP servers (including link:./Hyrax.txt[Hyrax], the
 server supplied by the OPeNDAP group) can make sensible replies to
 requests for THREDDS catalog information. This can serve to "advertise"
 a server's data by having it appear in catalogs accumulated by THREDDS
@@ -1422,40 +1420,37 @@ by appending them to one another. To retrieve all stations west of 60
 degrees West and north of the equator:
 
 ------------------------------------------
-?station&station.lat>0.0&station.lon<-60.0
+ ?station&station.lat>0.0&station.lon<-60.0
 ------------------------------------------
 
-As was mentioned, the logical OR can be implemented using a list of
-scalars. The following expression will select only stations taken north
-of the equator in April, May, June, or July:
+As mentioned earler, the logical OR can be implemented using a list of scalars. The following expression will select only stations taken north of the equator in April, May, June, or July:
 
 ------------------------------------------------
-?station&station.lat>0.0&station.month={4,5,6,7}
+ ?station&station.lat>0.0&station.month={4,5,6,7}
 ------------------------------------------------
 
 If our dataset contained a field called monsoon-month, indicating the month in which monsoons happened that year, we could modify the last example search to include those months as follows:
 
 ----------------------------------------------------------------------
-?station&station.lat>O.O&station.month={4,5,6,7,station.monsoon-month}
+ ?station&station.lat>O.O&station.month={4,5,6,7,station.monsoon-month}
 ----------------------------------------------------------------------
 
 In other words, a list can contain both values and other variables. If monsoon-month was itself a list of months, a search could be written as:
 
 ------------------------------------------------------------
-?station&station.lat>0.0&station.month=station.monsoon-month
+ ?station&station.lat>0.0&station.month=station.monsoon-month
 ------------------------------------------------------------
 
-For arrays and grids, there is a special way to select data within the projection clause. Suppose we want to see only the first five oxygen calibration points for each station. The constraint expression for this
-would be:
+For arrays and grids, there is a special way to select data within the projection clause. Suppose we want to see only the first five oxygen calibration points for each station. The constraint expression for this would be:
 
 -------------------
-?station.02cal[0:4]
+ ?station.02cal[0:4]
 -------------------
 
 By specifying a stride value, we can also select a hyperslab of the oxygen calibration array:
 
 ----------------------
-?station.02cal[0:5:19]
+ ?station.02cal[0:5:19]
 ----------------------
 
 This expression will return every fifth member of the 02cal array. In other words, the result will be a four-element array containing only the
@@ -1491,9 +1486,9 @@ Byte, Int*, UInt*, Float* |< > = != <= >=
 
 |Array |[start:stop] [start:stride:stop]
 
-|Structure |. /
+|Structure |.
 
-|Sequence |. /
+|Sequence |.
 
 |Grid |[start:stop] [start:stride:stop] .
 
@@ -1505,8 +1500,7 @@ fields time and temperature, then those fields may be accessed using
 s.time and s.temperature or as s/time and s/temperature.
 
 The ~= operator returns true when the character string on the left of
-the operator matches the regular expression on the right. See Pattern Matching with
-Constraint Expressions for a discussion of regular expressions.
+the operator matches the regular expression on the right. See __Pattern Matching with Constraint Expressions__ for a discussion of regular expressions.
 
 The array operator [] is used to subsample the given array. You can find
 several examples of its use in the
@@ -1527,8 +1521,8 @@ samples whose density exceeded 1.0275g/cm3:
                      station.cast.press)>27.5
 ---------------------------------------------
 
-Functions like this one are not a standard part of the OPeNDAP
-architecture, and may vary from one server to another. A user may query
+Functions like this are not a standard part of the OPeNDAP
+architecture and may vary from one server to another. A user may query
 a server for a list of such functions by sending a URL with a constraint
 expression that calls the "version()" function.
 
@@ -1548,16 +1542,19 @@ NOTE: When using functions, remember that a function used in a projection can re
 ===== Pattern Matching with Constraint Expressions =====
 
 There are three operators defined to compare one String data type to
-another. The = operator returns TRUE if its two input character strings
-are identical, and the != operator returns TRUE if the Strings do not
-match. A third operator, ~= is provided that returns TRUE if the String
-to the left of the operator matches the regular expression in the String
-on the right.
+another:
+
+* The = operator returns TRUE if its two input character strings
+are identical.
+* The != operator returns TRUE if the Strings do not
+match.
+* The ~= operator is provided that returns TRUE if the String
+to the left of the operator matches the regular expression in the String on the right.
 
 A regular expression is simply a character string containing wildcard
 characters that allow it to match patterns within a longer string. For
 example, the following constraint expression might return all the
-stations on the sample cruise at which a shark was sighted:
+stations on the sample cruise on which a shark was sighted:
 
 -------------------------------------
 ?station&station.comment~=".*shark.*"
@@ -1576,11 +1573,11 @@ pattern-matching capabilities.
   and o? matches only zero or one o.
 "[ ... ]":: Define a "character set," which begins with [ and is terminated by ].
   In the simplest case, the characters between the two brackets are what
-  this set can match. The expression [Ss] matches either an upper or
+  this set can match. For example, [Ss] matches either an upper or
   lower case s. Brackets can also contain character ranges, so [0-9]
   matches all the numerals. If the first character within the brackets
   is a caret ( ), the expression will only match characters that do not
-  appear in the brackets. For example, [ 0-9]* only matches character
+  appear in the brackets. For example, [ 0-9]* matches only character
   strings that contain no numerals.
 ^$:: These are special characters that match the empty string at the
   beginning or end of a line.
@@ -1588,10 +1585,10 @@ pattern-matching capabilities.
   expression on either side of the operator. So, for example, the string
   Endeavor\|Oceanus matches either Endeavor or Oceanus. The scope of the
   OR can be contained with the grouping operators, \( and \).
- \( \):: These are used to group a series of characters into an expression, or for the OR function. So, for example, \(abc\)* matches zero or more repetitions of the string abc2.
+ \( \):: These are used to group a series of characters into an expression, or for the OR function. For example, \(abc\)* matches zero or more repetitions of the string abc2.
 
  
- There are several more special characters and several other features of
+There are several more special characters and several other features of
 the characters described here, but they are beyond the scope of this
 guide. The OPeNDAP regular expression syntax is the same as that used in
 the Emacs editor. See the documentation for Emacs for a complete
@@ -1600,46 +1597,37 @@ expressions.
 
 ===== Optimizing the Query =====
 
-Using the tools provided by OPeNDAP, a user can build quite elaborate
-and sophisticated constraint expressions that will return precisely the
-data he or she wishes to examine. However, as the complexity of the
-constraint expression increases, so does the time necessary to process
-that expression. There are some techniques a user may user to optimize
-the evaluation of a constraint that will ease the load on the server,
-and provide faster replies to OPeNDAP dataset queries.
+Using the tools provided by OPeNDAP, a user can buil elaborate and sophisticated constraint expressions that will return precisely the data he or she wants. However, as the complexity of a constraint expression increases, so does the time necessary to process the expression. There are some techniques for optimizing the evaluation of a constraint that will ease the load on the server and provide faster replies to OPeNDAP dataset queries.
 
 The OPeNDAP constraint expression evaluator uses a "lazy evaluation"
 algorithm. This means that the sub-clauses of the selection clause are
-evaluated in order, and parsing halts when any sub-clause returns FALSE.
+evaluated in order and parsing halts when any sub-clause returns FALSE.
 Consider a constraint expression that looks like this:
 
 ----------------------------------------------------
-?station&station.cast.O2>15.0&station.cast.temp>22.0
+ ?station&station.cast.O2>15.0&station.cast.temp>22.0
 ----------------------------------------------------
 
-If the server encounters a station with no oxygen values over 15.0, it
-does not bother to look at the temperature records at all. The first
-sub- clause evaluates FALSE, so the second clause is never even parsed.
+If the server encounters a station with no oxygen values over 15.0, it does not bother to look at the temperature records at all. The first sub- clause evaluates FALSE, so the second clause is never even parsed.
 
-A careful user may use this feature to his or her advantage. In the
-above example, the order of the clauses does not really matter; there
+A careful user may use this feature to his or her advantage. In the example above, the order of the clauses does not really matter; there
 are the same number of temperature and oxygen measurements at each
 station. However, consider the following expression:
 
 ---------------------------------------------------
-?station&station.cast.O2>15.0&station.month={3,4,5}
+ ?station&station.cast.O2>15.0&station.month={3,4,5}
 ---------------------------------------------------
 
-For each station there is only one month value, while there are many
+For each station there is only one month value and many
 oxygen values. Passing a constraint expression like this one will force
 the server to sort through all the oxygen data for each station (which
 could be in the thousands of points), only to throw the data away when
-it finds that the month requested does not match the month value stored
+it finds that the requested month does not match the month value stored
 in the station data. This would be far better done with the clauses
 reversed:
 
 ---------------------------------------------------
-?station&station.month={3,4,5}&station.cast.O2>15.0
+ ?station&station.month={3,4,5}&station.cast.O2>15.0
 ---------------------------------------------------
 
 This expression will evaluate much more quickly because unwanted
@@ -1653,20 +1641,15 @@ a URL should be left to the end of the selection. This way, the OPeNDAP
 server will only be forced to go to the network for data if absolutely
 necessary to evaluate the constraint expression.
   
-== OPeNDAP Server ==
+== OPeNDAP Server (Hyrax) ==
 
-This section provides information about the structure of the OPeNDAP server, including a closer look at the
-  server software provided by the OPeNDAP group itself. People involved
-  in providing data to OPeNDAP users should read this before looking at
-  the documentation for the server they will install.
+This section provides information about the structure of the OPeNDAP server, including a closer look at the server software provided by the OPeNDAP group itself. People involved in providing data to OPeNDAP users should read this before looking at the documentation for the server they will install.
 
 === The OPeNDAP Server ===
 
 Any server that responds to the messages described in
 link:../index.php/UserGuideOPeNDAPMessages[OPeNDAP Messages] using the
-link:../index.php/UserGuideDataModel[OPeNDAP Data Model] is an OPeNDAP
-server. The messages and the data model are published standards,
-available to anyone to use.
+link:../index.php/UserGuideDataModel[OPeNDAP Data Model] is an OPeNDAP server. The messages and the data model are published standards, available to anyone.
 
 The OPeNDAP group, in addition to publishing and maintaining the
 standards described here, maintains a server that complies with the
@@ -1674,39 +1657,33 @@ standard. This is link:../index.php/Hyrax[Hyrax].
 
 ==== Hyrax ====
 
-The OPeNDAP group produces and supports Hyrax,
-a modular data server that can be used in a variety of ways to serve a
-wide variety of data with OPeNDAP.
+Hyrax, the modular OPeNDAP server, is flexible enough that it can serve data that currently exist in
+a wide variety of data storage formats, including HDF4 data files, netCDF data, and, using the FreeForm module, data in arbitrary, non-standard formats.
 
-Hyrax is flexible enough that it can serve data that currently exist in
-a wide variety of data storage formats, ranging from HDF4 data files to
-netCDF data to data in some arbitrary non-standard format using the
-FreeForm module.
-
-Hyrax is modular, too, which means it can be outfitted to serve the
-particular needs of your data without weighing down its performance with
+Because Hyrax is modular, it can be outfitted to serve the
+particular needs of your data without weighing down performance with
 features you don't need.
 
 ===== How Hyrax Works =====
 
 The Hyrax server is actually a combination of
-two distinct servers, running on the same machine, or on two machines
+two distinct servers, running on the same machine or on two machines
 connected with a very fast link. One server serves as the user-facing
-"front end" to the system, while the other provides the "engine room",
-optimized to turn requests around quickly.
+"front end" to the system while the other provides the "engine room",
+optimized to turn around requests quickly.
 
 The front end server is called the **O**PeNDAP **L**ightweight **F**ront
 end **S**erver (OLFS). It receives requests for data and services in
 multiple formats and forms, and is meant to be as "user friendly" as a
-server can be. It also handles such chores as authentication and
-authorization-checking, and responding to catalog and bot requests. It
+server can be. It also handles chores such as authentication and
+authorization-checking and responding to catalog and bot requests. It
 can also construct complex data requests from multiple requests from its
 parner server.
 
 image:../images/thumb/c/c5/HyraxArchitecture.jpg/300px-HyraxArchitecture.jpg[]
 
-This other server, called the **B**ack **E**nd **S**erver (BES), does
-only one thing—provide data—and is designed to do it fast. It handles
+This "engine room" server, called the **B**ack **E**nd **S**erver (BES), does
+only one thing: it provides data. It is designed to do it fast. It handles
 the compute-intensive parts of processing an OPeNDAP client request for
 data. This results in higher performance for small requests while not
 penalizing the larger requests.
@@ -1723,10 +1700,10 @@ sending requests directly to the BES.
 
 ===== Installing Hyrax =====
 
-The two parts of link:../index.php/Hyrax[Hyrax] are both installed by
-the same script, but they are two different animals, which may require
+The two parts of link:../index.php/Hyrax[Hyrax] are installed by
+the same script. However, because they are discrete, they may require
 different kinds of attention from an administrator. Testing OLFS
-requires a working BES, so it's typical to start the post-unpacking
+requires a working BES, so it is best to start the post-unpacking
 process with the BES.
 
 .Installing BES
@@ -1734,16 +1711,16 @@ The BES is a standalone server. Its installation involves parking its
 code somewhere to be run as a daemon and configuring your system to
 execute it.
 
-After that, though, there are several configuration options you'll need
-to address by installing software on your machine, and by editing the
+After that, there are several configuration options that you will need
+to address by installing software on your computer and by editing the
 link:../index.php/Hyrax_-_BES_Configuration[Hyrax configuration file],
-called bes.xml. Details of these options are in the Hyrax documentation, but these are the
+called bes.xml. Details of these options are in the Hyrax documentation, but following are the
 decisions you'll have to make:
 
 What kind of data:: Hyrax is equipped to serve data stored in any of several different
   file formats, HDF, netCDF and others. Each different format requires
-  its own handler, and your machine must have shared libraries
-  containing these handlers installed. For example, in order to serve
+  its own handler, and your computer must have shared libraries
+  containing these handlers. For example, in order to serve
   netCDF data, the netCDF handler library must be available to Hyrax,
   and identified in its
   link:../index.php/Hyrax_-_BES_Configuration[configuration file]. The
@@ -1756,16 +1733,16 @@ Where the data lives:: A server equipped to serve data must be able to find that
 
 What kinds of services:: Along with simply supplying data, Hyrax can supply several different services, including link:../index.php/UserGuideOPeNDAPMessages#ASCII_Service[serving the data as ASCII values], and the form-driven link:../index.php/UserGuideOPeNDAPMessages#WWW_Interface_Service[WWW interface]. The bes.xml file is used to specify the list of services. The drivers for these services are installed as part of the default installation of Hyrax, but they need to be chosen and identified in bes.xml. See instructions at link:../index.php/Hyrax_-_BES_Configuration#Loading_Handlers[Loading Handlers].
 
-Once these three tasks are accomplished, and once data is moved into the
+Once these three tasks are accomplished and data is moved into the
 appropriate directories, your server should be ready to provide data to
-all comers, but most specifically to its OLFS.
+all comers, but specifically to its OLFS.
 
 .The FreeForm Module
 One of the shared libraries to use for serving data is called the
 FreeForm module. This module allows you to serve data in fairly
 arbitrary formats by writing a format description file to sit alongside
-your data file. If you have data that isn't in one of the supported file
-formats, consider writing format descriptions using FreeForm, and
+your data file. If you have data that is not in one of the supported file
+formats, consider writing format descriptions using FreeForm and
 serving the data that way.
 
 See the link:../index.php/FreeForm[FreeForm documentation] for more
@@ -1773,9 +1750,9 @@ information.
 
 .Installing OLFS
 The OLFS is a Java servlet, so its installation involves installing the
-Tomcat servlet infrastructure, and then configuring that with the OLFS.
-There are four configuration files, but unless yours is an unusual case,
-you'll likely only have to look at two of them. See
+Tomcat servlet infrastructure and then configuring that with the OLFS.
+There are four configuration files, but unless your's is an unusual case,
+you will likely have to look at only two of them. See
 link:../index.php/Hyrax_-_OLFS_Configuration[Hyrax_-_OLFS_Configuration]
 for more information.
 
@@ -1787,31 +1764,30 @@ Address of BES:: The OLFS is the front door to data from the BES. Use the olfs.x
 
 Dispatch handlers:: The OLFS "offers" the incoming URL to a series of "dispatch handlers"
   until one accepts it and executes. This allows the OLFS to offer
-  directory and catalog services, as well as data services and more. Use
+  directory and catalog services as well as data services and more. Use
   the olfs.xml file to nominate the dispatch handlers (they come with
-  the OLFS, and do not need to be separately installed). See
+  the OLFS and do not need to be separately installed). See
   link:../index.php/Hyrax_-_OLFS_Configuration#HTTP_GET_Handlers[handler instructions] for more.
 
 Catalog requests:: The OLFS can handle
   link:../index.php/Hyrax_-_THREDDS_Configuration[THREDDS] catalog
-  requests, as well as directory requests, an older part of the DAP
+  requests as well as directory requests, which are an older part of the DAP
   standard that also involves data about a collection of data files. The
   THREDDS information can be static (provided from a file) or dynamic
   (generated by a review of the available data).
 
 File access:: You may have individual files you want served intact via this server.
-  These might include documentation of the data files, or of the server.
+  These might include documentation of the data files or of the server.
   See
   link:../index.php/Hyrax_-_OLFS_Configuration#File_Dispatch_Handler[File
   Dispatch Handler] instructions.
 
-There are some other features, too, like a bot blocker and a version
-message, as well as the experimental SOAP message handler. These are
+There are additional features, such as a bot blocker and a version
+message as well as the experimental SOAP message handler. These are
 also configured with
-link:../index.php/Hyrax_-_OLFS_Configuration#olfs.xml_Configuration_File[olfs.xml],
-and you'll find more information about them at the link.
+link:../index.php/Hyrax_-_OLFS_Configuration#olfs.xml_Configuration_File[olfs.xml].
 
-The other configuration file you might need to edit is
+The other configuration file that you might need to edit is
 http://www.unidata.ucar.edu/projects/THREDDS/tech/TDS.html[catalog.xml],
 briefly reviewed under THREDDS, below.
 
@@ -1822,16 +1798,14 @@ http://www.unidata.ucar.edu[UCAR]. It allows
 
  
 The default file will allow dynamic catalogs to be created and should
-allow your server to respond to THREDDS requests properly. It's possible
-you may want to serve a static THREDDS catalog, too. This can be done by
-editing the catalog.xml file, and you'll find links to instructions for
+allow your server to respond to THREDDS requests properly. You may want to serve a static THREDDS catalog as well. This can be done by
+editing the catalog.xml file, and you will find links to instructions for
 that at link:../index.php/Hyrax_-_THREDDS_Configuration[Hyrax - THREDDS
 Configuration].
 
 .Multiple BES Configuration
 You can configure a single OLFS to work with multiple BES instances.
-This offers an opportunity to do rudimentary load balancing, or to
-isolate data on one server or another. See the
+This enables rudimentary load balancing the isolation of data on one server or another. See the
 link:../index.php/Hyrax_-_Configuring_The_OLFS_To_Work_With_Multiple_BES%27s[Hyrax
 configuration chapter] for more information on the subject.
   
