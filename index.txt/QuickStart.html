@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.5.dev">
 <meta name="author" content="2016-12-31">
-<title>QuickStart - OPeNDAP Documentation</title>
+<title>QuickStart - OPeNDAP</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -421,7 +421,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article">
 <div id="header">
-<h1>QuickStart - OPeNDAP Documentation</h1>
+<h1>QuickStart - OPeNDAP</h1>
 <div class="details">
 <span id="author" class="author">2016-12-31</span><br>
 </div>
@@ -458,7 +458,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><a href="http://www.opendap.org/">OPeNDAP</a> is the developer of client/server software, of the same name, that enables scientists to share data more easily over the internet. The OPeNDAP group is also the original developer of the <a href="http://www.opendap.org/pdf/ESE-RFC-004v1.1.pdf">Data Access Protocol</a> (DAP) that the software uses. Many other groups have adopted DAP and provide compatible clients, servers, and SDKs. OPeNDAP&#8217;s DAP is also a NASA community standard. For the rest of this document, "OPeNDAP" will refer to the software.</p>
 </div>
 <div class="paragraph">
-<p>With OPeNDAP, you can access data using an OPeNDAP URL of any database server that supports OPeNDAP. You can do this via command-line, Intenet browser, or a custom UI. Note that OPeNDAP data is, by default, stored and transmitted in binary form.</p>
+<p>With OPeNDAP, you can access data using an OPeNDAP URL of any database server that supports OPeNDAP. You can do this via command-line, Intenet browser, or a custom UI. Note that OPeNDAP data is, by default, stored and transmitted in binary form. OPeNDAP can return data in the following formats: NetCDF, GeoTIFF, JPEG2000, JSON, ASCII.</p>
+</div>
+<div class="paragraph">
+<p>Ways that OPeNDAP supports getting data: NetCDF, GeoTIFF, JPEG2000, JSON, ASCII</p>
 </div>
 <div class="paragraph">
 <p>This quick start guide covers how to use OPeNDAP in a typical web browser, such as Firefox, Chrome, or Safari, to discover information about data that is useful when creating database queries.</p>
@@ -688,7 +691,7 @@ to see the rest of it.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Unlike the DDS, the DAS is populated at the data provider&#8217;s discretion. Cosenquently, the quality of the data in it (the "metadata") varies widely. The data in the Reynolds dataset used in this example are COARDS compliant. Other metadata standards you may encounter with OPeNDAP data are HDF-EOS, EPIC, FGDC, or no metadata at all.
+Unlike the DDS, the DAS is populated at the data provider&#8217;s discretion. Consequently, the quality of the data in it (the "metadata") varies widely. The data in the Reynolds dataset used in this example are COARDS compliant. Other metadata standards you may encounter with OPeNDAP data are HDF-EOS, EPIC, FGDC, or no metadata at all.
 </td>
 </tr>
 </table>
@@ -1062,11 +1065,7 @@ support OPeNDAP. You can use these for downloading OPeNDAP data, and for
 examining it afterwards. (There are limitations. For example, Ferret may not be able to read datasets served as Sequence data.)</p>
 </li>
 <li>
-<p>The Matlab analysis package also supports an OPeNDAP client attached
-to a graphical user interface. You can use the GUI to create a
-constrained OPeNDAP URL, and download the data directly into Matlab. Click
-<a href="https://www.opendap.org/about/workshops-and-presentations/2002-02-22">here</a>
-for more information about the Matlab GUI client.</p>
+<p>The Matlab analysis package also supports an OPeNDAP client attached to a graphical user interface. You can use the GUI to create a constrained OPeNDAP URL, and download the data directly into Matlab. Click <a href="https://www.opendap.org/about/workshops-and-presentations/2002-02-22">here</a> for more information about the Matlab GUI client. You can also check out the Matlab section in the OPeNDAP User Guide.</p>
 </li>
 <li>
 <p>If you have a data analysis program or package that you like, you can
@@ -1079,10 +1078,16 @@ data access APIs. If your program already uses one of these APIs,
 getting it to run with OPeNDAP may be as simple as changing the
 libraries to which you link it. The <a href="https://www.opendap.org/support/user-documentation">OPeNDAP User
 Documentation</a> describes how to do this and how you can use the OPeNDAP toolkit
-directly to create a new application that doesn&#8217;t use one of the
+directly to create a new application that does not use one of the
 established data access APIs.</p>
 </li>
+<li>
+<p>Any tool based on the NetCDF API will work with OPeNDAP. For example, Matlab has built-in support for OPeNDAP; Matlab supported NetCDF calls can be used with DAP datasets. Other tools that are built on NetCDF API also read data from OPeNDAP servers. A free tool similar to Matlab, <a href="https://www.gnu.org/software/octave/">GNU Octave</a>, is also supported. The R Project for Statistical Computing (<a href="https://www.r-project.org/" class="bare">https://www.r-project.org/</a>) can also read data from OPeNDAP servers.</p>
+</li>
 </ul>
+</div>
+<div class="paragraph">
+<p>Other tools that function with OPeNDAP clients: Graphical applicaitons&#8212;&#8203;IDV (<a href="http://www.unidata.ucar.edu/software/idv/" class="bare">http://www.unidata.ucar.edu/software/idv/</a>) and Panoply (<a href="http://www.giss.nasa.gov/tools/panoply/" class="bare">http://www.giss.nasa.gov/tools/panoply/</a>) ; use "Open Remote Dataset" and "Open Remote Catalog".</p>
 </div>
 <div class="paragraph">
 <p>The use of these clients, like the ways in which you can analyze the
@@ -1093,7 +1098,7 @@ data you find, is beyond the scope of this document.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-12-05 18:36:05 CST
+Last updated 2016-12-09 16:44:51 CST
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css">

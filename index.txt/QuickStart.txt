@@ -1,4 +1,4 @@
-= QuickStart - OPeNDAP Documentation
+= QuickStart - OPeNDAP
 2016-12-31
 :numbered:
 :toc:
@@ -7,9 +7,11 @@
 
 http://www.opendap.org/[OPeNDAP] is the developer of client/server software, of the same name, that enables scientists to share data more easily over the internet. The OPeNDAP group is also the original developer of the http://www.opendap.org/pdf/ESE-RFC-004v1.1.pdf[Data Access Protocol] (DAP) that the software uses. Many other groups have adopted DAP and provide compatible clients, servers, and SDKs. OPeNDAP's DAP is also a NASA community standard. For the rest of this document, "OPeNDAP" will refer to the software.
 
-With OPeNDAP, you can access data using an OPeNDAP URL of any database server that supports OPeNDAP. You can do this via command-line, Intenet browser, or a custom UI. Note that OPeNDAP data is, by default, stored and transmitted in binary form.
+With OPeNDAP, you can access data using an OPeNDAP URL of any database server that supports OPeNDAP. You can do this via command-line, Intenet browser, or a custom UI. Note that OPeNDAP data is, by default, stored and transmitted in binary form. OPeNDAP can return data in the following formats: NetCDF, GeoTIFF, JPEG2000, JSON, ASCII.
 
-This quick start guide covers how to use OPeNDAP in a typical web browser, such as Firefox, Chrome, or Safari, to discover information about data that is useful when creating database queries.
+Ways that OPeNDAP supports getting data: NetCDF, GeoTIFF, JPEG2000, JSON, ASCII
+
+This quick start guide covers how to use OPeNDAP in a typical web browser, such as Firefox, Chrome, or Safari, to discover information about data that is useful when creating database queries. For additional information, see the OPeNDAP USer Guide.
 
 === Key Terms ===
 
@@ -358,43 +360,21 @@ it. (OPeNDAP software mentioned here is available from the
 http://www.opendap.org[OPeNDAP Home Page] .)
 
 * Use a generic web client like *geturl* (a standard part of the OPeNDAP
-package), the free programs
-https://www.gnu.org/software/wget/[wget] or
-http://lynx.browser.org[lynx], or even a browser like *Netscape
-Navigator* or *Chrome* to download data into a local data
+package) or free programs such as 
+https://www.gnu.org/software/wget/[wget], 
+https://curl.haxx.se/[curl] or *Chrome* to download data into a local data
 file. To be able to use the data further, you will probably have to
 download the ASCII version by using the *.ascii* suffix on the URL, as
 in the examples shown above.
 
-* There are pre-packaged OPeNDAP clients available that can download
-binary OPeNDAP data from the web into a useful form. As of today,
-command line clients (**loaddods**) are available for the Matlab and IDL
-data analysis environments, with which you can download OPeNDAP data
-directly into IDL or Matlab objects.
-
-* The http://ferret.wrc.noaa.gov/Ferret[Ferret] and
+* Any tool that uses the C NetCDF API will work with OPeNDAP. For example, Matlab has built-in support for OPeNDAP; Matlab supported NetCDF calls can be used with DAP datasets. Other tools that are built on NetCDF API also read data from OPeNDAP servers. A free tool similar to Matlab, https://www.gnu.org/software/octave/[GNU Octave], is also supported. The https://www.r-project.org/[R Project] for Statistical Computing can also read data from OPeNDAP servers. The http://ferret.wrc.noaa.gov/Ferret[Ferret] and
 http://cola.gmu.edu/grads/[GrADS] free data analysis packages both
-support OPeNDAP. You can use these for downloading OPeNDAP data, and for
+support OPeNDAP. You can use these for dowloading OPeNDAP data and for
 examining it afterwards. (There are limitations. For example, Ferret may not be able to read datasets served as Sequence data.)
 
-* The Matlab analysis package also supports an OPeNDAP client attached
-to a graphical user interface. You can use the GUI to create a
-constrained OPeNDAP URL, and download the data directly into Matlab. Click 
-https://www.opendap.org/about/workshops-and-presentations/2002-02-22[here]
-for more information about the Matlab GUI client.
+* Other tools, that are Java NetCDF compliant, also function with OPeNDAP clients; for example, http://www.unidata.ucar.edu/software/idv/[IDV] and http://www.giss.nasa.gov/tools/panoply/[Panoply].
 
-* If you have a data analysis program or package that you like, you can
-look into the possibility of linking that package to the OPeNDAP toolkit
-library, in effect making your program into a web-capable OPeNDAP
-client. OPeNDAP libraries exist to mimic the behavior of the
-http://www.unidata.ucar.edu/software/netcdf/docs/netcdf_apis.html[netcdf],
-http://www.hdfgroup.org/[HDF] and http://www1.whoi.edu/jgofs.html[JGOFS]
-data access APIs. If your program already uses one of these APIs,
-getting it to run with OPeNDAP may be as simple as changing the
-libraries to which you link it. The https://www.opendap.org/support/user-documentation[OPeNDAP User
-Documentation] describes how to do this and how you can use the OPeNDAP toolkit
-directly to create a new application that doesn't use one of the
-established data access APIs.
+* If you have written a C NetCDF or Java NetCDF compliant data analysis program, you can probably read data from OPeNDAP servers.
 
 The use of these clients, like the ways in which you can analyze the
 data you find, is beyond the scope of this document.

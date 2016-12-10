@@ -27,7 +27,7 @@ the http://www.w3.org/hypertext/WWW/TheProject.html[World Wide Web]
 where client browsers submit requests to web servers for the data that
 compose web pages. Using flexible, multi-purpose data types,
 including scientific data, OPeNDAP servers deliver real data
-directly to client programs in the format needed by that client.
+directly to client programs in the format needed by that client. OPeNDAP can return data in the following formats: NetCDF, GeoTIFF, JPEG2000, JSON, ASCII.
 
 OPeNDAP clients are very specialized browsers, constructed by linking
 legacy data analysis programs with OPeNDAP-enabled versions of the data
@@ -75,7 +75,7 @@ http://gomoos.org[Gulf of Maine Ocean Observing System (GoMOOS)].
 
 Users who may be interested in OPeNDAP may be divided into data consumers and data providers (and these two roles are often assumed by the same scientists). The remainder of this guide is organized around this distinction between classes of users.
 
-=== The OPeNDAP Client ===
+=== The OPeNDAP Client/Server ===
 
 OPeNDAP uses a client/server model. The OPeNDAP servers are web servers
 equipped to interpret an OPeNDAP URL sent to them. An OPeNDAP client
@@ -1880,26 +1880,23 @@ libraries you can use for developing your own client, or for converting
 an existing body of code into an OPeNDAP client. These are reviewed in
 that order below:
 
-===== Matlab, IDL, Ferret, GrADS =====
+===== NetCDF Compliant Tools (e.g., Matlab, R, IDL, IDV, and Panoply) =====
 
-To use OPeNDAP with Matlab or IDL, you'll need the client for each. This
-is a special program that issues a request for data from an OPeNDAP
-server, and imports it into the environment. Links to
-http://opendap.org/download/ml-structs.html[the Matlab client] and
-http://opendap.org/download/idl-client.html[the IDL client] can be found
-on the [http;//opendap.org/download/index.html OPeNDAP software download
-page].
+Any tool that uses the C NetCDF API will work with OPeNDAP. For example, Matlab has built-in support for OPeNDAP; Matlab supported NetCDF calls can be used with DAP datasets. Other tools that are built on NetCDF API also read data from OPeNDAP servers. A free tool similar to Matlab, https://www.gnu.org/software/octave/[GNU Octave], is also supported. The https://www.r-project.org/[R Project] for Statistical Computing can also read data from OPeNDAP servers. The http://ferret.wrc.noaa.gov/Ferret[Ferret] and
+http://cola.gmu.edu/grads/[GrADS] free data analysis packages both
+support OPeNDAP. You can use these for dowloading OPeNDAP data and for
+examining it afterwards. (There are limitations. For example, Ferret may not be able to read datasets served as Sequence data.)
 
-Using OPeNDAP data with the http://www.iges.org/grads[GrADS] or
-http://ferret.wrc.noaa.gov/Ferret[Ferret] packages is even easier.
-Because these packages are based on the netCDF library, and because that
-library now supports reading OPeNDAP data sets, these packages can read
-OPeNDAP URLs as easily as they read local files.
+Other tools, that are Java NetCDF compliant, also function with OPeNDAP clients; for example, http://www.unidata.ucar.edu/software/idv/[IDV] and http://www.giss.nasa.gov/tools/panoply/[Panoply].
 
-Special note. If you're using the Matlab client, and using it for
-oceanographic data, you may be interested in the graphical user
-interface available for it. See [http://oceanographicdata.org/toolbox
-Matlab OPeNDAP Ocean Toolbox].
+.Matlab
+
+
+.Panoply
+Download Panoply and install
+Enter a URL and it will work or not
+
+Open Dataset catalog: When you use the URL for the root of a server, you can examine the entire contents (all of the datasets) of the server. 
 
 ===== Testing ===== 
 
