@@ -4,7 +4,7 @@ Leonard Porrello <lporrel@gmail.com>
 :numbered:
 :toc:
 
-== About This Guide ==
+== About This Guide == 
 
 This guide introduces important concepts behind the OPeNDAP data
 model and transmission format as well as the clients and servers that
@@ -45,7 +45,7 @@ structures and formats that are defined by the data provider but can be accessed
 users just like they access of local data files on the
 user's own system. Alhough there are limitations on the types of data
 that may be translated (see
-link:../index.php/UserGuideDataModel#Translation[Translation]), the
+link:./UserGuideDataModel.txt#Translation[Translation]), the
 facility is flexible and general enough to handle many translations. The upshot of this is... 
 
 * A user may not need to know that data from one set are stored in a
@@ -93,7 +93,7 @@ defined by that API to access the data, which is typically stored on the
 same host machine. Some APIs are somewhat more sophisticated than this, but their general operation is similar.
 
 .The Architecture of a Data Analysis Package
-image:../images/7/76/Unlinked.png[]
+image:./images/Unlinked.png[]
 
 The operation of an OPeNDAP client is illustrated in the The Architecture of a Data Analysis Package Using OPeNDAP figure, shown below. Here, the _same program_ that was used in The Architecture of a Data Analysis Package
 figure (above) has been modified to use one of the OPeNDAP API libraries.
@@ -103,16 +103,16 @@ To make any analysis program into an OPeNDAP client, it just needs to be linked 
 supported legacy API libraries, like netCDF, you can link with the
 OPeNDAP version of that library.) This will create a program that
 accepts URLs as well as file pathnames to identify needed data. (See
-link:../index.php/UserGuideClient[the OPeNDAP Client]).
+link:./UserGuideClient.txt[the OPeNDAP Client]).
 
 .The Architecture of a Data Analysis Package Using OPeNDAP
-image:../images/8/87/Linked.png[]
+image:./images/Linked.png[]
 
 OPeNDAP also provides data translation functionality. Data from the
 original data file is translated by the OPeNDAP server into the OPeNDAP
 data model for transmission to the client. Upon receiving the data, the
 client translates the data into the
-link:../index.php/UserGuideDataModel[data model] it understands. Because
+link:./UserGuideDataModel.txt[data model] it understands. Because
 the data transmitted from an OPeNDAP server to the client travel in the
 OPeNDAP format, the dataset's original storage format is completely
 irrelevant to the client. For example, if the client was originally designed to read
@@ -143,23 +143,23 @@ Some are required by the DAP and others are merely suggested. A server
 is considered to be DAP-compliant if it can respond intelligibly to the
 required messages. Following are the requests messages a server is required to understand:
 
-Data Description:: Data values come in types and sizes. An array, for example, might consist of 10 integers. The value "ten" and the type "integer" describe the array. This request returns information about data types, so that a receiving program can allocate space appropriately. See link:../index.php/UserGuideOPeNDAPMessages#Dataset_Descriptor_Structure[Data Description Structure (DDS)].
+Data Description:: Data values come in types and sizes. An array, for example, might consist of 10 integers. The value "ten" and the type "integer" describe the array. This request returns information about data types, so that a receiving program can allocate space appropriately. See link:./UserGuideOPeNDAPMessages.txt#Dataset_Descriptor_Structure[Data Description Structure (DDS)].
 
-Data Attribute:: This is a request to provide information _about_ data and typically includes information like units, names of data types, reference information and so on. See link:../index.php/UserGuideDataModel#DAS[Data Attribute Structure (DAS)].
+Data Attribute:: This is a request to provide information _about_ data and typically includes information like units, names of data types, reference information and so on. See link:./UserGuideDataModel.txt#DAS[Data Attribute Structure (DAS)].
 
-Data:: The server also must be able to respond to a request for the data itself. See link:../index.php/UserGuideDataModel#DataDDS[data response].
+Data:: The server also must be able to respond to a request for the data itself. See link:./UserGuideDataModel.txt#DataDDS[data response].
 
 In addition, a server may respond to requests like these:
 
-ASCII:: Some servers can convert data to ASCII values on the fly. This allows users to view data using a standard web browser, assuming the data are not too large. See link:../index.php/UserGuideServer#ASCII[ASCII return].
+ASCII:: Some servers can convert data to ASCII values on the fly. This allows users to view data using a standard web browser, assuming the data are not too large. See link:./UserGuideServer.txt#ASCII[ASCII return].
 
-Info:: The info response is a formatted page containing information from the Data Attributes and Data Description responses. It is meant to be a human-readable means to show what is available in a dataset via a standard web browser. See link:../index.php/UserGuideServer#Info[Info response].
+Info:: The info response is a formatted page containing information from the Data Attributes and Data Description responses. It is meant to be a human-readable means to show what is available in a dataset via a standard web browser. See link:./UserGuideServer.txt#Info[Info response].
 
-HTML:: Very similar to the info response, the HTML response provides the information from the info response and also includes a Javascript form to help you build a request for data from the same data file. The best description of the HTML form is in the link:../index.php/QuickStart[Quick Start Guide].
+HTML:: Very similar to the info response, the HTML response provides the information from the info response and also includes a Javascript form to help you build a request for data from the same data file. The best description of the HTML form is in the link:./QuickStart.txt[Quick Start Guide].
 
-SOAP:: OPeNDAP servers can provide their data in terms of a SOAP request and response. For more information see link:../index.php/UserGuideDataModel#SOAP[SOAP Request].
+SOAP:: OPeNDAP servers can provide their data in terms of a SOAP request and response. For more information see link:./UserGuideDataModel.txt#SOAP[SOAP Request].
 
-DDX:: The DDX is an XML version of the Data Attribute and Data Description replies. See link:../index.php/UserGuideServer#DDX[DDX Request].
+DDX:: The DDX is an XML version of the Data Attribute and Data Description replies. See link:./UserGuideServer.txt#DDX[DDX Request].
 
 === The OPeNDAP Server (Hyrax) ===
 
@@ -192,16 +192,16 @@ the user needs.
 NOTE: Most users will not make requests directly to the BES.
 
 .Hyrax Architecture
-image:../images/thumb/c/c5/HyraxArchitecture.jpg/600px-HyraxArchitecture.jpg[]
+image:./images/600px-HyraxArchitecture.jpg[]
 
 _Hyrax_ is an alternative name for the OPeNDAP 4 Data Server.
 
-See link:../index.php/UserGuideDataModel[Data Model] for a description
+See link:./UserGuideDataModel.txt[Data Model] for a description
 of the data returned by requests and see
-link:../index.php/UserGuideServer[OPeNDAP Server] for a description of
+link:./UserGuideServer.txt[OPeNDAP Server] for a description of
 the URL syntax used to send requests.
 
-See link:../index.php/Hyrax[the OPeNDAP 4 Data Server documentation] for
+See link:./Hyrax.txt[the OPeNDAP 4 Data Server documentation] for
 a description of how to install and configure an OPeNDAP data server
 (Hyrax).
 
@@ -365,7 +365,7 @@ infinite number of data models. The examples above use the OPeNDAP
 Dataset Descriptor Structure (DDS) format, which will become important
 in later discussions of the details of the OPeNDAP Data Access Protocol.
 The precise details of the DDS syntax are described in
-link:../index.php/UserGuideOPeNDAPMessages#Dataset_Descriptor_Structure[DDS].
+link:./UserGuideOPeNDAPMessage.txts#Dataset_Descriptor_Structure[DDS].
 
 ===== Data Models and APIs =====
 
@@ -402,8 +402,7 @@ useful translations that can be done and there are many others that are
 still useful despite their inherent information loss.
 
 For example, consider a relational structure below, which contains two nested
-Sequences. The outer sequence represents all the XBT drops in a cruise; the inner sequence represents each XBT drop. The JGOFS API was
-designed to use this sort of data type.
+Sequences. The outer sequence represents all the XBT drops in a cruise; the inner sequence represents each XBT drop. The JGOFS API was designed to use this sort of data type.
 
 .Example Data Description of XBT Cruise
 -----------------------------
@@ -491,7 +490,7 @@ platforms.
 designed to implement the protocol,
 
 The intermediate data representation and the ancillary data formats are
-introduced in link:../index.php/UserGuideOPeNDAPMessages[OPeNDAP
+introduced in link:./UserGuideOPeNDAPMessages.txt[OPeNDAP
 Messages], as are the steps of the procedure. The actual details of the
 software used to implement these formats and procedures is a subject of
 the documentation of the respective software.
@@ -567,7 +566,7 @@ in ANSI C when that type is implemented as 32 bits.
 * Url is a string containing an OPeNDAP URL.
 
 The declaration in a
-link:../index.php/UserGuideOPeNDAPMessages#Data_Descriptor_Structure[DDS]
+link:./UserGuideOPeNDAPMessages.txt#Data_Descriptor_Structure[DDS]
 of a variable of any of the base types is simply the type of the
 variable followed by its name and a semicolon. For example, to declare
 a month variable to be a 32-bit integer, you would type...
@@ -608,8 +607,7 @@ middle value in the first subscript range indicates that the output
 array values are to be selected from alternate input array rows. The
 array temp[2:3:10][3:4] would select from every third row, and so on.
 
-A link:../index.php/UserGuideOPeNDAPMessages#Data_Descriptor_Structure[DDS]
-declaration of a 5x6 array of floating point numbers would look like this:
+A DDS declaration of a 5x6 array of floating point numbers would look like this:
 
 -------------------
 Float64 data[5][6];
@@ -630,8 +628,7 @@ structure type can also be used to group a set of unrelated variables
 together into a single dataset. The "dataset" class name is a synonym
 for structure.
 
-A link:../index.php/UserGuideOPeNDAPMessages#Data_Descriptor_Structure[DDS]
-Structure declaration containing some data and the month in which the
+A DDS Structure declaration containing some data and the month in which the
 data was taken might look like this:
 
 -------------------------
@@ -718,7 +715,7 @@ of the points in the grid, the precise location of each column and row
 must be described.
 
 .A Sample of an Irregular Grid of Data
-image:../images/6/64/Grid.gif[]
+image:./Images/Grid.gif[]
 
 The secondary vectors in the Grid data type provide a solution to this
 problem. Each member of these vectors associates a value for all the
@@ -787,7 +784,7 @@ The XDR data types corresponding to OPeNDAP base-type variables.
 |URL |xdr string
 |==========================
 
-A base type variable is always either transmitted or not. You will not see a fraction of an String type transmitted. Constructor type variables, being composed of the bast type variables, are transmitted as sets of base type variables, and these may be sampled, with a link:../index.php/UserGuideOPeNDAPMessages#Constraint_Expression[constraint expression].
+A base type variable is always either transmitted or not. You will not see a fraction of an String type transmitted. Constructor type variables, being composed of the bast type variables, are transmitted as sets of base type variables, and these may be sampled, with a link:./UserGuideOPeNDAPMessages.txt#Constraint_Expression[constraint expression].
 
 Constraint expressions do not affect _how_ a base-type variable is
 transmitted from a client to a server; they determine _if_ a variable is
@@ -805,9 +802,7 @@ Array:: An Array is sent using the xdr_array function. This means that an
   Array of 100 Int32s is sent as a single block of 100 xdr longs, not
   100 separate "xdr long"s.
 Structure:: A Structure is sent by encoding each field in the order those fields
-  are declared in the
-  link:../index.php/UserGuideOPeNDAPMessages#Data_Descriptor_Structure[DDS]
-  and transmitting the resulting block of bytes.
+  are declared in the DDS and transmitting the resulting block of bytes.
 Sequence:: A Sequence is transmitted by encoding each item in the sequence as if
   it were a Structure, and ending each such structure after the other,
   in the order of their occurrence in the sequence. The entire sequence
@@ -919,7 +914,7 @@ at http:/tests.opendap.org/data/mydata.dat then you'll find the DDS at
 http:/tests.opendap.org/data/mydata.dat.dds
 
 An example DDS entry is shown below. (There are more in
-link:../index.php/UserGuideDataModel[Data_Models], where there's also an
+link:./UserGuideDataModel.txt[Data_Models], where there's also an
 explanation of the information implied by the data model.)
 
 .An Example Dataset Descriptor Entry
@@ -1126,16 +1121,14 @@ data set is located at http:/tests.opendap.org/data/mydata.dat then
 you'll find the data at http:/tests.opendap.org/data/mydata.dat.dods
 
 The data is returned in a MIME document that consists of two parts: the
-link:../index.php/UserGuideOPeNDAPMessages#Data_Descriptor_Structure[DDS], 
-and the data encoded according to the description in
-link:../index.php/UserGuideDataModel#External_Data_Representation[External
+DDS and the data encoded according to the description in
+link:./UserGuideDataModel.txt#External_Data_Representation[External
 Data Representation]. (The returned document is sometimes called the
 DataDDS.) The two parts are separated by this string:
 
 Data:<CR><NL>
 
-The DDS included is modified according to any
-link:#Constraint_Expression[constraint expression] that may have been
+The DDS included is modified according to any constraint expression that may have been
 applied. That is, the returned DDS describes the returned data.
 
 For example, consider a a request for data from a data set with a DDS
@@ -1189,7 +1182,7 @@ message.
 
 NOTE: While ASCII is fine for moving small amounts of data, it generally is best to move data in binary whenever possible becuase servers can generate binary data more quickly than ASCII data, and binary data is more compact. You can then process locally if you need ASCII. To process binary data, you could use getdap if you retrieve DAP2 binary response (.dods); getdap4 if you retrieve a DAP4 binary response; or ncdump for a NetCDF3 or NetCDF4 binary response.
 
-The link:../index.php/QuickStart[Quick Start Guide] contains examples of the ASCII response.
+The link:./QuickStart.txt[Quick Start Guide] contains examples of the ASCII response.
 
 ===== Info Service =====
 
@@ -1217,18 +1210,18 @@ resulting URL into another browser, or use one of the buttons on the
 form to download data.
 
 .OPeNDAP Server Data Access Form
-image:../images/0/05/Reynolds_ifh.png[]
+image:./images/Reynolds_ifh.png[]
 
 If a server receives a URL that either ends in a slash (/) or
 contents.html, it returns a web page that looks like a standard web
 browser's directory view.
 
-image:../images/9/9e/Test.oopendap.org_directory_view.png[]
+image:./images/Test.oopendap.org_directory_view.png[]
 
 Each link in the directory view opens up the WWW service version of that
 data.
 
-The link:../index.php/QuickStart#An_Easier_Way[Quick Start Guide]
+The link:./QuickStart.html[Quick Start Guide]
 contains more information about browsing OPeNDAP data interactively.
 
 ===== Version Service =====
@@ -1338,8 +1331,7 @@ can also include functional expressions of the form...
 
 ...where the arguments are variables from the dataset, scalar values, or other functions. (See Constraint Expression Functions below.)
 
-A *selection* expression leads with an ampersand and is a boolean expression of the form "variable operator variable", "variable operator
-value" or "function(arg_1,arg_2,...,arg_n)", where...
+A *selection* expression leads with an ampersand and is a boolean expression of the form "variable operator variable", "variable operator value" or "function(arg_1,arg_2,...,arg_n)", where...
 
 operator:: Can be one of the relational operators listed in the table below.
 variable:: Can be any variable recorded in the dataset.
@@ -1504,7 +1496,7 @@ the operator matches the regular expression on the right. See __Pattern Matching
 
 The array operator [] is used to subsample the given array. You can find
 several examples of its use in the
-link:../index.php/QuickStart#Peeking_at_Data[Quick Start Guide].
+link:./QuickStart.txt#Peeking_at_Data[Quick Start Guide].
 
 ===== Constraint Expression Functions =====
 
@@ -1648,12 +1640,12 @@ This section provides information about the structure of the OPeNDAP server, inc
 === The OPeNDAP Server ===
 
 Any server that responds to the messages described in
-link:../index.php/UserGuideOPeNDAPMessages[OPeNDAP Messages] using the
-link:../index.php/UserGuideDataModel[OPeNDAP Data Model] is an OPeNDAP server. The messages and the data model are published standards, available to anyone.
+link:./UserGuideOPeNDAPMessages.txt[OPeNDAP Messages] using the
+link:./UserGuideDataModel.txt[OPeNDAP Data Model] is an OPeNDAP server. The messages and the data model are published standards, available to anyone.
 
-The OPeNDAP group, in addition to publishing and maintaining the
-standards described here, maintains a server that complies with the
-standard. This is link:../index.php/Hyrax[Hyrax].
+In addition to publishing and maintaining the
+standards described here, the OPeNDAP group maintains a server that complies with the
+standard. This is link:./Hyrax[Hyrax].
 
 ==== Hyrax ====
 
@@ -1680,7 +1672,7 @@ authorization-checking and responding to catalog and bot requests. It
 can also construct complex data requests from multiple requests from its
 parner server.
 
-image:../images/thumb/c/c5/HyraxArchitecture.jpg/300px-HyraxArchitecture.jpg[]
+image:./images/300px-HyraxArchitecture.jpg[]
 
 This "engine room" server, called the **B**ack **E**nd **S**erver (BES), does
 only one thing: it provides data. It is designed to do it fast. It handles
@@ -1700,7 +1692,7 @@ sending requests directly to the BES.
 
 ===== Installing Hyrax =====
 
-The two parts of link:../index.php/Hyrax[Hyrax] are installed by
+The two parts of link:./Hyrax.txt[Hyrax] are installed by
 the same script. However, because they are discrete, they may require
 different kinds of attention from an administrator. Testing OLFS
 requires a working BES, so it is best to start the post-unpacking
@@ -1713,7 +1705,7 @@ execute it.
 
 After that, there are several configuration options that you will need
 to address by installing software on your computer and by editing the
-link:../index.php/Hyrax_-_BES_Configuration[Hyrax configuration file],
+link:./Hyrax_-_BES_Configuration.txt[Hyrax configuration file],
 called bes.xml. Details of these options are in the Hyrax documentation, but following are the
 decisions you'll have to make:
 
@@ -1723,15 +1715,15 @@ What kind of data:: Hyrax is equipped to serve data stored in any of several dif
   containing these handlers. For example, in order to serve
   netCDF data, the netCDF handler library must be available to Hyrax,
   and identified in its
-  link:../index.php/Hyrax_-_BES_Configuration[configuration file]. The
+  link:./Hyrax_-_BES_Configuration.txt[configuration file]. The
   handlers are shared libraries and are installed separately. Find
   instructions under
-  link:../index.php/Hyrax_-_BES_Configuration#Loading_Handlers[Loading
+  link:./Hyrax_-_BES_Configuration.txt#Loading_Handlers[Loading
   Handlers].
 
-Where the data lives:: A server equipped to serve data must be able to find that data. Lines in the bes.xml file identify the disk location of your data files. Hyrax can provide a limited amount of browsing capacity to users, through its link:../index.php/UserGuideOPeNDAPMessages#WWW_Interface_Service[WWW interface]. Access is specified by identifying directories where data resides. See link:../index.php/Hyrax_-_BES_Configuration[Pointing_to_data].
+Where the data lives:: A server equipped to serve data must be able to find that data. Lines in the bes.xml file identify the disk location of your data files. Hyrax can provide a limited amount of browsing capacity to users, through its link:./UserGuideOPeNDAPMessages.txt#WWW_Interface_Service[WWW interface]. Access is specified by identifying directories where data resides. See link:./Hyrax_-_BES_Configuration.txt[Pointing_to_data].
 
-What kinds of services:: Along with simply supplying data, Hyrax can supply several different services, including link:../index.php/UserGuideOPeNDAPMessages#ASCII_Service[serving the data as ASCII values], and the form-driven link:../index.php/UserGuideOPeNDAPMessages#WWW_Interface_Service[WWW interface]. The bes.xml file is used to specify the list of services. The drivers for these services are installed as part of the default installation of Hyrax, but they need to be chosen and identified in bes.xml. See instructions at link:../index.php/Hyrax_-_BES_Configuration#Loading_Handlers[Loading Handlers].
+What kinds of services:: Along with simply supplying data, Hyrax can supply several different services, including link:./UserGuideOPeNDAPMessages.txt#ASCII_Service[serving the data as ASCII values], and the form-driven link:./UserGuideOPeNDAPMessages.txt#WWW_Interface_Service[WWW interface]. The bes.xml file is used to specify the list of services. The drivers for these services are installed as part of the default installation of Hyrax, but they need to be chosen and identified in bes.xml. See instructions at link:./Hyrax_-_BES_Configuration.txt#Loading_Handlers[Loading Handlers].
 
 Once these three tasks are accomplished and data is moved into the
 appropriate directories, your server should be ready to provide data to
@@ -1745,7 +1737,7 @@ your data file. If you have data that is not in one of the supported file
 formats, consider writing format descriptions using FreeForm and
 serving the data that way.
 
-See the link:../index.php/FreeForm[FreeForm documentation] for more
+See the link:./FreeForm.txt[FreeForm documentation] for more
 information.
 
 .Installing OLFS
@@ -1753,24 +1745,24 @@ The OLFS is a Java servlet, so its installation involves installing the
 Tomcat servlet infrastructure and then configuring that with the OLFS.
 There are four configuration files, but unless your's is an unusual case,
 you will likely have to look at only two of them. See
-link:../index.php/Hyrax_-_OLFS_Configuration[Hyrax_-_OLFS_Configuration]
+link:./Hyrax_-_OLFS_Configuration.txt[Hyrax_-_OLFS_Configuration]
 for more information.
 
 Use the
-link:../index.php/Hyrax_-_OLFS_Configuration#olfs.xml_Configuration_File[olfs.xml]
+link:.//Hyrax_-_OLFS_Configuration.txt#olfs.xml_Configuration_File[olfs.xml]
 file to specify these important features of the OLFS operation:
 
-Address of BES:: The OLFS is the front door to data from the BES. Use the olfs.xml file to identify where to find this server. See the instructions for the link:../index.php/Hyrax_-_OLFS_Configuration#BESManager[BESManager].
+Address of BES:: The OLFS is the front door to data from the BES. Use the olfs.xml file to identify where to find this server. See the instructions for the link:./Hyrax_-_OLFS_Configuration.txt#BESManager[BESManager].
 
 Dispatch handlers:: The OLFS "offers" the incoming URL to a series of "dispatch handlers"
   until one accepts it and executes. This allows the OLFS to offer
   directory and catalog services as well as data services and more. Use
   the olfs.xml file to nominate the dispatch handlers (they come with
   the OLFS and do not need to be separately installed). See
-  link:../index.php/Hyrax_-_OLFS_Configuration#HTTP_GET_Handlers[handler instructions] for more.
+  link:./Hyrax_-_OLFS_Configuration.txt#HTTP_GET_Handlers[handler instructions] for more.
 
 Catalog requests:: The OLFS can handle
-  link:../index.php/Hyrax_-_THREDDS_Configuration[THREDDS] catalog
+  link:./Hyrax_-_THREDDS_Configuration.txt[THREDDS] catalog
   requests as well as directory requests, which are an older part of the DAP
   standard that also involves data about a collection of data files. The
   THREDDS information can be static (provided from a file) or dynamic
@@ -1779,13 +1771,13 @@ Catalog requests:: The OLFS can handle
 File access:: You may have individual files you want served intact via this server.
   These might include documentation of the data files or of the server.
   See
-  link:../index.php/Hyrax_-_OLFS_Configuration#File_Dispatch_Handler[File
+  link:./Hyrax_-_OLFS_Configuration.txt#File_Dispatch_Handler[File
   Dispatch Handler] instructions.
 
 There are additional features, such as a bot blocker and a version
 message as well as the experimental SOAP message handler. These are
 also configured with
-link:../index.php/Hyrax_-_OLFS_Configuration#olfs.xml_Configuration_File[olfs.xml].
+link:./Hyrax_-_OLFS_Configuration.txt#olfs.xml_Configuration_File[olfs.xml].
 
 The other configuration file that you might need to edit is
 http://www.unidata.ucar.edu/projects/THREDDS/tech/TDS.html[catalog.xml],
@@ -1800,19 +1792,18 @@ http://www.unidata.ucar.edu[UCAR]. It allows
 The default file will allow dynamic catalogs to be created and should
 allow your server to respond to THREDDS requests properly. You may want to serve a static THREDDS catalog as well. This can be done by
 editing the catalog.xml file, and you will find links to instructions for
-that at link:../index.php/Hyrax_-_THREDDS_Configuration[Hyrax - THREDDS
+that at link:./Hyrax_-_THREDDS_Configuration.txt[Hyrax - THREDDS
 Configuration].
 
 .Multiple BES Configuration
 You can configure a single OLFS to work with multiple BES instances.
 This enables rudimentary load balancing the isolation of data on one server or another. See the
-link:../index.php/Hyrax_-_Configuring_The_OLFS_To_Work_With_Multiple_BES%27s[Hyrax
+link:./Hyrax_-_Configuring_The_OLFS_To_Work_With_Multiple_BES%27s.txt[Hyrax
 configuration chapter] for more information on the subject.
   
 == OPeNDAP Client ==
 
-This section presents information about the parts of the OPeNDAP client, including a review of the available
-client software, from within as well as outside the OPeNDAP group.
+This section presents information about the parts of the OPeNDAP client, including a review of the available client software, from within as well as outside the OPeNDAP group.
   Developers interested in creating new OPeNDAP clients, as well as
   users who want to convert a program to a network-aware OPeNDAP client
   should read this chapter.
@@ -1842,8 +1833,8 @@ hard to find one you can use.
 In fact, though it can become clumsy for advanced applications, you can
 use an ordinary web browser as a client to most OPeNDAP servers, making
 use of the server's
-link:../index.php/UserGuideOPeNDAPMessages#WWW_Interface_Service[WWW
-interface]. The link:../index.php/QuickStart[Quick Start Guide] contains
+link:./UserGuideOPeNDAPMessages.txt#WWW_Interface_Service[WWW
+interface]. The link:./QuickStart.txt[Quick Start Guide] contains
 many examples of exactly this.
 
 After a basic web browser, the simplest clients to use are likely to be
@@ -1867,9 +1858,8 @@ about each one.
 
 OPeNDAP clients come in a variety of forms. The simplest are web
 browsers, who use the OPeNDAP
-link:../index.php/UserGuideOPeNDAPMessages#WWW_Interface_Service[WWW
-interface] and the
-[[link:../index.php/UserGuideOPeNDAPMessages#ASCII_Service[ASCII
+link:./UserGuideOPeNDAPMessages.txt#WWW_Interface_Service[WWW
+interface] and the link:./UserGuideOPeNDAPMessages.txt#ASCII_Service[ASCII
 response] to check out data sets and download data.
 
 Beyond these, there are three categories of client. The first contains
@@ -1934,8 +1924,7 @@ connected to the Internet by substituting a URL for the filename above:
 > ncdump http://dods.gso.uri.edu/cgi-bin/nc/data/fnocl.nc
 ---------------------------------------------------------
 
- 
- Aside from the fact that the data is remote, and must be specified with
+Aside from the fact that the data is remote, and must be specified with
 a URL, the program will seem to function in the same way it had with the
 simple netCDF library (albeit somewhat more slowly due to having to make
 network connections instead of local file operations).
@@ -1988,7 +1977,6 @@ The OPeNDAP libraries are functional equivalents of each other. They are
 derived from separate code bases, but they do the same thing. They are
 provided in different languages for the convenience of the implementer.
 
-
 .C++ Client Library
 The http://opendap.org/download/libdap++.html[C++ library], also called
 libdap, was the original client implementation of the OPeNDAP protocol.
@@ -1997,7 +1985,7 @@ source, as well as classes for each of the data types, and the other
 information (such as DAS and DDS) a client will encounter.
 
 To use the library, you will need to provide implementations for some
-abstract classes. Consult the link:../index.php/Libdap_Overview[libdap
+abstract classes. Consult the link:./Libdap_Overview.txt[libdap
 Overview] for an introduction to the basic concepts behind the use of
 this library. You will also find the
 http://www.opendap.org/api/pref/html/index.html[C++ library Reference]

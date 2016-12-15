@@ -433,7 +433,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#trueabout-this-guide">1. About This Guide</a>
 <ul class="sectlevel2">
 <li><a href="#truewhat-is-opendap">1.1. What is OPeNDAP</a></li>
-<li><a href="#truethe-opendap-client">1.2. The OPeNDAP Client</a></li>
+<li><a href="#truethe-opendap-client-server">1.2. The OPeNDAP Client/Server</a></li>
 <li><a href="#trueopendap-services">1.3. OPeNDAP Services</a></li>
 <li><a href="#truethe-opendap-server-hyrax">1.4. The OPeNDAP Server (Hyrax)</a></li>
 <li><a href="#trueadministration-and-centralization-of-data">1.5. Administration and Centralization of Data</a></li>
@@ -457,7 +457,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#trueopendap-client">5. OPeNDAP Client</a>
 <ul class="sectlevel2">
-<li><a href="#truethe-opendap-client-2">5.1. The OPeNDAP Client</a></li>
+<li><a href="#truethe-opendap-client">5.1. The OPeNDAP Client</a></li>
 </ul>
 </li>
 </ul>
@@ -502,7 +502,7 @@ the <a href="http://www.w3.org/hypertext/WWW/TheProject.html">World Wide Web</a>
 where client browsers submit requests to web servers for the data that
 compose web pages. Using flexible, multi-purpose data types,
 including scientific data, OPeNDAP servers deliver real data
-directly to client programs in the format needed by that client.</p>
+directly to client programs in the format needed by that client. OPeNDAP can return data in the following formats: NetCDF, GeoTIFF, JPEG2000, JSON, ASCII.</p>
 </div>
 <div class="paragraph">
 <p>OPeNDAP clients are very specialized browsers, constructed by linking
@@ -522,7 +522,7 @@ structures and formats that are defined by the data provider but can be accessed
 users just like they access of local data files on the
 user&#8217;s own system. Alhough there are limitations on the types of data
 that may be translated (see
-<a href="../index.php/UserGuideDataModel#Translation">Translation</a>), the
+<a href="./UserGuideDataModel.txt#Translation">Translation</a>), the
 facility is flexible and general enough to handle many translations. The upshot of this is&#8230;&#8203;</p>
 </div>
 <div class="ulist">
@@ -564,7 +564,7 @@ OPeNDAP, as do many of the real-time observing systems that make up the
 </div>
 </div>
 <div class="sect2">
-<h3 id="truethe-opendap-client"><a class="anchor" href="#truethe-opendap-client"></a>1.2. The OPeNDAP Client</h3>
+<h3 id="truethe-opendap-client-server"><a class="anchor" href="#truethe-opendap-client-server"></a>1.2. The OPeNDAP Client/Server</h3>
 <div class="paragraph">
 <p>OPeNDAP uses a client/server model. The OPeNDAP servers are web servers
 equipped to interpret an OPeNDAP URL sent to them. An OPeNDAP client
@@ -584,7 +584,7 @@ same host machine. Some APIs are somewhat more sophisticated than this, but thei
 </div>
 <div class="paragraph">
 <div class="title">The Architecture of a Data Analysis Package</div>
-<p><span class="image"><img src="../images/7/76/Unlinked.png" alt="Unlinked.png"></span></p>
+<p><span class="image"><img src="./images/Unlinked.png" alt="Unlinked.png"></span></p>
 </div>
 <div class="paragraph">
 <p>The operation of an OPeNDAP client is illustrated in the The Architecture of a Data Analysis Package Using OPeNDAP figure, shown below. Here, the <em>same program</em> that was used in The Architecture of a Data Analysis Package
@@ -596,18 +596,18 @@ Now, in addition to being able to use local data as before, the program is able 
 supported legacy API libraries, like netCDF, you can link with the
 OPeNDAP version of that library.) This will create a program that
 accepts URLs as well as file pathnames to identify needed data. (See
-<a href="../index.php/UserGuideClient">the OPeNDAP Client</a>).</p>
+<a href="./UserGuideClient.txt">the OPeNDAP Client</a>).</p>
 </div>
 <div class="paragraph">
 <div class="title">The Architecture of a Data Analysis Package Using OPeNDAP</div>
-<p><span class="image"><img src="../images/8/87/Linked.png" alt="Linked.png"></span></p>
+<p><span class="image"><img src="./images/Linked.png" alt="Linked.png"></span></p>
 </div>
 <div class="paragraph">
 <p>OPeNDAP also provides data translation functionality. Data from the
 original data file is translated by the OPeNDAP server into the OPeNDAP
 data model for transmission to the client. Upon receiving the data, the
 client translates the data into the
-<a href="../index.php/UserGuideDataModel">data model</a> it understands. Because
+<a href="./UserGuideDataModel.txt">data model</a> it understands. Because
 the data transmitted from an OPeNDAP server to the client travel in the
 OPeNDAP format, the dataset&#8217;s original storage format is completely
 irrelevant to the client. For example, if the client was originally designed to read
@@ -647,15 +647,15 @@ required messages. Following are the requests messages a server is required to u
 <dl>
 <dt class="hdlist1">Data Description</dt>
 <dd>
-<p>Data values come in types and sizes. An array, for example, might consist of 10 integers. The value "ten" and the type "integer" describe the array. This request returns information about data types, so that a receiving program can allocate space appropriately. See <a href="../index.php/UserGuideOPeNDAPMessages#Dataset_Descriptor_Structure">Data Description Structure (DDS)</a>.</p>
+<p>Data values come in types and sizes. An array, for example, might consist of 10 integers. The value "ten" and the type "integer" describe the array. This request returns information about data types, so that a receiving program can allocate space appropriately. See <a href="./UserGuideOPeNDAPMessages.txt#Dataset_Descriptor_Structure">Data Description Structure (DDS)</a>.</p>
 </dd>
 <dt class="hdlist1">Data Attribute</dt>
 <dd>
-<p>This is a request to provide information <em>about</em> data and typically includes information like units, names of data types, reference information and so on. See <a href="../index.php/UserGuideDataModel#DAS">Data Attribute Structure (DAS)</a>.</p>
+<p>This is a request to provide information <em>about</em> data and typically includes information like units, names of data types, reference information and so on. See <a href="./UserGuideDataModel.txt#DAS">Data Attribute Structure (DAS)</a>.</p>
 </dd>
 <dt class="hdlist1">Data</dt>
 <dd>
-<p>The server also must be able to respond to a request for the data itself. See <a href="../index.php/UserGuideDataModel#DataDDS">data response</a>.</p>
+<p>The server also must be able to respond to a request for the data itself. See <a href="./UserGuideDataModel.txt#DataDDS">data response</a>.</p>
 </dd>
 </dl>
 </div>
@@ -666,23 +666,23 @@ required messages. Following are the requests messages a server is required to u
 <dl>
 <dt class="hdlist1">ASCII</dt>
 <dd>
-<p>Some servers can convert data to ASCII values on the fly. This allows users to view data using a standard web browser, assuming the data are not too large. See <a href="../index.php/UserGuideServer#ASCII">ASCII return</a>.</p>
+<p>Some servers can convert data to ASCII values on the fly. This allows users to view data using a standard web browser, assuming the data are not too large. See <a href="./UserGuideServer.txt#ASCII">ASCII return</a>.</p>
 </dd>
 <dt class="hdlist1">Info</dt>
 <dd>
-<p>The info response is a formatted page containing information from the Data Attributes and Data Description responses. It is meant to be a human-readable means to show what is available in a dataset via a standard web browser. See <a href="../index.php/UserGuideServer#Info">Info response</a>.</p>
+<p>The info response is a formatted page containing information from the Data Attributes and Data Description responses. It is meant to be a human-readable means to show what is available in a dataset via a standard web browser. See <a href="./UserGuideServer.txt#Info">Info response</a>.</p>
 </dd>
 <dt class="hdlist1">HTML</dt>
 <dd>
-<p>Very similar to the info response, the HTML response provides the information from the info response and also includes a Javascript form to help you build a request for data from the same data file. The best description of the HTML form is in the <a href="../index.php/QuickStart">Quick Start Guide</a>.</p>
+<p>Very similar to the info response, the HTML response provides the information from the info response and also includes a Javascript form to help you build a request for data from the same data file. The best description of the HTML form is in the <a href="./QuickStart.txt">Quick Start Guide</a>.</p>
 </dd>
 <dt class="hdlist1">SOAP</dt>
 <dd>
-<p>OPeNDAP servers can provide their data in terms of a SOAP request and response. For more information see <a href="../index.php/UserGuideDataModel#SOAP">SOAP Request</a>.</p>
+<p>OPeNDAP servers can provide their data in terms of a SOAP request and response. For more information see <a href="./UserGuideDataModel.txt#SOAP">SOAP Request</a>.</p>
 </dd>
 <dt class="hdlist1">DDX</dt>
 <dd>
-<p>The DDX is an XML version of the Data Attribute and Data Description replies. See <a href="../index.php/UserGuideServer#DDX">DDX Request</a>.</p>
+<p>The DDX is an XML version of the Data Attribute and Data Description replies. See <a href="./UserGuideServer.txt#DDX">DDX Request</a>.</p>
 </dd>
 </dl>
 </div>
@@ -737,19 +737,19 @@ Most users will not make requests directly to the BES.
 </div>
 <div class="paragraph">
 <div class="title">Hyrax Architecture</div>
-<p><span class="image"><img src="../images/thumb/c/c5/HyraxArchitecture.jpg/600px-HyraxArchitecture.jpg" alt="600px HyraxArchitecture.jpg"></span></p>
+<p><span class="image"><img src="./images/600px-HyraxArchitecture.jpg" alt="600px HyraxArchitecture.jpg"></span></p>
 </div>
 <div class="paragraph">
 <p><em>Hyrax</em> is an alternative name for the OPeNDAP 4 Data Server.</p>
 </div>
 <div class="paragraph">
-<p>See <a href="../index.php/UserGuideDataModel">Data Model</a> for a description
+<p>See <a href="./UserGuideDataModel.txt">Data Model</a> for a description
 of the data returned by requests and see
-<a href="../index.php/UserGuideServer">OPeNDAP Server</a> for a description of
+<a href="./UserGuideServer.txt">OPeNDAP Server</a> for a description of
 the URL syntax used to send requests.</p>
 </div>
 <div class="paragraph">
-<p>See <a href="../index.php/Hyrax">the OPeNDAP 4 Data Server documentation</a> for
+<p>See <a href="./Hyrax.txt">the OPeNDAP 4 Data Server documentation</a> for
 a description of how to install and configure an OPeNDAP data server
 (Hyrax).</p>
 </div>
@@ -946,7 +946,7 @@ infinite number of data models. The examples above use the OPeNDAP
 Dataset Descriptor Structure (DDS) format, which will become important
 in later discussions of the details of the OPeNDAP Data Access Protocol.
 The precise details of the DDS syntax are described in
-<a href="../index.php/UserGuideOPeNDAPMessages#Dataset_Descriptor_Structure">DDS</a>.</p>
+<a href="./UserGuideOPeNDAPMessage.txts#Dataset_Descriptor_Structure">DDS</a>.</p>
 </div>
 <div class="sect4">
 <h5 id="truedata-models-and-apis"><a class="anchor" href="#truedata-models-and-apis"></a>Data Models and APIs</h5>
@@ -989,8 +989,7 @@ still useful despite their inherent information loss.</p>
 </div>
 <div class="paragraph">
 <p>For example, consider a relational structure below, which contains two nested
-Sequences. The outer sequence represents all the XBT drops in a cruise; the inner sequence represents each XBT drop. The JGOFS API was
-designed to use this sort of data type.</p>
+Sequences. The outer sequence represents all the XBT drops in a cruise; the inner sequence represents each XBT drop. The JGOFS API was designed to use this sort of data type.</p>
 </div>
 <div class="listingblock">
 <div class="title">Example Data Description of XBT Cruise</div>
@@ -1108,7 +1107,7 @@ designed to implement the protocol,</p>
 </div>
 <div class="paragraph">
 <p>The intermediate data representation and the ancillary data formats are
-introduced in <a href="../index.php/UserGuideOPeNDAPMessages">OPeNDAP
+introduced in <a href="./UserGuideOPeNDAPMessages.txt">OPeNDAP
 Messages</a>, as are the steps of the procedure. The actual details of the
 software used to implement these formats and procedures is a subject of
 the documentation of the respective software.</p>
@@ -1238,7 +1237,7 @@ in ANSI C when that type is implemented as 32 bits.</p>
 </div>
 <div class="paragraph">
 <p>The declaration in a
-<a href="../index.php/UserGuideOPeNDAPMessages#Data_Descriptor_Structure">DDS</a>
+<a href="./UserGuideOPeNDAPMessages.txt#Data_Descriptor_Structure">DDS</a>
 of a variable of any of the base types is simply the type of the
 variable followed by its name and a semicolon. For example, to declare
 a month variable to be a 32-bit integer, you would type&#8230;&#8203;</p>
@@ -1296,8 +1295,7 @@ array temp[2:3:10][3:4] would select from every third row, and so on.
 </table>
 </div>
 <div class="paragraph">
-<p>A <a href="../index.php/UserGuideOPeNDAPMessages#Data_Descriptor_Structure">DDS</a>
-declaration of a 5x6 array of floating point numbers would look like this:</p>
+<p>A DDS declaration of a 5x6 array of floating point numbers would look like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1323,8 +1321,7 @@ together into a single dataset. The "dataset" class name is a synonym
 for structure.</p>
 </div>
 <div class="paragraph">
-<p>A <a href="../index.php/UserGuideOPeNDAPMessages#Data_Descriptor_Structure">DDS</a>
-Structure declaration containing some data and the month in which the
+<p>A DDS Structure declaration containing some data and the month in which the
 data was taken might look like this:</p>
 </div>
 <div class="listingblock">
@@ -1465,7 +1462,7 @@ must be described.</p>
 </div>
 <div class="paragraph">
 <div class="title">A Sample of an Irregular Grid of Data</div>
-<p><span class="image"><img src="../images/6/64/Grid.gif" alt="Grid.gif"></span></p>
+<p><span class="image"><img src="./Images/Grid.gif" alt="Grid.gif"></span></p>
 </div>
 <div class="paragraph">
 <p>The secondary vectors in the Grid data type provide a solution to this
@@ -1580,7 +1577,7 @@ variables.</p>
 </tbody>
 </table>
 <div class="paragraph">
-<p>A base type variable is always either transmitted or not. You will not see a fraction of an String type transmitted. Constructor type variables, being composed of the bast type variables, are transmitted as sets of base type variables, and these may be sampled, with a <a href="../index.php/UserGuideOPeNDAPMessages#Constraint_Expression">constraint expression</a>.</p>
+<p>A base type variable is always either transmitted or not. You will not see a fraction of an String type transmitted. Constructor type variables, being composed of the bast type variables, are transmitted as sets of base type variables, and these may be sampled, with a <a href="./UserGuideOPeNDAPMessages.txt#Constraint_Expression">constraint expression</a>.</p>
 </div>
 <div class="paragraph">
 <p>Constraint expressions do not affect <em>how</em> a base-type variable is
@@ -1607,9 +1604,7 @@ Array of 100 Int32s is sent as a single block of 100 xdr longs, not
 <dt class="hdlist1">Structure</dt>
 <dd>
 <p>A Structure is sent by encoding each field in the order those fields
-are declared in the
-<a href="../index.php/UserGuideOPeNDAPMessages#Data_Descriptor_Structure">DDS</a>
-and transmitting the resulting block of bytes.</p>
+are declared in the DDS and transmitting the resulting block of bytes.</p>
 </dd>
 <dt class="hdlist1">Sequence</dt>
 <dd>
@@ -1804,7 +1799,7 @@ http:/tests.opendap.org/data/mydata.dat.dds</p>
 </div>
 <div class="paragraph">
 <p>An example DDS entry is shown below. (There are more in
-<a href="../index.php/UserGuideDataModel">Data_Models</a>, where there&#8217;s also an
+<a href="./UserGuideDataModel.txt">Data_Models</a>, where there&#8217;s also an
 explanation of the information implied by the data model.)</p>
 </div>
 <div class="listingblock">
@@ -2116,9 +2111,8 @@ you&#8217;ll find the data at http:/tests.opendap.org/data/mydata.dat.dods</p>
 </div>
 <div class="paragraph">
 <p>The data is returned in a MIME document that consists of two parts: the
-<a href="../index.php/UserGuideOPeNDAPMessages#Data_Descriptor_Structure">DDS</a>,
-and the data encoded according to the description in
-<a href="../index.php/UserGuideDataModel#External_Data_Representation">External
+DDS and the data encoded according to the description in
+<a href="./UserGuideDataModel.txt#External_Data_Representation">External
 Data Representation</a>. (The returned document is sometimes called the
 DataDDS.) The two parts are separated by this string:</p>
 </div>
@@ -2126,8 +2120,7 @@ DataDDS.) The two parts are separated by this string:</p>
 <p>Data:&lt;CR&gt;&lt;NL&gt;</p>
 </div>
 <div class="paragraph">
-<p>The DDS included is modified according to any
-<a href="#Constraint_Expression">constraint expression</a> that may have been
+<p>The DDS included is modified according to any constraint expression that may have been
 applied. That is, the returned DDS describes the returned data.</p>
 </div>
 <div class="paragraph">
@@ -2212,7 +2205,7 @@ While ASCII is fine for moving small amounts of data, it generally is best to mo
 </table>
 </div>
 <div class="paragraph">
-<p>The <a href="../index.php/QuickStart">Quick Start Guide</a> contains examples of the ASCII response.</p>
+<p>The <a href="./QuickStart.txt">Quick Start Guide</a> contains examples of the ASCII response.</p>
 </div>
 </div>
 <div class="sect4">
@@ -2247,7 +2240,7 @@ form to download data.</p>
 </div>
 <div class="paragraph">
 <div class="title">OPeNDAP Server Data Access Form</div>
-<p><span class="image"><img src="../images/0/05/Reynolds_ifh.png" alt="Reynolds ifh.png"></span></p>
+<p><span class="image"><img src="./images/Reynolds_ifh.png" alt="Reynolds ifh.png"></span></p>
 </div>
 <div class="paragraph">
 <p>If a server receives a URL that either ends in a slash (/) or
@@ -2255,14 +2248,14 @@ contents.html, it returns a web page that looks like a standard web
 browser&#8217;s directory view.</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="../images/9/9e/Test.oopendap.org_directory_view.png" alt="Test.oopendap.org directory view.png"></span></p>
+<p><span class="image"><img src="./images/Test.oopendap.org_directory_view.png" alt="Test.oopendap.org directory view.png"></span></p>
 </div>
 <div class="paragraph">
 <p>Each link in the directory view opens up the WWW service version of that
 data.</p>
 </div>
 <div class="paragraph">
-<p>The <a href="../index.php/QuickStart#An_Easier_Way">Quick Start Guide</a>
+<p>The <a href="./QuickStart.html">Quick Start Guide</a>
 contains more information about browsing OPeNDAP data interactively.</p>
 </div>
 </div>
@@ -2414,8 +2407,7 @@ can also include functional expressions of the form&#8230;&#8203;</p>
 <p>&#8230;&#8203;where the arguments are variables from the dataset, scalar values, or other functions. (See Constraint Expression Functions below.)</p>
 </div>
 <div class="paragraph">
-<p>A <strong>selection</strong> expression leads with an ampersand and is a boolean expression of the form "variable operator variable", "variable operator
-value" or "function(arg_1,arg_2,&#8230;&#8203;,arg_n)", where&#8230;&#8203;</p>
+<p>A <strong>selection</strong> expression leads with an ampersand and is a boolean expression of the form "variable operator variable", "variable operator value" or "function(arg_1,arg_2,&#8230;&#8203;,arg_n)", where&#8230;&#8203;</p>
 </div>
 <div class="dlist">
 <dl>
@@ -2670,7 +2662,7 @@ the operator matches the regular expression on the right. See <em>Pattern Matchi
 <div class="paragraph">
 <p>The array operator [] is used to subsample the given array. You can find
 several examples of its use in the
-<a href="../index.php/QuickStart#Peeking_at_Data">Quick Start Guide</a>.</p>
+<a href="./QuickStart.txt#Peeking_at_Data">Quick Start Guide</a>.</p>
 </div>
 </div>
 <div class="sect4">
@@ -2887,13 +2879,13 @@ necessary to evaluate the constraint expression.</p>
 <h3 id="truethe-opendap-server"><a class="anchor" href="#truethe-opendap-server"></a>4.1. The OPeNDAP Server</h3>
 <div class="paragraph">
 <p>Any server that responds to the messages described in
-<a href="../index.php/UserGuideOPeNDAPMessages">OPeNDAP Messages</a> using the
-<a href="../index.php/UserGuideDataModel">OPeNDAP Data Model</a> is an OPeNDAP server. The messages and the data model are published standards, available to anyone.</p>
+<a href="./UserGuideOPeNDAPMessages.txt">OPeNDAP Messages</a> using the
+<a href="./UserGuideDataModel.txt">OPeNDAP Data Model</a> is an OPeNDAP server. The messages and the data model are published standards, available to anyone.</p>
 </div>
 <div class="paragraph">
-<p>The OPeNDAP group, in addition to publishing and maintaining the
-standards described here, maintains a server that complies with the
-standard. This is <a href="../index.php/Hyrax">Hyrax</a>.</p>
+<p>In addition to publishing and maintaining the
+standards described here, the OPeNDAP group maintains a server that complies with the
+standard. This is <a href="./Hyrax">Hyrax</a>.</p>
 </div>
 <div class="sect3">
 <h4 id="truehyrax"><a class="anchor" href="#truehyrax"></a>4.1.1. Hyrax</h4>
@@ -2925,7 +2917,7 @@ can also construct complex data requests from multiple requests from its
 parner server.</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="../images/thumb/c/c5/HyraxArchitecture.jpg/300px-HyraxArchitecture.jpg" alt="300px HyraxArchitecture.jpg"></span></p>
+<p><span class="image"><img src="./images/300px-HyraxArchitecture.jpg" alt="300px HyraxArchitecture.jpg"></span></p>
 </div>
 <div class="paragraph">
 <p>This "engine room" server, called the <strong>B</strong>ack <strong>E</strong>nd <strong>S</strong>erver (BES), does
@@ -2949,7 +2941,7 @@ sending requests directly to the BES.</p>
 <div class="sect4">
 <h5 id="trueinstalling-hyrax"><a class="anchor" href="#trueinstalling-hyrax"></a>Installing Hyrax</h5>
 <div class="paragraph">
-<p>The two parts of <a href="../index.php/Hyrax">Hyrax</a> are installed by
+<p>The two parts of <a href="./Hyrax.txt">Hyrax</a> are installed by
 the same script. However, because they are discrete, they may require
 different kinds of attention from an administrator. Testing OLFS
 requires a working BES, so it is best to start the post-unpacking
@@ -2964,7 +2956,7 @@ execute it.</p>
 <div class="paragraph">
 <p>After that, there are several configuration options that you will need
 to address by installing software on your computer and by editing the
-<a href="../index.php/Hyrax_-_BES_Configuration">Hyrax configuration file</a>,
+<a href="./Hyrax_-_BES_Configuration.txt">Hyrax configuration file</a>,
 called bes.xml. Details of these options are in the Hyrax documentation, but following are the
 decisions you&#8217;ll have to make:</p>
 </div>
@@ -2978,19 +2970,19 @@ its own handler, and your computer must have shared libraries
 containing these handlers. For example, in order to serve
 netCDF data, the netCDF handler library must be available to Hyrax,
 and identified in its
-<a href="../index.php/Hyrax_-<em>BES_Configuration">configuration file</a>. The
+<a href="./Hyrax_-<em>BES_Configuration.txt">configuration file</a>. The
 handlers are shared libraries and are installed separately. Find
 instructions under
-<a href="../index.php/Hyrax</em>-_BES_Configuration#Loading_Handlers">Loading
+<a href="./Hyrax</em>-_BES_Configuration.txt#Loading_Handlers">Loading
 Handlers</a>.</p>
 </dd>
 <dt class="hdlist1">Where the data lives</dt>
 <dd>
-<p>A server equipped to serve data must be able to find that data. Lines in the bes.xml file identify the disk location of your data files. Hyrax can provide a limited amount of browsing capacity to users, through its <a href="../index.php/UserGuideOPeNDAPMessages#WWW_Interface_Service">WWW interface</a>. Access is specified by identifying directories where data resides. See <a href="../index.php/Hyrax_-_BES_Configuration">Pointing_to_data</a>.</p>
+<p>A server equipped to serve data must be able to find that data. Lines in the bes.xml file identify the disk location of your data files. Hyrax can provide a limited amount of browsing capacity to users, through its <a href="./UserGuideOPeNDAPMessages.txt#WWW_Interface_Service">WWW interface</a>. Access is specified by identifying directories where data resides. See <a href="./Hyrax_-_BES_Configuration.txt">Pointing_to_data</a>.</p>
 </dd>
 <dt class="hdlist1">What kinds of services</dt>
 <dd>
-<p>Along with simply supplying data, Hyrax can supply several different services, including <a href="../index.php/UserGuideOPeNDAPMessages#ASCII_Service">serving the data as ASCII values</a>, and the form-driven <a href="../index.php/UserGuideOPeNDAPMessages#WWW_Interface_Service">WWW interface</a>. The bes.xml file is used to specify the list of services. The drivers for these services are installed as part of the default installation of Hyrax, but they need to be chosen and identified in bes.xml. See instructions at <a href="../index.php/Hyrax_-_BES_Configuration#Loading_Handlers">Loading Handlers</a>.</p>
+<p>Along with simply supplying data, Hyrax can supply several different services, including <a href="./UserGuideOPeNDAPMessages.txt#ASCII_Service">serving the data as ASCII values</a>, and the form-driven <a href="./UserGuideOPeNDAPMessages.txt#WWW_Interface_Service">WWW interface</a>. The bes.xml file is used to specify the list of services. The drivers for these services are installed as part of the default installation of Hyrax, but they need to be chosen and identified in bes.xml. See instructions at <a href="./Hyrax_-_BES_Configuration.txt#Loading_Handlers">Loading Handlers</a>.</p>
 </dd>
 </dl>
 </div>
@@ -3009,7 +3001,7 @@ formats, consider writing format descriptions using FreeForm and
 serving the data that way.</p>
 </div>
 <div class="paragraph">
-<p>See the <a href="../index.php/FreeForm">FreeForm documentation</a> for more
+<p>See the <a href="./FreeForm.txt">FreeForm documentation</a> for more
 information.</p>
 </div>
 <div class="paragraph">
@@ -3018,19 +3010,19 @@ information.</p>
 Tomcat servlet infrastructure and then configuring that with the OLFS.
 There are four configuration files, but unless your&#8217;s is an unusual case,
 you will likely have to look at only two of them. See
-<a href="../index.php/Hyrax_-<em>OLFS_Configuration">Hyrax</em>-_OLFS_Configuration</a>
+<a href="./Hyrax_-<em>OLFS_Configuration.txt">Hyrax</em>-_OLFS_Configuration</a>
 for more information.</p>
 </div>
 <div class="paragraph">
 <p>Use the
-<a href="../index.php/Hyrax_-_OLFS_Configuration#olfs.xml_Configuration_File">olfs.xml</a>
+<a href=".//Hyrax_-_OLFS_Configuration.txt#olfs.xml_Configuration_File">olfs.xml</a>
 file to specify these important features of the OLFS operation:</p>
 </div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Address of BES</dt>
 <dd>
-<p>The OLFS is the front door to data from the BES. Use the olfs.xml file to identify where to find this server. See the instructions for the <a href="../index.php/Hyrax_-_OLFS_Configuration#BESManager">BESManager</a>.</p>
+<p>The OLFS is the front door to data from the BES. Use the olfs.xml file to identify where to find this server. See the instructions for the <a href="./Hyrax_-_OLFS_Configuration.txt#BESManager">BESManager</a>.</p>
 </dd>
 <dt class="hdlist1">Dispatch handlers</dt>
 <dd>
@@ -3039,12 +3031,12 @@ until one accepts it and executes. This allows the OLFS to offer
 directory and catalog services as well as data services and more. Use
 the olfs.xml file to nominate the dispatch handlers (they come with
 the OLFS and do not need to be separately installed). See
-<a href="../index.php/Hyrax_-_OLFS_Configuration#HTTP_GET_Handlers">handler instructions</a> for more.</p>
+<a href="./Hyrax_-_OLFS_Configuration.txt#HTTP_GET_Handlers">handler instructions</a> for more.</p>
 </dd>
 <dt class="hdlist1">Catalog requests</dt>
 <dd>
 <p>The OLFS can handle
-<a href="../index.php/Hyrax_-_THREDDS_Configuration">THREDDS</a> catalog
+<a href="./Hyrax_-_THREDDS_Configuration.txt">THREDDS</a> catalog
 requests as well as directory requests, which are an older part of the DAP
 standard that also involves data about a collection of data files. The
 THREDDS information can be static (provided from a file) or dynamic
@@ -3055,7 +3047,7 @@ THREDDS information can be static (provided from a file) or dynamic
 <p>You may have individual files you want served intact via this server.
 These might include documentation of the data files or of the server.
 See
-<a href="../index.php/Hyrax_-_OLFS_Configuration#File_Dispatch_Handler">File
+<a href="./Hyrax_-_OLFS_Configuration.txt#File_Dispatch_Handler">File
 Dispatch Handler</a> instructions.</p>
 </dd>
 </dl>
@@ -3064,7 +3056,7 @@ Dispatch Handler</a> instructions.</p>
 <p>There are additional features, such as a bot blocker and a version
 message as well as the experimental SOAP message handler. These are
 also configured with
-<a href="../index.php/Hyrax_-_OLFS_Configuration#olfs.xml_Configuration_File">olfs.xml</a>.</p>
+<a href="./Hyrax_-_OLFS_Configuration.txt#olfs.xml_Configuration_File">olfs.xml</a>.</p>
 </div>
 <div class="paragraph">
 <p>The other configuration file that you might need to edit is
@@ -3081,14 +3073,14 @@ catalog standard for scientific data promoted by scientists at
 <p>The default file will allow dynamic catalogs to be created and should
 allow your server to respond to THREDDS requests properly. You may want to serve a static THREDDS catalog as well. This can be done by
 editing the catalog.xml file, and you will find links to instructions for
-that at <a href="../index.php/Hyrax_-_THREDDS_Configuration">Hyrax - THREDDS
+that at <a href="./Hyrax_-_THREDDS_Configuration.txt">Hyrax - THREDDS
 Configuration</a>.</p>
 </div>
 <div class="paragraph">
 <div class="title">Multiple BES Configuration</div>
 <p>You can configure a single OLFS to work with multiple BES instances.
 This enables rudimentary load balancing the isolation of data on one server or another. See the
-<a href="../index.php/Hyrax_-_Configuring_The_OLFS_To_Work_With_Multiple_BES%27s">Hyrax
+<a href="./Hyrax_-_Configuring_The_OLFS_To_Work_With_Multiple_BES%27s.txt">Hyrax
 configuration chapter</a> for more information on the subject.</p>
 </div>
 </div>
@@ -3100,14 +3092,13 @@ configuration chapter</a> for more information on the subject.</p>
 <h2 id="trueopendap-client"><a class="anchor" href="#trueopendap-client"></a>5. OPeNDAP Client</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This section presents information about the parts of the OPeNDAP client, including a review of the available
-client software, from within as well as outside the OPeNDAP group.
+<p>This section presents information about the parts of the OPeNDAP client, including a review of the available client software, from within as well as outside the OPeNDAP group.
   Developers interested in creating new OPeNDAP clients, as well as
   users who want to convert a program to a network-aware OPeNDAP client
   should read this chapter.</p>
 </div>
 <div class="sect2">
-<h3 id="truethe-opendap-client-2"><a class="anchor" href="#truethe-opendap-client-2"></a>5.1. The OPeNDAP Client</h3>
+<h3 id="truethe-opendap-client"><a class="anchor" href="#truethe-opendap-client"></a>5.1. The OPeNDAP Client</h3>
 <div class="paragraph">
 <p>The OPeNDAP client is the program that sends a message to an OPeNDAP
 server in order to get some data, or other information.</p>
@@ -3136,8 +3127,8 @@ hard to find one you can use.</p>
 <p>In fact, though it can become clumsy for advanced applications, you can
 use an ordinary web browser as a client to most OPeNDAP servers, making
 use of the server&#8217;s
-<a href="../index.php/UserGuideOPeNDAPMessages#WWW_Interface_Service">WWW
-interface</a>. The <a href="../index.php/QuickStart">Quick Start Guide</a> contains
+<a href="./UserGuideOPeNDAPMessages.txt#WWW_Interface_Service">WWW
+interface</a>. The <a href="./QuickStart.txt">Quick Start Guide</a> contains
 many examples of exactly this.</p>
 </div>
 <div class="paragraph">
@@ -3165,9 +3156,8 @@ about each one.</p>
 <div class="paragraph">
 <p>OPeNDAP clients come in a variety of forms. The simplest are web
 browsers, who use the OPeNDAP
-<a href="../index.php/UserGuideOPeNDAPMessages#WWW_Interface_Service">WWW
-interface</a> and the
-[[<a href="../index.php/UserGuideOPeNDAPMessages#ASCII_Service">ASCII
+<a href="./UserGuideOPeNDAPMessages.txt#WWW_Interface_Service">WWW
+interface</a> and the <a href="./UserGuideOPeNDAPMessages.txt#ASCII_Service">ASCII
 response</a> to check out data sets and download data.</p>
 </div>
 <div class="paragraph">
@@ -3180,28 +3170,23 @@ an existing body of code into an OPeNDAP client. These are reviewed in
 that order below:</p>
 </div>
 <div class="sect4">
-<h5 id="truematlab-idl-ferret-grads"><a class="anchor" href="#truematlab-idl-ferret-grads"></a>Matlab, IDL, Ferret, GrADS</h5>
+<h5 id="truenetcdf-compliant-tools-e-g-matlab-r-idl-idv-and-panoply"><a class="anchor" href="#truenetcdf-compliant-tools-e-g-matlab-r-idl-idv-and-panoply"></a>NetCDF Compliant Tools (e.g., Matlab, R, IDL, IDV, and Panoply)</h5>
 <div class="paragraph">
-<p>To use OPeNDAP with Matlab or IDL, you&#8217;ll need the client for each. This
-is a special program that issues a request for data from an OPeNDAP
-server, and imports it into the environment. Links to
-<a href="http://opendap.org/download/ml-structs.html">the Matlab client</a> and
-<a href="http://opendap.org/download/idl-client.html">the IDL client</a> can be found
-on the [http;//opendap.org/download/index.html OPeNDAP software download
-page].</p>
+<p>Any tool that uses the C NetCDF API will work with OPeNDAP. For example, Matlab has built-in support for OPeNDAP; Matlab supported NetCDF calls can be used with DAP datasets. Other tools that are built on NetCDF API also read data from OPeNDAP servers. A free tool similar to Matlab, <a href="https://www.gnu.org/software/octave/">GNU Octave</a>, is also supported. The <a href="https://www.r-project.org/">R Project</a> for Statistical Computing can also read data from OPeNDAP servers. The <a href="http://ferret.wrc.noaa.gov/Ferret">Ferret</a> and
+<a href="http://cola.gmu.edu/grads/">GrADS</a> free data analysis packages both
+support OPeNDAP. You can use these for dowloading OPeNDAP data and for
+examining it afterwards. (There are limitations. For example, Ferret may not be able to read datasets served as Sequence data.)</p>
 </div>
 <div class="paragraph">
-<p>Using OPeNDAP data with the <a href="http://www.iges.org/grads">GrADS</a> or
-<a href="http://ferret.wrc.noaa.gov/Ferret">Ferret</a> packages is even easier.
-Because these packages are based on the netCDF library, and because that
-library now supports reading OPeNDAP data sets, these packages can read
-OPeNDAP URLs as easily as they read local files.</p>
+<p>Other tools, that are Java NetCDF compliant, also function with OPeNDAP clients; for example, <a href="http://www.unidata.ucar.edu/software/idv/">IDV</a> and <a href="http://www.giss.nasa.gov/tools/panoply/">Panoply</a>.</p>
 </div>
 <div class="paragraph">
-<p>Special note. If you&#8217;re using the Matlab client, and using it for
-oceanographic data, you may be interested in the graphical user
-interface available for it. See [<a href="http://oceanographicdata.org/toolbox" class="bare">http://oceanographicdata.org/toolbox</a>
-Matlab OPeNDAP Ocean Toolbox].</p>
+<div class="title">Panoply</div>
+<p>Download Panoply and install
+Enter a URL and it will work or not</p>
+</div>
+<div class="paragraph">
+<p>Open Dataset catalog: When you use the URL for the root of a server, you can examine the entire contents (all of the datasets) of the server.</p>
 </div>
 </div>
 <div class="sect4">
@@ -3247,13 +3232,11 @@ connected to the Internet by substituting a URL for the filename above:</p>
 <pre>&gt; ncdump http://dods.gso.uri.edu/cgi-bin/nc/data/fnocl.nc</pre>
 </div>
 </div>
-<div class="literalblock">
-<div class="content">
-<pre> Aside from the fact that the data is remote, and must be specified with
+<div class="paragraph">
+<p>Aside from the fact that the data is remote, and must be specified with
 a URL, the program will seem to function in the same way it had with the
 simple netCDF library (albeit somewhat more slowly due to having to make
-network connections instead of local file operations).</pre>
-</div>
+network connections instead of local file operations).</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3317,7 +3300,7 @@ information (such as DAS and DDS) a client will encounter.</p>
 </div>
 <div class="paragraph">
 <p>To use the library, you will need to provide implementations for some
-abstract classes. Consult the <a href="../index.php/Libdap_Overview">libdap
+abstract classes. Consult the <a href="./Libdap_Overview.txt">libdap
 Overview</a> for an introduction to the basic concepts behind the use of
 this library. You will also find the
 <a href="http://www.opendap.org/api/pref/html/index.html">C++ library Reference</a>
@@ -3368,7 +3351,7 @@ more information about it.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-12-09 16:02:57 CST
+Last updated 2016-12-14 22:34:45 CST
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css">
