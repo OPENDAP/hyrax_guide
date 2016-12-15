@@ -40,7 +40,7 @@ NOTE: Because you will rarely want to request an entire archive, OPeNDAP provide
 
 OPeNDAP includes a way to sample data that makes writing a constraint expression somewhat easier than using only a URL to do the same thing. Append *.html* to an OPeNDAP URL, and you will get an OPeNDAP Server Dataset Access Form that simplifies the process for sampling data.
 
-image::../images/0/05/Reynolds_ifh.png[]
+image::./images/Reynolds_ifh.png[]
 
 NOTE: As you read this section, it would be useful to have an OPeNDAP Server Dataset Access Form open. http://test.opendap.org/opendap/data/nc/sst.mnmean.nc.gz.html[Click here for a live OPeNDAP Dataset Access Form]
 
@@ -61,7 +61,7 @@ as grids. However, since sequence constraint expressions look different
 from grid expressions, the form also looks slightly different. The variable selection boxes allow you to enter relational
 expressions for each variable. Apart from that, the function is exactly the same.
 
-image::../images\d\d9\Gsodock-html.png[]
+image::./images/Gsodock-html.png[]
 
 Click http://test.opendap.org/dap/data/ff/gsodock.dat.html[here] to see
 a live "sequence" form. Click the checkboxes to choose which data
@@ -79,7 +79,7 @@ If you would perfer to not use the OPeNDAP Server Data Access Form, you can use 
 
 OPeNDAP has sophisticated methods for subsampling data at a remote site, but you need some information about the data first. First, we will look at data's Dataset Descriptor Structure (DDS). This provides a description of the "shape" of the data, using a vaguely C-like syntax. You get a dataset's DDS by appending *.dds* to the URL. Click http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.dds[here] to see an example of an OPeNDAP DDS at sst.mnmean.nc.gz.dds. The DDS looks like this:
 
-image::../images/a/a4/Reynolds_dds.png[]
+image::./images/Reynolds_dds.png[]
 
 From the sst.mnmean.nc.gz DDS, you can see that the dataset consists of two different pieces:
 
@@ -92,7 +92,7 @@ From the sst.mnmean.nc.gz DDS, you can see that the dataset consists of two diff
 
 The Grid is a special OPeNDAP data type that includes a multidimensional array and map vectors that indicate independent variable values. That is, you can use a Grid to store an array in which rows appear in irregular intervals. Here is a diagram of a simple grid:
 
-image::../images/d/d4/Gridpts.gif[]
+image::./images/Gridpts.gif[]
 
 The array part of the grid (like *sst* in the example above) contains the data points measured at each one of the squares. The X map vector contains the horizontal positions of the columns (like the *lon* vector above). The Y map vector contains the vertical positions of the rows (like the *lat* vector above).
 
@@ -109,7 +109,7 @@ the data, such as units and the name of the variable. Part of the DAS
 for the Reynolds data taht we saw above is shown in the figure below. Click http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.das[sst.mnmean.nc.gz.das]
 to see the rest of it.
 
-image::../images/f/f9/Reynolds_das.png[]
+image::./images/Reynolds_das.png[]
 
 NOTE: Unlike the DDS, the DAS is populated at the data provider's discretion. Consequently, the quality of the data in it (the "metadata") varies widely. The data in the Reynolds dataset used in this example are COARDS compliant. Other metadata standards you may encounter with OPeNDAP data are HDF-EOS, EPIC, FGDC, or no metadata at all.
 
@@ -150,14 +150,14 @@ attributes, we will look at some of the data.
 You can request a piece of an array with subscripts, just like in a C
 program, Matlab, or many other computer languages. Use a colon to indicate a subscript range. For example, http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.ascii?time%5b0:6%5d[http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.ascii?time%5b0:6%5d] will produce a time vecor that looks like this:
 
-image::../images/0/01/Reynolds_time_vector.png[]
+image::./images/Reynolds_time_vector.png[]
 
 If you are interested in the Reynolds dataset, you are probably more
 interested in the sea surface temperature data than the dependent
 variable vectors. The temperature data is a three-dimensional grid. To
 sample the sst grid, you just add a dimension for time: "...sst/mnmean.nc.ascii?sst[0:1][13:16][103:105]". Click http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.ascii?sst%5b0:1%5d%5b13:16%5d%5b103:105%5d[here] to see this example in action. You will see something like this:
 
-image::../images/a/a8/Reynolds_sst.png[]
+image::./images/Reynolds_sst.png[]
 
 Notice that when you ask for part of an OPeNDAP grid, you get the array
 part along with the corresponding parts of the map vectors.
@@ -194,7 +194,7 @@ Hyrax supports a small set of functions which can perform these look-up
 operations for you. For example, we could rewrite the example above like
 this: "...mnmean.nc.gz.ascii?geogrid(sst,62,206,56,210,"19722<time<19755")". Click http://test.opendap.org/opendap/data/nc/sst.mnmean.nc.gz.ascii?geogrid(sst,62,206,56,210,%2219722%3Ctime%3C19755%22)[here] to see this in action. The results look like this:
 
-image::../images/c/c8/Reynolds_sst_geogrid.png[]
+image::./images/Reynolds_sst_geogrid.png[]
 
 The Syntax for `geogrid()` is: "geogrid(grid variable, upper latitude, left longitude, lower latitude,
 right longitude, __other expressions__)", ehere _other expressions_ must be enclosed in double quotes, and can be one of these forms:
@@ -247,7 +247,7 @@ the second form when Hyrax can guess the values using data set metadata.
 
 http://test.opendap.org/opendap/data/nc/sst.mnmean.nc.gz.ascii?linear_scale(geogrid(sst,78,0,56,10,%22time=19723%22),0.01,0)[...nc.gz.ascii?linear_scale(geogrid(sst,78,0,56,10,"time=19723"),0.01,0)] produces the following:
 
-image::../images/9/96/Reynolds_sst_linear_scale_geogrid.png[]
+image::./images/Reynolds_sst_linear_scale_geogrid.png[]
 
 ==== Working With Sequence Data ====
 
@@ -274,11 +274,11 @@ measurements of each of the twelve variables.
 
 http://test.opendap.org/dap/data/ff/gsodock.dat.dds[Ask for the DDS], and you will see the twelve variables, all contained in a Sequence called URI_GSO-Dock:
 
-image::../images/7/71/Gsodock-dds.png[]
+image::./images/Gsodock-dds.png[]
 
 http://test.opendap.org/dap/data/ff/gsodock.dat.das[The DAS] contains the units for each data type and some additional information:
 
-image::../images/8/85/Gsodock-das.png[]
+image::./images/Gsodock-das.png[]
 
 To select the data you want from a server, use a constraint
 expression, just as you did with the gridded data above. Now, though,
@@ -316,7 +316,7 @@ If we use the same URL, but without the file name at the end, we can browse the 
 The OPeNDAP server checks to see whether the URL is a directory, and if
 it is, it generates a directory listing, like http://test.opendap.org/dap/data/nc/[this:]
 
-image::../images/9/9e/Test.oopendap.org_directory_view.png[]
+image::./images/Test.oopendap.org_directory_view.png[]
 
 You can see from the directory listing that the monthly mean dataset
 that we have been looking at is accompanied by a host of other datasets. The

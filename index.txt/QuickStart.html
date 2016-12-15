@@ -464,7 +464,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Ways that OPeNDAP supports getting data: NetCDF, GeoTIFF, JPEG2000, JSON, ASCII</p>
 </div>
 <div class="paragraph">
-<p>This quick start guide covers how to use OPeNDAP in a typical web browser, such as Firefox, Chrome, or Safari, to discover information about data that is useful when creating database queries.</p>
+<p>This quick start guide covers how to use OPeNDAP in a typical web browser, such as Firefox, Chrome, or Safari, to discover information about data that is useful when creating database queries. For additional information, see the OPeNDAP USer Guide.</p>
 </div>
 <div class="sect2">
 <h3 id="truekey-terms"><a class="anchor" href="#truekey-terms"></a>1.1. Key Terms</h3>
@@ -530,7 +530,7 @@ Because you will rarely want to request an entire archive, OPeNDAP provides soph
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/0/05/Reynolds_ifh.png" alt="Reynolds ifh.png">
+<img src="./images/Reynolds_ifh.png" alt="Reynolds ifh.png">
 </div>
 </div>
 <div class="admonitionblock note">
@@ -597,7 +597,7 @@ expressions for each variable. Apart from that, the function is exactly the same
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/d/d9/Gsodock-html.png" alt="images\d\d9\Gsodock html.png">
+<img src="./images/Gsodock-html.png" alt="Gsodock html.png">
 </div>
 </div>
 <div class="paragraph">
@@ -622,7 +622,7 @@ than 2 meters.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/a/a4/Reynolds_dds.png" alt="Reynolds dds.png">
+<img src="./images/Reynolds_dds.png" alt="Reynolds dds.png">
 </div>
 </div>
 <div class="paragraph">
@@ -657,7 +657,7 @@ than 2 meters.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/d/d4/Gridpts.gif" alt="Gridpts.gif">
+<img src="./images/Gridpts.gif" alt="Gridpts.gif">
 </div>
 </div>
 <div class="paragraph">
@@ -681,7 +681,7 @@ to see the rest of it.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/f/f9/Reynolds_das.png" alt="Reynolds das.png">
+<img src="./images/Reynolds_das.png" alt="Reynolds das.png">
 </div>
 </div>
 <div class="admonitionblock note">
@@ -743,7 +743,7 @@ program, Matlab, or many other computer languages. Use a colon to indicate a sub
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/0/01/Reynolds_time_vector.png" alt="Reynolds time vector.png">
+<img src="./images/Reynolds_time_vector.png" alt="Reynolds time vector.png">
 </div>
 </div>
 <div class="paragraph">
@@ -754,7 +754,7 @@ sample the sst grid, you just add a dimension for time: "&#8230;&#8203;sst/mnmea
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/a/a8/Reynolds_sst.png" alt="Reynolds sst.png">
+<img src="./images/Reynolds_sst.png" alt="Reynolds sst.png">
 </div>
 </div>
 <div class="paragraph">
@@ -799,7 +799,7 @@ this: "&#8230;&#8203;mnmean.nc.gz.ascii?geogrid(sst,62,206,56,210,"19722&lt;time
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/c/c8/Reynolds_sst_geogrid.png" alt="Reynolds sst geogrid.png">
+<img src="./images/Reynolds_sst_geogrid.png" alt="Reynolds sst geogrid.png">
 </div>
 </div>
 <div class="paragraph">
@@ -881,7 +881,7 @@ the second form when Hyrax can guess the values using data set metadata.
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/9/96/Reynolds_sst_linear_scale_geogrid.png" alt="Reynolds sst linear scale geogrid.png">
+<img src="./images/Reynolds_sst_linear_scale_geogrid.png" alt="Reynolds sst linear scale geogrid.png">
 </div>
 </div>
 </div>
@@ -917,7 +917,7 @@ measurements of each of the twelve variables.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/7/71/Gsodock-dds.png" alt="Gsodock dds.png">
+<img src="./images/Gsodock-dds.png" alt="Gsodock dds.png">
 </div>
 </div>
 <div class="paragraph">
@@ -925,7 +925,7 @@ measurements of each of the twelve variables.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/8/85/Gsodock-das.png" alt="Gsodock das.png">
+<img src="./images/Gsodock-das.png" alt="Gsodock das.png">
 </div>
 </div>
 <div class="paragraph">
@@ -983,7 +983,7 @@ it is, it generates a directory listing, like <a href="http://test.opendap.org/d
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/9/9e/Test.oopendap.org_directory_view.png" alt="Test.oopendap.org directory view.png">
+<img src="./images/Test.oopendap.org_directory_view.png" alt="Test.oopendap.org directory view.png">
 </div>
 </div>
 <div class="paragraph">
@@ -1043,51 +1043,26 @@ it. (OPeNDAP software mentioned here is available from the
 <ul>
 <li>
 <p>Use a generic web client like <strong>geturl</strong> (a standard part of the OPeNDAP
-package), the free programs
-<a href="https://www.gnu.org/software/wget/">wget</a> or
-<a href="http://lynx.browser.org">lynx</a>, or even a browser like <strong>Netscape
-Navigator</strong> or <strong>Chrome</strong> to download data into a local data
+package) or free programs such as
+<a href="https://www.gnu.org/software/wget/">wget</a>,
+<a href="https://curl.haxx.se/">curl</a> or <strong>Chrome</strong> to download data into a local data
 file. To be able to use the data further, you will probably have to
 download the ASCII version by using the <strong>.ascii</strong> suffix on the URL, as
 in the examples shown above.</p>
 </li>
 <li>
-<p>There are pre-packaged OPeNDAP clients available that can download
-binary OPeNDAP data from the web into a useful form. As of today,
-command line clients (<strong>loaddods</strong>) are available for the Matlab and IDL
-data analysis environments, with which you can download OPeNDAP data
-directly into IDL or Matlab objects.</p>
-</li>
-<li>
-<p>The <a href="http://ferret.wrc.noaa.gov/Ferret">Ferret</a> and
+<p>Any tool that uses the C NetCDF API will work with OPeNDAP. For example, Matlab has built-in support for OPeNDAP; Matlab supported NetCDF calls can be used with DAP datasets. Other tools that are built on NetCDF API also read data from OPeNDAP servers. A free tool similar to Matlab, <a href="https://www.gnu.org/software/octave/">GNU Octave</a>, is also supported. The <a href="https://www.r-project.org/">R Project</a> for Statistical Computing can also read data from OPeNDAP servers. The <a href="http://ferret.wrc.noaa.gov/Ferret">Ferret</a> and
 <a href="http://cola.gmu.edu/grads/">GrADS</a> free data analysis packages both
-support OPeNDAP. You can use these for downloading OPeNDAP data, and for
+support OPeNDAP. You can use these for dowloading OPeNDAP data and for
 examining it afterwards. (There are limitations. For example, Ferret may not be able to read datasets served as Sequence data.)</p>
 </li>
 <li>
-<p>The Matlab analysis package also supports an OPeNDAP client attached to a graphical user interface. You can use the GUI to create a constrained OPeNDAP URL, and download the data directly into Matlab. Click <a href="https://www.opendap.org/about/workshops-and-presentations/2002-02-22">here</a> for more information about the Matlab GUI client. You can also check out the Matlab section in the OPeNDAP User Guide.</p>
+<p>Other tools, that are Java NetCDF compliant, also function with OPeNDAP clients; for example, <a href="http://www.unidata.ucar.edu/software/idv/">IDV</a> and <a href="http://www.giss.nasa.gov/tools/panoply/">Panoply</a>.</p>
 </li>
 <li>
-<p>If you have a data analysis program or package that you like, you can
-look into the possibility of linking that package to the OPeNDAP toolkit
-library, in effect making your program into a web-capable OPeNDAP
-client. OPeNDAP libraries exist to mimic the behavior of the
-<a href="http://www.unidata.ucar.edu/software/netcdf/docs/netcdf_apis.html">netcdf</a>,
-<a href="http://www.hdfgroup.org/">HDF</a> and <a href="http://www1.whoi.edu/jgofs.html">JGOFS</a>
-data access APIs. If your program already uses one of these APIs,
-getting it to run with OPeNDAP may be as simple as changing the
-libraries to which you link it. The <a href="https://www.opendap.org/support/user-documentation">OPeNDAP User
-Documentation</a> describes how to do this and how you can use the OPeNDAP toolkit
-directly to create a new application that does not use one of the
-established data access APIs.</p>
-</li>
-<li>
-<p>Any tool based on the NetCDF API will work with OPeNDAP. For example, Matlab has built-in support for OPeNDAP; Matlab supported NetCDF calls can be used with DAP datasets. Other tools that are built on NetCDF API also read data from OPeNDAP servers. A free tool similar to Matlab, <a href="https://www.gnu.org/software/octave/">GNU Octave</a>, is also supported. The R Project for Statistical Computing (<a href="https://www.r-project.org/" class="bare">https://www.r-project.org/</a>) can also read data from OPeNDAP servers.</p>
+<p>If you have written a C NetCDF or Java NetCDF compliant data analysis program, you can probably read data from OPeNDAP servers.</p>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p>Other tools that function with OPeNDAP clients: Graphical applicaitons&#8212;&#8203;IDV (<a href="http://www.unidata.ucar.edu/software/idv/" class="bare">http://www.unidata.ucar.edu/software/idv/</a>) and Panoply (<a href="http://www.giss.nasa.gov/tools/panoply/" class="bare">http://www.giss.nasa.gov/tools/panoply/</a>) ; use "Open Remote Dataset" and "Open Remote Catalog".</p>
 </div>
 <div class="paragraph">
 <p>The use of these clients, like the ways in which you can analyze the
@@ -1098,7 +1073,7 @@ data you find, is beyond the scope of this document.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-12-09 16:44:51 CST
+Last updated 2016-12-14 22:46:43 CST
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css">
