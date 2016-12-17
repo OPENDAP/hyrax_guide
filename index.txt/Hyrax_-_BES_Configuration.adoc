@@ -206,6 +206,7 @@ sizes of data files before decompressing them, there may be times when
 the cache holds more data than this value. Ideally this value should be
 several times the size of the largest file you plan to serve.
 
+[[Loading_Modules]]
 8 Loading Software Modules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -246,6 +247,7 @@ Module specific parameters will be included in its own configuration
 file. For example, any parameters specific to the netcdf data handler
 would be included in the nc.conf file.
 
+[[Pointing_to_data]]
 9 Pointing to data
 ~~~~~~~~~~~~~~~~~~
 

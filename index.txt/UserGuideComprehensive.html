@@ -598,7 +598,7 @@ Now, in addition to being able to use local data as before, the program is able 
 <p>To make any analysis program into an OPeNDAP client, it just needs to be linked with the OPeNDAP API library. (Or, if your program uses one of the
 supported legacy API libraries, like netCDF, you can link with the
 OPeNDAP version of that library.) This will create a program that
-accepts URLs as well as file pathnames to identify needed data. (See <a href="#OPeNDAP_Client">the OPeNDAP Client</a>).</p>
+accepts URLs as well as file pathnames to identify needed data. (See <a href="#OPeNDAP_Client">OPeNDAP Client</a>).</p>
 </div>
 <div class="paragraph">
 <div class="title">The Architecture of a Data Analysis Package Using OPeNDAP</div>
@@ -636,12 +636,12 @@ libraries to link with existing software.</p>
 <h3 id="trueopendap-services"><a class="anchor" href="#trueopendap-services"></a>2.2. OPeNDAP Services</h3>
 <div class="paragraph">
 <p>The communication between an OPeNDAP client and server is specified by
-the <a href="#DAP">Data Access Protocol (DAP)</a>. This defines the range of messages a
+the <a href="#DAP">DAP</a>. This defines the range of messages a
 server must understand and the kinds of replies it makes.</p>
 </div>
 <div class="paragraph">
 <p>There are two categories of messages that an OPeNDAP server can understand.
-Some are required by the DAP and others are merely suggested. A server
+Some are required by the <a href="#DAP">DAP</a> and others are merely suggested. A server
 is considered to be DAP-compliant if it can respond intelligibly to the
 required messages. Following are the requests messages a server is required to understand:</p>
 </div>
@@ -657,7 +657,7 @@ required messages. Following are the requests messages a server is required to u
 </dd>
 <dt class="hdlist1">Data</dt>
 <dd>
-<p>The server also must be able to respond to a request for the data itself. See <a href="#DDS">DDS</a>.</p>
+<p>The server also must be able to respond to a request for the data itself. See <a href="#DDS">Data Description Structure (DDS)</a>.</p>
 </dd>
 </dl>
 </div>
@@ -676,7 +676,7 @@ required messages. Following are the requests messages a server is required to u
 </dd>
 <dt class="hdlist1">HTML</dt>
 <dd>
-<p>Very similar to the info response, the HTML response provides the information from the info response and also includes a Javascript form to help you build a request for data from the same data file. The best description of the HTML form is in the <a href="./QuickStart.txt">Quick Start Guide</a>.</p>
+<p>Very similar to the info response, the HTML response provides the information from the info response and also includes a Javascript form to help you build a request for data from the same data file. The best description of the HTML form is in the <a href="./QuickStart.html">Quick Start Guide</a>.</p>
 </dd>
 <dt class="hdlist1">SOAP</dt>
 <dd>
@@ -693,7 +693,7 @@ required messages. Following are the requests messages a server is required to u
 <h3 id="truethe-opendap-server-hyrax"><a class="anchor" href="#truethe-opendap-server-hyrax"></a>2.3. The OPeNDAP Server (Hyrax)</h3>
 <div class="paragraph">
 <p>OPeNDAP provides a definition of the communication between client and
-server and enables servers and clients that conform to DAP standard to communicate
+server and enables servers and clients that conform to <a href="#DAP">DAP</a> standard to communicate
 with each other. In addition to the DAP communication standard
 itself, the OPeNDAP group also provides an implementation of a
 standard server protocol, called <em>Hyrax.</em></p>
@@ -751,7 +751,7 @@ of the data returned by requests and see
 the URL syntax used to send requests.</p>
 </div>
 <div class="paragraph">
-<p>See <a href="./Hyrax.txt">the OPeNDAP 4 Data Server documentation</a> for
+<p>See <a href="./Hyrax.adoc">the OPeNDAP 4 Data Server documentation</a> for
 a description of how to install and configure an OPeNDAP data server
 (Hyrax).</p>
 </div>
@@ -1086,12 +1086,11 @@ consists of two pieces:</p>
 <ul>
 <li>
 <p>A description of the shape and size of the various data types stored
-in some given data set. This is called the Data Description Structure
-(DDS).</p>
+in some given data set. This is called the (<a href="#DDS">DDS</a>).</p>
 </li>
 <li>
 <p>Capsule descriptions of some of the properties of the data stored in
-some given data set. This is the Data Attribute Structure (DAS).</p>
+some given data set. This is called the <a href="#DAS">DAS</a>.</p>
 </li>
 </ul>
 </div>
@@ -1182,7 +1181,7 @@ further be the object of an operator that defines a subset of the
 available data set.</p>
 </div>
 <div class="paragraph">
-<p>Variables in the DAP have two forms. They are either base types or type
+<p>Variables in the <a href="#DAP">DAP</a> have two forms. They are either base types or type
 constructors. Base type variables are similar to predefined variables in
 procedural programming languages like C or Fortran (such as int or
 integer*4). While these have an internal structure, it is not
@@ -1296,7 +1295,7 @@ array temp[2:3:10][3:4] would select from every third row, and so on.
 </table>
 </div>
 <div class="paragraph">
-<p>A DDS declaration of a 5x6 array of floating point numbers would look like this:</p>
+<p>A <a href="#DDS">DDS</a> declaration of a 5x6 array of floating point numbers would look like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1578,7 +1577,7 @@ variables.</p>
 </tbody>
 </table>
 <div class="paragraph">
-<p>A base type variable is always either transmitted or not. You will not see a fraction of an String type transmitted. Constructor type variables, being composed of the bast type variables, are transmitted as sets of base type variables, and these may be sampled, with a <a href="#Constraint_Expression">constraint expression</a>.</p>
+<p>A base type variable is always either transmitted or not. You will not see a fraction of an String type transmitted. Constructor type variables, being composed of the bast type variables, are transmitted as sets of base type variables, and these may be sampled, with a <a href="#Constraint_Expressions">constraint expression</a>.</p>
 </div>
 <div class="paragraph">
 <p>Constraint expressions do not affect <em>how</em> a base-type variable is
@@ -1605,7 +1604,7 @@ Array of 100 Int32s is sent as a single block of 100 xdr longs, not
 <dt class="hdlist1">Structure</dt>
 <dd>
 <p>A Structure is sent by encoding each field in the order those fields
-are declared in the DDS and transmitting the resulting block of bytes.</p>
+are declared in the <a href="#DDS">DDS</a> and transmitting the resulting block of bytes.</p>
 </dd>
 <dt class="hdlist1">Sequence</dt>
 <dd>
@@ -1669,9 +1668,8 @@ information, called ancillary data, describes the shape and size of the
 data types that make up the data set, and provides information about
 many of the data set&#8217;s attributes. OPeNDAP uses two different
 structures to supply this ancillary information about an OPeNDAP data
-set. The Dataset Descriptor Structure (DDS) describes the data set&#8217;s
-structure and the relationships between its variables, and the Dataset
-Attribute Structure (DAS) provides information about the variables
+set. The <a href="#DDS">DDS</a> describes the data set&#8217;s
+structure and the relationships between its variables, and the <a href="#DAS">DAS</a> provides information about the variables
 themselves. Both structures are described in the following sections.</p>
 </div>
 <div class="sect3">
@@ -1707,7 +1705,7 @@ entire data set even when it does not technically need an enclosing
 element.)</p>
 </div>
 <table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 1. Dataset Descriptor Structure Syntax</caption>
+<caption class="title">Table 1. DDS Syntax</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1823,10 +1821,10 @@ explanation of the information implied by the data model.)</p>
 <div class="sect3">
 <h4 id="DAS"><a class="anchor" href="#DAS"></a>4.1.2. Dataset Attribute Structure (DAS)</h4>
 <div class="paragraph">
-<p>The "Dataset Attribute Structure" (DAS) is used to store attributes for
+<p>The DAS is used to store attributes for
 variables in the dataset. An attribute is any piece of information about
 a variable that the creator wants to bind with that variable <em>excluding</em>
-the type and size, which are part of the DDS. Typical attributes might
+the type and size, which are part of the <a href="#DDS">DDS</a>. Typical attributes might
 range from error measurements to text describing how the data was
 collected or processed.</p>
 </div>
@@ -1965,7 +1963,7 @@ separated by commas (,) in the textual representation of the DAS.</p>
 </tbody>
 </table>
 <div class="paragraph">
-<p>A DAS is returned in response to a request for the DAS. Unlike the DDS,
+<p>A DAS is returned in response to a request for the DAS. Unlike the <a href="#DDS">DDS</a>,
 it is not part of the data return. The request URL for the DAS is
 composed of the root URL, with the suffix ".das". For example, if a data
 set is located at http:/tests.opendap.org/data/mydata.dat then you&#8217;ll
@@ -1976,7 +1974,7 @@ find the DAS at http:/tests.opendap.org/data/mydata.dat.das</p>
 <div class="paragraph">
 <p>An attribute can contain another attribute, or a set of attributes. This
 is roughly comparable to the way compound variables can contain other
-variables in the DDS. The container defines a new lexical scope for the
+variables in the <a href="#DDS">DDS</a>. The container defines a new lexical scope for the
 attributes it contains.</p>
 </div>
 <div class="paragraph">
@@ -2005,8 +2003,8 @@ Bill.Matilda.LastName would be associated with the string "Fink" and
 Bill.Matilda.Age with the number 26.</p>
 </div>
 <div class="paragraph">
-<p>Using container attributes as above, you can construct a DAS that
-exactly mirrors the construction of a DDS that uses compound data types,
+<p>Using container attributes as above, you can construct a <a href="#DAS">DAS</a> that
+exactly mirrors the construction of a <a href="#DDS">DDS</a> that uses compound data types,
 like "Structure" and "Sequence". Note that though the Bill attribute is
 a container, it has attributes of its own, as well. This exactly
 corresponds to the situation where, for example, a "Sequence" would have
@@ -2050,7 +2048,7 @@ data was collected. Here&#8217;s an example:</p>
 </div>
 <div class="paragraph">
 <p>Global attributes can be used to define a certain view of a dataset.
-For example, consider the following DAS:</p>
+For example, consider the following <a href="#DAS">DAS</a>:</p>
 </div>
 <div class="listingblock">
 <div class="title">An Example of Global Attributes In Use</div>
@@ -2110,19 +2108,18 @@ you&#8217;ll find the data at http:/tests.opendap.org/data/mydata.dat.dods</p>
 </div>
 <div class="paragraph">
 <p>The data is returned in a MIME document that consists of two parts: the
-DDS and the data encoded according to the description in
+<a href="#DDS">DDS</a> and the data encoded according to the description in
 <a href="#External_Data_Representation">External Data Representation</a>. (The returned document is sometimes called the DataDDS.) The two parts are separated by this string:</p>
 </div>
 <div class="paragraph">
 <p>Data:&lt;CR&gt;&lt;NL&gt;</p>
 </div>
 <div class="paragraph">
-<p>The DDS included is modified according to any constraint expression that may have been
+<p>The <a href="#DDS">DDS</a> included is modified according to any constraint expression that may have been
 applied. That is, the returned DDS describes the returned data.</p>
 </div>
 <div class="paragraph">
-<p>For example, consider a a request for data from a data set with a DDS
-like this:</p>
+<p>For example, consider a a request for data from a data set with a DDS like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2140,7 +2137,7 @@ like this:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>This is the DDS of a typical gridded dataset. Suppose, though, that you ask for only the time values of the data set. The DDS of the result will look like this:</p>
+<p>This is the <a href="#DDS">DDS</a> of a typical gridded dataset. Suppose, though, that you ask for only the time values of the data set. The DDS of the result will look like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2150,7 +2147,7 @@ like this:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>This DDS will be included in the DataDDS return, ahead of the encoded array of 1857 64-bit time values.</p>
+<p>This <a href="#DDS">DDS</a> will be included in the DataDDS return, ahead of the encoded array of 1857 64-bit time values.</p>
 </div>
 <div class="paragraph">
 <p>For more information about sampling OPeNDAP data sets, see the section
@@ -2163,7 +2160,7 @@ below about constraint expressions.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-A request for data from an OPeNDAP client will generally make three different service requests: DAS, DDS, and data. The prepackaged OPeNDAP
+A request for data from an OPeNDAP client will generally make three different service requests: <a href="#DAS">DAS</a>, <a href="#DDS">DDS</a>, and data. The prepackaged OPeNDAP
 clients do this for you, so you may not be aware that three requests are made for each URL.
 </td>
 </tr>
@@ -2173,7 +2170,7 @@ clients do this for you, so you may not be aware that three requests are made fo
 <div class="sect2">
 <h3 id="trueother-services"><a class="anchor" href="#trueother-services"></a>4.3. Other Services</h3>
 <div class="paragraph">
-<p>In addition to the data, DSS, and DAS, an OPeNDAP server <em>may</em> provide
+<p>In addition to the data, <a href="#DDS">DDS</a>, and <a href="#DAS">DAS</a> an OPeNDAP server <em>may</em> provide
 any or all of the services described in the sections that follow.</p>
 </div>
 <div class="sect3">
@@ -2185,7 +2182,7 @@ This service is activated when the server receives a URL ending with .asc or .as
 </div>
 <div class="paragraph">
 <p>Note that unlike the data response, the ASCII response does not contain
-a DDS for the returned data. Instead it just returns the simple text
+a <a href="#DDS">DDS</a> for the returned data. Instead it just returns the simple text
 message.</p>
 </div>
 <div class="admonitionblock note">
@@ -2201,13 +2198,13 @@ While ASCII is fine for moving small amounts of data, it generally is best to mo
 </table>
 </div>
 <div class="paragraph">
-<p>The <a href="./QuickStart.txt">Quick Start Guide</a> contains examples of the ASCII response.</p>
+<p>The <a href="./QuickStart.html">Quick Start Guide</a> contains examples of the ASCII response.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="Info_Service"><a class="anchor" href="#Info_Service"></a>4.3.2. Info Service</h4>
 <div class="paragraph">
-<p>The Info service formats information from a data set&#8217;s DAS and DDS into
+<p>The Info service formats information from a data set&#8217;s <a href="#DAS">DAS</a> and <a href="#DDS">DDS</a> into
 a single HTML document suitable for viewing in a web browser. The
 returned document may include information about both the data server
 itself (such as server functions implemented) and the dataset
@@ -2228,7 +2225,7 @@ directory of files (or "files" since a server may contain logical
 entities that look like files).</p>
 </div>
 <div class="paragraph">
-<p>The server uses a data set&#8217;s DDS and DAS to construct a web form you can
+<p>The server uses a data set&#8217;s <a href="#DDS">DDS</a> and <a href="#DAS">DAS</a> to construct a web form you can
 use to construct a URL that subsamples the data set (using a
 constraint expression). You can copy the
 resulting URL into another browser, or use one of the buttons on the
@@ -2278,7 +2275,7 @@ to contact the OPeNDAP developer team.</p>
 <div class="sect3">
 <h4 id="DDX"><a class="anchor" href="#DDX"></a>4.3.6. DDX</h4>
 <div class="paragraph">
-<p>The DDX is an XML version of the DAS and DDS, combined. It is triggered
+<p>The DDX is an XML version of the <a href="#DAS">DAS</a> and <a href="#DDS">DDS</a>, combined. It is triggered
 by a URL ending with .ddx. You can find the schema for the DDX at
 <a href="http://xml.opendap.org/dap/dap2.xsd" class="bare">http://xml.opendap.org/dap/dap2.xsd</a>.</p>
 </div>
@@ -2287,18 +2284,18 @@ by a URL ending with .ddx. You can find the schema for the DDX at
 DDX, which will eventually hold returned data.</p>
 </div>
 <div class="paragraph">
-<p>The DDX response can be modified with a constraint expression. Like the DDS, the
+<p>The DDX response can be modified with a constraint expression. Like the <a href="#DDS">DDS</a>, the
 DDX will describe only the data actually returned.</p>
 </div>
 <div class="paragraph">
 <p>The DDX and the DataDDX (containing the dataBLOB) are the nucleus of
-what will become version 4 of the DAP.</p>
+what will become version 4 of the <a href="#DAP">DAP</a>.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="truethredds"><a class="anchor" href="#truethredds"></a>4.3.7. THREDDS</h4>
 <div class="paragraph">
-<p>Some OPeNDAP servers (including <a href="./Hyrax.txt">Hyrax</a>, the
+<p>Some OPeNDAP servers (including <a href="./Hyrax.adoc">Hyrax</a>, the
 server supplied by the OPeNDAP group) can make sensible replies to
 requests for THREDDS catalog information. This can serve to "advertise"
 a server&#8217;s data by having it appear in catalogs accumulated by THREDDS
@@ -2374,7 +2371,7 @@ process and thus reduce the network load of transmitting the given data to the c
 An OPeNDAP data set can contain an extraordinary amount of
 data. You almost certainly do <em>not</em> want to make an unconstrained
 request to a data set without knowing something about it. Familiarize
-yourself with the DDS and DAS before asking for data.
+yourself with the <a href="#DDS">DDS</a> and <a href="#DAS">DAS</a> before asking for data.
 </td>
 </tr>
 </table>
@@ -2401,7 +2398,7 @@ can also include functional expressions of the form&#8230;&#8203;</p>
 </div>
 </div>
 <div class="paragraph">
-<p>&#8230;&#8203;where the arguments are variables from the dataset, scalar values, or other functions. (See <a href="#Constraint_Expression_Functions">Constraint Expression Functions</a> below.)</p>
+<p>&#8230;&#8203;where the arguments are variables from the dataset, scalar values, or other functions. (See the  <a href="#Constraint_Expression_Functions">Constraint Expression Functions</a> section in this guide.)</p>
 </div>
 <div class="paragraph">
 <p>A <strong>selection</strong> expression leads with an ampersand and is a boolean expression of the form "variable operator variable", "variable operator value" or "function(arg_1,arg_2,&#8230;&#8203;,arg_n)", where&#8230;&#8203;</p>
@@ -2449,14 +2446,14 @@ criteria, then only that part will be returned.</p>
 <td class="content">
 Due to differences between data model paradigms, selection is not implemented for the OPeNDAP array data types, such as
 Grid or Array. However, many OPeNDAP servers implement selection
-functions you can use for the same effect. (See <a href="#Constraint_Expression_Functions">Constraint Expression Functions</a> below for more information about functions.)
+functions you can use for the same effect. (See <a href="#Constraint_Expression_Functions">Constraint Expression Functions</a>.)
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
 <div class="title">Simple Constraint Expression Examples</div>
-<p>Consider the DDS below. This is the description of a dataset containing
+<p>Consider the <a href="#DDS">DDS</a> below. This is the description of a dataset containing
 station data including temperature, oxygen, and salinity. Each station
 also contains 20 oxygen data points, taken at 20 fixed depths, used for calibration of the data.</p>
 </div>
@@ -2659,7 +2656,7 @@ the operator matches the regular expression on the right. See <a href="#Pattern_
 <div class="paragraph">
 <p>The array operator [] is used to subsample the given array. You can find
 several examples of its use in the
-<a href="./QuickStart.txt#Peeking_at_Data">Quick Start Guide</a>.</p>
+<a href="./QuickStart.html#Peeking_at_Data">Quick Start Guide</a>.</p>
 </div>
 </div>
 <div class="sect3">
@@ -2875,13 +2872,13 @@ necessary to evaluate the constraint expression.</p>
 <h3 id="truethe-opendap-server"><a class="anchor" href="#truethe-opendap-server"></a>5.1. The OPeNDAP Server</h3>
 <div class="paragraph">
 <p>Any server that responds to the messages described in
-<a href="./UserGuideOPeNDAPMessages.txt">OPeNDAP Messages</a> using the
-<a href="./UserGuideDataModel.txt">OPeNDAP Data Model</a> is an OPeNDAP server. The messages and the data model are published standards, available to anyone.</p>
+<a href="#OPeNDAP_Messages">OPeNDAP Messages</a> using the
+<a href="#OPeNDAP_Data_Model">OPeNDAP Data Model</a> is an OPeNDAP server. The messages and the data model are published standards, available to anyone.</p>
 </div>
 <div class="paragraph">
 <p>In addition to publishing and maintaining the
 standards described here, the OPeNDAP group maintains a server that complies with the
-standard. This is <a href="./Hyrax">Hyrax</a>.</p>
+standard. This is <a href="./Hyrax.adoc">Hyrax</a>.</p>
 </div>
 <div class="sect3">
 <h4 id="truehyrax"><a class="anchor" href="#truehyrax"></a>5.1.1. Hyrax</h4>
@@ -2937,7 +2934,7 @@ sending requests directly to the BES.</p>
 <div class="sect4">
 <h5 id="trueinstalling-hyrax"><a class="anchor" href="#trueinstalling-hyrax"></a>Installing Hyrax</h5>
 <div class="paragraph">
-<p>The two parts of <a href="./Hyrax.txt">Hyrax</a> are installed by
+<p>The two parts of <a href="./Hyrax.adoc">Hyrax</a> are installed by
 the same script. However, because they are discrete, they may require
 different kinds of attention from an administrator. Testing OLFS
 requires a working BES, so it is best to start the post-unpacking
@@ -2952,7 +2949,7 @@ execute it.</p>
 <div class="paragraph">
 <p>After that, there are several configuration options that you will need
 to address by installing software on your computer and by editing the
-<a href="./Hyrax_-_BES_Configuration.txt">Hyrax configuration file</a>,
+<a href="./Hyrax_-_BES_Configuration.adoc">Hyrax configuration file</a>,
 called bes.xml. Details of these options are in the Hyrax documentation, but following are the
 decisions you&#8217;ll have to make:</p>
 </div>
@@ -2966,19 +2963,18 @@ its own handler, and your computer must have shared libraries
 containing these handlers. For example, in order to serve
 netCDF data, the netCDF handler library must be available to Hyrax,
 and identified in its
-<a href="./Hyrax_-<em>BES_Configuration.txt">configuration file</a>. The
+configuration file].The
 handlers are shared libraries and are installed separately. Find
 instructions under
-<a href="./Hyrax</em>-_BES_Configuration.txt#Loading_Handlers">Loading
-Handlers</a>.</p>
+<a href="./Hyrax_-_BES_Configuration.adoc#Loading_Modules">Loading Modules</a> in the Hyrax BES configuration documentation.</p>
 </dd>
 <dt class="hdlist1">Where the data lives</dt>
 <dd>
-<p>A server equipped to serve data must be able to find that data. Lines in the bes.xml file identify the disk location of your data files. Hyrax can provide a limited amount of browsing capacity to users, through its <a href="#WWW_Interface">WWW interface</a>. Access is specified by identifying directories where data resides. See <a href="./Hyrax_-_BES_Configuration.txt">Pointing_to_data</a>.</p>
+<p>A server equipped to serve data must be able to find that data. Lines in the bes.xml file identify the disk location of your data files. Hyrax can provide a limited amount of browsing capacity to users, through its <a href="#WWW_Interface">WWW interface</a>. Access is specified by identifying directories where data resides. See <a href="./Hyrax_-_BES_Configuration.adoc">Pointing_to_data</a> in the Hyrax BES configuration documentation.</p>
 </dd>
 <dt class="hdlist1">What kinds of services</dt>
 <dd>
-<p>Along with simply supplying data, Hyrax can supply several different services, including <a href="#ASCII_Service">serving the data as ASCII values</a>, and the form-driven <a href="#WWW_Interface">WWW interface</a>. The bes.xml file is used to specify the list of services. The drivers for these services are installed as part of the default installation of Hyrax, but they need to be chosen and identified in bes.xml. See instructions at <a href="./Hyrax_-_BES_Configuration.txt#Loading_Handlers">Loading Handlers</a>.</p>
+<p>Along with simply supplying data, Hyrax can supply several different services, including <a href="#ASCII_Service">serving the data as ASCII values</a>, and the form-driven <a href="#WWW_Interface">WWW interface</a>. The bes.xml file is used to specify the list of services. The drivers for these services are installed as part of the default installation of Hyrax, but they need to be chosen and identified in bes.xml. See instructions at <a href="./Hyrax_-_BES_Configuration.adoc#Loading_Handlers">Loading Handlers</a>.</p>
 </dd>
 </dl>
 </div>
@@ -2997,28 +2993,23 @@ formats, consider writing format descriptions using FreeForm and
 serving the data that way.</p>
 </div>
 <div class="paragraph">
-<p>See the <a href="./FreeForm.txt">FreeForm documentation</a> for more
-information.</p>
-</div>
-<div class="paragraph">
 <div class="title">Installing OLFS</div>
 <p>The OLFS is a Java servlet, so its installation involves installing the
 Tomcat servlet infrastructure and then configuring that with the OLFS.
 There are four configuration files, but unless your&#8217;s is an unusual case,
 you will likely have to look at only two of them. See
-<a href="./Hyrax_-<em>OLFS_Configuration.txt">Hyrax</em>-_OLFS_Configuration</a>
-for more information.</p>
+<a href="./Hyrax_-_OLFS_Configuration.adoc">Hyrax OLFS Configuration</a>.</p>
 </div>
 <div class="paragraph">
 <p>Use the
-<a href=".//Hyrax_-_OLFS_Configuration.txt#olfs.xml_Configuration_File">olfs.xml</a>
+<a href=".//Hyrax_-_OLFS_Configuration.adoc#olfs.xml_Configuration_File">olfs.xml</a>
 file to specify these important features of the OLFS operation:</p>
 </div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Address of BES</dt>
 <dd>
-<p>The OLFS is the front door to data from the BES. Use the olfs.xml file to identify where to find this server. See the instructions for the <a href="./Hyrax_-_OLFS_Configuration.txt#BESManager">BESManager</a>.</p>
+<p>The OLFS is the front door to data from the BES. Use the olfs.xml file to identify where to find this server. See the instructions for the <a href="./Hyrax_-_OLFS_Configuration.adoc#BESManager">BESManager</a>.</p>
 </dd>
 <dt class="hdlist1">Dispatch handlers</dt>
 <dd>
@@ -3027,13 +3018,13 @@ until one accepts it and executes. This allows the OLFS to offer
 directory and catalog services as well as data services and more. Use
 the olfs.xml file to nominate the dispatch handlers (they come with
 the OLFS and do not need to be separately installed). See
-<a href="./Hyrax_-_OLFS_Configuration.txt#HTTP_GET_Handlers">handler instructions</a> for more.</p>
+<a href="./Hyrax_-_OLFS_Configuration.adoc#HTTP_GET_Handlers">handler instructions</a> for more.</p>
 </dd>
 <dt class="hdlist1">Catalog requests</dt>
 <dd>
 <p>The OLFS can handle
-<a href="./Hyrax_-_THREDDS_Configuration.txt">THREDDS</a> catalog
-requests as well as directory requests, which are an older part of the DAP
+<a href="./Hyrax_-_THREDDS_Configuration.adoc">THREDDS</a> catalog
+requests as well as directory requests, which are an older part of the <a href="#DAP">DAP</a>
 standard that also involves data about a collection of data files. The
 THREDDS information can be static (provided from a file) or dynamic
 (generated by a review of the available data).</p>
@@ -3043,7 +3034,7 @@ THREDDS information can be static (provided from a file) or dynamic
 <p>You may have individual files you want served intact via this server.
 These might include documentation of the data files or of the server.
 See
-<a href="./Hyrax_-_OLFS_Configuration.txt#File_Dispatch_Handler">File
+<a href="./Hyrax_-_OLFS_Configuration.adoc#File_Dispatch_Handler">File
 Dispatch Handler</a> instructions.</p>
 </dd>
 </dl>
@@ -3052,7 +3043,7 @@ Dispatch Handler</a> instructions.</p>
 <p>There are additional features, such as a bot blocker and a version
 message as well as the experimental SOAP message handler. These are
 also configured with
-<a href="./Hyrax_-_OLFS_Configuration.txt#olfs.xml_Configuration_File">olfs.xml</a>.</p>
+<a href="./Hyrax_-_OLFS_Configuration.adoc#olfs.xml_Configuration_File">olfs.xml</a>.</p>
 </div>
 <div class="paragraph">
 <p>The other configuration file that you might need to edit is
@@ -3069,15 +3060,15 @@ catalog standard for scientific data promoted by scientists at
 <p>The default file will allow dynamic catalogs to be created and should
 allow your server to respond to THREDDS requests properly. You may want to serve a static THREDDS catalog as well. This can be done by
 editing the catalog.xml file, and you will find links to instructions for
-that at <a href="./Hyrax_-_THREDDS_Configuration.txt">Hyrax - THREDDS
+that at <a href="./Hyrax_-_THREDDS_Configuration.adoc">Hyrax - THREDDS
 Configuration</a>.</p>
 </div>
 <div class="paragraph">
 <div class="title">Multiple BES Configuration</div>
 <p>You can configure a single OLFS to work with multiple BES instances.
 This enables rudimentary load balancing the isolation of data on one server or another. See the
-<a href="./Hyrax_-_Configuring_The_OLFS_To_Work_With_Multiple_BES%27s.txt">Hyrax
-configuration chapter</a> for more information on the subject.</p>
+<a href="./Hyrax_-_Configuring_The_OLFS_To_Work_With_Multiple_BES%27s.adoc">Hyrax
+configuration chapter</a>.</p>
 </div>
 </div>
 </div>
@@ -3118,7 +3109,7 @@ hard to find one you can use.</p>
 <p>In fact, though it can become clumsy for advanced applications, you can
 use an ordinary web browser as a client to most OPeNDAP servers, making
 use of the server&#8217;s
-<a href="#WWW_Interface">WWW interface</a>. The <a href="./QuickStart.txt">Quick Start Guide</a> contains several examples.</p>
+<a href="#WWW_Interface">WWW interface</a>. The <a href="./QuickStart.html">Quick Start Guide</a> contains several examples.</p>
 </div>
 <div class="paragraph">
 <p>After a basic web browser, the simplest clients to use are likely to be
@@ -3160,7 +3151,7 @@ that order below:</p>
 <div class="sect3">
 <h4 id="truenetcdf-compliant-tools-e-g-matlab-r-idl-idv-and-panoply"><a class="anchor" href="#truenetcdf-compliant-tools-e-g-matlab-r-idl-idv-and-panoply"></a>6.1.1. NetCDF Compliant Tools (e.g., Matlab, R, IDL, IDV, and Panoply)</h4>
 <div class="paragraph">
-<p>Any tool that uses the C NetCDF API will work with OPeNDAP. For example, Matlab has built-in support for OPeNDAP; Matlab supported NetCDF calls can be used with DAP datasets. Other tools that are built on NetCDF API also read data from OPeNDAP servers. A free tool similar to Matlab, <a href="https://www.gnu.org/software/octave/">GNU Octave</a>, is also supported. The <a href="https://www.r-project.org/">R Project</a> for Statistical Computing can also read data from OPeNDAP servers. The <a href="http://ferret.wrc.noaa.gov/Ferret">Ferret</a> and
+<p>Any tool that uses the C NetCDF API will work with OPeNDAP. For example, Matlab has built-in support for OPeNDAP; Matlab supported NetCDF calls can be used with <a href="#DAP">DAP</a> datasets. Other tools that are built on NetCDF API also read data from OPeNDAP servers. A free tool similar to Matlab, <a href="https://www.gnu.org/software/octave/">GNU Octave</a>, is also supported. The <a href="https://www.r-project.org/">R Project</a> for Statistical Computing can also read data from OPeNDAP servers. The <a href="http://ferret.wrc.noaa.gov/Ferret">Ferret</a> and
 <a href="http://cola.gmu.edu/grads/">GrADS</a> free data analysis packages both
 support OPeNDAP. You can use these for dowloading OPeNDAP data and for
 examining it afterwards. (There are limitations. For example, Ferret may not be able to read datasets served as Sequence data.)</p>
@@ -3365,15 +3356,15 @@ provided in different languages for the convenience of the implementer.</p>
 <div class="sect4">
 <h5 id="truec-client-library"><a class="anchor" href="#truec-client-library"></a>C++ Client Library</h5>
 <div class="paragraph">
-<p>The <a href="http://opendap.org/download/libdap.html[C" class="bare">http://opendap.org/download/libdap.html[C</a> library], also called
+<p>The Link:http://opendap.org/download/libdap.html[C library], also called
 libdap, was the original client implementation of the OPeNDAP protocol.
 It provides classes to manage the connection between a client and a data
 source, as well as classes for each of the data types, and the other
-information (such as DAS and DDS) a client will encounter.</p>
+information (such as <a href="#DAS">DAS</a> and <a href="#DDS">DDS</a>) a client will encounter.</p>
 </div>
 <div class="paragraph">
 <p>To use the library, you will need to provide implementations for some
-abstract classes. Consult the <a href="./Libdap_Overview.txt">libdap
+abstract classes. Consult the <a href="./Libdap_Overview.adoc">libdap
 Overview</a> for an introduction to the basic concepts behind the use of
 this library. You will also find the
 <a href="http://www.opendap.org/api/pref/html/index.html">C++ library Reference</a>
@@ -3383,8 +3374,7 @@ useful.</p>
 <div class="sect4">
 <h5 id="truec-client-library-2"><a class="anchor" href="#truec-client-library-2"></a>C Client Library</h5>
 <div class="paragraph">
-<p>The OPeNDAP group supports a <a href="http://opendap.org/download/oc.html">C
-library</a>. The C library is in many ways a simpler library to use than
+<p>The OPeNDAP group supports a <a href="http://opendap.org/download/oc.html">C library</a>. The C library is in many ways a simpler library to use than
 the C++ libdap, but it is not as flexible in other ways. Using the
 library is straightforward, and you&#8217;ll find a file called
 octutorial.html in the software release that provides a detailed example
@@ -3396,7 +3386,7 @@ of its use.</p>
 <div class="paragraph">
 <p>The OPeNDAP group supports a
 <a href="http://opendap.org/download/java-dap.html">Java implementation</a> of the
-DAP. On the Java page, there are links to download the Java class
+<a href="#DAP">DAP</a>. On the Java page, there are links to download the Java class
 documentation.</p>
 </div>
 </div>
@@ -3411,8 +3401,7 @@ netCDF API to use OPeNDAP is as simple as re-linking with an updated
 version of the netCDF library.</p>
 </div>
 <div class="paragraph">
-<p>See the <a href="http://www.unidata.ucar.edu/software/netcdf">netCDF home page</a>
-for information about how to use that library.</p>
+<p>See the <a href="http://www.unidata.ucar.edu/software/netcdf/">netCDF home page</a> for information about how to use that library.</p>
 </div>
 </div>
 <div class="sect4">
@@ -3432,7 +3421,7 @@ more information about it.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-12-16 18:04:05 CST
+Last updated 2016-12-16 23:03:07 CST
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css">
