@@ -142,6 +142,7 @@ http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.info[this]:
 http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.info
 ---------------------------------------------------------
 
+[[Peeking_at_Data]]
 ==== Peeking at Data ====
 
 Now that we know a little about the shape of the data and the data
