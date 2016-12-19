@@ -1,0 +1,15 @@
+
+Quick note about ceverting to CommonMark Markdown from AsciiDoc.
+(NB: We can use HTML, so this is likely not needed, but it's described
+here all the same.)
+
+While AsciiDoc is better than CommonMark, the latter is what is
+actaully being used by NASA for the developer portal (well, it's one
+of the formats, but CM is closest to AsciiDoc).
+
+To convert to CM from adoc, use 'asciidoctor' and 'pandoc' like this:
+
+    asciidoctor -b docbook5 -o quick_start_hack QuickStart.adoc
+    pandoc -f docbook -t commonmark -o quick_start.cm quick_start_hack
+
+Or just feed the HTML5 output from asciidoctor into the portal.
