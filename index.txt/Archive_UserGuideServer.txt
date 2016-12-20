@@ -1,4 +1,4 @@
-UserGuideServer - OPeNDAP Documentation
+OBSOLETE - ARCHIVE
 =======================================
 
 [[firstHeading]]

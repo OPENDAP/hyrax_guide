@@ -1,4 +1,5 @@
 = QuickStart - OPeNDAP
+:Leonard Porrello <lporrel@gmail.com>:
 2016-12-31
 :numbered:
 :toc:
@@ -102,7 +103,7 @@ You can also use a grid to store arrays in which the columns and rows occur at r
 
 You can see from the DDS that the Reynolds data is in a 89x180x1857
 element grid, and the dimensions of the Grid are called "lat", "lon",
-and "time". This is suggestive, but not as helpful as one could wish. To find out more about what the data __is__, you can look at the other
+and "time". This is suggestive, but not as helpful as one could wish. To find out more about what the data _is_, you can look at the other
 important OPeNDAP structure: the Data Attribute Structure (DAS). This
 structure is somewhat similar to the DDS but contains information about
 the data, such as units and the name of the variable. Part of the DAS
@@ -198,7 +199,7 @@ this: "...mnmean.nc.gz.ascii?geogrid(sst,62,206,56,210,"19722<time<19755")". Cli
 image::./images/Reynolds_sst_geogrid.png[]
 
 The Syntax for `geogrid()` is: "geogrid(grid variable, upper latitude, left longitude, lower latitude,
-right longitude, __other expressions__)", ehere _other expressions_ must be enclosed in double quotes, and can be one of these forms:
+right longitude, _other expressions_)", ehere _other expressions_ must be enclosed in double quotes, and can be one of these forms:
 
 * variable relop value
 * value relop variable
@@ -328,7 +329,7 @@ hold data stored in other file types.
 
 *Note:* In general, this list is produced by an OPeNDAP server and this feature works on all servers. However, it only really understands OPeNDAP data files, so other file types will simply be sent without any interpretation. This can be useful if the 'other file' happens to be a README or other documentation file since this
 makes it simple to serve data stored in files and documented using plain
-text files. Essentially, the person or organization providing data does not need to do anything besides link:../index.php/Hyrax[installing the server].
+text files. Essentially, the person or organization providing data does not need to do anything besides link:./Hyrax.adoc[installing the server (Hyrax)].
 
 === File Servers ===
 
@@ -358,7 +359,7 @@ resulting URLs to get more data.
 This guide is about forming an OPeNDAP URL. After you have figured out
 how to request the data, there are a variety of things you can do with
 it. (OPeNDAP software mentioned here is available from the
-http://www.opendap.org[OPeNDAP Home Page] .)
+http://www.opendap.org[OPeNDAP Home Page].)
 
 * Use a generic web client like *geturl* (a standard part of the OPeNDAP
 package) or free programs such as 

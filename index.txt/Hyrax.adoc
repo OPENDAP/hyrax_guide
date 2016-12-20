@@ -1,43 +1,14 @@
-Hyrax - OPeNDAP Documentation
-=============================
+= Hyrax - OPeNDAP Documentation
+Leonard Porrello <lporrel@gmail.com>
+2016-12-31
+:numbered:
+:toc:
 
-[[firstHeading]]
-Hyrax
------
+This documentation covers the **OPeNDAP 4 Data Server**, which is also known as **Hyrax**.
 
-From OPeNDAP Documentation
+== Overview
 
-This is the **OPeNDAP 4 Data Server**, also known as **Hyrax**.
-
-Contents
-~~~~~~~~
-
-* link:#Overview[1 Overview]
-** link:#Features[1.1 Features]
-* link:#Downloading_and_Installation[2 Downloading and Installation]
-** link:#Building_And_Installing_From_Source[2.1 Building And Installing
-From Source]
-* link:#Documentation[3 Documentation]
-** link:#User_Manuals[3.1 User Manuals]
-*** link:#Modules[3.1.1 Modules]
-**** link:#BES_modules[3.1.1.1 BES modules]
-**** link:#Additional_Java_Modules_that_use_the_BES[3.1.1.2 Additional
-Java Modules that use the BES]
-** link:#For_Software_Developers[3.2 For Software Developers]
-*** link:#BES_Development_Information[3.2.1 BES Development Information]
-** link:#Reference_documentation[3.3 Reference documentation]
-* link:#Thanks.21[4 Thanks!]
-** link:#Contact_Us[4.1 Contact Us]
-** link:#Sponsorship[4.2 Sponsorship]
-*** #OPeNDAP_Hyrax_development_is_sponsored_by:[4.2.1 OPeNDAP Hyrax
-development is sponsored by:]
-
-1 Overview
-----------
-
-../index.php/File:HyraxArchitecture.jpg[image:../images/thumb/c/c5/HyraxArchitecture.jpg/180px-HyraxArchitecture.jpg[HyraxArchitecture.jpg]]
-
-../index.php/File:HyraxArchitecture.jpg[image:../skins/common/images/magnify-clip.png[image]]
+image:./images/HyraxArchitecture.jpg
 
 Hyrax uses the Java servlet mechanism to hand off requests from a
 general web daemon to DAP format-specific software. This results in
@@ -56,15 +27,11 @@ more complex responses. The nature of the Inter Process Communication
 same machine or be able to communicate over a very high bandwidth
 channel.
 
- +
- Both the OLFS and the BES will run and serve test data immediately
+The OLFS and the BES will run and serve test data immediately
 after a default installation. Additional configuration is required for
 them to serve site specific data.
 
- +
-
-1.1 Features
-~~~~~~~~~~~~
+=== Features
 
 THREDDS Catalog Support ::
   Hyrax supports the THREDDS catalogs. It can serve user supplied static
@@ -102,11 +69,11 @@ Supports multiple source data formats ::
   enable semantic web tools to operate upon the metadata content held in
   the server.
 
-link:../index.php/Server_Side_Processing_Functions[Server side
-functions] ::
-  Hyrax supports a number of server side functions out of the box
+ Server Side Functions ::
+  Hyrax supports a number of link:../index.php/Server_Side_Processing_Functions[Server side
+functions] out of the box
   including (but not limited to):
-  +
+  
   * __link:../index.php/Server_Side_Processing_Functions#geogrid.28.29[geogrid]__:
   Subset applicable DAP Grids using latitude and longitude values.
   * __link:../index.php/Server_Side_Processing_Functions#grid.28.29[grid]__:
@@ -148,32 +115,26 @@ Administrator's interface ::
   "structure" variables appear as graph nodes. Data can be acquired for
   atomic types or arrays of atomic types in a number of formats.
 
- +
-
 Feature Request ::
   Is there a feature you would like to see but don't? Let us know:
   support@opendap.org or opendap-tech@opendap.org (You need to
   http://mailman.opendap.org/mailman/listinfo/opendap-tech[subscribe]
   first)
 
-2 Downloading and Installation
-------------------------------
+== Downloading and Installation
 
 The download and installation instructions are kept together. For the
 latest release look at http://www.opendap.org/download/hyrax[the Hyrax
 downloads page].
 
-2.1 Building And Installing From Source
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Building And Installing From Source
 
 link:../index.php/Hyrax_GitHub_Source_Build[Getting and Building The
 Code From GitHub]
 
-3 Documentation
----------------
+== Documentation
 
-3.1 User Manuals
-~~~~~~~~~~~~~~~~
+=== User Manuals
 
 * link:../index.php/Hyrax_-_Administrators_Interface[Hyrax -
 Administrators Interface]
@@ -194,8 +155,7 @@ User Authentication and Identification]
 * link:../index.php/Australian_BOM_System_Administrator%27s_Agenda_and_Presentations[System
 Administrators Workshop]
 
-3.1.1 Modules
-^^^^^^^^^^^^^
+==== Modules
 
 Hyrax has a number of modules that provide the actual functionality of
 the server: Reading data files, building different kinds of responses
@@ -203,7 +163,7 @@ and performing different kinds of server processing operations. Most of
 these modules work with the BES but some are part of the front (web
 facing) part of the server.
 
-3.1.1.1 BES modules
+===== BES modules
 
 * link:../index.php/BES_-_Modules_-_The_NetCDF_Handler[NetCDF data
 handler]
@@ -226,7 +186,7 @@ handler]
 * link:../index.php/BES_-_Modules_-_FileOut_GDAL[GDAL (GeoTIFF,
 JPEG2000) File Response handler]
 
-3.1.1.2 Additional Java Modules that use the BES
+===== Additional Java Modules that use the BES
 
 * link:../index.php/Hyrax_WMS[WMS] - Web Mapping Service via integration
 with ncWMS.
@@ -236,8 +196,7 @@ Unsupported:
 
 * link:../index.php/BES_-_Modules_-_SQL_Hander[SQL handler]
 
-3.2 For Software Developers
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== For Software Developers
 
 * link:../index.php/Hyrax_GitHub_Source_Build[Hyrax GitHub Source Build]
 We have moved the Hyrax source code to GitHub; please don't use the old,
@@ -247,7 +206,7 @@ Eclipse with Hyrax Source Code] Note that this is a a work in progress,
 but it will help with some of the odd steps that Eclipse seems to
 require.
 
-3.2.1 BES Development Information
+==== BES Development Information
 
 * link:../index.php/BES_-_How_to_Debug_the_BES[How to debug the BES]
 * link:../index.php/BES_-_Debugging_Using_besstandalone[BES - Debugging
@@ -272,22 +231,15 @@ the Hello World example and the CSV data handler
 * ../index.php/Hyrax:_BES_Administrative_Commands[BES Administrative
 Commands]
 
- +
-
-3.3 Reference documentation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Reference documentation
 
 * http://www.opendap.org/api/bes/html/index.html[BES Reference]
 * http://www.opendap.org/api/libdap/html/index.html[libdap Reference]
 
-4 Thanks!
----------
+== Contact Us
 
 We hope we hope you find this software useful, and we welcome your
 questions and comments.
-
-4.1 Contact Us
-~~~~~~~~~~~~~~
 
 *Technical Support:*
 
@@ -304,13 +256,11 @@ http://mailman.opendap.org/mailman/listinfo[subscribe] first)
 * pwest <at> ucar <dot> edu (__bes__)
 * jgallagher <at> opendap <dot> org (__libdap__)
 
-4.2 Sponsorship
-~~~~~~~~~~~~~~~
+=== Sponsorship
 
-4.2.1 OPeNDAP Hyrax development is sponsored by:
-++++++++++++++++++++++++++++++++++++++++++++++++
 
-../index.php/File:Nsf-logo.png[image:../images/thumb/e/e9/Nsf-logo.png/95px-Nsf-logo.png[Nsf-logo.png]]
+==== OPeNDAP Hyrax development is sponsored by...
+
 *http://www.nsf.gov[National Science Foundation]*
 
 This material is based upon work supported by the National Science
@@ -319,8 +269,6 @@ conclusions or recomendations expressed in this material are those of
 the author(s) and do not necessarily reflect the views of the National
 Science Foundation (NSF).
 
-../index.php/File:Nasa-logo.jpg[image:../images/thumb/e/e8/Nasa-logo.jpg/95px-Nasa-logo.jpg[Nasa-logo.jpg]]
-*http://www.nasa.gov[National Aeronautics and Space Administration]*
+*http://www.nasa.gov[National Aeronautics and Space Administration (NASA)]*
 
-../index.php/File:Noaa-logo.jpg[image:../images/thumb/c/c7/Noaa-logo.jpg/90px-Noaa-logo.jpg[Noaa-logo.jpg]]
-*http://www.noaa.gov[National Oceanic and Atmospheric Administration]*
+*http://www.noaa.gov[National Oceanic and Atmospheric Administration (NOAA)]*

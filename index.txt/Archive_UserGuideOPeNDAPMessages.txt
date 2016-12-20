@@ -1,4 +1,4 @@
-UserGuideOPeNDAPMessages - OPeNDAP Documentation
+OBSOLETE - ARCHIVE
 ================================================
 
 [[firstHeading]]

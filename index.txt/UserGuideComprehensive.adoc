@@ -1,5 +1,5 @@
 = User Guide - OPeNDAP Documentation
-Leonard Porrello <lporrel@gmail.com>
+:Leonard Porrello <lporrel@gmail.com>:
 2016-12-31
 :numbered:
 :toc:
@@ -21,7 +21,7 @@ It is used widely in earth-science research settings but it is not limited to th
 NOTE: There are different implementations of OPeNDAP produced by various open source organizations. This guide covers the implementation of OPeNDAP produced by the OPeNDAP group.
 
 The OPeNDAP architecture uses a client/server model, with a _client_
-that sends requests for data out onto the network to a __server__,
+that sends requests for data out onto the network to a _server_,
 that answers with the requested data. This is the same model used by
 the http://www.w3.org/hypertext/WWW/TheProject.html[World Wide Web]
 where client browsers submit requests to web servers for the data that
@@ -45,7 +45,7 @@ structures and formats that are defined by the data provider but can be accessed
 users just like they access of local data files on the
 user's own system. Alhough there are limitations on the types of data
 that may be translated (see
-xref:Translation[Translating Data Models]), the facility is flexible and general enough to handle many translations. The upshot of this is... 
+xref:Translation[Translating Data Models] in this guide), the facility is flexible and general enough to handle many translations. The upshot of this is... 
 
 * A user may not need to know that data from one set are stored in a
 format different from data in another set. Also, it may be possible
@@ -67,7 +67,7 @@ The uniformity with which data appears, which makes the system useful
 for data analysis, also enables you to automate data transport and manipulation
 tasks. For example, NOAA's
 http://ferret.pmel.noaa.gov/Ferret/LAS/home/[Live Access Server (LAS)]
-(see, for example, http://mynasadata.larc.nasa.gov/data.html) uses
+(for example, http://mynasadata.larc.nasa.gov/data.html) uses
 OPeNDAP, as do many of the real-time observing systems that make up the
 https://ioos.noaa.gov/[Integrated Ocean Observing System (IOOS)], such as the
 http://gomoos.org[Gulf of Maine Ocean Observing System (GoMOOS)].
@@ -84,7 +84,7 @@ programs that are modified to get their data remotely, from the internet, rather
 than locally, from a file.
 
 Without OPeNDAP, a program that uses one of the common data
-access APIs (such as netCDF) operates as shown in
+access APIs (such as NetCDF) operates as shown in
 The Architecture of a Data Analysis Package figure, shown below. Here is how it works:
 The user makes a request for data from the program; the program uses a
 data access API to read and write data; the program uses procedures
@@ -92,31 +92,30 @@ defined by that API to access the data, which is typically stored on the
 same host machine. Some APIs are somewhat more sophisticated than this, but their general operation is similar.
 
 .The Architecture of a Data Analysis Package
-image:./images/Unlinked.png[]
+image::./images/Unlinked.png[]
 
 The operation of an OPeNDAP client is illustrated in the The Architecture of a Data Analysis Package Using OPeNDAP figure, shown below. Here, the _same program_ that was used in The Architecture of a Data Analysis Package
 figure (above) has been modified to use one of the OPeNDAP API libraries.
 Now, in addition to being able to use local data as before, the program is able to access data from OPeNDAP servers anywhere on the internet just as it would local data.
 
 To make any analysis program into an OPeNDAP client, it just needs to be linked with the OPeNDAP API library. (Or, if your program uses one of the
-supported legacy API libraries, like netCDF, you can link with the
+supported legacy API libraries, like NetCDF, you can link with the
 OPeNDAP version of that library.) This will create a program that
-accepts URLs as well as file pathnames to identify needed data. (See xref:OPeNDAP_Client[OPeNDAP Client]).
+accepts URLs as well as file pathnames to identify needed data. (See xref:OPeNDAP_Client[OPeNDAP Client] in this guide).
 
 .The Architecture of a Data Analysis Package Using OPeNDAP
-image:./images/Linked.png[]
+image::./images/Linked.png[]
 
 OPeNDAP also provides data translation functionality. Data from the
 original data file is translated by the OPeNDAP server into the OPeNDAP
 data model for transmission to the client. Upon receiving the data, the
 client translates the data into the
-xref:OPeNDAP_Data_Model[data model] it understands. Because
+xref:OPeNDAP_Data_Model[Data Model] it understands. Because
 the data transmitted from an OPeNDAP server to the client travel in the
 OPeNDAP format, the dataset's original storage format is completely
 irrelevant to the client. For example, if the client was originally designed to read
-netCDF format files, the data returned by the OPeNDAP-netCDF library
-will appear to have been read from a netCDF file. Similarly, if the program expects JGOFS data, the OPeNDAP-JGOFS library will return
-data that seem to have come from a JGOFS dataset, and so on.
+NetCDF format files, the data returned by the OPeNDAP-NetCDF library
+will appear to have been read from a NetCDF file. Similarly, if the program expects JGOFS data, the OPeNDAP-JGOFS library will return data that seem to have come from a JGOFS dataset, and so on.
 
 OPeNDAP does not claim to remove all of the overhead of data searches. A
 user will still have to keep track of the URLs of interesting data in
@@ -137,27 +136,27 @@ the xref:DAP[DAP]. This defines the range of messages a
 server must understand and the kinds of replies it makes.
 
 There are two categories of messages that an OPeNDAP server can understand.
-Some are required by the xref:DAP[DAP] and others are merely suggested. A server
+Some are required by the DAP and others are merely suggested. A server
 is considered to be DAP-compliant if it can respond intelligibly to the
 required messages. Following are the requests messages a server is required to understand:
 
-Data Description:: Data values come in types and sizes. An array, for example, might consist of 10 integers. The value "ten" and the type "integer" describe the array. This request returns information about data types, so that a receiving program can allocate space appropriately. See xref:DDS[Data Description Structure (DDS)].
+Data Description:: Data values come in types and sizes. An array, for example, might consist of 10 integers. The value "ten" and the type "integer" describe the array. This request returns information about data types, so that a receiving program can allocate space appropriately. See xref:DDS[Data Description Structure (DDS)] in this guide.
 
-Data Attribute:: This is a request to provide information _about_ data and typically includes information like units, names of data types, reference information and so on. See xref:DAS[Data Attribute Structure (DAS)].
+Data Attribute:: This is a request to provide information _about_ data and typically includes information like units, names of data types, reference information and so on. See xref:DAS[Data Attribute Structure (DAS)] in this guide.
 
-Data:: The server also must be able to respond to a request for the data itself. See xref:DDS[Data Description Structure (DDS)].
+Data:: The server also must be able to respond to a request for the data itself. See xref:DDS[Data Description Structure (DDS)] in this guide.
 
 In addition, a server may respond to requests like these:
 
-ASCII:: Some servers can convert data to ASCII values on the fly. This allows users to view data using a standard web browser, assuming the data are not too large. See xref:ASCII_Service[ASCII Service]
+ASCII:: Some servers can convert data to ASCII values on the fly. This allows users to view data using a standard web browser, assuming the data are not too large. See xref:ASCII_Service[ASCII Service] in this guide.
 
-Info:: The info response is a formatted page containing information from the Data Attributes and Data Description responses. It is meant to be a human-readable means to show what is available in a dataset via a standard web browser. See xref:Info_Service[Info Service].
+Info:: The info response is a formatted page containing information from the Data Attributes and Data Description responses. It is meant to be a human-readable means to show what is available in a dataset via a standard web browser. See xref:Info_Service[Info Service] in this guide.
 
-HTML:: Very similar to the info response, the HTML response provides the information from the info response and also includes a Javascript form to help you build a request for data from the same data file. The best description of the HTML form is in the link:./QuickStart.html[Quick Start Guide].
+HTML:: Very similar to the info response, the HTML response provides the information from the info response and also includes a Javascript form to help you build a request for data from the same data file. The best description of the HTML form is in the link:./QuickStart.adoc[Quick Start Guide].
 
-SOAP:: OPeNDAP servers can provide their data in terms of a SOAP request and response. For more information see xref:SOAP[SOAP].
+SOAP:: OPeNDAP servers can provide their data in terms of a SOAP request and response. For more information see xref:SOAP[SOAP] in this guide.
 
-DDX:: The DDX is an XML version of the Data Attribute and Data Description replies. See xref:DDX[DDX].
+DDX:: The DDX is an XML version of the Data Attribute and Data Description replies. See xref:DDX in this guide.
 
 === The OPeNDAP Server (Hyrax) ===
 
@@ -165,7 +164,7 @@ OPeNDAP provides a definition of the communication between client and
 server and enables servers and clients that conform to xref:DAP[DAP] standard to communicate
 with each other. In addition to the DAP communication standard
 itself, the OPeNDAP group also provides an implementation of a
-standard server protocol, called _Hyrax._
+standard server protocol, called _Hyrax._ (_Hyrax_ is an alternative name for the OPeNDAP 4 Data Server.)
 
 The OPeNDAP data server is made up of two pieces. You can think of them 
 as a front-end and a back-end, though a client will not be aware of the
@@ -189,19 +188,14 @@ the user needs.
 
 NOTE: Most users will not make requests directly to the BES.
 
-.Hyrax Architecture
-image:./images/600px-HyraxArchitecture.jpg[]
-
-_Hyrax_ is an alternative name for the OPeNDAP 4 Data Server.
-
-See xref:OPeNDAP_Data_Model[Data Model] for a description
+See xref:OPeNDAP_Data_Model[Data Model] in this guide for a description
 of the data returned by requests and see
-xref:OPeNDAP_Server[OPeNDAP Server] for a description of
+xref:OPeNDAP_Server[OPeNDAP Server] in this guide for a description of
 the URL syntax used to send requests.
 
-See link:./Hyrax.adoc[the OPeNDAP 4 Data Server documentation] for
+Go to the link:./Hyrax.adoc[OPeNDAP 4 Data Server documentation] for
 a description of how to install and configure an OPeNDAP data server
-(Hyrax).
+("Hyrax").
 
 === Administration and Centralization of Data ===
 
@@ -213,9 +207,7 @@ served. Data providers are free to join and to leave the system as doing so is c
 Similar to the World Wide Web, there are some
 disadvantages to the lack of central authority. If no one knows about a
 web site, no one will visit it. Similarly, listing a dataset in a
-central data catalog, such as the Global Change Master Directory
-(http://gcmd.gsfc.nasa.gov[http://gcmd.gsfc.nasa.gov/]), can make data
-available to other researchers in a way that simply configuring an
+central data catalog, such as the [http://gcmd.gsfc.nasa.gov/[Global Change Master Directory], can make data available to other researchers in a way that simply configuring an
 OPeNDAP server would not. OPeNDAP provided a facility for registering a
 data set with the GCMD catalog. This makes the data set known to the
 OPeNDAP data location service. The THREDDS catalog service is another
@@ -400,7 +392,7 @@ useful translations that can be done and there are many others that are
 still useful despite their inherent information loss.
 
 For example, consider a relational structure below, which contains two nested
-Sequences. The outer sequence represents all the XBT drops in a cruise; the inner sequence represents each XBT drop. The JGOFS API was designed to use this sort of data type.
+Sequences. The outer sequence represents all the XBT drops in a cruise; the inner sequence represents each XBT drop.
 
 .Example Data Description of XBT Cruise
 -----------------------------
@@ -489,8 +481,8 @@ platforms.
 designed to implement the protocol,
 
 The intermediate data representation and the ancillary data formats are
-introduced in xref:OPeNDAP_Messages[OPeNDAP
-Messages], as are the steps of the procedure. The actual details of the
+introduced in the xref:OPeNDAP_Messages[OPeNDAP
+Messages] section of this guide, as are the steps of the procedure. The actual details of the
 software used to implement these formats and procedures is a subject of
 the documentation of the respective software.
 
@@ -533,9 +525,9 @@ These elements are defined in greater detail in the sections that follow.
 The OPeNDAP data model uses the concepts of variables and operators.
 Each data set is defined by a set of one or more variables, and each
 variable is defined by a set of attributes. A variable's
-__attributes__—such as units, name and type—must not be confused with
+_attributes_—such as units, name and type—must not be confused with
 the data _value_ (or values) that may be represented by that variable. A
-variable called __time__ may contain an integer number of minutes, but it
+variable called _time_ may contain an integer number of minutes, but it
 does not contain a particular number of minutes until a context, such as
 a specific event recorded in a data set, is provided. Each variable may
 further be the object of an operator that defines a subset of the
@@ -683,7 +675,7 @@ the Structure defined above:
 
 Note that, unlike an Array, a Sequence has no index. This means that a
 Sequence's values are not simultaneously accessible. Instead, a Sequence
-has an implied __state__, corresponding to a single element in the
+has an implied _state_, corresponding to a single element in the
 Sequence.
 
 As with a Structure, the variable measurement.month has a single value.
@@ -715,7 +707,7 @@ of the points in the grid, the precise location of each column and row
 must be described.
 
 .A Sample of an Irregular Grid of Data
-image:./Images/Grid.gif[]
+image::./Images/Grid.gif[]
 
 The secondary vectors in the Grid data type provide a solution to this
 problem. Each member of these vectors associates a value for all the
@@ -732,9 +724,9 @@ type that could accommodate a structure like this:
    } measurement;
 --------------------------------------------
 
-In this example, a vector called __depth__ contains five values, each
+In this example, a vector called _depth_ contains five values, each
 corresponding to the depths of each row of the array, while another
-vector called __distance__ contains the scalar distance between the location
+vector called _distance_ contains the scalar distance between the location
 of the corresponding column and a reference point.
 
 In a similar arrangement, a location array could contain six
@@ -993,11 +985,7 @@ separated by commas (,) in the textual representation of the DAS.
 |"container" |user-chosen container name
 |================================================
 
-A DAS is returned in response to a request for the DAS. Unlike the xref:DDS[DDS],
-it is not part of the data return. The request URL for the DAS is
-composed of the root URL, with the suffix ".das". For example, if a data
-set is located at http:/tests.opendap.org/data/mydata.dat then you'll
-find the DAS at http:/tests.opendap.org/data/mydata.dat.das
+A DAS is returned in response to a request for the DAS. Unlike the #DDS[DDS], it is not part of the data return. The request URL for the DAS is composed of the root URL, with the suffix ".das". For example, if a data set is located at _http:/tests.opendap.org/data/mydata.dat_ then you’ll find the DAS at _http:/tests.opendap.org/data/mydata.dat.das_.
 
 ===== Containers =====
 An attribute can contain another attribute, or a set of attributes. This
@@ -1113,10 +1101,7 @@ to compile an OPeNDAP dataset database.
 
 === Data Transmission ===
 
-An OPeNDAP server returns data to a client in response to a request URL
-composed of the root URL, with the suffix ".dods". For example, if a
-data set is located at http:/tests.opendap.org/data/mydata.dat then
-you'll find the data at http:/tests.opendap.org/data/mydata.dat.dods
+An OPeNDAP server returns data to a client in response to a request URL composed of the root URL, with the suffix ".dods". For example, if a data set is located at _http:/tests.opendap.org/data/mydata.dat_ then you’ll find the data at _http:/tests.opendap.org/data/mydata.dat.dods_
 
 The data is returned in a MIME document that consists of two parts: the
 xref:DDS[DDS] and the data encoded according to the description in
@@ -1124,7 +1109,7 @@ xref:External_Data_Representation[External Data Representation]. (The returned d
 
 Data:<CR><NL>
 
-The xref:DDS[DDS] included is modified according to any constraint expression that may have been
+The DDS is modified according to any constraint expression that may have been
 applied. That is, the returned DDS describes the returned data.
 
 For example, consider a a request for data from a data set with a DDS like this:
@@ -1143,7 +1128,7 @@ Dataset {
 } sst.mnmean.nc;
 ----------------------------------------------------
 
-This is the xref:DDS[DDS] of a typical gridded dataset. Suppose, though, that you ask for only the time values of the data set. The DDS of the result will look like this:
+This is the DDS of a typical gridded dataset. Suppose, though, that you ask for only the time values of the data set. The DDS of the result will look like this:
 
 ------------------------------
 Dataset {
@@ -1151,12 +1136,12 @@ Dataset {
 } sst.mnmean.nc;
 ------------------------------
 
-This xref:DDS[DDS] will be included in the DataDDS return, ahead of the encoded array of 1857 64-bit time values.
+This DDS will be included in the DataDDS return, ahead of the encoded array of 1857 64-bit time values.
 
 For more information about sampling OPeNDAP data sets, see the section
 below about constraint expressions.
 
-NOTE: A request for data from an OPeNDAP client will generally make three different service requests: xref:DAS[DAS], xref:DDS[DDS], and data. The prepackaged OPeNDAP
+NOTE: A request for data from an OPeNDAP client will generally make three different service requests: xref:DAS[DAS], DDSD, and data. The prepackaged OPeNDAP
 clients do this for you, so you may not be aware that three requests are made for each URL.
 
 === Other Services ===
@@ -1177,7 +1162,7 @@ message.
 
 NOTE: While ASCII is fine for moving small amounts of data, it generally is best to move data in binary whenever possible becuase servers can generate binary data more quickly than ASCII data, and binary data is more compact. You can then process locally if you need ASCII. To process binary data, you could use getdap if you retrieve DAP2 binary response (.dods); getdap4 if you retrieve a DAP4 binary response; or ncdump for a NetCDF3 or NetCDF4 binary response.
 
-The link:./QuickStart.html[Quick Start Guide] contains examples of the ASCII response.
+The link:./QuickStart.adoc[Quick Start Guide] contains examples of the ASCII response.
 
 [[Info_Service]]
 ==== Info Service ====
@@ -1190,7 +1175,7 @@ referenced in the URL. The server administrator determines what
 information is returned in response to such a request. The services is
 activated by a URL ending in .info.
 
-Click http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.info to see an Info response.
+Go to http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.info to see an Info response.
 
 [[WWW_Interface]]
 ==== WWW Interface Service ====
@@ -1207,19 +1192,19 @@ resulting URL into another browser, or use one of the buttons on the
 form to download data.
 
 .OPeNDAP Server Data Access Form
-image:./images/Reynolds_ifh.png[]
+image::./images/Reynolds_ifh.png[]
 
 If a server receives a URL that either ends in a slash (/) or
 contents.html, it returns a web page that looks like a standard web
 browser's directory view.
 
 .Sample Directory View
-image:./images/Test.oopendap.org_directory_view.png[]
+image::./images/Test.oopendap.org_directory_view.png[]
 
 Each link in the directory view opens up the WWW service version of that
 data.
 
-The link:./QuickStart.html[Quick Start Guide]
+The link:./QuickStart.adoc[Quick Start Guide]
 contains more information about browsing OPeNDAP data interactively.
 
 ==== Version Service ====
@@ -1248,7 +1233,7 @@ http://xml.opendap.org/dap/dap2.xsd.
 The DDX is designed to contain data, too, but this is not yet implemented. You will see an empty dataBLOB element at the end of each
 DDX, which will eventually hold returned data.
 
-The DDX response can be modified with a constraint expression. Like the xref:DDS[DDS], the
+The DDX response can be modified with a constraint expression. Like the DDS, the
 DDX will describe only the data actually returned.
 
 The DDX and the DataDDX (containing the dataBLOB) are the nucleus of
@@ -1256,13 +1241,12 @@ what will become version 4 of the xref:DAP[DAP].
 
 ==== THREDDS ====
 
-Some OPeNDAP servers (including link:./Hyrax.adoc[Hyrax], the
+Some OPeNDAP servers (for example, go to link:./Hyrax.adoc[Hyrax], the
 server supplied by the OPeNDAP group) can make sensible replies to
 requests for THREDDS catalog information. This can serve to "advertise"
 a server's data by having it appear in catalogs accumulated by THREDDS
-browsers. For more information about THREDDS, see the
-http://www.unidata.ucar.edu/projects/THREDDS/tech/TDS.html[THREDDS] home
-page.
+browsers. Go to the UCAR 
+http://www.unidata.ucar.edu/projects/THREDDS/tech/TDS.html[THREDDS Data Server] site for more information.
 
 [[Constraint_Expressions]]
 === Constraint Expressions ===
@@ -1353,7 +1337,7 @@ criteria, then only that part will be returned.
 
 NOTE: Due to differences between data model paradigms, selection is not implemented for the OPeNDAP array data types, such as
 Grid or Array. However, many OPeNDAP servers implement selection
-functions you can use for the same effect. (See xref:Constraint_Expression_Functions[Constraint Expression Functions].)
+functions you can use for the same effect. (See the xref:Constraint_Expression_Functions[Constraint Expression Functions] section in this guide.)
 
 .Simple Constraint Expression Examples
 Consider the xref:DDS[DDS] below. This is the description of a dataset containing
@@ -1488,16 +1472,16 @@ Byte, Int*, UInt*, Float* |< > = != <= >=
 |================================================
  
 Individual fields of type constructors may be accessed using the dot
-(.) operator or the virtual file system syntax. If a structure __s__ has two
+(.) operator or the virtual file system syntax. If a structure _s_ has two
 fields time and temperature, then those fields may be accessed using
 s.time and s.temperature or as s/time and s/temperature.
 
 The ~= operator returns true when the character string on the left of
-the operator matches the regular expression on the right. See xref:Pattern_Matching[Pattern Matching with Constraint Expressions] for a discussion of regular expressions.
+the operator matches the regular expression on the right. See xref:Pattern_Matching[Pattern Matching with Constraint Expressions] in this guide for a discussion of regular expressions.
 
 The array operator [] is used to subsample the given array. You can find
 several examples of its use in the
-link:./QuickStart.html#Peeking_at_Data[Quick Start Guide].
+link:./QuickStart.adoc#Peeking_at_Data[Quick Start Guide: Peeking at Data].
 
 [[Constraint_Expression_Functions]]
 ==== Constraint Expression Functions ====
@@ -1648,16 +1632,11 @@ xref:OPeNDAP_Data_Model[OPeNDAP Data Model] is an OPeNDAP server. The messages a
 
 In addition to publishing and maintaining the
 standards described here, the OPeNDAP group maintains a server that complies with the
-standard. This is link:./Hyrax.adoc[Hyrax].
+standard. Go to the link:./Hyrax.adoc[Hyrax] guide for addtional information..
 
 ==== Hyrax ====
 
-Hyrax, the modular OPeNDAP server, is flexible enough that it can serve data that currently exist in
-a wide variety of data storage formats, including HDF4 data files, netCDF data, and, using the FreeForm module, data in arbitrary, non-standard formats.
-
-Because Hyrax is modular, it can be outfitted to serve the
-particular needs of your data without weighing down performance with
-features you don't need.
+Hyrax, the modular OPeNDAP server, C and Java NetCDF data storage formats. Because Hyrax is modular, it can be outfitted to serve the particular needs of your data without weighing down performance with features you do not need.
 
 ===== How Hyrax Works =====
 
@@ -1675,7 +1654,7 @@ authorization-checking and responding to catalog and bot requests. It
 can also construct complex data requests from multiple requests from its
 parner server.
 
-image:./images/300px-HyraxArchitecture.jpg[]
+image::./images/HyraxArchitecture.jpg[]
 
 This "engine room" server, called the **B**ack **E**nd **S**erver (BES), does
 only one thing: it provides data. It is designed to do it fast. It handles
@@ -1712,8 +1691,7 @@ link:./Hyrax_-_BES_Configuration.adoc[Hyrax configuration file],
 called bes.xml. Details of these options are in the Hyrax documentation, but following are the
 decisions you'll have to make:
 
-What kind of data:: Hyrax is equipped to serve data stored in any of several different
-  file formats, HDF, netCDF and others. Each different format requires
+What kind of data:: Hyrax is equipped to serve data stored in C and Java netCDF file formats. Each different format requires
   its own handler, and your computer must have shared libraries
   containing these handlers. For example, in order to serve
   netCDF data, the netCDF handler library must be available to Hyrax,
@@ -1811,8 +1789,8 @@ An OPeNDAP client is usually just a data analysis application program
 modified to become a web browser, somewhat like any other web browser
 with which you may be familiar. A web browser can only display the data
 it receives, however. What makes an OPeNDAP client different from
-another web browser is that once the data has been received from an
-OPeNDAP server, the OPeNDAP client application can compute with it.
+other web browsers is that once the data has been received from an
+OPeNDAP server, the OPeNDAP client application can perform computations with it.
 
 Like a web browser, an OPeNDAP client accepts a URL from a user, and
 sends a message to that address, asking for the information specified in
@@ -1822,12 +1800,8 @@ pictures, but an OPeNDAP server will return scientific data that an
 OPeNDAP client can understand and process.
 
 There is a wide range of OPeNDAP clients available, and it should not be
-hard to find one you can use.
-
-In fact, though it can become clumsy for advanced applications, you can
-use an ordinary web browser as a client to most OPeNDAP servers, making
-use of the server's
-xref:WWW_Interface[WWW interface]. The link:./QuickStart.html[Quick Start Guide] contains several examples.
+hard to find one you can use. In fact, though it can become clumsy for advanced applications, you can use an ordinary web browser as a client to most OPeNDAP servers, making
+use of the server's xref:WWW_Interface[WWW interface]. The link:./QuickStart.adoc[Quick Start Guide] contains several examples.
 
 After a basic web browser, the simplest clients to use are likely to be
 the programs you're already using. If you use one of the popular data
@@ -1839,8 +1813,7 @@ the program that will work with OPeNDAP URLs just as well as file names.
 
 If none of those options work for you, there is a whole range of client
 libraries you can use to develop a client of your own. Several of these
-are supported by the OPeNDAP project, and there are others out there in
-the world supported by other groups.
+are supported by the OPeNDAP project, and there are others supported by other groups.
 
 This page provides a list and very brief overview of the various
 options, along with pointers to places you can find more information
@@ -1936,10 +1909,17 @@ subsampled_data =
 This quick demo just scratches the surface of what the inteface can do! And, of course, you can use it to read local files if you have those as well.
 
 ===== Panoply =====
-Download Panoply and install
-Enter a URL and it will work or not
+Panoply plots geo-referenced and other arrays from http://www.unidata.ucar.edu/packages/netcdf/[netCDF], http://www.hdfgroup.org/[HDF], https://www.wmo.int/pages/prog/www/WMOCodes.html[GRIB], and other datasets. With Panoply 4 (and later) you can Explore remote OpenDAP catalogs and open datasets served from them. For example, if you click *File* > *Open* > *Open Remote Dataset* and then enter http://test.opendap.org/opendap/hyrax/data/nc/coads_climatology.nc you will see this:
 
-Open Dataset catalog: When you use the URL for the root of a server, you can examine the entire contents (all of the datasets) of the server. 
+.An OPeNDAP Dataset Displayed in Panoply
+image::./images/Panoply.png[]
+
+If you then click, *SEA SURFACE TEMPERATURE*, you will see this:
+
+.Panoply Displaying OPeNDAP Data
+image::./images/Panoply_Graph.png[]
+
+NOTE: Using the URL for the root of a server, you can open a dataset catalog and examine the entire contents of the server.
 
 ==== Testing ====
 
