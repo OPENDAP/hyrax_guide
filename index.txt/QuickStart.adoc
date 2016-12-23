@@ -419,7 +419,8 @@ Data often comes in the form of a URL enclosed in an email message,
 and there are several other ways to find data served by OPeNDAP
 servers.
 
-// jhrg TODO Google works too
+// jhrg TODO Google works too. Use Google to search for 'OPeNDAP Hyrax' or
+// to search for 'OPeNDAP <terms>' or 'Hyrax <terms>'
 
 === GCMD ===
 
