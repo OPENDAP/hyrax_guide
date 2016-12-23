@@ -7,7 +7,7 @@
 == About This Guide == 
 
 This guide introduces important concepts behind the OPeNDAP data
-model and transmission format as well as the clients and servers that
+model and Web API as well as the clients and servers that
 use them. While it is not a reference for any particular client or server, you will find links to particluar clients and servers in it.
 
 == What is OPeNDAP ==
@@ -25,9 +25,11 @@ that sends requests for data out onto the network to a _server_,
 that answers with the requested data. This is the same model used by
 the http://www.w3.org/hypertext/WWW/TheProject.html[World Wide Web]
 where client browsers submit requests to web servers for the data that
-compose web pages. Using flexible, multi-purpose data types,
-including scientific data, OPeNDAP servers deliver real data
-directly to client programs in the format needed by that client. OPeNDAP can return data in the following formats: NetCDF, GeoTIFF, JPEG2000, JSON, ASCII.
+compose web pages. Using flexible, general-purpose data types,
+that can easily represent scientific data, OPeNDAP servers deliver real data
+directly to client programs in the format needed by that client. In addition to the OPeNDAP data encoding, our server can return data in the following formats: NetCDF, GeoTIFF, JPEG2000, JSON, ASCII.
+// replaced with the above. jhrg
+// OPeNDAP can return data in the following formats: NetCDF, GeoTIFF, JPEG2000, JSON, // ASCII.
 
 OPeNDAP clients are very specialized browsers, constructed by linking
 legacy data analysis programs with OPeNDAP-enabled versions of the data
@@ -43,7 +45,7 @@ To expand the universe of data available to a user, OPeNDAP incorporates
 a powerful data translation facility, so that data may be stored in data
 structures and formats that are defined by the data provider but can be accessed by the
 users just like they access of local data files on the
-user's own system. Alhough there are limitations on the types of data
+user's own system. Although there are limitations on the types of data
 that may be translated (see
 xref:Translation[Translating Data Models] in this guide), the facility is flexible and general enough to handle many translations. The upshot of this is... 
 
@@ -114,8 +116,10 @@ xref:OPeNDAP_Data_Model[Data Model] it understands. Because
 the data transmitted from an OPeNDAP server to the client travel in the
 OPeNDAP format, the dataset's original storage format is completely
 irrelevant to the client. For example, if the client was originally designed to read
-NetCDF format files, the data returned by the OPeNDAP-NetCDF library
-will appear to have been read from a NetCDF file. Similarly, if the program expects JGOFS data, the OPeNDAP-JGOFS library will return data that seem to have come from a JGOFS dataset, and so on.
+NetCDF format files, the data returned by the OPeNDAP-enabled NetCDF library
+will appear to have been read from a NetCDF file. Similarly, if the program uses C, Python, Java or JavaScript there are OPeNDAP API libraries that will enable it to directly access data. Finally, if a program can read data from files using any of the server's supported format, it is easy to use the OPeNDAP server to send you data in a file and use that just like any other local data file. 
+// Replaced with the above. jhrg
+// expects JGOFS data, the OPeNDAP-JGOFS library will return data that seem to have // come from a JGOFS dataset, and so on.
 
 OPeNDAP does not claim to remove all of the overhead of data searches. A
 user will still have to keep track of the URLs of interesting data in
@@ -127,7 +131,8 @@ OPeNDAP does make the access to that data simpler and quicker.
 
 The OPeNDAP group provides a whole array of client software to implement
 this communication standard. These range from standalone clients to
-libraries to link with existing software.
+libraries to link with existing software. In addition, a community of like-minded software developers and data users has built compatible software that extends the software we offer in many new directions.
+// I hacked this a bit to reflect new developments since this was written. jhrg
 
 === OPeNDAP Services ===
 
@@ -152,11 +157,21 @@ ASCII:: Some servers can convert data to ASCII values on the fly. This allows us
 
 Info:: The info response is a formatted page containing information from the Data Attributes and Data Description responses. It is meant to be a human-readable means to show what is available in a dataset via a standard web browser. See xref:Info_Service[Info Service] in this guide.
 
-HTML:: Very similar to the info response, the HTML response provides the information from the info response and also includes a Javascript form to help you build a request for data from the same data file. The best description of the HTML form is in the link:./QuickStart.adoc[Quick Start Guide].
+HTML:: Very similar to the info response, the HTML response provides the information from the info response and also includes a JavaScript form to help you build a request for data from the same data file. The best description of the HTML form is in the link:./QuickStart.adoc[Quick Start Guide].
 
 SOAP:: OPeNDAP servers can provide their data in terms of a SOAP request and response. For more information see xref:SOAP[SOAP] in this guide.
+// FIXME SOAP is deprecated in our server, but the binding is probably technically
+// valid. How should we handle this? Remove it from the guide and leave it as
+// a developer item or leave it here but add an explanation about it's current
+// support in/by our server? jhrg
 
-DDX:: The DDX is an XML version of the Data Attribute and Data Description replies. See xref:DDX in this guide.
+DDX:: The DDX is an XML version of the Data Attribute and Data Description replies. See xref:DDX[DDX] in this guide.
+
+// FIXME We need to add information about DAP4 here and thus to introduce the 
+// idea that there are two DAP protocol versions. jhrg
+// Also, there are a number of other responses the our server supports, we should
+// be clear about these (that they exist, but some are probably not _suggested_).
+// jhrg
 
 === The OPeNDAP Server (Hyrax) ===
 
@@ -207,11 +222,13 @@ served. Data providers are free to join and to leave the system as doing so is c
 Similar to the World Wide Web, there are some
 disadvantages to the lack of central authority. If no one knows about a
 web site, no one will visit it. Similarly, listing a dataset in a
-central data catalog, such as the [http://gcmd.gsfc.nasa.gov/[Global Change Master Directory], can make data available to other researchers in a way that simply configuring an
-OPeNDAP server would not. OPeNDAP provided a facility for registering a
-data set with the GCMD catalog. This makes the data set known to the
-OPeNDAP data location service. The THREDDS catalog service is another
-way to make information about your data widely available.
+central data catalog, such as the link:http://gcmd.nasa.gov/[Global Change Master Directory], can make data available to other researchers in a way that simply configuring an OPeNDAP server would not. You can contact the GCMD and submit 
+your server to their catalog.
+// Replaced this with the above. jhrg
+// OPeNDAP provided a facility for registering a
+// data set with the GCMD catalog. This makes the data set known to the
+// OPeNDAP data location service. The THREDDS catalog service is another
+// way to make information about your data widely available.
 
 The remainder of this section will be divided into three sections:
 
