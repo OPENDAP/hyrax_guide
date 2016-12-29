@@ -17,23 +17,24 @@ document, "OPeNDAP" will refer to the software.
 
 With OPeNDAP, you can access data using an OPeNDAP URL of any database
 server that supports OPeNDAP. You can do this via command-line,
-Internet browser, or a custom UI. Note that OPeNDAP data is, by
+Internet browser, or a custom UI. You can also use other NetCFD complaint tools, 
+such asMatlab, R, IDL, IDV, and Panoply.
+
+Note:: that OPeNDAP data is, by
 default, stored and transmitted in binary form. In addition to its
-native data representation format, OPeNDAP can return data in the
+native data representation format, OPeNDAP can get data in the
 following formats: NetCDF, GeoTIFF, JPEG2000, JSON, ASCII.
 
-// jhrg Ways that OPeNDAP supports getting data: NetCDF, GeoTIFF, JPEG2000, JSON, ASCII
+// DONE: jhrg Ways that OPeNDAP supports getting data: NetCDF, GeoTIFF, JPEG2000, JSON, ASCII
 
 This quick start guide covers how to use OPeNDAP in a typical web
 browser, such as Firefox, Chrome, or Safari, to discover information
 about data that is useful when creating database queries. For
 additional information, see the OPeNDAP User Guide.
 
-// jhrg TODO Add information about the other clients/examples (Matlab, ...)
+// DONE: jhrg TODO Add information about the other clients/examples (Matlab, ...)
 
-// jhrg TODO In this text you're using 'database' in a way that's technically correct,
-// but which may be confusing to users who will think more of servers and datasets.
-// I'll have to think about just how important that distinction is...
+// jhrg TODO In this text you're using 'database' in a way that's technically correct, but which may be confusing to users who will think more of servers and datasets. I'll have to think about just how important that distinction is...
 
 === Key Terms ===
 
@@ -52,10 +53,10 @@ additional information, see the OPeNDAP User Guide.
 * *DDS (Dataset Descriptor Structure):* Provides a description of the
    "shape" of data in a database, using a vaguely C-like syntax.
 * *Hyrax:* The server half of OPeNDAP, developed by the OPeNDAP group.
-* *OPeNDAP URL* An OPeNDAP URL is a URL that enables you to access
-   data on a database server on which OPeNDAP is implemented.
+* *OPeNDAP URL* An OPeNDAP URL is a URL that includes "opendap.org" and 
+   enables you to access data on a database server on which OPeNDAP is implemented.
 
-// jhrg No: An OPeNDAP URL will include "opendap.org" in its path.
+// DONE: jhrg No: An OPeNDAP URL will include "opendap.org" in its path.
 
 == What to do With an OPeNDAP URL ==
 
@@ -244,8 +245,7 @@ http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.info
 Now that we know a little about the shape of the data and the data
 attributes, we will look at some of the data.
 
-// jhrg TODO There should be a better way to write the [] in the URLs. People
-// will think they have to use the hex escapes.
+// jhrg TODO There should be a better way to write the [] in the URLs. People will think they have to use the hex escapes.
 
 You can request a piece of an array with subscripts, just like in a C
 program, Matlab, or many other computer languages. Use a colon to
@@ -333,9 +333,7 @@ parameter list and get some documentation for that function. For
 example, try
 http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.ascii?geogrid()[...?geogrid()].
 
-// jhrg TODO Add a note that other servers may support other ways of doing an
-// equivalent operation (e.g., ERDDAP does, TDS does not AFAIK). We don't really
-// want to rank on TDS, however, so maybe soft-pedal that...
+// jhrg TODO Add a note that other servers may support other ways of doing an equivalent operation (e.g., ERDDAP does, TDS does not AFAIK). We don't really want to rank on TDS, however, so maybe soft-pedal that...
 
 ===== Creating Server Function Pipelines =====
 
@@ -419,8 +417,7 @@ Data often comes in the form of a URL enclosed in an email message,
 and there are several other ways to find data served by OPeNDAP
 servers.
 
-// jhrg TODO Google works too. Use Google to search for 'OPeNDAP Hyrax' or
-// to search for 'OPeNDAP <terms>' or 'Hyrax <terms>'
+// jhrg TODO Google works too. Use Google to search for 'OPeNDAP Hyrax' or to search for 'OPeNDAP <terms>' or 'Hyrax <terms>'
 
 === GCMD ===
 
