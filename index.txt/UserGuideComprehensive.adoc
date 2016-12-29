@@ -255,7 +255,18 @@ decisions) of the OPeNDAP software.
 [[OPeNDAP_Data_Model]]  
 == OPeNDAP Data Model ==
 
-This section provides a review of the data types OPeNDAP sends between client and server and issues involved in translating one to another. This information may be useful to researchers who will be using OPeNDAP to transfer data.
+This section provides a review of the data types OPeNDAP sends between
+client and server and issues involved in translating one to another.
+This information may be useful to researchers who will be using
+OPeNDAP to transfer data.
+
+// FIXME We will need to introduce the idea that there are now two DAP
+// protocols - DAP2 (described in the text that follows now) and DAP4
+// (not yet described in this document). They are pretty colsely
+// related, but still there are differences. jhrg
+
+// FIXME We should include links to the more technical (and
+// authoritative) documents for DAP2 and DAP4. jhrg
 
 === Data and Data Models ===
 
@@ -402,7 +413,8 @@ models.)
 The problem of data model translation is central to the implementation
 of OPeNDAP. With an effective data translator, an OPeNDAP program
 originally designed to read netCDF data can have some access to data
-sets that use an incompatible data model, such as JGOFS.
+sets that use an incompatible data model, such as an SQL database.
+// Replaced 'JGOFS.' with SQL... jhrg
 
 In general, it is not possible to define an algorithm that will
 translate data from any model to any other model without losing information
@@ -1246,6 +1258,7 @@ relevant version numbers.
 
 [[SOAP]]
 ==== SOAP ====
+// FIXME We dropped support for SOAP a while ago. jhrg
 
 The OPeNDAP server provided by the OPeNDAP group contains an
 experimental SOAP service, enabling users to make requests and get
@@ -1257,7 +1270,7 @@ to contact the OPeNDAP developer team.
 ==== DDX ====
 
 The DDX is an XML version of the xref:DAS[DAS] and xref:DDS[DDS], combined. It is triggered
-by a URL ending with .ddx. You can find the schema for the DDX at
+by a URL ending with __.ddx__. You can find the schema for the DDX at
 http://xml.opendap.org/dap/dap2.xsd.
 
 The DDX is designed to contain data, too, but this is not yet implemented. You will see an empty dataBLOB element at the end of each
@@ -1266,8 +1279,9 @@ DDX, which will eventually hold returned data.
 The DDX response can be modified with a constraint expression. Like the DDS, the
 DDX will describe only the data actually returned.
 
-The DDX and the DataDDX (containing the dataBLOB) are the nucleus of
-what will become version 4 of the xref:DAP[DAP].
+The DDX is the nucleus of
+what became version 4 of the xref:DAP[DAP].
+// Hacked. jhrg
 
 ==== THREDDS ====
 
@@ -1502,9 +1516,9 @@ Byte, Int*, UInt*, Float* |< > = != <= >=
 |================================================
  
 Individual fields of type constructors may be accessed using the dot
-(.) operator or the virtual file system syntax. If a structure _s_ has two
-fields time and temperature, then those fields may be accessed using
-s.time and s.temperature or as s/time and s/temperature.
+(.) operator. If a structure _s_ has two fields time and temperature,
+then those fields may be accessed using s.time and s.temperature.
+// Edited. Removed text about the '/' operator. jhrg
 
 The ~= operator returns true when the character string on the left of
 the operator matches the regular expression on the right. See xref:Pattern_Matching[Pattern Matching with Constraint Expressions] in this guide for a discussion of regular expressions.
@@ -2083,3 +2097,6 @@ pure Python. This is tremendously useful for scripting complicated
 applications with lots of download steps. This is not supported by the
 OPeNDAP group, so please refer to the http://pydap.org[Pydap site] for
 more information about it.
+
+// FIXME Add a note about the opendap javascript library at
+// https://github.com/omarbenhamid/jsdap jhrg
