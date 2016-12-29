@@ -32,7 +32,9 @@ directly to client programs in the format needed by that client. In addition to 
 // OPeNDAP can return data in the following formats: NetCDF, GeoTIFF, JPEG2000, JSON, // ASCII.
 
 OPeNDAP clients are very specialized browsers, constructed by linking
-legacy data analysis programs with OPeNDAP-enabled versions of the data
+new or existing data analysis programs with OPeNDAP-enabled versions
+of the data
+// legacy --> new or existing. jhrg
 access APIs they use or by modifying programs to use one of the
 OPeNDAP data access APIs. In addition to providing a sophisticated set
 of network-compatible APIs in several languages, there are also
@@ -40,6 +42,11 @@ libraries of legacy APIs available in OPeNDAP-aware versions. The
 popular http://www.unidata.ucar.edu/downloads/netcdf/index.jsp[NetCDF]
 library, for example, can read data from remote OPeNDAP data sources as
 easily as it reads from a local file.
+// The preceding is not exactly true - there is only the netCDF
+// 'legacy' API that has been 'opendap enabled'. We planned for more,
+// but they were seen as of little use. There are libraries in several
+// programming languages (C/C++, Java, Python, JavaScript are the ones
+// I know about). jhrg
 
 To expand the universe of data available to a user, OPeNDAP incorporates
 a powerful data translation facility, so that data may be stored in data
@@ -179,12 +186,17 @@ OPeNDAP provides a definition of the communication between client and
 server and enables servers and clients that conform to xref:DAP[DAP] standard to communicate
 with each other. In addition to the DAP communication standard
 itself, the OPeNDAP group also provides an implementation of a
-standard server protocol, called _Hyrax._ (_Hyrax_ is an alternative name for the OPeNDAP 4 Data Server.)
+standard server protocol, called _Hyrax.
+// (_Hyrax_ is an alternative name for the OPeNDAP 4 Data Server.) jhrg
 
-The OPeNDAP data server is made up of two pieces. You can think of them 
+For most data consumers, the architecture of Hyrax is not important
+since they see only its web interface (through a browser or by pasting
+URLs into an application). Hyrax is actually made up of two pieces. You can think of them 
 as a front-end and a back-end, though a client will not be aware of the
 separation. They will often be run on the same machine, and even when
 they are not, a client will see only the front end.
+// I modified this paragraph a bit because most people don't need to
+// know how the server is deployed. jhrg
 
 ** The front-end server is a Tomcat servlet and is also called the
 *OPeNDAP Lightweight Front-End Servlet* (OLFS). Its job is to receive
@@ -200,6 +212,7 @@ designed to respond quickly and efficiently to requests from the OLFS.
 It is a pure data server and has only one format of request and
 response, relying on the OLFS to convert messages to whatever format
 the user needs.
+// FIXME. Not really true. 
 
 NOTE: Most users will not make requests directly to the BES.
 
