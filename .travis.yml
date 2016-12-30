@@ -10,7 +10,7 @@ before_install:
 # Name the file explicitly until we sort out the organization of the
 # 'documentation' project.
 script:
-  - docker run -v $TRAVIS_BUILD_DIR:/documents/ --name asciidoc-to-html asciidoctor/docker-asciidoctor asciidoctor -D /documents/output index.txt/QuickStart.adoc index.txt/UserGuideComprehensive.adoc
+  - docker run -v $TRAVIS_BUILD_DIR:/documents/ --name asciidoc-to-html asciidoctor/docker-asciidoctor asciidoctor -D /documents/output index.txt/QuickStart.adoc index.txt/UserGuideComprehensive.adoc README.adoc
   - docker run -v $TRAVIS_BUILD_DIR:/documents/ --name asciidoc-to-pdf asciidoctor/docker-asciidoctor asciidoctor-pdf -D /documents/output index.txt/QuickStart.adoc index.txt/UserGuideComprehensive.adoc
 
 after_error: 
