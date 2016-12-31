@@ -166,7 +166,7 @@ variable values. That is, you can use a Grid to store an array in
 which rows appear in irregular intervals. Here is a diagram of a
 simple grid:
 
-image::./images/Gridpts.gif[]
+image::./images/Gridpts.png[]
 
 The array part of the grid (like *sst* in the example above) contains
 the data points measured at each one of the squares. The X map vector

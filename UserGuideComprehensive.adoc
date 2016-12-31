@@ -761,7 +761,7 @@ of the points in the grid, the precise location of each column and row
 must be described.
 
 .A Sample of an Irregular Grid of Data
-image::./Images/Grid.gif[]
+image::./Images/Grid.png[]
 
 The secondary vectors in the Grid data type provide a solution to this
 problem. Each member of these vectors associates a value for all the
