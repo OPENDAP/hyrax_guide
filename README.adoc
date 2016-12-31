@@ -4,13 +4,13 @@ The most recent build of some of the OPeNDAP documentation.
 
 == Quick Start 
 
-The link:QuickStart.html[QuickStart Guide]link:QuickStart.pdf[(PDF)]
+The link:QuickStart.html[QuickStart Guide] link:QuickStart.pdf[(PDF)]
 provides a overview of our software and its use
 
 == User Guide
 
 The link:UserGuideComprehensive.html[User
-Guide]link:UserGuideComprehensive.pdf[(PDF)] provides general
+Guide] link:UserGuideComprehensive.pdf[(PDF)] provides general
 information about the OPeNDAP software, the two versions of the Data
 Access Protocol (DAP) and information about access to remote data made
 available using DAP.

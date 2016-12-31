@@ -4,11 +4,23 @@
 :numbered:
 :toc:
 
+// If there are lots of links we sneed to share, put their variables
+// in a file and include it as in 'include link_variables.txt'
+
+:quick-start-doc: QuickStart.html
+
+:hyrax-doc: http://docs.opendap.org/index.php/Hyrax
+:hyrax-bes-conf-doc: http://docs.opendap.org/index.php/Hyrax_-_BES_Configuration
+:hyrax-olfs-conf-doc: http://docs.opendap.org/index.php/Hyrax_-_OLFS_Configuration
+:hyrax-thredds-conf-doc: http://docs.opendap.org/index.php/Hyrax_-_THREDDS_Configuration
+:hyrax-multi-bes-doc: http://docs.opendap.org/index.php/Hyrax_-_Configuring_The_OLFS_To_Work_With_Multiple_BES%27s
+:libdap-doc: http://docs.opendap.org/index.php/Libdap
+
 == About This Guide == 
 
 This guide introduces important concepts behind the OPeNDAP data
 model and Web API as well as the clients and servers that
-use them. While it is not a reference for any particular client or server, you will find links to particluar clients and servers in it.
+use them. While it is not a reference for any particular client or server, you will find links to particular clients and servers in it.
 
 == What is OPeNDAP ==
 
@@ -164,7 +176,7 @@ ASCII:: Some servers can convert data to ASCII values on the fly. This allows us
 
 Info:: The info response is a formatted page containing information from the Data Attributes and Data Description responses. It is meant to be a human-readable means to show what is available in a dataset via a standard web browser. See xref:Info_Service[Info Service] in this guide.
 
-HTML:: Very similar to the info response, the HTML response provides the information from the info response and also includes a JavaScript form to help you build a request for data from the same data file. The best description of the HTML form is in the link:./QuickStart.adoc[Quick Start Guide].
+HTML:: Very similar to the info response, the HTML response provides the information from the info response and also includes a JavaScript form to help you build a request for data from the same data file. The best description of the HTML form is in the link:{quick-start-doc}[Quick Start Guide].
 
 SOAP:: OPeNDAP servers can provide their data in terms of a SOAP request and response. For more information see xref:SOAP[SOAP] in this guide.
 // FIXME SOAP is deprecated in our server, but the binding is probably technically
@@ -221,7 +233,7 @@ of the data returned by requests and see
 xref:OPeNDAP_Server[OPeNDAP Server] in this guide for a description of
 the URL syntax used to send requests.
 
-Go to the link:./Hyrax.adoc[OPeNDAP 4 Data Server documentation] for
+Go to the link:{hyrax-doc}[OPeNDAP 4 Data Server documentation] for
 a description of how to install and configure an OPeNDAP data server
 ("Hyrax").
 
@@ -1204,7 +1216,7 @@ message.
 
 NOTE: While ASCII is fine for moving small amounts of data, it generally is best to move data in binary whenever possible becuase servers can generate binary data more quickly than ASCII data, and binary data is more compact. You can then process locally if you need ASCII. To process binary data, you could use getdap if you retrieve DAP2 binary response (.dods); getdap4 if you retrieve a DAP4 binary response; or ncdump for a NetCDF3 or NetCDF4 binary response.
 
-The link:./QuickStart.adoc[Quick Start Guide] contains examples of the ASCII response.
+The link:{quick-start-doc}[Quick Start Guide] contains examples of the ASCII response.
 
 [[Info_Service]]
 ==== Info Service ====
@@ -1246,7 +1258,7 @@ image::./images/Test.oopendap.org_directory_view.png[]
 Each link in the directory view opens up the WWW service version of that
 data.
 
-The link:./QuickStart.adoc[Quick Start Guide]
+The link:{quick-start-doc}[Quick Start Guide]
 contains more information about browsing OPeNDAP data interactively.
 
 ==== Version Service ====
@@ -1285,7 +1297,7 @@ what became version 4 of the xref:DAP[DAP].
 
 ==== THREDDS ====
 
-Some OPeNDAP servers (for example, go to link:./Hyrax.adoc[Hyrax], the
+Some OPeNDAP servers (for example, go to link:{hyrax-doc}[Hyrax], the
 server supplied by the OPeNDAP group) can make sensible replies to
 requests for THREDDS catalog information. This can serve to "advertise"
 a server's data by having it appear in catalogs accumulated by THREDDS
@@ -1525,7 +1537,7 @@ the operator matches the regular expression on the right. See xref:Pattern_Match
 
 The array operator [] is used to subsample the given array. You can find
 several examples of its use in the
-link:./QuickStart.adoc#Peeking_at_Data[Quick Start Guide: Peeking at Data].
+link:{quick-start-doc}#Peeking_at_Data[Quick Start Guide: Peeking at Data].
 
 [[Constraint_Expression_Functions]]
 ==== Constraint Expression Functions ====
@@ -1676,7 +1688,7 @@ xref:OPeNDAP_Data_Model[OPeNDAP Data Model] is an OPeNDAP server. The messages a
 
 In addition to publishing and maintaining the
 standards described here, the OPeNDAP group maintains a server that complies with the
-standard. Go to the link:./Hyrax.adoc[Hyrax] guide for addtional information..
+standard. Go to the link:{hyrax-doc}[Hyrax] guide for additional information..
 
 ==== Hyrax ====
 
@@ -1718,7 +1730,7 @@ sending requests directly to the BES.
 
 ===== Installing Hyrax =====
 
-The two parts of link:./Hyrax.adoc[Hyrax] are installed by
+The two parts of link:{hyrax-doc}[Hyrax] are installed by
 the same script. However, because they are discrete, they may require
 different kinds of attention from an administrator. Testing OLFS
 requires a working BES, so it is best to start the post-unpacking
@@ -1731,7 +1743,7 @@ execute it.
 
 After that, there are several configuration options that you will need
 to address by installing software on your computer and by editing the
-link:./Hyrax_-_BES_Configuration.adoc[Hyrax configuration file],
+link:{hyrax-bes-conf-doc}[Hyrax configuration file],
 called bes.xml. Details of these options are in the Hyrax documentation, but following are the
 decisions you'll have to make:
 
@@ -1743,11 +1755,11 @@ What kind of data:: Hyrax is equipped to serve data stored in C and Java netCDF 
   configuration file].The
   handlers are shared libraries and are installed separately. Find
   instructions under
-  link:./Hyrax_-_BES_Configuration.adoc#Loading_Modules[Loading Modules] in the Hyrax BES configuration documentation.
+  link:{hyrax-bes-conf-doc}#Loading_Modules[Loading Modules] in the Hyrax BES configuration documentation.
 
-Where the data lives:: A server equipped to serve data must be able to find that data. Lines in the bes.xml file identify the disk location of your data files. Hyrax can provide a limited amount of browsing capacity to users, through its xref:WWW_Interface[WWW interface]. Access is specified by identifying directories where data resides. See link:./Hyrax_-_BES_Configuration.adoc[Pointing_to_data] in the Hyrax BES configuration documentation.
+Where the data lives:: A server equipped to serve data must be able to find that data. Lines in the bes.xml file identify the disk location of your data files. Hyrax can provide a limited amount of browsing capacity to users, through its xref:WWW_Interface[WWW interface]. Access is specified by identifying directories where data resides. See link:{hyrax-bes-conf-doc}[Pointing_to_data] in the Hyrax BES configuration documentation.
 
-What kinds of services:: Along with simply supplying data, Hyrax can supply several different services, including xref:ASCII_Service[serving the data as ASCII values], and the form-driven xref:WWW_Interface[WWW interface]. The bes.xml file is used to specify the list of services. The drivers for these services are installed as part of the default installation of Hyrax, but they need to be chosen and identified in bes.xml. See instructions at link:./Hyrax_-_BES_Configuration.adoc#Loading_Handlers[Loading Handlers].
+What kinds of services:: Along with simply supplying data, Hyrax can supply several different services, including xref:ASCII_Service[serving the data as ASCII values], and the form-driven xref:WWW_Interface[WWW interface]. The bes.xml file is used to specify the list of services. The drivers for these services are installed as part of the default installation of Hyrax, but they need to be chosen and identified in bes.xml. See instructions at link:{hyrax-bes-conf-doc}#Loading_Handlers[Loading Handlers].
 
 Once these three tasks are accomplished and data is moved into the
 appropriate directories, your server should be ready to provide data to
@@ -1766,23 +1778,23 @@ The OLFS is a Java servlet, so its installation involves installing the
 Tomcat servlet infrastructure and then configuring that with the OLFS.
 There are four configuration files, but unless your's is an unusual case,
 you will likely have to look at only two of them. See
-link:./Hyrax_-_OLFS_Configuration.adoc[Hyrax OLFS Configuration].
+link:{hyrax-olfs-conf-doc}[Hyrax OLFS Configuration].
 
 Use the
-link:.//Hyrax_-_OLFS_Configuration.adoc#olfs.xml_Configuration_File[olfs.xml]
+link:{hyrax-olfs-conf-doc}#olfs.xml_Configuration_File[olfs.xml]
 file to specify these important features of the OLFS operation:
 
-Address of BES:: The OLFS is the front door to data from the BES. Use the olfs.xml file to identify where to find this server. See the instructions for the link:./Hyrax_-_OLFS_Configuration.adoc#BESManager[BESManager].
+Address of BES:: The OLFS is the front door to data from the BES. Use the olfs.xml file to identify where to find this server. See the instructions for the link:{hyrax-olfs-conf-doc}#BESManager[BESManager].
 
 Dispatch handlers:: The OLFS "offers" the incoming URL to a series of "dispatch handlers"
   until one accepts it and executes. This allows the OLFS to offer
   directory and catalog services as well as data services and more. Use
   the olfs.xml file to nominate the dispatch handlers (they come with
   the OLFS and do not need to be separately installed). See
-  link:./Hyrax_-_OLFS_Configuration.adoc#HTTP_GET_Handlers[handler instructions] for more.
+  link:{hyrax-olfs-conf-doc}#HTTP_GET_Handlers[handler instructions] for more.
 
 Catalog requests:: The OLFS can handle
-  link:./Hyrax_-_THREDDS_Configuration.adoc[THREDDS] catalog
+  link:{hyrax-thredds-conf-doc}[THREDDS] catalog
   requests as well as directory requests, which are an older part of the xref:DAP[DAP]
   standard that also involves data about a collection of data files. The
   THREDDS information can be static (provided from a file) or dynamic
@@ -1791,13 +1803,13 @@ Catalog requests:: The OLFS can handle
 File access:: You may have individual files you want served intact via this server.
   These might include documentation of the data files or of the server.
   See
-  link:./Hyrax_-_OLFS_Configuration.adoc#File_Dispatch_Handler[File
+  link:{hyrax-olfs-conf-doc}#File_Dispatch_Handler[File
   Dispatch Handler] instructions.
 
 There are additional features, such as a bot blocker and a version
 message as well as the experimental SOAP message handler. These are
 also configured with
-link:./Hyrax_-_OLFS_Configuration.adoc#olfs.xml_Configuration_File[olfs.xml].
+link:{hyrax-olfs-conf-doc}#olfs.xml_Configuration_File[olfs.xml].
 
 The other configuration file that you might need to edit is
 http://www.unidata.ucar.edu/projects/THREDDS/tech/TDS.html[catalog.xml],
@@ -1812,14 +1824,12 @@ http://www.unidata.ucar.edu[UCAR]. It allows
 The default file will allow dynamic catalogs to be created and should
 allow your server to respond to THREDDS requests properly. You may want to serve a static THREDDS catalog as well. This can be done by
 editing the catalog.xml file, and you will find links to instructions for
-that at link:./Hyrax_-_THREDDS_Configuration.adoc[Hyrax - THREDDS
-Configuration].
+that at link:{hyrax-thredds-conf-doc}[Hyrax - THREDDS Configuration].
 
 .Multiple BES Configuration
 You can configure a single OLFS to work with multiple BES instances.
 This enables rudimentary load balancing the isolation of data on one server or another. See the
-link:./Hyrax_-_Configuring_The_OLFS_To_Work_With_Multiple_BES%27s.adoc[Hyrax
-configuration chapter].
+link:{hyrax-multi-bes-doc}[Hyrax configuration chapter].
 
 [[OPeNDAP_Client]]  
 == OPeNDAP Client ==
@@ -1845,7 +1855,8 @@ OPeNDAP client can understand and process.
 
 There is a wide range of OPeNDAP clients available, and it should not be
 hard to find one you can use. In fact, though it can become clumsy for advanced applications, you can use an ordinary web browser as a client to most OPeNDAP servers, making
-use of the server's xref:WWW_Interface[WWW interface]. The link:./QuickStart.adoc[Quick Start Guide] contains several examples.
+use of the server's xref:WWW_Interface[WWW interface].
+The link:{quick-start-doc}[Quick Start Guide] contains several examples.
 
 After a basic web browser, the simplest clients to use are likely to be
 the programs you're already using. If you use one of the popular data
@@ -2062,8 +2073,7 @@ source, as well as classes for each of the data types, and the other
 information (such as xref:DAS[DAS] and xref:DDS[DDS]) a client will encounter.
 
 To use the library, you will need to provide implementations for some
-abstract classes. Consult the link:./Libdap_Overview.adoc[libdap
-Overview] for an introduction to the basic concepts behind the use of
+abstract classes. Consult the link:{libdap-doc}[libdap Overview] for an introduction to the basic concepts behind the use of
 this library. You will also find the
 http://www.opendap.org/api/pref/html/index.html[C++ library Reference]
 useful.

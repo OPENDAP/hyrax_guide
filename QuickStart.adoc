@@ -4,6 +4,8 @@
 :numbered:
 :toc:
 
+:hyrax-doc:  http://docs.opendap.org/index.php/Hyrax
+
 == Introduction ==
 
 http://www.opendap.org/[OPeNDAP] is the developer of client/server
@@ -458,8 +460,7 @@ any interpretation. This can be useful if the 'other file' happens to
 be a README or other documentation file since this makes it simple to
 serve data stored in files and documented using plain text files.
 Essentially, the person or organization providing data does not need
-to do anything besides link:./Hyrax.adoc[installing the server
-(Hyrax)].
+to do anything besides link:{hyrax-doc}[installing the server (Hyrax)].
 
 // jhrg TODO I think there are no more file servers running. Lets add a section on 
 // Using Google to find servers. I'll comment this section out.
