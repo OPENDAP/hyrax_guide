@@ -4,6 +4,7 @@
 :numbered:
 :toc:
 
+:user-guide-doc: UserGuideComprehensive.html
 :hyrax-doc:  http://docs.opendap.org/index.php/Hyrax
 
 == Introduction ==
@@ -247,12 +248,12 @@ http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.info
 Now that we know a little about the shape of the data and the data
 attributes, we will look at some of the data.
 
-// jhrg TODO There should be a better way to write the [] in the URLs. People will think they have to use the hex escapes.
+// DONE: jhrg TODO There should be a better way to write the [] in the URLs. People will think they have to use the hex escapes.
 
 You can request a piece of an array with subscripts, just like in a C
 program, Matlab, or many other computer languages. Use a colon to
 indicate a subscript range. For example,
-http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.ascii?time%5b0:6%5d[http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.ascii?time%5b0:6%5d]
+http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.ascii?time%5b0:6%5d[http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.ascii?time[0:6\]]
 will produce a time vecor that looks like this:
 
 image::./images/Reynolds_time_vector.png[]
@@ -335,7 +336,9 @@ parameter list and get some documentation for that function. For
 example, try
 http://test.opendap.org/dap/data/nc/sst.mnmean.nc.gz.ascii?geogrid()[...?geogrid()].
 
-// jhrg TODO Add a note that other servers may support other ways of doing an equivalent operation (e.g., ERDDAP does, TDS does not AFAIK). We don't really want to rank on TDS, however, so maybe soft-pedal that...
+// DONE: jhrg TODO Add a note that other servers may support other ways of doing an equivalent operation (e.g., ERDDAP does, TDS does not AFAIK). We don't really want to rank on TDS, however, so maybe soft-pedal that...
+
+NOTE: Other severs, such as ERDAP, support alternative ways of doing similar operations.
 
 ===== Creating Server Function Pipelines =====
 
@@ -419,7 +422,9 @@ Data often comes in the form of a URL enclosed in an email message,
 and there are several other ways to find data served by OPeNDAP
 servers.
 
-// jhrg TODO Google works too. Use Google to search for 'OPeNDAP Hyrax' or to search for 'OPeNDAP <terms>' or 'Hyrax <terms>'
+// DONE: jhrg TODO Google works too. Use Google to search for 'OPeNDAP Hyrax' or to search for 'OPeNDAP <terms>' or 'Hyrax <terms>'
+
+Google also works. Use Google to search for 'OPeNDAP Hyrax' or to search for 'OPeNDAP <terms>' or 'Hyrax <terms>'. For example, Google _OPeNDAP sea surface temperature_.
 
 === GCMD ===
 
@@ -494,7 +499,7 @@ how to request the data, there are a variety of things you can do with
 it. (OPeNDAP software mentioned here is available from the
 http://www.opendap.org[OPeNDAP Home Page].)
 
-// jhrg TODO Add a reference to the User's Guide and include that there
+// DONE: jhrg TODO Add a reference to the User's Guide and include that there
 // are examples of Matlab, ..., there
 
 * Use a generic web client like *geturl* (a standard part of the
@@ -520,6 +525,8 @@ http://cola.gmu.edu/grads/[GrADS] free data analysis packages both
 support OPeNDAP. You can use these for down loading OPeNDAP data and
 for examining it afterwards. (There are limitations. For example,
 Ferret may not be able to read datasets served as Sequence data.)
+
+NOTE: For information about NetCDF compliant tools, see the NetCDF Compliant Tools in the link:{user-guide-doc}#NetCDFTools[User Guide].
 
 * Other tools, that are Java NetCDF compliant, also function with
   OPeNDAP clients; for example,

@@ -1889,6 +1889,7 @@ libraries you can use for developing your own client, or for converting
 an existing body of code into an OPeNDAP client. These are reviewed in
 that order below:
 
+[[NetCDFTools]]
 ==== NetCDF Compliant Tools (e.g., Matlab, R, IDL, IDV, and Panoply) ====
 
 Any tool that uses the C NetCDF API will work with OPeNDAP. For example, Matlab has built-in support for OPeNDAP; Matlab supported NetCDF calls can be used with xref:DAP[DAP] datasets. Other tools that are built on NetCDF API also read data from OPeNDAP servers. A free tool similar to Matlab, https://www.gnu.org/software/octave/[GNU Octave], is also supported. The https://www.r-project.org/[R Project] for Statistical Computing can also read data from OPeNDAP servers. The http://ferret.wrc.noaa.gov/Ferret[Ferret] and
