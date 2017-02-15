@@ -5,16 +5,14 @@ The most recent build of some of the OPeNDAP documentation.
 == Quick Start 
 
 The
- link:https://opendap.github.io/documentation/QuickStart.html[QuickStart
- Guide]
+ link:https://opendap.github.io/documentation/QuickStart.html[QuickStart Guide]
  link:https://opendap.github.io/documentation/QuickStart.pdf[(PDF)]
  provides a overview of our software and its use
 
 == User Guide
 
 The
-link:https://opendap.github.io/documentation/UserGuideComprehensive.html[User
-Guide]
+link:https://opendap.github.io/documentation/UserGuideComprehensive.html[UserGuide]
 link:https://opendap.github.io/documentation/UserGuideComprehensive.pdf[(PDF)]
 provides general information about the OPeNDAP software, the two
 versions of the Data Access Protocol (DAP) and information about
@@ -33,7 +31,6 @@ To convert to CM from adoc, use 'asciidoctor' and 'pandoc' like this:
 
 === About opendap.github.io
 
-The opendap.github.io site is populated with HTML and PDF documents
-that are automatically build any time an AsciiDoc file in the
-https://github.com/opendap/documentation repo is updated on the master
-branch.
+The https://opendap.github.io site is populated with HTML and PDF
+documents that are automatically build any time an AsciiDoc file in
+the documentation repo is updated on the master branch.
