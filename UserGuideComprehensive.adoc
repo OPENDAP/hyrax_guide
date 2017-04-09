@@ -192,7 +192,7 @@ DDX:: The DDX is an XML version of the Data Attribute and Data Description repli
 // be clear about these (that they exist, but some are probably not _suggested_).
 // jhrg
 
-=== The OPeNDAP Server (Hyrax) ===
+=== The OPeNDAP Server (aka "Hyrax") ===
 
 OPeNDAP provides a definition of the communication between client and
 server and enables servers and clients that conform to xref:DAP[DAP] standard to communicate
@@ -2102,12 +2102,15 @@ version of the netCDF library.
 
 See the http://www.unidata.ucar.edu/software/netcdf/[netCDF home page] for information about how to use that library.
 
-===== Python library =====
+===== Python Library =====
 http://pydap.org[Pydap] is an implementation of the OPeNDAP client in
 pure Python. This is tremendously useful for scripting complicated
 applications with lots of download steps. This is not supported by the
 OPeNDAP group, so please refer to the http://pydap.org[Pydap site] for
 more information about it.
 
-// FIXME Add a note about the opendap javascript library at
-// https://github.com/omarbenhamid/jsdap jhrg
+===== JavaScript AJAX Client for DAP Services =====
+https://github.com/omarbenhamid/jsdap[This library] is designed to enable URL based AJAX querying of DAP datasets.
+
+// Done FIXME Add a note about the opendap javascript library at
+// Done https://github.com/omarbenhamid/jsdap jhrg
