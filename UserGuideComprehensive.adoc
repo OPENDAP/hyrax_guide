@@ -178,7 +178,8 @@ Info:: The info response is a formatted page containing information from the Dat
 
 HTML:: Very similar to the info response, the HTML response provides the information from the info response and also includes a JavaScript form to help you build a request for data from the same data file. The best description of the HTML form is in the link:{quick-start-doc}[Quick Start Guide].
 
-SOAP:: OPeNDAP servers can provide their data in terms of a SOAP request and response. For more information see xref:SOAP[SOAP] in this guide.
+SOAP:: While existing SOAP queries may continue to work, SOAP is has been deprecated and is not actively suppored by OPeNDAP servers.
+//OPeNDAP servers can provide their data in terms of a SOAP request and response. For more //information see xref:SOAP[SOAP] in this guide.
 // FIXME SOAP is deprecated in our server, but the binding is probably technically
 // valid. How should we handle this? Remove it from the guide and leave it as
 // a developer item or leave it here but add an explanation about it's current
@@ -221,10 +222,10 @@ about the data, too.
 
 ** The *Back-End Server* (BES) is more strictly about performance and is
 designed to respond quickly and efficiently to requests from the OLFS.
-It is a pure data server and has only one format of request and
-response, relying on the OLFS to convert messages to whatever format
-the user needs.
-// FIXME. Not really true. 
+//It is a pure data server and has only one format of request and
+//response, relying on the OLFS to convert messages to whatever format
+//the user needs.
+// DONE. FIXME. Not really true. 
 
 NOTE: Most users will not make requests directly to the BES.
 
@@ -1268,16 +1269,6 @@ software running on the server. This service is triggered by a URL
 ending with .ver. The return is a short text message containing the
 relevant version numbers.
 
-[[SOAP]]
-==== SOAP ====
-// FIXME We dropped support for SOAP a while ago. jhrg
-
-The OPeNDAP server provided by the OPeNDAP group contains an
-experimental SOAP service, enabling users to make requests and get
-responses by exchanging SOAP XML documents. This is an experimental
-service, and if you're writing an application depending on it, it's best
-to contact the OPeNDAP developer team.
-
 [[DDX]]
 ==== DDX ====
 
@@ -1292,7 +1283,7 @@ The DDX response can be modified with a constraint expression. Like the DDS, the
 DDX will describe only the data actually returned.
 
 The DDX is the nucleus of
-what became version 4 of the xref:DAP[DAP].
+what becomes version 4 of the xref:DAP[DAP].
 // Hacked. jhrg
 
 ==== THREDDS ====
