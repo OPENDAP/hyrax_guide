@@ -1,14 +1,13 @@
-= Hyrax - OPeNDAP Documentation
-Leonard Porrello <lporrel@gmail.com>
-2016-12-31
+= Hyrax - OPeNDAP Documentation =
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
 :numbered:
 :toc:
 
 This documentation covers the **OPeNDAP 4 Data Server**, which is also known as **Hyrax**.
 
 == Overview
-
-image:./images/HyraxArchitecture.jpg
+image::./images/HyraxArchitecture.jpg[]
 
 Hyrax uses the Java servlet mechanism to hand off requests from a
 general web daemon to DAP format-specific software. This results in

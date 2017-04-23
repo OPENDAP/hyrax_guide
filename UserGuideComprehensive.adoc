@@ -1,6 +1,6 @@
 = User Guide - OPeNDAP Documentation
 :Leonard Porrello <lporrel@gmail.com>:
-2016-12-31
+{docdate}
 :numbered:
 :toc:
 
