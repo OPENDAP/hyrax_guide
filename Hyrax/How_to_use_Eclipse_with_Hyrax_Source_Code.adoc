@@ -1,0 +1,179 @@
+How to use Eclipse with Hyrax Source Code - OPeNDAP Documentation
+=================================================================
+
+[[firstHeading]]
+How to use Eclipse with Hyrax Source Code
+-----------------------------------------
+
+From OPeNDAP Documentation
+
+This presents one way to set up Eclipse to build, edit, debug, etc., the
+Hyrax source code. It's based on our previous how to documents, but is
+updated for (and maybe specific to) OSX 10.10, Eclipse 4.4 (Luna) and
+CDT 8.5. There are many things about Eclipse that can be pretty obscure,
+not the least of which is that Eclipse & CDT are not really 'just
+Eclipse' but may have specific configuration nuances. This is almost
+certainly not the _only_ way to set this tool up to build the Hyrax
+code, just one way.
+
+The set up assumes that you have already cloned the _hyrax_ repo from
+GitHub (https://github.com/opendap/hyrax.git) and have run _source
+spath.sh_ and _./hyrax_clone.sh_ so that the $PATH and $prefix
+environment variables are set and the __libdap__, _bes_ and _olfs_ repos
+have all been cloned. For most development, it's a good idea to clone
+_hyrax-dependencies_ too.
+
+1 The _git_ perspective
+~~~~~~~~~~~~~~~~~~~~~~~
+
+What I've done to make projects that use the existing C++ code repos
+cloned from GitHub was to first use the _git_ perspective to add the
+repo to Eclipse.
+
+Switch to the _git_ perspective using either the icon/toll-bar item on
+the right side of the main window or by going to the Window -> Open
+Perspective menu item.
+
+../index.php/File:Perspective_Menu.png[image:../images/0/06/Perspective_Menu.png[Perspective
+views are accessed using either the rightmost set of icons or the Window
+menu]]
+
+Once the Eclipse window is showing the _git_ perspective, you'll see
+something like the following:
+
+../index.php/File:Git_Repo_Perspective.png[image:../images/f/f9/Git_Repo_Perspective.png[Git
+Repo Perspective.png]]
+
+Use the _Add existing git repository_ icon to add an existing _git_
+repo.
+
+../index.php/File:Add_Existing_Repo.png[image:../images/c/c3/Add_Existing_Repo.png[Add
+Existing Repo.png]]
+
+The result looks like:
+
+../index.php/File:Once_Added.png[image:../images/4/41/Once_Added.png[Once
+Added.png]]
+
+2 Make the projects
+~~~~~~~~~~~~~~~~~~~
+
+Follow theses steps to make a new project using the repo you just added
+to the _git_ perspective.
+
+* Import Projects
+* New Project
+* Use the New Project Wizard
+* Existing Code Makefile
+* Setup the Project
+* Switch to C++ Perspective
+* The New project
+
+../index.php/File:0_Import_Projects_2.png[image:../images/4/49/0_Import_Projects_2.png[0
+Import Projects 2.png]]
+
+../index.php/File:2_Use_New_Project_Wizard.png[image:../images/a/a6/2_Use_New_Project_Wizard.png[2
+Use New Project Wizard.png]]
+
+../index.php/File:3_Existing_Code_Makefile.png[image:../images/a/a5/3_Existing_Code_Makefile.png[3
+Existing Code Makefile.png]]
+
+../index.php/File:4_Setup_The_Project.png[image:../images/9/91/4_Setup_The_Project.png[4
+Setup The Project.png]]
+
+../index.php/File:5_Switch_To_Cpp_Perspective.png[image:../images/3/36/5_Switch_To_Cpp_Perspective.png[5
+Switch To Cpp Perspective.png]]
+
+../index.php/File:6_The_New_Project.png[image:../images/6/6d/6_The_New_Project.png[6
+The New Project.png]]
+
+3 General Eclipse configurations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+These are not specific to our project, but they are very useful and
+somewhat hard to sort out.
+
+* How to set up PATH so the CDT build (which uses an external program)
+reads from the PATH you want instead of the default PATH
+** ../index.php/File:0_Set_PATH_in_Eclipse.png[image:../images/b/b7/0_Set_PATH_in_Eclipse.png[0
+Set PATH in Eclipse.png]]
+** ../index.php/File:1_Add_the_prefix_var_to_project.png[image:../images/7/7b/1_Add_the_prefix_var_to_project.png[1
+Add the prefix var to project.png]]
+** ../index.php/File:2_Set_PATH_in_the_project.png[image:../images/1/11/2_Set_PATH_in_the_project.png[2
+Set PATH in the project.png]]
+** Do you need to set PATH in both Eclipse and the Project? I don't
+know, but that's what I wound up doing to get it to work.
+* How to get the editor in CDT to save before building code
+** ../index.php/File:0_Set_autosave_on_build.png[image:../images/b/b7/0_Set_autosave_on_build.png[0
+Set autosave on build.png]]
+* How to configure builds using an existing Makefile
+** ../index.php/File:0_make_target.png[image:../images/1/17/0_make_target.png[0
+make target.png]]
+** ../index.php/File:1_configure_new_make_target.png[image:../images/b/b8/1_configure_new_make_target.png[1
+configure new make target.png]]
+* Editor tweaks:
+** Emacs mode (it's not a real emacs, but it's bearable)
+** How to configure Eclipse's editor to find includes
+*** ../index.php/File:0_Goto_includes_fir_project.png[image:../images/6/64/0_Goto_includes_fir_project.png[0
+Goto includes fir project.png]]
+*** ../index.php/File:1_Add_directory_workspace_path.png[image:../images/6/65/1_Add_directory_workspace_path.png[1
+Add directory workspace path.png]]
+*** ../index.php/File:2_Result_of_adding_workspace_path.png[image:../images/1/1f/2_Result_of_adding_workspace_path.png[2
+Result of adding workspace path.png]]
+*** [File:4 Filesystem path.png]]
+*** ../index.php/File:3_Add_filesystem_path.png[image:../images/6/6c/3_Add_filesystem_path.png[3
+Add filesystem path.png]]
+*** ../index.php/File:5_Probably_reindex.png[image:../images/2/26/5_Probably_reindex.png[5
+Probably reindex.png]]
+** Setting up folding to hide #if 0 ... #endif blocks (help with
+refactoring, among other things).
+*** ../index.php/File:0_Editor_folding.png[image:../images/8/82/0_Editor_folding.png[0
+Editor folding.png]]
+*** ../index.php/File:1_editor_folding.png[image:../images/3/30/1_editor_folding.png[1
+editor folding.png]]
+*** ../index.php/File:2_editor_folding.png[image:../images/f/fa/2_editor_folding.png[2
+editor folding.png]]
+* GDB on OS/X 10.9 and 10.10 is broken WRT shared object libraries
+(i.e., BES modules).
+** Build GDB 7.8.x (other versions might work, but the default 6.x that
+comes with OS/X won't). To do this I had to _sudo cp
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/include/machine/setjmp.h
+/usr/include/machine/_ because while _setjmp.h_ is present, there's
+nothing in <machine/setjmp.h> on 10.10 (and maybe 10.9, too). This may
+also explain the _homebrew_ install fail on gdb, but I don't know. I
+also used _export CC=gcc_ before running _./configure_ for gdb, but I
+doubt that made any difference in hindsight. Regardless, get a modern
+GDB built and installed.
+** Follow this advice on setup with eclipse:
+http://ntraft.com/installing-gdb-on-os-x-mavericks/. NB: since PATH is
+already configured to have /usr/local/bin before the other stuff, the
+part about setting C/C++ -> Debug -> GDB to /usr/local/bin/gdb may be
+moot, but I did it all the same. The example shows the preferences
+window from a version of eclipse earlier than 4.4, which I am using.
+** GDB and libtool: But GDB won't debug programs built with shared libs
+(dylibs on OS/X), responding with this message: _"hell": not in
+executable format: File format not recognized_ for the program _hell_
+that's linked using libtool. Nice. The work-around is to use _libtool
+--mode=execute gdb hell_ and maybe to set GDB to be _libtool
+--mode=execute gdb_ although I have not tried the later.
+** Here is advice on signing GDB (if you build it from source) so that
+OS/X 10.9++ will run it and let it attach to a running process:
+https://sourceware.org/gdb/wiki/BuildingOnDarwin
+** Now set up Eclipse:
+*** ../index.php/File:0_GDB_Issues_with_shared_libs.png[image:../images/d/d2/0_GDB_Issues_with_shared_libs.png[0
+GDB Issues with shared libs.png]]
+*** ../index.php/File:1_GDB_Issues_cont.png[image:../images/d/d2/1_GDB_Issues_cont.png[1
+GDB Issues cont.png]]
+*** ../index.php/File:2_Setup_the_debug_configuration.png[image:../images/4/43/2_Setup_the_debug_configuration.png[2
+Setup the debug configuration.png]]
+*** ../index.php/File:3_Debug_config_dialog.png[image:../images/2/2e/3_Debug_config_dialog.png[3
+Debug config dialog.png]]
+*** ../index.php/File:4_Use_legacy_launcing_with_Eclipse_4.4.png[image:../images/0/08/4_Use_legacy_launcing_with_Eclipse_4.4.png[4
+Use legacy launcing with Eclipse 4.4.png]]
+*** ../index.php/File:5_Debugger_tab_should_look_like.png[image:../images/8/85/5_Debugger_tab_should_look_like.png[5
+Debugger tab should look like.png]]
+*** ../index.php/File:6_warning_gone.png[image:../images/0/09/6_warning_gone.png[6
+warning gone.png]]
+** ../index.php/File:0_GDB_Suppres_auto_build_on_launch.png[image:../images/c/c0/0_GDB_Suppres_auto_build_on_launch.png[0
+GDB Suppres auto build on launch.png]]
+**

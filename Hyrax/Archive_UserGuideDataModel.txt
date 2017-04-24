@@ -1,0 +1,710 @@
+OBSOLETE - ARCHIVE
+==========================================
+
+[[firstHeading]]
+UserGuideDataModel
+------------------
+
+From OPeNDAP Documentation
+
+link:../index.php/UserGuide[Back to User Guide Contents]
+
+Contents
+~~~~~~~~
+
+* link:#Data_and_Data_Models[1 Data and Data Models]
+** link:#Data_Models[1.1 Data Models]
+*** link:#Data_Models_and_APIs[1.1.1 Data Models and APIs]
+*** link:#Translating_Data_Models[1.1.2 Translating Data Models]
+** link:#Data_Access_Protocol[1.2 Data Access Protocol]
+** link:#Data_representation[1.3 Data representation]
+*** link:#Base_Types[1.3.1 Base Types]
+*** link:#Constructor_Types[1.3.2 Constructor Types]
+**** link:#Array[1.3.2.1 Array]
+**** link:#Structure[1.3.2.2 Structure]
+**** link:#Sequence[1.3.2.3 Sequence]
+**** link:#Grid[1.3.2.4 Grid]
+*** link:#External_Data_Representation[1.3.3 External Data
+Representation]
+
+1 Data and Data Models
+----------------------
+
+Basic to the operation of OPeNDAP is its data model, and the set of
+messages that define the communication between client and server. This
+chapter presents the data model, and the next
+link:../index.php/UserGuideOPeNDAPMessages[presents the messages].
+
+1.1 Data Models
+~~~~~~~~~~~~~~~
+
+Any data set is made up of data and a data model. The data model defines
+the type and arrangement of data values, and may be thought of as an
+abstract representation of the relationship between one data value and
+another. Though it may seem paradoxical, it is precisely this
+relationship that defines the meaning of some number. Without the
+context provided by a data model, a number does not represent anything.
+For example, within some data set, it may be apparent that a number
+represents the value of temperature at some point in space and time.
+Without its neighboring temperature measurements, and without the
+latitude, longitude, height (or depth), and time, the same number means
+nothing.
+
+As the model only defines an abstract set of relationships, two data
+sets containing different data may share the same data model. For
+example, the data produced by two different measurements with the same
+instrument will use the same data model, though the values of the data
+are different. Sometimes two models may be equivalent. For example, an
+XBT (eXpendable BathyThermograph) measures a time series of temperature
+near the surface of the ocean, but is usually stored as a series of
+temperature and depth measurements. The temperature vs. time model of
+the original data is equivalent to the temperature vs. depth model of
+the stored data.
+
+In a computational sense, a data model may be considered to be the data
+type or collection of data types used to represent that data. A
+temperature measurement might occur as half an entry in a sequence of
+temperature and depth pairs. However the data model also includes the
+scalar latitude, longitude and date that identify the time and place
+where the temperature measurements were taken. Thus the data set might
+be represented in a C-like syntax like this:
+
+--------------------------
+Dataset {
+   Float64 lat;
+   Float64 lon;
+   Int32 minutes;
+   Int32 day;
+   Int32 year;
+   Sequence {
+      Float64 depth;
+      Float64 temperature;
+   } cast;
+} xbt-station;
+--------------------------
+
+Example Data Description of XBT Station
+
+ +
+ The above example describes a data set that contains all the data from
+a single XBT. The data set is called xbt-station, and contains
+floating-point representations of the latitude and longitude of the
+station, and three integers that specify _when_ the XBT measurements
+were made. The xbt-station contains a single sequence (called cast) of
+measurements, which are here represented as values for depth and
+temperature.
+
+A slightly different data model representing the same data might look
+like this:
+
+--------------------------
+Dataset {
+   Structure {
+      Float64 lat;
+      Float64 lon;
+   } location;
+   Structure {
+      Int32 minutes;
+      Int32 day;
+      Int32 year;
+   } time;
+   Sequence {
+      Float64 depth;
+      Float64 temperature;
+   } cast;
+} xbt-station;
+--------------------------
+
+Example Data Description of XBT Station Using Structures
+
+ +
+
+In this example, several of the data have been grouped, implying a
+relation between them. The nature of the relationship is not defined,
+but it is clear that lat and lon are both components of location, and
+that each measurement in the cast sequence is made up of depth and
+temperature values.
+
+In these two examples, meaning was added to the data set only by
+providing a more refined context for the data values. No other data was
+added, but still the second example can be said to contain more
+information than the first one.
+
+These two examples are refinements of the same basic arrangement of
+data. However, there is nothing that says that a completely different
+data model can't be just as useful or just as accurate. For example, the
+depth and temperature data, instead of being represented by a sequence
+of pairs could be represented by a pair of sequences or arrays:
+
+----------------------------
+Dataset {
+   Structure {
+      Float64 lat;
+      Float64 lon;
+   } location;
+   Structure {
+      Int32 minutes;
+      Int32 day;
+      Int32 year;
+   } time;
+   Float64 depth[500];
+   Float64 temperature[500];
+} xbt-station;
+----------------------------
+
+Example Data Description of XBT Station Using Arrays
+
+ +
+ The relationship between the depth and temperature variables is no
+longer quite as clear, but, depending on what sort of processing is
+intended, this may not be that important a loss.
+
+The choice of a computational data model to contain some data set
+depends in many cases on the whims and preferences of the user, as well
+as on the data analysis software to be used. Several different data
+models may be equally useful for a given task. Of course, some data
+models will contain more information about the data than others, but
+this information can also be carried in a researcher's head.
+
+Note that with a carefully chosen set of data type constructors, such as
+those we've used in the preceding examples, a user can implement an
+infinite number of data models. The examples above use the OPeNDAP
+Dataset Descriptor Structure (DDS) format, which will become important
+in later discussions of the details of the OPeNDAP Data Access Protocol.
+The precise details of the DDS syntax are described in
+link:../index.php/UserGuideOPeNDAPMessages#Dataset_Descriptor_Structure[DDS].
+
+ +
+
+1.1.1 Data Models and APIs
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A data access Application Program Interface (API) is a library of
+functions designed to be used by a computer program to read, write, and
+sample data. Any given data access API can be said to define implicitly
+some data model. (Or, at least, it will define restrictions on the data
+model you can use.) That is, the functions that make up the API accept
+and return data using a certain collection of computational data types:
+multi-dimensional arrays might be required for some data, scalars for
+others, sequences for others. This collection of data types, and their
+use constitute the data model represented by that API. (Or data
+models—there is no reason an API cannot accommodate several different
+models.)
+
+ +
+
+1.1.2 Translating Data Models
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The problem of data model translation is central to the implementation
+of OPeNDAP. With an effective data translator, an OPeNDAP program
+originally designed to read netCDF data can have some access to data
+sets that use an incompatible data model, such as JGOFS.
+
+In general, it is not possible to define an algorithm that will
+translate data from any model to any other, without losing information
+defined by the position of data values or the relations between them.
+Some of these incompatibilities are obvious; a data model designed for
+time series data may not be able to accommodate multi-dimensional
+arrays. Others are more subtle. For example, a Sequence looks very
+similar to a collection of Arrays in many respects. But this does not
+mean they can always be translated from one to the other. For example,
+some APIs only return one Sequence "instance" at a time. This means that
+even if a Sequence of sets of three numbers is more or less the same
+shape as three parallel Arrays, it will be very difficult to model the
+one kind of behavior on the other kind of API.
+
+However, even though the general problem isn't solvable, there are many
+useful translations that can be done, and there are many others that are
+still useful despite their inherent information loss.
+
+For example, consider a relational structure like the one below. This is
+similar to the examples in #Data_Models, but contains two nested
+Sequences. The outer Sequence represents all the XBT drops in a cruise,
+and the inner Sequence represents each XBT drop. The JGOFS API was
+designed to use this sort of data type.
+
+-----------------------------
+Dataset {
+   Sequence {
+      Int32 id;
+      Float64 latitude;
+      Float64 longitude;
+      Sequence {
+         Float64 depth;
+         Float64 temperature;
+      } xbt_drop;
+   } station;
+} cruise;
+-----------------------------
+
+Example Data Description of XBT Cruise
+
+ +
+ Note that each entry in the cruise sequence is composed of a tuple of
+data values (one of which is itself a sequence). Were we to arrange
+these data values as a table, they might look like this:
+
+----------------------------
+id   lat   lon   depth  temp
+1   10.8   60.8    0     70
+                  10     46
+                  20     34
+2   11.2   61.0    0     71
+                  10     45
+                  20     34
+3   11.6   61.2    0     69
+                  10     47
+                  20     34 
+----------------------------
+
+This can be made into an array, although that introduces redundancy.
+
+----------------------------
+id   lat   lon   depth  temp
+1   10.8   60.8    0     70
+1   10.8   60.8   10     46
+1   10.8   60.8   20     34
+2   11.2   61.0    0     71
+2   11.2   61.0   10     45
+2   11.2   61.0   20     34
+3   11.6   61.2    0     69
+3   11.6   61.2   10     47
+3   11.6   61.2   20     34
+----------------------------
+
+The data is now in a form that may be read by an API such as netCDF. But
+consider the analysis stage. Suppose a user wants to see graphs of each
+station's data. It is not obvious simply from the arrangement of the
+array where a station stops and the next one begins. Analyzing data in
+this format is not a function likely to be accommodated by a program
+that uses the netCDF API, even though it is theoretically possible to
+implement.
+
+1.2 Data Access Protocol
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+The OPeNDAP Data Access Protocol (DAP) defines how an OPeNDAP client and
+an OPeNDAP server communicate with one another to pass data from the
+server to the client. The job of the functions in the OPeNDAP client
+library is to translate data from the DAP into the form expected by the
+data access API for which the OPeNDAP library is substituting. The job
+of an OPeNDAP server is to translate data stored on a disk in whatever
+format they happen to be stored in to the DAP for transmission to the
+client.
+
+The DAP consists of several components:
+
+ +
+
+1.  An "intermediate data representation" for data sets. This is used to
+transport data from the remote source to the client. The data types that
+make up this representation may be thought of as the OPeNDAP data model.
+2.  A format for the "ancillary data" needed to translate a data set
+into the intermediate representation, and to translate the intermediate
+representation into the target data model. The ancillary data in turn
+consists of two pieces:
+* A description of the shape and size of the various data types stored
+in some given data set. This is called the Data Description Structure
+(DDS).
+* Capsule descriptions of some of the properties of the data stored in
+some given data set. This is the Data Attribute Structure (DAS).
+3.  A "procedure" for retrieving data and ancillary data from remote
+platforms.
+4.  An "API" consisting of OPeNDAP classes and data access calls
+designed to implement the protocol,
+
+The intermediate data representation and the ancillary data formats are
+introduced in link:../index.php/UserGuideOPeNDAPMessages[OPeNDAP
+Messages], as are the steps of the procedure. The actual details of the
+software used to implement these formats and procedures is a subject of
+the documentation of the respective software.
+
+1.3 Data representation
+~~~~~~~~~~~~~~~~~~~~~~~
+
+There are many popular data storage formats, and many more than that in
+use. These formats are optimized (it they are optimized at all) for data
+storage, and are not generally suitable for data transmission. In order
+to transmit data over the Internet, OPeNDAP must translate the data
+model used by a particular storage format into the data model used for
+transmission.
+
+If the data model for transmission is defined to be general enough to
+encompass the abstractions of several data models for storage, than this
+intermediate representation—the transmission format—can be used to
+translate between one data model and another.
+
+The OPeNDAP data model consists of a fairly elementary set of base
+types, combined with an advanced set of constructs and operators that
+allows it to define data types of arbitrary complexity. This way, the
+OPeNDAP data access protocol can be used to transmit data from virtually
+any data storage format.
+
+The elements of the OPeNDAP data access protocol are:
+
+ +
+
+Base Types ::
+  These are the simple data types, like integers, floating point
+  numbers, strings, and character data.
+Constructor ::
+  Types These are the more complex data types that can be constructed
+  from the simple base types. Examples are structures, sequences,
+  arrays, and grids.
+Operators ::
+  Access to data can be operationally defined with operators defined on
+  the various data types.
+ External Data Representation ::
+  In order to transmit the data across the Internet, there needs to be a
+  machine-independent definition of what the various data types look
+  like. For example, the client and server need to agree on the most
+  significant digit of a particular byte in the message
+
+These elements are defined in greater detail in the sections that
+follow.
+
+1.3.1 Base Types
+^^^^^^^^^^^^^^^^
+
+The OPeNDAP data model uses the concepts of variables and operators.
+Each data set is defined by a set of one or more variables, and each
+variable is defined by a set of attributes. A variable's
+__attributes__—such as units, name and type—must not be confused with
+the data _value_ (or values) that may be represented by that variable. A
+variable called time may contain an integer number of minutes, but it
+does not contain a particular number of minutes until a context, such as
+a specific event recorded in a data set, is provided. Each variable may
+further be the object of an operator that defines a subset of the
+available data set.
+
+Variables in the DAP have two forms. They are either base types or type
+constructors. Base type variables are similar to predefined variables in
+procedural programming languages like C or Fortran (such as int or
+integer*4). While these certainly have an internal structure, it is not
+possible to access parts of that structure using the DAP. Base type
+variables in the DAP have two predefined attributes (or
+characteristics): name, and type. They are defined as follows:
+
+ +
+
+_____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+--
+Name ::
+  A unique identifier that can be used to reference the part of the
+  dataset associated with this variable.
+
+ +
+
+Type ::
+  The data type contained by the variable. This can be one of Byte,
+  Int32, UInt32, Float64, String, and URL. Where:
+
+___________________________________________________________________________________________________________________________
+* Byte is a single byte of data. This is the same as unsigned char in
+ANSI C.
+* Int16 is a 16 bit two's complement integer—it is synonymous with long
+in ANSI C when that type is implemented as 16 bits.
+* UInt16 is a 16 bit unsigned integer.
+* Int32 is a 32 bit two's complement integer—it is synonymous with long
+in ANSI C when that type is implemented as 32 bits.
+* UInt32 is a 32 bit unsigned integer.
+* Float32 is the IEEE 32 bit floating point data type.
+* Float64 is the IEEE 64 bit floating point data type.
+* String is a sequence of bytes terminated by a null character.
+* Url is a string containing an OPeNDAP URL.
+___________________________________________________________________________________________________________________________
+
+The declaration in a
+link:../index.php/UserGuideOPeNDAPMessages#Data_Descriptor_Structure[DDS]
+of a variable of any of the base types is simply the type of the
+variable, followed by its name, and a semicolon. For example, to declare
+a month variable to be a 32-bit integer, one would type:
+
+------------
+Int32 month;
+------------
+
+1.3.2 Constructor Types
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Constructor types, such as arrays and structures, describe the grouping
+of one or more variables within a dataset. These classes are used to
+describe different types of relations between the variables that
+comprise the dataset. For example, an array might indicate that the
+variables grouped are all measurements of the same quantity with some
+spatial relation to one another, whereas a structure might indicate a
+grouping of measurements of disparate quantities that happened at the
+same place and time.
+
+There are six classes of type constructor variables defined by the
+OPeNDAP DAP: arrays, structures, sequences, functions, and grids. The
+types are defined as:
+
+1.3.2.1 Array
++++++++++++++
+
+An array is a one dimensional indexed data structure as defined by ANSI
+C. Multidimensional arrays are defined as arrays of arrays. An array may
+be subsampled using subscripts or ranges of subscripts enclosed in
+brackets ([]). For example, temp[3][4] would indicate the value in the
+fourth row and fifth column of the temp array. (As in C, OPeNDAP array
+indices start at zero.)
+
+A chunk of an array may be specified with subscript ranges; the array
+temp[2:10][3:4] indicates an array of nine rows and two columns whose
+values have been lifted intact from the larger temp array.
+
+ +
+ A _hyperslab_ may be selected from an array with a _stride_ value. The
+array represented by temp[2:2:10][3:4] would have only five rows; the
+middle value in the first subscript range indicates that the output
+array values are to be selected from alternate input array rows. The
+array temp[2:3:10][3:4] would select from every third row, and so on.
+
+A
+link:../index.php/UserGuideOPeNDAPMessages#Data_Descriptor_Structure[DDS]
+declaration of a 5x6 array of floating point numbers would look like
+this:
+
+-------------------
+Float64 data[5][6];
+-------------------
+
+In addition to its magnitude, every dimension of an array may also have
+a name. The previous declaration could be written:
+
+------------------------------------
+Float64 data[height = 5][width = 6];
+------------------------------------
+
+1.3.2.2 Structure
++++++++++++++++++
+
+A Structure is a class that may contain several variables of different
+classes. However, though it implies that its member variables are
+related somehow, it conveys no relational information about them. The
+structure type can also be used to group a set of unrelated variables
+together into a single dataset. The "dataset" class name is a synonym
+for structure.
+
+A
+link:../index.php/UserGuideOPeNDAPMessages#Data_Descriptor_Structure[DDS]
+Structure declaration containing some data and the month in which the
+data was taken might look like this:
+
+-------------------------
+   Structure {
+      Int32 month;
+      Float64 data[5][6];
+   } measurement;
+-------------------------
+
+Use the *.* operator to refer to members of a Structure. For example,
+measurement.month would identify the integer member of the Structure
+defined in the above declaration.
+
+ +
+
+1.3.2.3 Sequence
+++++++++++++++++
+
+A Sequence is an ordered set of variables each of which may have several
+values. The variables may be of different classes. Each element of a
+Sequence consists of a value for each member variable, so a Sequence is
+sort of like an ordered set of Structures.
+
+Thus a Sequence can be represented as:
+
+[cols=",,,",]
+|========================
+|s~00~ |s~01~ |... |s~0n~
+|s~10~ |s~11~ |... |s~1n~
+|s~20~ |s~21~ |... |s~2n~
+|. |... |... |.
+|. |... |... |.
+|. |... |... |.
+|s~i0~ |s~i1~ |... |s~in~
+|========================
+
+ +
+ Every instance of Sequence S has the same number, order, and class of
+its member variables. A Sequence implies that each of the variables is
+related to each other in some logical way. For example, a Sequence
+containing position and temperature measurements might imply that each
+temperature measurement was taken at the corresponding position. A
+Sequence is different from a Structure because its constituent variables
+have several instances while a Structure's variables have only one
+instance (or value).
+
+A Sequence declaration is similar to a Structure's. For example, the
+following would define a Sequence that would contain many members like
+the Structure defined above:
+
+-------------------------
+   Sequence {
+      Int32 month;
+      Float64 data[5][6];
+   } measurement;
+-------------------------
+
+Note that, unlike an Array, a Sequence has no index. This means that a
+Sequence's values are not simultaneously accessible. Instead, a Sequence
+has an implied __state__, corresponding to a single element in the
+Sequence.
+
+As with a Structure, the variable measurement.month has a single value.
+The distinction is that this variable's value changes depending on the
+state of the Sequence. You can think of a Sequence as composed of the
+data you get from successive reads of data from a file. The data values
+available at any point are the last values read from the file. But you
+don't have immediate access to any of the other values in that file.
+
+1.3.2.4 Grid
+++++++++++++
+
+A Grid is an association of an N dimensional array with N named vectors
+(one-dimensional arrays), each of which has the same number of elements
+as the corresponding dimension of the array. Each data value in the Grid
+is associated with the data values in the vectors associated with its
+dimensions.
+
+As an example, consider an array of temperature values that has six
+columns and five rows. Suppose that this array represents measurements
+of temperature at five different depths in six different locations. The
+problem is the indication of the precise location of each temperature
+measurement, relative to one another.
+
+If the six locations are evenly spaced, and the five depths are also
+evenly spaced, then the data set can be completely described using the
+array and two scalar values indicating the distance between adjacent
+vertices of the array. However, if the spacing of the measurements is
+_not_ regular, as in ../index.php/File:Grid.gif[figure 6.3.2] then an
+array will be inadequate. To adequately describe the positions of each
+of the points in the grid, the precise location of each column and row
+must be described.
+
+../index.php/File:Grid.gif[image:../images/6/64/Grid.gif[actual size]]
+
+An Irregular Grid of Data.
+
+ +
+ The secondary vectors in the Grid data type provide a solution to this
+problem. Each member of these vectors associates a value for all the
+data points in the corresponding rank of the array. The value can
+represent location or time or some other quantity, and can even be a
+constructor data type. The following declaration would define a data
+type that could accommodate a structure like this:
+
+--------------------------------------------
+ Grid {
+      Float64 data[distance = 6][depth = 5];
+      Float64 distance[6];
+      Float64 depth[5];
+   } measurement;
+ 
+--------------------------------------------
+
+In the above example, an vector called depth contains five values
+corresponding to the depths of each row of the array, while another
+vector called distance contains the scalar distance between the location
+of the corresponding column, and some reference point.
+
+In a similar arrangement, a location array could instead contain six
+(latitude, longitude) pairs indicating the absolute location of each
+column of the grid.
+
+--------------------------------------------
+    Grid {
+      Float64 data[distance = 6][depth = 5];
+      Float64 depth[5];
+      Array Structure {
+         Float64 latitude;
+         Float64 longitude;
+      } location[6];
+   } measurement;
+--------------------------------------------
+
+1.3.3 External Data Representation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Now that you know what the data types are, the next step is to define
+their external representation. The DAP defines an external
+representation for each of the base-type and constructor-type variables.
+This is used when an object of the given type is transferred from one
+computer to another. Defining a single external representation makes
+possible the translation of variables from one computer to another when
+those computers use different internal representations for those
+variable types.
+
+The data access protocol uses Sun Microsystems' XDR protocol for the
+external representation of all of the base type variables. The table
+below shows the XDR types used to represent the various base type
+variables.
+
+ +
+
+The XDR data types corresponding to OPeNDAP base-type variables.
+
+[cols=",",options="header",]
+|==========================
+|Base Type |XDR Type
+|Byte |xdr byte
+|Int16 |xdr int16
+|UInt16 |xdr unsigned int16
+|Int32 |xdr int32
+|UInt32 |xdr unsigned int32
+|Float32 |xdr float
+|Float64 |xdr double
+|String |xdr string
+|URL |xdr string
+|==========================
+
+A base type variable is always either transmitted or not. You won't ever
+see a fraction of an String type transmitted. The constructor type
+variables, being made up of the bast type variables, are transmitted as
+sets of base type variables, and these may be sampled, with a
+link:../index.php/UserGuideOPeNDAPMessages#Constraint_Expression[constraint
+expression].
+
+Constraint expressions do not affect _how_ a base-type variable is
+transmitted from a client to a server; they determine _if_ a variable is
+to be transmitted. For constructor type variables, however, constraint
+expressions may be used to exclude portions of the variable. For
+example, if a constraint expression is used to select the first three of
+six fields in a structure, the last three fields of that structure are
+not transmitted by the server.
+
+What remains is to define the external representation of the constructor
+type variables. For each of the six constructor types these definitions
+are:
+
+Array ::
+  An Array is sent using the xdr_array function. This means that an
+  Array of 100 Int32s is sent as a single block of 100 xdr longs, not
+  100 separate "xdr long"s.
+Structure ::
+  A Structure is sent by encoding each field in the order those fields
+  are declared in the
+  link:../index.php/UserGuideOPeNDAPMessages#Data_Descriptor_Structure[DDS]
+  and transmitting the resulting block of bytes.
+Sequence ::
+  A Sequence is transmitted by encoding each item in the sequence as if
+  it were a Structure, and ending each such structure after the other,
+  in the order of their occurrence in the sequence. The entire sequence
+  is sent, subject to the constraint expression. In other words, if no
+  constraint expression is supplied then the entire sequence is sent.
+  However, if a constraint expression is given all the records in the
+  sequence that satisfy the expression are sent.
+Grid ::
+  A Grid is encoded as if it were a Structure (one component after the
+  other, in the order of their declaration).
+
+The external data representation used by an OPeNDAP server and client
+may be compressed, depending on the configuration of the respective
+machines. The compression is done using the gzip program. Only the data
+transmission itself will be affected by this; the transmission of the
+ancillary data is not compressed.
+
+--
+_____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________

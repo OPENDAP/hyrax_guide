@@ -1,0 +1,43 @@
+BES - Modules - GeoTiff, GRIB2, JPEG2000 Handler - OPeNDAP Documentation
+========================================================================
+
+[[firstHeading]]
+BES - Modules - GeoTiff, GRIB2, JPEG2000 Handler
+------------------------------------------------
+
+From OPeNDAP Documentation
+
+Contents
+~~~~~~~~
+
+* link:#Kinds_of_files_the_handler_will_serve[1 Kinds of files the
+handler will serve]
+** link:#Dataset_representation[1.1 Dataset representation]
+** link:#Known_problems[1.2 Known problems]
+* link:#Configuration_parameters[2 Configuration parameters]
+
+1 Kinds of files the handler will serve
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This handler will serve data stored in files that can be read using the
+GDAL GIS library, including GeoTIFF, JPEG2000 and GRIB2.
+
+1.1 Dataset representation
+
+These are all GIS datasets, so DAP2 responses will contains Grid
+variables with latitude and longitude maps. For DAP4, the responses will
+be coverages with latitude and longitude domain variables.
+
+1.2 Known problems
+^^^^^^^^^^^^^^^^^^
+
+Often the data returned when using nothing but a GeoTIFF, JPEG2000 or
+GRIB2 file contains none of the metadata that make them useful for
+people not extremely familiar with the particular dataset. Thus, in most
+cases some extra work will have to be done either using NcML or an
+ancillary DAS file to add metadata to the dataset.
+
+2 Configuration parameters
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+None.

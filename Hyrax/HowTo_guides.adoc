@@ -1,0 +1,174 @@
+Developer Info - OPeNDAP Documentation
+======================================
+
+[[firstHeading]]
+Developer Info
+--------------
+
+From OPeNDAP Documentation
+
+(Redirected from link:../index.php?title=HowTo_guides&redirect=no[HowTo
+guides])
+
+* https://github.com/OPENDAP[OPeNDAP's GitHub repositories]: OPeNDAP's
+software is available using GitHub in addition to the doenloads from our
+website.
+* https://travis-ci.org/OPENDAP[Continuous Integration builds]: Software
+that is built whenever new changes are pushed to the master branch.
+These builds are done on the Travis-CI system.
+* http://test.opendap.org/[test.opendap.org]: Test servers with data
+files.
+* We use the Coverity static system to look for common software defects,
+information on Hyrax is spread across three projects:
+** https://scan.coverity.com/projects/opendap-bes?tab=overview[The BES
+and the standard handlers we distribute]
+** https://scan.coverity.com/projects/opendap-olfs?tab=overview[The OLFS
+- the front end to the Hyrax data server]
+** https://scan.coverity.com/projects/opendap-libdap4?tab=overview[libdap
+- The implementation of DAP2 and DAP4]
+
+Contents
+~~~~~~~~
+
+* link:#Developer_Guidelines_and_Information[1 Developer Guidelines and
+Information]
+* link:#General_development_information[2 General development
+information]
+* link:#OPeNDAP_Workshops[3 OPeNDAP Workshops]
+* link:#OPeNDAP_Development_process_information[4 OPeNDAP Development
+process information]
+** #Software_process_issues:[4.1 Software process issues:]
+** link:#Old_information[4.2 Old information]
+
+1 Developer Guidelines and Information
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The http://www.opendap.org/faq[OPeNDAP FAQ] has a pretty good section on
+developer's questions.
+
+2 General development information
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+These pages contain general information relevant to anyone working with
+our software:
+
+* link:../index.php/Git_Hacks_and_Tricks[Git Hacks and Tricks]:
+Information about using git and/or GitHub that seems useful and maybe
+not all that obvious.
+* link:../index.php/Migrating_source_code_from_SVN_to_git[Migrating
+source code from SVN to git]: How to move a large project from SVN to
+git and keep the history, commits, branches and tags.
+* https://developer.mozilla.org/en-US/docs/Eclipse_CDT[Eclipse -
+Detailed information about running Eclipse on OSX from the Mozzilla
+project]. Maybe a bit out of date.
+
+3 OPeNDAP Workshops
+~~~~~~~~~~~~~~~~~~~
+
+* http://www.opendap.org/apac_workshop_vm[The APAC/BOM Workshops]: This
+workshop spanned several days and covered a number of topics, including
+information for SAs and Developers. Oct 2007.
+* http://www.opendap.org/ESIP_Federation_Hyrax_workshop[ESIP Federation
+Server Workshop]: This half-day workshop focused on server installation
+and configuration. Summer 2008
+* link:../index.php/A_One-day_Course_on_Hyrax_Development[Server
+Functions]: This one-day workshop is all about writing and debugging
+server-side functions. It also contains a wealth of information about
+Hyrax, the BES and debugging tricks for the server. Spring 2012. Updated
+Fall 2014 for presentation to Ocean Networks Canada.
+
+4 OPeNDAP Development process information
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+These pages contain information about how we'd like people working with
+us to use our various on-line tools.
+
+* link:../index.php/Hyrax_GitHub_Source_Build[Hyrax GitHub Source Build]
+This explains how to clone our software from GitHub and build our code
+using a shell like bash. It also explains how to build the BES and all
+of the Hyrax 'standard' handlers in one operation, as well as how to
+build just the parts you need without cloning the whole set of repos.
+Some experience with 'git submodule' will make this easier, although the
+page explains everything.
+* link:../index.php/ReleaseSprintNotes[How to Plan a Release Sprint] A
+general template for planning a release in Jira or the equivalent.
+* link:../index.php/ReleaseGuide[Making a Release]. Once software is
+ready for distribution, use this checklist to make sure you do all of
+the steps needed to make a release.
+* link:../index.php/RPM[Making RPM Distributions]. Follow these steps to
+create an RPM distribution of the software.
+* link:../index.php/OLFSReleaseGuide[Making a Release of OLFS]. Follow
+these steps to create the three .jar files needed for the OLFS release.
+Includes information on how to build the OLFS and how to run the tests.
+* link:../index.php/Bug_Prioritization[Bug Prioritization]. How we
+prioritize bugs in our software.
+
+4.1 Software process issues:
+
+* link:../index.php/ConfigureCentos[How to configure a CentOS machine
+for production of RPM binaries] - Updated 12/2014 to include information
+regarding git.
+* link:../index.php/How_to_use_Eclipse_with_Hyrax_Source_Code[How to use
+Eclipse with Hyrax Source Code] Assuming you have cloned our Hyrax code
+from GitHub, this explains how to setup eclipse so you can work fairly
+easily and switch back and forth between the shell, emacs and eclipse.
+* link:../index.php/BES_Timing[How to add timing instrumentation to your
+BES code.]
+* link:../index.php/UnitTests[How to write unit tests using CppUnit]
+* link:../index.php/Valgrind[How to use valgrind with unit tests]
+* link:../index.php/CopyRights[How to copyright software written for
+OPeNDAP]
+* link:../index.php/Managing_public_and_private_keys_using_gpg[Managing
+public and private keys using gpg]
+* link:../index.php/SecureEmail[How to Setup Secure Email and Sign
+Software Distributions]
+* link:../index.php/UserSupport[How to Handle Email-list Support
+Questions]
+* link:../index.php/NetworkServerSecurity[Security Policy and Related
+Procedures]
+* http://semver.org/[Software version numbers]
+* link:../index.php/GuideLines[Development Guidelines]
+
+4.2 Old information
+
+**Note**: _The following is all about using Subversion and is out of
+date as of November 2014 when we switched to git. There are still good
+ideas here..._
+
+* link:../index.php/MergingBranches[How to merge code]
+* link:../index.php/TrunkDevelBranchRel[Using the SVN trunk, branches
+and tags to manage releases].
+* link:../index.php/ShrewBranchGuide[Making a Branch of Shrew for a
+Server Release]. Releases should be made from the trunk and moved to a
+branch once they are 'ready' so that development can continue on the
+trunk and so that we can easily go back to the software that mad up a
+release, fix bugs, and (re)release those fixes. In general, it's better
+to fix things like build issues, etc., discovered in the released
+software _on the trunk_ and merge those down to the release branch to
+maintain consistency, re-release, etc. This also means that virtually
+all new feature development should take place on special _feature_
+branches, not the trunk.
+* link:../index.php/Hyrax_Package_for_OS-X[Hyrax Package for OS-X]. This
+describes how to make a new OS/X 'metapackage' for Hyrax.
+* link:../index.php/XP[Making Windows XP distributions]. Follow these
+directions to make Windows XP binaries.
+* link:../index.php/ReleaseToolbox[Making a Matlab Ocean Toolbox
+Release]. Follow these steps when a new Matlab GUI version is ready to
+be released.
+* link:../index.php/Eclipse_-_How_to_Setup_Eclipse_in_a_Shrew_Checkout[Eclipse
+- How to Setup Eclipse in a Shrew Checkout] This includes some build
+instructions
+* link:../index.php/LinuxBuildHostConfig[How to configure a Linux
+machine to build Hyrax from SVN]
+* link:../index.php/ConfigureSUSE[How to configure a SUSE machine for
+production of RPM binaries]
+* link:../index.php/ConfigureAmazonLinuxAMI[How to configure an Amazon
+Linux AMI for EC2 Instance To Build Hyrax]
+* link:../index.php/TestOpendapOrg[Notes from setting up Hyrax on our
+new web host]
+* http://svnbook.red-bean.com/en/1.7/index.html[Subversion 1.7
+documentation] -- The official Subversion documentation;
+http://svnbook.red-bean.com/en/1.1/svn-book.pdf[PDF] and
+http://svnbook.red-bean.com/en/1.1/index.html[HTML].
+* link:../index.php/OPeNDAP%27s_Use_of_Trac[OPeNDAP's Use of Trac] --
+How to use Trac's various features in the software development process.
