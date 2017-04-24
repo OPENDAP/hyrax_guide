@@ -1,5 +1,5 @@
 
-== About these files ==
+## About these files
 
 These files are derived from the Hyrax documentation pages on
 docs.OPeNDAP.org. I've extracted them from the files in
