@@ -1,50 +1,24 @@
-Hyrax - BES Configuration - OPeNDAP Documentation
-=================================================
+= Hyrax - BES Configuration - OPeNDAP Documentation
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-[[firstHeading]]
-Hyrax - BES Configuration
--------------------------
-
-From OPeNDAP Documentation
+== Introduction
 
 Building the BES and it's data handlers from source, or installing from
 the Linux RPMs, will provide the default installation with data and a
 valid configuration. This is suitable for testing. The following details
 how you go about customizing it for your data.
 
-Contents
-~~~~~~~~
-
-* link:#Location_of_the_BES_Configuation_File[1 Location of the BES
-Configuation File]
-* link:#Basic_format_of_parameters[2 Basic format of parameters]
-* link:#Administration_.26_Logging[3 Administration & Logging]
-* link:#User_and_Group_parameters[4 User and Group parameters]
-* link:#Setting_the_networking_parameters[5 Setting the networking
-parameters]
-* link:#Debugging_Tip[6 Debugging Tip]
-* link:#Controlling_how_compressed_files_are_treated[7 Controlling how
-compressed files are treated]
-* link:#Loading_Software_Modules[8 Loading Software Modules]
-* link:#Pointing_to_data[9 Pointing to data]
-* link:#Including_and_Excluding_files_and_directories[10 Including and
-Excluding files and directories]
-* link:#Symbolic_Links[11 Symbolic Links]
-* link:#Parameters_for_Specific_Handlers[12 Parameters for Specific
-Handlers]
-* link:#Sample_Installation_and_Configuration[13 Sample Installation and
-Configuration]
-
-1 Location of the BES Configuation File
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+== Location of the BES Configuation File
 
 The BES configuration file is called _bes.conf_ and can be found in
 _$prefix/etc/bes/_ if you built the software from source or in
 _/etc/bes/_ if you used our RPM packages. By default _$prefix_ is
 __/usr/local__.
 
-2 Basic format of parameters
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+== Basic format of parameters
 
 Parameters set in the BES configuration file have the following format:
 
@@ -79,8 +53,7 @@ BES.Include=modules/.*\.conf$
 Note that regular expressions can be used in the Include parameter to
 match a set of files.
 
-3 Administration & Logging
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+== Administration & Logging
 
 In the bes.conf configuration file, the _BES.ServerAdministrator_
 parameter is the address used in various mail messages returned to
@@ -103,8 +76,7 @@ which network port and interface to use. Assuming you are running the
 BES and OLFS (i.e., all of Hyrax) on one machine, here's what you should
 do:
 
-4 User and Group parameters
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+== User and Group parameters
 
 In the bes.conf configuration file, the BES must be started as root. One
 of the things that the BES does first is to start up a listener to
@@ -124,8 +96,7 @@ BES.User=#172
 BES.Group=#14
 -------------
 
-5 Setting the networking parameters
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+== Setting the networking parameters
 
 In the bes.conf configuration file, we have settings for how the BES
 should listen for requests:
@@ -154,7 +125,7 @@ Otherwise, clients on other machines will connect to the BES using the
 _BES.ServerPort_ value. Note that the OLFS always uses only the TCP
 socket, even if the UNIX socket is present.
 
-6 Debugging Tip
+== 6 Debugging Tip
 ~~~~~~~~~~~~~~~
 
 In the bes.conf configuration file, use the _BES.ProcessManagerMethod_
@@ -168,8 +139,7 @@ greatly simplifying trouble shooting.
 BES.ProcessManagerMethod=multiple
 ---------------------------------
 
-7 Controlling how compressed files are treated
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+== Controlling how compressed files are treated
 
 Compression parameters are configured in the bes.conf configuration
 file.
@@ -207,8 +177,7 @@ the cache holds more data than this value. Ideally this value should be
 several times the size of the largest file you plan to serve.
 
 [[Loading_Modules]]
-8 Loading Software Modules
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+== Loading Software Modules
 
 Virtually all of the BESs functions are contained in modules that are
 loaded when the server starts up. Each module is a shared-object
@@ -248,8 +217,7 @@ file. For example, any parameters specific to the netcdf data handler
 would be included in the nc.conf file.
 
 [[Pointing_to_data]]
-9 Pointing to data
-~~~~~~~~~~~~~~~~~~
+== Pointing to data
 
 There are two parameters that can be used to tell the BES where your
 data are stored. Which one you use depends on whether you are setting up
@@ -325,8 +293,7 @@ software) actually makes a data request. This is because it's possible
 to use BES commands in place of these regular expressions, although the
 Hyrax won't.
 
-10 Including and Excluding files and directories
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+== Including and Excluding files and directories
 
 Finally, you can configure the types of information that the BES sends
 back when a client requests catalog information. The _Include_ and
@@ -344,8 +311,7 @@ BES.Catalog.catalog.Include=;
 BES.Catalog.catalog.Exclude=^\..*;
 ----------------------------------
 
-11 Symbolic Links
-~~~~~~~~~~~~~~~~~
+== Symbolic Links
 
 If you would like for symbolic links to be followed when retrieving data
 and for viewing catalog entries, then you need to set the following two
@@ -370,15 +336,13 @@ And this one is set in the dap.conf file in the modules directory:
 BES.Catalog.catalog.FollowSymLinks=No|Yes
 -----------------------------------------
 
-12 Parameters for Specific Handlers
------------------------------------
+== Parameters for Specific Handlers
 
 Parameters for specific modules can be added to the BES configuration
 file for that specific module. No module-specific parameters should be
 added to bes.conf.
 
-13 Sample Installation and Configuration
-----------------------------------------
+== Sample Installation and Configuration
 
 link:../index.php/Hyrax_-_Sample_BES_Installations[Sample Installations
 Page] shows how to download, build, install and configure for some

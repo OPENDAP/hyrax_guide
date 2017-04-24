@@ -1,11 +1,8 @@
-Hyrax - BES Installation - OPeNDAP Documentation
-================================================
-
-[[firstHeading]]
-Hyrax - BES Installation
-------------------------
-
-From OPeNDAP Documentation
+= Hyrax - BES Installation - OPeNDAP Documentation
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
 This page is deprecated ::
   These instructions apply to Hyrax version 1.10 and older (BES 3.13.x
@@ -81,9 +78,9 @@ configuration to the BES configuration file.
 Here's a list of the required RPM packages for a typical Hyrax
 installation.
 
-1.  libdap: The DAP implementation used by the handlers
-2.  bes: The BES component of Hyrax
-3.  dap-server: These handlers provide basic services for Hyrax
+. libdap: The DAP implementation used by the handlers
+. bes: The BES component of Hyrax
+. dap-server: These handlers provide basic services for Hyrax
 
 Plus you must have at least one data handler:
 

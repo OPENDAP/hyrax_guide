@@ -4,7 +4,7 @@
 :numbered:
 :toc:
 
-// If there are lots of links we sneed to share, put their variables
+// If there are lots of links we need to share, put their variables
 // in a file and include it as in 'include link_variables.txt'
 
 :quick-start-doc: QuickStart.html
