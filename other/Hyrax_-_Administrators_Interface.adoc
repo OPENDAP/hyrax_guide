@@ -1,33 +1,10 @@
-Hyrax - Administrators Interface - OPeNDAP Documentation
-========================================================
+= Hyrax - Administrators Interface - OPeNDAP Documentation
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-[[firstHeading]]
-Hyrax - Administrators Interface
---------------------------------
-
-From OPeNDAP Documentation
-
-Contents
-~~~~~~~~
-
-* link:#Overview[1 Overview]
-* link:#Installation_.26_Configuration[2 Installation & Configuration]
-** link:#Configuring_Tomcat[2.1 Configuring Tomcat]
-** link:#BES[2.2 BES]
-** link:#OLFS[2.3 OLFS]
-** link:#Configuration_notes[2.4 Configuration notes]
-* link:#Using_the_Hyrax_Administrator.27s_Interface[3 Using the Hyrax
-Administrator's Interface]
-** link:#OLFS_Log_Viewer[3.1 OLFS Log Viewer]
-*** link:#Log_Viewer_Controls[3.1.1 Log Viewer Controls]
-*** link:#Setting_logging_levels[3.1.2 Setting logging levels]
-** link:#BES_Controls[3.2 BES Controls]
-*** link:#BES_Configuration[3.2.1 BES Configuration]
-*** link:#Bes_Logging[3.2.2 Bes Logging]
-*** link:#OLFS_Connections[3.2.3 OLFS Connections]
-
-1 Overview
-~~~~~~~~~~
+== Overview
 
 The Hyrax Administrator's Interface (HAI) is a graphical interface to
 the configuration files and run-time logs of the Hyrax data server. It
@@ -47,8 +24,7 @@ Tomcat are not necessary for many sites since it's often the case that
 the servlet engine is already configured for SSL and has one or more
 users in Tomcat's _manager_ role. Using the interface is very intuitive.
 
-2 Installation & Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+== Installation & Configuration
 
 When Hyrax and Tomcat are installed all of the software needed to run
 the Hyrax Administrative Interface (HAI) is in place. However, you will
@@ -67,8 +43,7 @@ Prerequisites:
 likely that you can use another servlet engine, but the specifics of the
 SSL/https configuration may be different.
 
-2.1 Configuring Tomcat
-^^^^^^^^^^^^^^^^^^^^^^
+=== Configuring Tomcat
 
 In order to use the HAI you will need to configure your tomcat instance
 to enable SSL. This is very simple for most sites, and it might already
@@ -111,48 +86,44 @@ defined, add it too: _<role rolename="manager"/>_
 
 Restart Tomcat
 
-2.2 BES
-^^^^^^^
+=== BES
 
 Edit the file _$HYRAX_HOME/etc/bes.conf_ and remove the comments from
 the line _BES.DaemonPort=11002_
 
 Restart the BES.
 
-2.3 OLFS
-^^^^^^^^
+=== OLFS
 
 Edit the file _$CATALINA_HOME/content/opendap/olfs.xml_ and remove the
 comments around the line _<adminPort>11002</adminPort>_
 
-2.4 Configuration notes
-^^^^^^^^^^^^^^^^^^^^^^^
+=== Configuration notes
 
-1.  Note that because the HAI is a web-based interface, with secure
+. Note that because the HAI is a web-based interface, with secure
 logins using SSL, you can use the interface with your server from
 anywhere in the world. It might be a good idea, however, to limit the IP
 addresses that can access the HAI.
-2.  Using a self-signed certificate is fine, but you will see a warning
+. Using a self-signed certificate is fine, but you will see a warning
 box when you log in because self-signed certs are not trusted by
 browsers by default. Most browsers have an option that will suppress
 that warning or, although it involves some expense, you can get a
 certificate signed by a Certificate Authority and install that in the
 keystore
-3.  More about tomcat users: Tomcat supports several authentication
+. More about tomcat users: Tomcat supports several authentication
 Realms including Memory realms, databases and LDAP. We document using
 memory realms here because other techniques, while better in some ways,
 are more cumbersome. If you are using memory realms, be sure to protect
 the _tomcat-users.xml_ file because it contains plain text passwords.
-4.  The _<security-constraint>_ element in the
+. The _<security-constraint>_ element in the
 _$CATALINA_HOME/opendap/WEB-INF/web.xml_ configuration file controls the
 level of access control for the HAI
-5.  The role used by the HAI is set in the
+. The role used by the HAI is set in the
 _$CATALINA_HOME/opendap/WEB-INF/web.xml_ configuration file using the
 _<auth-constraint>_ element. You can switch roles by changing the
 __<role-name>__.
 
-3 Using the Hyrax Administrator's Interface
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+== Using the Hyrax Administrator's Interface
 
 To access the Hyrax Administrator's Interface, go to the base page for
 your server (http://__you server__/opendap) and follow the link to the
@@ -180,8 +151,7 @@ part of one Hyrax installation. Use the tabs at the top of the interface
 to select different back-end server instances. The following sections
 describe both parts of the interface.
 
-3.1 OLFS Log Viewer
-^^^^^^^^^^^^^^^^^^^
+=== OLFS Log Viewer
 
 The OLFS control panel provides access to the log for the front-end of
 Hyrax. Note that the control panel provides a way to set the logging
@@ -195,8 +165,7 @@ see them.
 ../index.php/File:Hai-Slide12.jpg[image:../images/7/77/Hai-Slide12.jpg[OLFS
 Log Viewer Default Page]]
 
-3.1.1 Log Viewer Controls
-+++++++++++++++++++++++++
+==== Log Viewer Controls
 
 ../index.php/File:Hai-Slide13.jpg[image:../images/2/29/Hai-Slide13.jpg[Log
 Viewer Controls 1]]
@@ -204,8 +173,7 @@ Viewer Controls 1]]
 ../index.php/File:Hai-Slide14.jpg[image:../images/7/7a/Hai-Slide14.jpg[Log
 Viewer Controls 2]]
 
-3.1.2 Setting logging levels
-++++++++++++++++++++++++++++
+==== Setting logging levels
 
 ../index.php/File:Hai-Slide15.jpg[image:../images/a/a6/Hai-Slide15.jpg[Setting
 log levels 1]]
@@ -219,8 +187,7 @@ log levels 3]]
 ../index.php/File:Hai-Slide18.jpg[image:../images/a/a2/Hai-Slide18.jpg[Setting
 log levels 4]]
 
-3.2 BES Controls
-^^^^^^^^^^^^^^^^
+=== BES Controls
 
 The BES control panel provides one tab for each back-end server in this
 instance of Hyrax. Note that in these pictures we have only one BES
@@ -241,8 +208,7 @@ Page Tour 1]]
 ../index.php/File:Hai-Slide03.jpg[image:../images/a/a0/Hai-Slide03.jpg[Admin
 Page Tour 2]]
 
-3.2.1 BES Configuration
-+++++++++++++++++++++++
+==== BES Configuration
 
 ../index.php/File:Hai-Slide04.jpg[image:../images/3/3c/Hai-Slide04.jpg[BES
 Configuration 1]]
@@ -250,8 +216,7 @@ Configuration 1]]
 ../index.php/File:Hai-Slide05.jpg[image:../images/6/60/Hai-Slide05.jpg[BES
 Configuration 2]]
 
-3.2.2 Bes Logging
-+++++++++++++++++
+==== Bes Logging
 
 ../index.php/File:Hai-Slide06.jpg[image:../images/7/72/Hai-Slide06.jpg[BES
 Logging 1]]
@@ -265,8 +230,7 @@ Logging Configuration 1]]
 ../index.php/File:Hai-Slide09.jpg[image:../images/7/74/Hai-Slide09.jpg[BES
 Logging 3]]
 
-3.2.3 OLFS Connections
-++++++++++++++++++++++
+==== OLFS Connections
 
 ../index.php/File:Hai-Slide10.jpg[image:../images/6/64/Hai-Slide10.jpg[OLFS
 Connections 1]]
