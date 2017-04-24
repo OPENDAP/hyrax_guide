@@ -1,33 +1,10 @@
-Hyrax - BES PPT - OPeNDAP Documentation
-=======================================
+= Hyrax - BES PPT - OPeNDAP Documentation
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-[[firstHeading]]
-Hyrax - BES PPT
----------------
-
-From OPeNDAP Documentation
-
-Contents
-~~~~~~~~
-
-* link:#What_is_PPT[1 What is PPT]
-* link:#Initial_handshaking_in_the_PPT[2 Initial handshaking in the PPT]
-* link:#PPT_Authentication[3 PPT Authentication]
-* link:#PPT_Chunking[4 PPT Chunking]
-** link:#Chunking_Scheme[4.1 Chunking Scheme]
-** link:#Graphical_representation_of_chunking_scheme[4.2 Graphical
-representation of chunking scheme]
-** link:#Client.2Fserver_exit[4.3 Client/server exit]
-** link:#Chunking_State_Diagram[4.4 Chunking State Diagram]
-** link:#Error_response[4.5 Error response]
-* link:#Communication_Flow[5 Communication Flow]
-* link:#State_Diagram[6 State Diagram]
-* link:#The_API[7 The API]
-** link:#C.2B.2B_API[7.1 C++ API]
-** link:#C_API[7.2 C API]
-
-1 What is PPT
-~~~~~~~~~~~~~
+== What is PPT
 
 PPT stands for Point to Point Transport. It is based on TFTP, which
 stands for Trivial File Transfer Protocol. PPT is a protocol developed
@@ -97,40 +74,38 @@ characters received by an application would be the size of the chunk
 followed by that many bytes of data. To signify the end of the
 transmission, a chunk is sent with chunk size of zero.
 
-2 Initial handshaking in the PPT
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+== Initial handshaking in the PPT
 
 In the PPT scheme the server is the software that is listening for a
 connection, accepting commands, and providing responses. The client is
 the software that initiates a connection, issues commands, and receives
 responses.
 
-1.  The client opens a socket connection to the server.
-2.  The server accepts the connection.
-3.  The client sends the string "PPTCLIENT_TESTING_CONNECTION" to the
+. The client opens a socket connection to the server.
+. The server accepts the connection.
+. The client sends the string "PPTCLIENT_TESTING_CONNECTION" to the
 server.
-4.  The server responds with one of the following tokens:
-1.  "PPTSERVER_CONNECTION_OK" - If it will accept the session connection
+. The server responds with one of the following tokens:
+. "PPTSERVER_CONNECTION_OK" - If it will accept the session connection
 for PPT based message exchange.
-2.  "PPT_PROTOCOL_UNDEFINED" - If it is busy or otherwise unavailable.
-3.  "PPTSERVER_AUTHENTICATE" - Authentication is required for connection
+. "PPT_PROTOCOL_UNDEFINED" - If it is busy or otherwise unavailable.
+. "PPTSERVER_AUTHENTICATE" - Authentication is required for connection
 
 Any other response from the server indicates that initiating the session
 failed and that the client should abandon the connection.
 
-3 PPT Authentication
-~~~~~~~~~~~~~~~~~~~~
+== PPT Authentication
 
 If PPTSERVER_AUTHENTICATE is returned, then the client must make an SSL
 connection to the server in order to authenticate. The hand-shaking
 continues in this case as follows:
 
-1.  The client sends the token "PPTCLIENT_REQUEST_AUTHPORT", which lets
+. The client sends the token "PPTCLIENT_REQUEST_AUTHPORT", which lets
 the server know that it understands the request for authentication and
 to request the SSL port to connect to.
-2.  The server responds with the SSL port to connect to
-3.  The client opens an SSL connection to the server on this port
-4.  SSL authentication proceeds as normal.
+. The server responds with the SSL port to connect to
+. The client opens an SSL connection to the server on this port
+. SSL authentication proceeds as normal.
 
 For SSL authentication, the client and the server must be configured,
 both through the use of a BES configuration file. The server side
@@ -159,11 +134,10 @@ handled through the initial non-secure connection.
 Once the connection is established all further communications will be
 chunked as described in the following sections.
 
-4 PPT Chunking
-~~~~~~~~~~~~~~
+== PPT Chunking
 
-4.1 Chunking Scheme
-^^^^^^^^^^^^^^^^^^^
+=== Chunking Scheme
+
 
 --------------------------------------------------------------------------------------
        chunked-body     =  *chunked-section last-chunk
@@ -187,8 +161,7 @@ chunked as described in the following sections.
                           ; exactly chunk-size bytes
 --------------------------------------------------------------------------------------
 
-4.2 Graphical representation of chunking scheme
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=== Graphical representation of chunking scheme
 
 ../index.php/File:BES_chunking_7_1.jpg[image:../images/8/8f/BES_chunking_7_1.jpg[BES
 chunking 7 1.jpg]]
@@ -224,8 +197,7 @@ be called until the entire chunk has been received.
 Read/receive should be called until the last chunk is received. The last
 chunk is represented by chunk size of 0.
 
-4.3 Client/server exit
-^^^^^^^^^^^^^^^^^^^^^^
+=== Client/server exit
 
 The exit handshake used to take place with an exit token. Now, instead,
 it is done with an exit extension. The chunk will look like this:
@@ -240,13 +212,11 @@ followed by the last chunk signifying the end of the transmission.
 0000000d
 --------
 
-4.4 Chunking State Diagram
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+=== Chunking State Diagram
 
 ../index.php/File:ChunkedStreamReaderStateDiagram.png[image:../images/thumb/a/a1/ChunkedStreamReaderStateDiagram.png/1000px-ChunkedStreamReaderStateDiagram.png[ChunkedStreamReaderStateDiagram.png]]
 
-4.5 Error response
-^^^^^^^^^^^^^^^^^^
+=== Error response
 
 Built in to the BES currently is the error message response to a BES
 client request. Specifically, if the BES client issues a command and the
@@ -258,22 +228,19 @@ chunks will contain the error information followed by the last chunk.
 The extension chunk with the error status could come following a series
 of data chunks containing the partial response.
 
-5 Communication Flow
-~~~~~~~~~~~~~~~~~~~~
+== Communication Flow
 
 ../index.php/File:Communication_flow.jpg[image:../images/e/e5/Communication_flow.jpg[Communication
 flow.jpg]]
 
-6 State Diagram
-~~~~~~~~~~~~~~~
+== State Diagram
 
 ../index.php/File:Client_state_diagram.jpg[image:../images/6/69/Client_state_diagram.jpg[Client
 state diagram.jpg]]                             
 ../index.php/File:Server_state_diagram.jpg[image:../images/e/ef/Server_state_diagram.jpg[Server
 state diagram.jpg]]
 
-7 The API
-~~~~~~~~~
+== The API
 
 There are two versions of the PPT available. The PPT C++ API is provided
 with the BES, either source tarball or binary distributions. The PPTCAPI
@@ -284,8 +251,7 @@ http://scm.opendap.org/svn/trunk/bes[svn].
 The C API is a client-side only API, whereas the C++ API is both client
 and server.
 
-7.1 C++ API
-^^^^^^^^^^^
+=== C++ API
 
 To build this test use the following:
 
@@ -366,8 +332,7 @@ main( int, char ** )
 }
 ------------------------------------------------------------------------------------------------------------------------------
 
-7.2 C API
-^^^^^^^^^
+=== C API
 
 To build the C test use the following:
 
