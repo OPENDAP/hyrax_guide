@@ -4,7 +4,7 @@
 :numbered:
 :toc:
 
-*When you install Hyrax for the first time it is pre-configured to serve
+When you install Hyrax for the first time it is pre-configured to serve
 test data sets that come with each of the installed data handlers. This
 will allow you to test the server and make sure it is functioning
 correctly. After that you can customize it for your data.*

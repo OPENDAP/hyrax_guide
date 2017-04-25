@@ -1,5 +1,4 @@
-= Hyrax - Configuring The OLFS To Work With Multiple BES's - OPeNDAP
-Documentation
+= Hyrax - Configuring The OLFS To Work With Multiple BES's - OPeNDAP Documentation
 :Leonard Porrello <lporrel@gmail.com>:
 {docdate}
 :numbered:

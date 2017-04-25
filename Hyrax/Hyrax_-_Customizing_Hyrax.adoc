@@ -1,11 +1,10 @@
-Hyrax - Customizing Hyrax - OPeNDAP Documentation
-=================================================
+= Hyrax - Customizing Hyrax - OPeNDAP Documentation
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-[[firstHeading]]
-Hyrax - Customizing Hyrax
--------------------------
-
-From OPeNDAP Documentation
+== Introduction
 
 There are several ways in which Hyrax can be customized:
 
@@ -13,33 +12,15 @@ There are several ways in which Hyrax can be customized:
 * Custom DispatchHandlers for the OLFS
 * Custom RequestHandlers for the BES.
 
- +
- +
+== Webpage Customization
 
-Contents
-~~~~~~~~
-
-* link:#Web_page_customization[1 Web page customization]
-** link:#Where_to_make_the_changes[1.1 Where to make the changes]
-** link:#What_to_change[1.2 What to change]
-*** link:#HTML_Files[1.2.1 HTML Files]
-*** link:#CSS_Files[1.2.2 CSS Files]
-*** link:#Image_Files[1.2.3 Image Files]
-*** link:#XSL_Transform_Files[1.2.4 XSL Transform Files]
-* link:#Software_Customization[2 Software Customization]
-** link:#OLFS_Customization[2.1 OLFS Customization]
-** link:#BES_Customization[2.2 BES Customization]
-
-1 Web page customization
-------------------------
 
 Hyrax's public "face" is the web pages that are produced by servlets
 running in the Tomcat servlet engine. Almost all of these pages can be
 completely customized by the site administrator by editing a combination
 of HTML, XSLT, and CSS files.
 
-1.1 Where to make the changes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Where To Make the Changes
 
 All of the default versions of the HTML, XSLT, and CSS files come
 bundled with Hyrax in the _$CATALINA_HOME/webapps/opendap/docs_
@@ -62,11 +43,9 @@ changed when installing new versions of Hyrax.
 *The rest of these instructions are written with the assumption that a
 copy of the _docs_ directory has been made as described above.*
 
-1.2 What to change
-~~~~~~~~~~~~~~~~~~
+=== What to Change
 
-1.2.1 HTML Files
-^^^^^^^^^^^^^^^^
+==== HTML Files
 
 The HTML files provide the static content of a Hyrax server.
 
@@ -115,11 +94,8 @@ generates an **Bad Gateway**. (Associated with an HTML status of 502) +
  +
 |=======================================================================
 
- +
- +
 
-1.2.2 CSS Files
-^^^^^^^^^^^^^^^
+==== CSS Files
 
 [width="100%",cols="20%,20%,20%,20%,20%",]
 |=======================================================================
@@ -137,11 +113,8 @@ the THREDDS component of Hyrax. +
  +
 |=======================================================================
 
- +
- +
 
-1.2.3 Image Files
-^^^^^^^^^^^^^^^^^
+==== Image Files
 
 There are a number of image files shipped with Hyrax. Simply replacing
 key image files will allow you to customize the icons and logos
@@ -171,11 +144,8 @@ files are referenced by the default collection of web content files
 (described above) that ship with Hyrax.
 |=======================================================================
 
- +
- +
 
-1.2.4 XSL Transform Files
-^^^^^^^^^^^^^^^^^^^^^^^^^
+==== XSL Transform Files
 
 These files are used to transform XML documents used by Hyrax. Some
 transforms operate on source XML from internal documents such as BES
@@ -186,8 +156,7 @@ _All of these XSLT files are software, and should be treated as such.
 They are intimately tied to the functions of Hyrax. The likelihood that
 you can change these files and not break Hyrax is fairly low._
 
- +
- Current Operational XSLT
+===== Current Operational XSLT
 
 [width="100%",cols="20%,20%,20%,20%,20%",]
 |=======================================================================
@@ -238,11 +207,7 @@ transform is used to provide a single location for the Hyrax version
 number shown in the public interface.
 |=======================================================================
 
- +
-
-Experimental XSLT
-
- +
+===== Experimental XSLT
 
 [width="100%",cols="20%,20%,20%,20%,20%",]
 |=======================================================================
@@ -289,22 +254,17 @@ elements have XML _type_ attributes that are not currently recognized by
 any OPeNDAP software. _Not currently in use._
 |=======================================================================
 
- +
- +
 
-2 Software Customization
-------------------------
+== Software Customization
 
-2.1 OLFS Customization
-~~~~~~~~~~~~~~~~~~~~~~
+=== OLFS Customization
 
 http://www.opendap.org/support/bom_sdw/SDW_2r0_OLFSExtensions.ppt[Power
 Point Presentation From the 2007 Software Development Workshop hosted by
 the Australian Bureau of Meteorology.] +
  +
 
-2.2 BES Customization
-~~~~~~~~~~~~~~~~~~~~~
+=== BES Customization
 
 http://www.opendap.org/support/bom_sdw/SDW_4r0_BESExtensibility.ppt[Power
 Point Presentation From the 2007 Software Development Workshop hosted by
