@@ -1,42 +1,10 @@
 Hyrax - Starting and stopping the BES - OPeNDAP Documentation
-=============================================================
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-[[firstHeading]]
-Hyrax - Starting and stopping the BES
--------------------------------------
-
-From OPeNDAP Documentation
-
-Contents
-~~~~~~~~
-
-* link:#The_besctl_command[1 The _besctl_ command]
-* link:#The_most_common_uses_of_besctl[2 The most common uses of
-_besctl_]
-* link:#About_each_of_the_arguments_to_besctl[3 About each of the
-arguments to _besctl_]
-** link:#help[3.1 help]
-** link:#start[3.2 start]
-** link:#stop[3.3 stop]
-** link:#restart[3.4 restart]
-** link:#status[3.5 status]
-** link:#pids[3.6 pids]
-** link:#kill[3.7 kill]
-* link:#About_the_options_accepted_by_besctl[4 About the options
-accepted by _besctl_]
-** link:#server_installation_directory[4.1 server installation
-directory]
-** link:#server_configuration_file[4.2 server configuration file]
-** link:#debugging[4.3 debugging]
-** link:#help_2[4.4 help]
-** link:#port[4.5 port]
-** link:#PID_file[4.6 PID file]
-** link:#SLL_authentication[4.7 SLL authentication]
-** link:#unix_socket[4.8 unix socket]
-** link:#verbose[4.9 verbose]
-
-1 The _besctl_ command
-~~~~~~~~~~~~~~~~~~~~~~
+== The _besctl_ command
 
 The _besctl_ command is used to control the BES daemon. For Hyrax
 version 1.7 and earlier, this the only way to control the BES. Starting
@@ -48,8 +16,7 @@ link:../index.php/Hyrax_-_Administrators_Interface[Hyrax Admin
 Interface] also provides for both hard and soft restarts of Hyrax while
 the _besctl_ command does not.
 
-2 The most common uses of _besctl_
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+== The most common uses of _besctl_
 
 To start and stop the BES, use the _besctl_ command. The besctl command
 has a number of options, but the most important are the _start_ and
@@ -108,33 +75,28 @@ standard error output.
 
 The besctl command accepts a total of seven arguments.
 
-3.1 help
-^^^^^^^^
+=== help
 
 Display help information for the besctl command. The help argument
 displays, among other things, all of the main _centexts_ that can be
 used with the debug (__-d__) option.
 
-3.2 start
-^^^^^^^^^
+=== start
 
 Start the BES
 
-3.3 stop
-^^^^^^^^
+=== stop
 
 Stop the BES. This is a 'hard' stop and any active connections will be
 dropped.
 
-3.4 restart
-^^^^^^^^^^^
+=== restart
 
 This is the same as using the stop and start commands separately. If you
 want to issue a 'soft' restart of Hyrax, use the Hyrax Admin Interface,
 which will be available in Hyrax 1.8.
 
-3.5 status
-^^^^^^^^^^
+=== status
 
 This returns the master BES daemon process id number and the user id
 under which it is running.
@@ -145,8 +107,7 @@ under which it is running.
 The BES is actually a collection of processes; use this argument to find
 the process id numbers for them all.
 
-3.7 kill
-^^^^^^^^
+=== kill
 
 Sometimes the _stop_ or _restart_ arguments don't work. Use this
 argument to stop all the processes. The _stop_ command works by sending
@@ -156,11 +117,9 @@ ignore this signal in certain circumstances. Using the _kill_ argument
 to besctl sends the KILL signal to all of the processes; KILL cannot be
 ignored by a process, so this is certain to stop the server.
 
-4 About the options accepted by _besctl_
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+== About the options accepted by _besctl_
 
-4.1 server installation directory
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=== server installation directory
 
 Use the _-i_ option to force besctl to use a specific directory as the
 server's root directory. This option is useful if you have several BES
@@ -170,8 +129,7 @@ daemons running on one machine.
 -i <directory>
 --------------
 
-4.2 server configuration file
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=== server configuration file
 
 Use the _-c_ option to force the daemon to use a specific _bes.conf_
 file instead of the file found at __server root__/etc/bes/bes.conf
@@ -188,8 +146,7 @@ reads a significant amount of configuration information from the
 __server root__/etc/bes/conf.d directory. You can disable this by
 editing the bes.conf file; look for the _Includes_ directive.
 
-4.3 debugging
-^^^^^^^^^^^^^
+=== debugging
 
 Use the _-d_ option to achieve fine-grained control over the server's
 diagnostic output. The -d option takes a single double-quoted string
@@ -209,8 +166,7 @@ server.
 Use the special context _all_ to see output from all of the contexts.
 This will produce very verbose output.
 
-4.4 help
-^^^^^^^^
+=== help
 
 The _-h_ option prints a short online help message which lists the
 option switches. Note that this option doesn't work when you supply an
@@ -220,8 +176,7 @@ argument like __start__, __stop__, et c., except for __help__.
 -h
 --
 
-4.5 port
-^^^^^^^^
+=== port
 
 Use the _-p_ option to set the port the daemon uses for communication
 with the Hyrax front-end.
@@ -230,8 +185,7 @@ with the Hyrax front-end.
 -p <number>
 -----------
 
-4.6 PID file
-^^^^^^^^^^^^
+=== PID file
 
 Use the _-r_ option to tell the BES where to store the master daemon's
 process id number.
@@ -240,8 +194,7 @@ process id number.
 -r <directory>
 --------------
 
-4.7 SLL authentication
-^^^^^^^^^^^^^^^^^^^^^^
+=== SLL authentication
 
 Use the _-s_ option to force the server to use SSL authentication. This
 option is not used with Hyrax. To configure Hyrax for use with SSL, see
@@ -249,8 +202,7 @@ information about running ht efront-end of the server with SSL. This is
 typically done by securing a Tomcat or Apache server and is standard
 procedure used by many general web sites.
 
-4.8 unix socket
-^^^^^^^^^^^^^^^
+=== unix socket
 
 Use the _-u_ option to force the BES to use a Unix socket for
 communication with the front-end instead of the TCP socket. We rarely
@@ -260,7 +212,7 @@ use this.
 -u <socket>
 -----------
 
-4.9 verbose
+=== verbose
 ^^^^^^^^^^^
 
 use the _-v_ option to see the version of the bes. The server does not

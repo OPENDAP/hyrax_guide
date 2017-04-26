@@ -1,14 +1,10 @@
-Hyrax - Secure Installation Guidelines - OPeNDAP Documentation
-==============================================================
+= Hyrax - Secure Installation Guidelines - OPeNDAP Documentation
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-[[firstHeading]]
-Hyrax - Secure Installation Guidelines
---------------------------------------
-
-From OPeNDAP Documentation
-
-1 Overview
-----------
+== Introduction
 
 Security is an important and unfortunately complex issue. Any computer
 security expert will tell you that the best way to keep your systems
@@ -23,10 +19,7 @@ However, we are not security experts. What follows is a summary of what
 we currently know to be the most effective methods for securing your
 Hyrax installation.
 
- +
-
-2 Best Practices For Secure Installation
-----------------------------------------
+== Best Practices For Secure Installation
 
 *Always use a firewall* - Keep your Hyrax server behind a firewall and
 configure the firewall to only forward requests to the appropriate port
@@ -92,8 +85,7 @@ Configuring/Managing User Realms]
 ** http://tomcat.apache.org/tomcat-5.5-doc/ssl-howto.html[Section 12:
 Configuring SSL]
 
- +
- For Tomcat 6.x see:
+For Tomcat 6.x see:
 
 * http://tomcat.apache.org/tomcat-6.0-doc/index.html[Tomcat 6.x
 Documentation]
@@ -102,8 +94,7 @@ Configuring/Managing User Realms]
 ** http://tomcat.apache.org/tomcat-6.0-doc/ssl-howto.html[Section 12:
 Configuring SSL]
 
- +
- Requiring user authentication and using SSL doesn't actually change
+Requiring user authentication and using SSL doesn't actually change
 Hyrax's vulnerability to attack, but it willl increase the security of
 your server by:
 

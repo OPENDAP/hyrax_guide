@@ -1,54 +1,30 @@
 Satellite Time Series Aggregation - OPeNDAP Documentation
-=========================================================
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-[[firstHeading]]
-Satellite Time Series Aggregation
----------------------------------
-
-From OPeNDAP Documentation
-
-link:../index.php/Use_cases_for_swath_and_time_series_aggregation[<--
-Back]
+== link:../index.php/Use_cases_for_swath_and_time_series_aggregation[<--Back]
 
 *Point Of Contact:* _James_
 
-Contents
-~~~~~~~~
-
-* link:#Description[1 Description]
-* link:#Goal[2 Goal]
-* link:#Summary[3 Summary]
-* link:#Actors[4 Actors]
-* link:#Preconditions[5 Preconditions]
-* link:#Triggers[6 Triggers]
-* link:#Basic_Flow[7 Basic Flow]
-* link:#Alternate_Flow[8 Alternate Flow]
-* link:#Post_Conditions[9 Post Conditions]
-* link:#Activity_Diagram[10 Activity Diagram]
-* link:#Notes[11 Notes]
-* link:#Resources[12 Resources]
-
-1 Description
-~~~~~~~~~~~~~
+== Description
 
 Satellite_Time_Series_1
 
-2 Goal
-~~~~~~
+== Goal
 
 The goal of this use case is, like many of its other parts, the same as
 the Satellite Swath Data use case. The primary difference is that this
 use case covers Time Series data.
 
-3 Summary
-~~~~~~~~~
+== Summary
 
 _Give a summary of the use case to capture the essence of the use case
 (no longer than a page). It provides a quick overview and includes the
 goal and principal actor._
 
-4 Actors
-~~~~~~~~
+== Actors
 
 _List actors, people or things outside the system that either acts on
 the system (primary actors) or is acted on by the system (secondary
@@ -56,24 +32,21 @@ actors). Primary actors are ones that invoke the use case and benefit
 from the result. Identify sensors, models, portals and relevant data
 resources. Identify the primary actor and briefly describe role._
 
-5 Preconditions
-~~~~~~~~~~~~~~~
+== Preconditions
 
 _Here we state any assumptions about the state of the system that must
 be met for the trigger (below) to initiate the use case. Any assumptions
 about other systems can also be stated here, for example, weather
 conditions. List all preconditions._
 
-6 Triggers
-~~~~~~~~~~
+== Triggers
 
 _Here we describe in detail the event or events that brings about the
 execution of this use case. Triggers can be external, temporal, or
 internal. They can be single events or when a set of conditions are met,
 List all triggers and relationships._
 
-7 Basic Flow
-~~~~~~~~~~~~
+== Basic Flow
 
 _Often referred to as the primary scenario or course of events. In the
 basic flow we describe the flow that would be followed if the use case
@@ -83,27 +56,23 @@ gives any browser of the document a quick view of how the system will
 work. Here the flow can be documented as a list, a conversation or as a
 story.(as much as required)_
 
-8 Alternate Flow
-~~~~~~~~~~~~~~~~
+== Alternate Flow
 
 _Here we give any alternate flows that might occur. May include flows
 that involve error conditions. Or flows that fall outside of the basic
 flow._
 
-9 Post Conditions
-~~~~~~~~~~~~~~~~~
+== Post Conditions
 
 _Here we give any conditions that will be true of the state of the
 system after the use case has been completed._
 
-10 Activity Diagram
-~~~~~~~~~~~~~~~~~~~
+== Activity Diagram
 
 _Here a diagram is given to show the flow of events that surrounds the
 use case._
 
-11 Notes
-~~~~~~~~
+== Notes
 
 _There is always some piece of information that is required that has no
 other place to go. This is the place for that information._
@@ -282,15 +251,12 @@ variables/dimensions:
     Float32 Data_4s_Aerosol1064_OD_r_Aer_ir_bot[Data_4s_Time_d_UTCTime_4s = 20302][Data_4s_DS_Cloud_Layer_2 = 2];
 ------------------------------------------------------------------------------------------------------------------------------
 
-12 Resources
-~~~~~~~~~~~~
+== Resources
 
 _In order to support the capabilities described in this Use Case, a set
 of resources must be available and/or configured. These resources
 include data and services, and the systems that offer them. This section
 will call out examples of these resources._
-
- +
 
 [cols=",,,,",]
 |=======================================================================

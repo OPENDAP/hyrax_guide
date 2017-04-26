@@ -1,35 +1,10 @@
-Hyrax - Running bescmdln - OPeNDAP Documentation
-================================================
+= Hyrax - Running bescmdln - OPeNDAP Documentation
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-[[firstHeading]]
-Hyrax - Running bescmdln
-------------------------
-
-From OPeNDAP Documentation
-
-Contents
-~~~~~~~~
-
-* link:#Basic_Commands[1 Basic Commands]
-* link:#Commands_for_Hyrax_testing[2 Commands for Hyrax testing]
-** link:#Poke_around_in_the_RootDirectory_to_see_what.27s_actually_visible_to_the_BES[2.1
-Poke around in the RootDirectory to see what's actually visible to the
-BES]
-*** link:#show_the_root_catalog[2.1.1 show the root catalog]
-*** link:#will_show_the_contents_of_.22pathname.22[2.1.2 will show the
-contents of "pathname"]
-** link:#Get_the_BES_to_return_a_DAP_response_object[2.2 Get the BES to
-return a DAP response object]
-*** link:#bind_the_dataset_to_a_container_in_a_catalog[2.2.1 bind the
-dataset to a container in a catalog]
-*** link:#make_a_definition_so_you_can_access_that_container[2.2.2 make
-a definition so you can access that container]
-*** link:#request_a_particular_response[2.2.3 request a particular
-response]
-* link:#Command_line_options[3 Command line options]
-
-1 Basic Commands
-~~~~~~~~~~~~~~~~
+== Basic Commands
 
 First we will issue some simple commands to make sure that the client is
 talking to the server. First, start the command-line client:
@@ -86,20 +61,17 @@ BESClient > exit
 
 This one will exit out of interactive mode.
 
-2 Commands for Hyrax testing
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+== Commands for Hyrax testing
 
-2.1 Poke around in the RootDirectory to see what's actually visible to
-the BES
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=== Poke around in the RootDirectory to see what's actually visible to the BES
 
-2.1.1 show the root catalog
+==== Show the root catalog
 
 -------------
 show catalog;
 -------------
 
-2.1.2 will show the contents of "pathname"
+==== ...will show the contents of "pathname"
 
 For example, show catalog for "/data/nc"; will show all the stuff in the
 /data/nc directory.
@@ -108,31 +80,29 @@ For example, show catalog for "/data/nc"; will show all the stuff in the
 show catalog for "pathname";
 ----------------------------
 
-2.2 Get the BES to return a DAP response object
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=== Get the BES to return a DAP response object
 
 You need three commands to do this:
 
-2.2.1 bind the dataset to a container in a catalog
+==== Bind the dataset to a container in a catalog
 
 --------------------------------------------------
 set container in catalog values c,/data/nc/feb.nc;
 --------------------------------------------------
 
-2.2.2 make a definition so you can access that container
+==== Make a definition so you can access that container
 
 --------------
 define d as c;
 --------------
 
-2.2.3 request a particular response
+==== Request a particular response
 
 --------------
 get ddx for d;
 --------------
 
-3 Command line options
-~~~~~~~~~~~~~~~~~~~~~~
+== Command line options
 
 Other command line options available to the bescmdln program:
 
