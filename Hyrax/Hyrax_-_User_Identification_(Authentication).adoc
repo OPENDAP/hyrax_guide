@@ -1,61 +1,11 @@
-Hyrax - User Identification (Authentication) - OPeNDAP Documentation
-====================================================================
+= Hyrax - User Identification (Authentication) - OPeNDAP Documentation
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-[[firstHeading]]
-Hyrax - User Identification (Authentication)
---------------------------------------------
 
-From OPeNDAP Documentation
-
- +
-
-Contents
-~~~~~~~~
-
-* link:#Overview[1 Overview]
-* link:#Terms[2 Terms]
-* link:#Apache_httpd_Authentication_Services_Configuration[3 Apache
-_httpd_ Authentication Services Configuration]
-** #First:_Configure_Apache_httpd_and_Tomcat_to_work_together[3.1 First:
-Configure Apache httpd and Tomcat to work together]
-*** link:#Configure_Apache[3.1.1 Configure Apache]
-*** link:#Taking_advantage_of_Apache_Logging[3.1.2 Taking advantage of
-Apache Logging]
-*** link:#Add_SSL_Capabilities_to_Apache[3.1.3 Add SSL Capabilities to
-Apache]
-*** link:#Configure_Tomcat_.28Hyrax.29[3.1.4 Configure Tomcat (Hyrax)]
-** #Second:_Configure_Apache_httpd_to_authenticate[3.2 Second: Configure
-Apache httpd to authenticate]
-*** link:#LDAP_.28mod_ldap.2C_mod_authnz_ldap.29[3.2.1 LDAP (mod_ldap,
-mod_authnz_ldap)]
-**** link:#LDAP_Authorization_Constraints[3.2.1.1 LDAP Authorization
-Constraints]
-*** link:#Shibboleth_.28mod_shib.29[3.2.2 Shibboleth (mod_shib)]
-**** link:#Installation[3.2.2.1 Installation]
-**** link:#Configuration[3.2.2.2 Configuration]
-*** link:#URS_OAuth2_.28mod_auth_urs.29[3.2.3 URS OAuth2 (mod_auth_urs)]
-**** link:#Prerequisites_.26_Requirements[3.2.3.1 Prerequisites &
-Requirements]
-**** link:#Building_mod_auth_urs[3.2.3.2 Building mod_auth_urs]
-**** link:#Obtain_URS_Application_Credentials[3.2.3.3 Obtain URS
-Application Credentials]
-**** link:#Approve_your_URS_Application[3.2.3.4 Approve your URS
-Application]
-**** link:#Compute_the_Authorization_Code[3.2.3.5 Compute the
-Authorization Code]
-**** link:#Configuration_2[3.2.3.6 Configuration]
-*** link:#Logging_URS_information[3.2.4 Logging URS information]
-** link:#Common_Problems[3.3 Common Problems]
-*** link:#Clients_keep_getting_Internal_Server_Error[3.3.1 Clients keep
-getting *Internal Server Error*]
-* link:#Tomcat_Authentication_Services_Configuration[4 Tomcat
-Authentication Services Configuration]
-** link:#LDAP[4.1 LDAP]
-** link:#Shibboleth[4.2 Shibboleth]
-** link:#URS_OAuth2[4.3 URS OAuth2]
-
-1 Overview
-~~~~~~~~~~
+== Overview
 
 This document is intended to help those that have been asked to deploy
 Hyrax into an environment where authentication of users is required. In
@@ -66,8 +16,7 @@ a standalone instance of Tomcat and will be needing to configure it to
 use one of the supported authentication services. This document means to
 address both situations.
 
-2 Terms
-~~~~~~~
+== Terms
 
  http://en.wikipedia.org/wiki/Authentication[Authentication] ::
   This is the process of confirming the identity of the user. The end
@@ -76,8 +25,7 @@ address both situations.
   ServletAPI (Tomcat servlets) used to trigger authorization policy
   chains or may be logged along with relevant request information.
 
- http://en.wikipedia.org/wiki/Identity_provider[Identity Provider (IdP)]
-::
+ http://en.wikipedia.org/wiki/Identity_provider[Identity Provider (IdP)] ::
   Also known as an **Identity Assertion Provider**, an *Identity
   Provider (IdP)* is a service that provides authentication and identity
   information services. An *IdP* is a kind of provider that creates,
@@ -100,8 +48,7 @@ http://www.thedotnetfactory.com/learningcenter/technologies/service-identity-pro
 Providers, Identity Providers & Security Token Services explained] for
 more.
 
-3 Apache _httpd_ Authentication Services Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+== Apache _httpd_ Authentication Services Configuration
 
 There are many authentication methods available for use with our friend
 _httpd_ and each of the three illustrated here has a unique installation
@@ -116,19 +63,17 @@ Shibboleth, and NASA URS IdP configurations for Apache __httpd__.
   together and define and then define a security constraint for _httpd_
   that enforces a login requirement (valid-user) for Hyrax.
 
-3.1 First: Configure Apache httpd and Tomcat to work together
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=== First: Configure Apache httpd and Tomcat to work together
 
 In this part we configure Tomcat and Apache _httpd_ to work together so
 that _httpd_ can provide proxy and authentication services for Hyrax.
 
-3.1.1 Configure Apache
-++++++++++++++++++++++
+==== Configure Apache
 
 In `/etc/httpd/conf.d` create a file called *hyrax.conf* . Edit the file
 and add following:
 
-code,de1------------------------------------------------------ code,de1
+------------------------------------------------------ 
 <Proxy *>
     AddDefaultCharset Off
     Order deny,allow
@@ -147,8 +92,7 @@ This will expose the web application "opendap" (aka Hyrax) through
 Apache. Make sure that the AJP URLs both point to your deployment of
 Hyrax.
 
-3.1.2 Taking advantage of Apache Logging
-++++++++++++++++++++++++++++++++++++++++
+==== Taking advantage of Apache Logging
 
 Often when authentication is needed, it is also necessary to log _who_
 has logged in and _what_ they have accessed. Apache has a very flexible
@@ -159,8 +103,7 @@ information about UIDs, etc. See the sections below for information on
 configuring Apache's log to record that kind of technology-specific
 data.
 
-3.1.3 Add SSL Capabilities to Apache
-++++++++++++++++++++++++++++++++++++
+==== Add SSL Capabilities to Apache
 
 This step is not absolutely necessary, but it's quite likely you will
 want to do this, particularly if you're going to use _https_ to access
@@ -178,8 +121,7 @@ install mod_ssl_
 Next make the needed certs. Here's how to make and install a self-signed
 cert for CentOS 6:
 
-code,de1------------------------------------------------------------------
-code,de1
+------------------------------------------------------------------
 # Generate private key 
 openssl genrsa -out ca.key 2048 
  
@@ -205,8 +147,7 @@ Configure httpd to use the newly installed certs and restart:
 NB: More complete instructions can be found here:
 http://wiki.centos.org/HowTos/Https
 
-3.1.4 Configure Tomcat (Hyrax)
-++++++++++++++++++++++++++++++
+==== Configure Tomcat (Hyrax)
 
 The primary result of the Apache authentication (the _uid_ string) must
 be correctly transmitted to Tomcat. On the Tomcat side we have to open
@@ -218,7 +159,7 @@ $CATALINA_HOME/conf/server.xml
 Edit the server.xml file, and find the AJP Connector element on port
 8009. It should look something like this:
 
-code,de1-------------------------------------------- code,de1
+-------------------------------------------- 
 <Connector port="8009" protocol="AJP/1.3" />
 --------------------------------------------
 
@@ -240,7 +181,7 @@ below for an example.
 When you are finished making changes, your connector should look
 something like this:
 
-code,de1------------------------------------- code,de1
+------------------------------------- 
     <Connector 
         port="8009" 
         protocol="AJP/1.3" 
@@ -293,8 +234,7 @@ HttpServletRequest.getAttribute("ATTRIBUTE NAME"). Note that
 HttpServletRequest.getAttributeNames() may not list all available
 attributes – you must request each attribute individually by name.)
 
-3.2 Second: Configure Apache httpd to authenticate
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=== Second: Configure Apache httpd to authenticate
 
 Once Tomcat and Apache httpd are working together all that remains is to
 configure a security restraint on the Hyrax web application and specify
@@ -306,8 +246,8 @@ define a security constraint on Hyrax inside the chain of *httpd.conf*
 files. The most simple example, that you want all users of the Hyrax
 instance to be authenticated, might look something like this:
 
-code,de1-----------------------------------------------------------------------------------------
-code,de1
+-----------------------------------------------------------------------------------------
+
 # This is a simplified generic configuration example; see the sections below for the real
 # examples for LDAP, Shibboleth or URS/OAuth2
 <Location /opendap>
@@ -323,10 +263,9 @@ like __Basic__, _UrsOAuth2_ or __shibboleth__.
 Complete examples for LDAP, URS/OAuth2, and Shibboleth IdPs are
 presented in the following sections.
 
-3.2.1 LDAP
+==== LDAP
 (http://httpd.apache.org/docs/2.2/mod/mod_ldap.html[mod_ldap],
 http://httpd.apache.org/docs/2.2/mod/mod_authnz_ldap.html[mod_authnz_ldap])
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 *NB:* You must
 *#First:_Configure_Apache_httpd_and_Tomcat_to_work_together[configure
@@ -356,8 +295,8 @@ Create and edit the file `/etc/httpd/conf.d/ldap.conf`.
 
 Add the following at the end of the file:
 
-code,de1--------------------------------------------------------------------------------------------
-code,de1
+--------------------------------------------------------------------------------------------
+
 # You may need to uncomment these two lines...
 # LoadModule ldap_module modules/mod_ldap.so
 # LoadModule authnz_ldap_module modules/mod_authnz_ldap.so
@@ -500,9 +439,7 @@ What's happening here? Let's look at each of the components of the
   are coming from a host address that appears in an *`Allow from`*
   directive.
 
- +
-
-3.2.1.1 LDAP Authorization Constraints
+===== LDAP Authorization Constraints
 
 The Apache module
 http://httpd.apache.org/docs/2.2/mod/mod_authnz_ldap.html[mod_authnz_ldap]
@@ -510,7 +447,7 @@ provides a fairly rich set of "`Require`" directives which can be used
 to control (authorize) access to resources serviced by Apache. In the
 example above the *`Require`* directive is quite simple:
 
-code,de1--------------------- code,de1
+--------------------- 
    Require valid-user
 ---------------------
 
@@ -530,32 +467,28 @@ Apache project].
 Grant access to anyone in the _`mathematicians`_ group in the
 organization __`example.com`__.
 
-code,de1--------------------------------------------------------------
-code,de1
+--------------------------------------------------------------
+
     AuthLDAPURL ldap://ldap.forumsys.com:389/dc=example,dc=com
     AuthLDAPGroupAttributeIsDN on
     Require ldap-group ou=mathematicians,dc=example,dc=com
 --------------------------------------------------------------
 
- +
-
 Grant access to anyone who has an LDAP attribute _`homeDirectory`_ whose
 value is __`home`__.
 
-code,de1--------------------------------------------------------------
-code,de1
+--------------------------------------------------------------
+
     AuthLDAPURL ldap://ldap.forumsys.com:389/dc=example,dc=com
     Require ldap-attribute homeDirectory=home
 --------------------------------------------------------------
-
- +
 
 Combine the previous two examples to grant access to anyone who has an
 LDAP attribute _`homeDirectory`_ whose value is _`home`_ and to anyone
 in the _`mathematicians`_ group.
 
-code,de1--------------------------------------------------------------
-code,de1
+--------------------------------------------------------------
+
     AuthLDAPURL ldap://ldap.forumsys.com:389/dc=example,dc=com
     AuthLDAPGroupAttributeIsDN on
     Require ldap-group ou=mathematicians,dc=example,dc=com
@@ -567,8 +500,7 @@ contents of the LDAP service against which you are authenticating, and
 the richness of the group and attribute entries will in a large part
 determine the granularity of access control you will be able to provide.
 
-3.2.2 Shibboleth (mod_shib)
-+++++++++++++++++++++++++++
+==== Shibboleth (mod_shib)
 
 *NB:* You must
 *#First:_Configure_Apache_httpd_and_Tomcat_to_work_together[configure
@@ -584,7 +516,7 @@ https://wiki.shibboleth.net/confluence/display/SHIB2/NativeSPJavaInstall[follow
 the instructions for a Native Java Install] and as you read, remember -
 Hyrax does not use either Spring or Grails.
 
-3.2.2.1 Installation
+===== Installation
 
 The logical starting point for this is with the
 https://wiki.shibboleth.net/confluence/display/SHIB2/NativeSPJavaInstall[Native
@@ -617,7 +549,7 @@ Return to the
 https://wiki.shibboleth.net/confluence/display/SHIB2/NativeSPJavaInstall[Native
 Java SP Installation] and complete the instructions there.
 
-3.2.2.2 Configuration
+===== Configuration
 
 Once the SP installation is completed go to the Native SP Configuration
 page:
@@ -643,7 +575,7 @@ the Module for Authentication]
 
 The Shibboleth instructions should have had you add something like this:
 
-code,de1------------------------------------- code,de1
+------------------------------------- 
 <Location /opendap>
   AuthType shibboleth
   ShibRequestSetting requireSession 1
@@ -656,7 +588,7 @@ part of Hyrax which may be exactly what you want. If you want more fine
 grained control you may want use multiple `Location` elements with
 different `require` attributes. For example:
 
-code,de1------------------------------------- code,de1
+------------------------------------- 
 <Location /opendap>
   AuthType shibboleth
   ShibCompatWith24 On
@@ -690,8 +622,7 @@ For more examples and better understanding see the
 https://wiki.shibboleth.net/confluence/display/SHIB2/NativeSPApacheConfig#NativeSPApacheConfig-AuthConfigOptions[Apache
 Configuration section of the Shibboleth wiki.]
 
-3.2.3 URS OAuth2 (mod_auth_urs)
-+++++++++++++++++++++++++++++++
+==== URS OAuth2 (mod_auth_urs)
 
 URS/OAuth2 is a Single Sign On (SSO) authentication flow that utilizes
 HTTP redirects to guide client applications requesting an authenticated
@@ -713,9 +644,7 @@ different running instance of _mod_auth_urs_ will need to be registered
 in order to successfully have the server redirect clients back from
 their authentication activity.
 
- +
-
-3.2.3.1 Prerequisites & Requirements
+===== Prerequisites & Requirements
 
 * You must be a registered URS user in order to perform this
 configuration. (First. Do this first.)
@@ -733,9 +662,7 @@ Apache and Tomcat (Hyrax) to work together]**.
 * You will need the public facing domain name or IP address of your
 server.
 
- +
-
-3.2.3.2 Building mod_auth_urs
+===== Building mod_auth_urs
 
 The
 https://wiki.earthdata.nasa.gov/display/URSFOUR/Apache+URS+Authentication+Module[documentation
@@ -774,7 +701,7 @@ installs libraries into apache.
 apxs -i -c -n mod_auth_urs mod_auth_urs.c mod_auth_urs_cfg.c mod_auth_urs_session.c mod_auth_urs_ssl.c mod_auth_urs_http.c mod_auth_urs_json.c -lssl
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
-3.2.3.3 Obtain URS Application Credentials
+===== Obtain URS Application Credentials
 
 * With your browser, navigate to your URS profile page.
 * Click the *My Applications* tab.
@@ -788,7 +715,7 @@ later.
 ** Make special note of the Application Username (UID) and password that
 you submit and the _ClientID_ generated by the URS system.
 
-This information is required in section *3.2.3.5 Compute the
+This information is required in section *Compute the
 Authorization Code* – the auth code is the hex conversion of the
 application UID and password.
 
@@ -810,7 +737,7 @@ activated. (The last time I did this it took ~20 minutes to receive the
 activation notification. ../index.php/User:Ndp[ndp]
 (../index.php?title=User_talk:Ndp&action=edit&redlink=1[talk]))
 
-3.2.3.4 Approve your URS Application
+===== Approve your URS Application
 
 Once your application is marked *Active* you will need to _approve_ it
 so that the URS system knows that you are OK with the application having
@@ -847,7 +774,7 @@ see your new application on the list of **Approved Applications**.
 
 URS Approved Applications
 
-3.2.3.5 Compute the Authorization Code
+===== Compute the Authorization Code
 
 The last thing to do before configuring _mod_auth_urs_ is to compute the
 authorization code for your freshly registered application. To do this
@@ -857,20 +784,20 @@ number of ways to generate the Authorization Code.
 
 Use a simple perl script:
 
-code,de1--------------------------------------------------------------
-code,de1
+--------------------------------------------------------------
+
 perl -e 'use MIME::Base64; print encode_base64("<uid>:<pw>");'
 --------------------------------------------------------------
 
 Or php script:
 
-code,de1------------------------------------------ code,de1
+------------------------------------------ 
 php -r 'echo base64_encode("<uid>:<pw>");'
 ------------------------------------------
 
 Or shell script:
 
-code,de1----------------------------- code,de1
+----------------------------- 
 echo -n "<uid>:<pw>" | base64
 -----------------------------
 
@@ -879,7 +806,7 @@ password associated with your freshly registered application. The
 resulting string of base64 encoded stuff is your application's URS
 authorization code, aka UrsAuthCode in __mod_auth_urs__.
 
-3.2.3.6 Configuration
+===== Configuration
 
 The instructions for configuring the Apache module *mod_auth_urs* can be
 found here:
@@ -916,11 +843,10 @@ appropriate page on your server for failed authentication:
 
 * UrsAccessErrorUrl
 
- +
  Example _urs.conf_ file for __httpd__:
 
-code,de1-----------------------------------------------------------------------------------
-code,de1
+-----------------------------------------------------------------------------------
+
 # Load the URS module
 LoadModule auth_urs_module    modules/mod_auth_urs.so
 #
@@ -1018,21 +944,20 @@ proxy for Tomcat]
 Simply restart Apache and Hyrax is ready to be accessed with your URS
 credentials.
 
-3.2.4 Logging URS information
-+++++++++++++++++++++++++++++
+==== Logging URS information
 
 It is possible to get the Apache module to pull user profile information
 into the request environment using the UrsUserProfileEnv configuration
 directive:
 
-code,de1----------------------------------------- code,de1
+----------------------------------------- 
 UrsUserProfileEnv email_address URS_EMAIL
 UrsUserProfileEnv user_type URS_TYPE
 -----------------------------------------
 
 This can be added to a custom log format by including:
 
-code,de1------------------------------------------------------- code,de1
+------------------------------------------------------- 
 LogFormat ... %{URS_EMAIL}e ... \"%{URS_TYPE}e\" ...'''
 -------------------------------------------------------
 
@@ -1044,11 +969,9 @@ See the full Apache
 http://httpd.apache.org/docs/2.2/mod/mod_log_config.html[LogFormat
 documentation] for more information.
 
-3.3 Common Problems
-^^^^^^^^^^^^^^^^^^^
+=== Common Problems
 
-3.3.1 Clients keep getting *Internal Server Error*
-++++++++++++++++++++++++++++++++++++++++++++++++++
+==== Clients keep getting *Internal Server Error*
 
  Problem ::
   Everything seems to work fine but when the browser client is
@@ -1066,7 +989,7 @@ This is often caused by the Apache httpd user not having read/write
 permission on the directory specified by *UrsSessionStorePath* in the
 httpd configuration:
 
-code,de1---------------------------------------- code,de1
+---------------------------------------- 
 UrsSessionStorePath /var/tmp/urs/session
 ----------------------------------------
 
@@ -1074,8 +997,7 @@ Solution ::
   Check and repair the permissions of the directory specified by
   *UrsSessionStorePath* as needed.
 
-4 Tomcat Authentication Services Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+== Tomcat Authentication Services Configuration
 
 Tomcat provides a number of authentication Realm implementations
 including the JNDIRealm which provides LDAP SP services for Tomcat.
@@ -1084,8 +1006,7 @@ it's an open question for the author if there could be one for
 Shibboleth or OAuth2 given the way that these protocols utilize 302
 redirects away from the origin service.
 
-4.1 LDAP
-^^^^^^^^
+=== LDAP
 
 The
 http://tomcat.apache.org/tomcat-7.0-doc/realm-howto.html#JNDIRealm[instructions
@@ -1101,8 +1022,8 @@ http://forumsys.com[the public LDAP service provided by ForumSys].
 
 In the _server.xml_ file we added a JNDI Realm element:
 
-code,de1---------------------------------------------------------
-code,de1
+---------------------------------------------------------
+
 <Realm 
     className="org.apache.catalina.realm.JNDIRealm" 
     connectionURL="ldap://ldap.forumsys.com:389"
@@ -1122,8 +1043,8 @@ Systems test LDAP server].
 Then in the _opendap_ web application we added the following security
 constraint to the _WEB-INF/web.xml_ file:
 
-code,de1---------------------------------------------------------------------------------------------------------
-code,de1
+---------------------------------------------------------------------------------------------------------
+
 <security-constraint>
     <web-resource-collection>
          <web-resource-name>Hyrax Server</web-resource-name>
@@ -1140,20 +1061,17 @@ code,de1
 </security-constraint>
 ---------------------------------------------------------------------------------------------------------
 
- +
  No changes were made to the _$CATALINA_HOME/conf/tomcat_users.xml_
 file.
 
-4.2 Shibboleth
-^^^^^^^^^^^^^^
+=== Shibboleth
 
 There is no actual Shibboleth integration with Tomcat beyond what is
 link:#Shibboleth_.28mod_shib.29[provided by running the Apache _httpd_
 module mod_shib and connecting Tomcat to _httpd_ using AJP as described
 in the Apache/Shibboleth section on this page.]
 
-4.3 URS OAuth2
-^^^^^^^^^^^^^^
+=== URS OAuth2
 
 There is no actual URS integration with Tomcat beyond what is
 link:#URS_OAuth2_.28mod_auth_urs.29[provided by running the Apache httpd
