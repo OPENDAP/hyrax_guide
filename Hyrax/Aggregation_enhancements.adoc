@@ -1,12 +1,11 @@
-Aggregation enhancements - OPeNDAP Documentation
-================================================
+= Aggregation enhancements - OPeNDAP Documentation
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-[[firstHeading]]
-Aggregation enhancements
-------------------------
-
-From OPeNDAP Documentation
-
+== Introducdtion
+ 
 In response to requests from NASA, and with their support, we have added
 two new kinds of aggregation to Hyrax. Both of these aggregation
 operations provide a way for client software to specify the granules
@@ -19,33 +18,7 @@ intended for use with search interfaces that have knowledge of the
 individual files that make up typical satellite data sets (often called
 a __dataset inventory__).
 
-Contents
-~~~~~~~~
-
-* link:#Overview_of_the_new_capability[1 Overview of the new capability]
-** link:#Intended_audience[1.1 Intended audience]
-** link:#Accessing_the_Aggregation_Services[1.2 Accessing the
-Aggregation Services]
-*** link:#How_to_use_these_parameters[1.2.1 How to use these parameters]
-*** link:#Response_formats[1.2.2 Response formats]
-*** link:#More_about_var[1.2.3 More about _var_]
-*** link:#More_about_bbox[1.2.4 More about _bbox_]
-**** link:#bbox_.26_zip-formatted_returns[1.2.4.1 _bbox & zip-formatted
-returns_]
-**** link:#bbox_.26_the_csv_response[1.2.4.2 _bbox & the csv response_]
-** link:#Performance_and_Implementation[1.3 Performance and
-Implementation]
-*** link:#Implementation[1.3.1 Implementation]
-*** link:#Design[1.3.2 Design]
-** link:#Examples[1.4 Examples]
-*** link:#Version[1.4.1 Version]
-*** link:#Returning_an_Archive[1.4.2 Returning an Archive]
-*** link:#Returning_a_Table[1.4.3 Returning a Table]
-** link:#Potential_Extensions_to_the_Service[1.5 Potential Extensions to
-the Service]
-
-1 Overview of the new capability
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+== Overview of the new capability
 
 **Summary**: This service provides value-based subsetting for satellite
 __swath data__. It's applicable to lots of other kinds of data, but
@@ -69,8 +42,7 @@ the extent possible (the underlying data files may lack information CF
 from N files will be returned in one ASCII CSV response. These values
 can be easily assimilated by database systems, Excel and other tools.
 
-1.1 Intended audience
-^^^^^^^^^^^^^^^^^^^^^
+=== Intended audience
 
 This service was originally intended for software developers working
 data search tools who need to be able to return results that encompass
@@ -78,8 +50,7 @@ hundreds or thousands of granules. It works best from a programmatic
 interface, but it's certainly open to end users, see the examples using
 curl for one way to access the service.
 
-1.2 Accessing the Aggregation Services
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=== Accessing the Aggregation Services
 
 This 'service' is accessed using HTTP's GET or POST methods. In this
 documentation I will describe how to use POST to send information, but
@@ -111,7 +82,7 @@ bbox::
   a given variable. Like __var__, this applies only to __netcdf3__,
   __netcdf4__, __ascii__, or _csv_
 
-1.2.1 How to use these parameters
+==== How to use these parameters
 
 The _operation_ and _file_ parameters are the key to the service. By
 listing multiple files, you can explicitly control which files are
@@ -132,7 +103,7 @@ true of the _bbox_ parameter. Furthermore, these parameters act
 independently, so a request can use one value for _var_ and _N_ values
 for _bbox_ or vice versa.
 
-1.2.2 Response formats
+==== Response formats
 
 This service will either return a collection of files bundled in a _zip
 archive_ or it will return a since CSV/text file. When _operation_ is
@@ -144,7 +115,7 @@ format.
 
 For the _csv_ operation, the response is a single CSV/text file.
 
-1.2.3 More about _var_
+==== More about _var_
 
 The _var_ parameter is a comma-separated list of variables in the files
 listed in the request. Each of the variables must be named just as it is
@@ -165,7 +136,7 @@ _getdap -d <url>_ or
 
 _getdap4 -d <url>_
 
-1.2.4 More about _bbox_
+==== More about _bbox_
 
 The _bbox_ parameter is probably the most powerful of the parameters in
 terms of its ability to select specific data values. It has two
@@ -215,7 +186,7 @@ The next two sections describe how the return format (zipped collection
 of files or CSV table of data) affects the way the _bbox_ subset request
 is interpreted.
 
-1.2.4.1 _bbox & zip-formatted returns_
+===== _bbox & zip-formatted returns_
 
 When the Aggregation Service is asked to provide a zipped collection of
 files (__operation__ = __netcdf3__, _netcdf4_ or __ascii__), the
@@ -236,7 +207,7 @@ bounding box for the set of variables is the union for the same reason.
 Hyrax contains server functions that can form both the union and
 intersection of several bounding boxes returned by the _bbox_ function.
 
-1.2.4.2 _bbox & the csv response_
+===== _bbox & the csv response_
 
 The _csv_ response format is treated differently because the data values
 are returned in a table and not arrays. Because of this, the
@@ -278,15 +249,14 @@ include four columns, one each for Latitude, Longitude and
 Corrected_Optical_Depth and a fourth for Solution_3_Land where the value
 would be the index number.
 
-1.3 Performance and Implementation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=== Performance and Implementation
 
 Performance is linear in terms of the number of granules. The response
 is streamed as it is built, so even very large responses use only a
 little memory on the server. Of course, that won't be the case on the
 client...
 
-1.3.1 Implementation
+==== Implementation
 
 The interface described here is built using a Servlet that talks to the
 Hyrax BES - a C/C++ Unix daemon that reads and processes data building
@@ -318,7 +288,7 @@ tabular::
 It is possible to access the essential functionality of the Aggregation
 Service using these functions.
 
-1.3.2 Design
+==== Design
 
 The design of the
 link:../index.php/Use_cases_for_swath_and_time_series_aggregation[Aggregation
@@ -330,8 +300,7 @@ https://github.com/OPENDAP/olfs/tree/master/src/opendap/aggregation[aggregation]
 and https://github.com/OPENDAP/bes/tree/master/functions[functions]
 parts of those repos, respectively.
 
-1.4 Examples
-^^^^^^^^^^^^
+=== Examples
 
 This section lists a number of examples of the aggregation service. We
 have only a handful of data on our test server, but these examples
@@ -339,15 +308,14 @@ should work. Because the aggregation service is a machine interface, the
 examples require that use of curl and text files that contain the POST
 requests (except for the version operation).
 
-1.4.1 Version
+==== Version
 
 Request::
   http://test.opendap.org/dap/aggregation/?&operation=version
 
 Returns::
 
-code,de1------------------------------------------------------------------------
-code,de1
+------------------------------------------------------------------------
 Aggregation Interface Version: 1.1
 <?xml version="1.0" encoding="UTF-8"?>
 <response xmlns="http://xml.opendap.org/ns/bes/1.0#" reqID="[ajp-bio-…">
@@ -361,9 +329,7 @@ Aggregation Interface Version: 1.1
 </response>
 ------------------------------------------------------------------------
 
- +
-
-1.4.2 Returning an Archive
+==== Returning an Archive
 
 *NB:* To get these examples, clone https://github.com/opendap/olfs, then
 cd to __resources/aggregation/tests/demo__.
@@ -379,8 +345,7 @@ In the OLFS repo on github, you'll see a file named
 __resources/aggregation/tests/demo/short_names/d1_netcdf3_variable_subset.txt__.
 Here's what it looks like:
 
-code,de1-------------------------------------------------------------------
-code,de1
+-------------------------------------------------------------------
 edamame:demo jimg$ more short_names/d1_netcdf3_variable_subset.txt 
 &operation=netcdf3
 &var=Latitude,Longitude,Optical_Depth_Land_And_Ocean
@@ -403,8 +368,7 @@ constraints).
 
 To send this command to the service, use _curl_ like this:
 
-code,de1-----------------------------------------------------------------------------------------------------------------------------------
-code,de1
+-----------------------------------------------------------------------------------------------------------------------------------
 edamame:demo jimg$ curl -X POST -d @short_names/d1_netcdf3_variable_subset.txt http://test.opendap.org/opendap/aggregation > d1.zip
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current 
                                                      Dload  Upload   Total   Spent    Left  Speed
@@ -418,7 +382,7 @@ list its contents
 verifying that it contains the files we expect.
 -----------------------------------------------
 
-code,de1------------------------------------------------------- code,de1
+-------------------------------------------------------
 edamame:demo jimg$ unzip -t d1.zip 
 Archive:  d1.zip
     testing: MOD04_L2.A2015021.0020.051.NRT.hdf.nc   OK
@@ -427,7 +391,7 @@ Archive:  d1.zip
 No errors detected in compressed data of d1.zip.
 -------------------------------------------------------
 
-1.4.3 Returning a Table
+==== Returning a Table
 
 In this example, a request is made for data from the same three
 variables from the same files, but the data are returned in a single
@@ -439,8 +403,7 @@ _&operation_ or _csv_ and also adds a _&bbox_ command, the latter
 provides a way to specify filtering based on latitude/longitude bounding
 boxes.
 
-code,de1----------------------------------------------------------
-code,de1
+----------------------------------------------------------
 edamame:demo jimg$ more short_names/d3_csv_subset.txt 
 &operation=csv
 &var=Latitude,Longitude,Image_Optical_Depth_Land_And_Ocean
@@ -452,8 +415,7 @@ edamame:demo jimg$ more short_names/d3_csv_subset.txt
 
 The command is sent using '__curl__ as before:
 
-code,de1----------------------------------------------------------------------------------------------------------------------
-code,de1
+----------------------------------------------------------------------------------------------------------------------
 edamame:demo jimg$ curl -X POST -d @short_names/d3_csv_subset.txt http://test.opendap.org/opendap/aggregation > d3.csv
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
@@ -462,8 +424,7 @@ edamame:demo jimg$ curl -X POST -d @short_names/d3_csv_subset.txt http://test.op
 
 However, the response is now an ASCII table:
 
-code,de1-------------------------------------------------------------------------
-code,de1
+-------------------------------------------------------------------------
 edamame:demo jimg$ more d3.csv
 Dataset: function_result_MOD04_L2.A2015021.0020.051.NRT.hdf
 table.Latitude, table.Longitude, table.Image_Optical_Depth_Land_And_Ocean
@@ -479,8 +440,7 @@ table.Latitude, table.Longitude, table.Image_Optical_Depth_Land_And_Ocean
 ...
 -------------------------------------------------------------------------
 
-1.5 Potential Extensions to the Service
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=== Potential Extensions to the Service
 
 This service was purpose-built for the NASA CMR system, but it could be
 extended in several useful ways.

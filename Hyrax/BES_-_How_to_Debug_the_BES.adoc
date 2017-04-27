@@ -1,30 +1,17 @@
-BES - How to Debug the BES - OPeNDAP Documentation
-==================================================
+= BES - How to Debug the BES - OPeNDAP Documentation
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-[[firstHeading]]
-BES - How to Debug the BES
---------------------------
-
-From OPeNDAP Documentation
-
-Contents
-~~~~~~~~
-
-* link:#Tricks[1 Tricks]
-* link:#Use_the_BESDEBUG_Macro[2 Use the BESDEBUG Macro]
-* link:#Start_the_BES_with_Debuging_on[3 Start the BES with Debuging on]
-* link:#Send_Commands_to_the_BES[4 Send Commands to the BES]
-
-1 Tricks
-~~~~~~~~
+== Tricks
 
 * Set the beslistener to run in single, not multiprocess, mode. Do this
 in the _bes.conf_ file (use the _BES.ProcessManagerMethod_ parameter).
 * Build the bes using _developer_ mode (so it won't need to be root,
 among other things). Do this with _./configure --enable-developer_
 
-2 Use the BESDEBUG Macro
-~~~~~~~~~~~~~~~~~~~~~~~~
+== Use the BESDEBUG Macro
 
 Use the macro _BESDEBUG_ defined in __BESDebug.h__.
 
@@ -44,14 +31,13 @@ BESDEBUG( "h4", "File Id:" << _file_id << endl);
 
 Notes:
 
-1.  You'll need to include the BES_DAP_LIBS when you link an executable
+. You'll need to include the BES_DAP_LIBS when you link an executable
 or a libtool library and you'll need BES_CPPFLAGS when you compile (for
 libdap code)
-2.  The trailing semicolon is not needed but including it makes
+. The trailing semicolon is not needed but including it makes
 automatic code indent software (eclipse, emacs, ...) much happier.
 
-3 Start the BES with Debuging on
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+== Start the BES with Debuging on
 
 Use the _-d_ option to _besctl_ and give _-d_ one argument, a string,
 with two parts: "<output sink>,<context>". For example,
@@ -129,8 +115,7 @@ USAGE: besctl (help|start|stop|restart|status) [options]
 where [options] are passed to besdaemon; see besdaemon -h
 --------------------------------------------------------------------------------------------------------------------------
 
-4 Send Commands to the BES
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+== Send Commands to the BES
 
 Now run some commands using bescmdln. You should see debugging being
 output to either cerr, or the file you specified when you started the
