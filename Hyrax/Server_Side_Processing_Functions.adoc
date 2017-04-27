@@ -1,46 +1,12 @@
-Server Side Processing Functions - OPeNDAP Documentation
-========================================================
+= Server Side Processing Functions - OPeNDAP Documentation
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-[[firstHeading]]
-Server Side Processing Functions
---------------------------------
+== Server functions, invocation and composition
 
-From OPeNDAP Documentation
-
-Contents
-~~~~~~~~
-
-* link:#Server_functions.2C_invocation_and_composition[1 Server
-functions, invocation and composition]
-** link:#Calling_Syntax[1.1 Calling Syntax]
-** link:#Function_Composition[1.2 Function Composition]
-* link:#Server_Functions_in_the_BES_functions_Module[2 Server Functions
-in the _BES functions_ Module]
-** link:#geogrid.28.29[2.1 geogrid()]
-** link:#grid.28.29[2.2 grid()]
-** link:#linear_scale[2.3 linear_scale]
-** link:#The_make_array.28.29_function[2.4 The make_array() function]
-** link:#The_.27make_array.27_special_forms[2.5 The 'make array' special
-forms]
-*** link:#Performance_measurements[2.5.1 Performance measurements]
-*** link:#Raw_timing_data[2.5.2 Raw timing data]
-** link:#bind_name.28.29_and_bind_shape.28.29[2.6 bind_name() and
-bind_shape()]
-** link:#Unstructured_Grid_subsetting[2.7 Unstructured Grid subsetting]
-** link:#version.28.29[2.8 version()]
-** link:#tabular.28.29[2.9 tabular()]
-** link:#roi.28.29[2.10 roi()]
-** link:#bbox.28.29[2.11 bbox()]
-** link:#bbox_union.28.29[2.12 bbox_union()]
-* link:#Functions_Included_FreeForm_Module[3 Functions Included
-_FreeForm Module_]
-** link:#Projection_functions[3.1 Projection functions]
-** link:#Selection_functions[3.2 Selection functions]
-
-1 Server functions, invocation and composition
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-1.1 Calling Syntax
+=== Calling Syntax
 
 To run a server function, you call the function with its arguments in
 the 'query string' part of a URL. The server function call is a kind of
@@ -55,7 +21,7 @@ to those returned by accessing the variables without using the function
   +
   http://test.opendap.org/dap/data/nc/fnoc1.nc.ascii?u,v
 
-1.2 Function Composition
+=== Function Composition
 
 Server-side functions provide a way to access the processing power of
 the data server and perform operations that fall outside the scope of
@@ -75,8 +41,8 @@ All of these functions can be composed. Thus, the values from the
 geogrid() function can be used by the linear_scale() function. Here's an
 example:
 
-code,de1---------------------------------------------------------------------------------------------------------------------------------------------
-code,de1
+---------------------------------------------------------------------------------------------------------------------------------------------
+
  linear_scale(geogrid(SST, 45, -82, 40, -78))  // spaces added for clarity; in reality spaces in server function arg lists are a syntax error
 ---------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -85,8 +51,7 @@ This first subsets the variable _SST_ so only those values in latitude
 values to the linear_scale() function, which will scale them and return
 those new values to the caller.
 
-2 Server Functions in the _BES functions_ Module
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+== Server Functions in the _BES functions_ Module
 
 For Hyrax 1.9, the server functions listed here were moved from libdap,
 where they were 'hard coded' into the constraint evaluator, to a module
@@ -98,16 +63,15 @@ large arrays filled with constant values into custom server functions.
 We will expand on these as part of an NSF-sponsored project in the
 coming two years.
 
-2.1 geogrid()
-^^^^^^^^^^^^^
+=== geogrid()
 
 Version documented: 1.2
 
 The geogrid() function applies a constraint given in latitude and
 longitude to a DAP Grid variable. The arguments to the function are:
 
-code,de1-----------------------------------------------------------------------------------------------
-code,de1
+-----------------------------------------------------------------------------------------------
+
 geogrid(grid variable, top, left, bottom, right[, expression ...])
 geogrid(grid variable, latitude map, longitude map, top, left, bottom, right[, expression ...])
 -----------------------------------------------------------------------------------------------
@@ -138,8 +102,8 @@ Version documented: 1.1
 The geogrid() function applies a constraint given in latitude and
 longitude to a DAP Grid variable. The arguments to the function are:
 
-code,de1--------------------------------------------------------------
-code,de1
+--------------------------------------------------------------
+
  geogrid(variable, top, left, bottom, right[, expression ...])
 --------------------------------------------------------------
 
@@ -157,8 +121,7 @@ return those joined together as a single Grid. If the data are stored
 with the southern latitudes at the top of the array, the return result
 will be flipped so that the northern latitudes are at the top.
 
-2.2 grid()
-^^^^^^^^^^
+=== 2.2 grid()
 
 Version documented: 1.0
 
@@ -171,8 +134,8 @@ grid values themselves
 
 Two forms of expression are provided:
 
-1.  "var relop const"
-2.  "const relop var relop const"
+. "var relop const"
+. "const relop var relop const"
 
 Where _relop_ stands for one of the relational operators, like `=` and
 ` > `
@@ -180,17 +143,16 @@ Where _relop_ stands for one of the relational operators, like `=` and
 For example: grid(sst,"20>TIME>=10") and grid(sst,"20>TIME","TIME>=10")
 are both legal and, in this case, also equivalent.
 
-2.3 linear_scale
-^^^^^^^^^^^^^^^^
+=== linear_scale
 
 Version documented: 1.0b1
 
 The linear_scale() function applies the familiar y = mx + b equation to
 data. It has three forms:
 
-1.  linear_scale(var)
-2.  linear_scale(var,scale_factor,add_offset)
-3.  linear_scale(var,scale_factor,add_offset,missing_value)
+. linear_scale(var)
+. linear_scale(var,scale_factor,add_offset)
+. linear_scale(var,scale_factor,add_offset,missing_value)
 
 If only the name of a variable is given, the function looks for the
 COARDS/CF-1.0 __scale_factor__, _add_offset_ and _missing_value_
@@ -203,8 +165,7 @@ cannot be found, the test for it is not performed.
 In the second and third form, if the given values conflict with the
 dataset's attributes, the given values override.
 
-2.4 The make_array() function
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=== The make_array() function
 
 The _make_array()_ function takes three or more arguments and returns a
 DAP2 Array with the values passed to the function.
@@ -225,8 +186,7 @@ _bind_name()_ to change the name.
 This function can build an array with 1024 X 1024 Int32 elements in
 about 4 seconds.
 
-2.5 The 'make array' special forms
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=== The 'make array' special forms
 
 These special forms can build vectors with specific values and return
 them as DAP2 Arrays. The Array variables can be named using the
@@ -253,8 +213,7 @@ _bind_shape("[4][4]",$Byte(16:2,3,4,5,2,3,4,5,2,3,4,5,2,3,4,5))._
 The special forms can make a 1,047,572 element vector on Int32 in 0.4
 seconds, including the time required to parse the million plus values.
 
-2.5.1 Performance measurements
-++++++++++++++++++++++++++++++
+==== Performance measurements
 
 Time to make 1,000,000 (actually 1,048,576) element Int32 array using
 the special form, where the argument vector<int> was preset to 1,048,576
@@ -268,8 +227,7 @@ analyzer ('Instruments' on OS/X) and the code was optimized so that long
 sequences of numbers would scan and parse more efficiently. This
 benefited both the make_array() function and $type() special form.
 
-2.5.2 Raw timing data
-+++++++++++++++++++++
+==== Raw timing data
 
 In all cases, a 1,048,576 element vector of Int32 was built 50 times.
 The values were serialized and written to /dev/null using the command
@@ -346,8 +304,7 @@ make_array()
 
 6.254
 
-2.6 bind_name() and bind_shape()
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=== bind_name() and bind_shape()
 
 These functions take a BaseType* object and bind a name or shape to it
 (in the latter case the BaseType* must be an Array*). They are intended
@@ -370,7 +327,7 @@ _$Byte_ to build an array of constants:
 __bind_shape("[4][4]",bind_name("bob",$Byte(0:2,3,4,5,2,3,4,5,2,3,4,5,2,3,4,5)))__.
 The result, in a browser, is:
 
-code,de1--------------------------------------------- code,de1
+--------------------------------------------- 
 Dataset: function_result_coads_climatology.nc
 bob[0], 2, 3, 4, 5
 bob[1], 2, 3, 4, 5
@@ -378,8 +335,7 @@ bob[2], 2, 3, 4, 5
 bob[3], 2, 3, 4, 5
 ---------------------------------------------
 
-2.7 Unstructured Grid subsetting
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=== Unstructured Grid subsetting
 
 The *ugr5()* function subsets an Unstructured Grid (aka flexible mesh)
 if it conforms to the
@@ -394,16 +350,14 @@ information.
 This function is optional with Hyrax and is provided by the
 ugrid_functions module.
 
-2.8 version()
-^^^^^^^^^^^^^
+=== version()
 
 The _version_ function provides a list of the server-side processing
 functions available on a given server along with their versions. For
 information on a specific function, call it with no arguments or look at
 this page.
 
-2.9 tabular()
-^^^^^^^^^^^^^
+=== tabular()
 
 Brief: Transform one or more arrays to a sequence.
 
@@ -430,8 +384,7 @@ Sequence as a new column.
 tabular(__array1__, __array2__, ..., __arrayN__) ::
   Returns a Sequence with N or N+1 columns
 
-2.10 roi()
-^^^^^^^^^^
+=== roi()
 
 Brief: Subset N arrays using index slicing information
 
@@ -456,8 +409,7 @@ bbox(...), ..., "union")) ::
   using the range variables. See the _bbox()_ and _bbox_union()_
   function descriptions.
 
-2.11 bbox()
-^^^^^^^^^^^
+=== bbox()
 
 Brief: Return the bounding box for an array
 
@@ -480,8 +432,7 @@ bbox(__array__, __min-value__, __max-value__) ::
   indices corresponding to the first and last occurrence of the values
   _min-value_ and __max-value__.
 
-2.12 bbox_union()
-^^^^^^^^^^^^^^^^^
+=== bbox_union()
 
 Brief: Combine several bounding boxes, forming their union.
 
@@ -500,16 +451,13 @@ __min-2__, __max-2__), ..., "union"|"intersection") ::
   _bbox()_ function) form their union or intersection and return that
   bounding box (using the same Array of Structures representation).
 
-3 Functions Included _FreeForm Module_
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+== Functions Included _FreeForm Module_
 
 There are a number of date and time functions supported by the FreeForm
 server.
 
 @TODO Add documentation for the functions
 
-3.1 Projection functions
-^^^^^^^^^^^^^^^^^^^^^^^^
+=== Projection functions
 
-3.2 Selection functions
-^^^^^^^^^^^^^^^^^^^^^^^
+=== Selection functions

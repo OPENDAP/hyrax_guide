@@ -1,4 +1,4 @@
-Satellite Time Series Aggregation - OPeNDAP Documentation
+= Satellite Time Series Aggregation - OPeNDAP Documentation
 :Leonard Porrello <lporrel@gmail.com>:
 {docdate}
 :numbered:
