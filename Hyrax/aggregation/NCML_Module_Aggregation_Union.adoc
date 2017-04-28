@@ -1,30 +1,10 @@
-NCML Module Aggregation Union - OPeNDAP Documentation
-=====================================================
+= NCML Module Aggregation Union - OPeNDAP Documentation
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-[[firstHeading]]
-NCML Module Aggregation Union
------------------------------
-
-From OPeNDAP Documentation
-
-Contents
-~~~~~~~~
-
-* #NCML_Module:_Union_Aggregation[1 NCML Module: Union Aggregation]
-** link:#Functionality[1.1 Functionality]
-*** link:#Order_of_Element_Processing[1.1.1 Order of Element Processing]
-**** link:#Shadowing_an_Aggregation_Member[1.1.1.1 Shadowing an
-Aggregation Member]
-**** link:#Modifying_the_.22Winner.22_of_the_Union_Aggregation[1.1.1.2
-Modifying the "Winner" of the Union Aggregation]
-*** link:#Dimensions[1.1.2 Dimensions]
-**** link:#Thoughts_About_Future_Directions_for_Dimension[1.1.2.1
-Thoughts About Future Directions for Dimension]
-** link:#Notes_About_Changes_from_NcML_2.2_Implementation[1.2 Notes
-About Changes from NcML 2.2 Implementation]
-
-1 NCML Module: Union Aggregation
---------------------------------
+== NCML Module: Union Aggregation
 
 The current trunk version of the module supports the union aggregation
 element of the form:
@@ -40,8 +20,7 @@ element of the form:
 Note that we do not implement <scan> yet, so all member datasets of the
 union must be explicitly listed as a <netcdf> element.
 
-1.1 Functionality
-~~~~~~~~~~~~~~~~~
+=== Functionality
 
 The union aggregation specifies the attributes and variables (and
 perhaps dimensions) for the dataset it is contained within (i.e. it's
@@ -69,8 +48,7 @@ Which items will show up in the output? We need to discuss this in a
 little more detail, in particular since we have deviated slightly from
 the Unidata implementation.
 
-1.1.1 Order of Element Processing
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Order of Element Processing
 
 The NCML Module processes the nodes in a <netcdf> element in the order
 encountered. This means that the parent dataset of an aggregation may
@@ -81,8 +59,7 @@ existing metadata within a member of the aggregation by using an
 attribute element, for example, must come AFTER the actual aggregation
 element, or else a parse error will be thrown.
 
-1.1.1.1 Shadowing an Aggregation Member
-+++++++++++++++++++++++++++++++++++++++
+===== Shadowing an Aggregation Member
 
 For example, the following examples show how to "shadow" a variable
 contained in an aggregation by specifying it in the parent dataset prior
@@ -121,8 +98,7 @@ show up in the output since it doesn't already exist in either the
 parent or the previous child. Note that this would also work on an
 attribute or dimension.
 
-1.1.1.2 Modifying the "Winner" of the Union Aggregation
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+===== Modifying the "Winner" of the Union Aggregation
 
 The following example shows how to modify the "winning" variable in a
 union aggregation by specifying the attribute change AFTER the
@@ -166,10 +142,7 @@ If this entire netcdf element were contained within another aggregation,
 then other transformations might be applied after the fact as well,
 again in the order encountered for clarity.
 
- +
-
-1.1.2 Dimensions
-^^^^^^^^^^^^^^^^
+==== Dimensions
 
 Since the DAP2 does not specify dimensions as explicit data items, a
 union of dimensions is only done __if the child netcdf elements
@@ -295,8 +268,7 @@ dimension checks only occur now in a *pure virtual dataset* like we see
 here. Using netcdf@location will effectively "hide" all the dimensions
 within it at this point.
 
-1.1.2.1 Thoughts About Future Directions for Dimension
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
+===== Thoughts About Future Directions for Dimension
 
 For a future implementation, we may want to consider a DAP2 Grid Map
 vector as a dimension and do cardinality checks on them if we have
@@ -307,10 +279,7 @@ dataset and is explicitly specified as "isShared". Though DAP2 does not
 have shared dimensions, this would be a basic first step in the error
 checking that will have to be done for shared dimensions.
 
- +
-
-1.2 Notes About Changes from NcML 2.2 Implementation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Notes About Changes from NcML 2.2 Implementation
 
 In the Aggregation tutorial, it is mentioned that in a given <netcdf>
 node, the <aggregation> element is process prior to any other nodes,

@@ -1,14 +1,11 @@
-Grid Metadata Tutorial - OPeNDAP Documentation
-==============================================
+= Grid Metadata Tutorial - OPeNDAP Documentation
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-[[firstHeading]]
-Grid Metadata Tutorial
-----------------------
 
-From OPeNDAP Documentation
-
-An Example of Adding Metadata to a Grid
----------------------------------------
+== An Example of Adding Metadata to a Grid
 
 ../index.php?title=Category:NCML&action=edit&redlink=1[Category:NCML]
 
@@ -186,16 +183,16 @@ Attributes {
 
 Let's say we want to add the following attributes:
 
-1.  Add an attribute to the HDF_GLOBAL attribute container called
+. Add an attribute to the HDF_GLOBAL attribute container called
 "ncml_location" since the file is wrapped by our NcML and the original
 location being wrapped might not be obvious.
-2.  Add the same attribute to the *dsp_band_1* Grid itself so it's
+. Add the same attribute to the *dsp_band_1* Grid itself so it's
 easier to see and in case of projections
-3.  Add "units" to the Array member variable *dsp_band_1* of the Grid
+. Add "units" to the Array member variable *dsp_band_1* of the Grid
 that matches the containing Grid's "units" attribute with value "Temp"
-4.  Add "units" to the *lat* map vector as a String with value
+. Add "units" to the *lat* map vector as a String with value
 "degrees_north"
-5.  Add "units" to the *lon* map vector as a String with value
+. Add "units" to the *lon* map vector as a String with value
 "degrees_east"
 
 First, let's add the "ncml_location" into the HDF_GLOBAL attribute

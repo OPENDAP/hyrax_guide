@@ -1,35 +1,10 @@
-NCML Module Aggregation JoinNew - OPeNDAP Documentation
-=======================================================
+= NCML Module Aggregation JoinNew - OPeNDAP Documentation
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-[[firstHeading]]
-NCML Module Aggregation JoinNew
--------------------------------
-
-From OPeNDAP Documentation
-
- +
-
-Contents
-~~~~~~~~
-
-* link:#Join_New_Aggregation[1 Join New Aggregation]
-** link:#Introduction[1.1 Introduction]
-** link:#A_Simple_Self-Contained_Example[1.2 A Simple Self-Contained
-Example]
-** link:#A_Simple_Example_Using_Explicit_Dataset_Files[1.3 A Simple
-Example Using Explicit Dataset Files]
-** link:#Examples_of_Explicit_Dataset_Listings[1.4 Examples of Explicit
-Dataset Listings]
-** link:#Adding.2FModifying_Metadata_on_Aggregations[1.5
-Adding/Modifying Metadata on Aggregations]
-** link:#Dynamic_Aggregations_Using_Directory_Scanning[1.6 Dynamic
-Aggregations Using Directory Scanning]
-*** link:#Please_see_the_Dynamic_Aggregation_Tutorial_for_a_more_detailed_discussion[1.6.1
-Please see the Dynamic Aggregation Tutorial for a more detailed
-discussion]
-
-1 Join New Aggregation
-----------------------
+== Join New Aggregation
 
 A _joinNew_ aggregation joins existing datasets along a new outer Array
 dimension. Essentially, it adds a new index to the existing variable
@@ -53,8 +28,7 @@ the Hyrax NcML Module! In particular, we do not process the
 cases the relative ordering of the <aggregation> and references to
 variables within the aggregation matters.
 
-1.1 Introduction
-~~~~~~~~~~~~~~~~
+=== Introduction
 
 A _joinNew_ aggregation combines a variable with data across _n_
 datasets by creating a new _outer dimension_ and placing the data from
@@ -108,8 +82,7 @@ increment values -- one value is generated automatically per dataset
 specified Java SimpleDataFormat string. (Only works with <scan>
 element!)
 
-1.2 A Simple Self-Contained Example
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== A Simple Self-Contained Example
 
 First, we start with a simple purely virtual (no external datasets)
 example to give the reader a basic idea of this aggregation. This
@@ -252,10 +225,7 @@ Now that the reader has an idea of the basics of the joinNew
 aggregation, we will create examples for the many different use cases
 the NcML aggregation author may wish to create.
 
- +
-
-1.3 A Simple Example Using Explicit Dataset Files
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== A Simple Example Using Explicit Dataset Files
 
 Using virtual datasets is not that common. More commonly, the
 aggregation author wants to specify files for the aggregation. As an
@@ -297,8 +267,7 @@ Dataset {
 } joinNew_string_coordVal.ncml;
 ---------------------------------------------------------
 
- +
- Since there's so much data we only show the new coordinate variable:
+Since there's so much data we only show the new coordinate variable:
 
 --------------------------------------------------------------------
 String source[source = 3] = {"Station_1", "Station_2", "Station_3"};
@@ -314,10 +283,7 @@ found in the order the datasets are listed is used.
 
 Now that we've seen simple cases, let's look at more complex examples.
 
- +
-
-1.4 Examples of Explicit Dataset Listings
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Examples of Explicit Dataset Listings
 
 In this section we will give several examples of joinNew aggregation
 with a static, explicit list of member datasets. In particular, we will
@@ -343,8 +309,7 @@ Please see the turotial:
 link:../index.php/JoinNew_Explicit_Dataset_Tutorial[JoinNew Explicit
 Dataset Tutorial]
 
-1.5 Adding/Modifying Metadata on Aggregations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Adding/Modifying Metadata on Aggregations
 
 It is possible to add or modify metadata on existing or new variables in
 an aggregation. The syntax for these varies somewhat, so we give
@@ -360,8 +325,7 @@ Please see the
 link:../index.php/Metadata_on_Aggregations_Tutorial[Metadata on
 Aggregations Tutorial].
 
-1.6 Dynamic Aggregations Using Directory Scanning
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Dynamic Aggregations Using Directory Scanning
 
 A powerful way to create dynamic aggregations rather than by listing
 datasets explicitly is by specifying a data directory where aggregation
@@ -404,7 +368,6 @@ We will give examples of each of these criteria in use in our tutorial.
 Again, if more than one is specified, then ALL must match for the file
 to be included in the aggregation.
 
-1.6.1 Please see the
+==== Please see the
 link:../index.php/Dynamic_Aggregation_Tutorial[Dynamic Aggregation
 Tutorial] for a more detailed discussion
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
