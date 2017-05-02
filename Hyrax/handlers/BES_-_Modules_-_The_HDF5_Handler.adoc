@@ -1,44 +1,23 @@
-BES - Modules - The HDF5 Handler - OPeNDAP Documentation
-========================================================
+= BES - Modules - The HDF5 Handler - OPeNDAP Documentation
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-[[firstHeading]]
-BES - Modules - The HDF5 Handler
---------------------------------
-
-From OPeNDAP Documentation
-
-Contents
-~~~~~~~~
-
-* link:#Kinds_of_files_the_handler_will_serve[1 Kinds of files the
-handler will serve]
-** link:#Mappings_between_the_HDF5_data_model_and_DAP2_data_types[1.1
-Mappings between the HDF5 data model and DAP2 data types]
-** link:#Special_characters_in_HDF_identifiers[1.2 Special characters in
-HDF identifiers]
-** link:#Known_problems[1.3 Known problems]
-*** link:#Handling_of_floating_point_attributes[1.3.1 Handling of
-floating point attributes]
-* link:#Configuration_parameters[2 Configuration parameters]
-* link:#Appendix[3 Appendix]
-
-1 Kinds of files the handler will serve
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+== Kinds of files the handler will serve
 
 This release of the server supports HDF5 files written using any version
 of the HDF5 API. The handler should be built/linked with version 1.8.x
 of the API.
 
-1.1 Mappings between the HDF5 data model and DAP2 data types
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=== Mappings between the HDF5 data model and DAP2 data types
 
 The mapping between the HDF5 and HDF-EOS5 data model and DAP2 is
 documented in a NASA Technical Note
 (http://www.esdswg.org/spg/rfc/esds-rfc-017[ESDS-RFC-017]). This note is
 quite detailed; a summary from its appendix is provided below.
 
-1.2 Special characters in HDF identifiers
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=== Special characters in HDF identifiers
 
 A number of non-alphanumeric characters (e.g., space, #, +, -) used in
 HDF identifiers are not allowed in the names of DAP objects, object
@@ -51,11 +30,9 @@ translations should be transparent to users of the server (but they will
 be visible in the DDS, DAS and in any applications which use a client
 that does not translate the identifiers back to their original form).
 
-1.3 Known problems
-^^^^^^^^^^^^^^^^^^
+=== Known problems
 
-1.3.1 Handling of floating point attributes
-+++++++++++++++++++++++++++++++++++++++++++
+==== Handling of floating point attributes
 
 Because the DAP software encodes attribute values as ASCII strings there
 will be a loss of accuracy for floating point attributes. This loss of
@@ -65,8 +42,7 @@ precision preserved when outputting to ASCII is dependent on the
 library). Typically it is very small (e.g., at least six decimal places
 are preserved).
 
-2 Configuration parameters
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+== Configuration parameters
 
 H5.EnableCF::
   This is an option to support NASA HDF5/HDF-EOS5 data products. The
@@ -135,8 +111,7 @@ will change to:
   When this option is true, StructMetadata attribute will not be
   generated in DAS output.
 
-3 Appendix
-~~~~~~~~~~
+== Appendix
 
 . _The complete set of mappings for the types in the HDF5 and HDF-EOS5
 data model_

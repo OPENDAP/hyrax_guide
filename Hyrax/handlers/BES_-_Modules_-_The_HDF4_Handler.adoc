@@ -1,76 +1,17 @@
-BES - Modules - The HDF4 Handler - OPeNDAP Documentation
-========================================================
+= BES - Modules - The HDF4 Handler - OPeNDAP Documentation
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-[[firstHeading]]
-BES - Modules - The HDF4 Handler
---------------------------------
-
-From OPeNDAP Documentation
-
-Contents
-~~~~~~~~
-
-* link:#Kinds_of_files_the_handler_will_serve[1 Kinds of files the
-handler will serve]
-** link:#Mappings_between_the_HDF4_data_model_and_DAP2_data_types[1.1
-Mappings between the HDF4 data model and DAP2 data types]
-** link:#Mappings_for_the_HDF-EOS_data_model[1.2 Mappings for the
-HDF-EOS data model]
-** link:#Special_characters_in_HDF_identifiers[1.3 Special characters in
-HDF identifiers]
-** link:#Known_problems[1.4 Known problems]
-*** link:#Handling_of_floating_point_attributes[1.4.1 Handling of
-floating point attributes]
-*** link:#Handling_of_global_attributes[1.4.2 Handling of global
-attributes]
-* link:#How_to_install_CF-enabled_HDF4_Handler_correctly[2 How to
-install CF-enabled HDF4 Handler correctly]
-** link:#Pick_the_right_RPM_instead_of_building_from_source[2.1 Pick the
-right RPM instead of building from source]
-** link:#Build_with_the_HDF-EOS2_library_if_you_plant_to_support_HDF-EOS2_products.[2.2
-Build with the HDF-EOS2 library if you plant to support HDF-EOS2
-products.]
-* link:#Configuration_parameters[3 Configuration parameters]
-** link:#What_are_the_CF_conventions_and_how_is_it_related_to_the_new_HDF4_handler.3F[3.1
-What are the CF conventions and how is it related to the new HDF4
-handler?]
-** link:#BES_Keys_in_h4.conf[3.2 BES Keys in h4.conf]
-*** link:#H4.EnableCF_.28true.29[3.2.1 H4.EnableCF (true)]
-*** link:#H4.EnableMODAPSFile.28false.29[3.2.2
-H4.EnableMODAPSFile(false)]
-*** link:#H4.EnableSpecialEOS_.28true.29[3.2.3 H4.EnableSpecialEOS
-(true)]
-*** link:#H4.DisableScaleOffsetComp_.28true.29[3.2.4
-H4.DisableScaleOffsetComp (true)]
-*** link:#H4.EnableCheckScaleOffsetType_.28true.29[3.2.5
-H4.EnableCheckScaleOffsetType (true)]
-*** link:#H4.EnableHybridVdata_.28true.29[3.2.6 H4.EnableHybridVdata
-(true)]
-*** link:#H4.EnableCERESVdata_.28false.29[3.2.7 H4.EnableCERESVdata
-(false)]
-*** link:#H4.EnableVdata_to_Attr_.28true.29[3.2.8 H4.EnableVdata_to_Attr
-(true)]
-*** link:#H4.EnableCERESMERRAShortName_.28true.29[3.2.9
-H4.EnableCERESMERRAShortName (true)]
-*** link:#H4.DisableVdataNameclashingCheck_.28true.29[3.2.10
-H4.DisableVdataNameclashingCheck (true)]
-*** link:#H4.EnableVdataDescAttr_.28false.29[3.2.11
-H4.EnableVdataDescAttr (false)]
-*** link:#H4.EnableCheckMODISGeoFile_.28false.29[3.2.12
-H4.EnableCheckMODISGeoFile (false)]
-*** link:#H4.CacheDir_.28no_longer_supported.29[3.2.13 H4.CacheDir (no
-longer supported)]
-
-1 Kinds of files the handler will serve
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+== Kinds of files the handler will serve
 
 This release of the server supports HDF4.2 and can read any file
 readable using that version of the API. It also supports reading/parsing
 HDF-EOS attribute information and provides some special mappings for
 HDF-EOS files depeding on the handler's build options.
 
-1.1 Mappings between the HDF4 data model and DAP2 data types
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=== Mappings between the HDF4 data model and DAP2 data types
 
 SDS ::
   This is mapped to a DAP2 Grid (if it has a dimension scale) or Array
@@ -106,13 +47,11 @@ Annotations ::
 Vgroups ::
   Vgroups are straight-forwardly mapped to Structures.
 
-1.2 Mappings for the HDF-EOS data model
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=== Mappings for the HDF-EOS data model
 
 _This needs to be documented._
 
-1.3 Special characters in HDF identifiers
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=== Special characters in HDF identifiers
 
 A number of non-alphanumeric characters (e.g., space, #, +, -) used in
 HDF identifiers are not allowed in the names of DAP objects, object
@@ -125,11 +64,9 @@ translations should be transparent to users of the server (but they will
 be visible in the DDS, DAS and in any applications which use a client
 that does not translate the identifiers back to their original form).
 
-1.4 Known problems
-^^^^^^^^^^^^^^^^^^
+=== Known problems
 
-1.4.1 Handling of floating point attributes
-+++++++++++++++++++++++++++++++++++++++++++
+==== Handling of floating point attributes
 
 Because the DAP software encodes attribute values as ASCII strings there
 will be a loss of accuracy for floating point attributes. This loss of
@@ -139,8 +76,7 @@ precision preserved when outputting to ASCII is dependent on the
 library). Typically it is very small (e.g., at least six decimal places
 are preserved).
 
-1.4.2 Handling of global attributes
-+++++++++++++++++++++++++++++++++++
+==== Handling of global attributes
 
 * The server will merge the separate global attributes for the SD, GR
 interfaces with any file annotations into one set of global attributes.
@@ -152,8 +88,7 @@ global attributes of the unconstrained dataset will not be accessible
 because the constraint creates a "virtual dataset" which is a subset of
 the original unconstrained dataset.
 
-2 How to install CF-enabled HDF4 Handler correctly
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+== How to install CF-enabled HDF4 Handler correctly
 
 The first step of using the HDF4 handler with CF option is to install
 the handler correctly because it has three different options. We'll call
@@ -169,8 +104,7 @@ their output follows not only the basic CF conventions but also the
 extra CF conventions. For HDF4 products, the output is same as the
 generic option.
 
-2.1 Pick the right RPM instead of building from source
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=== Pick the right RPM instead of building from source
 
 If you use Linux system that supports RPM package manager and have a
 super user privilege, the easiest way to install the HDF4 handler is
@@ -188,30 +122,29 @@ Here are two basic commands for deleting and adding RPMs:
 * Remove any existing RPM package using 'rpm -e <package_name>'.
 * Install a new RPM package using 'rpm -i <package_name.rpm>'.
 
-\1) Download and install the latest "libdap", "BES", and "General
+1) Download and install the latest "libdap", "BES", and "General
 purpose handlers (aka dap-server)" RPMs first from
 
 -----------------------------------
   http://opendap.org/download/hyrax
 -----------------------------------
 
-\3) Download and install the latest "hdf4_handler" RPM from
+3) Download and install the latest "hdf4_handler" RPM from
 
 -----------------------------------
   http://opendap.org/download/hyrax
 -----------------------------------
 
-\4) (Optional) Configure the handler after reading the section 3 below.
+4) (Optional) Configure the handler after reading the section 3 below.
 
-\5) (Re)start the BES server.
+5) (Re)start the BES server.
 
 ----------------------------
   %/usr/bin/besctl (re)start
 ----------------------------
 
-2.2 Build with the HDF-EOS2 library if you plant to support HDF-EOS2
+=== Build with the HDF-EOS2 library if you plant to support HDF-EOS2
 products.
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 If you plan to build one instead of using RPMs and to support HDF-EOS2
 products, please consider installing the HDF-EOS2 library first. Then,
@@ -240,12 +173,9 @@ be treated as pure HDF4 objects.
 Please see the INSTALL document on step-by-step instruction on building
 the handler.
 
-3 Configuration parameters
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+== Configuration parameters
 
-3.1 What are the CF conventions and how is it related to the new HDF4
-handler?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=== What are the CF conventions and how is it related to the new HDF4 handler?
 
 Before we discuss the usage further, it's very important to know what
 the CF conventions are. The CF conventions precisely define metadata
@@ -276,8 +206,7 @@ conventions, some products are inherently difficult to meet such level.
 In those cases, we ended up meeting the basic level of meeting the CF
 conventions.
 
-3.2 BES Keys in h4.conf
-^^^^^^^^^^^^^^^^^^^^^^^
+=== BES Keys in h4.conf
 
 You can control HDF4 handler's output behavior significantly by changing
 key values in a configuration file called "h4.conf".
@@ -289,8 +218,7 @@ you built one, you can find the h4.conf file in
 The following 6 BES keys are newly added in the h4.conf file. The
 default configuration values are specified in the parentheses.
 
-3.2.1 H4.EnableCF (true)
-++++++++++++++++++++++++
+==== H4.EnableCF (true)
 
 If this key's value is false, the handler will behave same as the
 default handler. The output will not follow basic CF conventions. Object
@@ -302,8 +230,7 @@ The rest of keys below relies on this option. This key must be set to be
 "true" to ensure other keys to be valid. Thus, this is the most
 important key to be turned on.
 
-3.2.2 H4.EnableMODAPSFile(false)
-++++++++++++++++++++++++++++++++
+==== H4.EnableMODAPSFile(false)
 
 By turning EnableMODAPSFile to be true, when HDF-EOS2 library is used,
 an extra HDF file handle(by calling SDstart) will be generated at the
@@ -312,8 +239,7 @@ that mounts its data over the network. If you are not sure about your
 server settings, always leave it as false or comment out this key. By
 default this key is turned off.
 
-3.2.3 H4.EnableSpecialEOS (true)
-++++++++++++++++++++++++++++++++
+==== H4.EnableSpecialEOS (true)
 
 When turning on this key, the handler will handle AIRS level 3 version 6
 products and MOD08_M3-like products in a speedy way by taking advantage
@@ -323,24 +249,22 @@ not be called. By turning on this key, potentially HDF-EOS2 files that
 provide dimension scales for all dimensions may also be handled quickly.
 By default, this key should be set to true.
 
-3.2.4 H4.DisableScaleOffsetComp (true)
-++++++++++++++++++++++++++++++++++++++
+==== H4.DisableScaleOffsetComp (true)
 
 Some NASA HDF4(MODIS etc.) products don't follow the CF rule to pack the
 data. To avoid the confusion for OPeNDAP's clients , the handler may
 adopt the following two approaches:
 
-1.  Apply the scale and offset computation to the individual data point
+. Apply the scale and offset computation to the individual data point
 if the scale and offset rule doesn't follow CF in the handler.
-2.  If possible, transform the scale and offset rule to CF rule.
+. If possible, transform the scale and offset rule to CF rule.
 
 Since approach 1) may degrade the performance of fetching large size
 data by heavy computation, we recommend approach 2), which is indicated
 by setting this key to be true. By default, this key should always be
 true.
 
-3.2.5 H4.EnableCheckScaleOffsetType (true)
-++++++++++++++++++++++++++++++++++++++++++
+==== H4.EnableCheckScaleOffsetType (true)
 
 By turning on this key, the handler will check if the datatype of
 scale_factorand offset is the same. This is required by CF. If they
@@ -351,16 +275,14 @@ Since we haven't found the data type inconsistencies of scale_factor and
 offset, in order not affect the performance,this key will be set to
 false by default.
 
-3.2.6 H4.EnableHybridVdata (true)
-+++++++++++++++++++++++++++++++++
+==== H4.EnableHybridVdata (true)
 
 If this key's value is false, additional Vdata such as "Level 1B Swath
 Metadta" in LAADS MYD021KM product will not be processed and visible in
 the DAS/DDS output. Those additional Vdatas are added directly using
 HDF4 APIs and HDF-EOS2 APIs cannot access them.
 
-3.2.7 H4.EnableCERESVdata (false)
-+++++++++++++++++++++++++++++++++
+==== H4.EnableCERESVdata (false)
 
 Some CERES products(CER_AVG,CER_ES4,CER_SRB and CER_ZAVG, see
 description in the HDFSP.h) have many SDS fields and some Vdata fields.
@@ -372,8 +294,7 @@ To avoid such cases, we will not map vdata to DAP in such products by
 default. Users can turn on this key to check vdata information of some
 CERES products. This key will not affect the access of other products.
 
-3.2.8 H4.EnableVdata_to_Attr (true)
-+++++++++++++++++++++++++++++++++++
+==== H4.EnableVdata_to_Attr (true)
 
 If this key's value is false, small vdata datasets will be mapped to
 arrays in DDS output instead of attributes in DAS.
@@ -396,8 +317,7 @@ attribute:
    }
 ---------------------------------------------------------------------------------------
 
-3.2.9 H4.EnableCERESMERRAShortName (true)
-+++++++++++++++++++++++++++++++++++++++++
+==== H4.EnableCERESMERRAShortName (true)
 
 If this key's value is false, the object name will be prefixed by the
 vgroup path and the fullpath attribute will not be printed in DAS
@@ -422,15 +342,13 @@ becomes
 
 in CER_AVG_Aqua-FM3-MODIS_Edition2B_007005.200510.hdf.
 
-3.2.10 H4.DisableVdataNameclashingCheck (true)
-++++++++++++++++++++++++++++++++++++++++++++++
+==== H4.DisableVdataNameclashingCheck (true)
 
 If this key's value is false, the handler will check if there's any
 vdata that has the same name as SDS. We haven't found such a case in
 NASA products so it's safe to disable this to improve performance.
 
-3.2.11 H4.EnableVdataDescAttr (false)
-+++++++++++++++++++++++++++++++++++++
+==== H4.EnableVdataDescAttr (false)
 
 If this key's value is true, the handler will generate vdata's
 attributes. By default, it's turned off because most NASA hybrid
@@ -452,8 +370,7 @@ will not appear in the attribute for that vdata although the key is
 true. The attribute container of the vdata will always appear regardless
 of this key's value.
 
-3.2.12 H4.EnableCheckMODISGeoFile (false)
-+++++++++++++++++++++++++++++++++++++++++
+==== H4.EnableCheckMODISGeoFile (false)
 
 For MODIS swath data products that use the dimension map, if this key's
 value is true and a MODIS geo-location product such as MOD03 is present
@@ -495,8 +412,7 @@ MOD14 product.
 
 [1] http://modis.gsfc.nasa.gov/data/dataprod/nontech/MOD0203.php
 
-3.2.13 H4.CacheDir (no longer supported)
-++++++++++++++++++++++++++++++++++++++++
+==== H4.CacheDir (no longer supported)
 
 The HDF4 handler used to support caching its response objects, but that
 feature has been removed do to problems with it and datasets where

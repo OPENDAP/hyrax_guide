@@ -1,30 +1,10 @@
-BES - Modules - The NetCDF Handler - OPeNDAP Documentation
-==========================================================
+= BES - Modules - The NetCDF Handler - OPeNDAP Documentation
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-[[firstHeading]]
-BES - Modules - The NetCDF Handler
-----------------------------------
-
-From OPeNDAP Documentation
-
-Contents
-~~~~~~~~
-
-* link:#Kinds_of_files_the_handler_will_serve[1 Kinds of files the
-handler will serve]
-** link:#Mappings_between_NetCDF_version_4_data_model_and_DAP2_data_types[1.1
-Mappings between NetCDF version 4 data model and DAP2 data types]
-*** link:#Mappings_for_netCDF_4.27s_User_Defined_types[1.1.1 Mappings
-for netCDF 4's User Defined types]
-*** link:#NetCDF_4.27s_Group[1.1.2 NetCDF 4's Group]
-* link:#Configuration_parameters[2 Configuration parameters]
-** link:#IgnoreUnknownTypes[2.1 IgnoreUnknownTypes]
-** link:#ShowSharedDimensions[2.2 ShowSharedDimensions]
-** link:#PromoteByteToShort[2.3 PromoteByteToShort]
-* link:#Appendix[3 Appendix]
-
-1 Kinds of files the handler will serve
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+== Kinds of files the handler will serve
 
 There are several versions of the netCDF software for reading and
 writing data and using those different versions, it's possible to make
@@ -50,8 +30,7 @@ challenge. However, as of version 3.10.x, the Hyrax data handler will
 serve most of the new cardinal types and the more commonly used 'user
 defined types'.
 
-1.1 Mappings between NetCDF version 4 data model and DAP2 data types
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=== Mappings between NetCDF version 4 data model and DAP2 data types
 
 All of the cardinal types in the netCDF 4 data model map directly to
 types in DAP2 except for the following:
@@ -69,8 +48,7 @@ NC_INT64, NC_UINT64::
   DAP2 does not support 64-bit integers (this will be added soon to the
   next version of the protocol).
 
-1.1.1 Mappings for netCDF 4's User Defined types
-++++++++++++++++++++++++++++++++++++++++++++++++
+==== Mappings for netCDF 4's User Defined types
 
 In the netCDF documentation, types such as Compound (which is
 effectively C's _struct_ type), et c., are called _User Defined_ types.
@@ -111,16 +89,13 @@ NC_OPAQUE::
   with the restriction that _M+1_ dimensional DAP2 Byte array can only
   be subset in the original NC_OPAQUE's _M_ dimensions).
 
-1.1.2 NetCDF 4's Group
-++++++++++++++++++++++
+==== NetCDF 4's Group
 
 The netCDF handler currently reads only from the root group.
 
-2 Configuration parameters
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+== Configuration parameters
 
-2.1 IgnoreUnknownTypes
-++++++++++++++++++++++
+=== IgnoreUnknownTypes
 
 When the handler reads a type that it does not recognize, it will
 normally signal an error and stop processing. Setting this parameter to
@@ -135,8 +110,7 @@ Example:
 NC.IgnoreUnknownTypes=true
 --------------------------
 
-2.2 ShowSharedDimensions
-++++++++++++++++++++++++
+=== ShowSharedDimensions
 
 Include shared dimensions as separate variables. This feature is
 included to support older clients based on the netCDF library. Some
@@ -158,8 +132,7 @@ Example:
 NC.ShowSharedDimensions=false
 -----------------------------
 
-2.3 PromoteByteToShort
-++++++++++++++++++++++
+=== PromoteByteToShort
 
 This option first appears in Hyrax 1.8; version 3.10.0 of the
 netcdf_handler.
@@ -201,8 +174,7 @@ Example:
 NC.PromoteByteToShort=true
 --------------------------
 
-3 Appendix
-~~~~~~~~~~
+== Appendix
 
 . _The complete set of mappings for the types in the netCDF 4 data
 model +

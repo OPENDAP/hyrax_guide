@@ -1,11 +1,10 @@
-BES - Modules - Gateway Module - OPeNDAP Documentation
-======================================================
+= BES - Modules - Gateway Module - OPeNDAP Documentation
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-[[firstHeading]]
-BES - Modules - Gateway Module
-------------------------------
-
-From OPeNDAP Documentation
+==Introduction
 
 The Gateway Service provides interoperability between Hyrax and other
 web services. Using the Gateway module, Hyrax can be used to access and
@@ -15,30 +14,9 @@ example, if a web service returns data using HDF4 files, then Hyrax,
 using the gateway module, can subset and return DAP responses for those
 data.
 
-Contents
-~~~~~~~~
+== Special options supported by the handler
 
-* link:#Special_options_supported_by_the_handler[1 Special options
-supported by the handler]
-** link:#Limiting_access_to_specific_hosts[1.1 Limiting access to
-specific hosts]
-** link:#Recognizing_responses[1.2 Recognizing responses]
-** link:#Network_proxies_and_Performance_optimizations[1.3 Network
-proxies and Performance optimizations]
-*** link:#Using_Squid[1.3.1 Using Squid]
-*** link:#Squid_and_Dynamic_Content[1.3.2 Squid and Dynamic Content]
-*** link:#How_can_I_tell_if_a_service_sends_Cache_Control_headers[1.3.3
-How can I tell if a service sends Cache Control headers]
-*** link:#Using_Squid_on_OS.2FX[1.3.4 Using Squid on OS/X]
-*** link:#Squid.2C_OS.2FX_and_Caching_Dynamic_Content[1.3.5 Squid, OS/X
-and Caching Dynamic Content]
-* link:#Known_Problems[2 Known Problems]
-
-1 Special options supported by the handler
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-1.1 Limiting access to specific hosts
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=== Limiting access to specific hosts
 
 Because this handler behaves like a web _client_ there are some special
 options that need to be configured to make it work. When we distribute
@@ -56,15 +34,14 @@ Gateway.Whitelist::
   hostname - it could in principal limit access to a specific set of
   requests to a particular web service.
 
-example:
+Example:
 
 -------------------------------------------------
 Gateway.Whitelist=http://test.opendap.org/opendap
 Gateway.Whitelist+=http://opendap.rpi.edu/opendap
 -------------------------------------------------
 
-1.2 Recognizing responses
-^^^^^^^^^^^^^^^^^^^^^^^^^
+=== Recognizing responses
 
 Gateway.MimeTypes::
   provides a list of mappings from data handler module to returned mime
@@ -83,8 +60,7 @@ Gateway.MimeTypes+=h4:application/x-hdf
 Gateway.MimeTypes+=h5:application/x-hdf5
 -----------------------------------------
 
-1.3 Network proxies and Performance optimizations
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=== Network proxies and Performance optimizations
 
 There are four parameters that are used to configure a proxy server that
 the gateway will use. Nominally this is used as a cache, so that files
@@ -120,8 +96,7 @@ Gateway.ProxyPort=
 Gateway.NoProxy=
 -----------------------
 
-1.3.1 Using Squid
-+++++++++++++++++
+==== Using Squid
 
 Squid makes a great cache for the gateway. In our testing we have used
 Squid only for services running on port 80.
@@ -129,8 +104,7 @@ Squid only for services running on port 80.
 Squid is a powerful tool and it is worth looking at its
 http://www.squid-cache.org/[web page].
 
-1.3.2 Squid and Dynamic Content
-+++++++++++++++++++++++++++++++
+==== Squid and Dynamic Content
 
 Squid follows the HTTP/1.1 specification to determine what and how long
 to cache items. However, you may want to force Squid to ignore some of
@@ -160,8 +134,7 @@ And change the third refresh_pattern to read:
 refresh_pattern -i (/cgi-bin/|\?) 1440  20% 10080
 -------------------------------------------------
 
-1.3.3 How can I tell if a service sends Cache Control headers
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+==== How can I tell if a service sends Cache Control headers
 
 Here are two ways to check:
 
@@ -169,8 +142,7 @@ Here are two ways to check:
 * _curl -i <URL> | more_ and look at the headers at the top of the
 message.
 
-1.3.4 Using Squid on OS/X
-+++++++++++++++++++++++++
+==== Using Squid on OS/X
 
 If you're using OS/X to run Hyrax, the easiest Squid port is
 http://web.me.com/adg/squidman/index.html[SquidMan]. We tested version
@@ -198,33 +170,31 @@ button to see the caching at work. The first access, which fetches the
 data, will say _DIRECT/<ip number>_ while cache hits will be labeled
 __NONE/-__.
 
-1.3.5 Squid, OS/X and Caching Dynamic Content
-+++++++++++++++++++++++++++++++++++++++++++++
+==== Squid, OS/X and Caching Dynamic Content
 
 By default SquidMan does not cache dynamic content that lacks cache
 control headers in the response. To hack the squid.conf file and make
 the change in the _refresh_pattern_ described above do the following:
 
-1.  Under Preferences... choose the 'Template' tab and scroll to the
+. Under Preferences... choose the 'Template' tab and scroll to the
 bottom of the
 text;../index.php/File:Edit_the_squid.conf_file.png[image:../images/thumb/9/9b/Edit_the_squid.conf_file.png/200px-Edit_the_squid.conf_file.png[Edit
 the squid.conf file.png]]
-2.  Edit the line, replacing "0 0% 0" with "1440 20% 10080"; and
-3.  'Save' and then 'Stop Squid' and 'Start Squid' (note the helpful
+. Edit the line, replacing "0 0% 0" with "1440 20% 10080"; and
+. 'Save' and then 'Stop Squid' and 'Start Squid' (note the helpful
 status messages in the 'Start/Stop'
 window).../index.php/File:Squid_1.png[image:../images/thumb/a/a6/Squid_1.png/200px-Squid_1.png[Squid
 1.png]]../index.php/File:Squid_2.png[image:../images/thumb/c/cc/Squid_2.png/200px-Squid_2.png[Squid
 2.png]]../index.php/File:Squid_3.png[image:../images/thumb/8/88/Squid_3.png/200px-Squid_3.png[Squid
 3.png]]
 
-2 Known Problems
-~~~~~~~~~~~~~~~~
+== Known Problems
 
 For version 1.0.1 of the gateway, we know about the following problems:
 
-1.  Squid does not cache requests to localhost, but our use of the proxy
+. Squid does not cache requests to localhost, but our use of the proxy
 server does not by-pass requests to localhost. Thus, using the gateway
 to access data from a service running on localhost will fail when using
 squid since the gateway will route the request to the proxy (i.e.,
 squid) where it will generate an error.
-2.  Not using a caching proxy server will result in poor performance.
+. Not using a caching proxy server will result in poor performance.

@@ -1,26 +1,10 @@
-Gateway Service - OPeNDAP Documentation
-=======================================
+= Gateway Service - OPeNDAP Documentation
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-[[firstHeading]]
-Gateway Service
----------------
-
-From OPeNDAP Documentation
-
-Contents
-~~~~~~~~
-
-* link:#Overview[1 Overview]
-* link:#BES_gateway_module[2 BES gateway_module]
-* link:#OLFS_gateway_service[3 OLFS gateway_service]
-* link:#Encoding_data_source_URLs[4 Encoding data source URLs]
-** link:#Prototype_Encoding[4.1 Prototype Encoding]
-*** link:#Example_1[4.1.1 Example 1]
-*** link:#Example_2[4.1.2 Example 2]
-*** link:#Example_3[4.1.3 Example 3]
-
-1 Overview
-~~~~~~~~~~
+== Overview
 
 ../index.php/File:Gateway_service.jpg[image:../images/thumb/8/88/Gateway_service.jpg/180px-Gateway_service.jpg[Gateway
 service.jpg]]
@@ -36,8 +20,7 @@ remote data resource and transmit the appropriate DAP response back to
 the client. The system employs a white list to control what data systems
 the BES will access.
 
- +
- A Data Service Portal (DSP), such as Mirador will:
+A Data Service Portal (DSP), such as Mirador will:
 
 * Provide the navigation/search/discovery interface to the data source.
 * Generate the data source URLs.
@@ -46,8 +29,7 @@ the BES will access.
 * Hand this to the client (via a link or what have you in the DSP
 interface)
 
-2 BES gateway_module
-~~~~~~~~~~~~~~~~~~~~
+== BES gateway_module
 
 The gateway_module handles the gathering of the remote data resource and
 the construction of the DAP response.
@@ -59,16 +41,15 @@ permission.
 * Retrieves remote data source .
 * Determines data type by:
 
-1.  Direct identification via the BesXmlApi. (You tell it.)
-2.  HTTP Content-Disposition header
-3.  Applying the BES.TypeMatch string to the last term in the path
+. Direct identification via the BesXmlApi. (You tell it.)
+. HTTP Content-Disposition header
+. Applying the BES.TypeMatch string to the last term in the path
 section of the data source URL.
 
 The BES will *not* persist the data resources beyond the scope of each
 request.
 
-3 OLFS gateway_service
-~~~~~~~~~~~~~~~~~~~~~~
+== OLFS gateway_service
 
 The gateway_service is responsible for:
 
@@ -76,16 +57,14 @@ The gateway_service is responsible for:
 * Building the request for the BES.
 * Returning the response from the BES to the client.
 
-4 Encoding data source URLs
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+== Encoding data source URLs
 
 The data source URLs need to be encoded in the DAP data request URL that
 is used to access the gateway_service.
 
 There are many ways to encode something in this context.
 
-4.1 Prototype Encoding
-^^^^^^^^^^^^^^^^^^^^^^
+=== Prototype Encoding
 
 As a prototype encoding we'll use an hex ascii encoding. In this
 encoding each character in the data source URL is expressed as is
@@ -103,10 +82,7 @@ The source code for the EncodeDecode java class used by hexEncode is
 available here:
 http://scm.opendap.org/svn/trunk/olfs/src/opendap/gateway/EncodeDecode.java
 
- +
-
-4.1.1 Example 1
-+++++++++++++++
+==== Example 1
 
 source string::
   http://www.google.com
@@ -117,10 +93,7 @@ stringToHex()::
 hexToString(stringToHex()::
   http://www.google.com
 
- +
-
-4.1.2 Example 2
-+++++++++++++++
+==== Example 2
 
 Source string::
   http://g0dup05u.ecs.nasa.gov/cgi-bin/ceopAIRX2RET?service=WCS&version=1.0.0&request=GetCoverage&coverage=H2OMMRStd&crs=WGS84&bbox=-107.375000,51.625000,-102.625000,56.375000&format=netCDF&TIME=2002-10-03&resx=0.25&resy=0.25&interpolationMethod=Nearest%20neighbor
@@ -132,8 +105,7 @@ stringToHex()::
 hexToString(stringToHex()::
   http://g0dup05u.ecs.nasa.gov/cgi-bin/ceopAIRX2RET?service=WCS&version=1.0.0&request=GetCoverage&coverage=H2OMMRStd&crs=WGS84&bbox=-107.375000,51.625000,-102.625000,56.375000&format=netCDF&TIME=2002-10-03&resx=0.25&resy=0.25&interpolationMethod=Nearest%20neighbor
 
-4.1.3 Example 3
-+++++++++++++++
+==== Example 3
 
 source string::
   foobar

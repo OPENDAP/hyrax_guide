@@ -1,35 +1,11 @@
-BES File Out NetCDF - OPeNDAP Documentation
-===========================================
+= BES File Out NetCDF - OPeNDAP Documentation
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-[[firstHeading]]
-BES File Out NetCDF
--------------------
 
-From OPeNDAP Documentation
-
-Contents
-~~~~~~~~
-
-* link:#General_Questions_and_Assumptions[1 General Questions and
-Assumptions]
-* link:#How_to_flatten_hierarchical_types[2 How to flatten hierarchical
-types]
-** link:#Attributes_of_flattened_types.2Fvariables[2.1 Attributes of
-flattened types/variables]
-* link:#Extra_data_to_be_included[3 Extra data to be included]
-* link:#Information_About_Specific_Types[4 Information About Specific
-Types]
-** link:#Strings[4.1 Strings]
-** link:#Structures[4.2 Structures]
-** link:#Grid[4.3 Grid]
-** link:#Array[4.4 Array]
-** link:#Sequences[4.5 Sequences]
-** link:#Attributes[4.6 Attributes]
-** link:#Added_attributes[4.7 Added attributes]
-* link:#Support_for_CF[5 Support for CF]
-
-1 General Questions and Assumptions
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+== General Questions and Assumptions
 
 * What version of netCDF will this support?
 
@@ -43,8 +19,7 @@ sequences?
 initial version should note their presence and add an attribute noting
 that they have been elided.
 
-2 How to flatten hierarchical types
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+== How to flatten hierarchical types
 
 For a structure such as
 
@@ -79,8 +54,7 @@ variable.
 This in some way obviates the need for the dot, but I think we should
 use that regardless.
 
-2.1 Attributes of flattened types/variables
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=== Attributes of flattened types/variables
 
 If the structure _Point_ has attributes, those should be copied to both
 the new variables (__Point.x__ and __Point.y__). It's redundant but this
@@ -94,8 +68,7 @@ variables x and y. So, if x has attributes a1 and a2 and Point has
 attributes a1 and a3 then the new variable Point.x will have attributes
 a1, a2, Point,a1 and Point.a3.
 
-3 Extra data to be included
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+== Extra data to be included
 
 For a file format like netCDF it is possible to include data about the
 source data using it's original data model as expressed using DAP. We
@@ -106,11 +79,9 @@ names where in the original data it came from so that client apps &
 users don't have to work too hard to sort out what has been changed to
 make the file.
 
-4 Information About Specific Types
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+== Information About Specific Types
 
-4.1 Strings
-^^^^^^^^^^^
+=== Strings
 
 * Add dimension representing the max length of the string with name
 varname_len.
@@ -128,8 +99,7 @@ string-length dimensions for netCDF-3 character arrays.
 For netCDF-4 of course, no string-length dimension is needed, as strings
 are supported as a netCDF data type.
 
-4.2 Structures
-^^^^^^^^^^^^^^
+=== Structures
 
 * Flatten
 * prepend name of structure with a dot followed by the variable name.
@@ -144,8 +114,7 @@ bad idea. If we use underscores then it maybe hard for clients to form a
 name that can be used to access values from a server based on the
 information in the file.
 
-4.3 Grid
-^^^^^^^^
+=== Grid
 
 * Flatten.
 * Use the name of the grid for the array of values
@@ -176,8 +145,8 @@ same variable with the same dimension and values. If not, it's an error,
 it should be using a map called y that gets written out as variable y
 with dimension y.
 
-1.  Read the dap spec on grids and see if this is the convention.
-2.  Read the netcdf component guide (section 2.2.1 and 2.3.1)
+. Read the dap spec on grids and see if this is the convention.
+. Read the netcdf component guide (section 2.2.1 and 2.3.1)
 
 Example files:
 
@@ -222,8 +191,7 @@ Dataset {
 } coads_climatology.nc;
 --------------------------------------------------------
 
-4.4 Array
-^^^^^^^^^
+=== Array
 
 * write_array appears to be working just fine.
 * If array of complex types?
@@ -235,8 +203,7 @@ using the name of the variable + "_dim" + dim_num. So, for example, if
 array a has three dimensions, and none have names, then the names will
 be a_dim1, a_dim2, a_dim3.
 
-4.5 Sequences
-^^^^^^^^^^^^^
+=== Sequences
 
 * For now throw an exception ../index.php/User:Jimg[jimg] 11:31, 21
 December 2008 (PST) Initial version should elide these I think because
@@ -246,15 +213,14 @@ the main part. We can represent these as arrays easily in the future.
 ../index.php/User:Jimg[jimg] 11:39, 21 December 2008 (PST) To translate
 a Sequence, there are several cases to consider:
 
-1.  A Sequence of simple types only (which means a one-level sequence):
+. A Sequence of simple types only (which means a one-level sequence):
 translate to a set of arrays using a name-prefix flattening scheme.
-2.  A nested sequence (otherwise with only simple types) should first be
+. A nested sequence (otherwise with only simple types) should first be
 flattened to a one level sequence and then that should be flattened.
-3.  A Sequence with a Structure or Grid should be flattened by
+. A Sequence with a Structure or Grid should be flattened by
 recursively applying the flattening logic to the components.
 
-4.6 Attributes
-^^^^^^^^^^^^^^
+=== Attributes
 
 * Global Attributes?
 ** For single container DDS (no embedded structure) just write out the
@@ -290,8 +256,7 @@ that variable.
 individual values will be put together with a newline character at the
 end of each, making one single value.
 
-4.7 Added attributes
-^^^^^^^^^^^^^^^^^^^^
+=== Added attributes
 
 ../index.php/User:Pwest[pwest] 14 January, 2009 - This feature will not
 be added as part of 1.5, but a future release.
@@ -326,8 +291,7 @@ Peter Fox mentions that we need to be careful of this sort of thing
 (storing provenance information locally) as this was tried with log
 information. Referencing this kind of information is dangerous.
 
-5 Support for CF
-~~~~~~~~~~~~~~~~
+== Support for CF
 
 If we can recognize and support files that contain CF-compliant
 information, we should strive to make sure that the resulting netCDF

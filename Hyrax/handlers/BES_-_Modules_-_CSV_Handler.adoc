@@ -1,37 +1,17 @@
 BES - Modules - CSV Handler - OPeNDAP Documentation
-===================================================
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-[[firstHeading]]
-BES - Modules - CSV Handler
----------------------------
-
-From OPeNDAP Documentation
-
-Contents
-~~~~~~~~
-
-* link:#Kinds_of_files_the_handler_will_serve[1 Kinds of files the
-handler will serve]
-** link:#Data_file_configuration[1.1 Data file configuration]
-*** link:#Supported_OpenDAP_datatypes[1.1.1 Supported OpenDAP datatypes]
-*** link:#Dataset_representation[1.1.2 Dataset representation]
-** link:#Known_problems[1.2 Known problems]
-* link:#Configuration_parameters[2 Configuration parameters]
-** link:#Configuring_the_handler[2.1 Configuring the handler]
-** link:#Configuring_Datasets[2.2 Configuring Datasets]
-*** link:#Simple_attribute_definitions[2.2.1 Simple attribute
-definitions]
-
-1 Kinds of files the handler will serve
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+== Kinds of files the handler will serve
 
 This handler will serve Comma-Separated Values type data. Form many
 kinds of files, only very modifications to the data files are needed. If
 you have very complex ASCII data (e.g., data with headers), take a look
 at the FreeForm handler, too.
 
-1.1 Data file configuration
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=== Data file configuration
 
 Given a simple CSV data file, such as would be written out by Excel, add
 a single line at the start that provides a name and OpenDAP datatype for
@@ -51,18 +31,18 @@ file with the added _name<type>_ configuration row.
 
 "FOOB",-32.9,23.4,269.69,"FOOBAR"
 
-1.1.1 Supported OpenDAP datatypes
+==== Supported OpenDAP datatypes
 
 The CSV handler supports the following DAP2 simple types: Int16, Int32,
 Float32, Float64, String.
 
-1.1.2 Dataset representation
+==== Dataset representation
 
 The CSV handler will return represent the columns in the dataset as
 arrays with the named dimension __record__. For example, the sample data
 shown above will be represented in DAP2 by this handler as:
 
-code,de1-------------------------------------- code,de1
+--------------------------------------
 Dataset {
     String Station[record = 5];
     Float32 latitude[record = 5];
@@ -80,21 +60,17 @@ attribute named _type_ with a string value of __Int16__, ...,
 __String__. However, see below for information on how to add custom
 attributes to a dataset.
 
-1.2 Known problems
-^^^^^^^^^^^^^^^^^^
+=== Known problems
 
 There are no known problems.
 
-2 Configuration parameters
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+== Configuration parameters
 
-2.1 Configuring the handler
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=== Configuring the handler
 
 This handler has no specific configuration parameters.
 
-2.2 Configuring Datasets
-^^^^^^^^^^^^^^^^^^^^^^^^
+=== Configuring Datasets
 
 There are two ways to add custom attributes to a dataset. First, you can
 use an _ancillary attribute_ file in the same directory as the dataset.
@@ -103,14 +79,14 @@ See link:../index.php/BES_-_Modules_-_NcML_Module[the NcML Handler
 documentation] for more information on that option. Here we will
 describe how to set up an ancillary attribute file.
 
-2.2.1 Simple attribute definitions
+==== Simple attribute definitions
 
 For any OpenDAP dataset, it is possible to write an ancillary attributes
 file like the following. If that file has the name __dataset__.`das`
 then whenever Hyrax reads __dataset__, it will also read those
 attributes, and return them when asked.
 
-code,de1--------------------------------------------- code,de1
+---------------------------------------------
 Attributes {
    Station {
       String bouy_type "flashing";

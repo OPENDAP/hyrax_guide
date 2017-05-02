@@ -1,35 +1,10 @@
-BES - Modules - SQL Hander - OPeNDAP Documentation
-==================================================
+= BES - Modules - SQL Hander - OPeNDAP Documentation
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-[[firstHeading]]
-BES - Modules - SQL Hander
---------------------------
-
-From OPeNDAP Documentation
-
-Contents
-~~~~~~~~
-
-* link:#Kinds_of_files_the_handler_will_serve[1 Kinds of files the
-handler will serve]
-** link:#Mappings_between_the_ODBC_data_types_and_DAP2_data_types[1.1
-Mappings between the ODBC data types and DAP2 data types]
-** link:#Known_problems[1.2 Known problems]
-* link:#Configuration_parameters[2 Configuration parameters]
-** link:#Configuring_the_ODBC_Driver[2.1 Configuring the ODBC Driver]
-** link:#Configuring_the_handler[2.2 Configuring the handler]
-*** link:#SQL.CheckPoint[2.2.1 SQL.CheckPoint]
-** link:#Configuring_Datasets[2.3 Configuring Datasets]
-*** link:#Information_in_the_section_part_of_the_dataset_file[2.3.1
-Information in the _section_ part of the dataset file]
-*** link:#The_select_part[2.3.2 The _select_ part]
-*** link:#The_from_and_where_parts[2.3.3 The _from_ and _where_ parts]
-*** link:#The_other_part[2.3.4 The _other_ part]
-*** link:#Using_variables[2.3.5 Using variables]
-*** link:#Some_example_dataset_files[2.3.6 Some example dataset files]
-
-1 Kinds of files the handler will serve
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+== Kinds of files the handler will serve
 
 This handler will serve data stored in a relational database if that
 database is configured to be accessed using ODBC. The handler has been
@@ -45,8 +20,7 @@ full range of SQL operations. At the same time, the SQL database server
 is never exposed to the web using this handler, so the database contents
 are safe.
 
-1.1 Mappings between the ODBC data types and DAP2 data types
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=== Mappings between the ODBC data types and DAP2 data types
 
 The SQL Handler maps the datatypes defined by SQL into types defined by
 DAP. In most cases the mapping is obvious. Here we document each of the
@@ -91,16 +65,13 @@ SQL_C_TYPE_DATE, SQL_C_TYPE_TIME, SQL_C_TYPE_TIMESTAMP |Str |
 |SQL_DECIMAL, SQL_NUMERIC |
 |========================================
 
-1.2 Known problems
-^^^^^^^^^^^^^^^^^^
+=== Known problems
 
 There are no known problems.
 
-2 Configuration parameters
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+== Configuration parameters
 
-2.1 Configuring the ODBC Driver
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=== Configuring the ODBC Driver
 
 To configure the handler the handler itself must be told which tables,
 or parts of tables, should be accessed and the ODBC driver must be
@@ -166,11 +137,9 @@ DATABASE    = test
 Socket      = /tmp/mysql.sock
 -----------------------------------
 
-2.2 Configuring the handler
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=== Configuring the handler
 
-2.2.1 SQL.CheckPoint
-++++++++++++++++++++
+==== SQL.CheckPoint
 
 Checkpoints in the SQL handler are phases of the database access process
 where error conditions can be tested for and reported. If these are
@@ -195,8 +164,7 @@ The default for the handler is to test for and report all errors:
 SQL.CheckPoint=1,2,3,4,5
 ------------------------
 
-2.3 Configuring Datasets
-^^^^^^^^^^^^^^^^^^^^^^^^
+=== Configuring Datasets
 
 One aspect of the SQL handler that sets it appart from other handlers is
 that the datasets it serves are not files or collections of files.
@@ -239,8 +207,7 @@ or
 [select]
 --------
 
-2.3.1 Information in the _section_ part of the dataset file
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+==== Information in the _section_ part of the dataset file
 
 There are six parameters that may be set in the _select_ part of the
 dataset file:
@@ -269,8 +236,7 @@ would rather have people access the data from the institution's high
 performance hardware. You can list both DSNs, knowing that the first
 listed will get preference.
 
-2.3.2 The _select_ part
-+++++++++++++++++++++++
+==== The _select_ part
 
 This part lists the columns to include as you would write them in an SQL
 SELECT statement. Each column name has to be unique. You can use aliases
@@ -285,24 +251,21 @@ table2.theColumn as col2
 
 and then use _col1,col2_ in the select part of the dataset file
 
-2.3.3 The _from_ and _where_ parts
-++++++++++++++++++++++++++++++++++
+==== The _from_ and _where_ parts
 
 Each of these parts are simply substituted and passed to the database
 just as you would expect. Note that you do not include the actual words
 _FROM_ or __WHERE__, just the contents of those parts of the SQL
 statement.
 
-2.3.4 The _other_ part
-++++++++++++++++++++++
+==== The _other_ part
 
 Entries in this parts should be of the form __key = value__, one per
 line. They are taken as a group and passed to the ODBC driver. Use this
 section to provide any parameters that are specific to a particular
 driver.
 
-2.3.5 Using variables
-+++++++++++++++++++++
+==== Using variables
 
 The dataset files also support 'variables' that can be used to define a
 name once and then use it repeatedly by simply using the variable name
@@ -313,8 +276,7 @@ variable is simple: __define $variable$ = value__, one per line (the _$_
 characters are literal, as is the word __define__). To reference a
 variable, use _$variable$_ wherever you would otherwise use a literal.
 
-2.3.6 Some example dataset files
-++++++++++++++++++++++++++++++++
+==== Some example dataset files
 
 ----------------------------------------------------------
 [section]

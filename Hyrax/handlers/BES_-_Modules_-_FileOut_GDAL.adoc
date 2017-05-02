@@ -1,22 +1,10 @@
-BES - Modules - FileOut GDAL - OPeNDAP Documentation
-====================================================
+= BES - Modules - FileOut GDAL - OPeNDAP Documentation
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-[[firstHeading]]
-BES - Modules - FileOut GDAL
-----------------------------
-
-From OPeNDAP Documentation
-
-Contents
-~~~~~~~~
-
-* link:#Description[1 Description]
-* link:#Services_Handled[2 Services Handled]
-* link:#Services_Provided[3 Services Provided]
-* link:#How_to_use_the_module[4 How to use the module]
-
-1 Description
-~~~~~~~~~~~~~
+== Description
 
 The File Out GDAL module provides the ability to return various kinds of
 GIS data files as responses from Hyrax. The handler currently supports
@@ -36,21 +24,18 @@ the EPSG:4047 or WGS84 Geographical Coordinate systems (GCS) and
 provides an option to set the default GCS using a parameter (described
 below).
 
-2 Services Handled
-~~~~~~~~~~~~~~~~~~
+== Services Handled
 
 This module does not handle any services but adds to an existing service
 
-3 Services Provided
-~~~~~~~~~~~~~~~~~~~
+== Services Provided
 
 The module provides an additional format to the `dap` service's `dods`
 command. The format is used to specify a "returnAs" format. This module
 provides the additional format of returning the OPenDAP data object as a
 GeoTIFF or JPEG2000 file.
 
-4 How to use the module
-~~~~~~~~~~~~~~~~~~~~~~~
+== How to use the module
 
 Once installed, the _fong.conf_ file is installed in the BES
 etc/bes/modules directory and is automatically loaded by the BES at
@@ -76,8 +61,7 @@ If not using the OLFS to serve your data, for example if using the
 bescmdln, you would run a command file that would look something like
 this:
 
-code,de1--------------------------------------------------------------------------------------
-code,de1
+--------------------------------------------------------------------------------------
 <?xml version="1.0" encoding="UTF-8"?>
 <request reqID="some_unique_value" >
     <setContext name="dap_format">dap2</setContext>

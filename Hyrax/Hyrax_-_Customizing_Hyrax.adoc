@@ -254,19 +254,16 @@ elements have XML _type_ attributes that are not currently recognized by
 any OPeNDAP software. _Not currently in use._
 |=======================================================================
 
-
 == Software Customization
 
 === OLFS Customization
 
 http://www.opendap.org/support/bom_sdw/SDW_2r0_OLFSExtensions.ppt[Power
 Point Presentation From the 2007 Software Development Workshop hosted by
-the Australian Bureau of Meteorology.] +
- +
+the Australian Bureau of Meteorology.]
 
 === BES Customization
 
 http://www.opendap.org/support/bom_sdw/SDW_4r0_BESExtensibility.ppt[Power
 Point Presentation From the 2007 Software Development Workshop hosted by
-the Australian Bureau of Meteorology.] +
- +
+the Australian Bureau of Meteorology.]
