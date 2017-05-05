@@ -1,8 +1,12 @@
+//// 
+// Removed this block of lines so the file can be included in another aAsciiDoc
+// file. jhrg 5/4/17
 = Hyrax - BES Configuration - OPeNDAP Documentation
 :Leonard Porrello <lporrel@gmail.com>:
 {docdate}
 :numbered:
 :toc:
+////
 
 == Introduction
 
@@ -126,7 +130,9 @@ _BES.ServerPort_ value. Note that the OLFS always uses only the TCP
 socket, even if the UNIX socket is present.
 
 == 6 Debugging Tip
-~~~~~~~~~~~~~~~
+// ~~~~~~~~~~~~~~~
+// This caused an error: [blockdef-comment] missing closing delimiter
+// jhrg 5/4/17
 
 In the bes.conf configuration file, use the _BES.ProcessManagerMethod_
 parameter to control whether the BES acts like a normal Unix server or

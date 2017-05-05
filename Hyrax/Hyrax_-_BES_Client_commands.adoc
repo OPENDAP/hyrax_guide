@@ -4,7 +4,7 @@
 :numbered:
 :toc:
 
-include::Hyrax_-_BES-Configuration.adoc[tabsize=4]
+include::Hyrax_-_BES_Configuration.adoc[tabsize=4]
 
 == Introduction
 
