@@ -4,7 +4,7 @@
 //:numbered:
 //:toc:
 
-== The _besctl_ command
+== The _besctl_ Command
 
 The _besctl_ command is used to control the BES daemon. For Hyrax
 version 1.7 and earlier, this the only way to control the BES. Starting
@@ -16,7 +16,7 @@ link:../index.php/Hyrax_-_Administrators_Interface[Hyrax Admin
 Interface] also provides for both hard and soft restarts of Hyrax while
 the _besctl_ command does not.
 
-== The most common uses of _besctl_
+== Most Common Uses of _besctl_
 
 To start and stop the BES, use the _besctl_ command. The besctl command
 has a number of options, but the most important are the _start_ and
@@ -70,8 +70,7 @@ which would tell the daemon to send diagnostic output from the ASCII
 handler, the NetCDF handler and the BES daemon itself to the terminal's
 standard error output.
 
-3 About each of the arguments to _besctl_
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+== About Each of the Arguments to _besctl_
 
 The besctl command accepts a total of seven arguments.
 
@@ -101,8 +100,7 @@ which will be available in Hyrax 1.8.
 This returns the master BES daemon process id number and the user id
 under which it is running.
 
-3.6 pids
-^^^^^^^^
+=== pids
 
 The BES is actually a collection of processes; use this argument to find
 the process id numbers for them all.
@@ -117,7 +115,7 @@ ignore this signal in certain circumstances. Using the _kill_ argument
 to besctl sends the KILL signal to all of the processes; KILL cannot be
 ignored by a process, so this is certain to stop the server.
 
-== About the options accepted by _besctl_
+== About the Options Accepted by _besctl_
 
 === server installation directory
 

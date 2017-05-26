@@ -24,7 +24,7 @@ Tomcat are not necessary for many sites since it's often the case that
 the servlet engine is already configured for SSL and has one or more
 users in Tomcat's _manager_ role. Using the interface is very intuitive.
 
-== Installation & Configuration
+== Installation and Configuration
 
 When Hyrax and Tomcat are installed all of the software needed to run
 the Hyrax Administrative Interface (HAI) is in place. However, you will
@@ -98,7 +98,7 @@ Restart the BES.
 Edit the file _$CATALINA_HOME/content/opendap/olfs.xml_ and remove the
 comments around the line _<adminPort>11002</adminPort>_
 
-=== Configuration notes
+=== Configuration Notes
 
 . Note that because the HAI is a web-based interface, with secure
 logins using SSL, you can use the interface with your server from
@@ -173,7 +173,7 @@ Viewer Controls 1]]
 ../index.php/File:Hai-Slide14.jpg[image:../images/7/7a/Hai-Slide14.jpg[Log
 Viewer Controls 2]]
 
-==== Setting logging levels
+==== Setting Logging Levels
 
 ../index.php/File:Hai-Slide15.jpg[image:../images/a/a6/Hai-Slide15.jpg[Setting
 log levels 1]]
@@ -216,7 +216,7 @@ Configuration 1]]
 ../index.php/File:Hai-Slide05.jpg[image:../images/6/60/Hai-Slide05.jpg[BES
 Configuration 2]]
 
-==== Bes Logging
+==== BES Logging
 
 ../index.php/File:Hai-Slide06.jpg[image:../images/7/72/Hai-Slide06.jpg[BES
 Logging 1]]

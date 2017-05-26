@@ -4,13 +4,13 @@
 :numbered:
 :toc:
 
-include::./aggregation/Dynamic_Aggregation_Tutorial.adoc[]
-include::./aggregation/Grid_Metadata_Tutorial.adoc[]
-include::./aggregation/JoinNew_Explicit_Dataset_Tutorial.adoc[]
-include::./aggregation/Metadata_on_Aggregations_Tutorial.adoc[]
-include::./aggregation/NCML_Module_Aggregation_JoinExisting.adoc[]
-include::./aggregation/NCML_Module_Aggregation_JoinNew.adoc[]
-include::./aggregation/NCML_Module_Aggregation_Union.adoc[] 
-include::./aggregation/Satellite_Swath_Data_Aggregation.adoc[]
-include::./aggregation/Satellite_Time_Series_Aggregation.adoc[]
-include::./aggregation/Aggregation_enhancements.adoc[]
+include::./aggregation/Dynamic_Aggregation_Tutorial.adoc[tabsize=4]
+include::./aggregation/Grid_Metadata_Tutorial.adoc[tabsize=4]
+include::./aggregation/JoinNew_Explicit_Dataset_Tutorial.adoc[tabsize=4]
+include::./aggregation/Metadata_on_Aggregations_Tutorial.adoc[tabsize=4]
+include::./aggregation/NCML_Module_Aggregation_JoinExisting.adoc[tabsize=4]
+include::./aggregation/NCML_Module_Aggregation_JoinNew.adoc[tabsize=4]
+include::./aggregation/NCML_Module_Aggregation_Union.adoc[tabsize=4] 
+include::./aggregation/Satellite_Swath_Data_Aggregation.adoc[tabsize=4]
+include::./aggregation/Satellite_Time_Series_Aggregation.adoc[tabsize=4]
+include::./aggregation/Aggregation_enhancements.adoc[tabsize=4]

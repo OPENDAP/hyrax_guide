@@ -7,7 +7,7 @@
 This documentation covers the **OPeNDAP 4 Data Server**, which is also known as **Hyrax**.
 
 == Overview
-image::./images/HyraxArchitecture.jpg[]
+image::../images/HyraxArchitecture.jpg[]
 
 Hyrax uses the Java servlet mechanism to hand off requests from a
 general web daemon to DAP format-specific software. This results in
@@ -230,7 +230,7 @@ the Hello World example and the CSV data handler
 * ../index.php/Hyrax:_BES_Administrative_Commands[BES Administrative
 Commands]
 
-=== Reference documentation
+=== Reference Documentation
 
 * http://www.opendap.org/api/bes/html/index.html[BES Reference]
 * http://www.opendap.org/api/libdap/html/index.html[libdap Reference]
