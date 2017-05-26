@@ -1,0 +1,16 @@
+= Hyrax Aggregation - OPeNDAP Documentation
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
+
+include::./aggregation/Dynamic_Aggregation_Tutorial.adoc[]
+include::./aggregation/Grid_Metadata_Tutorial.adoc[]
+include::./aggregation/JoinNew_Explicit_Dataset_Tutorial.adoc[]
+include::./aggregation/Metadata_on_Aggregations_Tutorial.adoc[]
+include::./aggregation/NCML_Module_Aggregation_JoinExisting.adoc[]
+include::./aggregation/NCML_Module_Aggregation_JoinNew.adoc[]
+include::./aggregation/NCML_Module_Aggregation_Union.adoc[] 
+include::./aggregation/Satellite_Swath_Data_Aggregation.adoc[]
+include::./aggregation/Satellite_Time_Series_Aggregation.adoc[]
+include::./aggregation/Aggregation_enhancements.adoc[]

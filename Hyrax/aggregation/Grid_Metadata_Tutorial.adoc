@@ -1,11 +1,11 @@
-= Grid Metadata Tutorial - OPeNDAP Documentation
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
+//= Grid Metadata Tutorial - OPeNDAP Documentation
+//:Leonard Porrello <lporrel@gmail.com>:
+//{docdate}
+//:numbered:
+//:toc:
 
 
-== An Example of Adding Metadata to a Grid
+== Grid Metadata Tutorial: An Example of Adding Metadata to a Grid
 
 ../index.php?title=Category:NCML&action=edit&redlink=1[Category:NCML]
 

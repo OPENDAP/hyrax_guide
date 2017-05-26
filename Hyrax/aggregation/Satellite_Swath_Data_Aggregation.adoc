@@ -1,10 +1,10 @@
-= Satellite Swath Data Aggregation - OPeNDAP Documentation
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
+//= Satellite Swath Data Aggregation - OPeNDAP Documentation
+//:Leonard Porrello <lporrel@gmail.com>:
+//{docdate}
+//:numbered:
+//:toc:
 
-== Description
+== Satellite Swath Data Aggregation Description
 
 Satellite_Swath_1
 

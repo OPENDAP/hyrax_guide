@@ -1,0 +1,12 @@
+= Hyrax Configuration - OPeNDAP Documentation
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
+
+include::Hyrax_-_Configuration.adoc[]
+include::Hyrax_-_BES_Configuration.adoc[]
+include::Hyrax_-_OLFS_Configuration.adoc[]
+include::Hyrax_-_Configuring_The_OLFS_To_Work_With_Multiple_BES's.adoc[]
+include::Hyrax_-_Logging_Configuration.adoc[]
+include::Hyrax_-_THREDDS_Configuration.adoc[]

@@ -1,10 +1,10 @@
-= Hyrax - THREDDS Configuration - OPeNDAP Documentation
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
+//= Hyrax - THREDDS Configuration - OPeNDAP Documentation
+//:Leonard Porrello <lporrel@gmail.com>:
+//{docdate}
+//:numbered:
+//:toc:
  
-== Overview
+== THREDDS Configuration Overview
 
 Hyrax now uses its own implementation of the THREDDS catalog services
 and supports most of the THREDDS catalog service stack. The

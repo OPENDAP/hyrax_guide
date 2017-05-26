@@ -1,10 +1,10 @@
-= NCML Module Aggregation JoinExisting - OPeNDAP Documentation
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
+//= NCML Module Aggregation JoinExisting - OPeNDAP Documentation
+//:Leonard Porrello <lporrel@gmail.com>:
+//{docdate}
+//:numbered:
+//:toc:
 
-== Overview
+== NCML Module Aggregation JoinExisting Overview
 
 A _joinExisting_ aggregation joins multiple granule datasets by
 concatenating the specified outer dimensional data from the granules

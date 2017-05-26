@@ -4,7 +4,7 @@
 :numbered:
 :toc:
 
-== 1 Overview
+== Overview
 
 The problem of linking Tomcat with Apache has been greatly reduced as of
 Apache 2.2. In previous incarnations of Apache & Tomcat, it was fairly

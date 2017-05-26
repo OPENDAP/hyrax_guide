@@ -1,10 +1,10 @@
-= Hyrax - Configuring The OLFS To Work With Multiple BES's - OPeNDAP Documentation
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
+//= Hyrax - Configuring The OLFS To Work With Multiple BES's - OPeNDAP Documentation
+//:Leonard Porrello <lporrel@gmail.com>:
+//{docdate}
+//:numbered:
+//:toc:
 
-== Introduction
+== Introduction to Configuring The OLFS To Work With Multiple BES's
 
 Configuring Hyrax to use multiple BES backends is straight forward. It
 will require that you edit the *olfs.xml* file and possible the

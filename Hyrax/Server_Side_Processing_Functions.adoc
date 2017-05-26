@@ -1,10 +1,10 @@
-= Server Side Processing Functions - OPeNDAP Documentation
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
+//= OPeNDAP Server Side Processing Functions
+//:Leonard Porrello <lporrel@gmail.com>:
+//{docdate}
+//:numbered:
+//:toc:
 
-== Server functions, invocation and composition
+== Server Functions, Invocation, and Composition
 
 === Calling Syntax
 

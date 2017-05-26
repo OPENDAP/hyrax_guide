@@ -1,10 +1,10 @@
-= Hyrax - OLFS Configuration - OPeNDAP Documentation
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
+//= Hyrax - OLFS Configuration - OPeNDAP Documentation
+//:Leonard Porrello <lporrel@gmail.com>:
+//{docdate}
+//:numbered:
+//:toc:
 
-== Introduction
+== OLFS Configuration Introduction
 
 This document should help you get started configuring the OLFS web
 application component of Hyrax. This software package was developed,

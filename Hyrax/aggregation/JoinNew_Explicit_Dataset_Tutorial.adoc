@@ -1,10 +1,10 @@
-= JoinNew Explicit Dataset Tutorial - OPeNDAP Documentation
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
+//= JoinNew Explicit Dataset Tutorial - OPeNDAP Documentation
+//:Leonard Porrello <lporrel@gmail.com>:
+//{docdate}
+//:numbered:
+//:toc:
 
-== Default Values for the New Coordinate Variable (on a Grid)
+== JoinNew Explicit Dataset Tutorial: Default Values for the New Coordinate Variable (on a Grid)
 
 The default for the new coordinate variable is to be of type String with
 the location of the dataset as the value. For example, the following

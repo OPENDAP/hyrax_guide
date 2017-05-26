@@ -1,10 +1,10 @@
-= Satellite Time Series Aggregation - OPeNDAP Documentation
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
+//= Satellite Time Series Aggregation - OPeNDAP Documentation
+//:Leonard Porrello <lporrel@gmail.com>:
+//{docdate}
+//:numbered:
+//:toc:
 
-== link:../index.php/Use_cases_for_swath_and_time_series_aggregation[<--Back]
+== Satellite Time Series Aggregation: link:../index.php/Use_cases_for_swath_and_time_series_aggregation[<--Back]
 
 *Point Of Contact:* _James_
 

@@ -1,10 +1,10 @@
-= Dynamic Aggregation Tutorial - OPeNDAP Documentation
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
+//= Dynamic Aggregation Tutorial - OPeNDAP Documentation
+//:Leonard Porrello <lporrel@gmail.com>:
+//{docdate}
+//:numbered:
+//:toc:
 
-== Overview
+== Dynamic Aggregation Tutorial Overview
 
 Dynamic aggregation is achieved through the use of the _scan_ element.
 

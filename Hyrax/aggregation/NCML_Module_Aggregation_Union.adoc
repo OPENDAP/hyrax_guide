@@ -1,8 +1,8 @@
-= NCML Module Aggregation Union - OPeNDAP Documentation
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
+//= NCML Module Aggregation Union - OPeNDAP Documentation
+//:Leonard Porrello <lporrel@gmail.com>:
+//{docdate}
+//:numbered:
+//:toc:
 
 == NCML Module: Union Aggregation
 

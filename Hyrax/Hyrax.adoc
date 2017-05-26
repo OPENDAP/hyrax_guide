@@ -1,8 +1,8 @@
-= Hyrax - OPeNDAP Documentation =
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
+// = Hyrax - OPeNDAP Documentation
+// :Leonard Porrello <lporrel@gmail.com>:
+// {docdate}
+// :numbered:
+// :toc:
 
 This documentation covers the **OPeNDAP 4 Data Server**, which is also known as **Hyrax**.
 
@@ -254,9 +254,6 @@ http://mailman.opendap.org/mailman/listinfo[subscribe] first)
 
 * pwest <at> ucar <dot> edu (__bes__)
 * jgallagher <at> opendap <dot> org (__libdap__)
-
-=== Sponsorship
-
 
 ==== OPeNDAP Hyrax development is sponsored by...
 

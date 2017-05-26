@@ -1,14 +1,10 @@
-//// 
-// Removed this block of lines so the file can be included in another aAsciiDoc
-// file. jhrg 5/4/17
-= Hyrax - BES Configuration - OPeNDAP Documentation
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
-////
+//= Hyrax - BES Configuration - OPeNDAP Documentation
+//:Leonard Porrello <lporrel@gmail.com>:
+//{docdate}
+//:numbered:
+//:toc:
 
-== Introduction
+== BES Configuration Introduction
 
 Building the BES and it's data handlers from source, or installing from
 the Linux RPMs, will provide the default installation with data and a

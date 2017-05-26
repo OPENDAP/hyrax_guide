@@ -1,8 +1,10 @@
-= Hyrax - Configuration - OPeNDAP Documentation
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
+// = Hyrax - Configuration - OPeNDAP Documentation
+// :Leonard Porrello <lporrel@gmail.com>:
+// {docdate}
+// :numbered:
+// :toc:
+
+== Introduction to Hyrax Configuration
 
 When you install Hyrax for the first time it is pre-configured to serve
 test data sets that come with each of the installed data handlers. This

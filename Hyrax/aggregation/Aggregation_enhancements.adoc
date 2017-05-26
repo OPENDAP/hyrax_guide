@@ -1,10 +1,10 @@
-= Aggregation Enhancements - OPeNDAP Documentation
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
+//= Aggregation Enhancements - OPeNDAP Documentation
+//:Leonard Porrello <lporrel@gmail.com>:
+//{docdate}
+//:numbered:
+//:toc:
 
-== Introduction
+== Introduction to Aggregation Enhancement
  
 In response to requests from NASA, and with their support, we have added
 two new kinds of aggregation to Hyrax. Both of these aggregation
@@ -18,7 +18,7 @@ intended for use with search interfaces that have knowledge of the
 individual files that make up typical satellite data sets (often called
 a __dataset inventory__).
 
-== Overview of the new capability
+== Overview of the New Capability
 
 **Summary**: This service provides value-based subsetting for satellite
 __swath data__. It's applicable to lots of other kinds of data, but

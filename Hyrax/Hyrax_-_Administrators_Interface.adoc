@@ -1,10 +1,10 @@
-= Hyrax - Administrators Interface - OPeNDAP Documentation
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
+//= Hyrax Administrators Interface
+//:Leonard Porrello <lporrel@gmail.com>:
+//{docdate}
+//:numbered:
+//:toc:
 
-== Overview
+== Administrator's Interface Overview
 
 The Hyrax Administrator's Interface (HAI) is a graphical interface to
 the configuration files and run-time logs of the Hyrax data server. It

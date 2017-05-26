@@ -1,8 +1,8 @@
-Hyrax - Starting and stopping the BES - OPeNDAP Documentation
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
+//= Starting and Stopping the BES
+//:Leonard Porrello <lporrel@gmail.com>:
+//{docdate}
+//:numbered:
+//:toc:
 
 == The _besctl_ command
 
