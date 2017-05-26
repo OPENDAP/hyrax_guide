@@ -6,4 +6,5 @@
 
 include::Hyrax_-_Running_bescmdln.adoc[]
 include::BES_-_How_to_Debug_the_BES.adoc[]
+include::Hyrax_-_BES_Configuration.adoc[tabsize=4]
 include::Hyrax_-_BES_Client_commands.adoc[]

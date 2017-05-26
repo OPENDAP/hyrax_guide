@@ -1,10 +1,10 @@
-= The FreeForm Data Handler - OPeNDAP Documentation
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
+//= The FreeForm Data Handler - OPeNDAP Documentation
+//:Leonard Porrello <lporrel@gmail.com>:
+//{docdate}
+//:numbered:
+//:toc:
 
-== Preface
+== FreeForm Data Handler Preface
 
 This document describes the OPeNDAP FreeForm ND Data Handler, which can
 be used with the OPeNDAP data server. It is not a complete description
@@ -25,7 +25,7 @@ convert that data into another data file format. This document presents
 the FreeForm ND software, and shows how to use it with the OPeNDAP
 server.
 
-=== Tasks Illustrated in this Guide
+=== Tasks Illustrated In This Section
 
 For a quick start to using the FreeForm ND software, see the list below
 of tasks described in this document.

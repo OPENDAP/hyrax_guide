@@ -1,11 +1,11 @@
-= BES File Out NetCDF - OPeNDAP Documentation
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
+//= BES File Out NetCDF - OPeNDAP Documentation
+//:Leonard Porrello <lporrel@gmail.com>:
+//{docdate}
+//:numbered:
+//:toc:
 
 
-== General Questions and Assumptions
+== BES File Out NetCDF - General Questions and Assumptions
 
 * What version of netCDF will this support?
 
@@ -19,9 +19,9 @@ sequences?
 initial version should note their presence and add an attribute noting
 that they have been elided.
 
-== How to flatten hierarchical types
+== How to Flatten Hierarchical Types
 
-For a structure such as
+For a structure such as...
 
 -----------
 Structure {
@@ -30,7 +30,7 @@ Structure {
 } Point;
 -----------
 
-represent that as
+...represent that as...
 
 -------
 Point.x
@@ -54,7 +54,7 @@ variable.
 This in some way obviates the need for the dot, but I think we should
 use that regardless.
 
-=== Attributes of flattened types/variables
+=== Attributes of Flattened Types/Variables
 
 If the structure _Point_ has attributes, those should be copied to both
 the new variables (__Point.x__ and __Point.y__). It's redundant but this
@@ -68,7 +68,7 @@ variables x and y. So, if x has attributes a1 and a2 and Point has
 attributes a1 and a3 then the new variable Point.x will have attributes
 a1, a2, Point,a1 and Point.a3.
 
-== Extra data to be included
+== Extra Data To Be Included
 
 For a file format like netCDF it is possible to include data about the
 source data using it's original data model as expressed using DAP. We

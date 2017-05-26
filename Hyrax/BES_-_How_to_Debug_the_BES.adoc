@@ -1,10 +1,10 @@
-= BES - How to Debug the BES - OPeNDAP Documentation
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
+//= BES - How to Debug the BES - OPeNDAP Documentation
+//:Leonard Porrello <lporrel@gmail.com>:
+//{docdate}
+//:numbered:
+//:toc:
 
-== Tricks
+== BES - How to Debug the BES - Tricks
 
 * Set the beslistener to run in single, not multiprocess, mode. Do this
 in the _bes.conf_ file (use the _BES.ProcessManagerMethod_ parameter).

@@ -1,10 +1,10 @@
-= Gateway Service - OPeNDAP Documentation
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
+//= Gateway Service - OPeNDAP Documentation
+//:Leonard Porrello <lporrel@gmail.com>:
+//{docdate}
+//:numbered:
+//:toc:
 
-== Overview
+== Gateway Service Overview
 
 ../index.php/File:Gateway_service.jpg[image:../images/thumb/8/88/Gateway_service.jpg/180px-Gateway_service.jpg[Gateway
 service.jpg]]

@@ -1,10 +1,10 @@
-= BES - Modules - NcML Module - OPeNDAP Documentation
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
+//= BES - Modules - NcML Module - OPeNDAP Documentation
+//:Leonard Porrello <lporrel@gmail.com>:
+//{docdate}
+//:numbered:
+//:toc:
 
-== Introduction
+== BES - Modules - NcML Module - Introduction
 
 *Welcome to the OPeNDAP NcML Data Handler Module v1.4.2 for
 http://www.opendap.org/download/hyrax.html[Hyrax]*

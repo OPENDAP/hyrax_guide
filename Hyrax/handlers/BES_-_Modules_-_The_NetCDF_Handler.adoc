@@ -1,10 +1,10 @@
-= BES - Modules - The NetCDF Handler - OPeNDAP Documentation
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
+//= BES - Modules - The NetCDF Handler - OPeNDAP Documentation
+//:Leonard Porrello <lporrel@gmail.com>:
+//{docdate}
+//:numbered:
+//:toc:
 
-== Kinds of files the handler will serve
+== BES - Modules - The NetCDF Handler - Kinds of files the handler will serve
 
 There are several versions of the netCDF software for reading and
 writing data and using those different versions, it's possible to make

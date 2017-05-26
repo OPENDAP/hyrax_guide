@@ -76,7 +76,7 @@ which network port and interface to use. Assuming you are running the
 BES and OLFS (i.e., all of Hyrax) on one machine, here's what you should
 do:
 
-== User and Group parameters
+== User and Group Parameters
 
 In the bes.conf configuration file, the BES must be started as root. One
 of the things that the BES does first is to start up a listener to
@@ -96,7 +96,7 @@ BES.User=#172
 BES.Group=#14
 -------------
 
-== Setting the networking parameters
+== Setting the Networking Parameters
 
 In the bes.conf configuration file, we have settings for how the BES
 should listen for requests:
@@ -125,10 +125,7 @@ Otherwise, clients on other machines will connect to the BES using the
 _BES.ServerPort_ value. Note that the OLFS always uses only the TCP
 socket, even if the UNIX socket is present.
 
-== 6 Debugging Tip
-// ~~~~~~~~~~~~~~~
-// This caused an error: [blockdef-comment] missing closing delimiter
-// jhrg 5/4/17
+== Debugging Tip
 
 In the bes.conf configuration file, use the _BES.ProcessManagerMethod_
 parameter to control whether the BES acts like a normal Unix server or

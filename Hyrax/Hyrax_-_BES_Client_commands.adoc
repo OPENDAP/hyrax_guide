@@ -1,12 +1,10 @@
-= Hyrax - BES Client commands - OPeNDAP Documentation
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
+//= Hyrax - BES Client commands - OPeNDAP Documentation
+//:Leonard Porrello <lporrel@gmail.com>:
+//{docdate}
+//:numbered:
+//:toc:
 
-include::Hyrax_-_BES_Configuration.adoc[tabsize=4]
-
-== Introduction
+== BES Client Commands - Introduction
 
 These are the commands that the BES supports. Documented here are the
 XML versions of the commands that are typed into the _bescmdln_ client.
