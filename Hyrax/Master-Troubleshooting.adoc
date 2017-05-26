@@ -1,4 +1,4 @@
-= Hyrax Trobuleshooting - OPeNDAP Documentation
+= Hyrax Troubleshooting - OPeNDAP Documentation
 :Leonard Porrello <lporrel@gmail.com>:
 {docdate}
 :numbered:
