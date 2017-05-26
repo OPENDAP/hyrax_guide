@@ -162,30 +162,23 @@ shipped with the server is generally the most useful level of detail. By
 default the log lines are not displayed - just click the start button to
 see them.
 
-../index.php/File:Hai-Slide12.jpg[image:../images/7/77/Hai-Slide12.jpg[OLFS
-Log Viewer Default Page]]
+image:../images/Hai-Slide12.jpg[]
 
 ==== Log Viewer Controls
 
-../index.php/File:Hai-Slide13.jpg[image:../images/2/29/Hai-Slide13.jpg[Log
-Viewer Controls 1]]
+image:../images/Hai-Slide13.jpg[]
 
-../index.php/File:Hai-Slide14.jpg[image:../images/7/7a/Hai-Slide14.jpg[Log
-Viewer Controls 2]]
+image:../images/Hai-Slide14.jpg[]
 
 ==== Setting Logging Levels
 
-../index.php/File:Hai-Slide15.jpg[image:../images/a/a6/Hai-Slide15.jpg[Setting
-log levels 1]]
+image:../images/Hai-Slide15.jpg[]
 
-../index.php/File:Hai-Slide16.jpg[image:../images/8/85/Hai-Slide16.jpg[Setting
-log levels 2]]
+image:../images/Hai-Slide16.jpg[]
 
-../index.php/File:Hai-Slide17.jpg[image:../images/a/a3/Hai-Slide17.jpg[Setting
-log levels 3]]
+image:../images/Hai-Slide17.jpg[]
 
-../index.php/File:Hai-Slide18.jpg[image:../images/a/a2/Hai-Slide18.jpg[Setting
-log levels 4]]
+image:../images/Hai-Slide18.jpg[]
 
 === BES Controls
 
@@ -193,8 +186,7 @@ The BES control panel provides one tab for each back-end server in this
 instance of Hyrax. Note that in these pictures we have only one BES
 running and it is called '/' (slash) meaning it is the default BES.
 
-../index.php/File:Besctl-01.jpg[image:../images/8/80/Besctl-01.jpg[Default
-Admin Page]]
+image:..\images\Besctl-01.jpg[]
 
 Beneath the "BES Management " banner you will see one or more tabs. You
 will always see a tab with the title of "/". This is the default BES for
@@ -202,38 +194,36 @@ this Hyrax. If the particular installation of Hyrax has multiple BES
 configured in its OLFS they will appear here as tabs where the "prefix"
 for the BES from the olfs.xml file will be used as the tab title.
 
-../index.php/File:Hai-Slide02.jpg[image:../images/7/72/Hai-Slide02.jpg[Admin
-Page Tour 1]]
+image:../images/Hai-Slide02.jpg[Admin
+Page Tour 1]
 
-../index.php/File:Hai-Slide03.jpg[image:../images/a/a0/Hai-Slide03.jpg[Admin
-Page Tour 2]]
+image:../images/Hai-Slide03.jpg[Admin
+Page Tour 2]
 
 ==== BES Configuration
 
-../index.php/File:Hai-Slide04.jpg[image:../images/3/3c/Hai-Slide04.jpg[BES
-Configuration 1]]
+image:../images/Hai-Slide04.jpg[]
 
-../index.php/File:Hai-Slide05.jpg[image:../images/6/60/Hai-Slide05.jpg[BES
-Configuration 2]]
+image:../images/Hai-Slide05.jpg[]
 
 ==== BES Logging
 
-../index.php/File:Hai-Slide06.jpg[image:../images/7/72/Hai-Slide06.jpg[BES
-Logging 1]]
+image:../images/Hai-Slide06.jpg[BES
+Logging 1]
 
-../index.php/File:Hai-Slide07.jpg[image:../images/c/c4/Hai-Slide07.jpg[BES
-Logging 2]]
+image:../images/Hai-Slide07.jpg[BES
+Logging 2]
 
-../index.php/File:Hai-Slide08.jpg[image:../images/a/a4/Hai-Slide08.jpg[BES
-Logging Configuration 1]]
+image:../images/Hai-Slide08.jpg[BES
+Logging Configuration 1]
 
-../index.php/File:Hai-Slide09.jpg[image:../images/7/74/Hai-Slide09.jpg[BES
-Logging 3]]
+image:../images4/Hai-Slide09.jpg[BES
+Logging 3]
 
 ==== OLFS Connections
 
-../index.php/File:Hai-Slide10.jpg[image:../images/6/64/Hai-Slide10.jpg[OLFS
-Connections 1]]
+image:../images/Hai-Slide10.jpg[OLFS
+Connections 1]
 
-../index.php/File:Hai-Slide11.jpg[image:../images/b/bb/Hai-Slide11.jpg[OLFS
-Connections 2]]
+image:../images/Hai-Slide11.jpg[OLFS
+Connections 2]
