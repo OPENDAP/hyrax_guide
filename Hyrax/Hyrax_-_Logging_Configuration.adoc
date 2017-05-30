@@ -4,6 +4,7 @@
 //:numbered:
 //:toc:
 
+//!!!NOTE: The external tomcat links in this doc do not work.
 == Logging Configuration Introduction
 
 We see logging activities falling into two categories:
@@ -173,14 +174,14 @@ doing so is not persistent: It will be overridden the next time the Web
 ARchive file is deployed. +
 
 . Failing 1, Hyrax then checks in the persistent content directory
-(link:../index.php/Hyrax_-_OLFS_Configuration#OLFS_Configuration_Location[set
+(link:./Hyrax_-_OLFS_Configuration.adoc[set
 by either the OLFS_CONFIG_DIR environment variable or in /etc/olfs]) for
 the file "logback-test.xml". If this file is present then it will be
 used to configure logging, and new installations of Hyrax will detect ad
 use this logging configuration automatically.
 
 . Failing 2, Hyrax then checks in the persistent content directory
-(link:../index.php/Hyrax_-_OLFS_Configuration#OLFS_Configuration_Location[set
+(link:./Hyrax_-_OLFS_Configuration.adoc[set
 by either the OLFS_CONFIG_DIR environment variable or in /etc/olfs]) for
 the file "logback.xml". If this file is present then it will be used to
 configure logging, and new installations of Hyrax will detect ad use
@@ -196,7 +197,7 @@ So - if you want to customize your Hyrax logging and have it be
 persistent, do it by copying the distributed logback.xml file
 ($CATALINA_HOME/webapps/opendap/WEB-INF/logback.xml) to the in the
 persistent content directory
-(link:../index.php/Hyrax_-_OLFS_Configuration#OLFS_Configuration_Location[set
+(link:./Hyrax_-_OLFS_Configuration.adoc[set
 by either the OLFS_CONFIG_DIR environment variable or in /etc/olfs]) and
 editing that copy.
 

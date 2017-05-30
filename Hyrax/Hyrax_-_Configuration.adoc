@@ -11,13 +11,13 @@ test data sets that come with each of the installed data handlers. This
 will allow you to test the server and make sure it is functioning
 correctly. After that you can customize it for your data.*
 
-=== link::./index.php/Hyrax_-_BES_Configuration[BES configuration]
+=== link::./Hyrax_-_BES_Configuration.adoc[BES configuration]
 
-=== link::./index.php/Hyrax_-_OLFS_Configuration[OLFS configuration]
+=== link::./Hyrax_-_OLFS_Configuration.adoc[OLFS configuration]
 
-=== link::./index.php/Hyrax_-_THREDDS_Configuration[THREDDS Configuration]
+=== link::./Hyrax_-_THREDDS_Configuration.adoc[THREDDS Configuration]
 
-=== link::./index.php/Hyrax_-_Logging_Configuration[Logging configuration]
+=== link::./Hyrax_-_Logging_Configuration.adoc[Logging configuration]
 
 === 5 Robots
 
@@ -42,5 +42,5 @@ place it in *$CATALINA_HOME/webapps/ROOT*
 
 If you still find that you system is being cruelly burdened with robot
 traffic then you might want to try the
-link:../index.php/Hyrax_-_OLFS_Configuration#BotBlocker_.28optional.29[BotBlocker
+link:./Hyrax_-_OLFS_Configuration.adoc#BotBlocker[BotBlocker
 handler for the OLFS].

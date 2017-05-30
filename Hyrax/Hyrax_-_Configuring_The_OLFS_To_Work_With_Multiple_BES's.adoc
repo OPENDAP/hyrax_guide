@@ -180,8 +180,7 @@ Consider, if you have this configuration:
 
 And the top level directory for the _root_ BES looks like this:
 
-../index.php/File:TopDir.png[image:../images/7/75/TopDir.png[Top Level
-Directory]]
+image::../images/TopDir.png[]
 
 If you add another BES, like this:
 
@@ -213,8 +212,7 @@ words, simply create a directory called "sst" in the same directory that
 contains the "Test" and "data" directories on server0.test.org. After
 you did that your top level directory would look like this:
 
-../index.php/File:TopDir2.png[image:../images/2/23/TopDir2.png[Top Level
-Directory]]
+image::../images/TopDir2.png[]
 
 This holds true for any arrangement of BESs that you make. The location
 of the _mount point_ will depend on your configuration, and how you

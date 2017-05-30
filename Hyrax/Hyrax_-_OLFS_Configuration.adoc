@@ -37,22 +37,19 @@ available through the Docs servlet the data provider can further
 customize the appearance and layout of the Hyrax server web pages to
 better conform with their parent organizations visual identity. The Docs
 servlet has no specific configuration file.
-* link:../index.php/Hyrax_-_Administrators_Interface[*Admin Interface
+* link:./Hyrax_-\_Administrators_Interface.adoc[*Admin Interface
 servlet*] - The Hyrax Administration Interface (HAI) provides server
 administrators with a GUI for monitoring, controlling, and configuring
-the server. link:../index.php/Hyrax_-_Administrators_Interface[The Admin
-Interface is documented here.]
-* link:../index.php/BES_-_Modules_-_Gateway_Module[*Gateway servlet*] -
+the server.
+* link:../Hyrax/handlers/BES_-\_Modules_-_Gateway_Module.adoc[*Gateway servlet*] -
 Provides a gateway service that allows Hyrax to be configured to
 retrieve files (that the server recognizes as data) from the web and
 then provide DAP services for those files once they are retrieved. The
 Gateway servlet does not require additional configuration, only that the
 BES be correctly configured to perform gateway tasks.
-link:../index.php/BES_-_Modules_-_Gateway_Module[The BES Gateway Module
-is documented here.]
 
 Additionally the OLFS web application relies on one or more instances of
-the link:../index.php/Hyrax_-_BES_Configuration[BES] to provide it with
+the link:./Hyrax_-_BES_Configuration.adoc[BES] to provide it with
 data access and basic catalog metadata.
 
 The OLFS web application stores it's configuration state in a number of
@@ -147,13 +144,13 @@ first two: *olfs.xml* and *catalog.xml*
   WEB-INF directory of the web application "opendap". Typically that
   means _$CATALINA_HOME/webapps/opendap/WEB-INF/log4j.xml_ However,
   Hyrax can be configured to look in additional places for the
-  _log4j.xml_ file. link:../index.php/Hyrax_-_Logging_Configuration[Read
+  _log4j.xml_ file. link:./Hyrax_-_Logging_Configuration.adoc[Read
   More About It Here].
 
 == Hyrax Servlet Configuration
 
 The Hyrax servlet is the front end (public interface) for
-link:../index.php/Hyrax[Hyrax]. It provides DAP services, THREDDS
+link:./Hyrax.adoc[Hyrax]. It provides DAP services, THREDDS
 catalogs, directory views, logging, and authentication services. This is
 accomplished through a collection of software components called
 DispatchHandlers. At startup the Hyrax servlet reads the *olfs.xml* file
@@ -209,33 +206,32 @@ web application
 servlet.
 * Controls both view and access behaviours of the Hyrax servlet.
 
-=== OLFSConfig element
+=== OLFSConfig Element
 
 The <__OLFSConfig__> element is the document root and it contains two
 elements that suppy the configuration for the OLFS: <__BesManager__> and
 <__DispatchHandlers__ >
 
-=== *<BESManager>* element (required)
+=== *<BESManager>* Element (required)
 
 The BESManager element provides configuration for the BESManager class.
 The BESManager is used various parts of the OLFS web application
 whenever the software needs to access BES(s) services. This
 configuration is key to the function of Hyrax. In it each BES that is
 connected to a Hyrax installation is defined. The following examples
-will show a single BES example.
-*link:../index.php/Hyrax_-_Configuring_The_OLFS_To_Work_With_Multiple_BES%27s[For
-more information on configuring Hyrax to use multiple BES's look here.]*
+will show a single BES example. For more information on configuring Hyrax to use multiple BES's
+link:./Hyrax_-_Configuring_The_OLFS_To_Work_With_Multiple_BES%27s.adoc[look here].
 
 Each BES is identified using a seperate <__BES__> child element inside
 of the <__BESManager__> element.
 
-==== *<BES>* element (required)
+==== *<BES>* Element (required)
 
 The <__BES__> element provides the OLFS with connection and control
 information for a BES. There are 4 child elements in a <__BES__>
 element: <__prefix__>, <__host__>, <__port__>, and <__ClientPool__>
 
-==== *<prefix>* element (required)
+==== *<prefix>* Element (required)
 
 This child element of the <__BES__> element contains the URL prefix that
 the OLFS will associate with this BES. This provides a mapping bewteen
@@ -256,7 +252,7 @@ that one.
 effort is required. However, when using multiple BES's it is neccesary
 that each BES have a mount point exposed as a directory (aka collection)
 in URI space where it's going to appear. See
-link:../index.php/Hyrax_-_Configuring_The_OLFS_To_Work_With_Multiple_BES%27s[Configuring
+link:./Hyrax_-_Configuring_The_OLFS_To_Work_With_Multiple_BES%27s.adoc[Configuring
 With Multiple BES's] for more information.
 . The prefix string *must* always begin with the slash ("/")
 character. (see __example 2__)
@@ -273,7 +269,7 @@ _example 2:_
  <prefix>/data/nc</prefix>
 --------------------------
 
-==== *<host>* element (required)
+==== *<host>* Element (required)
 
 This child element of the <__BES__> element contains the host name or IP
 address of the BES.
@@ -284,7 +280,7 @@ _example:_
 <host>test.opendap.org</host >
 ------------------------------
 
-==== *<port>* element (required)
+==== *<port>* Element (required)
 
 This child element of the <__BES__> element contains port number on
 which the BES is listening.
@@ -294,7 +290,7 @@ _example:_
 <port>10022</port >
 -------------------
 
-==== *<timeOut>* element (optional)
+==== *<timeOut>* Element (optional)
 
 This child element of the <__BES__> element contains the timeout time,
 in seconds, for the OLFS to wait for this BESto respond. Defaults to 300
@@ -306,7 +302,7 @@ _example:_
 <timeOut>600</timeOut >
 -----------------------
 
-==== *<maxResponseSize>* element (optional)
+==== *<maxResponseSize>* Element (optional)
 
 This child element of the <__BES__> element contains the maximum
 response size, in bytes, allowed for this BES. Requests that produce a
@@ -319,7 +315,7 @@ _example:_
 <maxResponseSize>0</maxResponseSize>
 ------------------------------------
 
-==== *<ClientPool>* element (optional)
+==== *<ClientPool>* Element (optional)
 
 This child element of the <__BES__> element configures the behavior of
 the pool of client connections that the OLFS maintains with this
@@ -350,7 +346,7 @@ _example:_
 <adminPort>11002</adminPort>
 ----------------------------
 
-==== Example BESManager configuration element
+==== Example BESManager Configuration Element
 
 -------------------------------------------------- 
 <BESManager>
@@ -366,7 +362,7 @@ _example:_
 </BESManager >
 --------------------------------------------------
 
-=== *<CatalogCache>* element
+=== *<CatalogCache>* Element
 
 The catalog cache element configures the OLFS memory cache of BES
 catalog responses. This cache can greatly increase server performance
@@ -387,14 +383,14 @@ timely manner. The `updateIntervalSeconds` default value 10000 seconds
 remove (or comment out) the `CatalogCache` element and it's children
 from the `olfs.xml` file.
 
-=== *<DispatchHandlers>* element
+=== *<DispatchHandlers>* Element
 
 The <__DispatchHandlers__> element has two child elements:
 <__HttpGetHandlers__> and <__HttpPostHandlers__>. The
 <__HttpGetHandlers__> contains and ordered list of the DispatchHandler
 classes used by the OLFS to handle incoming HTTP GET requests.
 
-=== *<HttpGetHandlers>* element
+=== *<HttpGetHandlers>* Element
 
 The <__HttpGetHandlers__> contains and ordered list of the
 DispatchHandler classes used by the OLFS to handle incoming HTTP GET
@@ -404,13 +400,13 @@ DispatchHandler on the list will be asked to handle the request. The
 first DispatchHandler on the list to claim the request will be asked to
 build the response.
 
-=== *<HttpPostHandlers>* element
+=== *<HttpPostHandlers>* Element
 
 While programmatic support for POST request handlers is part of the
 Hyrax servlet there are currently no HttpPostHandlers implemented for
 use with Hyrax. Maybe down the road…
 
-=== *<Handler>* elements
+=== *<Handler>* Elements
 
 Both the <__HttpGetHandlers__> and <__HttpPostHandlers__> contain an
 orderd list of <__Handler__> elements. Each <__Handler__> must have an
@@ -472,6 +468,7 @@ configuration elements, so it will always be written like this:
 <Handler className="opendap.bes.VersionDispatchHandler" />
 ----------------------------------------------------------
 
+[[BotBlocker]]
 === BotBlocker (optional)
 
 This optional handler can be used to block access from specific IP
@@ -482,7 +479,7 @@ data holdings exhaustively queried by automated software, we created a
 simple robot blocking handler to protect system resources from
 non-compliant robots.
 
-==== *<IpAddress>* element
+==== *<IpAddress>* Element
 
 The text value of this element should be the IP address of a system
 which you would like to block from accessing your service. For example:
@@ -494,7 +491,7 @@ which you would like to block from accessing your service. For example:
 Blocks the system located at 128.193.64.33 from accessing your server.
 There can be zero or more <IpAddress> elements in the <BotBlocker>
 
-==== *< IpMatch >* element
+==== *< IpMatch >* Element
 
 The text value of this element should be the regular expression that
 will be used to match the IP addresses clients attempting to access
@@ -545,7 +542,7 @@ Serves static THREDDS catalogs (i.e. THREDDS catalog files stored on
 disk). Provides both a presentation view (HTML) for humans using
 browsers, and direct catalog access (XML).
 
-==== *<prefix>* element (required)
+==== *<prefix>* Element (required)
 
 Defines the path component that comes after the servlet context and
 before all catalog requests. For example, if the prefix is __thredds__,
@@ -553,14 +550,14 @@ then http://localhost:8080/opendap/thredds/ should give you the
 top-level static catalog (the contents of the file
 $CATALINA_HOME/content/opendap/catalog.xml)
 
-==== *<useMemoryCache>* element (optional)
+==== *<useMemoryCache>* Element (optional)
 
 If the text value of this element is the string 'true' this will cause
 the servlet to ingest all of the static catalog files at startup and
-hold their contents in memory. link:../index.php/THREDDS_using_XSLT[See
+hold their contents in memory. link:./THREDDS_using_XSLT.adoc[See
 this page for more information about the memory caching operations]
 
-==== *<ingestTransformFile>* element (optional)
+==== *<ingestTransformFile>* Element (optional)
 
 This is a specific development option that allows one top specify the
 fully qualified path to an XSLT file that will be used to preprocess
@@ -582,7 +579,7 @@ general is not recommended for use in an operational server.*
 
 === Gateway Dispatcher
 
-Directs requests to the link:../index.php/Gateway_Service[Gateway
+Directs requests to the link:../Hyrax/handlers/Gateway_Service.adoc[Gateway
 Service]
 
 ==== *<prefix>* Element (required)
@@ -604,7 +601,7 @@ access form page.
 Handles DAP request for Hyrax. For example the DapDispatchHandler will
 handle requests for all DAP2 and DAP4 products
 
-==== *<AllowDirectDataSourceAccess>* element (optional)
+==== *<AllowDirectDataSourceAccess>* Element (optional)
 
 The <__AllowDirectDataSourceAccess__ /> element controls the users
 ability to directly access data sources via the web interface. If this
@@ -616,7 +613,7 @@ turned off and I recommend that you leave it that way unless you really
 want users to be able to circumvent the OPeNDAP request interface and
 have direct access to the data products stored on your server.
 
-==== *<UseDAP2ResourceUrlResponse>* element (optional)
+==== *<UseDAP2ResourceUrlResponse>* Element (optional)
 
 By default, at least for now, the server will provide the (undefined)
 DAP2 style response to requests for a dataset resource URL. Commenting
@@ -677,7 +674,7 @@ direct access to data sources (note that the
 
 Hyrax does not currently support HTTP POST requests.
 
-=== Example olfs.xml file
+=== Example olfs.xml File
 
 ---------------------------------------------------------------------------------------------------------------------------
 <?xml version="1.0" encoding="UTF-8"?>
@@ -790,18 +787,18 @@ Hyrax does not currently support HTTP POST requests.
 </OLFSConfig>
 ---------------------------------------------------------------------------------------------------------------------------
 
-== THREDDS configuration *catalog.xml* file
+== THREDDS Configuration *catalog.xml* File
 
 The *catalog.xml* file contains the static THREDDS catalog configuration
-for Hyrax. link:../index.php/Hyrax_-_THREDDS_Configuration[Read About It
+for Hyrax. link:./Hyrax_-_THREDDS_Configuration.adoc[Read About It
 Here].
 
-== Logging configuration (**logback.xml** file)
+== Logging Configuration (**logback.xml** file)
 
 The *logback.xml* file contains the logging configuration for Hyrax.
-link:../index.php/Hyrax_-_Logging_Configuration[Read About It Here].
+link:./Hyrax_-_Logging_Configuration.adoc[Read About It Here].
 
-== *web.xml* configuration file
+== *web.xml* Configuration File
 
 _We strongly recommend that you do *NOT* mess with the web.xml file. At
 least for now. Future versions of Server and the OLFS may have "user
@@ -914,7 +911,7 @@ __Default__: If this parameter is not set, or the value field is empty
 then these features will be disabled - which is what you want unless
 there is a problem to analyze.
 
-=== Example of web.xml content
+=== Example of web.xml Content
 
 ----------------------------------------------------------------------
 <servlet>
@@ -956,11 +953,11 @@ that can be utilized in conjunction with the dataset. The Viewers
 servlet is configured via the contents of the *viewers.xml* file located
 in the persistent content directory $CATALINA_HOME/content/opendap.
 
-=== *viewers.xml* configuration file
+=== *viewers.xml* Configuration File
 
-==== *<JwsHandler>* elements
+==== *<JwsHandler>* Elements
 
-==== *<WebServiceHandler>* elements
+==== *<WebServiceHandler>* Elements
 
 ==== Example Configuration
 
@@ -1033,12 +1030,11 @@ In the Docs servlet, if a URL ends in a directory name or a "/" then the
 servlet will attempt to serve the *index.html* in that directory. In
 other words *index.html* is the default document.
 
-== link:../index.php/Hyrax_-_Logging_Configuration[Logging]
+== Logging
 
-link:../index.php/Hyrax_-_Logging_Configuration[Logging is a big enough
-subject we gave it it's own page.]
+Logging is a big enough subject to get link:./Hyrax_-_Logging_Configuration.com[it's own page.]
 
-== Authentication & Authorization
+== Authentication and Authorization
 
 === Apache Web Server (httpd)
 
@@ -1053,9 +1049,9 @@ can be integrated nicely with this existing infrastructure.
 More about integrating Hyrax with Apache Web Server can be found at
 these pages:
 
-* link:../index.php/Hyrax_-_Apache_Integration[Integrating Hyrax with
+* link:./Master-Hyrax_-_Apache_Integration.adoc[Integrating Hyrax with
 Apache Web Server.]
-* link:../index.php/Hyrax_-_User_Identification_(Authentication)[Configuring
+* link:./Master-Hyrax_-\_User_Identification_(Authentication).adoc[Configuring
 Hyrax and Apache for User Authentication and Authorization]
 
 === Tomcat
@@ -1294,6 +1290,6 @@ Restart Tomcat for these changes to take effect.
 
 *NOTE: If you are using Tomcat in conjunction with the Apache Web Server
 (our friend httpd) via AJP you will need to
-link:../index.php/Hyrax_-_Apache_Integration#Apache_Compressed_Responses[configure
+link:./Master-Hyrax_-_Apache_Integration.adoc[configure
 Apache to deliver compressed responses] too. Tomcat will not compress
 content sent over the AJP connection.*
