@@ -52,7 +52,7 @@ BESClient > show catalog;
 -------------------------
 
 If you can't see your data, then make sure that the RootDirectory
-parameters in the link:../index.php/Hyrax_-_BES_Configuration[BES
+parameters in the link:./Hyrax_-_BES_Configuration.adoc[BES
 Configuration file] are correct.
 
 ----------------
@@ -61,11 +61,11 @@ BESClient > exit
 
 This one will exit out of interactive mode.
 
-== Commands for Hyrax testing
+== Commands for Hyrax Testing
 
 === Poke around in the RootDirectory to see what's actually visible to the BES
 
-==== Show the root catalog
+==== Show the Root Catalog
 
 -------------
 show catalog;

@@ -36,15 +36,14 @@ as a tool for altering the catalog presentation of any part of the BES
 catalog. These alterations include (but are not limited too) renaming,
 auto proxy generation, filtering, and metadata injection.
 
-link:../index.php/THREDDS_using_XSLT[More details about the handlers,
+link:./THREDDS_using_XSLT.adoc[More details about the handlers,
 their configuration options, and other information can be found here.]
 
 === THREDDS Catalog Documentation
 
 Rather than provide an exhaustive explanation of the THREDDS catalog
 functionality and configuration I will appeal to the existing documents
-provided by our fine colleagues at
-http://www.unidata.ucar.edu/projects/THREDDS/[UNIDATA]:
+provided by our fine colleagues at UNIDATA:
 
 * http://www.unidata.ucar.edu/projects/THREDDS/tech/TDS.html#Catalogs[Catalog
 Basics]
@@ -64,7 +63,7 @@ configuration] (applies to Hyrax as well).
 == Configuration Instructions
 
 * The current default
-(link:../index.php/Hyrax_-_OLFS_Configuration#olfs.xml_Configuration_File[olfs.xml])
+(link:./Hyrax_-_OLFS_Configuration.adoc[olfs.xml])
 file comes with THREDDS configured correctly.
 * The THREDDS master catalog is stored in the file
 *$CATALINA_HOME/content/opendap/catalog.xml* it can be edited to provide
