@@ -937,7 +937,7 @@ UrsTokenPath         /oauth/token
 
 Assuming that you have also:
 
-* Completed configuring link:../index.php/Hyrax_-_Apache_Integration[AJP
+* Completed configuring link:./Master-Hyrax_-_Apache_Integration.adoc[AJP
 proxy for Tomcat]
 * Authorized your server (aka Application) to access your URS profile.
 

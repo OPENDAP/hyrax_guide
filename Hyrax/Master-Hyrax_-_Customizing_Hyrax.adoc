@@ -14,7 +14,6 @@ There are several ways in which Hyrax can be customized:
 
 == Webpage Customization
 
-
 Hyrax's public "face" is the web pages that are produced by servlets
 running in the Tomcat servlet engine. Almost all of these pages can be
 completely customized by the site administrator by editing a combination
@@ -129,9 +128,7 @@ for the directory view (produced by contents.css and contents.xsl)
 
 |*favicon.ico* | |_$CATALINA_HOME/content/opendap/docs/images_ | |The
 cute little icon preceding the URL in the address bar of your browser.
-To be used this file needs to be installed into Tomcat
-link:../index.php/Hyrax_-_Installation_Instructions#Miscellaneous[as
-described here]
+To be used, this file needs to be installed into Tomcat.
 
 |*BadDapRequest.gif, BadGateway.png, +
  favicon.ico, folder.png, +
@@ -171,7 +168,7 @@ contents.xsl file contains the XSLT transformation that is used to build
 the
 link:../index.php/ServerDispatchOperations#OPeNDAP_Directory_Response[OPeNDAP
 Directory Response] (__see
-link:../images/6/6e/DirectoryView.png[img]__) +
+image:../images/DirectoryView.png[]
  +
 
 |*dap_3.2_ddxToRdfTriples.xsl* |

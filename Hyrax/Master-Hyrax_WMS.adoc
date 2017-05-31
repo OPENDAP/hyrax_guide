@@ -47,7 +47,7 @@ Open your dataset with **ToolsUI**, and in the *Feature Types -> Grid
 Panel* there should be one or more variables shown with some kind of
 coordinate system.
 
-../index.php/File:ToolsUI-GridView.png[image:../images/0/0f/ToolsUI-GridView.png[image]]
+image:../images/ToolsUI-GridView.png[]
 
 ToolsUI Grid View
 
@@ -168,8 +168,7 @@ different, more durable location._
 Once you have authenticated and can view the ncWMS2 admin page, scroll
 down to the Dynamic Services section:
 
-../index.php/File:Screen_Shot_2014-08-11_at_12.34.19_PM.png[image:../images/1/1a/Screen_Shot_2014-08-11_at_12.34.19_PM.png[ncWMS
-Admin Page - Partial Screen Grab]]
+image:../images/Screen_Shot_2014-08-11_at_12.34.19_PM.png[]
 
 Create a new Dynamic Service for Hyrax:
 
@@ -279,7 +278,7 @@ URL paths to locate the Godiva service. If the ncWMS2 instance is NOT
 running on the same host as Hyrax then the values of the _href_ and
 _base_ attributes must be converted to fully qualified URLs.
 
-===== Apache configuration
+===== Apache Configuration
 
 If you are running Hyrax with Apache linked to Tomcat (a fairly simple
 configuration described here), then add the following to the

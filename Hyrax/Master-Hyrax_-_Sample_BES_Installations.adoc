@@ -587,7 +587,6 @@ BES configuration file: /etc/bes/bes.conf
 Shutting down the BES daemon
 -----------------------------------------
 
- +
  Now that we know that you can run the BES and retrieve the test data,
 we can modify the bes.conf file in /etc/bes/modules directory, setting
 the RootDirectory for your data to wherever on your machine your data is
