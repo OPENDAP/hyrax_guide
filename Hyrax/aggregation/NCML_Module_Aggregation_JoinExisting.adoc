@@ -158,7 +158,7 @@ vectors.
 
 The collection of member datasets in a joinExisiting aggregation can be
 specified using the NcML _scan_ element as described in the
-link:../index.php/Dynamic_Aggregation_Tutorial[dynamic aggregation
+link:./Dynamic_Aggregation_Tutorial.adoc[dynamic aggregation
 tutorial].
 
 ==== NcML Dimension Cache
@@ -210,7 +210,7 @@ With only a modicum of effort one could write a shell program that
 utilizes the BES standalone functionality to pre-populate the dimension
 caches for large joinExisiting aggregations.
 
-==== ncoords extension
+==== ncoords Extension
 
 If all of the granules are of uniform dimensional size, we may also use
 the syntactic sugar provided by a Hyrax-specific extension to NcML --
@@ -270,7 +270,6 @@ server to manufacture responses much more quickly.
 The current version implements only basic functionality. If there is
 extended functionality that is needed for your use, please send
 <mailto:support@opendap.org[mailto:support@opendap.org]> to let us know!
-
 
 === Join Dimension Sizes Should Be Explicitly Declared
 

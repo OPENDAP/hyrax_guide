@@ -278,7 +278,7 @@ In following with our previous example, if there was only the one
 "grids" subdirectory in the $\{BES_DATA_ROOT} with our four familiar
 files, we'd get the same aggregation as before.
 
-=== Matching a partial filename
+=== Matching a Partial Filename
 
 Let's say we have a given directory full of data files whose filename
 prefix specifies which variable they refer to. For example, let's say
@@ -311,9 +311,7 @@ This section shows how to use the _scan@dateFormatMark_ attribute along
 with other search criteria in order to extract and sort datasets by a
 timestamp encoded in the filename. All that is required is that the
 timestamp be parseable by a pattern recognized by the Java language
-"SimpleDateFormat" class
-(http://java.sun.com/j2se/1.4.2/docs/api/java/text/SimpleDateFormat.html[java.text.SimpleDateFormat]),
-which has also been implemented in C++ in the
+"SimpleDateFormat" class, which has also been implemented in C++ in the
 http://site.icu-project.org/[International Components for Unicode]
 library which we use.
 

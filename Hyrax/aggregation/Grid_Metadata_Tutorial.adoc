@@ -7,8 +7,6 @@
 
 == Grid Metadata Tutorial: An Example of Adding Metadata to a Grid
 
-../index.php?title=Category:NCML&action=edit&redlink=1[Category:NCML]
-
 We will go through a basic example of adding metadata to all the
 possible scopes in a Grid variable:
 

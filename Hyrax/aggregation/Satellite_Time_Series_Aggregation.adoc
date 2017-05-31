@@ -4,7 +4,9 @@
 //:numbered:
 //:toc:
 
-== Satellite Time Series Aggregation: link:../index.php/Use_cases_for_swath_and_time_series_aggregation[<--Back]
+== Satellite Time Series Aggregation
+
+link:./Use_cases_for_swath_and_time_series_aggregation.adoc[<--Back]
 
 *Point Of Contact:* _James_
 

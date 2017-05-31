@@ -277,7 +277,7 @@ Also notice that other coordinate variables (lat, lon, time) already
 existed in the datasets along with the *u* and *v* arrays. Any variable
 that is not aggregated over (specified as an aggregationVar) is
 explicitly _union_ aggregated (please see
-link:../index.php/NCML_Module_Aggregation_Union[NCML_Module_Aggregation_Union])
+link:./NCML_Module_Aggregation_Union.adoc[NCML_Module_Aggregation_Union])
 into the resulting dataset --- the first instance of every variable
 found in the order the datasets are listed is used.
 
@@ -305,9 +305,8 @@ match dimensionality of the aggregated dimension) or using the
 start/increment autogeneration <values> element for numeric, evenly
 spaced samples.
 
-Please see the turotial:
-link:../index.php/JoinNew_Explicit_Dataset_Tutorial[JoinNew Explicit
-Dataset Tutorial]
+Please see the 
+link:./JoinNew_Explicit_Dataset_Tutorial.adoc[Join Explicit Dataset Tutorial].
 
 === Adding/Modifying Metadata on Aggregations
 
@@ -322,7 +321,7 @@ We will also give examples of providing metadata:
 * Adding/modifying metadata to existing maps in an aggregated Grid
 
 Please see the
-link:../index.php/Metadata_on_Aggregations_Tutorial[Metadata on
+link:./Metadata_on_Aggregations_Tutorial.adoc[Metadata on
 Aggregations Tutorial].
 
 === Dynamic Aggregations Using Directory Scanning
@@ -369,5 +368,5 @@ Again, if more than one is specified, then ALL must match for the file
 to be included in the aggregation.
 
 ==== Please see the
-link:../index.php/Dynamic_Aggregation_Tutorial[Dynamic Aggregation
+link:./Dynamic_Aggregation_Tutorial.adoc[Dynamic Aggregation
 Tutorial] for a more detailed discussion

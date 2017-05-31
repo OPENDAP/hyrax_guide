@@ -265,7 +265,7 @@ Where to find sample data for this use case: MODAPS (MODIS):
 https://urs.earthdata.nasa.gov)
 * Folders ending in _L2 contain level 2 data.
 
-=== Information about the data
+=== Information About the Data
 
 *NB:* This is how the files look when the CF option is turned on for the
 HDF4 handler. They are more messy without it.
@@ -402,13 +402,13 @@ Solution_Index, 1, 2, 3, 4, 5, 6, 7, 8, 9
 Num_DeepBlue_Wavelengths, 0, 0, 0
 ------------------------------------------------------
 
-=== Technical approaches to the problem
+=== Technical Approaches to the Problem
 
 *NB:* Unresolved issues in bold below.
 
 There are two general technical solutions to this problem, both
 requiring iteration over a number of granules. We can use the BES's
-link:../index.php/BES_XML_Commands#define[_define_] command to do this
+link:./BES_XML_Commands.adoc#define[_define_] command to do this
 or the capability can be built into the aggregating code.
 
 For a basic request, for each granule:
@@ -429,15 +429,15 @@ How do we generalize this? Time information is nominally in the file
 names, but...*
 * Since most of the dependent vars have an extra dimension that is used
 to select a band (wavelength) or other facet, that will have to be
-accommoated. Two ideas are presented int he link:#Basic_Flow[_Basic
-Flow_] section.
+accommoated. Two ideas are presented in the _Basic
+Flow_ section.
 * If the client requests several dependent vars they have to agree in
 all their dimensions, both number and 'kind'. This requirement keeps the
 result limited to values that can be represented in a single table.
 
-==== Using the BES define command
+==== Using the BES Define Command
 
-The BES link:../index.php/BES_XML_Commands#define[_define_] command can
+The BES link:./BES_XML_Commands.adoc#define[_define_] command can
 aggregate a set of requests into a DAP2 Structure. We could
 modify/extend this to include Sequences, or process a Structure or Array
 of Sequences transforming that into a single Sequence. The challenges
@@ -446,7 +446,7 @@ that would be used to build the DAP metadata responses. I think the
 _return_as_ capability of the BES could be used to transform the data in
 CSV encoding.
 
-==== Using a server function
+==== Using a Server Function
 
 The aggregation operation could be implemented using a server function,
 but that function would either need to make use of the BES's dispatch
@@ -456,7 +456,7 @@ complex. Below is a rough specification for such a function, without
 addressing the issues of dispatch and iteration over the granules. The
 design captures some useful information even if it is not actually used.
 
-===== The server function interface
+===== The Server Function Interface
 
 The aggregation server function needs to know what granules to
 aggregation on, the variables that are to be returned (nominally the

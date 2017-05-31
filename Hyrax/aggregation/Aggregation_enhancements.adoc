@@ -4,7 +4,7 @@
 //:numbered:
 //:toc:
 
-== Introduction to Aggregation Enhancement
+== Introduction to Aggregation Enhancements
  
 In response to requests from NASA, and with their support, we have added
 two new kinds of aggregation to Hyrax. Both of these aggregation
@@ -103,7 +103,7 @@ true of the _bbox_ parameter. Furthermore, these parameters act
 independently, so a request can use one value for _var_ and _N_ values
 for _bbox_ or vice versa.
 
-==== Response formats
+==== Response Formats
 
 This service will either return a collection of files bundled in a _zip
 archive_ or it will return a since CSV/text file. When _operation_ is
@@ -115,7 +115,7 @@ format.
 
 For the _csv_ operation, the response is a single CSV/text file.
 
-==== More about _var_
+==== More About _var_
 
 The _var_ parameter is a comma-separated list of variables in the files
 listed in the request. Each of the variables must be named just as it is
@@ -291,7 +291,7 @@ Service using these functions.
 ==== Design
 
 The design of the
-link:../index.php/Use_cases_for_swath_and_time_series_aggregation[Aggregation
+link:./Use_cases_for_swath_and_time_series_aggregation.adoc[Aggregation
 Service] is documented as well, although some aspects of that document
 are old and incorrect. it may also be useful to look at the source code,
 which can be found on GitHub at https://github.com/opendap/olfs[olfs]
@@ -336,10 +336,10 @@ cd to __resources/aggregation/tests/demo__.
 
 The example files are also available here:
 
-* ../index.php/File:D1_netcdf3_variable_subset.txt[d1_netcdf3_variable_subset.txt]
-* link:../images/1/1e/D2_netcdf3_bbox_subset.txt[d2_netcdf3_bbox_subset.txt]
-* link:../images/4/46/D3_csv_subset.txt[d3_csv_subset.txt]
-* link:../images/8/88/D4_csv_subset_dim.txt[d4_csv_subset_dim.txt]
+* link:./D1_netcdf3_variable_subset.txt[d1_netcdf3_variable_subset.txt]
+* link:./D2_netcdf3_bbox_subset.txt[d2_netcdf3_bbox_subset.txt]
+* link:./D3_csv_subset.txt[d3_csv_subset.txt]
+* link:./D4_csv_subset_dim.txt[d4_csv_subset_dim.txt]
 
 In the OLFS repo on github, you'll see a file named
 __resources/aggregation/tests/demo/short_names/d1_netcdf3_variable_subset.txt__.
