@@ -35,7 +35,7 @@ command. The format is used to specify a "returnAs" format. This module
 provides the additional format of returning the OPenDAP data object as a
 GeoTIFF or JPEG2000 file.
 
-== How to use the module
+== How to Use the Module
 
 Once installed, the _fong.conf_ file is installed in the BES
 etc/bes/modules directory and is automatically loaded by the BES at

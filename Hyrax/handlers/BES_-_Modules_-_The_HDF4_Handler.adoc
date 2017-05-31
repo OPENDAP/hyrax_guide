@@ -173,7 +173,7 @@ be treated as pure HDF4 objects.
 Please see the INSTALL document on step-by-step instruction on building
 the handler.
 
-== Configuration parameters
+== Configuration Parameters
 
 === What are the CF conventions and how is it related to the new HDF4 handler?
 

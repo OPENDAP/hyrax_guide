@@ -265,7 +265,7 @@ line. They are taken as a group and passed to the ODBC driver. Use this
 section to provide any parameters that are specific to a particular
 driver.
 
-==== Using variables
+==== Using Variables
 
 The dataset files also support 'variables' that can be used to define a
 name once and then use it repeatedly by simply using the variable name
@@ -276,7 +276,7 @@ variable is simple: __define $variable$ = value__, one per line (the _$_
 characters are literal, as is the word __define__). To reference a
 variable, use _$variable$_ wherever you would otherwise use a literal.
 
-==== Some example dataset files
+==== Some Example Dataset Files
 
 ----------------------------------------------------------
 [section]

@@ -7,7 +7,7 @@
 == BES - Modules - NcML Module - Introduction
 
 *Welcome to the OPeNDAP NcML Data Handler Module v1.4.2 for
-http://www.opendap.org/download/hyrax.html[Hyrax]*
+https://www.opendap.org/software/hyrax-data-server[Hyrax]*
 
 **Note**: In the past Hyrax was distributed as a collection of separate
 binary packages which data providers would choose to install to build up
@@ -42,7 +42,7 @@ another dataset
 * Aggregations: JoinNew, JoinExisting Union
 link:#Aggregation_Tutorials[#Aggregation Tutorials]
 ** JoinNew Aggregation
-(link:../index.php/NCML_Module_Aggregation_JoinNew[NCML_Module_Aggregation_JoinNew])
+(link:../aggregation/NCML_Module_Aggregation_JoinNew.adoc[NCML_Module_Aggregation_JoinNew])
 *** Allows multiple datasets to be "joined" by creating a new outer
 dimension for the aggregated variable
 *** Aggregation member datasets can be listed explicitly with explicit
@@ -53,7 +53,7 @@ regular expression.
 *** Metadata may be added to the new coordinate variable for the new
 dimension
 ** JoinExisting Aggregation
-(link:../index.php/NCML_Module_Aggregation_JoinExisting[NCML_Module_Aggregation_JoinExisting])
+(link:../aggregation/NCML_Module_Aggregation_JoinExisting.adoc[NCML_Module_Aggregation_JoinExisting])
 *** The _ncoords_ element can be left out of the _joinexisting_
 granules. However, this may be a slow operation, depending on the number
 of granules in the aggregation.
@@ -62,7 +62,7 @@ granules
 *** Only allows join dimension to be aggregated from granules and not
 overridden in NcML
 ** Union Aggregation
-(link:../index.php/NCML_Module_Aggregation_Union[NCML_Module_Aggregation_Union])
+(link:../aggregation/NCML_Module_Aggregation_Union.adoc[NCML_Module_Aggregation_Union])
 *** Merges all member datasets into one by taking the first named
 instance of variables and metadata from the members
 *** Useful for combining two or more datasets with different variables
@@ -142,9 +142,7 @@ HDF5 handlers.
 == Functionality
 
 This version of the NcML Module implements a subset of NcML 2.2
-functionality. The reader is directed to
-http://www.unidata.ucar.edu/software/netcdf/ncml/v2.2/ for more
-information on NcML.
+functionality.
 
 Our module can currently:
 
@@ -829,9 +827,9 @@ The current version of the NcML module supports two of these
 aggregations:
 
 * Union
-link:../index.php/NCML_Module_Aggregation_Union[NCML_Module_Aggregation_Union]
+link:../aggregation/NCML_Module_Aggregation_Union.adoc[NCML_Module_Aggregation_Union]
 * JoinNew
-link:../index.php/NCML_Module_Aggregation_JoinNew[NCML_Module_Aggregation_JoinNew]
+link:../aggregation/NCML_Module_Aggregation_JoinNew.adoc[NCML_Module_Aggregation_JoinNew]
 
 A _union_ aggregation specifies that the first instance of a variable or
 attribute (by name) that is found in the ordered list of datasets will
@@ -857,7 +855,7 @@ of an aggregation. This allows a static NcML file to refer to an
 aggregation which may change over time, such as where a new data file is
 generated each day.
 
-**link:../index.php/NCML_Module_Aggregation_JoinNew[We describe usage of
+**link:../aggregation/NCML_Module_Aggregation_JoinNew.adoc[We describe usage of
 the <scan> element in detail in the joinNew aggregation tutorial
 here.]**.
 
@@ -909,7 +907,7 @@ current scope.
 == Grid Metadata Tutorial
 
 Please see the page
-link:../index.php/Grid_Metadata_Tutorial[Grid_Metadata_Tutorial] for an
+link:../aggregation/Grid_Metadata_Tutorial.adoc[Grid_Metadata_Tutorial] for an
 example of adding metadata to the various parts of a DAP Grid variable.
 
 == Aggregation Tutorials
@@ -926,22 +924,21 @@ We currently support three of the NcML aggregations:
 Please see the individual pages for each aggregation type for tutorials
 on their respective application and use..
 
-=== link:../index.php/NCML_Module_Aggregation_Union[Union]
-
-link:../index.php/NCML_Module_Aggregation_Union[Union Aggregation] -
+=== link:../aggregation/NCML_Module_Aggregation_Union.adoc[Union]
+Union Aggregation -
 Combine multiple datasets into one by merging variables together,
 selecting the first of each unique name.
 
-=== link:../index.php/NCML_Module_Aggregation_JoinNew[JoinNew]
+=== link:../aggregation/NCML_Module_Aggregation_JoinNew.adoc[JoinNew]
 
-link:../index.php/NCML_Module_Aggregation_JoinNew[JoinNew Aggregation] -
+JoinNew Aggregation -
 Combine variables across multiple datasets by creating a new outer
 dimension and coordinate variable for each of the sample datasets.
 
-=== link:../index.php/NCML_Module_Aggregation_JoinExisting[JoinExisting]
+=== link:../aggregation/NCML_Module_Aggregation_JoinExisting.adoc[JoinExisting]
 
-link:../index.php/NCML_Module_Aggregation_JoinExisting[JoinExisting
-Aggregation] - Combine variables with a common named outer dimension
+JoinExisting
+Aggregation - Combine variables with a common named outer dimension
 along that dimension by concatenating data for that dimension
 
 == Additions/Changes to NcML 2.2

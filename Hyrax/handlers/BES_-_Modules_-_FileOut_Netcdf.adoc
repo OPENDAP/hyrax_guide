@@ -13,10 +13,6 @@ and streams the resulting file back to the caller. Currently, simple
 types, arrays, structures and grids are supported. Sequences are not yet
 supported. +
 
-Go to link:../index.php/BES_File_Out_NetCDF[this page] for more
-information on the specifics of how OPeNDAP data objects are written to
-NetCDF.
-
 == Status
 
 Stable release 1.3.2 with Hyrax 1.12
@@ -36,7 +32,7 @@ additional format of returning the OPenDAP data object as a netcdf file.
 
 The latest version of this handler is included in the BES RPM
 distribution as of Hyrax 1.12, which you can download from the
-http://opendap.org/download/hyrax[Hyrax download page]. You can get the
+https://www.opendap.org/software/hyrax-data-server[Hyrax download page]. You can get the
 source code for this module from the https://github.com/OPENDAP/bes[BES]
 or https://github.com/OPENDAP/fileout_netcdf[fileout_netcdf] projects
 from guthub. The BES project can be used to all of the source we use
@@ -44,7 +40,7 @@ when building the bES for inclusion in the Hyrax releases; the
 fileout_netcdf project can be used to get just the source code for the
 module.
 
-== How to use the module
+== How to Use the Module
 
 Once installed, the fonc.conf file is installed in the BES
 etc/bes/modules directory and is automatically loaded by the BES at

@@ -14,7 +14,7 @@ example, if a web service returns data using HDF4 files, then Hyrax,
 using the gateway module, can subset and return DAP responses for those
 data.
 
-== Special options supported by the handler
+== Special Pptions Supported by the Handler
 
 === Limiting access to specific hosts
 
@@ -41,7 +41,7 @@ Gateway.Whitelist=http://test.opendap.org/opendap
 Gateway.Whitelist+=http://opendap.rpi.edu/opendap
 -------------------------------------------------
 
-=== Recognizing responses
+=== Recognizing Responses
 
 Gateway.MimeTypes::
   provides a list of mappings from data handler module to returned mime
@@ -60,7 +60,7 @@ Gateway.MimeTypes+=h4:application/x-hdf
 Gateway.MimeTypes+=h5:application/x-hdf5
 -----------------------------------------
 
-=== Network proxies and Performance optimizations
+=== Network Proxies and Performance Optimizations
 
 There are four parameters that are used to configure a proxy server that
 the gateway will use. Nominally this is used as a cache, so that files
@@ -134,7 +134,7 @@ And change the third refresh_pattern to read:
 refresh_pattern -i (/cgi-bin/|\?) 1440  20% 10080
 -------------------------------------------------
 
-==== How can I tell if a service sends Cache Control headers
+==== How can I tell if a service sends Cache Control headers?
 
 Here are two ways to check:
 
@@ -178,15 +178,13 @@ the change in the _refresh_pattern_ described above do the following:
 
 . Under Preferences... choose the 'Template' tab and scroll to the
 bottom of the
-text;../index.php/File:Edit_the_squid.conf_file.png[image:../images/thumb/9/9b/Edit_the_squid.conf_file.png/200px-Edit_the_squid.conf_file.png[Edit
-the squid.conf file.png]]
+text; image:../images/Edit_the_squid.conf_file.png[]
 . Edit the line, replacing "0 0% 0" with "1440 20% 10080"; and
 . 'Save' and then 'Stop Squid' and 'Start Squid' (note the helpful
 status messages in the 'Start/Stop'
-window).../index.php/File:Squid_1.png[image:../images/thumb/a/a6/Squid_1.png/200px-Squid_1.png[Squid
-1.png]]../index.php/File:Squid_2.png[image:../images/thumb/c/cc/Squid_2.png/200px-Squid_2.png[Squid
-2.png]]../index.php/File:Squid_3.png[image:../images/thumb/8/88/Squid_3.png/200px-Squid_3.png[Squid
-3.png]]
+window)image:../images/squid_1.png[]
+image:../images/Squid_2.png[]
+image:../images/Squid_3.png[]
 
 == Known Problems
 
