@@ -1,19 +1,18 @@
-= Hyrax Server and Installation Guides Table of Contents - OPeNDAP Documentation
+= Hyrax Server and Installation Guides - Table of Contents - OPeNDAP Documentation
 :Leonard Porrello <lporrel@gmail.com>:
 {docdate}
 :numbered:
 :toc:
 
-:: link:./Master-Hyrax_WMS.adoc[]
-:: link:./Master-Aggregation.adoc[]
-:: link:./Master-Handlers.adoc[]
-:: link:./Master-Hyrax_-_Apache_Integration.adoc[]
-:: link:./Master-Hyrax_-_Customizing_Hyrax.adoc[]
-:: link:./Master-Hyrax_-_OLFS_Installation.adoc[]
-:: link:./Master-Hyrax_-_Sample_BES_Installations.adoc[]
-:: link:./Master-Hyrax_-_Secure_Installation_Guidelines.adoc[]
-:: link:./Master-Hyrax_-_User_Identification_(Authentication).adoc[]
-:: link:./Master-Hyrax_Configuration.adoc[]
-:: link:./Master-Hyrax_Overview.adoc[]
-:: link:./Master-Hyrax_WMS.adoc[]
-:: link:./Master-Troubleshooting.adoc[]
+:: link:./Master-Hyrax_Overview.adoc[Hyrax Overview - ]
+:: link:./Master-Hyrax_Configuration.adoc[Hyrax Configuration - ]
+:: link:./Master-Hyrax_WMS.adoc[WMS - ]
+:: link:./Master-Aggregation.adoc[Aggregation - ]
+:: link:./Master-Handlers.adoc[Hanlers - ]
+:: link:./Master-Hyrax_-_Apache_Integration.adoc[Apache Integration - ]
+:: link:./Master-Hyrax_-_Customizing_Hyrax.adoc[Customizing Hyrax - ]
+:: link:./Master-Hyrax_-_OLFS_Installation.adoc[OLFS Installation - ]
+:: link:./Master-Hyrax_-_Sample_BES_Installations.adoc[Sample BES Installations - ]
+:: link:./Master-Hyrax_-_Secure_Installation_Guidelines.adoc[Secure Installation Guidelines - ]
+:: link:./Master-Hyrax_-\_User_Identification_(Authentication).adoc[User Identification - ]
+:: link:./Master-Troubleshooting.adoc[Hyrax Troubleshooting - ]
