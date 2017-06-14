@@ -13,3 +13,8 @@ and those links will need to be fixed, one way or another.
 
 I will remove the files from _documentation/other_ that are here, so
 there are no duplicates.
+
+The files that start with the prefix Master: Some are composite documents,
+others are just one file. 
+
+The files that are prefixed with Hyrax: The original files from the wiki. Some of these are 'included' by the 'Master' documents.
