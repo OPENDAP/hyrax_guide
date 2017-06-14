@@ -4,15 +4,25 @@
 :numbered:
 :toc:
 
+== Installation
+
 :: link:./Master-Hyrax_Overview.adoc[Hyrax Overview - ]
-:: link:./Master-Hyrax_Configuration.adoc[Hyrax Configuration - ]
-:: link:./Master-Hyrax_WMS.adoc[WMS - ]
-:: link:./Master-Aggregation.adoc[Aggregation - ]
-:: link:./Master-Handlers.adoc[Hanlers - ]
-:: link:./Master-Hyrax_-_Apache_Integration.adoc[Apache Integration - ]
-:: link:./Master-Hyrax_-_Customizing_Hyrax.adoc[Customizing Hyrax - ]
 :: link:./Master-Hyrax_-_OLFS_Installation.adoc[OLFS Installation - ]
 :: link:./Master-Hyrax_-_Sample_BES_Installations.adoc[Sample BES Installations - ]
+:: link:./Master-Hyrax_Configuration.adoc[Hyrax Configuration - ]
+:: link:./Master-Hyrax_-_Customizing_Hyrax.adoc[Customizing Hyrax - ]
+:: link:./Master-Hyrax_-_Apache_Integration.adoc[Apache Integration - ]
+
+== Security
 :: link:./Master-Hyrax_-_Secure_Installation_Guidelines.adoc[Secure Installation Guidelines - ]
 :: link:./Master-Hyrax_-\_User_Identification_(Authentication).adoc[User Identification - ]
+
+== Troubleshooting
 :: link:./Master-Troubleshooting.adoc[Hyrax Troubleshooting - ]
+
+== Appendices
+:: link:./Master-Handlers.adoc[Appendix A: Handlers - ]
+:: link:./Master-Hyrax_WMS.adoc[Appendix B: WMS - ]
+:: link:./Master-Aggregation.adoc[Appendix C: Aggregation - ]
+
+
