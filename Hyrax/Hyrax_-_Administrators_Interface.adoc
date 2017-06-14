@@ -35,7 +35,7 @@ need to perform minimal additional configuration steps in the two parts
 of Hyrax - the BES and OLFS. Be sure to skim the Configuration Notes
 subsection.
 
-Prerequisites:
+=== Prerequisites
 
 * Tomcat 6 installed and working, and
 * Hyrax has been installed and simple responses work.

@@ -7,6 +7,4 @@
 //:leveloffset: 1
 
 include::Hyrax.adoc[tabsize=4]
-include::Hyrax_-_Administrators_Interface.adoc[tabsize=4]
 include::Hyrax_-_Starting_and_stopping_the_BES.adoc[tabsize=4]
-include::Server_Side_Processing_Functions.adoc[tabsize=4]
