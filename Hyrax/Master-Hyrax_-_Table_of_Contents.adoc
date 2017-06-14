@@ -1,0 +1,27 @@
+= Hyrax Server Installation Guide - Table of Contents - OPeNDAP Documentation
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
+
+== Installation
+:: link:./Master-Hyrax_Overview.adoc[Hyrax Overview]
+:: link:./Master-Hyrax_-_OLFS_Installation.adoc[OLFS Installation - Hyrax comprises the OPeNDAP Lightweight Front-end Server (OLFS) and Back-End Server (BES). This document explains how to install the OLFS.]
+// :: link:./Master-Hyrax_-_Sample_BES_Installations.adoc[Sample BES Installations // - OLFS Installation - This document details several alternative BES installations.]
+:: link:./Master-Hyrax_Configuration.adoc[Hyrax Configuration - Covers Hyrax installation and configuration.]
+:: link:./Master-Hyrax_-_Customizing_Hyrax.adoc[Customizing Hyrax - Covers how to customize the way the server looks when used with a web browser.]
+:: link:./Master-Hyrax_-_Apache_Integration.adoc[Apache Integration - Describes how to integrate Hyrax with the Apache web demon.]
+:: link:./Master-Hyrax_-_Administrators_Interface.adoc[Hyrax Adminsitrator's Interface - Describes the web GUI that enables an administrator to control the various parts of a Hyrax server.]
+
+== Security
+:: link:./Master-Hyrax_-_Secure_Installation_Guidelines.adoc[Secure Installation Guidelines - Describes how to install Hyrax for use in production environments so it will meet typical organizational security requirements.]
+:: link:./Master-Hyrax_-\_User_Identification_(Authentication).adoc[User Identification - Covers how to configure a Hyrax server to support user authentication.]
+
+== Troubleshooting
+:: link:./Master-Troubleshooting.adoc[Hyrax Troubleshooting]
+
+== Appendices
+:: link:./Master-Handlers.adoc[Appendix A, Handlers - Specific configuration parameters for various Hyrax modules.]
+:: link:./Master-Hyrax_WMS.adoc[Appendix B,  WMS ("Web Mapping Service") - In addition to supporting the OPeNDAP protocol, Hyrax also supports the OGC web mapping services protocol. This document covers how to install and configure Hyrax to support the OGC web mapping services protocol.]
+:: link:./Master-Aggregation.adoc[Appendix C, Aggregation - Describes how to install and configure Hyrax's support for user specified aggregations of data.]
+:: link:./Master-Server_Side_Processing_Functions.adoc[Appendix D, Server Side Processing Functions - Describes the default server-side processing functions that are distributed with Hyrax.]
