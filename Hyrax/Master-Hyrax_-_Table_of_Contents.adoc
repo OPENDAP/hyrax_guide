@@ -6,15 +6,15 @@
 
 == Installation
 :: link:./Master-Hyrax_Overview.adoc[Hyrax Overview]
-:: link:./Master-Hyrax_-_OLFS_Installation.adoc[OLFS Installation] - Hyrax comprises the OPeNDAP Lightweight Front-end Server (OLFS) and Back-End Server (BES). This document explains how to install the OLFS.
-// :: link:./Master-Hyrax_-_Sample_BES_Installations.adoc[Sample BES Installations // - OLFS Installation] - This document details several alternative BES installations.
+:: link:./Master-Hyrax_OLFS_Installation.adoc[OLFS Installation] - Hyrax comprises the OPeNDAP Lightweight Front-end Server (OLFS) and Back-End Server (BES). This document explains how to install the OLFS.
+// :: link:./Master-Hyrax_Sample_BES_Installations.adoc[Sample BES Installations // - OLFS Installation] - This document details several alternative BES installations.
 :: link:./Master-Hyrax_Configuration.adoc[Hyrax Configuration] - Covers Hyrax installation and configuration.
-:: link:./Master-Hyrax_-_Customizing_Hyrax.adoc[Customizing Hyrax] - Covers how to customize the way the server looks when used with a web browser.
-:: link:./Master-Hyrax_-_Apache_Integration.adoc[Apache Integration] - Describes how to integrate Hyrax with the Apache web demon.
-:: link:./Master-Hyrax_-_Administrators_Interface.adoc[Hyrax Adminsitrator's Interface] - Describes the web GUI that enables an administrator to control the various parts of a Hyrax server.
+:: link:./Master-Hyrax_Customizing_Hyrax.adoc[Customizing Hyrax] - Covers how to customize the way the server looks when used with a web browser.
+:: link:./Master-Hyrax_Apache_Integration.adoc[Apache Integration] - Describes how to integrate Hyrax with the Apache web demon.
+:: link:./Master-Hyrax_Administrators_Interface.adoc[Hyrax Adminsitrator's Interface] - Describes the web GUI that enables an administrator to control the various parts of a Hyrax server.
 
 == Security
-:: link:./Master-Hyrax_-_Secure_Installation_Guidelines.adoc[Secure Installation Guidelines] - Describes how to install Hyrax for use in production environments so it will meet typical organizational security requirements.
+:: link:./Master-Hyrax_Secure_Installation_Guidelines.adoc[Secure Installation Guidelines] - Describes how to install Hyrax for use in production environments so it will meet typical organizational security requirements.
 :: link:./Master-Hyrax_-\_User_Identification_(Authentication).adoc[User Identification] - Covers how to configure a Hyrax server to support user authentication.
 
 == Troubleshooting

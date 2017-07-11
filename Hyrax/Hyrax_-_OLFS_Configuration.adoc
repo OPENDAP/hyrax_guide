@@ -41,7 +41,7 @@ servlet has no specific configuration file.
 servlet*] - The Hyrax Administration Interface (HAI) provides server
 administrators with a GUI for monitoring, controlling, and configuring
 the server.
-* link:../Hyrax/handlers/BES_-\_Modules_-_Gateway_Module.adoc[*Gateway servlet*] -
+* link:../Hyrax/handlers/BES_-\_Modules_Gateway_Module.adoc[*Gateway servlet*] -
 Provides a gateway service that allows Hyrax to be configured to
 retrieve files (that the server recognizes as data) from the web and
 then provide DAP services for those files once they are retrieved. The
@@ -49,7 +49,7 @@ Gateway servlet does not require additional configuration, only that the
 BES be correctly configured to perform gateway tasks.
 
 Additionally the OLFS web application relies on one or more instances of
-the link:./Hyrax_-_BES_Configuration.adoc[BES] to provide it with
+the link:./Hyrax_BES_Configuration.adoc[BES] to provide it with
 data access and basic catalog metadata.
 
 The OLFS web application stores it's configuration state in a number of
@@ -144,7 +144,7 @@ first two: *olfs.xml* and *catalog.xml*
   WEB-INF directory of the web application "opendap". Typically that
   means _$CATALINA_HOME/webapps/opendap/WEB-INF/log4j.xml_ However,
   Hyrax can be configured to look in additional places for the
-  _log4j.xml_ file. link:./Hyrax_-_Logging_Configuration.adoc[Read
+  _log4j.xml_ file. link:./Hyrax_Logging_Configuration.adoc[Read
   More About It Here].
 
 == Hyrax Servlet Configuration
@@ -220,7 +220,7 @@ whenever the software needs to access BES(s) services. This
 configuration is key to the function of Hyrax. In it each BES that is
 connected to a Hyrax installation is defined. The following examples
 will show a single BES example. For more information on configuring Hyrax to use multiple BES's
-link:./Hyrax_-_Configuring_The_OLFS_To_Work_With_Multiple_BES%27s.adoc[look here].
+link:./Hyrax_Configuring_The_OLFS_To_Work_With_Multiple_BES%27s.adoc[look here].
 
 Each BES is identified using a seperate <__BES__> child element inside
 of the <__BESManager__> element.
@@ -252,7 +252,7 @@ that one.
 effort is required. However, when using multiple BES's it is neccesary
 that each BES have a mount point exposed as a directory (aka collection)
 in URI space where it's going to appear. See
-link:./Hyrax_-_Configuring_The_OLFS_To_Work_With_Multiple_BES%27s.adoc[Configuring
+link:./Hyrax_Configuring_The_OLFS_To_Work_With_Multiple_BES%27s.adoc[Configuring
 With Multiple BES's] for more information.
 . The prefix string *must* always begin with the slash ("/")
 character. (see __example 2__)
@@ -790,13 +790,13 @@ Hyrax does not currently support HTTP POST requests.
 == THREDDS Configuration *catalog.xml* File
 
 The *catalog.xml* file contains the static THREDDS catalog configuration
-for Hyrax. link:./Hyrax_-_THREDDS_Configuration.adoc[Read About It
+for Hyrax. link:./Hyrax_THREDDS_Configuration.adoc[Read About It
 Here].
 
 == Logging Configuration (**logback.xml** file)
 
 The *logback.xml* file contains the logging configuration for Hyrax.
-link:./Hyrax_-_Logging_Configuration.adoc[Read About It Here].
+link:./Hyrax_Logging_Configuration.adoc[Read About It Here].
 
 == *web.xml* Configuration File
 
@@ -1032,7 +1032,7 @@ other words *index.html* is the default document.
 
 == Logging
 
-Logging is a big enough subject to get link:./Hyrax_-_Logging_Configuration.com[it's own page.]
+Logging is a big enough subject to get link:./Hyrax_Logging_Configuration.com[it's own page.]
 
 == Authentication and Authorization
 
@@ -1049,7 +1049,7 @@ can be integrated nicely with this existing infrastructure.
 More about integrating Hyrax with Apache Web Server can be found at
 these pages:
 
-* link:./Master-Hyrax_-_Apache_Integration.adoc[Integrating Hyrax with
+* link:./Master-Hyrax_Apache_Integration.adoc[Integrating Hyrax with
 Apache Web Server.]
 * link:./Master-Hyrax_-\_User_Identification_(Authentication).adoc[Configuring
 Hyrax and Apache for User Authentication and Authorization]
@@ -1290,6 +1290,6 @@ Restart Tomcat for these changes to take effect.
 
 *NOTE: If you are using Tomcat in conjunction with the Apache Web Server
 (our friend httpd) via AJP you will need to
-link:./Master-Hyrax_-_Apache_Integration.adoc[configure
+link:./Master-Hyrax_Apache_Integration.adoc[configure
 Apache to deliver compressed responses] too. Tomcat will not compress
 content sent over the AJP connection.*

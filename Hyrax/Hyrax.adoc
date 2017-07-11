@@ -97,7 +97,7 @@ Extensible/Configurable web interface ::
 
 Administrator's interface ::
   Control and dynamically update Hyrax from a convenient web interface.
-  See link:./Hyrax_-_Administrators_Interface.adoc[the Admin
+  See link:./Hyrax_Administrators_Interface.adoc[the Admin
   interface documentation].
 
  WMS services ::
@@ -135,22 +135,22 @@ Code From GitHub]
 
 === User Manuals
 
-* link:./Hyrax_-_Administrators_Interface.adoc[Hyrax -
+* link:./Hyrax_Administrators_Interface.adoc[Hyrax -
 Administrators Interface]
-* link:./Hyrax_-_Configuration.adoc[Hyrax Configuration
+* link:./Hyrax_Configuration.adoc[Hyrax Configuration
 Instructions]
-** link:./Hyrax_-_BES_Configuration.adoc[BES Configuration]
-** link:./Master-Hyrax_-_OLFS_Configuration.adoc[OLFS Configuration]
-** link:./Hyrax_-_THREDDS_Configuration.adoc[THREDDS
+** link:./Hyrax_BES_Configuration.adoc[BES Configuration]
+** link:./Master-Hyrax_OLFS_Configuration.adoc[OLFS Configuration]
+** link:./Hyrax_THREDDS_Configuration.adoc[THREDDS
 Configuration]
-** link:./Hyrax_-_Logging_Configuration.adoc[Logging
+** link:./Hyrax_Logging_Configuration.adoc[Logging
 Configuration]
 
-* link:./Master-Hyrax_-_Apache_Integration.adoc[Hyrax integration with
+* link:./Master-Hyrax_Apache_Integration.adoc[Hyrax integration with
 the Apache Web Server]
-* link:./Master-Hyrax_-_User_Identification_(Authentication).adoc[Hyrax
+* link:./Master-Hyrax_User_Identification_(Authentication).adoc[Hyrax
 User Authentication and Identification]
-* link:./Master-Hyrax_-_Customizing_Hyrax.adoc[Customizing Hyrax]
+* link:./Master-Hyrax_Customizing_Hyrax.adoc[Customizing Hyrax]
 * link:../index.php/Australian_BOM_System_Administrator%27s_Agenda_and_Presentations[System
 Administrators Workshop]
 
@@ -164,25 +164,25 @@ facing) part of the server.
 
 ===== BES modules
 
-* link:../handlers/BES_-_Modules_-_The_NetCDF_Handler.adoc[NetCDF data
+* link:../handlers/BES_Modules_The_NetCDF_Handler.adoc[NetCDF data
 handler]
-* link:../handlers/BES_-_Modules_-_The_HDF4_Handler.adoc.adoc[HDF4 data handler]
-* link:../handlers/BES_-_Modules_-_The_HDF5_Handler[HDF5 data handler]
+* link:../handlers/BES_Modules_The_HDF4_Handler.adoc.adoc[HDF4 data handler]
+* link:../handlers/BES_Modules_The_HDF5_Handler[HDF5 data handler]
 * link:../handlers/The_FreeForm_Data_Handler.adoc.adoc[FreeForm data handler]
-* link:../handlers/BES_-_Modules_-_NcML_Module.adoc[NcML data handler]
-** link:../handlers/BES_-_Modules_-_NcML_Module.adoc.adoc#Functionality[Variable
+* link:../handlers/BES_Modules_NcML_Module.adoc[NcML data handler]
+** link:../handlers/BES_Modules_NcML_Module.adoc.adoc#Functionality[Variable
 and Metadata modification]
-** link:../handlers/BES_-_Modules_-_NcML_Module.adoc#Aggregation_Tutorials[Aggregated
+** link:../handlers/BES_Modules_NcML_Module.adoc#Aggregation_Tutorials[Aggregated
 Datasets]__)__
-* link:../handlers/BES_-_Modules_-_Gateway_Module.adoc[Gateway handler]
+* link:../handlers/BES_Modules_Gateway_Module.adoc[Gateway handler]
 (Interoperability between Hyrax and other web services)
-* link:../handlers/BES_-_Modules_-_CSV_Handler.adoc[CSV handler]
-* link:../handlers/BES_-_Modules_-_GeoTiff,_GRIB2,_JPEG2000_Handler.adoc[GeoTiff,
+* link:../handlers/BES_Modules_CSV_Handler.adoc[CSV handler]
+* link:../handlers/BES_Modules_GeoTiff,_GRIB2,_JPEG2000_Handler.adoc[GeoTiff,
 GRiB2, JPEG2000 hander]
 
-* link:../handlers/BES_-_Modules_-_FileOut_Netcdf.adoc.adoc[NetCDF File Response
+* link:../handlers/BES_Modules_FileOut_Netcdf.adoc.adoc[NetCDF File Response
 handler]
-* link:../handlers/BES_-_Modules_-_FileOut_GDAL.adoc[GDAL (GeoTIFF,
+* link:../handlers/BES_Modules_FileOut_GDAL.adoc[GDAL (GeoTIFF,
 JPEG2000) File Response handler]
 
 ===== Additional Java Modules that use the BES
@@ -193,7 +193,7 @@ with ncWMS.
 
 Unsupported:
 
-* link:../handlers/BES_-_Modules_-_SQL_Hander.adoc[SQL handler]
+* link:../handlers/BES_Modules_SQL_Hander.adoc[SQL handler]
 
 === For Software Developers
 
@@ -207,23 +207,23 @@ require.
 
 ==== BES Development Information
 
-* link:./BES_-_How_to_Debug_the_BES.adoc[How to debug the BES]
-* link:./Hyrax_-_Create_BES_Module.adoc[How to create your own BES
+* link:./BES_How_to_Debug_the_BES.adoc[How to debug the BES]
+* link:./Hyrax_Create_BES_Module.adoc[How to create your own BES
 Module]
 * Hyrax Module Integration: How to configure your module so it's easy to
 add to Hyrax instances
 (../index.php/File:HyraxModuleIntegration-1.2.pdf[pdf])
-* link:./Hyrax_-_Starting_and_stopping_the_BES.adoc[Starting and
+* link:./Hyrax_Starting_and_stopping_the_BES.adoc[Starting and
 stopping the BES]
-* link:./Hyrax_-_Running_bescmdln.adoc[Running the BES command
+* link:./Hyrax_Running_bescmdln.adoc[Running the BES command
 line client]
-* link:./Hyrax_-_BES_Client_commands[BES Client commands]
+* link:./Hyrax_BES_Client_commands[BES Client commands]
 * link:../aggregation/BES_XML_Commands.adoc[BES XML Commands]
-* link:../index.php/Hyrax_-_Extending_BES_Module[Extending your BES
+* link:../index.php/Hyrax_Extending_BES_Module[Extending your BES
 Module]
-* link:../index.php/Hyrax_-_Example_BES_Modules[Example BES Modules] -
+* link:../index.php/Hyrax_Example_BES_Modules[Example BES Modules] -
 the Hello World example and the CSV data handler
-* link:../index.php/Hyrax_-_BES_PPT[BES communication protocol using PPT
+* link:../index.php/Hyrax_BES_PPT[BES communication protocol using PPT
 (point to point transport)]
 * ../index.php/Hyrax:_BES_Administrative_Commands[BES Administrative
 Commands]

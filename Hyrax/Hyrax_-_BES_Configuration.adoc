@@ -343,6 +343,6 @@ added to bes.conf.
 
 == Sample Installation and Configuration
 
-link:./Master-Hyrax_-_Sample_BES_Installations.adoc[Sample Installations
+link:./Master-Hyrax_Sample_BES_Installations.adoc[Sample Installations
 Page] shows how to download, build, install and configure for some
 sample installations.
