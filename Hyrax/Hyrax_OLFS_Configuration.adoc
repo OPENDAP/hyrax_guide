@@ -1049,9 +1049,9 @@ can be integrated nicely with this existing infrastructure.
 More about integrating Hyrax with Apache Web Server can be found at
 these pages:
 
-* link:./Master-Hyrax_Apache_Integration.adoc[Integrating Hyrax with
+* link:./Master_Hyrax_Apache_Integration.adoc[Integrating Hyrax with
 Apache Web Server.]
-* link:./Master-Hyrax_-\_User_Identification_(Authentication).adoc[Configuring
+* link:./Master_Hyrax_-\_User_Identification_(Authentication).adoc[Configuring
 Hyrax and Apache for User Authentication and Authorization]
 
 === Tomcat
@@ -1290,6 +1290,6 @@ Restart Tomcat for these changes to take effect.
 
 *NOTE: If you are using Tomcat in conjunction with the Apache Web Server
 (our friend httpd) via AJP you will need to
-link:./Master-Hyrax_Apache_Integration.adoc[configure
+link:./Master_Hyrax_Apache_Integration.adoc[configure
 Apache to deliver compressed responses] too. Tomcat will not compress
 content sent over the AJP connection.*

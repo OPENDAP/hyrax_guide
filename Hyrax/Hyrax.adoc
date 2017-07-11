@@ -140,17 +140,17 @@ Administrators Interface]
 * link:./Hyrax_Configuration.adoc[Hyrax Configuration
 Instructions]
 ** link:./Hyrax_BES_Configuration.adoc[BES Configuration]
-** link:./Master-Hyrax_OLFS_Configuration.adoc[OLFS Configuration]
+** link:./Master_Hyrax_OLFS_Configuration.adoc[OLFS Configuration]
 ** link:./Hyrax_THREDDS_Configuration.adoc[THREDDS
 Configuration]
 ** link:./Hyrax_Logging_Configuration.adoc[Logging
 Configuration]
 
-* link:./Master-Hyrax_Apache_Integration.adoc[Hyrax integration with
+* link:./Master_Hyrax_Apache_Integration.adoc[Hyrax integration with
 the Apache Web Server]
-* link:./Master-Hyrax_User_Identification_(Authentication).adoc[Hyrax
+* link:./Master_Hyrax_User_Identification_(Authentication).adoc[Hyrax
 User Authentication and Identification]
-* link:./Master-Hyrax_Customizing_Hyrax.adoc[Customizing Hyrax]
+* link:./Master_Hyrax_Customizing_Hyrax.adoc[Customizing Hyrax]
 * link:../index.php/Australian_BOM_System_Administrator%27s_Agenda_and_Presentations[System
 Administrators Workshop]
 
@@ -187,7 +187,7 @@ JPEG2000) File Response handler]
 
 ===== Additional Java Modules that use the BES
 
-* link:./Master-Hyrax_WMS.adoc[WMS] - Web Mapping Service via integration
+* link:./Master_Hyrax_WMS.adoc[WMS] - Web Mapping Service via integration
 with ncWMS.
 * link:../aggregation/Aggregation_enhancements.adoc[Aggregation enhancements]
 
