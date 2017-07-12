@@ -28,7 +28,8 @@ Master_Troubleshooting.html \
 Master_Handlers.html \
 Master_Hyrax_WMS.html \
 Master_Aggregation.html \
-Master_Server_Side_Processing_Functions.html
+Master_Server_Side_Processing_Functions.html \
+Hyrax_Starting_and_stopping_the_BES.html
 
 html: $(HTML)
 
