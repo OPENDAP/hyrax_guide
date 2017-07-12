@@ -15,7 +15,7 @@ talking to the server. First, start the command-line client:
 
 The -h option specifies the machine on which the BES is running. In this
 case, it's your local machine. The -p option specifies the port the BES
-is running on. The default, set in the BES configuraiton file, is 10022.
+is running on. The default, set in the BES configuration file, is 10022.
 If you changed this, or if you started the server with the -p option,
 then you need to use that port number here.
 
@@ -52,7 +52,7 @@ BESClient > show catalog;
 -------------------------
 
 If you can't see your data, then make sure that the RootDirectory
-parameters in the link:./Hyrax_-_BES_Configuration.adoc[BES
+parameters in the link:./Hyrax_BES_Configuration.adoc[BES
 Configuration file] are correct.
 
 ----------------

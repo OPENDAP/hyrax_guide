@@ -1,0 +1,27 @@
+= Hyrax Server Installation and Configuration Guide
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
+
+== Installation
+* link:./Master_Hyrax_Overview.adoc[Hyrax Overview]
+* link:./Master_Hyrax_OLFS_Installation.adoc[OLFS Installation] - Hyrax comprises the OPeNDAP Lightweight Front-end Server (OLFS) and Back-End Server (BES). This document explains how to install the OLFS.
+// :: link:./Master_Hyrax_Sample_BES_Installations.adoc[Sample BES Installations // - OLFS Installation] - This document details several alternative BES installations.
+* link:./Master_Hyrax_Configuration.adoc[Hyrax Configuration] - Covers Hyrax installation and configuration.
+* link:./Master_Hyrax_Customizing_Hyrax.adoc[Customizing Hyrax] - Covers how to customize the way the server looks when used with a web browser.
+* link:./Master_Hyrax_Apache_Integration.adoc[Apache Integration] - Describes how to integrate Hyrax with the Apache web demon.
+* link:./Master_Hyrax_Administrators_Interface.adoc[Hyrax Adminsitrator's Interface] - Describes the web GUI that enables an administrator to control the various parts of a Hyrax server.
+
+== Security
+* link:./Master_Hyrax_Secure_Installation_Guidelines.adoc[Secure Installation Guidelines] - Describes how to install Hyrax for use in production environments so it will meet typical organizational security requirements.
+* link:./Master_Hyrax_User_Authentication.adoc[User Authentication] - Covers how to configure a Hyrax server to support user authentication.
+
+== Troubleshooting
+* link:./Master_Troubleshooting.adoc[Hyrax Troubleshooting]
+
+== Appendices
+* link:./Master_Handlers.adoc[Appendix A, Handlers] - Specific configuration parameters for various Hyrax modules.
+* link:./Master_Hyrax_WMS.adoc[Appendix B,  WMS ("Web Mapping Service")] - In addition to supporting the OPeNDAP protocol, Hyrax also supports the OGC web mapping services protocol. This document covers how to install and configure Hyrax to support the OGC web mapping services protocol.
+* link:./Master_Aggregation.adoc[Appendix C, Aggregation] - Describes how to install and configure Hyrax's support for user specified aggregations of data.
+* link:./Master_Server_Side_Processing_Functions.adoc[Appendix D, Server Side Processing Functions] - Describes the default server-side processing functions that are distributed with Hyrax.

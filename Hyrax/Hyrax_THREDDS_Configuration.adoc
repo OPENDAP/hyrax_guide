@@ -63,7 +63,7 @@ configuration] (applies to Hyrax as well).
 == Configuration Instructions
 
 * The current default
-(link:./Hyrax_-_OLFS_Configuration.adoc[olfs.xml])
+(link:./Hyrax_OLFS_Configuration.adoc[olfs.xml])
 file comes with THREDDS configured correctly.
 * The THREDDS master catalog is stored in the file
 *$CATALINA_HOME/content/opendap/catalog.xml* it can be edited to provide
@@ -220,7 +220,7 @@ http://www.unidata.ucar.edu/software/thredds/v4.6/tds/reference/DatasetScan.html
 allows you to apply the following functions to the names of the datasets
 in the datasetScan catalog graph.]
 
-===== Filter
+==== Filter
 
 A datasetScan element can specify which files and directories it will
 include with a filter element (also

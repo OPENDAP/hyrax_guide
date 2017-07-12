@@ -93,8 +93,7 @@ What the configuration files look like on OSX:
 
 This file likely will no change. odbcinst.ini:
 
-code,de1-----------------------------------------------------------
-code,de1
+-----------------------------------------------------------
 [ODBC Drivers]
 MySQL ODBC 5.1 Driver = Installed
 psqlODBC              = Installed
@@ -114,7 +113,7 @@ Driver = /usr/local/lib/libmyodbc5.so
 This file holds information about the database name and the Data Source
 Name (DSN). Here it's creatively named 'test'. odbc.ini:
 
-code,de1----------------------------------- code,de1
+-----------------------------------
 [ODBC Data Sources]
 data_source_name = test
  
