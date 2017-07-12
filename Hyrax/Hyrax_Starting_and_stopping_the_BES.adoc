@@ -7,9 +7,9 @@
 == The _besctl_ Command
 
 The _besctl_ command is used to control the BES daemon. For Hyrax
-version 1.7 and earlier, this the only way to control the BES. Starting
-with Hyrax 1.8 (release date tentatively set for fall 2011) the
-link:./Hyrax_-\_Administrators_Interface.adoc[Hyrax Admin
+version 1.7 and earlier, this the only way to control the BES.
+Starting with Hyrax 1.8 (release date tentatively set for fall 2011)
+the link:./Hyrax_-\_Administrators_Interface.adoc[Hyrax Admin
 Interface] can be used to start, stop, reconfigure and debug the BES
 once the master daemon is started using this command. The Hyrax Admin
 Interface also provides for both hard and soft restarts of Hyrax while
@@ -149,7 +149,7 @@ Use the _-d_ option to achieve fine-grained control over the server's
 diagnostic output. The -d option takes a single double-quoted string
 which must contain the name of the output sink for the diagnostic
 information and a comma separated list of 'debug contexts'. The sink may
-be either an open stream (e.g., __cerr__) or a file while the contexts
+be either an open stream (e.g., _cerr_) or a file while the contexts
 are defined by/in the BES source code. All modules define a context that
 matches their name and you can see this using the _help_ argument to
 besctl, although most define additional contexts. The best way to find
@@ -169,9 +169,9 @@ The _-h_ option prints a short online help message which lists the
 option switches. Note that this option doesn't work when you supply an
 argument like __start__, __stop__, et c., except for __help__.
 
---
+----
 -h
---
+----
 
 === port
 
@@ -210,11 +210,10 @@ use this.
 -----------
 
 === verbose
-^^^^^^^^^^^
 
 use the _-v_ option to see the version of the bes. The server does not
 start, ..., et cetera.
 
---
+----
 -v
---
+----

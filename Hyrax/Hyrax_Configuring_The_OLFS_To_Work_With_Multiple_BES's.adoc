@@ -13,7 +13,7 @@ will require that you edit the *olfs.xml* file and possible the
 == Top Level (__root__) BES
 
 Every installation of Hyrax requires a top level (or _root_ level)
-BES.** This BES has a _prefix_ of "/" (the forward slash character). The
+BES. This BES has a _prefix_ of "/" (the forward slash character). The
 prefix is a URL token between the server address/port and catalog root
 used to designate a particular BES instance in the case that multiple
 Back-End-Servers are available to a single OLFS. The default (for a
@@ -26,7 +26,7 @@ resources to be made visible in Hyrax. In the THREDDS _catalog.xml_ file
 each top level directory/collection would have it's own
 <__datasetScan__> element.
 
-**__Note:__ The word _root_ here has *absolutely nothing* to do with
+__Note:__ The word _root_ here has *absolutely nothing* to do with
 the login account called root associated with the super user or system
 administrator.
 
@@ -281,9 +281,8 @@ the BES on server2.test.org is exposing.
 tree that the BES on server0.test.org is exposing.
 
 == Complete olfs.xml with multiple BES installations example
------------------------------------------------------------
 
---------------------------------------------------------------------------------------------------------
+----
 <?xml version="1.0" encoding="UTF-8"?>
 <OLFSConfig>
 
@@ -364,4 +363,5 @@ tree that the BES on server0.test.org is exposing.
     </DispatchHandlers>
 
 </OLFSConfig>
---------------------------------------------------------------------------------------------------------
+----
+

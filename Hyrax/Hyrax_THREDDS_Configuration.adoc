@@ -220,7 +220,7 @@ http://www.unidata.ucar.edu/software/thredds/v4.6/tds/reference/DatasetScan.html
 allows you to apply the following functions to the names of the datasets
 in the datasetScan catalog graph.]
 
-===== Filter
+==== Filter
 
 A datasetScan element can specify which files and directories it will
 include with a filter element (also

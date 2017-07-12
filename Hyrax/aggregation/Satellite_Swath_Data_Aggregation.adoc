@@ -254,7 +254,7 @@ The client will have the data values, in CSV-encoded tabular form.
 
 == Activity Diagram
 
-[skipped]
+// FIXME Could not find this
 
 == Notes
 

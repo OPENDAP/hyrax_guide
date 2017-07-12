@@ -41,7 +41,7 @@ described by the Unidata Common Data Model]**.
 * The NetCDF-Java library (which is what provides data access services
 for ncWMS2) utilizes the Common Data Model and must be able to identify
 the coordinates system used. You can test this by using the
-*http://www.unidata.ucar.edu/software/thredds/current/netcdf-java/documentation.htm[Unidata
+ *http://www.unidata.ucar.edu/software/thredds/current/netcdf-java/documentation.htm[Unidata
 ToolsUI application]* (which is also based on the NetCDF-Java library).
 Open your dataset with **ToolsUI**, and in the *Feature Types -> Grid
 Panel* there should be one or more variables shown with some kind of
@@ -129,31 +129,34 @@ being authenticated and in the *`manager`* role:
         <transport-guarantee>CONFIDENTIAL</transport-guarantee>
     </user-data-constraint>
 </security-constraint>
+
 ------------------------------------------------------------------------------
 
-Your choices:
+.Your choices
 
-1.  *Use Apache httpd to provide authentication services for your
+.  *Use Apache httpd to provide authentication services for your
 installation.*
-1.  Comment out the `security-constraint` in the `web.xml` file for
+..  Comment out the `security-constraint` in the `web.xml` file for
 ncWMS2.
-2.  Correctly integrate Tomcat and Apache using the AJP connector.
-3.  Configure an Apache httpd `<Location>` directive for the
+..  Correctly integrate Tomcat and Apache using the AJP connector.
+..  Configure an Apache httpd `<Location>` directive for the
 `ncWMS2/admin` page.
-4.  Write the directive to restrict access to specific users.
-2.  *Use Tomcat authentication.*
-1.  Leave the `security-constraint` in place.
-2.  Correctly configure Tomcat to use some type authentication (e.g.,
+..  Write the directive to restrict access to specific users.
+
+.  *Use Tomcat authentication.*
+..  Leave the `security-constraint` in place.
+..  Correctly configure Tomcat to use some type authentication (e.g.,
 MemoryRealm).
-3.  Modify the `security-constraint` to reflect your authentication
+..  Modify the `security-constraint` to reflect your authentication
 configuration. (Different role? HTTPS? etc.)
-3.  *Temporarily Disable the `security-constraint`.*
-1.  Comment out the `security-constraint` in the `web.xml` file for
+
+.  *Temporarily Disable the `security-constraint`.*
+..  Comment out the `security-constraint` in the `web.xml` file for
 ncWMS2.
-2.  Finish the configuration steps below.
-3.  At the end, when it's working, go back and un-comment the
+..  Finish the configuration steps below.
+..  At the end, when it's working, go back and un-comment the
 `security-constraint` in the web.xml file for ncWMS2.
-4.  Restart Tomcat.
+..  Restart Tomcat.
 
 Now that you can get to it, go to the ncWMS2 administration page:
 http://servername.org:8080/ncWMS2/admin/
@@ -213,7 +216,7 @@ part of ncWMS.
 
  Uncomment the following sections:
 
-------------------------------------------------------------------------------------------------------------------------
+----
 
 <!--
     <WebServiceHandler className="opendap.viewers.NcWmsService" serviceId="ncWms" >
@@ -227,7 +230,7 @@ part of ncWMS.
         <Godiva href="/ncWMS2/Godiva3.html" base="/ncWMS2/Godiva3.html"/>
     </WebServiceHandler>
 -->
-------------------------------------------------------------------------------------------------------------------------
+----
 
 ==== NcWmsServce
 
@@ -246,7 +249,7 @@ Edit the _NcWmsService_ element so that:
 * The value of the _ncWmsDynamicServiceId_ matches the _Unique ID_ of
 the Dynamic Service you defined in ncWMS.
 
-* NB: The _href_ and _base_ attributes both use relative URL paths to
+NOTE: The _href_ and _base_ attributes both use relative URL paths to
 locate the ncWMS service. If the ncWMS instance is NOT running on the
 same host as Hyrax then the values of the _href_ and _base_ attributes
 must be converted to fully qualified URLs.
@@ -255,14 +258,15 @@ must be converted to fully qualified URLs.
 
 In the second section:
 
-----------------------------------------------------------------------------------------------------------------
+----
 
 <WebServiceHandler className="opendap.viewers.GodivaWebService" serviceId="godiva" >
     <applicationName>Godiva WMS GUI</applicationName>
     <NcWmsService href="http://yourNcWMSserver:8080/ncWMS2/wms" base="/ncWMS2/wms" ncWmsDynamicServiceId="lds"/>
     <Godiva href="/ncWMS2/Godiva3.html" base="/ncWMS2/Godiva3.html"/>
 </WebServiceHandler>
-----------------------------------------------------------------------------------------------------------------
+
+----
 
 Edit the _NcWmsService_ element so that:
 
@@ -325,7 +329,7 @@ Tomcat and it's components including the ncWMS and Hyrax applications)
 The issue appears in the Tomcat log as a failure to lock files
 associated with the java.util.prefs.FileSystemPreferences:
 
-----------------------------------------------------------------------------------------------------
+----
 
 Dec 12, 2014 1:17:28 PM java.util.prefs.FileSystemPreferences checkLockFile0ErrorCode
 WARNING: Could not lock System prefs. Unix error code 32612.
@@ -335,7 +339,7 @@ Dec 12, 2014 1:17:58 PM java.util.prefs.FileSystemPreferences checkLockFile0Erro
 WARNING: Could not lock System prefs. Unix error code 32612.
 Dec 12, 2014 1:17:58 PM java.util.prefs.FileSystemPreferences syncWorld
 WARNING: Couldn't flush system prefs: java.util.prefs.BackingStoreException: Couldn't get file lock.
-----------------------------------------------------------------------------------------------------
+----
 
 And is logged every 30 seconds or so. So the problem is the logs fill up
 with this issue and not stuff we care about. The problem is that the

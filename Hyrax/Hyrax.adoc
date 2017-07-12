@@ -253,7 +253,7 @@ http://mailman.opendap.org/mailman/listinfo[subscribe] first)
 * pwest <at> ucar <dot> edu (__bes__)
 * jgallagher <at> opendap <dot> org (__libdap__)
 
-==== OPeNDAP Hyrax development is sponsored by...
+=== OPeNDAP Hyrax development is sponsored by...
 
 *http://www.nsf.gov[National Science Foundation]*
 
