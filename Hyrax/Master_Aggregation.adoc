@@ -1,4 +1,4 @@
-= Hyrax Aggregation - OPeNDAP Documentation
+= Hyrax Aggregation
 :Leonard Porrello <lporrel@gmail.com>:
 {docdate}
 :numbered:

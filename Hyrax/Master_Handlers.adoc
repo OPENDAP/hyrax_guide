@@ -1,4 +1,4 @@
-= Hyrax Handlers - OPeNDAP Documentation
+= Hyrax Handlers
 :Leonard Porrello <lporrel@gmail.com>:
 {docdate}
 :numbered:

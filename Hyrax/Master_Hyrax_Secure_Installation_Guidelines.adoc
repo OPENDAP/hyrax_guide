@@ -1,4 +1,4 @@
-= Hyrax - Secure Installation Guidelines - OPeNDAP Documentation
+= Secure Installation Guidelines
 :Leonard Porrello <lporrel@gmail.com>:
 {docdate}
 :numbered:

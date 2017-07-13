@@ -1,31 +1,32 @@
-= Hyrax Server Installation and Configuration Guide
+= The Hyrax Data Server Installation and Configuration Guide
 :Leonard Porrello <lporrel@gmail.com>:
 {docdate}
 :numbered:
 :toc:
-// :toclevels: 3
-
 :tabsize: 4
 :indent: 4
 :doctype: book
 
-//== Introduction
-// * link:./Master_Hyrax_Overview.adoc[Hyrax Overview]
-
+// TODO Make this a multi-part book? Maybe... To do that with the content we have, raise the levels
+// up one notch. That means reduce the leveloffset values by one (+1 --> 0, +2 --> +1) and the sections
+// in this document by one ('==' --> '=', ...).
+//
+// Right now there are more pressing problems.
 :leveloffset: +1
 
+// An overview of the server. This document includes the section title
+// The 'lines' attribute tells the include macro to only include lines 1 and 8 to the end (-1)
 include::Hyrax.adoc[lines="1,8..-1"]
 
 :leveloffset: -1
 
 == Installation
 
-:leveloffset: +2 
+:leveloffset: +2
 
-// :: link:./Master_Hyrax_Sample_BES_Installations.adoc[Sample BES Installations // - OLFS Installation] - This document details several alternative BES installations.
+NOTE: TODO Add (or find ...) a section on BES installation. It might have gotten lost; look for _Master_Hyrax_Sample_BES_Installations.adoc_
 
-//* link:./Master_Hyrax_OLFS_Installation.adoc[OLFS Installation] - Hyrax comprises the OPeNDAP Lightweight Front-end Server (OLFS) and Back-End Server (BES). This document explains how to install the OLFS.
-
+// This document explains how to install the OLFS.
 include::Master_Hyrax_OLFS_Installation.adoc[lines="1,8..-1"]
 
 :leveloffset: -2
@@ -34,16 +35,13 @@ include::Master_Hyrax_OLFS_Installation.adoc[lines="1,8..-1"]
 
 :leveloffset: +2
 
-// * link:./Master_Hyrax_Configuration.adoc[Hyrax Configuration] - Covers Hyrax installation and configuration.
-
+// General configuration informat
 include::Master_Hyrax_Configuration.adoc[lines="1,6..-1"]
 
-//* link:./Master_Hyrax_Customizing_Hyrax.adoc[Customizing Hyrax] - Covers how to customize the way the server looks when used with a web browser.
-
+// Customize the way the server looks when used with a web browser.
 include::Master_Hyrax_Customizing_Hyrax.adoc[lines="1,8..-1"]
 
-//* link:./Master_Hyrax_Apache_Integration.adoc[Apache Integration] - Describes how to integrate Hyrax with the Apache web demon.  
-
+// Integrate Hyrax with the Apache web demon.
 include::Master_Hyrax_Apache_Integration.adoc[lines="1,8..-1"]
 
 :leveloffset: -2
@@ -52,23 +50,92 @@ include::Master_Hyrax_Apache_Integration.adoc[lines="1,8..-1"]
 
 :leveloffset: +2
 
+NOTE: TODO Add a section about starting the OLFS
+NOTE: TODO Add information about configuration of the server so it starts automatically when a machine boots.
+
+// About starting and stopping the BES.
+NOTE: TODO Add text about using _besd_ to the following
+
 include::Hyrax_Starting_and_stopping_the_BES.adoc[lines="1,8..-1"]
 
-// * link:./Master_Hyrax_Administrators_Interface.adoc[Hyrax Adminsitrator's Interface] - Describes the web GUI that enables an administrator to control the various parts of a Hyrax server.
-
+// The web GUI that enables an administrator to control the various parts of a Hyrax server.
 include::Master_Hyrax_Administrators_Interface.adoc[lines="1,8..-1"]
 
 :leveloffset: -2
 
 == Security
-* link:./Master_Hyrax_Secure_Installation_Guidelines.adoc[Secure Installation Guidelines] - Describes how to install Hyrax for use in production environments so it will meet typical organizational security requirements.
-* link:./Master_Hyrax_User_Authentication.adoc[User Authentication] - Covers how to configure a Hyrax server to support user authentication.
+:leveloffset: +2
+
+// Install Hyrax for use in production environments so it will meet typical organizational security requirements.
+include::Master_Hyrax_Secure_Installation_Guidelines.adoc[lines="1,8..-1"]
+
+// Configure a Hyrax server to support user authentication.
+include::Master_Hyrax_User_Authentication.adoc[lines="1,8..-1"]
+
+:leveloffset: -2
 
 == Troubleshooting
-* link:./Master_Troubleshooting.adoc[Hyrax Troubleshooting]
 
-== Appendices
-* link:./Master_Handlers.adoc[Appendix A, Handlers] - Specific configuration parameters for various Hyrax modules.
-* link:./Master_Hyrax_WMS.adoc[Appendix B,  WMS ("Web Mapping Service")] - In addition to supporting the OPeNDAP protocol, Hyrax also supports the OGC web mapping services protocol. This document covers how to install and configure Hyrax to support the OGC web mapping services protocol.
-* link:./Master_Aggregation.adoc[Appendix C, Aggregation] - Describes how to install and configure Hyrax's support for user specified aggregations of data.
-* link:./Master_Server_Side_Processing_Functions.adoc[Appendix D, Server Side Processing Functions] - Describes the default server-side processing functions that are distributed with Hyrax.
+:leveloffset: +1
+
+NOTE: TODO Look at these files and determine how to better organize them so the TOC is not so bloated with level-two items
+
+include::Hyrax_Running_bescmdln.adoc[]
+include::BES_How_to_Debug_the_BES.adoc[]
+include::Hyrax_BES_Configuration.adoc[]
+include::Hyrax_BES_Client_commands.adoc[]
+
+//include::Master_Troubleshooting.adoc[lines="1,6..-1"]
+
+:leveloffset: -1
+
+//== Appendices
+// The [appendix] macro gives the following sections the correct numbering 
+
+// Install and configure Hyrax support for the OGC web mapping services protocol.
+[appendix]
+include::Master_Hyrax_WMS.adoc[lines="1,8..-1",leveloffset=+1] 
+
+:leveloffset: +1
+// Specific configuration parameters for various Hyrax modules
+[appendix]
+include::Master_Handlers.adoc[lines="1,6..-1"]
+
+////
+include::./handlers/BES_Modules_CSV_Handler.adoc[tabsize=4]
+include::./handlers/BES_Modules_FileOut_GDAL.adoc[tabsize=4]
+include::./handlers/BES_Modules_FileOut_Netcdf.adoc[tabsize=4]
+include::./handlers/BES_Modules_Gateway_Module.adoc[tabsize=4]
+include::./handlers/BES_Modules_GeoTiff,_GRIB2,_JPEG2000_Handler.adoc[tabsize=4]
+include::./handlers/BES_Modules_NcML_Module.adoc[tabsize=4]
+include::./handlers/BES_Modules_SQL_Hander.adoc[tabsize=4]
+include::./handlers/BES_Modules_The_HDF4_Handler.adoc[tabsize=4]
+include::./handlers/BES_Modules_The_HDF5_Handler.adoc[tabsize=4]
+include::./handlers/BES_Modules_The_NetCDF_Handler.adoc[tabsize=4]
+include::./handlers/BES_File_Out_NetCDF.adoc[tabsize=4]
+include::./handlers/Gateway_Service.adoc[tabsize=4]
+include::./handlers/The_FreeForm_Data_Handler.adoc[tabsize=4]
+////
+
+// Install and configure Hyrax's support for user specified aggregations of data.
+[appendix]
+include::Master_Aggregation.adoc[lines="1,6..-1"]
+
+////
+include::./aggregation/Dynamic_Aggregation_Tutorial.adoc[tabsize=4]
+include::./aggregation/Grid_Metadata_Tutorial.adoc[tabsize=4]
+include::./aggregation/JoinNew_Explicit_Dataset_Tutorial.adoc[tabsize=4]
+include::./aggregation/Metadata_on_Aggregations_Tutorial.adoc[tabsize=4]
+include::./aggregation/NCML_Module_Aggregation_JoinExisting.adoc[tabsize=4]
+include::./aggregation/NCML_Module_Aggregation_JoinNew.adoc[tabsize=4]
+include::./aggregation/NCML_Module_Aggregation_Union.adoc[tabsize=4] 
+include::./aggregation/Satellite_Swath_Data_Aggregation.adoc[tabsize=4]
+include::./aggregation/Satellite_Time_Series_Aggregation.adoc[tabsize=4]
+include::./aggregation/Aggregation_enhancements.adoc[tabsize=4]
+////
+
+// The default server-side processing functions that are distributed with Hyrax
+[appendix]
+include::Master_Server_Side_Processing_Functions.adoc[lines="1,6..-1"]
+
+:leveloffset: -1
