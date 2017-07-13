@@ -1,14 +1,19 @@
-// = Hyrax - OPeNDAP Documentation
-// :Leonard Porrello <lporrel@gmail.com>:
-// {docdate}
-// :numbered:
-// :toc:
-
-This documentation covers the **OPeNDAP 4 Data Server**, which is also known as **Hyrax**.
+= Hyrax Overview
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
 == Overview
-image::../images/HyraxArchitecture.jpg[]
+//This documentation covers the **OPeNDAP 4 Data Server**, which is also known as **Hyrax**.  
+This documentation describes the installation, configuration,
+and operation of the _Hyrax Data server_, a data server that integrates
+structured dat with the world wide web. Hyrax is one example of a
+number of data servers that implement OPeNDAP's Data Access protocol.
 
+NOTE: TODO: We probably want to rewrite this text to be more about the
+sever's capabilities than how the software was implemented.
+ 
 Hyrax uses the Java servlet mechanism to hand off requests from a
 general web daemon to DAP format-specific software. This results in
 higher performance for small requests. The servlet front end, which we
@@ -30,7 +35,9 @@ The OLFS and the BES will run and serve test data immediately
 after a default installation. Additional configuration is required for
 them to serve site specific data.
 
-=== Features
+image::../images/HyraxArchitecture.jpg[]
+
+== Features
 
 THREDDS Catalog Support ::
   Hyrax supports the THREDDS catalogs. It can serve user supplied static
@@ -244,6 +251,7 @@ questions and comments.
 * opendap-tech@opendap.org (You need to
 http://mailman.opendap.org/mailman/listinfo[subscribe] first)
 
+////
 *Hyrax Java Development:*
 
 * ndp <at> opendap <dot> org
@@ -252,6 +260,7 @@ http://mailman.opendap.org/mailman/listinfo[subscribe] first)
 
 * pwest <at> ucar <dot> edu (__bes__)
 * jgallagher <at> opendap <dot> org (__libdap__)
+////
 
 === OPeNDAP Hyrax development is sponsored by...
 

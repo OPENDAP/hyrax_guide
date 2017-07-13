@@ -1,4 +1,4 @@
-= Hyrax - Apache Integration - OPeNDAP Documentation
+=  Apache Integration
 :Leonard Porrello <lporrel@gmail.com>:
 {docdate}
 :numbered:

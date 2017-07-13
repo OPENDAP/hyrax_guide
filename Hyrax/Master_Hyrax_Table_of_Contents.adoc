@@ -3,15 +3,62 @@
 {docdate}
 :numbered:
 :toc:
+// :toclevels: 3
+
+:tabsize: 4
+:indent: 4
+:doctype: book
+
+//== Introduction
+// * link:./Master_Hyrax_Overview.adoc[Hyrax Overview]
+
+:leveloffset: +1
+
+include::Hyrax.adoc[lines="1,8..-1"]
+
+:leveloffset: -1
 
 == Installation
-* link:./Master_Hyrax_Overview.adoc[Hyrax Overview]
-* link:./Master_Hyrax_OLFS_Installation.adoc[OLFS Installation] - Hyrax comprises the OPeNDAP Lightweight Front-end Server (OLFS) and Back-End Server (BES). This document explains how to install the OLFS.
+
+:leveloffset: +2 
+
 // :: link:./Master_Hyrax_Sample_BES_Installations.adoc[Sample BES Installations // - OLFS Installation] - This document details several alternative BES installations.
-* link:./Master_Hyrax_Configuration.adoc[Hyrax Configuration] - Covers Hyrax installation and configuration.
-* link:./Master_Hyrax_Customizing_Hyrax.adoc[Customizing Hyrax] - Covers how to customize the way the server looks when used with a web browser.
-* link:./Master_Hyrax_Apache_Integration.adoc[Apache Integration] - Describes how to integrate Hyrax with the Apache web demon.
-* link:./Master_Hyrax_Administrators_Interface.adoc[Hyrax Adminsitrator's Interface] - Describes the web GUI that enables an administrator to control the various parts of a Hyrax server.
+
+//* link:./Master_Hyrax_OLFS_Installation.adoc[OLFS Installation] - Hyrax comprises the OPeNDAP Lightweight Front-end Server (OLFS) and Back-End Server (BES). This document explains how to install the OLFS.
+
+include::Master_Hyrax_OLFS_Installation.adoc[lines="1,8..-1"]
+
+:leveloffset: -2
+
+== Configuration
+
+:leveloffset: +2
+
+// * link:./Master_Hyrax_Configuration.adoc[Hyrax Configuration] - Covers Hyrax installation and configuration.
+
+include::Master_Hyrax_Configuration.adoc[lines="1,6..-1"]
+
+//* link:./Master_Hyrax_Customizing_Hyrax.adoc[Customizing Hyrax] - Covers how to customize the way the server looks when used with a web browser.
+
+include::Master_Hyrax_Customizing_Hyrax.adoc[lines="1,8..-1"]
+
+//* link:./Master_Hyrax_Apache_Integration.adoc[Apache Integration] - Describes how to integrate Hyrax with the Apache web demon.  
+
+include::Master_Hyrax_Apache_Integration.adoc[lines="1,8..-1"]
+
+:leveloffset: -2
+
+== Operation
+
+:leveloffset: +2
+
+include::Hyrax_Starting_and_stopping_the_BES.adoc[lines="1,8..-1"]
+
+// * link:./Master_Hyrax_Administrators_Interface.adoc[Hyrax Adminsitrator's Interface] - Describes the web GUI that enables an administrator to control the various parts of a Hyrax server.
+
+include::Master_Hyrax_Administrators_Interface.adoc[lines="1,8..-1"]
+
+:leveloffset: -2
 
 == Security
 * link:./Master_Hyrax_Secure_Installation_Guidelines.adoc[Secure Installation Guidelines] - Describes how to install Hyrax for use in production environments so it will meet typical organizational security requirements.

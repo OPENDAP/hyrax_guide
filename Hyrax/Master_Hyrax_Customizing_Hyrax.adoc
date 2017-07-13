@@ -1,4 +1,4 @@
-= Hyrax - Customizing Hyrax - OPeNDAP Documentation
+= Customizing Hyrax
 :Leonard Porrello <lporrel@gmail.com>:
 {docdate}
 :numbered:
