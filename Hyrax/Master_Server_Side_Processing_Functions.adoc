@@ -16,8 +16,7 @@ Get the U and V components of the fnoc1 dataset, but apply the dataset's
 scale_factor attribute (the 'm' in y=mx+b; for these variables, 'b' is
 zero). Compare the values returned by the linear_scale() server function
 to those returned by accessing the variables without using the function
-::
-  http://test.opendap.org/dap/data/nc/fnoc1.nc.ascii?linear_scale(u),linear_scale(v)
+http://test.opendap.org/dap/data/nc/fnoc1.nc.ascii?linear_scale(u),linear_scale(v)
   +
   http://test.opendap.org/dap/data/nc/fnoc1.nc.ascii?u,v
 

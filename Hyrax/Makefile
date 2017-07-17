@@ -1,6 +1,13 @@
 
-ASCIIDOC = asciidoc
-# ASCIIDOC = asciidoctor
+# The asciidoc application does not work as well as asciidoctor.
+# 7/17/17 jhrg
+# ASCIIDOC = asciidoc
+
+ASCIIDOC = asciidoctor
+
+all: Master_Hyrax_Table_of_Contents.html
+
+html: $(HTML)
 
 # Build these HTML files.
 HTML = Master_Hyrax_Table_of_Contents.html \
@@ -17,8 +24,6 @@ Master_Hyrax_WMS.html \
 Master_Aggregation.html \
 Master_Server_Side_Processing_Functions.html \
 Hyrax_Starting_and_stopping_the_BES.html
-
-html: $(HTML)
 
 clean:
 	-rm $(HTML)
