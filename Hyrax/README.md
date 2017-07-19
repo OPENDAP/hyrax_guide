@@ -1,4 +1,114 @@
 
+## Notes about the meta-documentation files
+
+**book-multi.txt** is an example of the multipart book format for
+asciidoc.
+
+**edits.txt** How I made lots of edits w/o mind-numbing manual
+  searching and stuff
+
+**link_loc.txt** Holds the current location of all the places that use
+  the asciidoc _link_ macro. In most cases these should be fixed
+  because they are k=links to the *.adoc files, but those won't be
+  present when we build the HTML or PDF documentation files.  Instead,
+  these should probably be section references (using anchors).
+
+**note_loc.txt** I found a bunch of places where the text says,
+  "Note:" in one way or another. Asciidoc has a special way of doing
+  this that looks good (using 'NOTE:' with no indentation). 
+
+**warnings.txt** Same as above, but for 'WARNING:'
+
+## Notes about specific adoc files
+
+**preface.adoc** If we use the book format, we can have a preface and
+should move the acknowledgements from Hyrax.adoc to there (I think)
+along with other text like, this is why Hyrax exists and/or other
+stuff that one usually finds in a Preface.
+
+### Files with _include_ directives
+At least I think these all _include_ other files. These are mostly in
+alphabetical order unless I moved stuff around because that seemed
+like a good idea.
+
+**Master\_Hyrax\_Table\_of\_Contents.adoc** This is the main document
+  for the whole manual. It now uses _include_ directives in place of
+  _link_s. There are notes in the file about building the manual
+  as a multipart book. There other notes about missing content
+  sections (like how to install the BES or start the OLFS).
+
+I changed the title to _The Hyrax Data Server Installation and
+Configuration Guide_ and it now has six sections (Overview, Installation,
+Configuration, Operation, Security, and Troubleshooting) and four
+appendices (WMS, handlers, Aggregation, and Server side processing).
+
+_Issues_:
+* Are these the correct sections and appendices?
+* We must write/find the missing content (maybe its buried somewhere
+in one of these other files)
+* The Troubleshooting section and Appendices B and C are way out of
+  hand in terms of the TOC listings. Modify the stuff so that it has a
+  more reasonable number of level two items
+
+**Master\_Aggregation.adoc**
+
+**Master\_Handlers.adoc**
+
+**Master\_Hyrax\_Administrators\_Interface.adoc**
+
+**Master\_Hyrax\_Apache\_Integration.adoc**
+
+**Master\_Hyrax\_Configuration.adoc** A set of includes; see below.
+
+**Master\_Hyrax\_Sample\_BES\_Installations.adoc**
+
+**Master\_Hyrax\_Secure\_Installation\_Guidelines.adoc**
+
+**Master\_Hyrax\_User\_Authentication.adoc**
+
+**Master\_Hyrax\_WMS.adoc**
+
+**Master\_Server\_Side\_Processing\_Functions.adoc**
+
+**Master\_Troubleshooting.adoc**
+
+### Files without _include_ directives
+
+**Hyrax.adoc** This is the source of the overview text. It has some
+  notes about changes to the presentation of the overview. I think the
+  _OPeNDAP Hyrax development is sponsored by_ section should be in the
+  acknowledgements subsection of the (now empty) Preface.
+
+**Master\_Hyrax\_OLFS\_Installation.adoc** No notes except that this
+  contains a link to the vanished BES_Installation file.
+
+**Hyrax\_Configuration.adoc** Included by Master_Hyrax_Configuration.adoc
+
+**Hyrax\_BES\_Configuration.adoc** Included by Master_Hyrax_Configuration.adoc
+
+**Hyrax\_OLFS\_Configuration.adoc** Included by Master_Hyrax_Configuration.adoc
+
+**Hyrax\_Configuring\_The\_OLFS\_To\_Work\_With\_Multiple\_BES's.adoc** Included by Master_Hyrax_Configuration.adoc
+
+**Hyrax\_Logging\_Configuration.adoc** Included by Master_Hyrax_Configuration.adoc
+
+**Hyrax\_THREDDS\_Configuration.adoc** Included by
+Master_Hyrax_Configuration.adoc
+
+**Master\_Hyrax\_Customizing\_Hyrax.adoc** No notes
+
+**Hyrax\_BES\_Client\_commands.adoc**
+
+**Hyrax\_JSON.adoc**
+
+**Hyrax\_Running\_bescmdln.adoc**
+
+**Hyrax\_Starting\_and\_stopping\_the\_BES.adoc**
+
+**BES\_How\_to\_Debug\_the\_BES.adoc**
+
+**THREDDS\_using\_XSLT.adoc**
+
 ## About these files
 
 These files are derived from the Hyrax documentation pages on
