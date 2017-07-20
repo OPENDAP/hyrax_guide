@@ -50,27 +50,34 @@ in one of these other files)
   hand in terms of the TOC listings. Modify the stuff so that it has a
   more reasonable number of level two items
 
-**Master\_Aggregation.adoc**
+**Master\_Aggregation.adoc** Appendix C; includes all of the files
+  about aggreation.
 
-**Master\_Handlers.adoc**
-
-**Master\_Hyrax\_Administrators\_Interface.adoc**
-
-**Master\_Hyrax\_Apache\_Integration.adoc**
+**Master\_Handlers.adoc** Appendix B; this _include_s all of the
+  handler documentation files
 
 **Master\_Hyrax\_Configuration.adoc** A set of includes; see below.
 
 **Master\_Hyrax\_Sample\_BES\_Installations.adoc**
 
-**Master\_Hyrax\_Secure\_Installation\_Guidelines.adoc**
+**Master\_Hyrax\_WMS.adoc** Appendix A, does not include files.
 
-**Master\_Hyrax\_User\_Authentication.adoc**
+**Master\_Server\_Side\_Processing\_Functions.adoc** Appendix D; no includes
 
-**Master\_Hyrax\_WMS.adoc**
+**Master\_Troubleshooting.adoc** includes files...
 
-**Master\_Server\_Side\_Processing\_Functions.adoc**
+#### _Master Hyrax_ files without _include_s or notes
 
-**Master\_Troubleshooting.adoc**
+**Master\_Hyrax\_Customizing\_Hyrax.adoc** Part of the
+  _Configuration_ section
+
+**Master\_Hyrax\_Apache\_Integration.adoc** Part of _Configuration_
+
+**Master\_Hyrax\_Administrators\_Interface.adoc** Part of _Operation_
+
+**Master\_Hyrax\_Secure\_Installation\_Guidelines.adoc** Part of _Security_
+
+**Master\_Hyrax\_User\_Authentication.adoc** Part of _Security_
 
 ### Files without _include_ directives
 
@@ -84,7 +91,8 @@ in one of these other files)
 
 **Hyrax\_Configuration.adoc** Included by Master_Hyrax_Configuration.adoc
 
-**Hyrax\_BES\_Configuration.adoc** Included by Master_Hyrax_Configuration.adoc
+**Hyrax\_BES\_Configuration.adoc** Included by
+  Master_Hyrax_Configuration.adoc. Also art of _Troubleshooting_
 
 **Hyrax\_OLFS\_Configuration.adoc** Included by Master_Hyrax_Configuration.adoc
 
@@ -95,19 +103,24 @@ in one of these other files)
 **Hyrax\_THREDDS\_Configuration.adoc** Included by
 Master_Hyrax_Configuration.adoc
 
-**Master\_Hyrax\_Customizing\_Hyrax.adoc** No notes
-
-**Hyrax\_BES\_Client\_commands.adoc**
+**Hyrax\_BES\_Client\_commands.adoc** Part of _Troubleshooting_
 
 **Hyrax\_JSON.adoc**
 
-**Hyrax\_Running\_bescmdln.adoc**
+**Hyrax\_Running\_bescmdln.adoc** Part of _Troubleshooting_
 
-**Hyrax\_Starting\_and\_stopping\_the\_BES.adoc**
+**Hyrax\_Starting\_and\_stopping\_the\_BES.adoc** No includes or
+  notes. Part of _Operation_
 
-**BES\_How\_to\_Debug\_the\_BES.adoc**
+**BES\_How\_to\_Debug\_the\_BES.adoc** Part of _Troubleshooting_
 
 **THREDDS\_using\_XSLT.adoc**
+
+## Unused files
+
+In the aggreagtion directory:
+* Use\_cases\_for\_swath\_and\_time\_series\_aggregation.adoc
+* BES\_XML\_Commands.adoc
 
 ## About these files
 

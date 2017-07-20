@@ -24,7 +24,8 @@ include::Hyrax.adoc[lines="1,8..-1"]
 
 :leveloffset: +2
 
-NOTE: TODO Add (or find ...) a section on BES installation. It might have gotten lost; look for _Master_Hyrax_Sample_BES_Installations.adoc_
+NOTE: TODO Add (or find ...) a section on BES installation. It might
+have gotten lost; look for _Master_Hyrax_Sample_BES_Installations.adoc_
 
 // This document explains how to install the OLFS.
 include::Master_Hyrax_OLFS_Installation.adoc[lines="1,8..-1"]
