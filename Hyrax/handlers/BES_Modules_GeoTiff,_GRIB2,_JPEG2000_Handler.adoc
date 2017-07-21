@@ -4,7 +4,7 @@
 :numbered:
 :toc:
 
-// == BES - Modules - GeoTiff, GRIB2, JPEG2000 Handler - Kinds of files the handler will serve
+== Kinds of files the handler will serve
 
 This handler will serve data stored in files that can be read using the
 GDAL GIS library, including GeoTIFF, JPEG2000 and GRIB2.

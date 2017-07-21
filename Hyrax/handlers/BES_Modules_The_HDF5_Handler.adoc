@@ -1,10 +1,10 @@
-//= BES - Modules - The HDF5 Handler - OPeNDAP Documentation
-//:Leonard Porrello <lporrel@gmail.com>:
-//{docdate}
-//:numbered:
-//:toc:
+= The HDF5 Handler
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-== BES - Modules - The HDF5 Handler - Kinds of files the handler will serve
+== Kinds of files the handler will serve
 
 This release of the server supports HDF5 files written using any version
 of the HDF5 API. The handler should be built/linked with version 1.8.x
@@ -111,7 +111,7 @@ will change to:
   When this option is true, StructMetadata attribute will not be
   generated in DAS output.
 
-== Appendix
+== HDF5 and HDF-EOS to DAP Type Mappings
 
 . _The complete set of mappings for the types in the HDF5 and HDF-EOS5
 data model_

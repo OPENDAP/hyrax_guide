@@ -585,7 +585,7 @@ Attributes {
 
 ==== DMR
 
-Coming Soon... ====
+Coming Soon...
 
 === w10n JSON (Abstract Model)
 

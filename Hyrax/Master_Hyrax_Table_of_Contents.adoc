@@ -78,18 +78,25 @@ include::Master_Hyrax_User_Authentication.adoc[lines="1,8..-1"]
 
 == Troubleshooting
 
-:leveloffset: +1
+//:leveloffset: +1
 
 NOTE: TODO Look at these files and determine how to better organize them so the TOC is not so bloated with level-two items
 
+////
 include::Hyrax_Running_bescmdln.adoc[]
+
 include::BES_How_to_Debug_the_BES.adoc[]
+
 include::Hyrax_BES_Configuration.adoc[]
+
 include::Hyrax_BES_Client_commands.adoc[]
+////
 
-//include::Master_Troubleshooting.adoc[lines="1,6..-1"]
+NOTE: Fix Troubleshooting section - components should be stand alone 
 
-:leveloffset: -1
+include::Master_Troubleshooting.adoc[lines="1,6..-1", leveloffset=+1]
+
+//:leveloffset: -1
 
 //== Appendices
 // The [appendix] macro gives the following sections the correct numbering 
@@ -98,52 +105,18 @@ include::Hyrax_BES_Client_commands.adoc[]
 [appendix]
 include::Master_Hyrax_WMS.adoc[lines="1,8..-1",leveloffset=+1] 
 
-:leveloffset: +1
 // Specific configuration parameters for various Hyrax modules
 [appendix]
-include::Master_Handlers.adoc[lines="1,6..-1"]
-
-////
-
-block comment
-
-include::./handlers/BES_Modules_CSV_Handler.adoc[tabsize=4]
-include::./handlers/BES_Modules_FileOut_GDAL.adoc[tabsize=4]
-include::./handlers/BES_Modules_FileOut_Netcdf.adoc[tabsize=4]
-include::./handlers/BES_Modules_Gateway_Module.adoc[tabsize=4]
-include::./handlers/BES_Modules_GeoTiff,_GRIB2,_JPEG2000_Handler.adoc[tabsize=4]
-include::./handlers/BES_Modules_NcML_Module.adoc[tabsize=4]
-include::./handlers/BES_Modules_SQL_Hander.adoc[tabsize=4]
-include::./handlers/BES_Modules_The_HDF4_Handler.adoc[tabsize=4]
-include::./handlers/BES_Modules_The_HDF5_Handler.adoc[tabsize=4]
-include::./handlers/BES_Modules_The_NetCDF_Handler.adoc[tabsize=4]
-include::./handlers/BES_File_Out_NetCDF.adoc[tabsize=4]
-include::./handlers/Gateway_Service.adoc[tabsize=4]
-include::./handlers/The_FreeForm_Data_Handler.adoc[tabsize=4]
-////
+include::Master_Handlers.adoc[lines="1,6..-1", leveloffset=+1]
 
 // Install and configure Hyrax's support for user specified aggregations of data.
 [appendix]
-include::Master_Aggregation.adoc[lines="1,6..-1"]
-
-////
-include::./aggregation/Dynamic_Aggregation_Tutorial.adoc[tabsize=4]
-include::./aggregation/Grid_Metadata_Tutorial.adoc[tabsize=4]
-include::./aggregation/JoinNew_Explicit_Dataset_Tutorial.adoc[tabsize=4]
-include::./aggregation/Metadata_on_Aggregations_Tutorial.adoc[tabsize=4]
-include::./aggregation/NCML_Module_Aggregation_JoinExisting.adoc[tabsize=4]
-include::./aggregation/NCML_Module_Aggregation_JoinNew.adoc[tabsize=4]
-include::./aggregation/NCML_Module_Aggregation_Union.adoc[tabsize=4] 
-include::./aggregation/Satellite_Swath_Data_Aggregation.adoc[tabsize=4]
-include::./aggregation/Satellite_Time_Series_Aggregation.adoc[tabsize=4]
-include::./aggregation/Aggregation_enhancements.adoc[tabsize=4]
-////
+include::Master_Aggregation.adoc[lines="1,6..-1", leveloffset=+1]
 
 // The default server-side processing functions that are distributed with Hyrax
 [appendix]
-include::Master_Server_Side_Processing_Functions.adoc[lines="1,6..-1"]
+include::Master_Server_Side_Processing_Functions.adoc[lines="1,6..-1", leveloffset=+1]
 
 [appendix]
-include::BES_XML_Commands.adoc[]
+include::BES_XML_Commands.adoc[leveloffset=+"]
 
-:leveloffset: -1

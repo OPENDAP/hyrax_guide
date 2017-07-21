@@ -4,7 +4,7 @@
 :numbered:
 :toc:
 
-//== BES - Modules - FileOut Netcdf - Description
+== Introduction
 
 The File Out NetCDF module provides the ability to return OPeNDAP
 DataDDS objects as netcdf files. The module takes an OPeNDAP DataDDS and

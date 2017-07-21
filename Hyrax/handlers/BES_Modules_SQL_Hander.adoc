@@ -1,8 +1,8 @@
-//= BES - Modules - SQL Hander - OPeNDAP Documentation
-//:Leonard Porrello <lporrel@gmail.com>:
-//{docdate}
-//:numbered:
-//:toc:
+= The SQL Hander
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
 == BES - Modules - SQL Hander - Kinds of files the handler will serve
 
