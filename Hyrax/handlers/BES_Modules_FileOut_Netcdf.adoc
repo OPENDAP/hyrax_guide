@@ -1,10 +1,10 @@
-//= BES - Modules - FileOut Netcdf - OPeNDAP Documentation
-//:Leonard Porrello <lporrel@gmail.com>:
-//{docdate}
-//:numbered:
-//:toc:
+= NetCDF file responses
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-== BES - Modules - FileOut Netcdf - Description
+== Introduction
 
 The File Out NetCDF module provides the ability to return OPeNDAP
 DataDDS objects as netcdf files. The module takes an OPeNDAP DataDDS and

@@ -1,11 +1,8 @@
-BES XML Commands - OPeNDAP Documentation
-========================================
+= BES XML Commands 
 
 [[firstHeading]]
 BES XML Commands
 ----------------
-
-From OPeNDAP Documentation
 
 Contents
 ~~~~~~~~

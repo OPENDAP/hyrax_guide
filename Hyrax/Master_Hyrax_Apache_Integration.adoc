@@ -1,4 +1,4 @@
-= Hyrax - Apache Integration - OPeNDAP Documentation
+=  Apache Integration
 :Leonard Porrello <lporrel@gmail.com>:
 {docdate}
 :numbered:
@@ -22,8 +22,6 @@ complex. What follows are the instructions for Apache
 === Tomcat
 
 You have to create the AJP connector in the _conf/server.xml_ file:
-
- +
 
 -------------------------------------------------------------------------------------------------------
     <!-- Define an AJP 1.3 Connector on port 8009 -->

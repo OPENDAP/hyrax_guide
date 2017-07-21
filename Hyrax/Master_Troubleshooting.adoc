@@ -1,10 +1,18 @@
-= Hyrax Troubleshooting - OPeNDAP Documentation
+= Hyrax Troubleshooting
 :Leonard Porrello <lporrel@gmail.com>:
 {docdate}
 :numbered:
 :toc:
 
-include::Hyrax_Running_bescmdln.adoc[tabsize=4]
-include::BES_How_to_Debug_the_BES.adoc[tabsize=4]
-include::Hyrax_BES_Configuration.adoc[tabsize=4]
-include::Hyrax_BES_Client_commands.adoc[tabsize=4]
+:leveloffset: +1
+
+include::Hyrax_Running_bescmdln.adoc[]
+
+include::BES_How_to_Debug_the_BES.adoc[]
+
+include::Hyrax_BES_Configuration.adoc[]
+
+include::Hyrax_BES_Client_commands.adoc[]
+
+:leveloffset: -1
+

@@ -1,10 +1,10 @@
-//= BES - Modules - Gateway Module - OPeNDAP Documentation
-//:Leonard Porrello <lporrel@gmail.com>:
-//{docdate}
-//:numbered:
-//:toc:
+= The Gateway Module
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-== BES - Modules - Gateway Module - Introduction
+== Introduction
 
 The Gateway Service provides interoperability between Hyrax and other
 web services. Using the Gateway module, Hyrax can be used to access and
@@ -14,7 +14,7 @@ example, if a web service returns data using HDF4 files, then Hyrax,
 using the gateway module, can subset and return DAP responses for those
 data.
 
-== Special Pptions Supported by the Handler
+== Special Options Supported by the Handler
 
 === Limiting access to specific hosts
 

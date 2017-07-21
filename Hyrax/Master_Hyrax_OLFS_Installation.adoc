@@ -1,4 +1,4 @@
-= Hyrax - OLFS Installation - OPeNDAP Documentation
+= OLFS Installation
 :Leonard Porrello <lporrel@gmail.com>:
 {docdate}
 :numbered:
@@ -11,8 +11,7 @@ default configuration of the BES. If you do a default install of each
 one you should get a running Hyrax server that will be pre-populated
 with test data suitable for running the integrity tests.
 
-== link:./Hyrax_BES_Installation.html[Install The BES]
-
+// == link:./Hyrax_BES_Installation.html[Install The BES]
 
 == Download
 

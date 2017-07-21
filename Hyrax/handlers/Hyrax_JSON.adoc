@@ -1,4 +1,4 @@
-= Hyrax JSON - OPeNDAP Documentation
+= JSON Responses
 :Leonard Porrello <lporrel@gmail.com>:
 {docdate}
 :numbered:
@@ -585,7 +585,7 @@ Attributes {
 
 ==== DMR
 
-Coming Soon... ====
+Coming Soon...
 
 === w10n JSON (Abstract Model)
 

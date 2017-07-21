@@ -1,10 +1,10 @@
-//= BES - Modules - CSV Handler - OPeNDAP Documentation
-//:Leonard Porrello <lporrel@gmail.com>:
-//{docdate}
-//:numbered:
-//:toc:
+= CSV Handler
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-== BES - Modules - CSV Handler - Kinds of files the handler will serve
+== Kinds of files the handler will serve
 
 This handler will serve Comma-Separated Values type data. Form many
 kinds of files, only very modifications to the data files are needed. If
@@ -108,4 +108,5 @@ global attributes - information about the dataset as a whole - by adding
 a section with a name that doesn't match the name of any variable in the
 dataset. In this example, I used _Global_ for this (because it's
 obvious) but I could have used __foo__. Also note the attribute
-_Conventions_ has two values, _CF-1.0_ and 'CF-1.6__.__
+_Conventions_ has two values, _CF-1.0_ and _CF-1.6_
+

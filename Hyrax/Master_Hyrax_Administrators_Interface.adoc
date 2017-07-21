@@ -1,8 +1,8 @@
-//= Hyrax Administrators Interface
-//:Leonard Porrello <lporrel@gmail.com>:
-//{docdate}
-//:numbered:
-//:toc:
+= Hyrax Administrators Interface
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
 == Administrator's Interface Overview
 

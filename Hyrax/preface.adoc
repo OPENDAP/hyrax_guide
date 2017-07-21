@@ -1,0 +1,26 @@
+= Preface
+:james Gallagher <jgallagher@opendap.org>:
+{docdate}
+:numbered:
+:toc:
+
+Hyrax was written _blah blah blah_
+
+NOTE: Add more to this. Mention HAO/NCAR, maybe talk a bit about other
+servers and the protocol. Also, maybe add a brief one paragraph history about
+DODS to OPeNDAP and the very start of the project at a workshop at teh
+alton-Jone campus or URI.
+
+// The docs say this should be a level 2
+=== Hyrax development sponsored by...
+
+*http://www.nsf.gov[National Science Foundation (NSF)]* footnote:[This
+material is based upon work supported by the National Science
+Foundation under Grant No. 0430822. Any opinions, findings and
+conclusions or recomendations expressed in this material are those of
+the author(s) and do not necessarily reflect the views of the National
+Science Foundation (NSF).]
+
+*http://www.nasa.gov[National Aeronautics and Space Administration (NASA)]*
+
+*http://www.noaa.gov[National Oceanic and Atmospheric Administration (NOAA)]*

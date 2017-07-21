@@ -1,9 +1,8 @@
-= Hyrax - User Identification (Authentication) - OPeNDAP Documentation
+= User Authentication
 :Leonard Porrello <lporrel@gmail.com>:
 {docdate}
 :numbered:
 :toc:
-
 
 == Overview
 
@@ -57,11 +56,10 @@ made to the Tomcat configuration regardless of the authentication method
 employed by Apache. We'll cover those first and then examine LDAP,
 Shibboleth, and NASA URS IdP configurations for Apache __httpd__.
 
- NB ::
-  If you are deploying Hyrax with an existing Apache service then it is
-  likely that all you have to do is configure _httpd_ and Tomcat to work
-  together and define and then define a security constraint for _httpd_
-  that enforces a login requirement (valid-user) for Hyrax.
+NOTE: If you are deploying Hyrax with an existing Apache service then
+it is likely that all you have to do is configure _httpd_ and Tomcat
+to work together and define and then define a security constraint for
+_httpd_ that enforces a login requirement (valid-user) for Hyrax.
 
 === First: Configure Apache httpd and Tomcat to work together
 
@@ -84,9 +82,8 @@ ProxyPass /opendap ajp://localhost:8009/opendap
 ProxyPassReverse /opendap ajp://localhost:8009/opendap
 ------------------------------------------------------
 
- Note::
-  The ProxyPass and ProxyPassReverse should be set to local host unless
-  a more complex deployment issuing attempted.
+NOTE: The ProxyPass and ProxyPassReverse should be set to local host
+unless a more complex deployment issuing attempted.
 
 This will expose the web application "opendap" (aka Hyrax) through
 Apache. Make sure that the AJP URLs both point to your deployment of
@@ -144,7 +141,7 @@ Configure httpd to use the newly installed certs and restart:
 * ... and SSLCertificateKeyFile /etc/pki/tls/private/ca.key
 * and then restart: _sudo /usr/sbin/apachectl restart_
 
-NB: More complete instructions can be found here:
+NOTE: More complete instructions can be found here:
 http://wiki.centos.org/HowTos/Https
 
 ==== Configure Tomcat (Hyrax)
@@ -267,7 +264,7 @@ presented in the following sections.
 (http://httpd.apache.org/docs/2.2/mod/mod_ldap.html[mod_ldap],
 http://httpd.apache.org/docs/2.2/mod/mod_authnz_ldap.html[mod_authnz_ldap])
 
-*NB:* You must
+NOTE: You must
 *#First:_Configure_Apache_httpd_and_Tomcat_to_work_together[configure
 Apache and Tomcat (Hyrax) to work together]* prior to completion of this
 section.
@@ -502,7 +499,7 @@ determine the granularity of access control you will be able to provide.
 
 ==== Shibboleth (mod_shib)
 
-*NB:* You must
+NOTE: You must
 *#First:_Configure_Apache_httpd_and_Tomcat_to_work_together[configure
 Apache and Tomcat (Hyrax) to work together]* prior to completion of this
 section.

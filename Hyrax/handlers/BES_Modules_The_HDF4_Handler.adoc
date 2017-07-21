@@ -1,10 +1,10 @@
-//= BES - Modules - The HDF4 Handler - OPeNDAP Documentation
-//:Leonard Porrello <lporrel@gmail.com>:
-//{docdate}
-//:numbered:
-//:toc:
+= The HDF4 Handler 
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-== BES - Modules - The HDF4 Handler - Kinds of files the handler will serve
+== Kinds of files the handler will serve
 
 This release of the server supports HDF4.2 and can read any file
 readable using that version of the API. It also supports reading/parsing

@@ -1,4 +1,4 @@
-= Hyrax WMS - OPeNDAP Documentation
+= Hyrax WMS
 :Leonard Porrello <lporrel@gmail.com>:
 {docdate}
 :numbered:
@@ -11,7 +11,7 @@ http://www.resc.rdg.ac.uk/trac/ncWMS/[ncWMS2 WMS Server] from
 http://www.resc.reading.ac.uk/[Reading e-Science Centre] Hyrax can now
 provide WMS services for all of it's appropriate holdings.
 
-=== Theory of Operation
+== Theory of Operation
 
 In an instance of the ncWMS2 WMS server, a Dynamic Service is configured
 that points to a Hyrax server. This allows the ncWMS2 instance to access
@@ -29,7 +29,7 @@ WMS response performance for datasets backed by the DAP service is
 nearly as fast as the ncWMS2 response performance using direct file
 access.
 
-=== Evaluating Candidate Datasets
+== Evaluating Candidate Datasets
 
 In order for ncWMS2 to recognize your dataset as valid for service your
 data must:

@@ -1,19 +1,50 @@
-= Hyrax Handlers - OPeNDAP Documentation
+= Hyrax Handlers
 :Leonard Porrello <lporrel@gmail.com>:
 {docdate}
 :numbered:
 :toc:
 
-include::./handlers/BES_Modules_CSV_Handler.adoc[tabsize=4]
-include::./handlers/BES_Modules_FileOut_GDAL.adoc[tabsize=4]
-include::./handlers/BES_Modules_FileOut_Netcdf.adoc[tabsize=4]
-include::./handlers/BES_Modules_Gateway_Module.adoc[tabsize=4]
-include::./handlers/BES_Modules_GeoTiff,_GRIB2,_JPEG2000_Handler.adoc[tabsize=4]
-include::./handlers/BES_Modules_NcML_Module.adoc[tabsize=4]
-include::./handlers/BES_Modules_SQL_Hander.adoc[tabsize=4]
-include::./handlers/BES_Modules_The_HDF4_Handler.adoc[tabsize=4]
-include::./handlers/BES_Modules_The_HDF5_Handler.adoc[tabsize=4]
-include::./handlers/BES_Modules_The_NetCDF_Handler.adoc[tabsize=4]
-include::./handlers/BES_File_Out_NetCDF.adoc[tabsize=4]
-include::./handlers/Gateway_Service.adoc[tabsize=4]
-include::./handlers/The_FreeForm_Data_Handler.adoc[tabsize=4]
+:leveloffset: +1
+
+// Handlers for different data formats - sources of data
+include::./handlers/BES_Modules_CSV_Handler.adoc[lines="1,8..-1", tabsize=4]
+
+include::./handlers/BES_Modules_GeoTiff,_GRIB2,_JPEG2000_Handler.adoc[lines="1,8..-1", tabsize=4]
+
+include::./handlers/BES_Modules_The_HDF4_Handler.adoc[lines="1,8..-1", tabsize=4]
+
+include::./handlers/BES_Modules_The_HDF5_Handler.adoc[lines="1,8..-1", tabsize=4]
+
+include::./handlers/BES_Modules_The_NetCDF_Handler.adoc[lines="1,8..-1", tabsize=4]
+
+include::./handlers/The_FreeForm_Data_Handler.adoc[lines="1,8..-1", tabsize=4]
+
+// One experimental data format handler - available in source code only
+include::./handlers/BES_Modules_SQL_Hander.adoc[lines="1,8..-1", tabsize=4]
+
+// Handlers that build different kinds of responses
+NOTE: The following two descriptions of the File Out NetCDF code need to be combined.
+
+include::./handlers/BES_File_Out_NetCDF.adoc[lines="1,8..-1", tabsize=4]
+
+include::./handlers/BES_Modules_FileOut_Netcdf.adoc[lines="1,8..-1", tabsize=4]
+
+include::./handlers/BES_Modules_FileOut_GDAL.adoc[lines="1,8..-1", tabsize=4]
+
+include::./handlers/Hyrax_JSON.adoc[lines="1,8..-1"]
+
+// Secial handlers
+NOTE: Maybe these should be their own Appendices - just like Server functions,
+which are really loaded in via the module system, get their own appendix.
+
+NOTE: Some of this overlaps with the Appendix on Aggregation.
+
+include::./handlers/BES_Modules_NcML_Module.adoc[lines="1,8..-1", tabsize=4]
+
+NOTE: The following two descriptions of the Gateway module need to be combined
+
+include::./handlers/BES_Modules_Gateway_Module.adoc[lines="1,8..-1", tabsize=4]
+
+include::./handlers/Gateway_Service.adoc[lines="1,8..-1", tabsize=4]
+
+:leveloffset: -1

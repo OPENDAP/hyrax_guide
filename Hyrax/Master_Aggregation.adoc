@@ -1,4 +1,4 @@
-= Hyrax Aggregation - OPeNDAP Documentation
+= Hyrax Aggregation
 :Leonard Porrello <lporrel@gmail.com>:
 {docdate}
 :numbered:
@@ -14,3 +14,6 @@ include::./aggregation/NCML_Module_Aggregation_Union.adoc[tabsize=4]
 include::./aggregation/Satellite_Swath_Data_Aggregation.adoc[tabsize=4]
 include::./aggregation/Satellite_Time_Series_Aggregation.adoc[tabsize=4]
 include::./aggregation/Aggregation_enhancements.adoc[tabsize=4]
+
+// Note that this file does not include Use_cases_for_swath_and_time_series_aggregation.adoc
+// nor does it include BES_XML_Commands.adoc

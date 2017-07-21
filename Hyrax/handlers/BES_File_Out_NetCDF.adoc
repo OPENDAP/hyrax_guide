@@ -1,11 +1,10 @@
-//= BES File Out NetCDF - OPeNDAP Documentation
-//:Leonard Porrello <lporrel@gmail.com>:
-//{docdate}
-//:numbered:
-//:toc:
+= Returning NetCDF
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-
-== BES File Out NetCDF - General Questions and Assumptions
+== General Questions and Assumptions
 
 * What version of netCDF will this support?
 
