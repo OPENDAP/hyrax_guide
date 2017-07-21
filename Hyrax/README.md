@@ -21,21 +21,20 @@ asciidoc.
 
 ## Notes about specific adoc files
 
-**preface.adoc** If we use the book format, we can have a preface and
+### preface.adoc
+
+If we use the book format, we can have a preface and
 should move the acknowledgements from Hyrax.adoc to there (I think)
 along with other text like, this is why Hyrax exists and/or other
 stuff that one usually finds in a Preface.
 
-### Files with _include_ directives
-At least I think these all _include_ other files. These are mostly in
-alphabetical order unless I moved stuff around because that seemed
-like a good idea.
+### Master\_Hyrax\_Table\_of\_Contents.adoc
 
-**Master\_Hyrax\_Table\_of\_Contents.adoc** This is the main document
-  for the whole manual. It now uses _include_ directives in place of
-  _link_s. There are notes in the file about building the manual
-  as a multipart book. There other notes about missing content
-  sections (like how to install the BES or start the OLFS).
+This is the main document for the whole manual. It now uses _include_
+directives in place of _link_s. There are notes in the file about
+building the manual as a multipart book. There other notes about
+missing content sections (like how to install the BES or start the
+OLFS).
 
 I changed the title to _The Hyrax Data Server Installation and
 Configuration Guide_ and it now has six sections (Overview, Installation,
@@ -50,77 +49,139 @@ in one of these other files)
   hand in terms of the TOC listings. Modify the stuff so that it has a
   more reasonable number of level two items
 
-**Master\_Aggregation.adoc** Appendix C; includes all of the files
-  about aggreation.
+### Overview
 
-**Master\_Handlers.adoc** Appendix B; this _include_s all of the
-  handler documentation files
+#### Hyrax.adoc
 
-**Master\_Hyrax\_Configuration.adoc** A set of includes; see below.
-
-**Master\_Hyrax\_Sample\_BES\_Installations.adoc**
-
-**Master\_Hyrax\_WMS.adoc** Appendix A, does not include files.
-
-**Master\_Server\_Side\_Processing\_Functions.adoc** Appendix D; no includes
-
-**Master\_Troubleshooting.adoc** includes files...
-
-#### _Master Hyrax_ files without _include_s or notes
-
-**Master\_Hyrax\_Customizing\_Hyrax.adoc** Part of the
-  _Configuration_ section
-
-**Master\_Hyrax\_Apache\_Integration.adoc** Part of _Configuration_
-
-**Master\_Hyrax\_Administrators\_Interface.adoc** Part of _Operation_
-
-**Master\_Hyrax\_Secure\_Installation\_Guidelines.adoc** Part of _Security_
-
-**Master\_Hyrax\_User\_Authentication.adoc** Part of _Security_
-
-### Files without _include_ directives
-
-**Hyrax.adoc** This is the source of the overview text. It has some
-  notes about changes to the presentation of the overview. I think the
-  _OPeNDAP Hyrax development is sponsored by_ section should be in the
+This is the source of the overview text. It has some notes about
+  changes to the presentation of the overview. I think the _OPeNDAP
+  Hyrax development is sponsored by_ section should be in the
   acknowledgements subsection of the (now empty) Preface.
 
-**Master\_Hyrax\_OLFS\_Installation.adoc** No notes except that this
-  contains a link to the vanished BES_Installation file.
+### Installation
 
-**Hyrax\_Configuration.adoc** Included by Master_Hyrax_Configuration.adoc
+#### Master\_Hyrax\_OLFS\_Installation.adoc
 
-**Hyrax\_BES\_Configuration.adoc** Included by
-  Master_Hyrax_Configuration.adoc. Also art of _Troubleshooting_
+No notes except that this contains a link to the vanished
+  BES_Installation file.
 
-**Hyrax\_OLFS\_Configuration.adoc** Included by Master_Hyrax_Configuration.adoc
+### Configuration
 
-**Hyrax\_Configuring\_The\_OLFS\_To\_Work\_With\_Multiple\_BES's.adoc** Included by Master_Hyrax_Configuration.adoc
+#### Master\_Hyrax\_Configuration.adoc
 
-**Hyrax\_Logging\_Configuration.adoc** Included by Master_Hyrax_Configuration.adoc
+A set of includes; see below.
 
-**Hyrax\_THREDDS\_Configuration.adoc** Included by
-Master_Hyrax_Configuration.adoc
+#### Hyrax\_Configuration.adoc
 
-**Hyrax\_BES\_Client\_commands.adoc** Part of _Troubleshooting_
+Included by Master\_Hyrax\_Configuration.adoc
 
-**Hyrax\_JSON.adoc**
+#### Hyrax\_BES\_Configuration.adoc
 
-**Hyrax\_Running\_bescmdln.adoc** Part of _Troubleshooting_
+Included by Master\_Hyrax\_Configuration.adoc. Also art of
+  _Troubleshooting_
 
-**Hyrax\_Starting\_and\_stopping\_the\_BES.adoc** No includes or
-  notes. Part of _Operation_
+#### Hyrax\_OLFS\_Configuration.adoc
 
-**BES\_How\_to\_Debug\_the\_BES.adoc** Part of _Troubleshooting_
+Included by Master_Hyrax_Configuration.adoc
 
-**THREDDS\_using\_XSLT.adoc**
+####
+Hyrax\_Configuring\_The\_OLFS\_To\_Work\_With\_Multiple\_BES's.adoc
+
+Included by Master_Hyrax_Configuration.adoc
+
+#### Hyrax\_Logging\_Configuration.adoc
+
+Included by Master_Hyrax_Configuration.adoc
+
+#### Hyrax\_THREDDS\_Configuration.adoc
+
+Included by Master_Hyrax_Configuration.adoc
+
+#### Master\_Hyrax\_Customizing\_Hyrax.adoc
+
+Part of the _Configuration_ section
+
+#### Master\_Hyrax\_Apache\_Integration.adoc
+
+Part of _Configuration_
+
+### Operation
+
+#### Hyrax\_Starting\_and\_stopping\_the\_BES.adoc
+
+No includes or notes. Part of _Operation_
+
+#### Master\_Hyrax\_Administrators\_Interface.adoc
+
+Part of _Operation_
+
+### Security
+
+#### Master\_Hyrax\_Secure\_Installation\_Guidelines.adoc
+
+Part of _Security_
+
+#### Master\_Hyrax\_User\_Authentication.adoc
+
+Part of _Security_
+
+### Troubleshooting
+
+#### Master\_Troubleshooting.adoc
+
+includes files...
+
+#### Hyrax\_BES\_Client\_commands.adoc
+
+Part of _Troubleshooting_ Think about moving this to Appendix E and
+adding text in Running bescmdln that says, "For a full listing of the
+commands, see..."
+
+### Hyrax\_Running\_bescmdln.adoc
+
+Part of _Troubleshooting_
+
+#### BES\_How\_to\_Debug\_the\_BES.adoc
+
+Part of _Troubleshooting_
+
+### Appendices
+
+#### Master\_Hyrax\_WMS.adoc
+
+Appendix A, does not include files.
+
+#### Master\_Handlers.adoc
+
+Appendix B; includes all of the handler documentation files
+
+#### Master\_Aggregation.adoc
+
+Appendix C; includes all of the files about aggreation.
+
+#### Master\_Hyrax\_Sample\_BES\_Installations.adoc
+
+#### Master\_Server\_Side\_Processing\_Functions.adoc
+
+Appendix D; no includes
+
+#### BES\_XML\_Commands.adoc 
+
+Appendix E.
+
+This needs significant work in both presentation and
+content. We need to decide how to fix the TOC it uses. We also need to
+add information on the DAP commands, since they are missing.
+
+Also, we might move the BES Client Commands and text from
+Troubleshooting to here and then refer to the appendix in the text there.
 
 ## Unused files
 
 In the aggreagtion directory:
-* Use\_cases\_for\_swath\_and\_time\_series\_aggregation.adoc
-* BES\_XML\_Commands.adoc
+* Use\_cases\_for\_swath\_and\_time\_series\_aggregation.adoc -
+  Somwhow this is actually an HTML file.
+* THREDDS\_using\_XSLT.adoc
 
 ## About these files
 

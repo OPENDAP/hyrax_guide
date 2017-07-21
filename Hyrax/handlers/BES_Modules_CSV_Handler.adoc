@@ -1,10 +1,10 @@
-//= BES - Modules - CSV Handler - OPeNDAP Documentation
-//:Leonard Porrello <lporrel@gmail.com>:
-//{docdate}
-//:numbered:
-//:toc:
+== CSV Handler
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-== BES - Modules - CSV Handler - Kinds of files the handler will serve
+// == BES - Modules - CSV Handler - Kinds of files the handler will serve
 
 This handler will serve Comma-Separated Values type data. Form many
 kinds of files, only very modifications to the data files are needed. If

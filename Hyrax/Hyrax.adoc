@@ -221,6 +221,9 @@ questions and comments.
 http://mailman.opendap.org/mailman/listinfo[subscribe] first)
 
 // TODO Move this to the preface
+
+// Done. jhrg 7/20/17
+////
 == OPeNDAP Hyrax development is sponsored by...
 
 *http://www.nsf.gov[National Science Foundation (NSF)]* footnote:[This
@@ -233,3 +236,5 @@ Science Foundation (NSF).]
 *http://www.nasa.gov[National Aeronautics and Space Administration (NASA)]*
 
 *http://www.noaa.gov[National Oceanic and Atmospheric Administration (NOAA)]*
+
+////
