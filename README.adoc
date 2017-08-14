@@ -32,5 +32,5 @@ To convert to CM from adoc, use 'asciidoctor' and 'pandoc' like this:
 === About opendap.github.io
 
 The https://opendap.github.io site is populated with HTML and PDF
-documents that are automatically build any time an AsciiDoc file in
+documents that are automatically built any time an AsciiDoc file in
 the documentation repo is updated on the master branch.
