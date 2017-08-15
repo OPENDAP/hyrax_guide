@@ -7,23 +7,20 @@
 == Overview
 This documentation describes the installation, configuration,
 and operation of the _Hyrax Data server_, a data server that integrates
-structured dat with the world wide web. Hyrax is one example of a
-number of data servers that implement OPeNDAP's Data Access protocol.
+structured data with the world wide web. Hyrax is one example of a
+number of data servers that implement OPeNDAP's Data Access Protocol (DAP).
 
-NOTE: TODO: Rewrite this text to be more about the sever's
-capabilities than how the software was implemented.
+//NOTE: TODO: Rewrite this text to be more about the sever's capabilities than how the software was implemented.
  
 Hyrax uses the Java servlet mechanism to hand off requests from a
-general web daemon to DAP format-specific software. This results in
+general web daemon to DAP format-specific software. This provides 
 higher performance for small requests. The servlet front end, which we
 call the **O**PeNDAP **L**ightweight **F**ront end **S**erver (OLFS)
 looks at each request and formulates a query to a second server (which
 may or may not on the same machine as the OLFS) called the **B**ack
 **E**nd **S**erver (BES).
 
-The BES is the high-performance server software from HAO. It handles
-reading data from the data stores and returning DAP-compliant responses
-to the OLFS. In turn, the OLFS may pass these response back to the
+The BES is the high-performance server software from HAO. It reads data from the data stores and returning DAP-compliant responses to the OLFS. In turn, the OLFS may pass these response back to the
 requestor with little or no modification or it may use them to build
 more complex responses. The nature of the Inter Process Communication
 (IPC) between the OLFS and BES is such that they should both be on the
