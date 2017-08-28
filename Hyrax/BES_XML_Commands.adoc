@@ -1,108 +1,42 @@
-= BES XML Commands 
+= BES XML Commands
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-[[firstHeading]]
-BES XML Commands
-----------------
-
-Contents
-~~~~~~~~
-
-* link:#BES_XML_Command_syntax.[1 BES XML Command syntax.]
-** link:#Requests[1.1 Requests]
-** link:#Responses[1.2 Responses]
-* link:#BES_Error_Response[2 BES Error Response]
-* link:#BES_Command_Set[3 BES Command Set]
-** link:#setContext[3.1 setContext]
-*** link:#name_attribute[3.1.1 _name_ attribute]
-**** link:#Request_Example[3.1.1.1 Request Example]
-**** link:#Response_Example[3.1.1.2 Response Example]
-** link:#setContainer[3.2 setContainer]
-*** link:#Request_Example_2[3.2.1 Request Example]
-*** link:#Response_Example_2[3.2.2 Response Example]
-** link:#define[3.3 define]
-*** link:#Request_Example_3[3.3.1 Request Example]
-*** link:#Response_Example_3[3.3.2 Response Example]
-** link:#get[3.4 get]
-*** link:#Request_Example_4[3.4.1 Request Example]
-*** link:#Response_Example_4[3.4.2 Response Example]
-** link:#Multiple_command_example[3.5 Multiple command example]
-*** link:#Request_Example_5[3.5.1 Request Example]
-** link:#Show_version[3.6 Show version]
-*** link:#Request_Example_6[3.6.1 Request Example]
-*** link:#Response[3.6.2 Response]
-** link:#Show_help[3.7 Show help]
-*** link:#Request_Example_7[3.7.1 Request Example]
-*** link:#Response_Example_5[3.7.2 Response Example]
-** link:#showProcess[3.8 showProcess]
-*** link:#Request_Example_8[3.8.1 Request Example]
-*** link:#Response_Example_6[3.8.2 Response Example]
-** link:#showConfig[3.9 showConfig]
-*** link:#Request_Example_9[3.9.1 Request Example]
-*** link:#Response_Example_7[3.9.2 Response Example]
-** link:#showStatus[3.10 showStatus]
-*** link:#Request_Example_10[3.10.1 Request Example]
-*** link:#Response_Example_8[3.10.2 Response Example]
-** link:#showContainers[3.11 showContainers]
-*** link:#Request_Example_11[3.11.1 Request Example]
-*** link:#Response_Example_9[3.11.2 Response Example]
-** link:#deleteContainer.28s.29.2C_deleteDefinition.28s.29[3.12
-deleteContainer(s), deleteDefinition(s)]
-*** link:#Request_Example_12[3.12.1 Request Example]
-*** link:#Response_Example_10[3.12.2 Response Example]
-** link:#showDefinitions[3.13 showDefinitions]
-*** link:#Request_Example_13[3.13.1 Request Example]
-*** link:#Response_Example_11[3.13.2 Response Example]
-** link:#showContext[3.14 showContext]
-*** link:#Request_Example_14[3.14.1 Request Example]
-*** link:#Response_Example_12[3.14.2 Response Example]
-** link:#showCatalog[3.15 showCatalog]
-*** link:#Request[3.15.1 Request]
-*** link:#Response_2[3.15.2 Response]
-** link:#showInfo[3.16 showInfo]
-*** link:#Request_2[3.16.1 Request]
-*** link:#Current_Response[3.16.2 Current Response]
-*** link:#Proposed_Response[3.16.3 Proposed Response]
-** link:#showServices[3.17 showServices]
-*** link:#Request_3[3.17.1 Request]
-*** link:#Response_3[3.17.2 Response]
-
-1 BES XML Command syntax.
-~~~~~~~~~~~~~~~~~~~~~~~~~
+== BES XML Command Syntax
 
 The BES will accept commands encoded in XML documents (BES XML
 Commands), and provide responses in kind. Some requests specifically
 indicate a non XML response (such as a DAP2 binary response) in which
 case the response will be as requested.
 
-1.1 Requests
-^^^^^^^^^^^^
+=== Requests
 
 All elements mentioned in the following are in the
 http://xml.opendap.org/ns/bes/1.0# namespace unless otherwise noted.
 
-1.  Each request document *must* have a <request> root element.
-2.  Each <request> *must* contain one or more BesCommand elements.
-3.  A <request> *may* contain multiple BesCommands as long as zero more
+1. Each request document *must* have a <request> root element.
+2. Each <request> *must* contain one or more BesCommand elements.
+3. A <request> *may* contain multiple BesCommands as long as zero more
 of those commands returns a response. +
 Examples (expand with abbreviated xml):
-* we can do a set context, set container, define and a get das in the
+* We can do a set context, set container, define and a get das in the
 same request document as only the get das request command returns a
 response.
 * There can not be two show commands within the request document, or a
 show and a get, or multiple gets.
-4.  . Each request element *must* have an attribute _reqID_ the value of
+4. Each request element *must* have an attribute _reqID_ the value of
 which will be used in the response document. There is no guarantee that
 the value of _reqID_ be unique within the operational domain of the BES.
 (It might be unique within the software of the requesting client, but
 that's of no concern to the BES).
 
-1.2 Responses
-^^^^^^^^^^^^^
+==== Responses
 
-Need a description and such here.
+*Need a description and such here.
 
-2 BES Error Response
-~~~~~~~~~~~~~~~~~~~~
+== BES Error Response
 
 ----------------------------------------------------------------------
 <BES>
@@ -125,14 +59,12 @@ config
 * 4. Forbidden Error - the requester is forbidden to see the resource
 * 5. Not Found Error - the resource can not be found
 
-If debugging is enabled during build then the Error object will include
+If debugging is enabled during build, the Error object will include
 the file name and line number where the exception was thrown.
 
-3 BES Command Set
-~~~~~~~~~~~~~~~~~
+== BES Command Set
 
-3.1 setContext
-^^^^^^^^^^^^^^
+=== setContext
 
 Example:
 
@@ -143,8 +75,7 @@ Example:
 Changes the state of the BES for the current client connection. This
 allows the client to ask the BES to utilize various response formats.
 
-3.1.1 _name_ attribute
-++++++++++++++++++++++
+==== _name_ Attribute
 
 Identifies which context value is being set.
 
@@ -164,13 +95,13 @@ returned as DAP2 error objects (definitely *not* XML).
 
 Proposed Values:
 
-* _dap_ - When error context is set to _dap_ then all errors will
+* _dap_ - When error context is set to _dap_, all errors will
 returned as DAP error objects. The version of the DAP that error must
 conform to is controlled by the dap_format context. It is possible
 (likely) that in the future DAP errors will be XML documents.
 * _bes_ - Returns a BES Error response XML Document:
 
-3.1.1.1 Request Example
+===== Request Example
 
 --------------------------------------------------
    <?xml version="1.0" encoding="UTF-8"?>
@@ -179,19 +110,16 @@ conform to is controlled by the dap_format context. It is possible
    </request>
 --------------------------------------------------
 
-3.1.1.2 Response Example
+====== Response Example
 
 Normally no response. May return a
 link:../index.php/BES_XML_Commands#BES_Error_Response[BESError].
 
- +
-
 '''''
 
-3.2 setContainer
-^^^^^^^^^^^^^^^^
+=== setContainer
 
-3.2.1 Request Example
+==== Request Example
 
 -----------------------------------------------------------------------------
    <?xml version="1.0" encoding="UTF-8"?>
@@ -200,19 +128,16 @@ link:../index.php/BES_XML_Commands#BES_Error_Response[BESError].
    </request>
 -----------------------------------------------------------------------------
 
-3.2.2 Response Example
+==== Response Example
 
 Normally no response. May return a
 link:../index.php/BES_XML_Commands#BES_Error_Response[BESError].
 
- +
-
 '''''
 
-3.3 define
-^^^^^^^^^^
+=== Define
 
-3.3.1 Request Example
+==== Request Example
 
 -----------------------------------------------------------------
    <?xml version="1.0" encoding="UTF-8"?>
@@ -232,17 +157,14 @@ link:../index.php/BES_XML_Commands#BES_Error_Response[BESError].
    </request>
 -----------------------------------------------------------------
 
-3.3.2 Response Example
+==== Response Example
 
 Normally no response. May return a
 link:../index.php/BES_XML_Commands#BES_Error_Response[BESError].
 
- +
-
 '''''
 
-3.4 get
-^^^^^^^
+=== get
 
 *This needs to be expanded to illuminate the missing details from the
 previoius command set:*
@@ -259,7 +181,7 @@ Type:
 * *html_form* -
 * *info_page* -
 
-3.4.1 Request Example
+==== Request Example
 
 -----------------------------------------------------------------------------------
    <?xml version="1.0" encoding="UTF-8"?>
@@ -268,16 +190,12 @@ Type:
    </request>
 -----------------------------------------------------------------------------------
 
-3.4.2 Response Example
 
-Explain about DAP2 responses etc...
-
-3.5 Multiple command example
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=== Multiple Command Example
 
 Multiple command transaction resulting in a DDS (non XML DAP2) response:
 
-3.5.1 Request Example
+==== Request Example
 
 -----------------------------------------------------------------------------
    <?xml version="1.0" encoding="UTF-8"?>
@@ -295,14 +213,11 @@ Multiple command transaction resulting in a DDS (non XML DAP2) response:
    </request>
 -----------------------------------------------------------------------------
 
- +
-
 '''''
 
-3.6 Show version
-^^^^^^^^^^^^^^^^
+=== Show Version
 
-3.6.1 Request Example
+==== Request Example
 
 -----------------------------------------
    <?xml version="1.0" encoding="UTF-8"?>
@@ -311,7 +226,7 @@ Multiple command transaction resulting in a DDS (non XML DAP2) response:
    </request>
 -----------------------------------------
 
-3.6.2 Response
+===== Response
 
 Current:
 
@@ -343,8 +258,7 @@ Current:
    </showVersion>
 -------------------------------------------
 
- +
- Proposed:
+Proposed:
 
 ---------------------------------------------------------
    <?xml version="1.0" encoding="UTF-8"?>
@@ -365,10 +279,9 @@ Current:
 
 '''''
 
-3.7 Show help
-^^^^^^^^^^^^^
+=== Show help
 
-3.7.1 Request Example
+==== Request Example
 
 -----------------------------------------
    <?xml version="1.0" encoding="UTF-8"?>
@@ -377,7 +290,7 @@ Current:
    </request>
 -----------------------------------------
 
-3.7.2 Response Example
+==== Response Example
 
 -------------------------------------------------------------------------------------------------------------------------
   <?xml version="1.0" encoding="UTF-8"?>
@@ -392,13 +305,12 @@ Current:
 
 '''''
 
-3.8 showProcess
-^^^^^^^^^^^^^^^
+=== showProcess
 
 This is available only if the BES is compiled in developer mode. A
 'production' BES does not support this command.
 
-3.8.1 Request Example
+==== Request Example
 
 -----------------------------------------
    <?xml version="1.0" encoding="UTF-8"?>
@@ -407,7 +319,7 @@ This is available only if the BES is compiled in developer mode. A
    </request>
 -----------------------------------------
 
-3.8.2 Response Example
+==== Response Example
 
 -----------------------------------------
    <?xml version="1.0" encoding="UTF-8"?>
@@ -420,13 +332,12 @@ This is available only if the BES is compiled in developer mode. A
 
 '''''
 
-3.9 showConfig
-^^^^^^^^^^^^^^
+=== showConfig
 
 This is available only if the BES is compiled in developer mode. A
 'production' BES does not support this command.
 
-3.9.1 Request Example
+==== Request Example
 
 -----------------------------------------
    <?xml version="1.0" encoding="UTF-8"?>
@@ -435,7 +346,7 @@ This is available only if the BES is compiled in developer mode. A
    </request>
 -----------------------------------------
 
-3.9.2 Response Example
+==== Response Example
 
 ----------------------------------------------------------------------
    <?xml version="1.0" encoding="UTF-8"?>
@@ -450,10 +361,9 @@ This is available only if the BES is compiled in developer mode. A
 
 '''''
 
-3.10 showStatus
-^^^^^^^^^^^^^^^
+=== showStatus
 
-3.10.1 Request Example
+==== Request Example
 
 -----------------------------------------
    <?xml version="1.0" encoding="UTF-8"?>
@@ -462,7 +372,7 @@ This is available only if the BES is compiled in developer mode. A
    </request>
 -----------------------------------------
 
-3.10.2 Response Example
+==== Response Example
 
 --------------------------------------------------------
    <?xml version="1.0" encoding="UTF-8"?>
@@ -475,10 +385,9 @@ This is available only if the BES is compiled in developer mode. A
 
 '''''
 
-3.11 showContainers
-^^^^^^^^^^^^^^^^^^^
+=== showContainers
 
-3.11.1 Request Example
+==== Request Example
 
 -----------------------------------------
    <?xml version="1.0" encoding="UTF-8"?>
@@ -487,7 +396,7 @@ This is available only if the BES is compiled in developer mode. A
    </request>
 -----------------------------------------
 
-3.11.2 Response Example
+==== Response Example
 
 -------------------------------------------------------------------------
    <?xml version="1.0" encoding="UTF-8"?>
@@ -502,10 +411,9 @@ This is available only if the BES is compiled in developer mode. A
 
 '''''
 
-3.12 deleteContainer(s), deleteDefinition(s)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=== deleteContainer(s), deleteDefinition(s)
 
-3.12.1 Request Example
+==== Request Example
 
 ------------------------------------------------------------------
    <?xml version="1.0" encoding="UTF-8"?>
@@ -517,19 +425,16 @@ This is available only if the BES is compiled in developer mode. A
    </request>
 ------------------------------------------------------------------
 
-3.12.2 Response Example
+==== Response Example
 
 Normally no response. May return a
 link:../index.php/BES_XML_Commands#BES_Error_Response[BESError].
 
- +
-
 '''''
 
-3.13 showDefinitions
-^^^^^^^^^^^^^^^^^^^^
+=== showDefinitions
 
-3.13.1 Request Example
+==== Request Example
 
 -----------------------------------------
    <?xml version="1.0" encoding="UTF-8"?>
@@ -538,7 +443,7 @@ link:../index.php/BES_XML_Commands#BES_Error_Response[BESError].
    </request>
 -----------------------------------------
 
-3.13.2 Response Example
+==== Response Example
 
 -------------------------------------------------------------------------------------------
    <?xml version="1.0" encoding="UTF-8"?>
@@ -556,10 +461,9 @@ link:../index.php/BES_XML_Commands#BES_Error_Response[BESError].
 
 '''''
 
-3.14 showContext
-^^^^^^^^^^^^^^^^
+=== showContext
 
-3.14.1 Request Example
+==== Request Example
 
 -----------------------------------------
    <?xml version="1.0" encoding="UTF-8"?>
@@ -568,7 +472,7 @@ link:../index.php/BES_XML_Commands#BES_Error_Response[BESError].
    </request>
 -----------------------------------------
 
-3.14.2 Response Example
+==== Response Example
 
 --------------------------------------------------
   <?xml version="1.0" encoding="UTF-8"?>
@@ -584,10 +488,9 @@ link:../index.php/BES_XML_Commands#BES_Error_Response[BESError].
 
 '''''
 
-3.15 showCatalog
-^^^^^^^^^^^^^^^^
+=== showCatalog
 
-3.15.1 Request
+==== Request
 
 -------------------------------------------------
    <?xml version="1.0" encoding="UTF-8"?>
@@ -601,7 +504,7 @@ specified in the BES configuration file. So if you had a catalog named
 rdh you could specify node="rdh:/" and it would give you the root node
 for the rdh catalog.
 
-3.15.2 Response
+==== Response
 
 ------------------------------------------------------------------------------------------------------------------------------
   <?xml version="1.0" encoding="UTF-8"?>
@@ -630,10 +533,9 @@ for the rdh catalog.
 
 '''''
 
-3.16 showInfo
-^^^^^^^^^^^^^
+=== showInfo
 
-3.16.1 Request
+==== Request
 
 -----------------------------------------
    <?xml version="1.0" encoding="UTF-8"?>
@@ -642,7 +544,7 @@ for the rdh catalog.
    </request>
 -----------------------------------------
 
-3.16.2 Current Response
+==== Current Response
 
 ---------------------------------------------
    <?xml version="1.0" encoding="UTF-8"?>
@@ -677,7 +579,7 @@ for the rdh catalog.
    </response>
 -------------------------------------------------
 
-3.16.3 Proposed Response
+==== Proposed Response
 
 -------------------------------------------------------------------------------------------------
    <dataset name="testfile.nc" size="43392" lastModified="YYYY-MM-DDThh:mm:ss" catalog="catalog" 
@@ -686,10 +588,9 @@ for the rdh catalog.
    </dataset>
 -------------------------------------------------------------------------------------------------
 
-3.17 showServices
-^^^^^^^^^^^^^^^^^
+=== showServices
 
-3.17.1 Request
+==== Request
 
 -----------------------------------------
    <?xml version="1.0" encoding="UTF-8"?>
@@ -698,7 +599,7 @@ for the rdh catalog.
    </request>
 -----------------------------------------
 
-3.17.2 Response
+==== Response
 
 --------------------------------------------------------------
    <?xml version="1.0" encoding="UTF-8"?>

@@ -33,7 +33,7 @@ arguments. The 'help' response from both _version()_ and a function such
 as _linear_scale()_ is a simple XML document listing the function's
 name, version and URL to more complete documentation.
 
-All the functions here are included in the Hyrax server, version 1.6 and
+All the functions listed here are included in the Hyrax server, versions 1.6 and
 later. Other servers may also support these.
 
 All of these functions can be composed. Thus, the values from the
@@ -41,20 +41,19 @@ geogrid() function can be used by the linear_scale() function. Here's an
 example:
 
 ---------------------------------------------------------------------------------------------------------------------------------------------
-
  linear_scale(geogrid(SST, 45, -82, 40, -78))  // spaces added for clarity; in reality spaces in server function arg lists are a syntax error
 ---------------------------------------------------------------------------------------------------------------------------------------------
 
-This first subsets the variable _SST_ so only those values in latitude
-45 to 40 and longitude -82 to -78 are returned and then passes those
+This first subsets the variable _SST_, so only those values in latitude
+45 to 40 and longitude -82 to -78 are returned; it then passes those
 values to the linear_scale() function, which will scale them and return
 those new values to the caller.
 
 == Server Functions in the _BES functions_ Module
 
 For Hyrax 1.9, the server functions listed here were moved from libdap,
-where they were 'hard coded' into the constraint evaluator, to a module
-that is loaded like the other BES modules. Currently this 'functions'
+where they were 'hard coded' into the constraint evaluator to a module
+that is loaded like the other BES modules. Currently, this 'functions'
 module is part of the BES source code while we decide where it should
 reside. Also note that __make_array()__, the _#Type_ special form,
 _bind_name()_ and _bind_shape()_ are new functions designed to pass
@@ -64,10 +63,10 @@ coming two years.
 
 === geogrid()
 
-Version documented: 1.2
+==== Version Documented: 1.2
 
 The geogrid() function applies a constraint given in latitude and
-longitude to a DAP Grid variable. The arguments to the function are:
+longitude to a DAP Grid variable. The arguments to the function are...
 
 -----------------------------------------------------------------------------------------------
 
@@ -87,16 +86,16 @@ expressions.
 The function will always return a single Grid variable whose values
 completely cover the given region, although there may be cases when some
 additional data are also returned. If the longitude values 'wrap around'
-the right edge of the data, then the function will make two requests and
+the right edge of the data, the function will make two requests and
 return those joined together as a single Grid. If the data are stored
 with the southern latitudes at the top of the array, the return result
 will be flipped so that the northern latitudes are at the top. If the
-Longitude values are offset, the function will correct for that, as
+Longitude values are offset, the function will correct for that as
 well.
 
 '''''
 
-Version documented: 1.1
+==== Version Documented: 1.1
 
 The geogrid() function applies a constraint given in latitude and
 longitude to a DAP Grid variable. The arguments to the function are:
@@ -122,7 +121,7 @@ will be flipped so that the northern latitudes are at the top.
 
 === 2.2 grid()
 
-Version documented: 1.0
+==== Version Documented: 1.0
 
 The grid() function takes a DAP Grid variable and zero or more
 relational expressions. Each relational expression is applied to the
@@ -144,7 +143,7 @@ are both legal and, in this case, also equivalent.
 
 === linear_scale
 
-Version documented: 1.0b1
+==== Version Documented: 1.0b1
 
 The linear_scale() function applies the familiar y = mx + b equation to
 data. It has three forms:
@@ -164,7 +163,7 @@ cannot be found, the test for it is not performed.
 In the second and third form, if the given values conflict with the
 dataset's attributes, the given values override.
 
-=== The make_array() function
+=== The make_array() Function
 
 The _make_array()_ function takes three or more arguments and returns a
 DAP2 Array with the values passed to the function.
@@ -185,7 +184,7 @@ _bind_name()_ to change the name.
 This function can build an array with 1024 X 1024 Int32 elements in
 about 4 seconds.
 
-=== The 'make array' special forms
+=== The 'make array' Special Forms
 
 These special forms can build vectors with specific values and return
 them as DAP2 Arrays. The Array variables can be named using the
@@ -212,7 +211,7 @@ _bind_shape("[4][4]",$Byte(16:2,3,4,5,2,3,4,5,2,3,4,5,2,3,4,5))._
 The special forms can make a 1,047,572 element vector on Int32 in 0.4
 seconds, including the time required to parse the million plus values.
 
-==== Performance measurements
+==== Performance Measurements
 
 Time to make 1,000,000 (actually 1,048,576) element Int32 array using
 the special form, where the argument vector<int> was preset to 1,048,576
@@ -224,9 +223,9 @@ make_array(Int32,[1048576],values...). As part of the performance
 testing, the scanner and parser were run under a sampling runtime
 analyzer ('Instruments' on OS/X) and the code was optimized so that long
 sequences of numbers would scan and parse more efficiently. This
-benefited both the make_array() function and $type() special form.
+benefits both the make_array() function and $type() special form.
 
-==== Raw timing data
+==== Raw Timing Data
 
 In all cases, a 1,048,576 element vector of Int32 was built 50 times.
 The values were serialized and written to /dev/null using the command
@@ -334,7 +333,7 @@ bob[2], 2, 3, 4, 5
 bob[3], 2, 3, 4, 5
 ---------------------------------------------
 
-=== Unstructured Grid subsetting
+=== Unstructured Grid Subsetting
 
 The *ugr5()* function subsets an Unstructured Grid (aka flexible mesh)
 if it conforms to the
@@ -369,7 +368,7 @@ those extra dimensions. Arrays are enumerated in row-major order (the
 right-most dimension varies fastest).
 
 It's assumed that for each of the arrays, elements (i0, i1, ..., in) are
-all related. The function makes no test to ensure that, however.
+all related. However, the function makes no test to ensure that.
 
 Note: While this version of tabular() will work when some arrays have
 more dimensions than others, the collection of arrays must have shapes
@@ -403,7 +402,7 @@ roi(__array1__, __array2__, ..., __arrayN__, bbox(...)) +
 roi(__array1__, __array2__, ..., __arrayN__, bbox_union(bbox(...),
 bbox(...), ..., "union")) ::
   Subset __array1__, ..., using the bound box given as the last
-  argument. Teh assumption is that the arrays will be the range
+  argument. The assumption is that the arrays will be the range
   variables of a coverage and that the bounding boxes will be computed
   using the range variables. See the _bbox()_ and _bbox_union()_
   function descriptions.
@@ -442,7 +441,7 @@ or "inter[section]").
 If the function is passed bboxes that have no intersection, an exception
 is thrown. This is so that callers will know why no data were returned.
 Otherwise, an empty response, while correct, could be baffling to the
-client.
+caller.
 
 bbox_union(bbox(__a1__, __min-value-1__, __max-value-1__), bbox(__a2__,
 __min-2__, __max-2__), ..., "union"|"intersection") ::
@@ -455,8 +454,8 @@ __min-2__, __max-2__), ..., "union"|"intersection") ::
 There are a number of date and time functions supported by the FreeForm
 server.
 
-@TODO Add documentation for the functions
+//@TODO Add documentation for the functions
 
-=== Projection functions
+=== Projection Functions
 
-=== Selection functions
+=== Selection Functions
