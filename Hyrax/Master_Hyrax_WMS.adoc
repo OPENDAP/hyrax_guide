@@ -6,9 +6,9 @@
 
 == Overview
 
-With the recent addition of the Dynamic Services feature in the
+Using the Dynamic Services feature in the
 http://www.resc.rdg.ac.uk/trac/ncWMS/[ncWMS2 WMS Server] from
-http://www.resc.reading.ac.uk/[Reading e-Science Centre] Hyrax can now
+http://www.resc.reading.ac.uk/[Reading e-Science Centre], Hyrax can 
 provide WMS services for all of it's appropriate holdings.
 
 == Theory of Operation
@@ -17,22 +17,22 @@ In an instance of the ncWMS2 WMS server, a Dynamic Service is configured
 that points to a Hyrax server. This allows the ncWMS2 instance to access
 all of the holdings of the DAP server. However, the ncWMS2 does not
 "crawl" or "discover" or in any other way catalog or inventory the DAP
-server. Instead the user configures the Hyrax server to add the WMS
+server. Instead, the user configures the Hyrax server to add the WMS
 service to its catalogs and services content. Hyrax then directs WMS
 traffic to the ncWMS2 instance. The ncWMS2 in turn retrieves the data
 directly from Hyrax and services the request.
 
 The ncWMS2 instance may be hosted anywhere, however for a significant
 performance improvement we suggest you host your own ncWMS2 running in
-the same Tomcat instance as Hyrax's OLFS. With such a configuration the
-WMS response performance for datasets backed by the DAP service is
+the same Tomcat instance as Hyrax's OLFS. With such a configuration, the
+WMS response performance for datasets, backed by the DAP service, is
 nearly as fast as the ncWMS2 response performance using direct file
 access.
 
 == Evaluating Candidate Datasets
 
-In order for ncWMS2 to recognize your dataset as valid for service your
-data must:
+In order for ncWMS2 to recognize your dataset as valid for service, your
+data must meet the following requirements:
 
 * Contain gridded data (as DAP Grid objects or DAP Array objects
 utilizing shared dimensional coordinate arrays)
@@ -59,7 +59,7 @@ Note that ToolsUI supports opening both local files and remote (http accessible)
 
 The ncWMS2 web application is easy to install.
 
-Simply:
+Simply...
 
 * Retrieve the latest stable release from
 https://github.com/Reading-eScience-Centre/edal-java/releases
@@ -82,7 +82,7 @@ steps detailed below.
 
 The following sub sections assume that you have installed both Hyrax and
 the ncWMS2 on your server in a single Tomcat instance running on port
-8080. If your arrangement is otherwise you will need to adjust
+8080. If your arrangement is different, you will need to adjust
 accordingly.
 
 For the following example sections we will use the following URLs:
@@ -98,19 +98,19 @@ For the following example sections we will use the following URLs:
 ==== Authenticate as the Administrator
 
 In order to access the ncWMS2 administration page (which you must do in
-oder to configure the server) you will need to configure authentication
+oder to configure the server), you will need to configure authentication
 and access control for the page, or you will need to temporarily disable
-access control for the page in order to configure the server (I strongly
+access control for the page in order to configure the server. (We strongly
 recommend the former).
 
 The default security configuration for ncWMS2 can be located (after
-initial launch) in the file:
+initial launch) in the file...
 
 `$CATALINA_HOME/webapps/ncWMS2/WEB-INF/web.xml`
 
 This configuration stipulates that access to the _ncWMS2/admin_ pages
 must be over a secure transport and that there will be no access without
-being authenticated and in the *`manager`* role:
+authentication  in the *`manager`* role:
 
 ------------------------------------------------------------------------------
 
@@ -234,7 +234,7 @@ part of ncWMS.
 
 ==== NcWmsServce
 
-In the first section:
+In the first section...
 
 --------------------------------------------------------------------------------------
 
@@ -244,19 +244,19 @@ In the first section:
 </WebServiceHandler>
 --------------------------------------------------------------------------------------
 
-Edit the _NcWmsService_ element so that:
+Edit the _NcWmsService_ element so that...
 
 * The value of the _ncWmsDynamicServiceId_ matches the _Unique ID_ of
 the Dynamic Service you defined in ncWMS.
 
 NOTE: The _href_ and _base_ attributes both use relative URL paths to
 locate the ncWMS service. If the ncWMS instance is NOT running on the
-same host as Hyrax then the values of the _href_ and _base_ attributes
+same host as Hyrax, the values of the _href_ and _base_ attributes
 must be converted to fully qualified URLs.
 
 ==== GodivaWebService
 
-In the second section:
+In the second section...
 
 ----
 
@@ -268,7 +268,7 @@ In the second section:
 
 ----
 
-Edit the _NcWmsService_ element so that:
+Edit the _NcWmsService_ element so that...
 
 * The value of the _href_ attribute is the fully qualified URL for
 public access to your WMS service. The server name in this _href_ should
@@ -306,7 +306,7 @@ directly via Tomcat. This configuration covers both access options.
 
 == Start and Test
 
-* Once the configuration steps are complete restart your Tomcat server.
+* Once the configuration steps are complete, restart your Tomcat server.
 * Point your browser at the Hyrax sever and navigate to a WMS-suitable
 dataset.
 * Clicking the dataset's *Viewers* link should return a page with both
@@ -348,18 +348,18 @@ the Tomcat user does not have read/write permissions on them.
 
 ==== The Fix
 
-I looked around and discovered that a number of people (including TDS
+We looked around and discovered that a number of people (including TDS
 deployers) had experienced this issue. It's a Linux problem and involves
 the existence and permissions of a global system preferences directory.
-I think this is only an issue on Linux systems in which everything is
+We think this is only an issue on Linux systems in which everything is
 installed via yum/rpm, which may be why we only see this problem on
-certain systems, but I not 100% confident that the issue is limited only
+certain systems, but we're not 100% confident that the issue is limited only
 to this type of installation.
 
-I found and tested these two ways to solve it:
+We found and tested these two ways to solve it:
 
 1) Create the global System Preference directory and set the owner to
-the Tomcat user
+the Tomcat user:
 
 ---------------------------------------------------- 
    sudo mkdir -P /etc/.java/.systemPrefs
@@ -372,9 +372,9 @@ tomcat-group and setting the group read/write flags.
 2) Create a java System Preference directory for the "tomcat-user"
 (adjust name that for your circumstance) and then set the JAVA_OPTS
 environment variable so that the systemRoot value is set the new
-directory
+directory.
 
-Create the directory
+Create the directory:
 
 -----------------------------------------------------------------
 
@@ -382,7 +382,7 @@ Create the directory
    sudo chown -R tomcat-user /home/tomcat-user/.java/.systemPrefs
 -----------------------------------------------------------------
 
-Then, in each shell that launches Tomcat:
+Then, in each shell that launches Tomcat...
 
 --------------------------------------------------------------------------
 
