@@ -8,7 +8,7 @@ Hyrax was written _blah blah blah_
 
 NOTE: Add more to this. Mention HAO/NCAR, maybe talk a bit about other
 servers and the protocol. Also, maybe add a brief one paragraph history about
-DODS to OPeNDAP and the very start of the project at a workshop at teh
+DODS to OPeNDAP and the very start of the project at a workshop at the
 alton-Jone campus or URI.
 
 // The docs say this should be a level 2
