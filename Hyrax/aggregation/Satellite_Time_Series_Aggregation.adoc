@@ -10,23 +10,23 @@ link:./Use_cases_for_swath_and_time_series_aggregation.adoc[<--Back]
 
 *Point Of Contact:* _James_
 
-== Description
+=== Description
 
 Satellite_Time_Series_1
 
-== Goal
+=== Goal
 
 The goal of this use case is, like many of its other parts, the same as
 the Satellite Swath Data use case. The primary difference is that this
 use case covers Time Series data.
 
-== Summary
+=== Summary
 
 _Give a summary of the use case to capture the essence of the use case
 (no longer than a page). It provides a quick overview and includes the
 goal and principal actor._
 
-== Actors
+=== Actors
 
 _List actors, people or things outside the system that either acts on
 the system (primary actors) or is acted on by the system (secondary
@@ -34,21 +34,21 @@ actors). Primary actors are ones that invoke the use case and benefit
 from the result. Identify sensors, models, portals and relevant data
 resources. Identify the primary actor and briefly describe role._
 
-== Preconditions
+=== Preconditions
 
 _Here we state any assumptions about the state of the system that must
 be met for the trigger (below) to initiate the use case. Any assumptions
 about other systems can also be stated here, for example, weather
 conditions. List all preconditions._
 
-== Triggers
+=== Triggers
 
 _Here we describe in detail the event or events that brings about the
 execution of this use case. Triggers can be external, temporal, or
 internal. They can be single events or when a set of conditions are met,
 List all triggers and relationships._
 
-== Basic Flow
+=== Basic Flow
 
 _Often referred to as the primary scenario or course of events. In the
 basic flow we describe the flow that would be followed if the use case
@@ -58,23 +58,23 @@ gives any browser of the document a quick view of how the system will
 work. Here the flow can be documented as a list, a conversation or as a
 story.(as much as required)_
 
-== Alternate Flow
+=== Alternate Flow
 
 _Here we give any alternate flows that might occur. May include flows
 that involve error conditions. Or flows that fall outside of the basic
 flow._
 
-== Post Conditions
+=== Post Conditions
 
 _Here we give any conditions that will be true of the state of the
 system after the use case has been completed._
 
-== Activity Diagram
+=== Activity Diagram
 
 _Here a diagram is given to show the flow of events that surrounds the
 use case._
 
-== Notes
+=== Notes
 
 _There is always some piece of information that is required that has no
 other place to go. This is the place for that information._
@@ -253,7 +253,7 @@ variables/dimensions:
     Float32 Data_4s_Aerosol1064_OD_r_Aer_ir_bot[Data_4s_Time_d_UTCTime_4s = 20302][Data_4s_DS_Cloud_Layer_2 = 2];
 ------------------------------------------------------------------------------------------------------------------------------
 
-== Resources
+=== Resources
 
 _In order to support the capabilities described in this Use Case, a set
 of resources must be available and/or configured. These resources

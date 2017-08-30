@@ -8,7 +8,7 @@
 
 Satellite_Swath_1
 
-== Goal
+=== Goal
 
 The user wants to get data from several granules of a many-granule data
 set using a single request. The user does not want to iterate over
@@ -18,7 +18,7 @@ data from a satellite, which poses special problems. Furthermore, the
 aggregation should require little or no effort by the data provider to
 configure.
 
-== Summary
+=== Summary
 
 Principal actor: A person who wants to access level 2 satellite swath
 data from a number of granules using a single URL. The person may be an
@@ -49,23 +49,18 @@ burden put on the user. The URL will be one that a system developer can
 easily build in software as well as one that a person could write by
 hand, at least in many cases.
 
-== Actors
+=== Actors
 
- A developer building a 'response URL' from a user's data search request
-::
-  This person must write software that will translate the search request
-  into the Hyrax server's (to-be developed) aggregation request syntax.
- A person making a data request to the Hyrax server ::
-  This actor will need to a similar understanding of the new aggregation
+*A developer building a 'response URL' from a user's data search request* - This person must write software that will translate the search request into the Hyrax server's (to-be developed) aggregation request syntax.
+
+*A person making a data request to the Hyrax server* - This actor will need to a similar understanding of the new aggregation
   mechanism as the 'developer' but will be writing the URLs 'by hand'.
- The Hyrax data server ::
-  This is an important actor because the server will have to be updated
-  to realize the new software's benefits.
- Level 2 satellite swath data, stored in multiple files (file == granule == 'pass') ::
-  This use case is limited to a particular kind of data, although the
-  resulting software might be useful for Time Series data too.
 
-== Preconditions
+*The Hyrax data server* - This is an important actor because the server will have to be updated to realize the new software's benefits.
+
+*Level 2 satellite swath data, stored in multiple files (file == granule == 'pass')* - This use case is limited to a particular kind of data, although the resulting software might be useful for Time Series data too.
+
+=== Preconditions
 
 The data to be accessed are served using Hyrax ::
   Yup
@@ -76,7 +71,7 @@ We may require that the _CF_ option of the HDF4 handler be turned on ::
   dependent var dimensions.
 The Hyrax server has been updated to include the aggregation function ::
   Ditto, but this will require that system admins install the code.
-The user's software understands the structure of the returned data
+The user's software understands the structure of the returned data.
 values ::
   Again, Yup. In this use case that means the data are in returned in a
   CSV table, encoded using ASCII characters. Excel can read these kinds
@@ -93,14 +88,14 @@ of the data ::
   variant scenario the user builds the URL that calls the aggregation
   function and not a search system
 
-== Triggers
+=== Triggers
 
 * A user searches for data and the result indicates that the data they
 want are spread over a number of granules.
 * A user knows they want data that are (or may be) spread over a number
 of granules in a dataset.
 
-== Basic Flow
+=== Basic Flow
 
 A user (the actor that initiates the use case) performs a search using
 EDSC and the result set contains two or more granules. The search client
@@ -165,7 +160,7 @@ constraints ::
 
 The response from the request will be a CSV table listing the dependent
 variables followed by the values of the dependent vars. For example, the
-response would typically look like:
+response would typically look like...
 
 ----------------------------------------------------------------------------
 Latitude, Longitude, Scan_Start_Time, Cloud_Mask_QA, Mass_Concentration_Land
@@ -175,13 +170,13 @@ Latitude, Longitude, Scan_Start_Time, Cloud_Mask_QA, Mass_Concentration_Land
 .
 ----------------------------------------------------------------------------
 
-where each granule would have 203 * 135 (25,375) rows (one for each cell
+...where each granule would have 203 * 135 (25,375) rows (one for each cell
 along and across the swath) maximum; fewer given space/time constraints.
 
 The CSV tabular response is received as a text/plain type HTTP/HTML
 response by the client software.
 
-=== Aside: The granule list
+==== Aside: The Granule List
 
 Because the search tool is used to build the list of granules and it
 performs 'point-in-box' (or point-in-polygon, which subsumes PIB)
@@ -189,7 +184,7 @@ selection of granules, this web service will assume that every granule
 in the request document contains _some_ data that should be included in
 the response.
 
-=== Aside: data organization
+==== Aside: Data Organization
 
 NB: This is discussed in more detail below in the Notes section.
 
@@ -225,7 +220,7 @@ _Mean_Reflectance_Land[**projection expression**]_
 To make this work, the value(s) associated with the 'extra dimension'
 will be turned into columns in the response table.
 
-==== Regarding time
+==== Regarding Time
 
 Level 2 data contain samples at various lat/lon points made over time.
 Each granule has a start time and end time, as does any
@@ -237,7 +232,7 @@ more previous times; the file that contains the ending time, along with
 zero or more later times; and the 'interior' files where all of the data
 are within the selection bounds.
 
-== Alternate Flow
+=== Alternate Flow
 
 There are a number of alternate flows involving errors, all of which
 involve invalid parameters or granules that fail in some way.
@@ -248,11 +243,11 @@ changes, however. The significant difference is that a computer program
 does not have to figure out how to make the URL. In the main flow of
 this use-case, it does.
 
-== Post Conditions
+=== Post Conditions
 
 The client will have the data values, in CSV-encoded tabular form.
 
-== Activity Diagram
+=== Activity Diagram
 
 // FIXME Could not find this
 
@@ -262,7 +257,7 @@ Where to find sample data for this use case: MODAPS (MODIS):
 
 * FTP server is here: ftp://nrt1.modaps.eosdis.nasa.gov/allData/1/
 * Log in with your URS credentials (create an account here:
-https://urs.earthdata.nasa.gov)
+https://urs.earthdata.nasa.gov
 * Folders ending in _L2 contain level 2 data.
 
 === Information About the Data
@@ -411,7 +406,7 @@ requiring iteration over a number of granules. We can use the BES's
 link:./BES_XML_Commands.adoc#define[_define_] command to do this
 or the capability can be built into the aggregating code.
 
-For a basic request, for each granule:
+For a basic request, for each granule...
 
 * Read the Scan_Start_Time, Longitude and Latitude values (3 time 25,375
 values; on array of doubles and two of floats; 25375 * 8 + 2(25375 * 4)

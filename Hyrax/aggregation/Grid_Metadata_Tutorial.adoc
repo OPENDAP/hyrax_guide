@@ -271,7 +271,7 @@ Grid variable. Here's the NcML:
 </netcdf>
 -----------------------------------------------------------------------------------------------
 
-which gives the (clipped again) DAS:
+...which gives the (clipped again) DAS:
 
 --------------------------------------------------------------------
 Attributes {
@@ -331,7 +331,7 @@ As a learning exercise, let's say we made a mistake and tried to use
 </netcdf>
 -----------------------------------------------------------------------------------------------
 
-Then we get a Parse Error:
+Then we get a Parse Error...
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 <?xml version="1.0" encoding="ISO-8859-1"?>
@@ -345,7 +345,7 @@ Then we get a Parse Error:
 </response>
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-which basically tells us the problem: we tried to specify an attribute
+...which basically tells us the problem: we tried to specify an attribute
 with the same name as the Grid, but *dsp_band_1* is a variable already
 with that name. It is illegal for an attribute and variable at the same
 scope to have the same name.
@@ -382,7 +382,7 @@ now becomes:
 </netcdf>
 ---------------------------------------------------------------------------------------------------------
 
-Our modified DAS is now:
+Our modified DAS is now...
 
 --------------------------------------------------------------------
 Attributes {
@@ -419,7 +419,7 @@ Attributes {
 }
 --------------------------------------------------------------------
 
-where the 3) denotes the newly injected metadata on
+...where the 3) denotes the newly injected metadata on
 **dsp_band_1.dsp_band_1**.
 
 Next, we will add the units to both of the map vectors in the next
@@ -464,7 +464,7 @@ version of our NcML:
 </netcdf>
 ---------------------------------------------------------------------------------------------------------
 
-where we denote the changed with 4) and 5). Here's the resulting DAS:
+...where we denote the changed with 4) and 5). Here's the resulting DAS:
 
 ---------------------------------------------------------------------
 Attributes {
@@ -503,7 +503,7 @@ Attributes {
 }
 ---------------------------------------------------------------------
 
-where we have marked all the new metadata we have injected, including
+...where we have marked all the new metadata we have injected, including
 the new attributes on the map vectors.
 
 Although we added metadata to the Grid, it is possible to also use the

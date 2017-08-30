@@ -4,7 +4,7 @@
 //:numbered:
 //:toc:
 
-== Dynamic Aggregation Tutorial Overview
+== Dynamic Aggregation Tutorial
 
 Dynamic aggregation is achieved through the use of the _scan_ element.
 
@@ -24,10 +24,10 @@ The NcML-2.2 _scan_ element schema:
 </xsd:element>
 ---------------------------------------------------------------------
 
-This page discusses the use and significance of _scan_ in creating
+This document discusses the use and significance of _scan_ in creating
 dynamically aggregated datasets.
 
-== Location (Location Location...)
+=== Location (Location Location...)
 
 The most important attribute of the scan element is the _scan@location_
 element that specifies the top-level search directory for the scan,
@@ -45,27 +45,27 @@ $\{BES_DATA_ROOT} refer to this location. If the NcML aggregation file
 is in "$\{BES_DATA_ROOT}/data/ncml/myAgg.ncml" and the aggregation
 member datasets are in "$\{BES_DATA_ROOT}/data/hdf4/myAggDatasets", then
 the location in the NcML file for the aggregation data directory would
-be:
+be...
 
 -------------------------------------------
 <scan location="data/hdf4/myAggDatasets" />
 -------------------------------------------
 
-which specifies the data directory relative to the BES data root as
+...which specifies the data directory relative to the BES data root as
 required.
 
-Again, due to security reasons, the data is always searched under the
-BES data root. Trying to specify an absolute filesystem path, such as:
+Again, for security reasons, the data is always searched under the
+BES data root. Trying to specify an absolute filesystem path, such as...
 
 -----------------------------------------
 <scan location="/usr/local/share/data" />
 -----------------------------------------
 
-will _NOT_ work. This directory will also be assumed to be a
+...will _NOT_ work. This directory will also be assumed to be a
 subdirectory of the $\{BES_DATA_ROOT}, regardless of the preceding "/"
 character.
 
-== Suffix Criterion
+=== Suffix Criterion
 
 The simplest criterion is to match only files of a certain datatype in a
 given directory. This is useful for filtering out text files and other
@@ -111,7 +111,7 @@ in effect be equivalent to the following list of <netcdf> elements:
 By default, scan will search subdirectories, which is why we mentioned
 "grids has no subdirectories". We discuss this in the next section.
 
-== Subdirectory Searching (The Default!)
+=== Subdirectory Searching (The Default!)
 
 If the author specifies the _scan@subdirs_ attribute to the value "true"
 (which is the default!), then the criteria will be applied recursively
@@ -135,7 +135,7 @@ location:
 
 Assuming that only the "grids" subdir of "/data/ncml/agg" contains HDF4
 files with that extension, the same aggregation as prior will be
-created, i.e. an aggregation isomorphic to:
+created, in other words, an aggregation isomorphic to:
 
 -----------------------------------------------------------
 <netcdf location="data/ncml/agg/grids/f97182070958.hdf"/> 
@@ -160,14 +160,14 @@ following will do that:
 </pre>
 -----------------------------------------------------------------------
 
-== OlderThan Criterion
+=== OlderThan Criterion
 
 The _scan@olderThan_ attribute can be used to filter out files that are
 "too new". This feature is useful for excluding partial files currently
 being written by a daemon process, for example.
 
 The value of the attribute is a duration specified by a number followed
-by a basic time unit. The time units recognized are:
+by a basic time unit. The time units recognized are as follows:
 
 * **seconds**: \{ s, sec, secs, second, seconds }
 * **minutes**: \{ m, min, mins, minute, minutes }
@@ -203,7 +203,7 @@ given duration from the current system time are included.
 *NOTE* that the modification date of the file, not the creation date, is
 used for the test.
 
-== Regular Expression Criterion
+=== Regular Expression Criterion
 
 The _scan@regExp_ attribute may be used for more complicated filename
 matching tests where data for multiple variables, for example, may live
@@ -224,12 +224,12 @@ We recognize the POSIX regular expression syntax. For more information
 on regular expressions and the POSIX syntax, please see:
 http://en.wikipedia.org/wiki/Regular_expression.
 
-We will give two basic examples:
+Consider the following, basic examples:
 
 * Finding all subdirectories with a given name
 * Matching a filename starting with a certain substring
 
-=== Matching a Subdirectory Name
+==== Matching a Subdirectory Name
 
 Here's an example where we use a subdirectory search to find ".hdf"
 files in all subdirectories named "grids":
@@ -278,7 +278,7 @@ In following with our previous example, if there was only the one
 "grids" subdirectory in the $\{BES_DATA_ROOT} with our four familiar
 files, we'd get the same aggregation as before.
 
-=== Matching a Partial Filename
+==== Matching a Partial Filename
 
 Let's say we have a given directory full of data files whose filename
 prefix specifies which variable they refer to. For example, let's say
@@ -305,7 +305,7 @@ example for that:
 Here we match all pathnames ending in "grids" and files that start with
 the letter "f" and end with ".hdf" as we desire.
 
-== Date Format Mark and Timestamp Extraction
+=== Date Format Mark and Timestamp Extraction
 
 This section shows how to use the _scan@dateFormatMark_ attribute along
 with other search criteria in order to extract and sort datasets by a
@@ -512,7 +512,7 @@ We see that the aggregation has also automatically added the
 "-->") as defined by the NcML 2.2 specification. The author may add
 other metadata to the new coordinate variable as discussed previously.
 
-== Order of Inclusion
+=== Order of Inclusion
 
 In cases where a dateFormatMark is _not_ specified, the member datasets
 are added to the aggregation in alphabetical order __on the full

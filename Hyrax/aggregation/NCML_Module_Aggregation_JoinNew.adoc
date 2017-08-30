@@ -21,14 +21,12 @@ The reader is also directed to a basic tutorial of this NcML aggregation
 which may be found at
 http://www.unidata.ucar.edu/software/thredds/current/netcdf-java/ncml/Aggregation.html#joinNew
 
-*PLEASE NOTE* that our syntax is slightly different than that of the
+*PLEASE NOTE* that our syntax is slightly different from that of the
 THREDDS Data Server (TDS), so please refer to this tutorial when using
-the Hyrax NcML Module! In particular, we do not process the
+the Hyrax NcML Module. In particular, we do not process the
 <aggregation> element prior to other elements in the dataset, so in some
 cases the relative ordering of the <aggregation> and references to
 variables within the aggregation matters.
-
-=== Introduction
 
 A _joinNew_ aggregation combines a variable with data across _n_
 datasets by creating a new _outer dimension_ and placing the data from
@@ -85,7 +83,7 @@ element!)
 === A Simple Self-Contained Example
 
 First, we start with a simple purely virtual (no external datasets)
-example to give the reader a basic idea of this aggregation. This
+example to give you a basic idea of this aggregation. This
 example will join two one-dimensional Arrays of int's of length 5. The
 variable they describe will be called **V**. In this example, we assume
 we are joining samples of some variable *V* where each dataset is
@@ -127,7 +125,7 @@ Here's our NcML, with comments to describe what we are doing:
 
   </aggregation>
 
-<!-- This will be what the expected output aggregation will look like.
+<!-- This is what the expected output aggregation will look like.
        We can use the named dimensions for the shape here since the aggregation
        comes first and the dimensions will be added to the parent dataset by now -->
   <variable name="V_expected" type="int" shape="day station">
@@ -143,7 +141,7 @@ Here's our NcML, with comments to describe what we are doing:
 </netcdf>
 -------------------------------------------------------------------------------------------------
 
-Notice we specify the name of the aggregation variable *V* inside the
+Notice that we specify the name of the aggregation variable *V* inside the
 aggregation using a <variableAgg> element --- this allows to to specify
 multiple variables in the datasets to join. The new dimension, however,
 is specified by the attribute _dimName_ of <aggregation>. We do NOT need
@@ -209,7 +207,7 @@ _netcdf@coordValue_ attribute:
 </netcdf>
 -----------------------------------------------------------------
 
-This results in the ASCII DODS of:
+This results in the ASCII DODS of...
 
 -------------------------------------------------------------------
 The data:
@@ -254,7 +252,7 @@ same new dimension name __source__.
 </netcdf>
 ------------------------------------------------------------------------------------
 
-which produces the DDS:
+...which produces the DDS:
 
 ---------------------------------------------------------
 Dataset {
@@ -287,7 +285,7 @@ Now that we've seen simple cases, let's look at more complex examples.
 
 In this section we will give several examples of joinNew aggregation
 with a static, explicit list of member datasets. In particular, we will
-go over examples of:
+go over examples of...
 
 * Default values for the new coordinate variable
 * Explicitly setting values of any type on the new coordinate variable
@@ -312,22 +310,20 @@ link:./JoinNew_Explicit_Dataset_Tutorial.adoc[Join Explicit Dataset Tutorial].
 
 It is possible to add or modify metadata on existing or new variables in
 an aggregation. The syntax for these varies somewhat, so we give
-examples of the different cases.
-
-We will also give examples of providing metadata:
+examples of the different cases. We will also give examples of providing metadata:
 
 * Adding/modifying metadata to the new coordinate variable
 * Adding/modifying metadata to the aggregation variable itself
 * Adding/modifying metadata to existing maps in an aggregated Grid
 
-Please see the
+Please see the 
 link:./Metadata_on_Aggregations_Tutorial.adoc[Metadata on
 Aggregations Tutorial].
 
 === Dynamic Aggregations Using Directory Scanning
 
-A powerful way to create dynamic aggregations rather than by listing
-datasets explicitly is by specifying a data directory where aggregation
+A powerful way to create dynamic aggregations (rather than by listing
+datasets explicitly) is by specifying a data directory where aggregation
 member datasets are stored and some criteria for which files are to be
 added to the aggregation. These criteria will be combined in a
 conjunction (an AND operator) to handle various types of searches. The
@@ -367,6 +363,6 @@ We will give examples of each of these criteria in use in our tutorial.
 Again, if more than one is specified, then ALL must match for the file
 to be included in the aggregation.
 
-==== Please see the
-link:./Dynamic_Aggregation_Tutorial.adoc[Dynamic Aggregation
+==== A More Detailed Discussion 
+Please see the link:./Dynamic_Aggregation_Tutorial.adoc[Dynamic Aggregation
 Tutorial] for a more detailed discussion

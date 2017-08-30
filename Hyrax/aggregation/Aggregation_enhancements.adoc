@@ -4,7 +4,7 @@
 //:numbered:
 //:toc:
 
-== Introduction to Aggregation Enhancements
+== Aggregation Enhancements
  
 In response to requests from NASA, and with their support, we have added
 two new kinds of aggregation to Hyrax. Both of these aggregation
@@ -18,7 +18,7 @@ intended for use with search interfaces that have knowledge of the
 individual files that make up typical satellite data sets (often called
 a __dataset inventory__).
 
-== Overview of the New Capability
+=== Overview of the New Capability
 
 **Summary**: This service provides value-based subsetting for satellite
 __swath data__. It's applicable to lots of other kinds of data, but
@@ -42,7 +42,7 @@ the extent possible (the underlying data files may lack information CF
 from N files will be returned in one ASCII CSV response. These values
 can be easily assimilated by database systems, Excel and other tools.
 
-=== Intended audience
+=== Intended Audience
 
 This service was originally intended for software developers working
 data search tools who need to be able to return results that encompass
@@ -82,7 +82,7 @@ bbox::
   a given variable. Like __var__, this applies only to __netcdf3__,
   __netcdf4__, __ascii__, or _csv_
 
-==== How to use these parameters
+=== How to Use These Parameters
 
 The _operation_ and _file_ parameters are the key to the service. By
 listing multiple files, you can explicitly control which files are
@@ -103,7 +103,7 @@ true of the _bbox_ parameter. Furthermore, these parameters act
 independently, so a request can use one value for _var_ and _N_ values
 for _bbox_ or vice versa.
 
-==== Response Formats
+=== Response Formats
 
 This service will either return a collection of files bundled in a _zip
 archive_ or it will return a since CSV/text file. When _operation_ is
@@ -115,7 +115,7 @@ format.
 
 For the _csv_ operation, the response is a single CSV/text file.
 
-==== More About _var_
+=== More About _var_
 
 The _var_ parameter is a comma-separated list of variables in the files
 listed in the request. Each of the variables must be named just as it is
@@ -136,7 +136,7 @@ _getdap -d <url>_ or
 
 _getdap4 -d <url>_
 
-==== More about _bbox_
+=== More About _bbox_
 
 The _bbox_ parameter is probably the most powerful of the parameters in
 terms of its ability to select specific data values. It has two
@@ -186,7 +186,7 @@ The next two sections describe how the return format (zipped collection
 of files or CSV table of data) affects the way the _bbox_ subset request
 is interpreted.
 
-===== _bbox & zip-formatted returns_
+==== _bbox & zip-formatted returns_
 
 When the Aggregation Service is asked to provide a zipped collection of
 files (__operation__ = __netcdf3__, _netcdf4_ or __ascii__), the
@@ -207,7 +207,7 @@ bounding box for the set of variables is the union for the same reason.
 Hyrax contains server functions that can form both the union and
 intersection of several bounding boxes returned by the _bbox_ function.
 
-===== _bbox & the csv response_
+==== _bbox & the csv response_
 
 The _csv_ response format is treated differently because the data values
 are returned in a table and not arrays. Because of this, the
@@ -254,7 +254,7 @@ would be the index number.
 Performance is linear in terms of the number of granules. The response
 is streamed as it is built, so even very large responses use only a
 little memory on the server. Of course, that won't be the case on the
-client...
+client.
 
 ==== Implementation
 
@@ -288,7 +288,7 @@ tabular::
 It is possible to access the essential functionality of the Aggregation
 Service using these functions.
 
-==== Design
+=== Design
 
 The design of the
 link:./Use_cases_for_swath_and_time_series_aggregation.adoc[Aggregation
@@ -308,7 +308,7 @@ should work. Because the aggregation service is a machine interface, the
 examples require that use of curl and text files that contain the POST
 requests (except for the version operation).
 
-==== Version
+=== Version
 
 Request::
   http://test.opendap.org/dap/aggregation/?&operation=version

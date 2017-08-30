@@ -24,8 +24,8 @@ union must be explicitly listed as a <netcdf> element.
 
 The union aggregation specifies the attributes and variables (and
 perhaps dimensions) for the dataset it is contained within (i.e. it's
-parent <netcdf> node, which must be be virtual, i.e. have no location
-specifed). To do this it:
+parent <netcdf> node, which must be be virtual, in other words, have no location
+specifed). To do this it...
 
 * Processes each child netcdf element recursively, creating the final
 transformed dataset
@@ -132,7 +132,7 @@ aggregation element:
 </netcdf>
 -------------------------------------------------------------------------------------------------------------------------------------------------
 
-In this case the output dataset will have the variable Foo with a value
+In this case, the output dataset will have the variable Foo with a value
 of "I am the winning Foo!", but its metadata will have been modified by
 the transformation after the aggregation, so its attribute "Description"
 will have the value "I am Foo.Description and have modified the winning
@@ -262,8 +262,8 @@ Here is an example that will produce a dimension mismatch parse error:
 </netcdf>
 ----------------------------------------------------------------------------------------------------------------------------------------
 
-Note that the failure is that the second dataset has had an extra "lat"
-sample added to it, but the prior dataset has not. Again, these
+Note that the failure is that the second dataset had an extra "lat"
+sample added to it, but the prior dataset did not. Again, these
 dimension checks only occur now in a *pure virtual dataset* like we see
 here. Using netcdf@location will effectively "hide" all the dimensions
 within it at this point.
@@ -275,7 +275,7 @@ vector as a dimension and do cardinality checks on them if we have
 multiple grids in a union each of which specify the same names for their
 map vectors. One argument is that this should be done if an explicit
 dimension element with the map vector name is specified in the parent
-dataset and is explicitly specified as "isShared". Though DAP2 does not
+dataset and is explicitly specified as "isShared". Although DAP2 does not
 have shared dimensions, this would be a basic first step in the error
 checking that will have to be done for shared dimensions.
 
