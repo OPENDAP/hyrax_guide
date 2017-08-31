@@ -1,8 +1,9 @@
 //= Hyrax - BES Client commands - OPeNDAP Documentation
 //:Leonard Porrello <lporrel@gmail.com>:
 //{docdate}
-//:numbered:
-//:toc:
+
+:numbered:
+:toc:
 
 == Overview ==
 Many users access DAP servers using a browser as their primary software interface. However there is also a growing group of users that utilize either:
