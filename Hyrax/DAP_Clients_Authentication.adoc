@@ -12,7 +12,6 @@ Many users access DAP servers using a browser as their primary software interfac
 In both these examples we want these client software applications to be able to manage authentication without user intervention, otherwise the automation benefits of these tools is lost.
 
 === Earthdata Login Users
-NOTE: _Throughout this document NASA's Earthdata Login is referred to as and is synonymous with *URS* (NASA changed the name of this service shortly before it's use became mandatory for all data access requests.)_
 
 Earthdata Login is a NASA run Single Sign-On service. In order to access NASA held data you will need to:
 
@@ -20,8 +19,13 @@ Earthdata Login is a NASA run Single Sign-On service. In order to access NASA he
 1. _Approve_ the DAP server application that is serving the data you want. as described in the following section.
 1. Use this guide to configure your DAP client of choice (_curl_, browser, etc.) to utilize these credentials.
 
+NOTE: _Throughout this document NASA's Earthdata Login is referred to as and is synonymous with *URS* (NASA changed the name of this service shortly before it's use became mandatory for all data access requests.)_
 
-==== Approving The DAP Server Application ====
+==== Acquire Earthdata Login credentials 
+Registering with Earthdata Login and getting a
+user account is free. Point you browser at the https://urs.earthdata.nasa.gov/users/new[Earthdata Login New User] page and do the stuff that needs the doing. 
+
+==== Approving The DAP Server Application 
 
 Regardless of which software client you decide to employ, before you can access any new Earthdata Login authenticated server you must first add that sever to the list of *Approved Applications* in your Earthdata Login profile. 
 

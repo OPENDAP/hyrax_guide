@@ -1,0 +1,108 @@
+= Hyrax Installation
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
+
+== Overview
+Installing a Hyrax binary release typically involves the following:
+
+* https://www.opendap.org/software/hyrax-data-server[Download the latest Hyrax release] usually composed of:
+** 2 RPM files (one for _libdap_, one for the _BES_).
+** The OLFS binary distribution file.
+* Install the _libdap_ RPM.
+* Install the _BES_ RPM.
+* Unpack the OLFS distribution file, and install the _opendap.war_ file into your Tomcat instance's _webapps_ directory.
+
+The detailed download and installation instructions for Hyrax are published on the download page for each release of the server. Find the latest release and it's associated installation details on https://www.opendap.org/software/hyrax-data-server[the Hyrax
+downloads page].
+
+=== Source Code Builds
+If you are interested in working on Hyrax or just want to build the
+server from source code (as opposed to using the prebuilt binaries we
+provide, you can get signed source distributions from the
+https://www.opendap.org/software/hyrax-data-server[download page]
+referenced above. See also the <<for-developers, For Software
+Developers>> section below.
+
+== BES Installation
+Install the _libdap_ and _BES_ binaries is straight forward
+
+== OLFS Installation
+
+The OLFS comes with a default configuration that is compatible with the
+default configuration of the BES. If you do a default install of each
+one you should get a running Hyrax server that will be pre-populated
+with test data suitable for running the integrity tests.
+
+=== Download
+
+If you haven't already got it, go
+http://www.opendap.org/download/olfs.html[get the latest OLFS
+distribution from here]. You should get the binary jar file which will
+be named something like: _*olfs-x.x.x-webapp.tgz*_
+
+=== Unpack
+
+Unpack the jar file with the command:
+------------------------------
+tar -xvf olfs-x.x.x-webapp.tgz
+------------------------------
+which will unpack to a directory called olfs-x.x.x-webapp
+
+=== Install
+
+Inside that directory find the opendap.war file, and copy it into
+the Tomcat's webapps directory:
+------------------------------------------------------------------------
+cp olfs-x.x.x-webapp/opendap.war /usr/local/apache-tomcat-6.x.x/webapps/
+------------------------------------------------------------------------
+(Assuming that your Tomcat instance is in /usr/local)
+
+If you're replacing an older version of the OLFS you may:
+
+* Need to remove the directory `$CATALINA_HOME/webapps/opendap` before
+restarting Tomcat.
+* Discover that some of the existing configuration information for the
+OLFS may need to be updated. If after you start Tomcat things don't work
+you should compare the `$CATALINA_HOME/content/opendap/olfs.xml` file
+that contains your exisiting configuration to the new default
+configuration located in
+`$CATALINA_HOME/webapps/opendap/intitalContent/olfs.xml` Look at the
+lists of DispatchHandlers and adjust your configuration to use the same
+ones.
+
+=== Setup Tomcat
+
+Configure the Tomcat environment by setting the environment variable
+CATALINA_HOME to the full path for the Tomcat distribution.
+
+In bash:
+
+-----------------------------------------------------
+export CATALINA_HOME = /usr/local/apache-tomcat-6.x.x
+-----------------------------------------------------
+
+=== Start Tomcat
+
+In the top level tomcat directory (apache-tomcat-6.x.x on my machine)
+issue the command:
+
+-----------------------------------------
+bin/startup.sh; tail -f logs/catalina.out
+-----------------------------------------
+
+Wait a few seconds while it all starts up.
+
+When Tomcat starts up it will unpack your '__OLFS__ and install the
+webapp.
+
+ **Usage Note**: If you use _ctrl-c_ to stop watching the tail of the
+servers output, make sure to run the command...
+
+---------------
+bin/shutdown.sh
+---------------
+
+...to shutdown Tomcat. If you don't, you may get errors when you next try
+to start the Tomcat server.
