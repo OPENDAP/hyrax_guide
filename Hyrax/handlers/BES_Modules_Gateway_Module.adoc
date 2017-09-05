@@ -1,10 +1,10 @@
-= The Gateway Module
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
+//= The Gateway Module
+//:Leonard Porrello <lporrel@gmail.com>:
+//{docdate}
+//:numbered:
+//:toc:
 
-== Introduction
+== The Gateway Module - Introduction
 
 The Gateway Service provides interoperability between Hyrax and other
 web services. Using the Gateway module, Hyrax can be used to access and
@@ -14,9 +14,9 @@ example, if a web service returns data using HDF4 files, then Hyrax,
 using the gateway module, can subset and return DAP responses for those
 data.
 
-== Special Options Supported by the Handler
+=== Special Options Supported by the Handler
 
-=== Limiting access to specific hosts
+==== Limiting Access to Specific Hosts
 
 Because this handler behaves like a web _client_ there are some special
 options that need to be configured to make it work. When we distribute
@@ -41,7 +41,7 @@ Gateway.Whitelist=http://test.opendap.org/opendap
 Gateway.Whitelist+=http://opendap.rpi.edu/opendap
 -------------------------------------------------
 
-=== Recognizing Responses
+==== Recognizing Responses
 
 Gateway.MimeTypes::
   provides a list of mappings from data handler module to returned mime
@@ -60,7 +60,7 @@ Gateway.MimeTypes+=h4:application/x-hdf
 Gateway.MimeTypes+=h5:application/x-hdf5
 -----------------------------------------
 
-=== Network Proxies and Performance Optimizations
+==== Network Proxies and Performance Optimizations
 
 There are four parameters that are used to configure a proxy server that
 the gateway will use. Nominally this is used as a cache, so that files
@@ -96,7 +96,7 @@ Gateway.ProxyPort=
 Gateway.NoProxy=
 -----------------------
 
-==== Using Squid
+===== Using Squid
 
 Squid makes a great cache for the gateway. In our testing we have used
 Squid only for services running on port 80.
@@ -104,7 +104,7 @@ Squid only for services running on port 80.
 Squid is a powerful tool and it is worth looking at its
 http://www.squid-cache.org/[web page].
 
-==== Squid and Dynamic Content
+===== Squid and Dynamic Content
 
 Squid follows the HTTP/1.1 specification to determine what and how long
 to cache items. However, you may want to force Squid to ignore some of
@@ -134,7 +134,7 @@ And change the third refresh_pattern to read:
 refresh_pattern -i (/cgi-bin/|\?) 1440  20% 10080
 -------------------------------------------------
 
-==== How can I tell if a service sends Cache Control headers?
+===== How can I tell if a service sends Cache Control headers?
 
 Here are two ways to check:
 
@@ -142,7 +142,7 @@ Here are two ways to check:
 * _curl -i <URL> | more_ and look at the headers at the top of the
 message.
 
-==== Using Squid on OS/X
+===== Using Squid on OS/X
 
 If you're using OS/X to run Hyrax, the easiest Squid port is
 http://web.me.com/adg/squidman/index.html[SquidMan]. We tested version
@@ -160,7 +160,7 @@ Gateway.ProxyPort=3218
 Gateway.NoProxy=http://localhost.*
 ----------------------------------
 
-assuming you're running both Squid and Hyrax on the same host.
+...assuming you're running both Squid and Hyrax on the same host.
 
 Restart the BES and you're all set.
 
@@ -170,7 +170,7 @@ button to see the caching at work. The first access, which fetches the
 data, will say _DIRECT/<ip number>_ while cache hits will be labeled
 __NONE/-__.
 
-==== Squid, OS/X and Caching Dynamic Content
+===== Squid, OS/X and Caching Dynamic Content
 
 By default SquidMan does not cache dynamic content that lacks cache
 control headers in the response. To hack the squid.conf file and make
@@ -186,7 +186,7 @@ window)image:../images/squid_1.png[]
 image:../images/Squid_2.png[]
 image:../images/Squid_3.png[]
 
-== Known Problems
+=== Known Problems
 
 For version 1.0.1 of the gateway, we know about the following problems:
 

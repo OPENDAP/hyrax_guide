@@ -1,10 +1,10 @@
-= JSON Responses
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
+//= JSON Responses
+//:Leonard Porrello <lporrel@gmail.com>:
+//{docdate}
+//:numbered:
+//:toc:
 
-== Overview
+== JSON Responses Overview
 
 With funding from the Australian Bureau of Meteorology we have developed
 prototype JSON data and metadata responses for Hyrax. After reviewing
@@ -40,9 +40,9 @@ The intention is to develop this work (in particular the w10n
 representation) into a DAP4 extension that defines the JSON
 representation for the DAP4 data and metadata responses.
 
-== Details
+=== Details
 
-=== Data Type Transform
+==== Data Type Transform
 
 w10n ::
   The w10n data model views the world as a directed graph of *nodes* and
@@ -89,12 +89,12 @@ expecting to get this information from JPL by 08/18/2014 at which point
 I will complete this section and update the code to reflect the mapping
 as stated here.__)
 
-==== Unmapped Types
+===== Unmapped Types
 
 * The DAP allows arrays of complex types like structures and grids. No
 w10n representation for this if offered.
 
-=== Navigation
+==== Navigation
 
 W10n defines a navigation component that allows the user to traverse the
 directed graph of a collection of dataset holdings on the server. This
@@ -109,7 +109,7 @@ result. Subsetting by index, selection of variables, and subsetting by
 value (where supported) will control what variables and what parts of
 variables will be returned in the response.
 
-== Installation
+=== Installation
 
 The JSON functionality is implemented as components of the OLFS and the
 BES. The OLFS JSON code is built into the OLFS and is not an add-on. In
@@ -122,7 +122,7 @@ https://scm.opendap.org/trac/browser/branch/shrew/hyrax_1.9_release[Hyrax-1.9
 release] branch. The next minor release of the Hyrax server will contain
 the JSON response capability.
 
-=== From subversion trunk
+==== From Subversion Trunk
 
 * Check out fileout_json from subversion:
 https://scm.opendap.org/svn/trunk/fileout_json
@@ -131,7 +131,7 @@ https://scm.opendap.org/svn/trunk/fileout_json
 * Compile and install as normal.
 * Start Hyrax and try it out.
 
-=== From the Hyrax-1.9 release branch
+==== From the Hyrax-1.9 Release Branch
 
 * Check out fileout_json from subversion:
 https://scm.opendap.org/svn/branch/fileout_json/hyrax_1.9_release/
@@ -142,12 +142,12 @@ https://scm.opendap.org/svn/branch/olfs/release/hyrax-1.9/
 * Compile and install as normal.
 * Start Hyrax and try it out.
 
-== Soliciting the JSON response
+==== Soliciting the JSON Response
 
 Let
 datasetUrl=http://54.84.172.19:8080/opendap/data/nc/coads_climatology.nc
 
-=== DAP4 requests
+==== DAP4 Requests
 
 Using the DAP4 URLs to request both the DMR and the Data responses in a
 JSON encoding.
@@ -169,7 +169,7 @@ objects._
  DAP4 Instance Object Data request ::
   datasetUrl.dap.ijsn
 
-=== DAP2 requests
+==== DAP2 requests
 
  DAP2 w10n JSON Data request ::
    Entire Dataset ;;
@@ -183,14 +183,14 @@ objects._
    Just the variable named "COADSX" ;;
     datasetUrl.ijsn?COADSX
 
-== Examples
+=== Examples
 
-=== Dataset - coads_climatology.nc
+==== Dataset - coads_climatology.nc
 
 (I'm putting in the DAP2 dataset descriptions for now, the DAP4 will
 follow)
 
-==== DDS
+===== DDS
 
 Here is the DDS for the grid dataset, our friend coads_climatology.nc:
 
@@ -235,7 +235,7 @@ Dataset {
 } coads_climatology.nc;
 -----------------------------------------------------------
 
-==== DAS
+===== DAS
 
 ---------------------------------------------------------------
 
@@ -291,7 +291,7 @@ Attributes {
 }
 ---------------------------------------------------------------
 
-==== DDX
+===== DDX
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -583,13 +583,13 @@ Attributes {
 </Dataset>
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-==== DMR
+===== DMR
 
 Coming Soon...
 
-=== w10n JSON (Abstract Model)
+==== w10n JSON (Abstract Model)
 
-==== Metadata Responses
+===== Metadata Responses
 
 ===== Single Variable Selection
 

@@ -1,10 +1,10 @@
-= Returning NetCDF
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
+//= Returning NetCDF
+//:Leonard Porrello <lporrel@gmail.com>:
+//{docdate}
+//:numbered:
+//:toc:
 
-== General Questions and Assumptions
+== Returning NetCFD - General Questions and Assumptions
 
 * What version of netCDF will this support?
 
@@ -18,7 +18,7 @@ sequences?
 initial version should note their presence and add an attribute noting
 that they have been elided.
 
-== How to Flatten Hierarchical Types
+=== How to Flatten Hierarchical Types
 
 For a structure such as...
 
@@ -50,10 +50,9 @@ or Grid and its name was __xyz__. Given that, it should be easy to sort
 out how to make a future request for the data in the translated
 variable.
 
-This in some way obviates the need for the dot, but I think we should
-use that regardless.
+This in some way obviates the need for the dot, but it's best to use it anyway.
 
-=== Attributes of Flattened Types/Variables
+==== Attributes of Flattened Types/Variables
 
 If the structure _Point_ has attributes, those should be copied to both
 the new variables (__Point.x__ and __Point.y__). It's redundant but this
@@ -67,20 +66,20 @@ variables x and y. So, if x has attributes a1 and a2 and Point has
 attributes a1 and a3 then the new variable Point.x will have attributes
 a1, a2, Point,a1 and Point.a3.
 
-== Extra Data To Be Included
+=== Extra Data To Be Included
 
 For a file format like netCDF it is possible to include data about the
 source data using it's original data model as expressed using DAP. We
 could then describe where each variable in the file came from. This
-would be a good thing if we can do it in a light-weight way. I think it
+would be a good thing if we can do it in a light-weight way. It
 would also be a good thing to add an attribute to each variable that
 names where in the original data it came from so that client apps &
 users don't have to work too hard to sort out what has been changed to
 make the file.
 
-== Information About Specific Types
+=== Information About Specific Types
 
-=== Strings
+==== Strings
 
 * Add dimension representing the max length of the string with name
 varname_len.
@@ -98,7 +97,7 @@ string-length dimensions for netCDF-3 character arrays.
 For netCDF-4 of course, no string-length dimension is needed, as strings
 are supported as a netCDF data type.
 
-=== Structures
+==== Structures
 
 * Flatten
 * prepend name of structure with a dot followed by the variable name.
@@ -113,7 +112,7 @@ bad idea. If we use underscores then it maybe hard for clients to form a
 name that can be used to access values from a server based on the
 information in the file.
 
-=== Grid
+==== Grid
 
 * Flatten.
 * Use the name of the grid for the array of values
@@ -123,7 +122,7 @@ A more sophisticated version might look at the values of two or more
 grids that use the same names and have the same type (e.g., Float64
 lon[360]) and if they are the same, make them shared dimensions.
 
-Please read:
+Please read...
 
 * https://www.unidata.ucar.edu/software/netcdf/guidec/guidec-7.html[netcdf
 guide on components]
@@ -190,7 +189,7 @@ Dataset {
 } coads_climatology.nc;
 --------------------------------------------------------
 
-=== Array
+==== Array
 
 * write_array appears to be working just fine.
 * If array of complex types?
@@ -202,10 +201,10 @@ using the name of the variable + "_dim" + dim_num. So, for example, if
 array a has three dimensions, and none have names, then the names will
 be a_dim1, a_dim2, a_dim3.
 
-=== Sequences
+==== Sequences
 
 * For now throw an exception ../index.php/User:Jimg[jimg] 11:31, 21
-December 2008 (PST) Initial version should elide these I think because
+December 2008 (PST) Initial version should elide these because
 there are important cases where they appear as part of a dataset but not
 the main part. We can represent these as arrays easily in the future.
 
@@ -219,7 +218,7 @@ flattened to a one level sequence and then that should be flattened.
 . A Sequence with a Structure or Grid should be flattened by
 recursively applying the flattening logic to the components.
 
-=== Attributes
+==== Attributes
 
 * Global Attributes?
 ** For single container DDS (no embedded structure) just write out the
@@ -255,7 +254,7 @@ that variable.
 individual values will be put together with a newline character at the
 end of each, making one single value.
 
-=== Added attributes
+==== Added Attributes
 
 ../index.php/User:Pwest[pwest] 14 January, 2009 - This feature will not
 be added as part of 1.5, but a future release.
@@ -278,7 +277,7 @@ references software component provenance.
 http://www.opendap.org/provenance?id=xxxxxx
 
 might be something referenced in the local provenance. The local
-provenance would keep track of:
+provenance would keep track of...
 
 * containers used to generate the data product
 * constraints (server side functions, projections, etc...)
@@ -290,7 +289,7 @@ Peter Fox mentions that we need to be careful of this sort of thing
 (storing provenance information locally) as this was tried with log
 information. Referencing this kind of information is dangerous.
 
-== Support for CF
+=== Support for CF
 
 If we can recognize and support files that contain CF-compliant
 information, we should strive to make sure that the resulting netCDF

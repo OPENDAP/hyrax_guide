@@ -1,17 +1,17 @@
-= CSV Handler
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
+//= CSV Handler
+//:Leonard Porrello <lporrel@gmail.com>:
+//{docdate}
+//:numbered:
+//:toc:
 
-== Kinds of files the handler will serve
+== CSV Handler - Introduction
 
 This handler will serve Comma-Separated Values type data. Form many
 kinds of files, only very modifications to the data files are needed. If
 you have very complex ASCII data (e.g., data with headers), take a look
 at the FreeForm handler, too.
 
-=== Data file configuration
+=== Data File Configuration
 
 Given a simple CSV data file, such as would be written out by Excel, add
 a single line at the start that provides a name and OpenDAP datatype for
@@ -31,7 +31,7 @@ file with the added _name<type>_ configuration row.
 
 "FOOB",-32.9,23.4,269.69,"FOOBAR"
 
-==== Supported OpenDAP datatypes
+==== Supported OpenDAP Datatypes
 
 The CSV handler supports the following DAP2 simple types: Int16, Int32,
 Float32, Float64, String.
@@ -60,13 +60,13 @@ attribute named _type_ with a string value of __Int16__, ...,
 __String__. However, see below for information on how to add custom
 attributes to a dataset.
 
-=== Known problems
+=== Known Problems
 
 There are no known problems.
 
-== Configuration parameters
+=== Configuration Parameters
 
-=== Configuring the handler
+=== Configuring the Handler
 
 This handler has no specific configuration parameters.
 
@@ -79,7 +79,7 @@ See link:./BES_Modules_NcML_Module.adoc[the NcML Handler
 documentation] for more information on that option. Here we will
 describe how to set up an ancillary attribute file.
 
-==== Simple attribute definitions
+==== Simple Attribute Definitions
 
 For any OpenDAP dataset, it is possible to write an ancillary attributes
 file like the following. If that file has the name __dataset__.`das`

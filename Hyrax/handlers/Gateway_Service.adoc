@@ -1,8 +1,8 @@
-= Gateway Service - OPeNDAP Documentation
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
+//= Gateway Service - OPeNDAP Documentation
+//:Leonard Porrello <lporrel@gmail.com>:
+//{docdate}
+//:numbered:
+//:toc:
 
 == Gateway Service Overview
 
@@ -28,7 +28,7 @@ A Data Service Portal (DSP), such as Mirador will:
 * Hand this to the client (via a link or what have you in the DSP
 interface)
 
-== BES gateway_module
+=== BES gateway_module
 
 The gateway_module handles the gathering of the remote data resource and
 the construction of the DAP response.
@@ -48,7 +48,7 @@ section of the data source URL.
 The BES will *not* persist the data resources beyond the scope of each
 request.
 
-== OLFS gateway_service
+=== OLFS gateway_service
 
 The gateway_service is responsible for:
 
@@ -56,14 +56,14 @@ The gateway_service is responsible for:
 * Building the request for the BES.
 * Returning the response from the BES to the client.
 
-== Encoding data source URLs
+=== Encoding Data Source URLs
 
 The data source URLs need to be encoded in the DAP data request URL that
 is used to access the gateway_service.
 
 There are many ways to encode something in this context.
 
-=== Prototype Encoding
+==== Prototype Encoding
 
 As a prototype encoding we'll use an hex ascii encoding. In this
 encoding each character in the data source URL is expressed as is
@@ -81,7 +81,7 @@ The source code for the EncodeDecode java class used by hexEncode is
 available here:
 http://scm.opendap.org/svn/trunk/olfs/src/opendap/gateway/EncodeDecode.java
 
-==== Example 1
+===== Example 1
 
 source string::
   http://www.google.com
@@ -92,7 +92,7 @@ stringToHex()::
 hexToString(stringToHex()::
   http://www.google.com
 
-==== Example 2
+===== Example 2
 
 Source string::
   http://g0dup05u.ecs.nasa.gov/cgi-bin/ceopAIRX2RET?service=WCS&version=1.0.0&request=GetCoverage&coverage=H2OMMRStd&crs=WGS84&bbox=-107.375000,51.625000,-102.625000,56.375000&format=netCDF&TIME=2002-10-03&resx=0.25&resy=0.25&interpolationMethod=Nearest%20neighbor
@@ -104,7 +104,7 @@ stringToHex()::
 hexToString(stringToHex()::
   http://g0dup05u.ecs.nasa.gov/cgi-bin/ceopAIRX2RET?service=WCS&version=1.0.0&request=GetCoverage&coverage=H2OMMRStd&crs=WGS84&bbox=-107.375000,51.625000,-102.625000,56.375000&format=netCDF&TIME=2002-10-03&resx=0.25&resy=0.25&interpolationMethod=Nearest%20neighbor
 
-==== Example 3
+===== Example 3
 
 source string::
   foobar
