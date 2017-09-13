@@ -1,10 +1,10 @@
-= The SQL Hander
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
+//= The SQL Hander
+//:Leonard Porrello <lporrel@gmail.com>:
+//{docdate}
+//:numbered:
+//:toc:
 
-== BES - Modules - SQL Hander - Kinds of files the handler will serve
+== The SQL Hander - Introduction
 
 This handler will serve data stored in a relational database if that
 database is configured to be accessed using ODBC. The handler has been
@@ -20,7 +20,7 @@ full range of SQL operations. At the same time, the SQL database server
 is never exposed to the web using this handler, so the database contents
 are safe.
 
-=== Mappings between the ODBC data types and DAP2 data types
+=== Mappings Between the ODBC Data Types and DAP2 Data Types
 
 The SQL Handler maps the datatypes defined by SQL into types defined by
 DAP. In most cases the mapping is obvious. Here we document each of the
@@ -65,13 +65,13 @@ SQL_C_TYPE_DATE, SQL_C_TYPE_TIME, SQL_C_TYPE_TIMESTAMP |Str |
 |SQL_DECIMAL, SQL_NUMERIC |
 |========================================
 
-=== Known problems
+=== Known Problems
 
 There are no known problems.
 
-== Configuration parameters
+=== Configuration Parameters
 
-=== Configuring the ODBC Driver
+==== Configuring the ODBC Driver
 
 To configure the handler the handler itself must be told which tables,
 or parts of tables, should be accessed and the ODBC driver must be
@@ -89,9 +89,7 @@ addition, there is a _user_ and _password_ parameter set defined for a
 particular DSN; the sql handler will likely need that too (NB: This
 might not actually be needed 9/9/12).
 
-What the configuration files look like on OSX:
-
-This file likely will no change. odbcinst.ini:
+What the configuration files look like on OSX (This file likely will not change. odbcinst.ini):
 
 -----------------------------------------------------------
 [ODBC Drivers]
@@ -136,7 +134,7 @@ DATABASE    = test
 Socket      = /tmp/mysql.sock
 -----------------------------------
 
-=== Configuring the handler
+=== Configuring the Handler
 
 ==== SQL.CheckPoint
 
@@ -163,7 +161,7 @@ The default for the handler is to test for and report all errors:
 SQL.CheckPoint=1,2,3,4,5
 ------------------------
 
-=== Configuring Datasets
+==== Configuring Datasets
 
 One aspect of the SQL handler that sets it appart from other handlers is
 that the datasets it serves are not files or collections of files.
@@ -206,7 +204,7 @@ or
 [select]
 --------
 
-==== Information in the _section_ part of the dataset file
+==== Information in the _section_ Part of the Dataset File
 
 There are six parameters that may be set in the _select_ part of the
 dataset file:
@@ -235,7 +233,7 @@ would rather have people access the data from the institution's high
 performance hardware. You can list both DSNs, knowing that the first
 listed will get preference.
 
-==== The _select_ part
+===== The _select_ Part
 
 This part lists the columns to include as you would write them in an SQL
 SELECT statement. Each column name has to be unique. You can use aliases
@@ -250,21 +248,21 @@ table2.theColumn as col2
 
 and then use _col1,col2_ in the select part of the dataset file
 
-==== The _from_ and _where_ parts
+===== The _from_ and _where_ Parts
 
 Each of these parts are simply substituted and passed to the database
 just as you would expect. Note that you do not include the actual words
 _FROM_ or __WHERE__, just the contents of those parts of the SQL
 statement.
 
-==== The _other_ part
+===== The _other_ Part
 
 Entries in this parts should be of the form __key = value__, one per
 line. They are taken as a group and passed to the ODBC driver. Use this
 section to provide any parameters that are specific to a particular
 driver.
 
-==== Using Variables
+===== Using Variables
 
 The dataset files also support 'variables' that can be used to define a
 name once and then use it repeatedly by simply using the variable name
@@ -275,7 +273,7 @@ variable is simple: __define $variable$ = value__, one per line (the _$_
 characters are literal, as is the word __define__). To reference a
 variable, use _$variable$_ wherever you would otherwise use a literal.
 
-==== Some Example Dataset Files
+===== Some Example Dataset Files
 
 ----------------------------------------------------------
 [section]

@@ -3,6 +3,8 @@
 # 7/17/17 jhrg
 # ASCIIDOC = asciidoc
 
+HTML = *.html
+
 ASCIIDOC = asciidoctor
 
 all: Master_Hyrax_Table_of_Contents.html

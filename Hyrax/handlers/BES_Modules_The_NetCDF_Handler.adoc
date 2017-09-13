@@ -1,10 +1,10 @@
-= The NetCDF Handler
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
+//= The NetCDF Handler
+//:Leonard Porrello <lporrel@gmail.com>:
+//{docdate}
+//:numbered:
+//:toc:
 
-== Kinds of files the handler will serve
+== THe NetCDF Handler - Introduction
 
 There are several versions of the netCDF software for reading and
 writing data and using those different versions, it's possible to make
@@ -30,7 +30,7 @@ challenge. However, as of version 3.10.x, the Hyrax data handler will
 serve most of the new cardinal types and the more commonly used 'user
 defined types'.
 
-=== Mappings between NetCDF version 4 data model and DAP2 data types
+=== Mappings Between NetCDF Version 4 Data Model and DAP2 Data Types
 
 All of the cardinal types in the netCDF 4 data model map directly to
 types in DAP2 except for the following:
@@ -93,9 +93,9 @@ NC_OPAQUE::
 
 The netCDF handler currently reads only from the root group.
 
-== Configuration parameters
+=== Configuration parameters
 
-=== IgnoreUnknownTypes
+==== IgnoreUnknownTypes
 
 When the handler reads a type that it does not recognize, it will
 normally signal an error and stop processing. Setting this parameter to
@@ -110,7 +110,7 @@ Example:
 NC.IgnoreUnknownTypes=true
 --------------------------
 
-=== ShowSharedDimensions
+==== ShowSharedDimensions
 
 Include shared dimensions as separate variables. This feature is
 included to support older clients based on the netCDF library. Some
@@ -132,7 +132,7 @@ Example:
 NC.ShowSharedDimensions=false
 -----------------------------
 
-=== PromoteByteToShort
+==== PromoteByteToShort
 
 This option first appears in Hyrax 1.8; version 3.10.0 of the
 netcdf_handler.
@@ -174,7 +174,7 @@ Example:
 NC.PromoteByteToShort=true
 --------------------------
 
-== NetCDF to DAP Type Mappings
+=== NetCDF to DAP Type Mappings
 
 . _The complete set of mappings for the types in the netCDF 4 data
 model +

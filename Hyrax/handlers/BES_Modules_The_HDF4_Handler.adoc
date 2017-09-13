@@ -1,17 +1,17 @@
-= The HDF4 Handler 
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
+//= The HDF4 Handler 
+//:Leonard Porrello <lporrel@gmail.com>:
+//{docdate}
+//:numbered:
+//:toc:
 
-== Kinds of files the handler will serve
+== The HDF4 Handler - Introduction
 
 This release of the server supports HDF4.2 and can read any file
 readable using that version of the API. It also supports reading/parsing
 HDF-EOS attribute information and provides some special mappings for
 HDF-EOS files depeding on the handler's build options.
 
-=== Mappings between the HDF4 data model and DAP2 data types
+=== Mappings Between the HDF4 Data Model and DAP2 Data Types
 
 SDS ::
   This is mapped to a DAP2 Grid (if it has a dimension scale) or Array
@@ -47,11 +47,11 @@ Annotations ::
 Vgroups ::
   Vgroups are straight-forwardly mapped to Structures.
 
-=== Mappings for the HDF-EOS data model
+=== Mappings for the HDF-EOS Data Model
 
 _This needs to be documented._
 
-=== Special characters in HDF identifiers
+=== Special Characters in HDF Identifiers
 
 A number of non-alphanumeric characters (e.g., space, #, +, -) used in
 HDF identifiers are not allowed in the names of DAP objects, object
@@ -64,9 +64,9 @@ translations should be transparent to users of the server (but they will
 be visible in the DDS, DAS and in any applications which use a client
 that does not translate the identifiers back to their original form).
 
-=== Known problems
+=== Known Problems
 
-==== Handling of floating point attributes
+==== Handling of Floating Point Attributes
 
 Because the DAP software encodes attribute values as ASCII strings there
 will be a loss of accuracy for floating point attributes. This loss of
@@ -76,7 +76,7 @@ precision preserved when outputting to ASCII is dependent on the
 library). Typically it is very small (e.g., at least six decimal places
 are preserved).
 
-==== Handling of global attributes
+==== Handling of Global attributes
 
 * The server will merge the separate global attributes for the SD, GR
 interfaces with any file annotations into one set of global attributes.
@@ -88,7 +88,7 @@ global attributes of the unconstrained dataset will not be accessible
 because the constraint creates a "virtual dataset" which is a subset of
 the original unconstrained dataset.
 
-== How to install CF-enabled HDF4 Handler correctly
+=== How to Install CF-enabled HDF4 Handler Correctly
 
 The first step of using the HDF4 handler with CF option is to install
 the handler correctly because it has three different options. We'll call
@@ -104,7 +104,7 @@ their output follows not only the basic CF conventions but also the
 extra CF conventions. For HDF4 products, the output is same as the
 generic option.
 
-=== Pick the right RPM instead of building from source
+==== Pick the Right RPM Instead of Building from Source
 
 If you use Linux system that supports RPM package manager and have a
 super user privilege, the easiest way to install the HDF4 handler is
@@ -143,8 +143,7 @@ purpose handlers (aka dap-server)" RPMs first from
   %/usr/bin/besctl (re)start
 ----------------------------
 
-=== Build with the HDF-EOS2 library if you plant to support HDF-EOS2
-products.
+==== Build With the HDF-EOS2 Library If You Plan to Support HDF-EOS2 Products
 
 If you plan to build one instead of using RPMs and to support HDF-EOS2
 products, please consider installing the HDF-EOS2 library first. Then,
@@ -173,9 +172,9 @@ be treated as pure HDF4 objects.
 Please see the INSTALL document on step-by-step instruction on building
 the handler.
 
-== Configuration Parameters
+=== Configuration Parameters
 
-=== What are the CF conventions and how is it related to the new HDF4 handler?
+==== CF Conventions and How they are Related to the New HDF4 Handler?
 
 Before we discuss the usage further, it's very important to know what
 the CF conventions are. The CF conventions precisely define metadata
@@ -385,19 +384,19 @@ we've done a case study that shows the differences between the
 interpolated values and the values stored in the geo-location file are
 very small.
 
-For example, when the handler serves
+For example, when the handler serves...
 
 ------------------------------------------------------
        "MOD05_L2.A2010001.0000.005.2010005211557.hdf" 
 ------------------------------------------------------
 
-file, it will first look for a geo-location file
+...file, it will first look for a geo-location file
 
 ---------------------------------------------------
        "MOD03.A2010001.0000.005.2010003235220.hdf" 
 ---------------------------------------------------
 
-first from the SAME DIRECTORY where MOD05_L2 file exists.
+...first from the SAME DIRECTORY where MOD05_L2 file exists.
 
 Please note that the "A2010001.0000" in the middle of the name is the
 "Acquisition Date" of the data so the geo-location file name should have

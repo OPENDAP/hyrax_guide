@@ -1,10 +1,10 @@
-= NetCDF file responses
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
+//= NetCDF file responses
+//:Leonard Porrello <lporrel@gmail.com>:
+//{docdate}
+//:numbered:
+//:toc:
 
-== Introduction
+== NetCDF File Responses - Introduction
 
 The File Out NetCDF module provides the ability to return OPeNDAP
 DataDDS objects as netcdf files. The module takes an OPeNDAP DataDDS and
@@ -13,22 +13,22 @@ and streams the resulting file back to the caller. Currently, simple
 types, arrays, structures and grids are supported. Sequences are not yet
 supported. +
 
-== Status
+=== Status
 
 Stable release 1.3.2 with Hyrax 1.12
 
-== Services Handled
+=== Services Handled
 
-This module does not handle any services but adds to an existing service
+This module does not handle any services but adds to an existing service.
 
-== Services Provided
+=== Services Provided
 
 The module provides an additional format to the `dap` service's `dods`
 command. The format is used to specify a "returnAs" format. Typically
 you will see responses of the dap2 format. This module provides the
 additional format of returning the OPenDAP data object as a netcdf file.
 
-=== Download
+==== Download
 
 The latest version of this handler is included in the BES RPM
 distribution as of Hyrax 1.12, which you can download from the
@@ -40,7 +40,7 @@ when building the bES for inclusion in the Hyrax releases; the
 fileout_netcdf project can be used to get just the source code for the
 module.
 
-== How to Use the Module
+=== How to Use the Module
 
 Once installed, the fonc.conf file is installed in the BES
 etc/bes/modules directory and is automatically loaded by the BES at

@@ -1,23 +1,23 @@
-= The HDF5 Handler
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
+//= The HDF5 Handler
+//:Leonard Porrello <lporrel@gmail.com>:
+//{docdate}
+//:numbered:
+//:toc:
 
-== Kinds of files the handler will serve
+== The HDF5 Handler - Introduction
 
 This release of the server supports HDF5 files written using any version
 of the HDF5 API. The handler should be built/linked with version 1.8.x
 of the API.
 
-=== Mappings between the HDF5 data model and DAP2 data types
+=== Mappings Between the HDF5 Data Model and DAP2 Data Types
 
 The mapping between the HDF5 and HDF-EOS5 data model and DAP2 is
 documented in a NASA Technical Note
 (http://www.esdswg.org/spg/rfc/esds-rfc-017[ESDS-RFC-017]). This note is
 quite detailed; a summary from its appendix is provided below.
 
-=== Special characters in HDF identifiers
+=== Special Characters in HDF Identifiers
 
 A number of non-alphanumeric characters (e.g., space, #, +, -) used in
 HDF identifiers are not allowed in the names of DAP objects, object
@@ -30,9 +30,9 @@ translations should be transparent to users of the server (but they will
 be visible in the DDS, DAS and in any applications which use a client
 that does not translate the identifiers back to their original form).
 
-=== Known problems
+=== Known Problems
 
-==== Handling of floating point attributes
+==== Handling of Floating Point Attributes
 
 Because the DAP software encodes attribute values as ASCII strings there
 will be a loss of accuracy for floating point attributes. This loss of
@@ -42,7 +42,7 @@ precision preserved when outputting to ASCII is dependent on the
 library). Typically it is very small (e.g., at least six decimal places
 are preserved).
 
-== Configuration parameters
+=== Configuration Parameters
 
 H5.EnableCF::
   This is an option to support NASA HDF5/HDF-EOS5 data products. The
@@ -90,7 +90,7 @@ H5.EnableAddPathAttr::
       }
 ----------------------------------------------------------------------------
 
-will change to:
+...will change to...
 
 -----------------------------------------
      temperature {
@@ -111,7 +111,7 @@ will change to:
   When this option is true, StructMetadata attribute will not be
   generated in DAS output.
 
-== HDF5 and HDF-EOS to DAP Type Mappings
+=== HDF5 and HDF-EOS to DAP Type Mappings
 
 . _The complete set of mappings for the types in the HDF5 and HDF-EOS5
 data model_

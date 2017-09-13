@@ -1,13 +1,13 @@
-= The NcML Module
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
+//= The NcML Module
+//:Leonard Porrello <lporrel@gmail.com>:
+//{docdate}
+//:numbered:
+//:toc:
 
-== Introduction
+== The NcML Module - Introduction
 
-*Welcome to the OPeNDAP NcML Data Handler Module v1.4.2 for
-https://www.opendap.org/software/hyrax-data-server[Hyrax]*
+Welcome to the OPeNDAP NcML Data Handler Module v1.4.2 for
+https://www.opendap.org/software/hyrax-data-server[Hyrax]
 
 **Note**: In the past Hyrax was distributed as a collection of separate
 binary packages which data providers would choose to install to build up
@@ -73,7 +73,7 @@ into a single set
 For information on how to build and install the NcML Data Module, please
 see the INSTALL file that came with the source distribution.
 
-== Installation Overview
+=== Installation Overview
 
 The NcML Module requires a working Hyrax 1.6 installation. It is a
 module that is dynamically loaded into the Hyrax BES (Back End Server)
@@ -85,7 +85,7 @@ well as requirements.
 *NOTE:* After installation, you MUST restart Hyrax by restarting the BES
 and OLFS so the NcML Module is loaded!
 
-=== Requirement: International Components for Unicode (ICU) Library
+==== Requirement: International Components for Unicode (ICU) Library
 
 The most important external requirement is an installation of the
 International Components for Unicode (ICU) version 3.6 or higher (tested
@@ -101,9 +101,9 @@ If you install in the default locations, the ncml_module should find the
 libraries and headers. Otherwise, please consult the INSTALL file for
 more information about installing ICU to a non-standard location.
 
-=== Configuration Parameters
+==== Configuration Parameters
 
-==== TempDirectory
+===== TempDirectory
 
 Where should the NCML handler store temporary data on the server's file
 system.
@@ -114,7 +114,7 @@ Default value is '/tmp'.
 NCML.TempDirectory=/tmp
 -----------------------
 
-==== GlobalAttributesContainerName
+===== GlobalAttributesContainerName
 
 In DAP2 all global attributes must be held in containers. However, the
 default behavior for the handler is set for DAP4, where this requirement
@@ -129,7 +129,7 @@ it can be anything you choose.
 NCML.GlobalAttributesContainerName=NC_GLOBAL
 --------------------------------------------
 
-=== Testing Installation
+==== Testing Installation
 
 Test data is provided to see if the installation was successful. The
 file sample_virtual_dataset.ncml is a dataset purely created in NcML and
@@ -139,12 +139,12 @@ dataset (fnoc1.nc), but this requires the netCDF data handler to be
 installed first! Several other examples installed also use the HDF4 and
 HDF5 handlers.
 
-== Functionality
+=== Functionality
 
 This version of the NcML Module implements a subset of NcML 2.2
 functionality.
 
-Our module can currently:
+Our module can currently...
 
 * Refer only to files being served locally (not remotely)
 * Add, modify, and remove attribute metadata to a dataset
@@ -165,14 +165,14 @@ matching certain criteria
 
 We describe each supported NcML element in detail below.
 
-=== <netcdf> Element
+==== <netcdf> Element
 
 The <netcdf> element is used to define a dataset, either a wrapped
 dataset that is to be modified, a pure virtual dataset, or a member
 dataset of an aggregation. The <netcdf> element is assumed to be the
 topmost node, or as a child of an aggregation element.
 
-==== Local vs. Remote Datasets
+===== Local vs. Remote Datasets
 
 We assume that the location attribute (__netcdf@location__) refers to
 the full path (with respect to the BES data root directory) of a
@@ -186,7 +186,7 @@ described and accessed with constraints just as normal datasets in this
 manner. The installed sample datafile "sample_virtual_dataset.ncml" is
 an example test case for this functionality.
 
-==== Unsupported Attributes
+===== Unsupported Attributes
 
 The current version does not support the following attributes of
 <netcdf>:
@@ -195,18 +195,18 @@ The current version does not support the following attributes of
 * addRecords
 * fmrcDefinition (will be supported when FMRC aggregation is added)
 
-=== <readMetadata> Element
+==== <readMetadata> Element
 
 The <readMetadata/> element is the default, so is effectively not
 needed.
 
-=== <explicit> element
+==== <explicit> element
 
 The <explicit/> element simply clears all attribute tables in the
 referred to netcdf@location before applying the rest of the NcML
 transformations to the metadata.
 
-=== <dimension> Element
+==== <dimension> Element
 
 The <dimension> element has limited functionality in this release since
 the DAP2 doesn't support dimensions as more than mnemonics at this time.
@@ -216,7 +216,7 @@ The limitations are:
 * Dimensions can only be specified as a direct child of a <netcdf>
 element prior to any reference to them
 
-For example:
+For example...
 
 --------------------------------------------------------------
 <netcdf> 
@@ -242,7 +242,7 @@ which is the only other legal place in NcML 2.2 for a dimension element.
 * If any of the other attributes specified in NcML 2.2 are used. We do
 not handle them, so we consider them errors now.
 
-=== <variable> Element
+==== <variable> Element
 
 The <variable> element is used to:
 
@@ -265,7 +265,7 @@ ensure that the type specified in the NcML document matches the type of
 the existing variable. In particular, variables that are arrays must be
 called array, and not the type of the template primitive._
 
-==== Specifying Lexical Scope with <variable type="">
+===== Specifying Lexical Scope with <variable type="">
 
 Consider the following example:
 
@@ -310,7 +310,7 @@ than one attribute can be specified within it. This will make the NcML
 more readable and also will make the parsing more efficient since the
 variable will only need to be looked up once.
 
-For example,
+For example...
 
 ----------------------------------------------------------
 <variable name="Foo">
@@ -319,7 +319,7 @@ For example,
 </variable>
 ----------------------------------------------------------
 
-should be preferred over:
+...should be preferred over...
 
 ----------------------------------------------------------
 <variable name="Foo">
@@ -331,20 +331,20 @@ should be preferred over:
 </variable>
 ----------------------------------------------------------
 
-although they produce the same result. Any number of attributes can be
+...although they produce the same result. Any number of attributes can be
 specified before the variable is closed.
 
-==== Renaming Existing Variables
+===== Renaming Existing Variables
 
 The attribute _variable@orgName_ is used to rename an existing variable.
 
-For example:
+For example...
 
 --------------------------------------------
 <variable name="NewName" orgName="OldName"/>
 --------------------------------------------
 
-will rename an existing variable at the current scope named "OldName" to
+...will rename an existing variable at the current scope named "OldName" to
 "NewName". After this point in the NcML file (such as in constraints
 specified for the DAP request), the variable is known by "NewName".
 
@@ -360,7 +360,7 @@ scope
 * If a new variable is created but does not have exactly one values
 element
 
-==== Adding a New Scalar Variable
+===== Adding a New Scalar Variable
 
 The <variable> element can be used to create a new scalar variable of a
 simple type (i.e. an atomic NcML type such as "int" or "float", or any
@@ -369,7 +369,7 @@ _variable@shape_ (which is the default), a simple type for
 __variable@type__, and a contained <values> element with the one value
 of correct type.
 
-For example:
+For example...
 
 -----------------------------------------------------------------------
 <variable name="TheAnswerToLifeTheUniverseAndEverything" type="double">
@@ -378,7 +378,7 @@ For example:
   </variable>
 -----------------------------------------------------------------------
 
-will create a new variable named
+...will create a new variable named
 "TheAnswerToLifeTheUniverseAndEverything" at the current scope. It has
 no shape so will be a scalar of type "double" and will have the value
 42.0.
@@ -390,13 +390,13 @@ proper value of the variable type.
 * It is a parse error to specify a malformed or out of bounds value for
 the data type
 
-==== Adding a New Structure Variable
+===== Adding a New Structure Variable
 
 A new Structure variable can be specified at the global scope or within
 another Structure. It is illegal for an array to have type structure, so
 the shape must be empty.
 
-For example:
+For example...
 
 ----------------------------------------------------------------------------------------------------------
 <variable name="MyNewStructure" type="Structure">
@@ -406,7 +406,7 @@ For example:
   </variable>
 ----------------------------------------------------------------------------------------------------------
 
-specifies a new structure called "MyNewStructure" which contains two
+...specifies a new structure called "MyNewStructure" which contains two
 scalar variable fields "ContainedScalar1" and "ContainedInt1".
 
 Nested structures are allowed as well.
@@ -419,12 +419,12 @@ new name.
 Structure --- structures cannot contain values, only attributes and
 other variables.
 
-==== Adding a New N-dimensional Array
+===== Adding a New N-dimensional Array
 
 An N-dimensional array of a simple type may be created virtually as well
 by specifying a non-empty __variable@shape__. The shape contains the
 array dimensions in left-to-right order of slowest varying dimension
-first. For example:
+first. For example...
 
 -------------------------------------------------------------------------------------------------------
  <variable name="FloatArray" type="float" shape="2 5">
@@ -438,7 +438,7 @@ first. For example:
     </variable>
 -------------------------------------------------------------------------------------------------------
 
-will specify a 2x5 dimension array of float values called "FloatArray".
+...will specify a 2x5 dimension array of float values called "FloatArray".
 The <values> element must contain 2x5=10 values in row major order
 (slowest varying dimension first). Since whitespace is the default
 separator, we use a newline to show the dimension boundary for the
@@ -447,7 +447,7 @@ values, which is easy to see for a 2D matrix such as this.
 A dimension name may also be used to refer mnemonically to a length. The
 DAP response will use this mnemonic in its output, but it is not
 currently used for shared dimensions, only as a mnemonic. See the
-section on the <dimension> element for more information. For example:
+section on the <dimension> element for more information. For example...
 
 -----------------------------------------------------------------
 <netcdf>
@@ -461,7 +461,7 @@ section on the <dimension> element for more information. For example:
     </variable>
 -----------------------------------------------------------------
 
-will produce the same 2x5 array, but will incorporate the dimension
+...will produce the same 2x5 array, but will incorporate the dimension
 mnemonics into the response. For example, here's the DDS response:
 
 --------------------------------------------------
@@ -472,7 +472,7 @@ Dataset {
 
 Note that the <values> element respects the _values@separator_ attribute
 if whitespace isn't correct. This is very useful for arrays of strings
-with whitespace, for example.
+with whitespace, for example...
 
 -----------------------------------------------------------
 <variable name="StringArray" type="string" shape="3">
@@ -480,7 +480,7 @@ with whitespace, for example.
 </variable>
 -----------------------------------------------------------
 
-creates a length 3 array of string StringArray = \{"String 1", "String
+...creates a length 3 array of string StringArray = \{"String 1", "String
 2", "String 3"}.
 
 **Parse Errors**:
@@ -493,7 +493,7 @@ the current <netcdf> scope.
 * It is an error to specify an Array whose flattened size (product of
 dimensions) is > 2^31-1.
 
-==== Specifying the new coordinate variable for a joinNew aggregation
+===== Specifying the New Coordinate Variable for a joinNew Aggregation
 
 In the special case of a joinNew aggregation, the new coordinate
 variable may be specified with the <variable> element. The new
@@ -548,7 +548,7 @@ member datasets do not have the same shape
 with a shape that is _not_ the same as the new dimension name (and the
 variable name itself).
 
-=== <values> Element
+==== <values> Element
 
 The <values> element can only be used in the context of a *new* variable
 of scalar or array type. We cannot change the values for existing
@@ -560,7 +560,7 @@ dimensions of the enclosing __variable@shape__, or be one value for a
 scalar. It is an error to _not_ specify a <values> element for a
 declared new variable as well.
 
-==== Changing the Separator Tokens
+===== Changing the Separator Tokens
 
 The author may specify values@separator to change the default value
 token separator from the default whitespace. This is very useful for
@@ -592,7 +592,7 @@ containing variable's type
 * If only one of start or increment is specified
 * If the values element is placed anywhere except within a NEW variable.
 
-=== <attribute> Element
+==== <attribute> Element
 
 As an overview, whenever the parser encounters an <attribute> with a
 non-existing name (at the current scope), it creates a new one, whether
@@ -608,18 +608,18 @@ different separator, such as CSV format or to specify a non-whitespace
 separator so strings with whitespace are not tokenized. We will give
 examples of creating array attributes below.
 
-==== Adding New Attributes or Modifying an Existing Attribute
+===== Adding New Attributes or Modifying an Existing Attribute
 
 If a specified attribute with the attribute@name does not exist at the
 current lexical scope, a new one is created with the given type and
 value. For example, assume "new_metadata" doesn't exist at the current
-parse scope. Then:
+parse scope. Then...
 
 ---------------------------------------------------------------------------
 <attribute name="new_metadata" type="string" value="This is a new entry!"/>
 ---------------------------------------------------------------------------
 
-will create the attribute at that scope. Note that value can be
+...will create the attribute at that scope. Note that value can be
 specified in the content of the element as well. This is identical to
 the above:
 
@@ -634,19 +634,19 @@ contain the specified type and value.
 
 As in NcML, for numerical types an array can be specified by separating
 the tokens by whitespace (default) or be specifying the token separator
-with attribute@separator. For example,
+with attribute@separator. For example...
 
 ------------------------------------------------------
 <attribute name="myArray" type="int">1 2 3</attribute>
 ------------------------------------------------------
 
-and
+...and...
 
 --------------------------------------------------------------------
 <attribute name="myArray" type="int" separator=",">1,2,3</attribute>
 --------------------------------------------------------------------
 
-both specify the same array of three integers named "myArray".
+...both specify the same array of three integers named "myArray".
 
 TODO Add more information on splitting with a separator!
 
@@ -682,7 +682,7 @@ existing container (they may or may not already exist as well).
 
 We also support the attribute@orgName attribute for renaming attributes.
 
-For example,
+For example...
 
 -----------------------------------------------------------
 <attribute name="NewName" orgName="OldName" type="string"/>
@@ -698,10 +698,10 @@ This works for renaming attribute containers as well:
 <attribute name="MyNewContainer" orgName="MyOldContainer" type="Structure"/>
 ----------------------------------------------------------------------------
 
-will rename an existing "MyOldContainer" to "MyNewContainer". Note that
+...will rename an existing "MyOldContainer" to "MyNewContainer". Note that
 any children of this container will remain in it.
 
-==== DAP _OtherXML_ Extension
+===== DAP _OtherXML_ Extension
 
 The module now allows specification of attributes of the new DAP type
 "OtherXML". This allows the NCML file author to inject arbitrary
@@ -727,7 +727,7 @@ will be thrown if the OtherXML is malformed.
 
 ===== Example
 
-Here's an example of the use of this special case.
+Here's an example of the use of this special case:
 
 --------------------------------------------------------------------------------------------------------------------------------------
 <netcdf xmlns="http://www.unidata.ucar.edu/namespaces/netcdf/ncml-2.2" location="/coverage/200803061600_HFRadar_USEGC_6km_rtv_SIO.nc">
@@ -777,9 +777,9 @@ they have to explicitly add the namespaces to each attributes.
 
 *TODO* Add an example!
 
-=== <remove> Element
+==== <remove> Element
 
-The <remove> element can remove attributes and variables. For example:
+The <remove> element can remove attributes and variables. For example...
 
 -----------------------------------------------
   <attribute name="NC_GLOBAL" type="Structure">
@@ -787,10 +787,10 @@ The <remove> element can remove attributes and variables. For example:
   </attribute>
 -----------------------------------------------
 
-will remove the attribute named "base_time" in the attribute structure
+...will remove the attribute named "base_time" in the attribute structure
 named "NC_GLOBAL".
 
-Note that this works for attribute containers as well! We could
+Note that this works for attribute containers as well. We could
 recursively remove the _entire_ attribute container (i.e. it and all its
 children) with:
 
@@ -837,7 +837,7 @@ be the one in the output aggregation. This is useful for combining two
 dataset files, each which may contain a single variable, into a
 composite dataset with both variables.
 
-A JoinNew aggregation joins a variable which exists in multiple datasets
+A _JoinNew_ aggregation joins a variable which exists in multiple datasets
 (usually samples of a datum over time) into a new variable containing
 the data from _all_ member datasets by creating a new outer dimension.
 The __i__th component in the new outer dimension is the variable's data
@@ -847,7 +847,7 @@ the new dimension as well. This new coordinate variable may be
 explicitly given by the author or may be autogenerated in one of several
 ways.
 
-=== <scan> Element
+==== <scan> Element
 
 The scan element can be used within an aggregation context to allow a
 directory to be searched in various ways in order to specify the members
@@ -859,7 +859,7 @@ generated each day.
 the <scan> element in detail in the joinNew aggregation tutorial
 here.]**.
 
-== Errors
+=== Errors
 
 There are three types of error messages that may be returned:
 
@@ -867,12 +867,12 @@ There are three types of error messages that may be returned:
 * Resource Not Found Error
 * Parse Error
 
-=== Internal Errors
+==== Internal Errors
 
 *Internal errors* should be reported to support@opendap.org as they are
 likely bugs.
 
-=== Resource Not Found Errors
+==== Resource Not Found Errors
 
 If the netcdf@location specifies a non-existent local dataset (one that
 is not being served by the same Hyrax server), it will specify the
@@ -882,7 +882,7 @@ that the dataset to be wrapped already exists and can be viewed on the
 running server before writing NcML to add metadata. It's also an error
 to refer to remote datasets (at this time).
 
-=== Parse Errors
+==== Parse Errors
 
 *Parse errors* are user errors in the NcML file. These could be
 malformed XML, malformed NcML, unimplemented features of NcML, or could
@@ -904,13 +904,13 @@ current scope.
 current scope.
 * remove specified a non-existing attribute name
 
-== Grid Metadata Tutorial
+=== Grid Metadata Tutorial
 
 Please see the page
 link:../aggregation/Grid_Metadata_Tutorial.adoc[Grid_Metadata_Tutorial] for an
 example of adding metadata to the various parts of a DAP Grid variable.
 
-== Aggregation Tutorials
+=== Aggregation Tutorials
 
 The NcML module may also be used to aggregate multiple datasets into one
 virtual dataset.
@@ -924,29 +924,29 @@ We currently support three of the NcML aggregations:
 Please see the individual pages for each aggregation type for tutorials
 on their respective application and use..
 
-=== link:../aggregation/NCML_Module_Aggregation_Union.adoc[Union]
+==== link:../aggregation/NCML_Module_Aggregation_Union.adoc[Union]
 Union Aggregation -
 Combine multiple datasets into one by merging variables together,
 selecting the first of each unique name.
 
-=== link:../aggregation/NCML_Module_Aggregation_JoinNew.adoc[JoinNew]
+==== link:../aggregation/NCML_Module_Aggregation_JoinNew.adoc[JoinNew]
 
 JoinNew Aggregation -
 Combine variables across multiple datasets by creating a new outer
 dimension and coordinate variable for each of the sample datasets.
 
-=== link:../aggregation/NCML_Module_Aggregation_JoinExisting.adoc[JoinExisting]
+==== link:../aggregation/NCML_Module_Aggregation_JoinExisting.adoc[JoinExisting]
 
 JoinExisting
 Aggregation - Combine variables with a common named outer dimension
 along that dimension by concatenating data for that dimension
 
-== Additions/Changes to NcML 2.2
+=== Additions/Changes to NcML 2.2
 
 This section will keep track of changes to the NcML 2.2 schema.
 Eventually these will be rolled into a new schema.
 
-=== Attribute Structures (Containers)
+==== Attribute Structures (Containers)
 
 This module also adds functionality beyond the current NcML 2.2 schema
 --- it can handle nested <attribute> elements in order to make attribute
@@ -976,26 +976,26 @@ If an attribute container of the given name already exists at the
 lexical scope, it is traversed in order to define the scope for the
 nested (children) attributes it contains.
 
-=== Unspecified Variable Type Matching for Lexical Scope
+==== Unspecified Variable Type Matching for Lexical Scope
 
 We also allow the type attribute of a variable element (variable@type)
 to be the empty string (or unspecified) when using existing variables to
 define the lexical scope of an <attribute> transformation. In the
 schema, variable@type is (normally) required.
 
-=== DAP 2 Types
+==== DAP 2 Types
 
 Additionally, we allow DAP2 atomic types (such as UInt32, URL) in
 addition to the NcML types. The NcML types are mapped onto the closest
 DAP2 type internally.
 
-=== DAP OtherXML Attribute Type
+==== DAP OtherXML Attribute Type
 
 We also allow attributes to be of the new DAP type "OtherXML" for
 injecting arbitrary XML into an attribute as content rather than trying
 to form a string. This allows the parser to check well-formedness.
 
-=== Forward Declaration of Dimensions
+==== Forward Declaration of Dimensions
 
 Since we use a SAX parser for efficiency, we require the <dimension>
 elements to come _before_ their use in a __variable@shape__. One way to
@@ -1003,7 +1003,7 @@ change the schema to allow this is to force the dimension elements to be
 specified in a sequence after explicit and metadata choice and before
 all other elements.
 
-=== Aggregation Element Location and Processing Order Differences
+==== Aggregation Element Location and Processing Order Differences
 
 NcML specifies that if a dataset (<netcdf> element) specifies an
 aggregation element, the aggregation element is always processed first,
@@ -1022,7 +1022,7 @@ attributes), the <variable> _must_ come after the aggregation since the
 size of the dimension is unknown until the aggregation element is
 processed.
 
-== Backward Compatibility Issues
+=== Backward Compatibility Issues
 
 Due to the way shared dimensions were implemented in the NetCDF, HDF4,
 and HDF5 handlers, the DAS responses did not follow the DAP2
@@ -1046,7 +1046,7 @@ that as the starting point for modifications to the original dataset.
 
 More explicit examples are given below.
 
-=== NetCDF
+==== NetCDF
 
 The NetCDF handler represents some NC datasets as a DAP 2 Grid, but the
 returned DAS is not consistent with the DAP 2 spec for the attribute
@@ -1067,7 +1067,7 @@ Dataset {
 } cldc.mean.nc;
 ----------------------------------------------------
 
-showing the Grid. Here's the DAS the NetCDF handler generates:
+...showing the Grid. Here's the DAS the NetCDF handler generates...
 
 --------------------------------------------------------------------
 Attributes {
@@ -1208,7 +1208,7 @@ a fully qualified name. The parser would return an error if it was
 attempted as "lat.Description" as the NetCDF DAS for the original file
 would have led one to believe.
 
-=== HDF4/HDF5
+==== HDF4/HDF5
 
 Similarly to the NetCDF case, the Hyrax HDF4 Module produces DAS
 responses that do not respect the DAP2 specification. If an NcML file is
@@ -1223,13 +1223,13 @@ knowing the structure the NcML handler expects to see in the NcML file.
 Alternatively, the DDX has the proper attribute structure as well (the
 DAS is generated from it).
 
-== Known Bugs
+=== Known Bugs
 
 There are no known bugs currently.
 
-== Planned Future Enhancements
+=== Planned Enhancements
 
-Planned enhancements for future versions of the module include:
+Planned enhancements for future versions of the module include...
 
 * New NcML Aggregations
 ** Forecast Model Run Collection (FMRC)
@@ -1237,7 +1237,7 @@ Planned enhancements for future versions of the module include:
 *** See:
 http://www.unidata.ucar.edu/software/netcdf/ncml/v2.2/FmrcAggregation.html
 
-== Copyright
+=== Copyright
 
 This software is copyrighted under the GNU Lesser GPL. Please see the
 files COPYING and COPYRIGHT that came with this distribution.

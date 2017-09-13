@@ -26,8 +26,15 @@ NOTE: TODO Add (or find ...) a section on BES installation. It might
 have gotten lost; Use _Master_Hyrax_Sample_BES_Installations.adoc_? If
 so that file will need content edits of a massive nature.
 
+// This document explains how to install Hyrax.
+include::Master_Hyrax_Installation.adoc[lines="1,8..-1"]
+
+// - - - - - - - - - - - - - 
+// I dropped this include as the content is now part 
+// of Master_Hyrax_Installation.adoc - ndp
 // This document explains how to install the OLFS.
-include::Master_Hyrax_OLFS_Installation.adoc[lines="1,8..-1"]
+// include::Master_Hyrax_OLFS_Installation.adoc[lines="1,8..-1"]
+// - - - - - - - - - - - - - 
 
 :leveloffset: -2
 
@@ -71,6 +78,10 @@ include::Master_Hyrax_Secure_Installation_Guidelines.adoc[lines="1,8..-1"]
 
 // Configure a Hyrax server to support user authentication.
 include::Master_Hyrax_User_Authentication.adoc[lines="1,8..-1"]
+
+// Configure client software such as browsers or curl
+// to authenticate with a server.
+include::DAP_Clients_Authentication.adoc[lines="1,8..-1"]
 
 :leveloffset: -2
 
