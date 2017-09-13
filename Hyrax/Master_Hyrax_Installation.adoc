@@ -14,7 +14,7 @@ Installing a Hyrax binary release typically involves the following:
 * Install the _BES_ RPM.
 * Unpack the OLFS distribution file, and install the _opendap.war_ file into your Tomcat instance's _webapps_ directory.
 
-The detailed download and installation instructions for Hyrax are published on the download page for each release of the server. Find the latest release and it's associated installation details on https://www.opendap.org/software/hyrax-data-server[the Hyrax
+The detailed download and installation instructions for Hyrax are published on the download page for each release of the server. Find the latest release and its associated installation details on https://www.opendap.org/software/hyrax-data-server[the Hyrax
 downloads page].
 
 === Source Code Builds
