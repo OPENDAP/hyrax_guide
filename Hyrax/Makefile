@@ -1,9 +1,9 @@
 
 # The asciidoc application does not work as well as asciidoctor.
 # 7/17/17 jhrg
-# ASCIIDOC = asciidoc
+ASCIIDOC = asciidoc
 
-ASCIIDOC = asciidoctor
+# ASCIIDOC = asciidoctor
 
 all: Master_Hyrax_Table_of_Contents.html
 
