@@ -8,7 +8,7 @@ Often it is desirable to treat a collection of data files as if they were
 a single dataset. Hyrax provides two different ways to do this: it enables
 data providers to define _aggregations_ of files so those appear as a single
 dataset and it provides a way for users to send the server a list of files
-along with processing operations and recieve a single amalgamatued response.
+along with processing operations and receive a single amalgamated response.
 
 In the first half of this appendix, we discuss aggregations defined by
 data providers. These aggregations use a simple mark-up language
@@ -19,17 +19,19 @@ the second part of this appendix, we discuss user-specified
 aggregations. These aggregations currently use a new interface to the
 Hyrax server.
 
-include::./hanlder/BES_Module_NcML_Module.adoc[tabsize=4,indentlevel=+1]
+:tabsize: 4
+
+include::./handlers/BES_Modules_NcML_Module.adoc[lines="1,6..-1", leveloffset=+1]
 // See also the BES_Modules_NCML 
 
-include::./aggregation/NCML_Module_Aggregation_JoinExisting.adoc[tabsize=4]
-include::./aggregation/NCML_Module_Aggregation_JoinNew.adoc[tabsize=4]
-include::./aggregation/NCML_Module_Aggregation_Union.adoc[tabsize=4]
+include::./aggregation/NCML_Module_Aggregation_JoinExisting.adoc[]
+include::./aggregation/NCML_Module_Aggregation_JoinNew.adoc[]
+include::./aggregation/NCML_Module_Aggregation_Union.adoc[]
 
-include::./aggregation/JoinNew_Explicit_Dataset_Tutorial.adoc[tabsize=4]
-include::./aggregation/Metadata_on_Aggregations_Tutorial.adoc[tabsize=4]
-include::./aggregation/Dynamic_Aggregation_Tutorial.adoc[tabsize=4]
-include::./aggregation/Grid_Metadata_Tutorial.adoc[tabsize=4]
+include::./aggregation/JoinNew_Explicit_Dataset_Tutorial.adoc[]
+include::./aggregation/Metadata_on_Aggregations_Tutorial.adoc[]
+include::./aggregation/Dynamic_Aggregation_Tutorial.adoc[]
+include::./aggregation/Grid_Metadata_Tutorial.adoc[]
 
 
 // These two documents are the formal Use Case description documents. They
@@ -39,7 +41,7 @@ include::./aggregation/Grid_Metadata_Tutorial.adoc[tabsize=4]
 
 // Change this from aggregation enhancements to user-specified aggregations.
 //
-include::./aggregation/Aggregation_enhancements.adoc[tabsize=4]
+include::./aggregation/Aggregation_enhancements.adoc[]
 
 // Note that this file does not include
 // Use_cases_for_swath_and_time_series_aggregation.adoc

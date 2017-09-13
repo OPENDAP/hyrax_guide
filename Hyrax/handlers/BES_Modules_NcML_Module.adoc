@@ -1,13 +1,10 @@
-//= The NcML Module
-//:Leonard Porrello <lporrel@gmail.com>:
-//{docdate}
-//:numbered:
-//:toc:
+= The NcML Module
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-== The NcML Module - Introduction
-
-Welcome to the OPeNDAP NcML Data Handler Module v1.4.2 for
-https://www.opendap.org/software/hyrax-data-server[Hyrax]
+== Introduction
 
 **Note**: In the past Hyrax was distributed as a collection of separate
 binary packages which data providers would choose to install to build up
@@ -21,7 +18,7 @@ front end. In some places in this documentation you may read about
 that. If you have a modern version of the server it includes this
 handler.
 
-=== Features
+== Features
 
 This version currently implements a subset of NcML 2.2 functionality,
 along with some OPeNDAP extensions:
@@ -68,40 +65,7 @@ instance of variables and metadata from the members
 *** Useful for combining two or more datasets with different variables
 into a single set
 
-=== Installation from Source
-
-For information on how to build and install the NcML Data Module, please
-see the INSTALL file that came with the source distribution.
-
-=== Installation Overview
-
-The NcML Module requires a working Hyrax 1.6 installation. It is a
-module that is dynamically loaded into the Hyrax BES (Back End Server)
-to allow it to handle NcML files.
-
-Please see the file INSTALL for full build and install instructions as
-well as requirements.
-
-*NOTE:* After installation, you MUST restart Hyrax by restarting the BES
-and OLFS so the NcML Module is loaded!
-
-==== Requirement: International Components for Unicode (ICU) Library
-
-The most important external requirement is an installation of the
-International Components for Unicode (ICU) version 3.6 or higher (tested
-up to 4.2.1). The source distributions (as well as some binaries) may be
-found at the site: http://site.icu-project.org/download
-
-If you are using Linux RPM's to run Hyrax, you can get an RPM for ICU as
-well. Search for the RPM named "libicu" using a package manager or yum,
-e.g. If you are compiling the module from source, you will also need the
-RPM "libicu-devel" to get the headers installed.
-
-If you install in the default locations, the ncml_module should find the
-libraries and headers. Otherwise, please consult the INSTALL file for
-more information about installing ICU to a non-standard location.
-
-==== Configuration Parameters
+== Configuration Parameters
 
 ===== TempDirectory
 
@@ -139,7 +103,7 @@ dataset (fnoc1.nc), but this requires the netCDF data handler to be
 installed first! Several other examples installed also use the HDF4 and
 HDF5 handlers.
 
-=== Functionality
+== Functionality
 
 This version of the NcML Module implements a subset of NcML 2.2
 functionality.
@@ -859,7 +823,7 @@ generated each day.
 the <scan> element in detail in the joinNew aggregation tutorial
 here.]**.
 
-=== Errors
+== Errors
 
 There are three types of error messages that may be returned:
 
@@ -867,12 +831,12 @@ There are three types of error messages that may be returned:
 * Resource Not Found Error
 * Parse Error
 
-==== Internal Errors
+=== Internal Errors
 
 *Internal errors* should be reported to support@opendap.org as they are
 likely bugs.
 
-==== Resource Not Found Errors
+=== Resource Not Found Errors
 
 If the netcdf@location specifies a non-existent local dataset (one that
 is not being served by the same Hyrax server), it will specify the
@@ -882,7 +846,7 @@ that the dataset to be wrapped already exists and can be viewed on the
 running server before writing NcML to add metadata. It's also an error
 to refer to remote datasets (at this time).
 
-==== Parse Errors
+=== Parse Errors
 
 *Parse errors* are user errors in the NcML file. These could be
 malformed XML, malformed NcML, unimplemented features of NcML, or could
@@ -904,6 +868,7 @@ current scope.
 current scope.
 * remove specified a non-existing attribute name
 
+////
 === Grid Metadata Tutorial
 
 Please see the page
@@ -940,13 +905,14 @@ dimension and coordinate variable for each of the sample datasets.
 JoinExisting
 Aggregation - Combine variables with a common named outer dimension
 along that dimension by concatenating data for that dimension
+////
 
-=== Additions/Changes to NcML 2.2
+== Additions/Changes to NcML 2.2
 
 This section will keep track of changes to the NcML 2.2 schema.
 Eventually these will be rolled into a new schema.
 
-==== Attribute Structures (Containers)
+=== Attribute Structures (Containers)
 
 This module also adds functionality beyond the current NcML 2.2 schema
 --- it can handle nested <attribute> elements in order to make attribute
@@ -976,26 +942,26 @@ If an attribute container of the given name already exists at the
 lexical scope, it is traversed in order to define the scope for the
 nested (children) attributes it contains.
 
-==== Unspecified Variable Type Matching for Lexical Scope
+=== Unspecified Variable Type Matching for Lexical Scope
 
 We also allow the type attribute of a variable element (variable@type)
 to be the empty string (or unspecified) when using existing variables to
 define the lexical scope of an <attribute> transformation. In the
 schema, variable@type is (normally) required.
 
-==== DAP 2 Types
+=== DAP 2 Types
 
 Additionally, we allow DAP2 atomic types (such as UInt32, URL) in
 addition to the NcML types. The NcML types are mapped onto the closest
 DAP2 type internally.
 
-==== DAP OtherXML Attribute Type
+=== DAP OtherXML Attribute Type
 
 We also allow attributes to be of the new DAP type "OtherXML" for
 injecting arbitrary XML into an attribute as content rather than trying
 to form a string. This allows the parser to check well-formedness.
 
-==== Forward Declaration of Dimensions
+=== Forward Declaration of Dimensions
 
 Since we use a SAX parser for efficiency, we require the <dimension>
 elements to come _before_ their use in a __variable@shape__. One way to
@@ -1003,7 +969,7 @@ change the schema to allow this is to force the dimension elements to be
 specified in a sequence after explicit and metadata choice and before
 all other elements.
 
-==== Aggregation Element Location and Processing Order Differences
+=== Aggregation Element Location and Processing Order Differences
 
 NcML specifies that if a dataset (<netcdf> element) specifies an
 aggregation element, the aggregation element is always processed first,
@@ -1022,7 +988,7 @@ attributes), the <variable> _must_ come after the aggregation since the
 size of the dimension is unknown until the aggregation element is
 processed.
 
-=== Backward Compatibility Issues
+== Backward Compatibility Issues
 
 Due to the way shared dimensions were implemented in the NetCDF, HDF4,
 and HDF5 handlers, the DAS responses did not follow the DAP2
@@ -1046,7 +1012,7 @@ that as the starting point for modifications to the original dataset.
 
 More explicit examples are given below.
 
-==== NetCDF
+=== NetCDF
 
 The NetCDF handler represents some NC datasets as a DAP 2 Grid, but the
 returned DAS is not consistent with the DAP 2 spec for the attribute
@@ -1208,7 +1174,7 @@ a fully qualified name. The parser would return an error if it was
 attempted as "lat.Description" as the NetCDF DAS for the original file
 would have led one to believe.
 
-==== HDF4/HDF5
+=== HDF4/HDF5
 
 Similarly to the NetCDF case, the Hyrax HDF4 Module produces DAS
 responses that do not respect the DAP2 specification. If an NcML file is
@@ -1223,11 +1189,11 @@ knowing the structure the NcML handler expects to see in the NcML file.
 Alternatively, the DDX has the proper attribute structure as well (the
 DAS is generated from it).
 
-=== Known Bugs
+== Known Bugs
 
 There are no known bugs currently.
 
-=== Planned Enhancements
+== Planned Enhancements
 
 Planned enhancements for future versions of the module include...
 
@@ -1236,8 +1202,9 @@ Planned enhancements for future versions of the module include...
 *** Special case of JoinNew for forecast data with two time variables
 *** See:
 http://www.unidata.ucar.edu/software/netcdf/ncml/v2.2/FmrcAggregation.html
-
+////
 === Copyright
 
 This software is copyrighted under the GNU Lesser GPL. Please see the
 files COPYING and COPYRIGHT that came with this distribution.
+////
