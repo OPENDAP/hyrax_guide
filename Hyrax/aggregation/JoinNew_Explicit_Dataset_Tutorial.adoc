@@ -1,10 +1,10 @@
-//= JoinNew Explicit Dataset Tutorial - OPeNDAP Documentation
-//:Leonard Porrello <lporrel@gmail.com>:
-//{docdate}
-//:numbered:
-//:toc:
+= JoinNew Explicit Dataset Tutorial
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-== JoinNew Explicit Dataset Tutorial: Default Values for the New Coordinate Variable (on a Grid)
+== Default Values for the New Coordinate Variable (on a Grid)
 
 The default for the new coordinate variable is to be of type String with
 the location of the dataset as the value. For example, the following
@@ -189,7 +189,7 @@ The values for the projected coordinate variables are as expected:
 Float32 sample_time[sample_time = 4] = {100, 200, 400, 1000};
 -------------------------------------------------------------
 
-==== Errors
+=== Errors
 
 It is a Parse Error to...
 
@@ -252,7 +252,7 @@ datasets are added. It is especially useful for a <scan> element that
 refers to a dynamic number of files that can be described with a
 uniformly varying index.
 
-=== Explicitly Using coordValue Attribute of <netcdf>
+== Explicitly Using coordValue Attribute of <netcdf>
 
 The _netcdf@coordValue_ may be used to specify the value for the given
 dataset right where the dataset is declared. This attribute will cause a
@@ -261,7 +261,7 @@ for each dataset filled in. The new coordinate variable will be of type
 *double* if the coordValue's can all be parsed as a number, otherwise
 they will be of type **String**.
 
-==== String coordValue Example
+=== String coordValue Example
 
 ------------------------------------------------------------------------------------
 <?xml version="1.0" encoding="UTF-8"?>
@@ -301,7 +301,7 @@ String source[source = 3] = {"Station_1", "Station_2", "Station_3"};
 
 ...as we specified.
 
-==== Numeric (double) Use of coordValue
+=== Numeric (double) Use of coordValue
 
 If the first _coordValue_ can be successfully parsed as a double numeric
 type, then a coordinate variable of type double (Float64) is created and

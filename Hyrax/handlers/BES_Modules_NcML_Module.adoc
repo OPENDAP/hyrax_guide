@@ -6,7 +6,7 @@
 
 == Introduction
 
-**Note**: In the past Hyrax was distributed as a collection of separate
+NOTE: In the past Hyrax was distributed as a collection of separate
 binary packages which data providers would choose to install to build up
 a server with certain features. As the number of modules grew, this
 became more and more complex and time consuming. As of Hyrax 1.12 we
@@ -36,10 +36,8 @@ well as structures)
 ** Variables may be removed from the wrapped dataset
 ** Allows the creation of "pure virtual" datasets which do not wrap
 another dataset
-* Aggregations: JoinNew, JoinExisting Union
-link:#Aggregation_Tutorials[#Aggregation Tutorials]
-** JoinNew Aggregation
-(link:../aggregation/NCML_Module_Aggregation_JoinNew.adoc[NCML_Module_Aggregation_JoinNew])
+* Aggregations: JoinNew, JoinExisting, and Union:
+** xref:join_new_aggregation[_JoinNew_ Aggregation]
 *** Allows multiple datasets to be "joined" by creating a new outer
 dimension for the aggregated variable
 *** Aggregation member datasets can be listed explicitly with explicit
@@ -49,8 +47,7 @@ directory for files matching certain criteria, such as a suffix or
 regular expression.
 *** Metadata may be added to the new coordinate variable for the new
 dimension
-** JoinExisting Aggregation
-(link:../aggregation/NCML_Module_Aggregation_JoinExisting.adoc[NCML_Module_Aggregation_JoinExisting])
+** xref:join_existing_aggregation[_JoinExisting_ Aggregation]
 *** The _ncoords_ element can be left out of the _joinexisting_
 granules. However, this may be a slow operation, depending on the number
 of granules in the aggregation.
@@ -58,8 +55,7 @@ of granules in the aggregation.
 granules
 *** Only allows join dimension to be aggregated from granules and not
 overridden in NcML
-** Union Aggregation
-(link:../aggregation/NCML_Module_Aggregation_Union.adoc[NCML_Module_Aggregation_Union])
+** xref:union_aggregation[_Union_ Aggregation]
 *** Merges all member datasets into one by taking the first named
 instance of variables and metadata from the members
 *** Useful for combining two or more datasets with different variables
@@ -778,6 +774,12 @@ response.
 in the current scope
 
 === <aggregation> Element
+
+NOTE: The syntax used by Hyrax is slightly different from the
+THREDDS Data Server (TDS). In particular, we do not process the
+<aggregation> element prior to other elements in the dataset, so in some
+cases the relative ordering of the <aggregation> and references to
+variables within the aggregation matters.
 
 Aggregation involves combining multiple datasets (<netcdf>) into a
 virtual "single" dataset in various ways. For a tutorial on aggregation

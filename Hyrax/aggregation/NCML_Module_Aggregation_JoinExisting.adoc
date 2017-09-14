@@ -1,10 +1,10 @@
-//= NCML Module Aggregation JoinExisting - OPeNDAP Documentation
-//:Leonard Porrello <lporrel@gmail.com>:
-//{docdate}
-//:numbered:
-//:toc:
+= JoinExisting Aggregation
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-== NCML Module Aggregation JoinExisting
+== Introduction
 
 A _joinExisting_ aggregation joins multiple granule datasets by
 concatenating the specified outer dimensional data from the granules
@@ -19,14 +19,7 @@ http://www.unidata.ucar.edu/software/netcdf/ncml/v2.2/Aggregation.html#joinExist
 Note that version 1.1.0 of the module does not support all features of
 joinExisting.
 
-*PLEASE NOTE* that our syntax is slightly different from that of the
-THREDDS Data Server (TDS), so please refer to this tutorial when using
-the Hyrax NcML Module. In particular, we do not process the
-<aggregation> element prior to other elements in the dataset, so in some
-cases the relative ordering of the <aggregation> and references to
-variables within the aggregation matters.
-
-=== Content Summary
+== Content Summary
 
 This section describes the behavior of the initial implementation of
 joinExisting for version 1.2.x of the NcML Module, bundled with Hyrax
@@ -47,7 +40,7 @@ Our example below will clarify this.
 Future versions of the module will implement more of the joinExisting
 feature set.
 
-=== Examples
+== Examples
 
 Here we give an example that illustrates the functionality offered by
 the current version of the aggregation. This example may also be found
@@ -59,7 +52,7 @@ http://test.opendap.org:8090/opendap/ioos/mday_joinExist.ncml
 
 http://test.opendap.org:8090/opendap/coverage/mday/
 
-=== Granules
+== Granules
 
 Assume we have some number of granule datasets with a DDS the same as
 the following (modulo the dataset name):
@@ -78,7 +71,7 @@ Dataset {
 } PH2006001_2006031_ssta.nc;
 -----------------------------------------------------------------------
 
-=== Explicit Listing of Granules
+== Explicit Listing of Granules
 
 We see that here _time_ is the outer dimension, which is the only
 dimension we may join along (it is an error to specify an inner). Given
@@ -154,14 +147,14 @@ changes should be made explicitly on this top-level coordinate variable
 so that the metadata is shared among all the aggregated Grid map
 vectors.
 
-=== Using the Scan Element
+== Using the Scan Element
 
 The collection of member datasets in a joinExisiting aggregation can be
 specified using the NcML _scan_ element as described in the
 link:./Dynamic_Aggregation_Tutorial.adoc[dynamic aggregation
 tutorial].
 
-==== NcML Dimension Cache
+=== NcML Dimension Cache
 
 If the scan element is used without the _ncoords_ extension (see below),
 then the first time a joinExisiting aggregation is accessed (say by
@@ -210,7 +203,7 @@ With only a modicum of effort one could write a shell program that
 utilizes the BES standalone functionality to pre-populate the dimension
 caches for large joinExisiting aggregations.
 
-==== ncoords Extension
+=== ncoords Extension
 
 If all of the granules are of uniform dimensional size, we may also use
 the syntactic sugar provided by a Hyrax-specific extension to NcML --
@@ -265,13 +258,13 @@ The advantage of this is that the server does not have to inspect all of
 the member granules to determine their dimensional size, which allows
 server to manufacture responses much more quickly.
 
-=== Limitations
+== Limitations
 
 The current version implements only basic functionality. If there is
 extended functionality that is needed for your use, please send
 <mailto:support@opendap.org[mailto:support@opendap.org]> to let us know!
 
-==== Join Dimension Sizes Should Be Explicitly Declared
+=== Join Dimension Sizes Should Be Explicitly Declared
 
 As we have seen, the most important limitation to the JoinExisting
 aggregation support is that the _ncoords_ attribute should be specified
@@ -280,7 +273,7 @@ requirement. The problem is that the size of the output join dimension
 is dependent on checking the DDS of _every_ granule in the aggregation,
 which is computationally expensive for large aggregations.
 
-==== Source of Data for Aggregated Coordinate Variable on Join Dimension
+=== Source of Data for Aggregated Coordinate Variable on Join Dimension
 
 This version does not allow the join dimension's data to be declared
 explicitly in the NcML as the NcML tutorial page describes. This version
@@ -292,7 +285,7 @@ about 5 ways this data can be specified in addition to pulling them from
 the granules --- we only can pull them from granules now, which seems
 the most common use.
 
-==== Source of Join Dimension Metadata
+=== Source of Join Dimension Metadata
 
 The metadata for the coordinate variable is pulled from the _first_
 granule dataset. Modification of coordinate variable metadata is not

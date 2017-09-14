@@ -22,27 +22,25 @@ Hyrax server.
 :tabsize: 4
 
 include::./handlers/BES_Modules_NcML_Module.adoc[lines="1,6..-1", leveloffset=+1]
-// See also the BES_Modules_NCML 
 
-include::./aggregation/NCML_Module_Aggregation_JoinExisting.adoc[]
-include::./aggregation/NCML_Module_Aggregation_JoinNew.adoc[]
-include::./aggregation/NCML_Module_Aggregation_Union.adoc[]
+[[join_new_aggregation]]
+include::./aggregation/NCML_Module_Aggregation_JoinNew.adoc[lines="1,6..-1",leveloffset=+1]
 
-include::./aggregation/JoinNew_Explicit_Dataset_Tutorial.adoc[]
-include::./aggregation/Metadata_on_Aggregations_Tutorial.adoc[]
-include::./aggregation/Dynamic_Aggregation_Tutorial.adoc[]
-include::./aggregation/Grid_Metadata_Tutorial.adoc[]
+[[join_existing_aggregation]]
+include::./aggregation/NCML_Module_Aggregation_JoinExisting.adoc[lines="1,6..-1",leveloffset=+1]
 
+[[union_aggregation]]
+include::./aggregation/NCML_Module_Aggregation_Union.adoc[lines="1,6..-1",leveloffset=+1]
 
-// These two documents are the formal Use Case description documents. They
-// should not be part of the user documentation.
-// include::./aggregation/Satellite_Swath_Data_Aggregation.adoc[tabsize=4]
-// include::./aggregation/Satellite_Time_Series_Aggregation.adoc[tabsize=4]
+[[aggregation_tutorials]]
+[[join_new_tutorial]]
+include::./aggregation/JoinNew_Explicit_Dataset_Tutorial.adoc[lines="1,6..-1",leveloffset=+1]
 
-// Change this from aggregation enhancements to user-specified aggregations.
-//
-include::./aggregation/Aggregation_enhancements.adoc[]
+[[metdata_tutorial]]
+include::./aggregation/Metadata_on_Aggregations_Tutorial.adoc[lines="1,6..-1",leveloffset=+1]
 
-// Note that this file does not include
-// Use_cases_for_swath_and_time_series_aggregation.adoc
-// nor does it include BES_XML_Commands.adoc
+[[dynamic_aggregation_tutorial]]
+include::./aggregation/Dynamic_Aggregation_Tutorial.adoc[lines="1,6..-1",leveloffset=+1]
+
+[[grid_metadata_utorial]]
+include::./aggregation/Grid_Metadata_Tutorial.adoc[lines="1,6..-1",leveloffset=+1]

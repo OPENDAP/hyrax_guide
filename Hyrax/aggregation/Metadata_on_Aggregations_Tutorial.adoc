@@ -1,10 +1,10 @@
-//= Metadata on Aggregations Tutorial - OPeNDAP Documentation
-//:Leonard Porrello <lporrel@gmail.com>:
-//{docdate}
-//:numbered:
-//:toc:
+= Metadata on Aggregations Tutorial
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-== Metadata on Aggregations Tutorial: Metadata Specification on the New Coordinate Variable
+== Metadata Specification on the New Coordinate Variable
 
 We can add metadata to the new coordinate variable in two ways:
 
