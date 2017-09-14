@@ -104,8 +104,8 @@ The OPeNDAP Server Dataset Access Form has four main sections:
 
 * *Actions:* Use these controls after you have defined your variables: 
 ** Click *Get ASCII*, and the data request will appear in a browser window, in comma-separated form.
-** Click *Binary (DAP) Object* to save a binary data file on your local disk.
-** Click *Get as NetCDF* to save the file in netCDF format on your local disk. (You can read either of these later with several OPeNDAP clients, by entering the file path instead of a URL.) 
+** Click *Binary (DAP2) Object* to save a binary data file on your local disk.
+** Click *Get as NetCDF 4* to save the file in netCDF format on your local disk. (You can read either of these later with several OPeNDAP clients, by entering the file path instead of a URL.) 
 * *Data URL:* This is the OPeNDAP URL connected to the data that we are interested in, but it is "unsampled" (that is, there is no constraint expression on it.
 * *Global Attributes:* This information is only for reference.
 * *Variables:* This is the most important part of the page. For each variable in the dataset, you will see the data description (something like "Array of 32 bit Reals [lat = 0..88]"), a checkbox, a text input box, and a list of the variable's attributes. If you click the checkbox, you will see the variable's array bounds appear in the text box, and you will see the variable appear in a constraint expression appended to the Data URL at the top of the page. If you edit the array bounds in the text box, press *enter* to place your edits in the Data URL box. Move on down the variable list, editing your request, and experiment by adding and changing variable requests. When you have a request you would like to make, use the Actions buttons at the top of the page.
@@ -179,7 +179,7 @@ You can also use a grid to store arrays in which the columns and rows
 occur at regular intervals. You will often see OPeNDAP data stored in
 this way.
 
-(The other special OPeNDAP data type worth considering is the
+NOTE: The other special OPeNDAP data type worth considering is the
 _Sequence_ . You will see more about this later. There are also
 _Structures_ for representing arbitrary hierarchies.)
 
@@ -302,7 +302,7 @@ real-world locations, and then made our accesses using those indexes.
 Hyrax supports a small set of functions which can perform these
 look-up operations for you. For example, we could rewrite the example
 above like this:
-"...mnmean.nc.gz.ascii?geogrid(sst,62,206,56,210,"19722<time<19755")".
+"...sst/mnmean.nc.gz.ascii?geogrid(sst,62,206,56,210,"19722<time<19755")".
 Click
 http://test.opendap.org/opendap/data/nc/sst.mnmean.nc.gz.ascii?geogrid(sst,62,206,56,210,%2219722%3Ctime%3C19755%22)[here]
 to see this in action. The results look like this:
@@ -400,11 +400,10 @@ image::./images/Gsodock-das.png[]
 To select the data you want from a server, use a constraint
 expression, just as you did with the gridded data above. Now, though,
 the constraint contains two kinds of clauses. One is a list of
-variables you wish to have returned, and the other is the conditions
-under which they should be returned. The first is called the
-*projection* clause and the second the *selection* clause. For
-example, if you want to see salinity data read after noon that day,
-try this:
+variables you wish to have returned (the *projection* clause), 
+and the other is the conditions under which they should be returned
+(the *selection* clause). For example, if you want to see salinity 
+data read after noon that day, try this:
 
 http://test.opendap.org/dap/data/ff/gsodock.dat.ascii?URI_GSO-Dock.Salinity&URI_GSO-Dock.Time%3E35234.5[...gsodock.dat.ascii?URI_GSO-Dock.Salinity&URI_GSO-Dock.Time>35234.5]
 
@@ -424,7 +423,9 @@ servers.
 
 // DONE: jhrg TODO Google works too. Use Google to search for 'OPeNDAP Hyrax' or to search for 'OPeNDAP <terms>' or 'Hyrax <terms>'
 
-Google also works. Use Google to search for 'OPeNDAP Hyrax' or to search for 'OPeNDAP <terms>' or 'Hyrax <terms>'. For example, Google _OPeNDAP sea surface temperature_.
+=== Google ===
+
+Use Google to search for 'OPeNDAP Hyrax' or to search for 'OPeNDAP <terms>' or 'Hyrax <terms>'. For example, Google _OPeNDAP sea surface temperature_.
 
 === GCMD ===
 
@@ -458,7 +459,7 @@ run many of our nightly tests. All of the files in the the _/data/nc_
 directory are stored in NetCDF files; other directories under _/data_
 hold data stored in other file types.
 
-*Note:* In general, this list is produced by an OPeNDAP server and
+NOTE: In general, this list is produced by an OPeNDAP server and
 this feature works on all servers. However, it only really understands
 OPeNDAP data files, so other file types will simply be sent without
 any interpretation. This can be useful if the 'other file' happens to
