@@ -1,10 +1,10 @@
-//= NCML Module Aggregation Union - OPeNDAP Documentation
-//:Leonard Porrello <lporrel@gmail.com>:
-//{docdate}
-//:numbered:
-//:toc:
+=  Union Aggregation
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-== NCML Module: Union Aggregation
+== Introduction
 
 The current trunk version of the module supports the union aggregation
 element of the form:
@@ -17,10 +17,7 @@ element of the form:
 </netcdf>
 ----------------------------------
 
-Note that we do not implement <scan> yet, so all member datasets of the
-union must be explicitly listed as a <netcdf> element.
-
-=== Functionality
+== Functionality
 
 The union aggregation specifies the attributes and variables (and
 perhaps dimensions) for the dataset it is contained within (i.e. it's
@@ -48,7 +45,7 @@ Which items will show up in the output? We need to discuss this in a
 little more detail, in particular since we have deviated slightly from
 the Unidata implementation.
 
-==== Order of Element Processing
+=== Order of Element Processing
 
 The NCML Module processes the nodes in a <netcdf> element in the order
 encountered. This means that the parent dataset of an aggregation may
@@ -59,7 +56,7 @@ existing metadata within a member of the aggregation by using an
 attribute element, for example, must come AFTER the actual aggregation
 element, or else a parse error will be thrown.
 
-===== Shadowing an Aggregation Member
+=== Shadowing an Aggregation Member
 
 For example, the following examples show how to "shadow" a variable
 contained in an aggregation by specifying it in the parent dataset prior
@@ -98,7 +95,7 @@ show up in the output since it doesn't already exist in either the
 parent or the previous child. Note that this would also work on an
 attribute or dimension.
 
-===== Modifying the "Winner" of the Union Aggregation
+=== Modifying the "Winner" of the Union Aggregation
 
 The following example shows how to modify the "winning" variable in a
 union aggregation by specifying the attribute change AFTER the
@@ -142,7 +139,7 @@ If this entire netcdf element were contained within another aggregation,
 then other transformations might be applied after the fact as well,
 again in the order encountered for clarity.
 
-==== Dimensions
+== Dimensions
 
 Since the DAP2 does not specify dimensions as explicit data items, a
 union of dimensions is only done __if the child netcdf elements
@@ -268,7 +265,7 @@ dimension checks only occur now in a *pure virtual dataset* like we see
 here. Using netcdf@location will effectively "hide" all the dimensions
 within it at this point.
 
-===== Thoughts About Future Directions for Dimension
+=== Thoughts About Future Directions for Dimension
 
 For a future implementation, we may want to consider a DAP2 Grid Map
 vector as a dimension and do cardinality checks on them if we have
@@ -279,7 +276,7 @@ dataset and is explicitly specified as "isShared". Although DAP2 does not
 have shared dimensions, this would be a basic first step in the error
 checking that will have to be done for shared dimensions.
 
-=== Notes About Changes from NcML 2.2 Implementation
+== Notes About Changes from NcML 2.2 Implementation
 
 In the Aggregation tutorial, it is mentioned that in a given <netcdf>
 node, the <aggregation> element is process prior to any other nodes,

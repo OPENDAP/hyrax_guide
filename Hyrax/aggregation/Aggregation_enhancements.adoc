@@ -1,10 +1,10 @@
-//= Aggregation Enhancements - OPeNDAP Documentation
-//:Leonard Porrello <lporrel@gmail.com>:
-//{docdate}
-//:numbered:
-//:toc:
+= User-Specified Aggregation
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-== Aggregation Enhancements
+== Introduction
  
 In response to requests from NASA, and with their support, we have added
 two new kinds of aggregation to Hyrax. Both of these aggregation
@@ -18,9 +18,7 @@ intended for use with search interfaces that have knowledge of the
 individual files that make up typical satellite data sets (often called
 a __dataset inventory__).
 
-=== Overview of the New Capability
-
-**Summary**: This service provides value-based subsetting for satellite
+NOTE: This service provides value-based subsetting for satellite
 __swath data__. It's applicable to lots of other kinds of data, but
 works best with data that meet certain requirements.
 
@@ -42,7 +40,7 @@ the extent possible (the underlying data files may lack information CF
 from N files will be returned in one ASCII CSV response. These values
 can be easily assimilated by database systems, Excel and other tools.
 
-=== Intended Audience
+== Intended Audience
 
 This service was originally intended for software developers working
 data search tools who need to be able to return results that encompass
@@ -50,7 +48,7 @@ hundreds or thousands of granules. It works best from a programmatic
 interface, but it's certainly open to end users, see the examples using
 curl for one way to access the service.
 
-=== Accessing the Aggregation Services
+== Accessing the Aggregation Services
 
 This 'service' is accessed using HTTP's GET or POST methods. In this
 documentation I will describe how to use POST to send information, but
@@ -249,14 +247,14 @@ include four columns, one each for Latitude, Longitude and
 Corrected_Optical_Depth and a fourth for Solution_3_Land where the value
 would be the index number.
 
-=== Performance and Implementation
+== Performance and Implementation
 
 Performance is linear in terms of the number of granules. The response
 is streamed as it is built, so even very large responses use only a
 little memory on the server. Of course, that won't be the case on the
 client.
 
-==== Implementation
+=== Implementation
 
 The interface described here is built using a Servlet that talks to the
 Hyrax BES - a C/C++ Unix daemon that reads and processes data building
@@ -440,7 +438,7 @@ table.Latitude, table.Longitude, table.Image_Optical_Depth_Land_And_Ocean
 ...
 -------------------------------------------------------------------------
 
-=== Potential Extensions to the Service
+== Potential Extensions to the Service
 
 This service was purpose-built for the NASA CMR system, but it could be
 extended in several useful ways.

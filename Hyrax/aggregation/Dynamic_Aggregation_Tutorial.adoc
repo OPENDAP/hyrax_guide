@@ -1,10 +1,10 @@
-//= Dynamic Aggregation Tutorial - OPeNDAP Documentation
-//:Leonard Porrello <lporrel@gmail.com>:
-//{docdate}
-//:numbered:
-//:toc:
+= Dynamic Aggregation Tutorial
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-== Dynamic Aggregation Tutorial
+== Introduction
 
 Dynamic aggregation is achieved through the use of the _scan_ element.
 
@@ -27,14 +27,14 @@ The NcML-2.2 _scan_ element schema:
 This document discusses the use and significance of _scan_ in creating
 dynamically aggregated datasets.
 
-=== Location (Location Location...)
+== Location (Location Location...)
 
 The most important attribute of the scan element is the _scan@location_
 element that specifies the top-level search directory for the scan,
 relative to the BES data root directory specified in the BES
 configuration.
 
-**IMPORTANT**: _ALL_ locations are interpreted relative to the BES root
+IMPORTANT: _ALL_ locations are interpreted relative to the BES root
 directory and *NOT* relative to the location of the NcML file itself!
 This means that all data to be aggregated *must* be in a subdirectory of
 the BES root data directory and that these directories _must_ be
