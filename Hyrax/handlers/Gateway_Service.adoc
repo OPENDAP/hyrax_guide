@@ -1,14 +1,14 @@
-//= Gateway Service - OPeNDAP Documentation
-//:Leonard Porrello <lporrel@gmail.com>:
-//{docdate}
-//:numbered:
-//:toc:
+= Gateway Service
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
 == Gateway Service Overview
 
-image:../images/180px-Gateway_service.jpg[]
+// image:../images/180px-Gateway_service.jpg[]
 
-image:../images/magnify-clip.png[]
+/// image:../images/magnify-clip.png[]
 
 The Gateway Service provides Hyrax with the ability to apply DAP
 constraint expressions and server side functions to data available

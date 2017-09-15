@@ -1,10 +1,14 @@
-//= The SQL Hander
-//:Leonard Porrello <lporrel@gmail.com>:
-//{docdate}
-//:numbered:
-//:toc:
+= The SQL Hander
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-== The SQL Hander - Introduction
+== Introduction
+
+NOTE: This handler is not included with the source or binary versions
+od Hyrax we distribute as our official releases. You must download
+the software and build it yourself at this time.
 
 This handler will serve data stored in a relational database if that
 database is configured to be accessed using ODBC. The handler has been
