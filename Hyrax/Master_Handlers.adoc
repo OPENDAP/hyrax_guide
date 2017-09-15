@@ -7,7 +7,7 @@
 :tabsize: 4
 
 // Handlers for different data formats - sources of data
-include::./handlers/BES_Modules_CSV_Handler.adoc[lines="1,8..-1", leveloffset=+1]
+include::./handlers/BES_Modules_CSV_Handler.adoc[lines="1,6..-1", leveloffset=+1]
 
 include::./handlers/BES_Modules_GeoTiff,_GRIB2,_JPEG2000_Handler.adoc[lines="1,8..-1", leveloffset=+1]
 
