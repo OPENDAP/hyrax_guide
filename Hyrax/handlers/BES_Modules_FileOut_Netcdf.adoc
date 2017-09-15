@@ -1,10 +1,10 @@
-//= NetCDF file responses
-//:Leonard Porrello <lporrel@gmail.com>:
-//{docdate}
-//:numbered:
-//:toc:
+= NetCDF file responses
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-== NetCDF File Responses - Introduction
+== Introduction
 
 The File Out NetCDF module provides the ability to return OPeNDAP
 DataDDS objects as netcdf files. The module takes an OPeNDAP DataDDS and
@@ -12,10 +12,6 @@ translates the attributes, data structure, and data into a netcdf file
 and streams the resulting file back to the caller. Currently, simple
 types, arrays, structures and grids are supported. Sequences are not yet
 supported. +
-
-=== Status
-
-Stable release 1.3.2 with Hyrax 1.12
 
 === Services Handled
 

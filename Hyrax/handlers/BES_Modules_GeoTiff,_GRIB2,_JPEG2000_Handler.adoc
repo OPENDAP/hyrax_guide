@@ -1,10 +1,10 @@
-//= GeoTiff, GRIB2, JPEG2000 Handler
-//:Leonard Porrello <lporrel@gmail.com>:
-//{docdate}
-//:numbered:
-//:toc:
+= GeoTiff, GRIB2, JPEG2000 Handler
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-== GeoTiff, GRIB2, JPEG2000 Handler Introduction
+== Introduction
 
 This handler will serve data stored in files that can be read using the
 GDAL GIS library, including GeoTIFF, JPEG2000 and GRIB2.

@@ -1,10 +1,10 @@
-//= The FreeForm Data Handler
-//:Leonard Porrello <lporrel@gmail.com>:
-//{docdate}
-//:numbered:
-//:toc:
+= The FreeForm Data Handler
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-== FreeForm Data Handler Introduction
+== Introduction
 
 This document describes the OPeNDAP FreeForm ND Data Handler, which can
 be used with the OPeNDAP data server. It is not a complete description

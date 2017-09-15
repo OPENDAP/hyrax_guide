@@ -1,10 +1,10 @@
-//= The Gateway Module
-//:Leonard Porrello <lporrel@gmail.com>:
-//{docdate}
-//:numbered:
-//:toc:
+= The Gateway Module
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
 
-== The Gateway Module - Introduction
+== Introduction
 
 The Gateway Service provides interoperability between Hyrax and other
 web services. Using the Gateway module, Hyrax can be used to access and
