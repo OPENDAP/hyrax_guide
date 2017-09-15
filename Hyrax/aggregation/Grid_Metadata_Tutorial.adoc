@@ -23,16 +23,16 @@ structure of the data we will want to modify (which may be slightly
 different than the wrapped dataset due to legacy issues with how shared
 dimensions are represented, etc):
 
---------------------------------------------------------------------------------------------
+----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf location="data/ncml/agg/grids/f97182070958.hdf" title="This file results in a Grid">
 <!-- This space intentionally left blank! -->
 </netcdf>
---------------------------------------------------------------------------------------------
+----
 
 This gives the DDS:
 
---------------------------------------------------
+----
 Dataset {
     Grid {
       Array:
@@ -42,7 +42,7 @@ Dataset {
         Float64 lon[1024];
     } dsp_band_1;
 } grid_attributes_2.ncml;
---------------------------------------------------
+----
 
 and the (extensive) DAS:
 
@@ -197,7 +197,7 @@ First, let's add the "ncml_location" into the HDF_GLOBAL attribute
 container. To do this, we need to specify the "scope" of the HDF_GLOBAL
 attribute container (called a Structure in NcML):
 
-------------------------------------------------------------------------------------------------
+----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf location="data/ncml/agg/grids/f97182070958.hdf" title="This file results in a Grid">
 
@@ -208,11 +208,11 @@ attribute container (called a Structure in NcML):
   </attribute>
   
 </netcdf>
-------------------------------------------------------------------------------------------------
+----
 
 This results in the following (clipped for clarity) DAS:
 
-------------------------------------------------------------------
+----
 Attributes {
     HDF_GLOBAL {
         UInt16 dsp_SubImageId 0;
@@ -244,7 +244,7 @@ Attributes {
         }
     }
 }
-------------------------------------------------------------------
+----
 
 We can see at the 1) where the new attribute has been added to
 HDF_GLOBAL as desired.
@@ -252,7 +252,7 @@ HDF_GLOBAL as desired.
 Next, we want to add the same attribute to the top-level *dsp_band_1*
 Grid variable. Here's the NcML:
 
------------------------------------------------------------------------------------------------
+----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf location="data/ncml/agg/grids/f97182070958.hdf" title="This file results in a Grid">
 
@@ -269,11 +269,11 @@ Grid variable. Here's the NcML:
  </variable>
   
 </netcdf>
------------------------------------------------------------------------------------------------
+----
 
 ...which gives the (clipped again) DAS:
 
---------------------------------------------------------------------
+----
 Attributes {
     HDF_GLOBAL {
        ... *** CLIPPED FOR CLARITY *** ...
@@ -305,14 +305,14 @@ Attributes {
         }
     }
 }
---------------------------------------------------------------------
+----
 
 We have denoted the injected metadata with a 2).
 
 As a learning exercise, let's say we made a mistake and tried to use
 <attribute> to specify the *dsp_band_1* attribute table:
 
------------------------------------------------------------------------------------------------
+----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf location="data/ncml/agg/grids/f97182070958.hdf" title="This file results in a Grid">
 
@@ -329,11 +329,11 @@ As a learning exercise, let's say we made a mistake and tried to use
  </attribute>
   
 </netcdf>
------------------------------------------------------------------------------------------------
+----
 
 Then we get a Parse Error...
 
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <response xmlns="http://xml.opendap.org/ns/bes/1.0#" reqID="some_unique_value">
   <getDAS>
@@ -343,7 +343,7 @@ Then we get a Parse Error...
       </BESError>
    </getDAS>
 </response>
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----
 
 ...which basically tells us the problem: we tried to specify an attribute
 with the same name as the Grid, but *dsp_band_1* is a variable already
@@ -355,7 +355,7 @@ the actual data Array inside the Grid (say we know we will be projecting
 it out with a constraint and don't want to lose this metadata). The NcML
 now becomes:
 
----------------------------------------------------------------------------------------------------------
+----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf location="data/ncml/agg/grids/f97182070958.hdf" title="This file results in a Grid">
 
@@ -380,11 +380,11 @@ now becomes:
  </variable>
   
 </netcdf>
----------------------------------------------------------------------------------------------------------
+----
 
 Our modified DAS is now...
 
---------------------------------------------------------------------
+----
 Attributes {
     HDF_GLOBAL {
        ... *** CLIPPED FOR CLARITY *** ...
@@ -417,7 +417,7 @@ Attributes {
         }
     }
 }
---------------------------------------------------------------------
+----
 
 ...where the 3) denotes the newly injected metadata on
 **dsp_band_1.dsp_band_1**.
@@ -425,7 +425,7 @@ Attributes {
 Next, we will add the units to both of the map vectors in the next
 version of our NcML:
 
----------------------------------------------------------------------------------------------------------
+----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf location="data/ncml/agg/grids/f97182070958.hdf" title="This file results in a Grid">
 
@@ -462,11 +462,11 @@ version of our NcML:
  </variable>
   
 </netcdf>
----------------------------------------------------------------------------------------------------------
+----
 
 ...where we denote the changed with 4) and 5). Here's the resulting DAS:
 
----------------------------------------------------------------------
+----
 Attributes {
     HDF_GLOBAL {
         ... *** CLIPPED FOR CLARITY *** ...
@@ -501,7 +501,7 @@ Attributes {
         }
     }
 }
----------------------------------------------------------------------
+----
 
 ...where we have marked all the new metadata we have injected, including
 the new attributes on the map vectors.

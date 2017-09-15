@@ -81,23 +81,23 @@ H5.EnableAddPathAttr::
   *fullnamepath* and *origname* attribute in DAS output. For example,
   the DAS output like below:
 
-----------------------------------------------------------------------------
+----
      temperature {
         String units "K";
         String origname "temperature";
         String fullnamepath "/HDFEOS/GRIDS/GeoGrid/Data Fields/temperature";
         String orig_dimname_list "XDim ";
       }
-----------------------------------------------------------------------------
+----
 
 ...will change to...
 
------------------------------------------
+----
      temperature {
         String units "K";
         String orig_dimname_list "XDim ";
      }
------------------------------------------
+----
 
  H5.EnableDropLongString::
   NetCDF Java client cannot handle string size bigger than 32767 and

@@ -38,7 +38,7 @@ that's of no concern to the BES).
 
 == BES Error Response
 
-----------------------------------------------------------------------
+----
 <BES>
     <response reqID="####">
         <BESError>
@@ -48,7 +48,7 @@ that's of no concern to the BES).
         </BESError>
     </response>
 </BES>
-----------------------------------------------------------------------
+----
 
 Where Type is one of the following:
 
@@ -68,9 +68,9 @@ the file name and line number where the exception was thrown.
 
 Example:
 
--------------------------------------------------
+----
 <setContext  name="contextName>Value</setContext>
--------------------------------------------------
+----
 
 Changes the state of the BES for the current client connection. This
 allows the client to ask the BES to utilize various response formats.
@@ -103,12 +103,12 @@ conform to is controlled by the dap_format context. It is possible
 
 ===== Request Example
 
---------------------------------------------------
+----
    <?xml version="1.0" encoding="UTF-8"?>
    <request reqID ="####" >
        <setContext name="errors">dap2</setContext>
    </request>
---------------------------------------------------
+----
 
 ====== Response Example
 
@@ -121,12 +121,12 @@ link:../index.php/BES_XML_Commands#BES_Error_Response[BESError].
 
 ==== Request Example
 
------------------------------------------------------------------------------
+----
    <?xml version="1.0" encoding="UTF-8"?>
    <request reqID ="####" >
        <setContainer name="c" space="catalog">data/nc/fnoc1.nc</setContainer>
    </request>
------------------------------------------------------------------------------
+----
 
 ==== Response Example
 
@@ -139,7 +139,7 @@ link:../index.php/BES_XML_Commands#BES_Error_Response[BESError].
 
 ==== Request Example
 
------------------------------------------------------------------
+----
    <?xml version="1.0" encoding="UTF-8"?>
    <request reqID ="####" >
         <define name="d" space="default">
@@ -155,7 +155,7 @@ link:../index.php/BES_XML_Commands#BES_Error_Response[BESError].
             <aggregate handler="someHandler" cmd="someCommand" />
         </define> 
    </request>
------------------------------------------------------------------
+----
 
 ==== Response Example
 
@@ -183,12 +183,12 @@ Type:
 
 ==== Request Example
 
------------------------------------------------------------------------------------
+----
    <?xml version="1.0" encoding="UTF-8"?>
    <request reqID ="####" >
         <get type="data_product" definition="def_name" returnAs="name" url="url" />
    </request>
------------------------------------------------------------------------------------
+----
 
 
 === Multiple Command Example
@@ -197,7 +197,7 @@ Multiple command transaction resulting in a DDS (non XML DAP2) response:
 
 ==== Request Example
 
------------------------------------------------------------------------------
+----
    <?xml version="1.0" encoding="UTF-8"?>
    <request reqID ="####" >
        <setContext name="error">dap2</setContext>
@@ -211,7 +211,7 @@ Multiple command transaction resulting in a DDS (non XML DAP2) response:
         </define> 
         <get  type="dds" definition="d" returnAs="name" />
    </request>
------------------------------------------------------------------------------
+----
 
 '''''
 
@@ -219,18 +219,18 @@ Multiple command transaction resulting in a DDS (non XML DAP2) response:
 
 ==== Request Example
 
------------------------------------------
+----
    <?xml version="1.0" encoding="UTF-8"?>
    <request reqID ="####" >
         <showVersion />
    </request>
------------------------------------------
+----
 
 ===== Response
 
 Current:
 
--------------------------------------------
+----
    <showVersion>
        <response>
            <DAP>
@@ -256,11 +256,11 @@ Current:
            </Handlers>
         </response>
    </showVersion>
--------------------------------------------
+----
 
 Proposed:
 
----------------------------------------------------------
+----
    <?xml version="1.0" encoding="UTF-8"?>
    <response reqID="####">
        <showVersion>
@@ -275,7 +275,7 @@ Proposed:
            <module name="freeform_handler">3.7.9</module>
        </showVersion>
    </response>
----------------------------------------------------------
+----
 
 '''''
 
@@ -283,16 +283,16 @@ Proposed:
 
 ==== Request Example
 
------------------------------------------
+----
    <?xml version="1.0" encoding="UTF-8"?>
    <request reqID ="####" >
         <showHelp />
    </request>
------------------------------------------
+----
 
 ==== Response Example
 
--------------------------------------------------------------------------------------------------------------------------
+----
   <?xml version="1.0" encoding="UTF-8"?>
    <response  reqID="####">
        <showHelp>
@@ -301,7 +301,7 @@ Proposed:
            <module name="netcdf_handler" version="3.7.9">Help Information including supported responses</module>
        </showHelp>
    </response>
--------------------------------------------------------------------------------------------------------------------------
+----
 
 '''''
 
@@ -312,23 +312,23 @@ This is available only if the BES is compiled in developer mode. A
 
 ==== Request Example
 
------------------------------------------
+----
    <?xml version="1.0" encoding="UTF-8"?>
    <request reqID ="####" >
         <showProcess />
    </request>
------------------------------------------
+----
 
 ==== Response Example
 
------------------------------------------
+----
    <?xml version="1.0" encoding="UTF-8"?>
    <response reqID="####">
        <showProcess>
            <process pid="10831" />
        </showProcess>
    </response>
------------------------------------------
+----
 
 '''''
 
@@ -339,16 +339,16 @@ This is available only if the BES is compiled in developer mode. A
 
 ==== Request Example
 
------------------------------------------
+----
    <?xml version="1.0" encoding="UTF-8"?>
    <request reqID ="####" >
         <showConfig />
    </request>
------------------------------------------
+----
 
 ==== Response Example
 
-----------------------------------------------------------------------
+----
    <?xml version="1.0" encoding="UTF-8"?>
    <response reqID="####">
        <showConfig>
@@ -357,7 +357,7 @@ This is available only if the BES is compiled in developer mode. A
            ....
        </showConfig>
    </response>
-----------------------------------------------------------------------
+----
 
 '''''
 
@@ -365,23 +365,23 @@ This is available only if the BES is compiled in developer mode. A
 
 ==== Request Example
 
------------------------------------------
+----
    <?xml version="1.0" encoding="UTF-8"?>
    <request reqID ="####" >
         <showStatus />
    </request>
------------------------------------------
+----
 
 ==== Response Example
 
---------------------------------------------------------
+----
    <?xml version="1.0" encoding="UTF-8"?>
    <response reqID="####">
        <showStatus>
            <status>MST Thu Dec 18 11:51:36 2008</status>
        </showStatus>
    </response>
---------------------------------------------------------
+----
 
 '''''
 
@@ -389,16 +389,16 @@ This is available only if the BES is compiled in developer mode. A
 
 ==== Request Example
 
------------------------------------------
+----
    <?xml version="1.0" encoding="UTF-8"?>
    <request reqID ="####" >
         <showContainers />
    </request>
------------------------------------------
+----
 
 ==== Response Example
 
--------------------------------------------------------------------------
+----
    <?xml version="1.0" encoding="UTF-8"?>
    <response  reqID="####">
        <showContainers>
@@ -407,7 +407,7 @@ This is available only if the BES is compiled in developer mode. A
            </store>
        </showContainers>
    </response>
--------------------------------------------------------------------------
+----
 
 '''''
 
@@ -415,7 +415,7 @@ This is available only if the BES is compiled in developer mode. A
 
 ==== Request Example
 
-------------------------------------------------------------------
+----
    <?xml version="1.0" encoding="UTF-8"?>
    <request reqID ="####" >
         <deleteContainers store="storeName" />
@@ -423,7 +423,7 @@ This is available only if the BES is compiled in developer mode. A
         <deleteDefinitions store="storeName" />
         <deleteDefinition name="defName" store="storeName" />
    </request>
-------------------------------------------------------------------
+----
 
 ==== Response Example
 
@@ -436,16 +436,16 @@ link:../index.php/BES_XML_Commands#BES_Error_Response[BESError].
 
 ==== Request Example
 
------------------------------------------
+----
    <?xml version="1.0" encoding="UTF-8"?>
    <request reqID ="####" >
         <showDefinitions />
    </request>
------------------------------------------
+----
 
 ==== Response Example
 
--------------------------------------------------------------------------------------------
+----
    <?xml version="1.0" encoding="UTF-8"?>
    <response  reqID="####">
        <showDefinitions>
@@ -457,7 +457,7 @@ link:../index.php/BES_XML_Commands#BES_Error_Response[BESError].
            </store>
        </showDefinitions>
    </response>
--------------------------------------------------------------------------------------------
+----
 
 '''''
 
@@ -465,16 +465,16 @@ link:../index.php/BES_XML_Commands#BES_Error_Response[BESError].
 
 ==== Request Example
 
------------------------------------------
+----
    <?xml version="1.0" encoding="UTF-8"?>
    <request reqID ="####" >
         <showContext />
    </request>
------------------------------------------
+----
 
 ==== Response Example
 
---------------------------------------------------
+----
   <?xml version="1.0" encoding="UTF-8"?>
   <response reqID ="####" >
        <showContext>
@@ -484,7 +484,7 @@ link:../index.php/BES_XML_Commands#BES_Error_Response[BESError].
             <context name="namen">valuen</context>
        <showContext>
   </response>
---------------------------------------------------
+----
 
 '''''
 
@@ -492,12 +492,12 @@ link:../index.php/BES_XML_Commands#BES_Error_Response[BESError].
 
 ==== Request
 
--------------------------------------------------
+----
    <?xml version="1.0" encoding="UTF-8"?>
    <request reqID="####" >
         <showCatalog node="[catalog:]nodeName" />
    </request>
--------------------------------------------------
+----
 
 The catalog name is optional, defaulting to the default catalog
 specified in the BES configuration file. So if you had a catalog named
@@ -506,7 +506,7 @@ for the rdh catalog.
 
 ==== Response
 
-------------------------------------------------------------------------------------------------------------------------------
+----
   <?xml version="1.0" encoding="UTF-8"?>
    <response reqID="####" >
        <showCatalog>
@@ -529,7 +529,7 @@ for the rdh catalog.
            </dataset>
        </showCatalog>
    </response>
-------------------------------------------------------------------------------------------------------------------------------
+----
 
 '''''
 
@@ -537,16 +537,16 @@ for the rdh catalog.
 
 ==== Request
 
------------------------------------------
+----
    <?xml version="1.0" encoding="UTF-8"?>
    <request reqID="####" >
         <showInfo node="nodeName />
    </request>
------------------------------------------
+----
 
 ==== Current Response
 
----------------------------------------------
+----
    <?xml version="1.0" encoding="UTF-8"?>
    <response reqID="####">
        <showInfo>
@@ -561,9 +561,9 @@ for the rdh catalog.
            </dataset>
        </showInfo>
    </response>
----------------------------------------------
+----
 
--------------------------------------------------
+----
    <?xml version="1.0" encoding="UTF-8"?>
    <response reqID="####">
        <showInfo>
@@ -577,31 +577,31 @@ for the rdh catalog.
            </dataset>
        </showInfo>
    </response>
--------------------------------------------------
+----
 
 ==== Proposed Response
 
--------------------------------------------------------------------------------------------------
+----
    <dataset name="testfile.nc" size="43392" lastModified="YYYY-MM-DDThh:mm:ss" catalog="catalog" 
                     node="true|false" count="#ofChildDatSets">
        <service>DAP</service>
    </dataset>
--------------------------------------------------------------------------------------------------
+----
 
 === showServices
 
 ==== Request
 
------------------------------------------
+----
    <?xml version="1.0" encoding="UTF-8"?>
    <request reqID="####" >
         <showServiceDescriptions />
    </request>
------------------------------------------
+----
 
 ==== Response
 
---------------------------------------------------------------
+----
    <?xml version="1.0" encoding="UTF-8"?>
    <response reqID="####">
        <showServices>
@@ -617,4 +617,4 @@ for the rdh catalog.
            </service>
        </showServices>
    </response>
---------------------------------------------------------------
+----

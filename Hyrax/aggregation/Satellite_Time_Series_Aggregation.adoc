@@ -92,7 +92,7 @@ variables are one-dimensional arrays that index time only with a
 frequency of 0.25, 1 or 40 Hz. The main independent variables (which
 every dependent has one of) are:
 
----------------------------------------------------------------------------
+----
 Float64 Data_1HZ_DS_UTCTime_1[Data_1HZ_DS_UTCTime_1 = 81216];
 Float64 Data_1HZ_Time_d_UTCTime_1[Data_1HZ_Time_d_UTCTime_1 = 81216];
  
@@ -101,7 +101,7 @@ Float64 Data_40HZ_Time_d_UTCTime_40[Data_40HZ_Time_d_UTCTime_40 = 3248640];
 
 Float64 Data_4s_DS_UTCTime_4s[Data_4s_DS_UTCTime_4s = 20304];
 Float64 Data_4s_Time_d_UTCTime_4s[Data_4s_Time_d_UTCTime_4s = 20304];
----------------------------------------------------------------------------
+----
 
 Note that looking at the values of _Data_1HZ_DS_UTCTime_1_ and
 _Data_1HZ_Time_d_UTCTime_1_ there's no difference. I don't know why
@@ -110,7 +110,7 @@ handler transforming the data 'into CF'.
 
 Here are the file's variables I think are 'independent variables':
 
--------------------------------------------------------------------------------
+----
     Float64 Data_1HZ_Time_d_UTCTime_1[Data_1HZ_Time_d_UTCTime_1 = 81208];
     Float64 Data_1HZ_DS_UTCTime_1[Data_1HZ_DS_UTCTime_1 = 81208];
 
@@ -129,11 +129,11 @@ Here are the file's variables I think are 'independent variables':
 
     Float64 Data_4s_Geolocation_d_lat[Data_4s_Time_d_UTCTime_4s = 20302];
     Float64 Data_4s_Geolocation_d_lon[Data_4s_Time_d_UTCTime_4s = 20302];
--------------------------------------------------------------------------------
+----
 
 Here are all of the variables that have only one dimension:
 
----------------------------------------------------------------------------------------------------
+----
     Float32 Data_1HZ_Angle_r_beam_azimuth[Data_1HZ_Time_d_UTCTime_1 = 81208];
     Float32 Data_1HZ_Angle_r_beam_coelev[Data_1HZ_Time_d_UTCTime_1 = 81208];
     Float32 Data_1HZ_Angle_r_pad_angle[Data_1HZ_Time_d_UTCTime_1 = 81208];
@@ -198,12 +198,12 @@ Here are all of the variables that have only one dimension:
     Int16 Data_4s_Time_peaktp_flg[Data_4s_Time_d_UTCTime_4s = 20302];
     Int16 Data_4s_Time_pl_timing_flg[Data_4s_Time_d_UTCTime_4s = 20302];
     Int16 Data_4s_Time_shot_time_flg[Data_4s_Time_d_UTCTime_4s = 20302];
----------------------------------------------------------------------------------------------------
+----
 
 And here are the dependent variables with two independent
 variables/dimensions:
 
-------------------------------------------------------------------------------------------------------------------------------
+----
     Float32 Data_1HZ_OD532CloudLayer_r_MRg_cldtop_pres[Data_1HZ_Time_d_UTCTime_1 = 81208][Data_1HZ_DS_Cloud_Layer_10 = 10];
     Float32 Data_1HZ_OD532CloudLayer_r_cld1_bot[Data_1HZ_Time_d_UTCTime_1 = 81208][Data_1HZ_DS_Cloud_Layer_10 = 10];
     Int16 Data_1HZ_OD532CloudLayer_i_cld1_qf[Data_1HZ_Time_d_UTCTime_1 = 81208][Data_1HZ_DS_Cloud_Layer_10 = 10];
@@ -251,7 +251,7 @@ variables/dimensions:
     Float32 Data_4s_Aerosol1064_OD_r_Aer_ir_OD[Data_4s_Time_d_UTCTime_4s = 20302][Data_4s_DS_Cloud_Layer_2 = 2];
     Float32 Data_4s_Aerosol1064_OD_r_Aer_ir_bot_temp[Data_4s_Time_d_UTCTime_4s = 20302][Data_4s_DS_Cloud_Layer_2 = 2];
     Float32 Data_4s_Aerosol1064_OD_r_Aer_ir_bot[Data_4s_Time_d_UTCTime_4s = 20302][Data_4s_DS_Cloud_Layer_2 = 2];
-------------------------------------------------------------------------------------------------------------------------------
+----
 
 === Resources
 

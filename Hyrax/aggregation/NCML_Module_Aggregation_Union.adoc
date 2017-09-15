@@ -9,13 +9,13 @@
 The current trunk version of the module supports the union aggregation
 element of the form:
 
-----------------------------------
+----
 <netcdf>
   <aggregation type="union">
       <!-- some <netcdf> nodes -->
   </aggregation>
 </netcdf>
-----------------------------------
+----
 
 == Functionality
 
@@ -62,7 +62,7 @@ For example, the following examples show how to "shadow" a variable
 contained in an aggregation by specifying it in the parent dataset prior
 to the aggregation:
 
----------------------------------------------------------------------------------------------------
+----
 <netcdf>
   
   <variable name="Foo" type="string">
@@ -86,7 +86,7 @@ to the aggregation:
   </aggregation>
 
 </netcdf>
----------------------------------------------------------------------------------------------------
+----
 
 The values make it clear what the output will be. The variable "Foo" in
 the first child will be skipped since the parent dataset already
@@ -101,7 +101,7 @@ The following example shows how to modify the "winning" variable in a
 union aggregation by specifying the attribute change AFTER the
 aggregation element:
 
--------------------------------------------------------------------------------------------------------------------------------------------------
+----
 <netcdf>
   <aggregation type="union">
     
@@ -127,7 +127,7 @@ aggregation element:
   </variable>
   
 </netcdf>
--------------------------------------------------------------------------------------------------------------------------------------------------
+----
 
 In this case, the output dataset will have the variable Foo with a value
 of "I am the winning Foo!", but its metadata will have been modified by
@@ -159,7 +159,7 @@ this time.
 
 Here is an example of a valid use of dimension in the current module:
 
-------------------------------------------------------------------------------------------------------------------------------
+----
 
 <netcdf xmlns="http://www.unidata.ucar.edu/namespaces/netcdf/ncml-2.2">
     
@@ -210,11 +210,11 @@ Here is an example of a valid use of dimension in the current module:
   </aggregation>
 
 </netcdf>
-------------------------------------------------------------------------------------------------------------------------------
+----
 
 Here is an example that will produce a dimension mismatch parse error:
 
-----------------------------------------------------------------------------------------------------------------------------------------
+----
 <netcdf xmlns="http://www.unidata.ucar.edu/namespaces/netcdf/ncml-2.2">
     
   <!-- Test that a union with dimensions in the virtual datasets will ERROR if the child set dimensions DO NOT match as they need to -->
@@ -257,7 +257,7 @@ Here is an example that will produce a dimension mismatch parse error:
   </aggregation>
 
 </netcdf>
-----------------------------------------------------------------------------------------------------------------------------------------
+----
 
 Note that the failure is that the second dataset had an extra "lat"
 sample added to it, but the prior dataset did not. Again, these

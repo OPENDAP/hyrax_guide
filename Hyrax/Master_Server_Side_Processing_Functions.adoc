@@ -40,9 +40,9 @@ All of these functions can be composed. Thus, the values from the
 geogrid() function can be used by the linear_scale() function. Here's an
 example:
 
----------------------------------------------------------------------------------------------------------------------------------------------
+----
  linear_scale(geogrid(SST, 45, -82, 40, -78))  // spaces added for clarity; in reality spaces in server function arg lists are a syntax error
----------------------------------------------------------------------------------------------------------------------------------------------
+----
 
 This first subsets the variable _SST_, so only those values in latitude
 45 to 40 and longitude -82 to -78 are returned; it then passes those
@@ -68,11 +68,11 @@ coming two years.
 The geogrid() function applies a constraint given in latitude and
 longitude to a DAP Grid variable. The arguments to the function are...
 
------------------------------------------------------------------------------------------------
+----
 
 geogrid(grid variable, top, left, bottom, right[, expression ...])
 geogrid(grid variable, latitude map, longitude map, top, left, bottom, right[, expression ...])
------------------------------------------------------------------------------------------------
+----
 
 The _grid variable_ is the data to be sub-sampled and must be a Grid.
 The optional latitude and longitude maps must be Maps in the named Grid
@@ -100,10 +100,10 @@ well.
 The geogrid() function applies a constraint given in latitude and
 longitude to a DAP Grid variable. The arguments to the function are:
 
---------------------------------------------------------------
+----
 
  geogrid(variable, top, left, bottom, right[, expression ...])
---------------------------------------------------------------
+----
 
 The _variable_ is the data to be sub-sampled. The Top, left, bottom,
 right are the latitude and longitude coordinates of the northwesterm and
@@ -325,13 +325,13 @@ _$Byte_ to build an array of constants:
 __bind_shape("[4][4]",bind_name("bob",$Byte(0:2,3,4,5,2,3,4,5,2,3,4,5,2,3,4,5)))__.
 The result, in a browser, is:
 
---------------------------------------------- 
+---- 
 Dataset: function_result_coads_climatology.nc
 bob[0], 2, 3, 4, 5
 bob[1], 2, 3, 4, 5
 bob[2], 2, 3, 4, 5
 bob[3], 2, 3, 4, 5
----------------------------------------------
+----
 
 === Unstructured Grid Subsetting
 

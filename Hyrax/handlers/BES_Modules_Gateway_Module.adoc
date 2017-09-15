@@ -36,10 +36,10 @@ Gateway.Whitelist::
 
 Example:
 
--------------------------------------------------
+----
 Gateway.Whitelist=http://test.opendap.org/opendap
 Gateway.Whitelist+=http://opendap.rpi.edu/opendap
--------------------------------------------------
+----
 
 === Recognizing Responses
 
@@ -54,11 +54,11 @@ Gateway.MimeTypes::
 
 These are the default types:
 
------------------------------------------
+----
 Gateway.MimeTypes=nc:application/x-netcdf
 Gateway.MimeTypes+=h4:application/x-hdf
 Gateway.MimeTypes+=h5:application/x-hdf5
------------------------------------------
+----
 
 === Network Proxies and Performance Optimizations
 
@@ -89,12 +89,12 @@ Gateway.NoProxy::
   the files given that they are on the host already). This parameter was
   added in version 1.1.0.
 
------------------------
+----
 Gateway.ProxyProtocol= 
 Gateway.ProxyHost=
 Gateway.ProxyPort=
 Gateway.NoProxy=
------------------------
+----
 
 == Using Squid
 
@@ -120,19 +120,19 @@ telling to cache to behave differently
 
 In the squid configuration file, find the lines:
 
----------------------------------------------
+----
 # refresh patterns (squid-recommended)
 refresh_pattern ^ftp:       1440    20% 10080
 refresh_pattern ^gopher:    1440    0%  1440
 refresh_pattern -i (/cgi-bin/|\?) 0 0%  0
 refresh_pattern .       0   20% 4320
----------------------------------------------
+----
 
 And change the third refresh_pattern to read:
 
--------------------------------------------------
+----
 refresh_pattern -i (/cgi-bin/|\?) 1440  20% 10080
--------------------------------------------------
+----
 
 === How can I tell if a service sends Cache Control headers?
 
@@ -153,12 +153,12 @@ size to something big (16GB) and Maximum object size to 256M. Click
 
 Now in the _gateway.conf_ file, set the proxy parameters like so:
 
-----------------------------------
+----
 Gateway.ProxyProtocol=http
 Gateway.ProxyHost=localhost
 Gateway.ProxyPort=3218
 Gateway.NoProxy=http://localhost.*
-----------------------------------
+----
 
 ...assuming you're running both Squid and Hyrax on the same host.
 

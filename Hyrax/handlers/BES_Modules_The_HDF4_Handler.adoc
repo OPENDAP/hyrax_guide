@@ -125,23 +125,23 @@ Here are two basic commands for deleting and adding RPMs:
 1) Download and install the latest "libdap", "BES", and "General
 purpose handlers (aka dap-server)" RPMs first from
 
------------------------------------
+----
   http://opendap.org/download/hyrax
------------------------------------
+----
 
 3) Download and install the latest "hdf4_handler" RPM from
 
------------------------------------
+----
   http://opendap.org/download/hyrax
------------------------------------
+----
 
 4) (Optional) Configure the handler after reading the section 3 below.
 
 5) (Re)start the BES server.
 
-----------------------------
+----
   %/usr/bin/besctl (re)start
-----------------------------
+----
 
 ==== Build With the HDF-EOS2 Library If You Plan to Support HDF-EOS2 Products
 
@@ -151,9 +151,9 @@ build the handler by specifying
 --with-hdfeos2=/path/to/hdfeos2-install-prefix during the configuration
 stage like below:
 
----------------------------------------------------------------
+----
   ./configure --with-hdf4=/usr/local --with-hdfeos2=/usr/local/
----------------------------------------------------------------
+----
 
 Although the HDF-EOS2 library is not required to clean dataset names and
 attributes that CF conventions require, visualization will fail for most
@@ -304,7 +304,7 @@ less than or equal to 10 records.
 For example, the DAS output of TRMM data 1B21 will show vdata as an
 attribute:
 
----------------------------------------------------------------------------------------
+----
   DATA_GRANULE_PR_CAL_COEF {
        String hdf4_vd_desc "This is an HDF4 Vdata.";
        Float32 Vdata_field_transCoef -0.5199999809;
@@ -314,7 +314,7 @@ attribute:
        0.3790999949, 0.000000000, -102.7460022, 0.000000000, 24.00000000, 0.000000000, 
        226.0000000;
    }
----------------------------------------------------------------------------------------
+----
 
 ==== H4.EnableCERESMERRAShortName (true)
 
@@ -324,20 +324,20 @@ output. This key only affects NASA CERES and MERRA products we support.
 
 For example, the DAS output for Region_Number dataset
 
------------------------------------------------------------------------------------
+----
     Region_Number {
         String coordinates "Colatitude Longitude";
         String fullpath "/Monthly Hourly Averages/Time And Position/Region Number";
    }
------------------------------------------------------------------------------------
+----
 
 becomes
 
---------------------------------------------------------------------------------------------------------------------------------------
+----
    Monthly_Hourly_Averages_Time_And_Position_Region_Number {
         String coordinates "Monthly_Hourly_Averages_Time_And_Position_Colatitude Monthly_Hourly_Averages_Time_And_Position_Longitude";
    }
---------------------------------------------------------------------------------------------------------------------------------------
+----
 
 in CER_AVG_Aqua-FM3-MODIS_Edition2B_007005.200510.hdf.
 
@@ -361,9 +361,9 @@ of small vdatas will be also turned off from the DAS output if this key
 is turned off, not the values of vdatas. If a vdata doesn't have any
 attribute or field attribute, the description
 
-----------------------------------------------------
+----
        String hdf4_vd_desc "This is an HDF4 Vdata.";
-----------------------------------------------------
+----
 
 will not appear in the attribute for that vdata although the key is
 true. The attribute container of the vdata will always appear regardless
@@ -386,15 +386,15 @@ very small.
 
 For example, when the handler serves...
 
-------------------------------------------------------
+----
        "MOD05_L2.A2010001.0000.005.2010005211557.hdf" 
-------------------------------------------------------
+----
 
 ...file, it will first look for a geo-location file
 
----------------------------------------------------
+----
        "MOD03.A2010001.0000.005.2010003235220.hdf" 
----------------------------------------------------
+----
 
 ...first from the SAME DIRECTORY where MOD05_L2 file exists.
 

@@ -162,13 +162,13 @@ The response from the request will be a CSV table listing the dependent
 variables followed by the values of the dependent vars. For example, the
 response would typically look like...
 
-----------------------------------------------------------------------------
+----
 Latitude, Longitude, Scan_Start_Time, Cloud_Mask_QA, Mass_Concentration_Land
 45, -120, 2010/10/01, 14, 127
 .
 .
 .
-----------------------------------------------------------------------------
+----
 
 ...where each granule would have 203 * 135 (25,375) rows (one for each cell
 along and across the swath) maximum; fewer given space/time constraints.
@@ -283,7 +283,7 @@ __[Cell_Along_Swath = 203][Cell_Across_Swath = 135]__.
 Of those 71, 27 (including Lat, ...) have only the dimensions
 __[Cell_Along_Swath = 203][Cell_Across_Swath = 135]__. They are:
 
--------------------------------------------------------------------------------------------------------------
+----
     Int16 Aerosol_Type_Land[Cell_Along_Swath = 203][Cell_Across_Swath = 135];
     Int16 Angstrom_Exponent_Land[Cell_Along_Swath = 203][Cell_Across_Swath = 135];
     Int16 Cloud_Fraction_Land[Cell_Along_Swath = 203][Cell_Across_Swath = 135];
@@ -311,12 +311,12 @@ __[Cell_Along_Swath = 203][Cell_Across_Swath = 135]__. They are:
     Int16 Sensor_Zenith[Cell_Along_Swath = 203][Cell_Across_Swath = 135];
     Int16 Solar_Azimuth[Cell_Along_Swath = 203][Cell_Across_Swath = 135];
     Int16 Solar_Zenith[Cell_Along_Swath = 203][Cell_Across_Swath = 135];
--------------------------------------------------------------------------------------------------------------
+----
 
 The other ones, which have other dimensions, are (sorted and grouped by
 the additional dimension, which always comes first):
 
-----------------------------------------------------------------------------------------------------------------------------------
+----
     Int16 Mean_Reflectance_Land[MODIS_Band_Land = 7][Cell_Along_Swath = 203][Cell_Across_Swath = 135];
     Int16 STD_Reflectance_Land[MODIS_Band_Land = 7][Cell_Along_Swath = 203][Cell_Across_Swath = 135];
     Int16 Asymmetry_Factor_Average_Ocean[MODIS_Band_Ocean = 7][Cell_Along_Swath = 203][Cell_Across_Swath = 135];
@@ -369,7 +369,7 @@ the additional dimension, which always comes first):
     Int16 Optical_Depth_Ratio_Small_Ocean_0_55micron[Solution_Ocean = 2][Cell_Along_Swath = 203][Cell_Across_Swath = 135];
     Int16 Solution_Index_Ocean_Large[Solution_Ocean = 2][Cell_Along_Swath = 203][Cell_Across_Swath = 135];
     Int16 Solution_Index_Ocean_Small[Solution_Ocean = 2][Cell_Along_Swath = 203][Cell_Across_Swath = 135];
-----------------------------------------------------------------------------------------------------------------------------------
+----
 
 Here are those 'additional dimensions' along with their sizes:
 
@@ -385,7 +385,7 @@ Here are those 'additional dimensions' along with their sizes:
 
 Here are the values of those dimensions - these are like DAP2 Grid Maps:
 
-------------------------------------------------------
+----
 Dataset: MOD04_L2.A2015021.0020.051.NRT.hdf
 MODIS_Band_Land, 470, 555, 659, 865, 1240, 1640, 2130
 MODIS_Band_Ocean, 470, 555, 659, 865, 1240, 1640, 2130
@@ -395,7 +395,7 @@ Solution_3_Land, 470, 659, 2130
 Solution_Ocean, 1, 2
 Solution_Index, 1, 2, 3, 4, 5, 6, 7, 8, 9
 Num_DeepBlue_Wavelengths, 0, 0, 0
-------------------------------------------------------
+----
 
 === Technical Approaches to the Problem
 

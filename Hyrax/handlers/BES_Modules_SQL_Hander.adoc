@@ -95,7 +95,7 @@ might not actually be needed 9/9/12).
 
 What the configuration files look like on OSX (This file likely will not change. odbcinst.ini):
 
------------------------------------------------------------
+----
 [ODBC Drivers]
 MySQL ODBC 5.1 Driver = Installed
 psqlODBC              = Installed
@@ -110,12 +110,12 @@ Driver      = /Library/PostgreSQL/psqlODBC/lib/psqlodbcw.so
  
 [MySQL ODBC 5.1 Driver]
 Driver = /usr/local/lib/libmyodbc5.so
------------------------------------------------------------
+----
 
 This file holds information about the database name and the Data Source
 Name (DSN). Here it's creatively named 'test'. odbc.ini:
 
------------------------------------
+----
 [ODBC Data Sources]
 data_source_name = test
  
@@ -136,7 +136,7 @@ Password    =
 Port        = 3306
 DATABASE    = test
 Socket      = /tmp/mysql.sock
------------------------------------
+----
 
 === Configuring the Handler
 
@@ -161,9 +161,9 @@ NEXT_ROW::
 
 The default for the handler is to test for and report all errors:
 
-------------------------
+----
 SQL.CheckPoint=1,2,3,4,5
-------------------------
+----
 
 ==== Configuring Datasets
 
@@ -198,15 +198,15 @@ other::
 Each of the sections is denoted by starting a line in the dataset file
 with its name in square brackets such as:
 
----------
+----
 [section]
----------
+----
 
 or
 
---------
+----
 [select]
---------
+----
 
 ==== Information in the _section_ Part of the Dataset File
 
@@ -245,10 +245,10 @@ SELECT statement. Each column name has to be unique. You can use aliases
 for two columns from different database tables that are the same. For
 example, you could define aliases like these:
 
-------------------------
+----
 table1.theColumn as col1
 table2.theColumn as col2
-------------------------
+----
 
 and then use _col1,col2_ in the select part of the dataset file
 
@@ -279,7 +279,7 @@ variable, use _$variable$_ wherever you would otherwise use a literal.
 
 ===== Some Example Dataset Files
 
-----------------------------------------------------------
+----
 [section]
 #  Required.
 api=odbc
@@ -300,4 +300,4 @@ wind_08_2010
 # this is optional constraint which will be applied to ALL
 # the requests and can be used to limit the shared data.
 id<100
-----------------------------------------------------------
+----

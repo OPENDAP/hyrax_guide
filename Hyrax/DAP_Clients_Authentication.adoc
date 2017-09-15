@@ -152,7 +152,7 @@ I was not able to use command line _curl_ to retrieve Shibboleth authentication 
 
 Analysis of the HTTP conversation between the idp.testshib.org  server and _curl_ shows that curl correctly follows the series of 302 redirects issued to it, first by the Apache service bound to the Hyrax server and then from the idp.testshib.org server. In every request to the idp.testshib.org server the _curl_ client correctly offers the credentials via the HTTP Authorization header:
 
------
+----
 0000: GET /idp/Authn/UserPassword HTTP/1.1
 0026: Authorization: Basic bXlzZWxmOm15c2VsZg==
 0051: User-Agent: curl/7.21.4 (universal-apple-darwin11.0) libcurl/7.2
@@ -163,7 +163,7 @@ Analysis of the HTTP conversation between the idp.testshib.org  server and _curl
 0115: 3ea8beb6744fab64fc406c358f; JSESSIONID=5A1731EDE00613B13803968CF
 0155: AF06284
 015e: 
------
+----
 
 But the Shibboleth system doesn't respond to them. This may be a simple configuration issue on the Shibboleth end, or it could be that the Shibboleth protocol specifically forbids accepting credentials via HTTP Authorization headers.
 

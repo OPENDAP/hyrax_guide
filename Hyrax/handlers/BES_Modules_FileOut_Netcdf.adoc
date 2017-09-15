@@ -48,28 +48,28 @@ this parameter is the /tmp directory. You should change this to a
 location where there is plenty of disk space/quota that is owned by the
 user set to run the BES.
 
------------------
+----
 FONc.Tempdir=/tmp
------------------
+----
 
 Other BES keys that can be used to control the handler's behavior:
 
-------------------------
+----
 FONc.UseCompression=true
-------------------------
+----
 
 Use compression when making netCDF4 files; true by default
 
--------------------
+----
 FONc.ChunkSize=4096
--------------------
+----
 
 The default chunk size when making netCDF4 files, in KBytes (4k by
 default)
 
-----------------------
+----
 FONc.ClassicModel=true
-----------------------
+----
 
 When making a netCDF4 file, use only the 'classic' netCDF data model;
 true by default.
@@ -83,7 +83,7 @@ If not using the OLFS to serve your data, for example if using the
 bescmdln, you would run a command file that would look something like
 this:
 
---------------------------------------------------------------------------
+----
 <?xml version="1.0" encoding="UTF-8"?>
 <request reqID="some_unique_value" >
     <setContext name="dap_format">dap2</setContext>
@@ -93,4 +93,4 @@ this:
     </define>
     <get type="dods" definition="d" returnAs="netcdf"/>
 </request>
---------------------------------------------------------------------------
+----

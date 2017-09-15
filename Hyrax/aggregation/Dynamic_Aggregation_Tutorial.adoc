@@ -10,7 +10,7 @@ Dynamic aggregation is achieved through the use of the _scan_ element.
 
 The NcML-2.2 _scan_ element schema:
 
----------------------------------------------------------------------
+----
 <xsd:element name="scan" minOccurs="0" maxOccurs="unbounded">
   <xsd:complexType>
     <xsd:attribute name="location" type="xsd:string" use="required"/>
@@ -22,7 +22,7 @@ The NcML-2.2 _scan_ element schema:
     <xsd:attribute name="enhance" type="xsd:string"/>
   </xsd:complexType>
 </xsd:element>
----------------------------------------------------------------------
+----
 
 This document discusses the use and significance of _scan_ in creating
 dynamically aggregated datasets.
@@ -47,9 +47,9 @@ member datasets are in "$\{BES_DATA_ROOT}/data/hdf4/myAggDatasets", then
 the location in the NcML file for the aggregation data directory would
 be...
 
--------------------------------------------
+----
 <scan location="data/hdf4/myAggDatasets" />
--------------------------------------------
+----
 
 ...which specifies the data directory relative to the BES data root as
 required.
@@ -57,9 +57,9 @@ required.
 Again, for security reasons, the data is always searched under the
 BES data root. Trying to specify an absolute filesystem path, such as...
 
------------------------------------------
+----
 <scan location="/usr/local/share/data" />
------------------------------------------
+----
 
 ...will _NOT_ work. This directory will also be assumed to be a
 subdirectory of the $\{BES_DATA_ROOT}, regardless of the preceding "/"
@@ -74,7 +74,7 @@ aggregation data.
 
 Here's a simple example:
 
-----------------------------------------------------------------------------
+----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf title="Example of joinNew Grid aggregation using the scan element.">
  
@@ -84,29 +84,29 @@ Here's a simple example:
  </aggregation> 
  
 </netcdf>
-----------------------------------------------------------------------------
+----
 
 Assuming that the specified location "data/ncml/agg/grids" contains no
 subdirectories, this NcML will return all files in that directory that
 end in ".hdf" in alphanumerical order. In the case of our installed
 example data, there are four HDF4 files in that directory:
 
--------------------------------------
+----
 data/ncml/agg/grids/f97182070958.hdf
 data/ncml/agg/grids/f97182183448.hdf
 data/ncml/agg/grids/f97183065853.hdf
 data/ncml/agg/grids/f97183182355.hdf 
--------------------------------------
+----
 
 These will be included in alphanumerical order, so the scan element will
 in effect be equivalent to the following list of <netcdf> elements:
 
------------------------------------------------------------
+----
 <netcdf location="data/ncml/agg/grids/f97182070958.hdf"/> 
 <netcdf location="data/ncml/agg/grids/f97182183448.hdf"/> 
 <netcdf location="data/ncml/agg/grids/f97183065853.hdf"/>  
 <netcdf location="data/ncml/agg/grids/f97183182355.hdf"/> 
------------------------------------------------------------
+----
 
 By default, scan will search subdirectories, which is why we mentioned
 "grids has no subdirectories". We discuss this in the next section.
@@ -121,7 +121,7 @@ as to any regular files in the base directory.
 For example, continuing our previous example, but giving a higher level
 location:
 
------------------------------------------------------------------
+----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf title="joinNew Grid aggregation using the scan element.">
   
@@ -131,25 +131,25 @@ location:
  </aggregation> 
  
 </netcdf>
------------------------------------------------------------------
+----
 
 Assuming that only the "grids" subdir of "/data/ncml/agg" contains HDF4
 files with that extension, the same aggregation as prior will be
 created, in other words, an aggregation isomorphic to:
 
------------------------------------------------------------
+----
 <netcdf location="data/ncml/agg/grids/f97182070958.hdf"/> 
 <netcdf location="data/ncml/agg/grids/f97182183448.hdf"/> 
 <netcdf location="data/ncml/agg/grids/f97183065853.hdf"/>  
 <netcdf location="data/ncml/agg/grids/f97183182355.hdf"/> 
------------------------------------------------------------
+----
 
 The _scan@subdirs_ attribute is much for useful for turning off the
 default recursion. For example, if recursion is *NOT* desired, but only
 files with the given suffix in the given directory are required, the
 following will do that:
 
------------------------------------------------------------------------
+----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf title="joinNew Grid aggregation using the scan element.">
  
@@ -158,7 +158,7 @@ following will do that:
    <scan location="data/ncml/agg/grids" suffix=".hdf" subdirs="false"/>
  </aggregation> 
 </pre>
------------------------------------------------------------------------
+----
 
 === OlderThan Criterion
 
@@ -183,7 +183,7 @@ For example, if we are following our previous example, but we suspect a
 new HDF file may be written at any time and usually takes 5 minutes to
 do so, we might use the following NcML:
 
---------------------------------------------------------------------------------------------
+----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf title="joinNew Grid aggregation using the scan element.">
  
@@ -193,7 +193,7 @@ do so, we might use the following NcML:
  </aggregation>
 
 </netcdf>
---------------------------------------------------------------------------------------------
+----
 
 
 Assuming the file will always be written withing 10 minutes, this files
@@ -234,7 +234,7 @@ Consider the following, basic examples:
 Here's an example where we use a subdirectory search to find ".hdf"
 files in all subdirectories named "grids":
 
------------------------------------------------------------------------------------------
+----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf title="Example of joinNew Grid aggregation using the scan element with a regexp">
  
@@ -247,7 +247,7 @@ files in all subdirectories named "grids":
       />
  </aggregation> 
 </netcdf>
------------------------------------------------------------------------------------------
+----
 
 The regular expression here is "^.*/grids/.+\/hdf". Let's pull it apart
 quickly (this is not intended to be a regular expression tutorial):
@@ -287,7 +287,7 @@ files that start with "f" we have seen in our examples. We still want
 just the files starting with "f" to filter out the others. Here's an
 example for that:
 
------------------------------------------------------------------------------------------
+----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf title="Example of joinNew Grid aggregation using the scan element with a regexp">
  
@@ -300,7 +300,7 @@ example for that:
       />
  </aggregation> 
 </netcdf>
------------------------------------------------------------------------------------------
+----
 
 Here we match all pathnames ending in "grids" and files that start with
 the letter "f" and end with ".hdf" as we desire.
@@ -326,16 +326,16 @@ that have suffix ".nc".
 
 Here's the list of files (relative to the BES data root dir):
 
----------------------------------------------
+----
 data/ncml/agg/dated/CG2006158_120000h_usfc.nc
 data/ncml/agg/dated/CG2006158_130000h_usfc.nc
 data/ncml/agg/dated/CG2006158_140000h_usfc.nc
 data/ncml/agg/dated/CG2006158_150000h_usfc.nc
----------------------------------------------
+----
 
 Here's the NcML:
 
---------------------------------------------------------------------------------------
+----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf title="Test of joinNew aggregation using the scan element and dateFormatMark">
   
@@ -351,7 +351,7 @@ Here's the NcML:
  </aggregation> 
 
 </netcdf>
---------------------------------------------------------------------------------------
+----
 
 So here we joinNew on the new outer dimension __fileTime__. The new
 coordinate variable **fileTime**[__fileTime__] for this dimension will
@@ -431,17 +431,17 @@ If we project out the ASCII dods response for the new coordinate
 variable, we see all of the parsed timestamps and that they are in
 chronological order:
 
----------------------------------------------------------
+----
 String fileTime[fileTime = 4] = {"2006-06-07T12:00:00Z", 
 "2006-06-07T13:00:00Z",
  "2006-06-07T14:00:00Z", 
 "2006-06-07T15:00:00Z"};
----------------------------------------------------------
+----
 
 We also check the resulting DDS to see that it is added as a map vector
 to the Grid as well:
 
---------------------------------------------------------------------------------
+----
 Dataset {
     Grid {
       Array:
@@ -456,11 +456,11 @@ Dataset {
     } CGusfc;
     String fileTime[fileTime = 4];
 } joinNew_scan_dfm.ncml;
---------------------------------------------------------------------------------
+----
 
 Finally, we look at the DAS with global metadata removed:
 
-------------------------------------------------------------------------
+----
 Attributes {
   CGusfc {
         Float32 _FillValue -1.000000033e+32;
@@ -505,7 +505,7 @@ Attributes {
 --->     String _CoordinateAxisType "Time";
     }
 }
-------------------------------------------------------------------------
+----
 
 We see that the aggregation has also automatically added the
 "_CoordinateAxisType" attribute and set it to "Time" (denoted by the

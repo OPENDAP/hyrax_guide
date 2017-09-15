@@ -47,9 +47,9 @@ this parameter is the /tmp directory. You should change this to a
 location where there is plenty of disk space/quota that is owned by the
 user set to run the BES._
 
------------------
+----
 FONg.Tempdir=/tmp
------------------
+----
 
 The next time the BES is started it will load this module. And, once
 installed, the OLFS will know that it can use this module to transform
@@ -61,7 +61,7 @@ If not using the OLFS to serve your data, for example if using the
 bescmdln, you would run a command file that would look something like
 this:
 
---------------------------------------------------------------------------------------
+----
 <?xml version="1.0" encoding="UTF-8"?>
 <request reqID="some_unique_value" >
     <setContext name="dap_format">dap2</setContext>
@@ -71,7 +71,7 @@ this:
     </define>
     <get type="dods" definition="d" returnAs="tiff"/>
 </request>
---------------------------------------------------------------------------------------
+----
 
 In addition to setting the directory where the response file is
 initially built, you can use the _FONg.default_gcs_ configuration

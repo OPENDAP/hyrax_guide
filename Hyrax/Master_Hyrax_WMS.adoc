@@ -51,9 +51,9 @@ image:../images/ToolsUI-GridView.png[]
 
 ToolsUI Grid View
 
-------------------------------------------------------------------------------------------
+----
 Note that ToolsUI supports opening both local files and remote (http accessible) datasets.
-------------------------------------------------------------------------------------------
+----
 
 == WMS Installation (suggested)
 
@@ -112,7 +112,7 @@ This configuration stipulates that access to the _ncWMS2/admin_ pages
 must be over a secure transport and that there will be no access without
 authentication  in the *`manager`* role:
 
-------------------------------------------------------------------------------
+----
 
 <!-- Define a Security Constraint on the Admin command and user interfaces -->
 <security-constraint>
@@ -130,7 +130,7 @@ authentication  in the *`manager`* role:
     </user-data-constraint>
 </security-constraint>
 
-------------------------------------------------------------------------------
+----
 
 .Your choices
 
@@ -236,13 +236,13 @@ part of ncWMS.
 
 In the first section...
 
---------------------------------------------------------------------------------------
+----
 
 <WebServiceHandler className="opendap.viewers.NcWmsService" serviceId="ncWms" >
     <applicationName>Web Mapping Service</applicationName>
     <NcWmsService href="/ncWMS2/wms" base="/ncWMS2/wms" ncWmsDynamicServiceId="lds" />
 </WebServiceHandler>
---------------------------------------------------------------------------------------
+----
 
 Edit the _NcWmsService_ element so that...
 
@@ -288,7 +288,7 @@ If you are running Hyrax with Apache linked to Tomcat (a fairly simple
 configuration described here), then add the following to the
 _httpd.conf_ file:
 
------------------------------------------------------------------------------
+----
 
 # This is needed to configure ncWMS2 so that it will work when               
 # users access Hyrax using Apache (port 80). Because Godiva was             
@@ -296,7 +296,7 @@ _httpd.conf_ file:
 # Godiva WMS service works when Hyrax is accesed over port 8080             
 # too.                                                                      
 ProxyPass /ncWMS2 ajp://localhost:8009/ncWMS2
------------------------------------------------------------------------------
+----
 
 This will form the linkage needed to access the Godiva interface when
 people access your server using Apache. Note that by using port _8080_
@@ -361,10 +361,10 @@ We found and tested these two ways to solve it:
 1) Create the global System Preference directory and set the owner to
 the Tomcat user:
 
----------------------------------------------------- 
+---- 
    sudo mkdir -P /etc/.java/.systemPrefs
    sudo chown -R tomcat-user /etc/.java/.systemPrefs
-----------------------------------------------------
+----
 
 This could also be accomplished by changing the group ownership to the
 tomcat-group and setting the group read/write flags.
@@ -376,16 +376,16 @@ directory.
 
 Create the directory:
 
------------------------------------------------------------------
+----
 
    mkdir -P /home/tomcat-user/.java/.systemPrefs
    sudo chown -R tomcat-user /home/tomcat-user/.java/.systemPrefs
------------------------------------------------------------------
+----
 
 Then, in each shell that launches Tomcat...
 
---------------------------------------------------------------------------
+----
 
    export JAVA_OPTS="-Djava.util.prefs.systemRoot=/home/tomcat-user/.java"
    $CATALINA_HOME/bin/startup.sh
---------------------------------------------------------------------------
+----

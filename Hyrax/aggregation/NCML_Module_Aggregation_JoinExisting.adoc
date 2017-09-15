@@ -57,7 +57,7 @@ http://test.opendap.org:8090/opendap/coverage/mday/
 Assume we have some number of granule datasets with a DDS the same as
 the following (modulo the dataset name):
 
------------------------------------------------------------------------
+----
 Dataset {
     Grid {
       Array:
@@ -69,7 +69,7 @@ Dataset {
         Float64 lon[lon = 8192];
     } PHssta;
 } PH2006001_2006031_ssta.nc;
------------------------------------------------------------------------
+----
 
 == Explicit Listing of Granules
 
@@ -78,7 +78,7 @@ dimension we may join along (it is an error to specify an inner). Given
 some number of granules with this same shape, consider the following
 explicit joinExisting aggregation:
 
------------------------------------------------------------------------------
+----
 <?xml version="1.0" encoding="UTF-8"?>
  
 <netcdf title="joinExisting test on netcdf Grid granules">
@@ -91,12 +91,12 @@ explicit joinExisting aggregation:
   </aggregation>
  
 </netcdf>
------------------------------------------------------------------------------
+----
 
 Here's the same aggregation using the _scan_ element instead of
 explicitly listing each file:
 
----------------------------------------------------------------------
+----
 <?xml version="1.0" encoding="UTF-8"?>
  
 <netcdf title="joinExisting test on netcdf Grid granules using scan">
@@ -106,7 +106,7 @@ explicitly listing each file:
   </aggregation>
  
 </netcdf>
----------------------------------------------------------------------
+----
 
 First, note that the _ncoords_ attribute should be specified on the
 individual granules for this version of the module. In many cases the
@@ -116,7 +116,7 @@ dimension is called this will be subject to aggregation in the output.
 
 Serving this from Hyrax will result in the following DDS:
 
------------------------------------------------------------------------
+----
 Dataset {
     Grid {
       Array:
@@ -129,7 +129,7 @@ Dataset {
     } PHssta;
     Float64 time[time = 3];
 } mday_joinExist.ncml;
------------------------------------------------------------------------
+----
 
 We see that the time dimension is now of size 3 to match that we joined
 three granule datasets together.
@@ -165,7 +165,7 @@ size of the cache is limited to a maximum size of 2GB. These settings
 can be changed by modifying the `ncml.conf file`, typically located in
 `/etc/bes/modules/ncml.conf`:
 
--------------------------------------------------------------------------
+----
 #-----------------------------------------------------------------------#
 # NcML Aggregation Dimension Cache Parameters                           #
 #-----------------------------------------------------------------------#
@@ -182,7 +182,7 @@ NCML.DimensionCache.size=2000
 # Maximum number of dimension allowed in any particular dataset. 
 # If not set in this configuration the value defaults to 100.
 # NCML.DimensionCache.maxDimensions=100
--------------------------------------------------------------------------
+----
 
 The cache files are small compared to the source dataset files,
 typically less than 1kb for a dataset with a few named dimensions.
@@ -213,7 +213,7 @@ be this value, as if the datasets were each listed explicitly with this
 value of the attribute. Here's an example of using the syntactic sugar
 that results in the same exact aggregation as the previous explicit one:
 
---------------------------------------------------------------------------------
+----
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- joinExisting test on netcdf granules using scan@ncoords extension-->
 <netcdf title="joinExisting test on netcdf Grid granules using scan@ncoords"
@@ -235,11 +235,11 @@ that results in the same exact aggregation as the previous explicit one:
   </aggregation>
   
 </netcdf>
---------------------------------------------------------------------------------
+----
 
 ...which we see results in the same DDS:
 
------------------------------------------------------------------------
+----
 Dataset {
     Grid {
       Array:
@@ -252,7 +252,7 @@ Dataset {
     } PHssta;
     Float64 time[time = 3];
 } mday_joinExist.ncml;
------------------------------------------------------------------------
+----
 
 The advantage of this is that the server does not have to inspect all of
 the member granules to determine their dimensional size, which allows

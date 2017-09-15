@@ -313,7 +313,7 @@ Request::
 
 Returns::
 
-------------------------------------------------------------------------
+----
 Aggregation Interface Version: 1.1
 <?xml version="1.0" encoding="UTF-8"?>
 <response xmlns="http://xml.opendap.org/ns/bes/1.0#" reqID="[ajp-bio-…">
@@ -325,7 +325,7 @@ Aggregation Interface Version: 1.1
     <library name="libdap">3.16.0</library>
 …
 </response>
-------------------------------------------------------------------------
+----
 
 ==== Returning an Archive
 
@@ -343,14 +343,14 @@ In the OLFS repo on github, you'll see a file named
 __resources/aggregation/tests/demo/short_names/d1_netcdf3_variable_subset.txt__.
 Here's what it looks like:
 
--------------------------------------------------------------------
+----
 edamame:demo jimg$ more short_names/d1_netcdf3_variable_subset.txt 
 &operation=netcdf3
 &var=Latitude,Longitude,Optical_Depth_Land_And_Ocean
 &file=/data/modis/MOD04_L2.A2015021.0020.051.NRT.hdf
 &file=/data/modis/MOD04_L2.A2015021.0025.051.NRT.hdf
 &file=/data/modis/MOD04_L2.A2015021.0030.051.NRT.hdf
--------------------------------------------------------------------
+----
 
 This example shows how the DAP2 projection constraint can be given once
 and applied to a number of files. It's also possible to provide a unique
@@ -366,28 +366,28 @@ constraints).
 
 To send this command to the service, use _curl_ like this:
 
------------------------------------------------------------------------------------------------------------------------------------
+----
 edamame:demo jimg$ curl -X POST -d @short_names/d1_netcdf3_variable_subset.txt http://test.opendap.org/opendap/aggregation > d1.zip
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current 
                                                      Dload  Upload   Total   Spent    Left  Speed
 100  552k    0  552k  100   226   305k    124  0:00:01  0:00:01 --:--:--  305k
------------------------------------------------------------------------------------------------------------------------------------
+----
 
 The output of _curl_ is redirected to a file (__d1.zip__) and we can
 list its contents
 
------------------------------------------------
+----
 verifying that it contains the files we expect.
------------------------------------------------
+----
 
--------------------------------------------------------
+----
 edamame:demo jimg$ unzip -t d1.zip 
 Archive:  d1.zip
     testing: MOD04_L2.A2015021.0020.051.NRT.hdf.nc   OK
     testing: MOD04_L2.A2015021.0025.051.NRT.hdf.nc   OK
     testing: MOD04_L2.A2015021.0030.051.NRT.hdf.nc   OK
 No errors detected in compressed data of d1.zip.
--------------------------------------------------------
+----
 
 ==== Returning a Table
 
@@ -401,7 +401,7 @@ _&operation_ or _csv_ and also adds a _&bbox_ command, the latter
 provides a way to specify filtering based on latitude/longitude bounding
 boxes.
 
-----------------------------------------------------------
+----
 edamame:demo jimg$ more short_names/d3_csv_subset.txt 
 &operation=csv
 &var=Latitude,Longitude,Image_Optical_Depth_Land_And_Ocean
@@ -409,20 +409,20 @@ edamame:demo jimg$ more short_names/d3_csv_subset.txt
 &file=/data/modis/MOD04_L2.A2015021.0020.051.NRT.hdf
 &file=/data/modis/MOD04_L2.A2015021.0025.051.NRT.hdf
 &file=/data/modis/MOD04_L2.A2015021.0030.051.NRT.hdf
-----------------------------------------------------------
+----
 
 The command is sent using '__curl__ as before:
 
-----------------------------------------------------------------------------------------------------------------------
+----
 edamame:demo jimg$ curl -X POST -d @short_names/d3_csv_subset.txt http://test.opendap.org/opendap/aggregation > d3.csv
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100  4141    0  3870  100   271   5150    360 --:--:-- --:--:-- --:--:--  5153
-----------------------------------------------------------------------------------------------------------------------
+----
 
 However, the response is now an ASCII table:
 
--------------------------------------------------------------------------
+----
 edamame:demo jimg$ more d3.csv
 Dataset: function_result_MOD04_L2.A2015021.0020.051.NRT.hdf
 table.Latitude, table.Longitude, table.Image_Optical_Depth_Land_And_Ocean
@@ -436,7 +436,7 @@ table.Latitude, table.Longitude, table.Image_Optical_Depth_Land_And_Ocean
 49.9897, 168.659, -9999
 49.9471, 168.862, -9999
 ...
--------------------------------------------------------------------------
+----
 
 == Potential Extensions to the Service
 

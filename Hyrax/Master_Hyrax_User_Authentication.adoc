@@ -71,7 +71,7 @@ that _httpd_ can provide proxy and authentication services for Hyrax.
 In `/etc/httpd/conf.d` create a file called *hyrax.conf* . Edit the file
 and add following:
 
------------------------------------------------------- 
+---- 
 <Proxy *>
     AddDefaultCharset Off
     Order deny,allow
@@ -80,7 +80,7 @@ and add following:
  
 ProxyPass /opendap ajp://localhost:8009/opendap
 ProxyPassReverse /opendap ajp://localhost:8009/opendap
-------------------------------------------------------
+----
 
 NOTE: The ProxyPass and ProxyPassReverse should be set to local host
 unless a more complex deployment issuing attempted.
@@ -118,7 +118,7 @@ install mod_ssl_
 Next make the needed certs. Here's how to make and install a self-signed
 cert for CentOS 6:
 
-------------------------------------------------------------------
+----
 # Generate private key 
 openssl genrsa -out ca.key 2048 
  
@@ -132,7 +132,7 @@ openssl x509 -req -days 365 -in ca.csr -signkey ca.key -out ca.crt
 cp ca.crt /etc/pki/tls/certs
 cp ca.key /etc/pki/tls/private/ca.key
 cp ca.csr /etc/pki/tls/private/ca.csr
-------------------------------------------------------------------
+----
 
 Configure httpd to use the newly installed certs and restart:
 
@@ -156,9 +156,9 @@ $CATALINA_HOME/conf/server.xml
 Edit the server.xml file, and find the AJP Connector element on port
 8009. It should look something like this:
 
--------------------------------------------- 
+---- 
 <Connector port="8009" protocol="AJP/1.3" />
---------------------------------------------
+----
 
 This line may be "commented out," with <!-- on a line before and --> on
 a line after. If so, remove those lines. If you cannot find the AJP
@@ -178,7 +178,7 @@ below for an example.
 When you are finished making changes, your connector should look
 something like this:
 
-------------------------------------- 
+---- 
     <Connector 
         port="8009" 
         protocol="AJP/1.3" 
@@ -188,7 +188,7 @@ something like this:
         enableLookups="false"  
         tomcatAuthentication="false" 
         />
--------------------------------------
+----
 
  port ::
   The Connector will listen on port 8009.
@@ -243,7 +243,7 @@ define a security constraint on Hyrax inside the chain of *httpd.conf*
 files. The most simple example, that you want all users of the Hyrax
 instance to be authenticated, might look something like this:
 
------------------------------------------------------------------------------------------
+----
 
 # This is a simplified generic configuration example; see the sections below for the real
 # examples for LDAP, Shibboleth or URS/OAuth2
@@ -251,7 +251,7 @@ instance to be authenticated, might look something like this:
   AuthType YourFavoriteAuthTypeHere
   require valid-user
 </Location>
------------------------------------------------------------------------------------------
+----
 
 Where the `require valid-user` attribute requires that all accessors be
 authenticated and where _YourFavoriteAuthTypeHere_ would be something
@@ -292,7 +292,7 @@ Create and edit the file `/etc/httpd/conf.d/ldap.conf`.
 
 Add the following at the end of the file:
 
---------------------------------------------------------------------------------------------
+----
 
 # You may need to uncomment these two lines...
 # LoadModule ldap_module modules/mod_ldap.so
@@ -316,7 +316,7 @@ LogLevel debug
    Require valid-user
    Satisfy any
 </Location>
---------------------------------------------------------------------------------------------
+----
 
 Restart Apache httpd and you should now need to authenticate to access
 anything in /opendap
@@ -444,9 +444,9 @@ provides a fairly rich set of "`Require`" directives which can be used
 to control (authorize) access to resources serviced by Apache. In the
 example above the *`Require`* directive is quite simple:
 
---------------------- 
+---- 
    Require valid-user
----------------------
+----
 
 Which says (since the defined authentication mechanism for the enclosing
 *`Location`* directive is LDAP) that any LDAP authenticated user may be
@@ -464,33 +464,33 @@ Apache project].
 Grant access to anyone in the _`mathematicians`_ group in the
 organization __`example.com`__.
 
---------------------------------------------------------------
+----
 
     AuthLDAPURL ldap://ldap.forumsys.com:389/dc=example,dc=com
     AuthLDAPGroupAttributeIsDN on
     Require ldap-group ou=mathematicians,dc=example,dc=com
---------------------------------------------------------------
+----
 
 Grant access to anyone who has an LDAP attribute _`homeDirectory`_ whose
 value is __`home`__.
 
---------------------------------------------------------------
+----
 
     AuthLDAPURL ldap://ldap.forumsys.com:389/dc=example,dc=com
     Require ldap-attribute homeDirectory=home
---------------------------------------------------------------
+----
 
 Combine the previous two examples to grant access to anyone who has an
 LDAP attribute _`homeDirectory`_ whose value is _`home`_ and to anyone
 in the _`mathematicians`_ group.
 
---------------------------------------------------------------
+----
 
     AuthLDAPURL ldap://ldap.forumsys.com:389/dc=example,dc=com
     AuthLDAPGroupAttributeIsDN on
     Require ldap-group ou=mathematicians,dc=example,dc=com
     Require ldap-attribute homeDirectory=home
---------------------------------------------------------------
+----
 
 The possibilities are vast, but it is certainly the case that the
 contents of the LDAP service against which you are authenticating, and
@@ -572,20 +572,20 @@ the Module for Authentication]
 
 The Shibboleth instructions should have had you add something like this:
 
-------------------------------------- 
+---- 
 <Location /opendap>
   AuthType shibboleth
   ShibRequestSetting requireSession 1
   require valid-user
 </Location>
--------------------------------------
+----
 
 to __httpd.conf__. This will require users to authenticate to access any
 part of Hyrax which may be exactly what you want. If you want more fine
 grained control you may want use multiple `Location` elements with
 different `require` attributes. For example:
 
-------------------------------------- 
+---- 
 <Location /opendap>
   AuthType shibboleth
   ShibCompatWith24 On
@@ -598,7 +598,7 @@ different `require` attributes. For example:
   require valid-user
 </Location>
 </apache>
--------------------------------------
+----
 
 In this example the first `Location` establishes Shibboleth as the
 authentication tool for the entire _/opendap_ application path, and
@@ -677,26 +677,26 @@ With that said, to build the module for CentOS 6:
 * Make sure you have the httpd-devel and ssl-devel packages are loaded
 onto your host
 
-------------------------------------------
+----
 sudo yum install httpd-devel openssl-devel
-------------------------------------------
+----
 
 * Clone the mod_auth_urs git repo from the ECC system. You need a URS
 login for this, but you need a URS login for several other steps with
 this configuration as well
 
-----------------------------------------------------------------------------------------------------
+----
 git clone https://<username>@git.earthdata.nasa.gov/scm/aam/apache-urs-authentication-module.git urs
-----------------------------------------------------------------------------------------------------
+----
 
 * Build it using the apache extension build tool apxs in the _urs_
 directory just made by the git clone command. Note that for CentOS 6 you
 need to include the _ssl_ library and that you'll need to be root as it
 installs libraries into apache.
 
-----------------------------------------------------------------------------------------------------------------------------------------------------
+----
 apxs -i -c -n mod_auth_urs mod_auth_urs.c mod_auth_urs_cfg.c mod_auth_urs_session.c mod_auth_urs_ssl.c mod_auth_urs_http.c mod_auth_urs_json.c -lssl
-----------------------------------------------------------------------------------------------------------------------------------------------------
+----
 
 ===== Obtain URS Application Credentials
 
@@ -781,22 +781,22 @@ number of ways to generate the Authorization Code.
 
 Use a simple perl script:
 
---------------------------------------------------------------
+----
 
 perl -e 'use MIME::Base64; print encode_base64("<uid>:<pw>");'
---------------------------------------------------------------
+----
 
 Or php script:
 
------------------------------------------- 
+---- 
 php -r 'echo base64_encode("<uid>:<pw>");'
-------------------------------------------
+----
 
 Or shell script:
 
------------------------------ 
+---- 
 echo -n "<uid>:<pw>" | base64
------------------------------
+----
 
 Where _<uid>_ is the Application Username (UID) and _<pw>_ is the
 password associated with your freshly registered application. The
@@ -842,7 +842,7 @@ appropriate page on your server for failed authentication:
 
  Example _urs.conf_ file for __httpd__:
 
------------------------------------------------------------------------------------
+----
 
 # Load the URS module
 LoadModule auth_urs_module    modules/mod_auth_urs.so
@@ -930,7 +930,7 @@ UrsTokenPath         /oauth/token
  
  
 </Location>
------------------------------------------------------------------------------------
+----
 
 Assuming that you have also:
 
@@ -947,16 +947,16 @@ It is possible to get the Apache module to pull user profile information
 into the request environment using the UrsUserProfileEnv configuration
 directive:
 
------------------------------------------ 
+---- 
 UrsUserProfileEnv email_address URS_EMAIL
 UrsUserProfileEnv user_type URS_TYPE
------------------------------------------
+----
 
 This can be added to a custom log format by including:
 
-------------------------------------------------------- 
+---- 
 LogFormat ... %{URS_EMAIL}e ... \"%{URS_TYPE}e\" ...'''
--------------------------------------------------------
+----
 
 Where we show the _URS_TYPE_ environment variable in double quotes
 because their values often contain spaces. Thanks to Peter Smith for
@@ -976,19 +976,19 @@ documentation] for more information.
   *Internal Server Error* from Apache httpd. In
   /var/log/httpd/ssl_error.log you see this type of thing:
 
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----
 [Sun Mar 22 20:05:47 2015] [notice] [client 71.56.150.130] UrsAuth: Redirecting to URS for authentication, referer: https://52.1.74.222/opendap/data/contents.html
 [Sun Mar 22 20:05:47 2015] [error] [client 71.56.150.130] UrsAuth: Redirection URL: https://uat.urs.earthdata.nasa.gov/oauth/authorize?app_type=401&client_id=tNxluRHmczrTN1iSjXCMiA&response_type=code&redirect_uri=https%3A%2F%2F52.1.74.222%2FOPeNDAP%2Flogin&state=aHR0cHM6Ly81Mi4xLjc0LjIyMi9vcGVuZGFwL2RhdGEvaGRmNC9jb250ZW50cy5odG1s, referer: https://52.1.74.222/opendap/data/contents.html
 [Sun Mar 22 20:05:53 2015] [error] [client 71.56.150.130] UrsAuth: Failed to create new cookie, referer: https://uat.urs.earthdata.nasa.gov/oauth/authorize?app_type=401&client_id=tNxluRHmczrTN1iSjXCMiA&response_type=code&redirect_uri=https%3A%2F%2F52.1.74.222%2FOPeNDAP%2Flogin&state=aHR0cHM6Ly81Mi4xLjc0LjIyMi9vcGVuZGFwL2RhdGEvaGRmNC9jb250ZW50cy5odG1s
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----
 
 This is often caused by the Apache httpd user not having read/write
 permission on the directory specified by *UrsSessionStorePath* in the
 httpd configuration:
 
----------------------------------------- 
+---- 
 UrsSessionStorePath /var/tmp/urs/session
-----------------------------------------
+----
 
 Solution ::
   Check and repair the permissions of the directory specified by
@@ -1019,7 +1019,7 @@ http://forumsys.com[the public LDAP service provided by ForumSys].
 
 In the _server.xml_ file we added a JNDI Realm element:
 
----------------------------------------------------------
+----
 
 <Realm 
     className="org.apache.catalina.realm.JNDIRealm" 
@@ -1031,7 +1031,7 @@ In the _server.xml_ file we added a JNDI Realm element:
     roleName="ou" 
     roleSearch="(uniqueMember={0})"
 />
----------------------------------------------------------
+----
 
 Configured to work with the
 http://www.forumsys.com/tutorials/integration-how-to/ldap/online-ldap-test-server/[Forum
@@ -1040,7 +1040,7 @@ Systems test LDAP server].
 Then in the _opendap_ web application we added the following security
 constraint to the _WEB-INF/web.xml_ file:
 
----------------------------------------------------------------------------------------------------------
+----
 
 <security-constraint>
     <web-resource-collection>
@@ -1056,7 +1056,7 @@ constraint to the _WEB-INF/web.xml_ file:
          <transport-guarantee>CONFIDENTIAL</transport-guarantee>
     </user-data-constraint>
 </security-constraint>
----------------------------------------------------------------------------------------------------------
+----
 
  No changes were made to the _$CATALINA_HOME/conf/tomcat_users.xml_
 file.
