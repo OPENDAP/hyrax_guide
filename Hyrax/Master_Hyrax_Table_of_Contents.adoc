@@ -2,7 +2,7 @@
 :Leonard Porrello <lporrel@gmail.com>:
 {docdate}
 :numbered:
-:toc:
+:toc: left
 :tabsize: 4
 :indent: 4
 :doctype: book
