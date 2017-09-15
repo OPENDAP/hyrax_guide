@@ -36,7 +36,7 @@ Here is the <__Handler__> element in an *olfs.xml* that defines the
 opendap.bes.BESManager file that configures the OLFS to use a single
 BES, the default configuration arrangement for Hyrax:
 
-------------------------------------------------
+----
     <Handler className="opendap.bes.BESManager">
         <BES>
             <prefix>/</prefix>
@@ -45,16 +45,16 @@ BES, the default configuration arrangement for Hyrax:
             <ClientPool maximum="10" />
         </BES>
     </Handler>
-------------------------------------------------
+----
 
 The BES is running on the same system as the OLFS, and it's prefix is
 correctly set to "/". This BES will handle all data requests directed at
 the OLFS and will expose it's top level directory/collection/catalog in
 the URI space of the OLFS here:
 
-------------------------------
+----
 http://localhost:8080/opendap/
-------------------------------
+----
 
 The THREDDS *catalog.xml* file for this should contain a
 <__datasetScan__> element for each of the top level directories |
@@ -67,7 +67,7 @@ the <__prefix__> set to "/" in your *olf.xml* file.
 
 Here is a BESManager <__Handler__> element that defines two BES's:
 
-------------------------------------------------
+----
     <Handler className="opendap.bes.BESManager">
 
         <BES>
@@ -85,22 +85,22 @@ Here is a BESManager <__Handler__> element that defines two BES's:
         </BES>
 
     </Handler>
-------------------------------------------------
+----
 
 The first one is running on the same system as the OLFS, the second on
 __comet. test.org__. The second BES is mapped to the prefix /sst. So the
 URL:
 
-------------------------------
+----
 http://localhost:8080/opendap/
-------------------------------
+----
 
 Will return the directory view at the top level of the first BES,
 running on the same system as the OLFS. The URL:
 
----------------------------------
+----
 http://localhost:8080/opendap/sst
----------------------------------
+----
 
 Will return the directory view at the top level of the second BES,
 running on __comet.test.org__.
@@ -109,7 +109,7 @@ You can repeat this pattern to add more BES's to the configuration. This
 next example shows a configuration with 4 BES's: The _root_ BES, and 3
 others:
 
-------------------------------------------------
+----
     <Handler className="opendap.bes.BESManager">
 
         <BES>
@@ -141,7 +141,7 @@ others:
         </BES>
 
     </Handler>
-------------------------------------------------
+----
 
 Note that in this example:
 
@@ -165,7 +165,7 @@ in Hyrax.
 
 Consider, if you have this configuration:
 
-------------------------------------------------
+----
     <Handler className="opendap.bes.BESManager">
 
         <BES>
@@ -176,7 +176,7 @@ Consider, if you have this configuration:
         </BES>
         
     </Handler>
-------------------------------------------------
+----
 
 And the top level directory for the _root_ BES looks like this:
 
@@ -184,7 +184,7 @@ image::../images/TopDir.png[]
 
 If you add another BES, like this:
 
-------------------------------------------------
+----
     <Handler className="opendap.bes.BESManager">
 
         <BES>
@@ -202,7 +202,7 @@ If you add another BES, like this:
         </BES>
         
     </Handler>
-------------------------------------------------
+----
 
 *It will not appear in the top level directory unless you create a
 __mount point__.* This simply means that on the file system served by
@@ -220,7 +220,7 @@ organize things. Here is a more complex example.
 
 Consider this configuration:
 
---------------------------------------------------------------------
+----
     <Handler className="opendap.bes.BESManager">
 
         <BES>
@@ -266,7 +266,7 @@ Consider this configuration:
         </BES>
         
     </Handler>
---------------------------------------------------------------------
+----
 
 * The _mount point_ "GlobalTemperature" must be in the top of the
 directory tree that the _root_ BES on server0.test.org is exposing.

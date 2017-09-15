@@ -24,7 +24,7 @@ variable and giving its values. In these cases, the metadata is added to
 the new coordinate variable exactly like any other variable. Let's see
 the example again:
 
----------------------------------------------------------------------------
+----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf title="joinNew Grid aggregation with explicit map">
   
@@ -43,13 +43,13 @@ the example again:
   </variable>
 
 </netcdf>
----------------------------------------------------------------------------
+----
 
 We see that the *units* attribute for the new coordinate variable has
 been specified. This subset of the DAS (we don't show the extensive
 global metadata) shows this:
 
------------------------------------------------------
+----
    dsp_band_1 {
         Byte dsp_PixelType 1;
         Byte dsp_PixelSize 2;
@@ -80,7 +80,7 @@ global metadata) shows this:
     sample_time {
 --->        String units "Days since 01/01/2010";
     }
------------------------------------------------------
+----
 
 We show the new metadata with the "--->" marker. Note that the metadata
 for the coordinate variable is also copied into the new map vector of
@@ -99,7 +99,7 @@ dynamic aggregations.
 
 Here's a trivial example using the default case of the filename:
 
---------------------------------------------------------------------------------------------
+----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf title="Test of adding metadata to the new map vector in a joinNew Grid aggregation">
  
@@ -118,7 +118,7 @@ Here's a trivial example using the default case of the filename:
   </variable>
 
 </netcdf>
---------------------------------------------------------------------------------------------
+----
 
 Note here that we just neglected to add a <values> element since we want
 the values to be generated automatically by the aggregation. Note also
@@ -132,7 +132,7 @@ metadata, in this case the newly generated map vector.
 Here is the DAS portion with just the aggregated Grid and the new
 coordinate variable:
 
----------------------------------------------------
+----
    dsp_band_1 {
         Byte dsp_PixelType 1;
         Byte dsp_PixelSize 2;
@@ -163,7 +163,7 @@ coordinate variable:
     filename {
         String units "Filename of the dataset";
     }
----------------------------------------------------
+----
 
 Here also the map vector gets a copy of the coordinate variable's
 metadata.
@@ -171,7 +171,7 @@ metadata.
 We can also use this syntax in the case that _netcdf@coordValue_ was
 used to autogenerate the coordinate variable:
 
--------------------------------------------------------------------------------
+----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf title="joinNew Grid aggregation with coordValue and metadata">
   
@@ -189,12 +189,12 @@ used to autogenerate the coordinate variable:
   </variable>
 
 </netcdf>
--------------------------------------------------------------------------------
+----
 
 Here we see the metadata added to the new coordinate variable and
 associated map vector:
 
------------------------------------------------------
+----
 Attributes {
    dsp_band_1 {
         Byte dsp_PixelType 1;
@@ -227,7 +227,7 @@ Attributes {
 --->        String units "Days since 01/01/2010";
     }
 }
------------------------------------------------------
+----
 
 === Parse Errors
 
@@ -266,7 +266,7 @@ similar and simpler and this case will cover those as well.
 
 Let's start from this example aggregation:
 
----------------------------------------------------------------
+----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf> 
   <aggregation type="joinNew" dimName="filename">
@@ -277,12 +277,12 @@ Let's start from this example aggregation:
     <netcdf location="data/ncml/agg/grids/f97183182355.hdf"/> 
   </aggregation> 
 </netcdf>
----------------------------------------------------------------
+----
 
 Here is the DAS for this unmodifed aggregated Grid (with the global
 dataset metadata removed):
 
-------------------------------------------
+----
 Attributes {
    dsp_band_1 {
         Byte dsp_PixelType 1;
@@ -313,7 +313,7 @@ Attributes {
     filename {
     }
 }
-------------------------------------------
+----
 
 We will now add attributes to all the existing parts of the Grid:
 
@@ -327,7 +327,7 @@ well.
 Here's the NcML we will use. Note we have added units data to the
 subparts of the Grid, and also added some metadata to the grid itself.
 
--------------------------------------------------------------------------------------------------
+----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf title="Showing how to add metadata to all parts of an aggregated grid">
   
@@ -365,7 +365,7 @@ subparts of the Grid, and also added some metadata to the grid itself.
   </variable> <!-- filename -->
  
 </netcdf
--------------------------------------------------------------------------------------------------
+----
 
 Here we show metadata being injected in several ways, denoted by the 1)
 -- 5) notations.
@@ -393,7 +393,7 @@ closed (i.e. all data is available to it).
 
 The resulting DAS (with global dataset metadata removed for clarity):
 
----------------------------------------------------------
+----
 Attribute {
 ... global data clipped ...
   dsp_band_1 {
@@ -431,7 +431,7 @@ Attribute {
 5)    String Info "Filename with timestamp";
     }
 }
----------------------------------------------------------
+----
 
 We have annotated the DAS with numbers representing which lines in the
 NcML above correspond to the injected metadata.

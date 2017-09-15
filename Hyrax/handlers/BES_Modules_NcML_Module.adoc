@@ -70,9 +70,9 @@ system.
 
 Default value is '/tmp'.
 
------------------------
+----
 NCML.TempDirectory=/tmp
------------------------
+----
 
 === GlobalAttributesContainerName
 
@@ -85,9 +85,9 @@ this option to set the name of that container. By default, the container
 is named _NC_GLOBAL_ (because lots of clients look for that name), but
 it can be anything you choose.
 
---------------------------------------------
+----
 NCML.GlobalAttributesContainerName=NC_GLOBAL
---------------------------------------------
+----
 
 == Testing Installation
 
@@ -178,13 +178,13 @@ element prior to any reference to them
 
 For example...
 
---------------------------------------------------------------
+----
 <netcdf> 
   <dimension name="station" length="2"/>
   <dimension name="samples" length="5"/>
   <!-- Some variable elements refer to the dimensions here -->
 </netcdf>
---------------------------------------------------------------
+----
 
 The dimension element sets up a mapping from the _name_ to the unsigned
 integer _length_ and can be used in a _variable@shape_ to specify a
@@ -229,11 +229,11 @@ called array, and not the type of the template primitive.
 
 Consider the following example:
 
---------------------------------------------------------------------------
+----
   <variable name="u">
     <attribute name="Metadata" type="string">This is metadata!</attribute>
   </variable>
---------------------------------------------------------------------------
+----
 
 This code assumes that a variable named "u" exists (of any type since we
 do not specify) and provides the lexical scope for the attribute
@@ -245,7 +245,7 @@ for the variable "u" (it's qualified name would be "u.Metadata").
 Scoping variable elements may be nested if the containing variable is a
 Structure (this includes the special case of Grid)
 
-----------------------------------------------------------
+----
  <variable name="DATA_GRANULE" type="Structure">
     <variable name="PlanetaryGrid" type="Structure">
       <variable name="percipitate">
@@ -253,7 +253,7 @@ Structure (this includes the special case of Grid)
       </variable>
     </variable>
   </variable>
-----------------------------------------------------------
+----
 
 This adds a "unit" attribute to the variable "percipitate" within the
 nested Structure's ("DATA_GRANULE.PlanetaryGrid.percipitate" as fully
@@ -272,16 +272,16 @@ variable will only need to be looked up once.
 
 For example...
 
-----------------------------------------------------------
+----
 <variable name="Foo">
    <attribute name="Attr_1" type="string" value="Hello"/>
    <attribute name="Attr_2" type="string" value="World!"/>
 </variable>
-----------------------------------------------------------
+----
 
 ...should be preferred over...
 
-----------------------------------------------------------
+----
 <variable name="Foo">
    <attribute name="Attr_1" type="string" value="Hello"/>
 </variable>
@@ -289,7 +289,7 @@ For example...
 <variable name="Foo">
    <attribute name="Attr_2" type="string" value="World!"/>
 </variable>
-----------------------------------------------------------
+----
 
 ...although they produce the same result. Any number of attributes can be
 specified before the variable is closed.
@@ -300,9 +300,9 @@ The attribute _variable@orgName_ is used to rename an existing variable.
 
 For example...
 
---------------------------------------------
+----
 <variable name="NewName" orgName="OldName"/>
---------------------------------------------
+----
 
 ...will rename an existing variable at the current scope named "OldName" to
 "NewName". After this point in the NcML file (such as in constraints
@@ -331,12 +331,12 @@ of correct type.
 
 For example...
 
------------------------------------------------------------------------
+----
 <variable name="TheAnswerToLifeTheUniverseAndEverything" type="double">
     <attribute name="SolvedBy" type="String" value="Deep Thought"/>
     <values>42.000</values>
   </variable>
------------------------------------------------------------------------
+----
 
 ...will create a new variable named
 "TheAnswerToLifeTheUniverseAndEverything" at the current scope. It has
@@ -358,13 +358,13 @@ the shape must be empty.
 
 For example...
 
-----------------------------------------------------------------------------------------------------------
+----
 <variable name="MyNewStructure" type="Structure">
     <attribute name="MetaData" type="String" value="This is metadata!"/>
     <variable name="ContainedScalar1" type="String"><values>I live in a new structure!</values></variable>
     <variable name="ContainedInt1" type="int"><values>42</values></variable>
   </variable>
-----------------------------------------------------------------------------------------------------------
+----
 
 ...specifies a new structure called "MyNewStructure" which contains two
 scalar variable fields "ContainedScalar1" and "ContainedInt1".
@@ -386,7 +386,7 @@ by specifying a non-empty __variable@shape__. The shape contains the
 array dimensions in left-to-right order of slowest varying dimension
 first. For example...
 
--------------------------------------------------------------------------------------------------------
+----
  <variable name="FloatArray" type="float" shape="2 5">
       <!-- values specified in row major order (leftmost dimension in shape varies slowest) 
     Any whitespace is a valid separator by default, so we can use newlines to pretty print 2D matrices.
@@ -396,7 +396,7 @@ first. For example...
     1.1 1.1 1.3 1.4 1.5
       </values>
     </variable>
--------------------------------------------------------------------------------------------------------
+----
 
 ...will specify a 2x5 dimension array of float values called "FloatArray".
 The <values> element must contain 2x5=10 values in row major order
@@ -409,7 +409,7 @@ DAP response will use this mnemonic in its output, but it is not
 currently used for shared dimensions, only as a mnemonic. See the
 section on the <dimension> element for more information. For example...
 
------------------------------------------------------------------
+----
 <netcdf>
  <dimension name="station" length="2"/>
  <dimension name="sample" length="5"/>
@@ -419,26 +419,26 @@ section on the <dimension> element for more information. For example...
     1.1 1.1 1.3 1.4 1.5
       </values>
     </variable>
------------------------------------------------------------------
+----
 
 ...will produce the same 2x5 array, but will incorporate the dimension
 mnemonics into the response. For example, here's the DDS response:
 
---------------------------------------------------
+----
 Dataset {
      Float32 FloatArray[station = 2][samples = 5];
 } sample_virtual_dataset.ncml;
---------------------------------------------------
+----
 
 Note that the <values> element respects the _values@separator_ attribute
 if whitespace isn't correct. This is very useful for arrays of strings
 with whitespace, for example...
 
------------------------------------------------------------
+----
 <variable name="StringArray" type="string" shape="3">
   <values separator="*">String 1*String 2*String 3</values>
 </variable>
------------------------------------------------------------
+----
 
 ...creates a length 3 array of string StringArray = \{"String 1", "String
 2", "String 3"}.
@@ -534,11 +534,11 @@ tokens in the content. This will "autogenerate" a uniform array of
 values of the given product of dimensions length for the containing
 variable. For example:
 
-----------------------------------------------
+----
 <variable name="Evens" type="int" shape="100">
   <values start="0" increment="2"/>
 </variable>
-----------------------------------------------
+----
 
 will specify an array of the first 100 even numbers (including 0).
 
@@ -575,17 +575,17 @@ current lexical scope, a new one is created with the given type and
 value. For example, assume "new_metadata" doesn't exist at the current
 parse scope. Then...
 
----------------------------------------------------------------------------
+----
 <attribute name="new_metadata" type="string" value="This is a new entry!"/>
----------------------------------------------------------------------------
+----
 
 ...will create the attribute at that scope. Note that value can be
 specified in the content of the element as well. This is identical to
 the above:
 
------------------------------------------------------------------------------
+----
 <attribute name="new_metadata" type="string">This is a new entry!</attribute>
------------------------------------------------------------------------------
+----
 
 If the attribute@name already exists at the scope, it is modified to
 contain the specified type and value.
@@ -596,15 +596,15 @@ As in NcML, for numerical types an array can be specified by separating
 the tokens by whitespace (default) or be specifying the token separator
 with attribute@separator. For example...
 
-------------------------------------------------------
+----
 <attribute name="myArray" type="int">1 2 3</attribute>
-------------------------------------------------------
+----
 
 ...and...
 
---------------------------------------------------------------------
+----
 <attribute name="myArray" type="int" separator=",">1,2,3</attribute>
---------------------------------------------------------------------
+----
 
 ...both specify the same array of three integers named "myArray".
 
@@ -616,12 +616,12 @@ We use attribute@type="Structure" to define a new (or existing)
 attribute container. So if we wanted to add a new attribute structure,
 we'd use something like this:
 
-----------------------------------------------------------------
+----
   <attribute name="MySamples" type="Structure">
     <attribute name="Location" type="string" value="Station 1"/>
     <attribute name="Samples" type="int">1 4 6</attribute>
   </attribute>
-----------------------------------------------------------------
+----
 
 Assuming "MySamples" doesn't already exist, an attribute container will
 be created at the current scope and the "Location" and "Samples"
@@ -644,9 +644,9 @@ We also support the attribute@orgName attribute for renaming attributes.
 
 For example...
 
------------------------------------------------------------
+----
 <attribute name="NewName" orgName="OldName" type="string"/>
------------------------------------------------------------
+----
 
 will rename an existing attribute "OldName" to "NewName" while leaving
 its value alone. If attribute@value is also specified, then the
@@ -654,9 +654,9 @@ attribute is renamed _and_ has its value modified.
 
 This works for renaming attribute containers as well:
 
-----------------------------------------------------------------------------
+----
 <attribute name="MyNewContainer" orgName="MyOldContainer" type="Structure"/>
-----------------------------------------------------------------------------
+----
 
 ...will rename an existing "MyOldContainer" to "MyNewContainer". Note that
 any children of this container will remain in it.
@@ -689,7 +689,7 @@ will be thrown if the OtherXML is malformed.
 
 Here's an example of the use of this special case:
 
---------------------------------------------------------------------------------------------------------------------------------------
+----
 <netcdf xmlns="http://www.unidata.ucar.edu/namespaces/netcdf/ncml-2.2" location="/coverage/200803061600_HFRadar_USEGC_6km_rtv_SIO.nc">
 
     <attribute name="someName" type="OtherXML">
@@ -713,7 +713,7 @@ Here's an example of the use of this special case:
     </attribute>
 
 </netcdf>
---------------------------------------------------------------------------------------------------------------------------------------
+----
 
 TODO: Put the DDX response for the above in here!
 
@@ -741,11 +741,11 @@ they have to explicitly add the namespaces to each attributes.
 
 The <remove> element can remove attributes and variables. For example...
 
------------------------------------------------
+----
   <attribute name="NC_GLOBAL" type="Structure">
     <remove name="base_time" type="attribute"/>
   </attribute>
------------------------------------------------
+----
 
 ...will remove the attribute named "base_time" in the attribute structure
 named "NC_GLOBAL".
@@ -754,15 +754,15 @@ Note that this works for attribute containers as well. We could
 recursively remove the _entire_ attribute container (i.e. it and all its
 children) with:
 
---------------------------------------------
+----
  <remove name="NC_GLOBAL" type="attribute"/>
---------------------------------------------
+----
 
 It also can be used to remove variables from existing datasets:
 
--------------------------------------------------------
+----
   <remove name="SomeExistingVariable" type="variable"/>
--------------------------------------------------------
+----
 
 This also recurses on variables of type Structure --- the entire
 structure including all of its children are removed from the dataset's
@@ -921,12 +921,12 @@ This module also adds functionality beyond the current NcML 2.2 schema
 structures. This is done by using the <attribute type="Structure"> form,
 for example:
 
-----------------------------------------------------------------
+----
   <attribute name="MySamples" type="Structure">
     <attribute name="Location" type="string" value="Station 1"/>
     <attribute name="Samples" type="int">1 4 6</attribute>
   </attribute>
-----------------------------------------------------------------
+----
 
 "MyContainer" describes an attribute structure with two attribute
 fields, a string "Location" and an array of int's called "Samples". Note
@@ -1005,9 +1005,9 @@ In general, what this means is that an empty "passthrough" NcML file
 should be the starting point for authoring an NcML file. This file would
 just specify a dataset and nothing else:
 
--------------------------------------------
+----
 <netcdf location="/data/ncml/myNetcdf.nc"/>
--------------------------------------------
+----
 
 The author would then request the DAS response for the NCML file and use
 that as the starting point for modifications to the original dataset.
@@ -1022,7 +1022,7 @@ hierarchy for such a Grid. The map vector attributes are placed as
 siblings of the grid attributes rather than within the grid lexical
 scope. For example, here's the NetCDF Handler DDS for a given file:
 
-----------------------------------------------------
+----
 Dataset {
     Grid {
       Array:
@@ -1033,11 +1033,11 @@ Dataset {
         Float32 lon[lon = 360];
     } cldc;
 } cldc.mean.nc;
-----------------------------------------------------
+----
 
 ...showing the Grid. Here's the DAS the NetCDF handler generates...
 
---------------------------------------------------------------------
+----
 Attributes {
     lat {
         String long_name "Latitude";
@@ -1081,14 +1081,14 @@ Attributes {
         String Unlimited_Dimension "time";
     }
 }
---------------------------------------------------------------------
+----
 
 Note the map vector attributes are in the "dataset" scope.
 
 Here's the DAS that the NcML Module produces from the correctly formed
 DDX:
 
-------------------------------------------------------------------------
+----
 Attributes {
     NC_GLOBAL {
         String title "COADS 1-degree Equatorial Enhanced";
@@ -1134,7 +1134,7 @@ Attributes {
         }
     }
 }
-------------------------------------------------------------------------
+----
 
 Here the Grid Structure "cldc" and its contained data array (of the same
 name "cldc") and map vectors have their own attribute containers as DAP
@@ -1147,15 +1147,15 @@ on that structure.
 
 Here's an example passthrough:
 
-----------------------------------------------------------------------------------
+----
 <netcdf location="data/ncml/agg/cldc.mean.nc" title="This file results in a Grid">
 </netcdf>
-----------------------------------------------------------------------------------
+----
 
 For example, to add an attribute to the map vector "lat" in the above,
 we'd need the following NcML:
 
---------------------------------------------------------------------------------------------------------------------
+----
 <netcdf location="data/ncml/agg/cldc.mean.nc" title="This file results in a Grid">
   <!-- Traverse into the Grid as a Structure -->
   <variable name="cldc" type="Structure">
@@ -1168,7 +1168,7 @@ we'd need the following NcML:
     </variable>
   </variable>
 </netcdf>
---------------------------------------------------------------------------------------------------------------------
+----
 
 This clearly shows that the structure of the Grid must be used in the
 NcML: the attribute being added is technically "cldc.lat.Description" in

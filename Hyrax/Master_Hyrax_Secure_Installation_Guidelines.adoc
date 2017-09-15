@@ -67,8 +67,7 @@ a web app. There's an overview in this Covalent presentation:
 
 http://www.springsource.com/files/uploads/all/pdf_files/news_event/Intro_to_Tomcat6.pdf
 
-3 Restricting System Access
----------------------------
+== Restricting System Access
 
 One may also choose to restrict user access to Hyrax. This can be done
 by configuring Tomcat to demand user authentication, and if required,

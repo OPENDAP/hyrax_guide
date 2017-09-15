@@ -50,7 +50,7 @@ instruction and containing code examples. The part you are looking for
 is nested inside of the <Service> and the <Engine> elements. Typically
 it will look like:
 
----------------------------------------------------------------------------------
+----
 <Service ...>
     .
     .
@@ -89,20 +89,20 @@ it will look like:
     .
     .
 </Service>
----------------------------------------------------------------------------------
+----
 
 You can uncomment the <__Valve__> element to enable it and you can
 change the values of the various attributes to suite your localization.
 For example:
 
--------------------------------------------------------------------------
+----
             <Valve className="org.apache.catalina.valves.AccessLogValve" 
                    directory="logs"  
                    prefix="access_log." 
                    suffix=".log" 
                    pattern="%h %l %u %t &quot;%r&quot; %s %b %D"
                    resolveHosts="false"/>
--------------------------------------------------------------------------
+----
 
 *3.* Save the file.
 
@@ -120,12 +120,12 @@ http://tomcat.apache.org/tomcat-5.0-doc/config/valve.html[Server
 Configuration Reference]. The pattern shown above will provide log
 output that looks like this:
 
-----------------------------------------------------------------------------------------------------------------------
+----
         69.59.200.52 - - [05/Mar/2007:16:29:14 -0800] "GET /opendap/data/nc/contents.html HTTP/1.1" 200 13014 234
         69.59.200.52 - - [05/Mar/2007:16:29:14 -0800] "GET /opendap/docs/images/logo.gif HTTP/1.1" 200 8114 2
         69.59.200.52 - - [05/Mar/2007:16:29:51 -0800] "GET /opendap/data/nc/TestPatDbl.nc.html HTTP/1.1" 200 11565 137
         69.59.200.52 - - [05/Mar/2007:16:29:56 -0800] "GET /opendap/data/nc/data.nc.ddx HTTP/1.1" 200 2167 121
-----------------------------------------------------------------------------------------------------------------------
+----
 
 Where the last column is the time in milliseconds it took to service the
 request and the next to the last column is the number of bytes returned.
@@ -227,23 +227,23 @@ can turn on debugging level logging by changing the log level to *DEBUG*
 for the software components you are interested in. All of the OPeNDAP
 code is in the "opendap" package. Thus:
 
-------------------------------------------
+----
    
     <logger name="opendap" level="error"/>
         <appender-ref ref="ErrorLog"/>
     </logger>
-------------------------------------------
+----
 
 Will cause all log messages of *ERROR* level or higher to be sent to the
 error log.
 
 This configuration:
 
------------------------------------------
+----
     <logger name="opendap" level="info"/>
         <appender-ref ref="stdout"/>
     </logger>
------------------------------------------
+----
 
 Will cause all messages of level *INFO'* or higher to be sent to
 **stdout**, which (in Tomcat) means that they will get stuck in the file

@@ -28,9 +28,9 @@ response into a THREDDS catalog.
 
 === Default Configuration
 
-------------------------------------------------------------------------
+----
            <Handler className="opendap.bes.BESThreddsDispatchHandler" />
-------------------------------------------------------------------------
+----
 
 == THREDDS Dispatch Handler
 
@@ -118,9 +118,9 @@ transform applied to the catalog XML document.
 
 === Default configuration
 
-----------------------------------------------------------------
+----
            <Handler className="opendap.threddsHandler.Dispatch">
                <prefix>thredds</prefix>
                <useMemoryCache>true</useMemoryCache>
            </Handler>
-----------------------------------------------------------------
+----

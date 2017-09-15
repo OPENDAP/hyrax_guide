@@ -84,9 +84,9 @@ updating the web application won't destroy your changes. This is easily
 done by creating an empty directory and identifying it with the
 `OLFS_CONFIG_DIR` environment variable. For example:
 
--------------------------------------------
+----
 export OLFS_CONFIG_DIR="/home/tomcat/hyrax"
--------------------------------------------
+----
 
 Alternatively, you can create the directory `/etc/olfs`, and ensure that
 it is both readable and writeable by Tomcat.
@@ -175,9 +175,9 @@ DispatchHandler in the list to claim a request gets to service it,
 changing the order of the DispatchHandlers can change the behaviour of
 the OLFS (and thus of Hyrax). For example the URL:
 
-------------------------------------
+----
 http://localhost:8080/opendap/data/ 
-------------------------------------
+----
 
 Is recognized by both the _DirectoryDispatchHandler_ and the
 _ThreddsDispatchHandler_ as a request for a directory view: both can
@@ -259,15 +259,15 @@ character. (see __example 2__)
 
 _example 1:_
 
--------------------
+----
  <prefix>/</prefix>
--------------------
+----
 
 _example 2:_
 
---------------------------
+----
  <prefix>/data/nc</prefix>
---------------------------
+----
 
 ==== *<host>* Element (required)
 
@@ -276,9 +276,9 @@ address of the BES.
 
 _example:_
 
-------------------------------
+----
 <host>test.opendap.org</host >
-------------------------------
+----
 
 ==== *<port>* Element (required)
 
@@ -286,9 +286,9 @@ This child element of the <__BES__> element contains port number on
 which the BES is listening.
 
 _example:_
--------------------
+----
 <port>10022</port >
--------------------
+----
 
 ==== *<timeOut>* Element (optional)
 
@@ -298,9 +298,9 @@ seconds.
 
 _example:_
 
------------------------ 
+----
 <timeOut>600</timeOut >
------------------------
+----
 
 ==== *<maxResponseSize>* Element (optional)
 
@@ -311,9 +311,9 @@ indicates that there is no imposed limit. The default value is 0.
 
 _example:_
 
------------------------------------- 
+---- 
 <maxResponseSize>0</maxResponseSize>
-------------------------------------
+----
 
 ==== *<ClientPool>* Element (optional)
 
@@ -328,9 +328,9 @@ by the _maximum_ attribute. The default value of _maximum_ is 200.
 
 _example:_
 
---------------------------- 
+---- 
 <ClientPool maximum="17" />
----------------------------
+----
 
 If the <ClientPool> element is missing the pool size defaults to 200.
 
@@ -342,13 +342,13 @@ THe BES must also be configured to open and utilize this admin port.
 
 _example:_
 
----------------------------- 
+---- 
 <adminPort>11002</adminPort>
-----------------------------
+----
 
 ==== Example BESManager Configuration Element
 
--------------------------------------------------- 
+---- 
 <BESManager>
     <BES>
         <prefix>/</prefix>
@@ -360,7 +360,7 @@ _example:_
         <adminPort>11002</adminPort>
     </BES>
 </BESManager >
---------------------------------------------------
+----
 
 === *<CatalogCache>* Element
 
@@ -414,9 +414,9 @@ attribute call _className_ whose value is set to the fully qualified
 Java class name for the DispatchHandler implementation to be used. For
 example:
 
-------------------------------------------------------------
+----
   <Handler className="opendap.bes.VersionDispatchHandler" />
-------------------------------------------------------------
+----
 
 Names the class __opendap.bes.VersionDispatchHandler__.
 
@@ -424,11 +424,11 @@ Each <__Handler__> element may contain a collection of child elements
 that provide configuration information to the DispatchHandler
 implementation. In this example:
 
-------------------------------------------------------
+----
   <Handler className="opendap.coreServlet.BotBlocker">
       <IpAddress&>44.55.66.77</IpAddress>
   </Handler>
-------------------------------------------------------
+----
 
 The <__Handler__> element contains a child element <__IpAddress__> that
 indicates to the _BotBlocker_ class to block requests from the IP
@@ -463,10 +463,10 @@ configuration elements, so it will always be written like this:
 
 ==== Example Configuration Element
 
-----------------------------------------------------------
+----
 
 <Handler className="opendap.bes.VersionDispatchHandler" />
-----------------------------------------------------------
+----
 
 [[BotBlocker]]
 === BotBlocker (optional)
@@ -484,9 +484,9 @@ non-compliant robots.
 The text value of this element should be the IP address of a system
 which you would like to block from accessing your service. For example:
 
----------------------------------------- 
+---- 
     <IpAddress>128.193.64.33</IPAddress>
-----------------------------------------
+----
 
 Blocks the system located at 128.193.64.33 from accessing your server.
 There can be zero or more <IpAddress> elements in the <BotBlocker>
@@ -499,9 +499,9 @@ Hyrax.
 
 For example:
 
-------------------------------------------------------- 
+---- 
     <IpMatch>65\.55\.[012]?\d?\d\.[012]?\d?\d</IpMatch>
--------------------------------------------------------
+----
 
 Matches all IP address beginning with 65.55 and thus block access for
 clients whose IP addresses lie in that range. There can be zero or more
@@ -509,7 +509,7 @@ clients whose IP addresses lie in that range. There can be zero or more
 
 ==== Example Configuration Element
 
--------------------------------------------------------------------------------------
+----
     <Handler className="opendap.coreServlet.BotBlocker">
  
         <IpAddress>127.0.0.1</IpAddress>
@@ -521,7 +521,7 @@ clients whose IP addresses lie in that range. There can be zero or more
         <IpMatch>65\.55\.[012]?\d?\d\.[012]?\d?\d</IpMatch>
  
     </Handler>
--------------------------------------------------------------------------------------
+----
 
 === Ncml Dataset Dispatcher (required)
 
@@ -532,9 +532,9 @@ external (to the server) perspective.
 
 ==== Example Configuration Element
 
-----------------------------------------------------------------------
+----
             <Handler className="opendap.ncml.NcmlDatasetDispatcher" />
-----------------------------------------------------------------------
+----
 
 === Static Thredds Catalog Dispatch Handler (required)
 
@@ -570,12 +570,12 @@ general is not recommended for use in an operational server.*
 
 ==== Example Configuration Element
 
-------------------------------------------------------------------
+----
 <Handler className="opendap.threddsHandler.StaticCatalogDispatch">
      <prefix>thredds</prefix>
      <useMemoryCache>true</useMemoryCache>
 </Handler>
-------------------------------------------------------------------
+----
 
 === Gateway Dispatcher
 
@@ -590,11 +590,11 @@ then http://localhost:8080/opendap/gateway/ will give you the gateway
 access form page.
 
 ==== Example Configuration Element
------------------------------------------------------ 
+---- 
 <Handler className="opendap.gateway.DispatchHandler">
     <prefix>gateway</prefix>
 </Handler>
------------------------------------------------------
+----
 
 === DapDispatchHandler (required)
 
@@ -623,12 +623,12 @@ is requested.
 
 ==== Example Configuration Element
 
---------------------------------------------------------------
+----
 <Handler className="opendap.bes.dapResponders.DapDispatcher" >
     <!-- AllowDirectDataSourceAccess / -->
     <UseDAP2ResourceUrlResponse />
 </Handler>
---------------------------------------------------------------
+----
 
 === DirectoryDispatchHandler (required)
 
@@ -636,11 +636,11 @@ Handles the OPeNDAP directory view (contents.html) requests.
 
 ==== Example Configuration Element
 
-------------------------------------------------------------
+----
 
  
 <Handler className="opendap.bes.DirectoryDispatchHandler" />
-------------------------------------------------------------
+----
 
 === BES Thredds Dispatch Handler (required)
 
@@ -648,9 +648,9 @@ Provides dynamic THREDDS catalogs of BES data holdings.
 
 ==== Example Configuration Element
 
--------------------------------------------------------------
+----
 <Handler className="opendap.bes.BESThreddsDispatchHandler" />
--------------------------------------------------------------
+----
 
 === File Dispatch Handler (required)
 
@@ -666,9 +666,9 @@ In the following example, the FileDispatchHandler is configured to deny
 direct access to data sources (note that the
 <__AllowDirectDataSourceAccess__ /> element is commented out:
 
-------------------------------------------------------- 
+---- 
 <Handler className="opendap.bes.FileDispatchHandler" />
--------------------------------------------------------
+----
 
 === HTTP POST Handlers
 
@@ -676,7 +676,7 @@ Hyrax does not currently support HTTP POST requests.
 
 === Example olfs.xml File
 
----------------------------------------------------------------------------------------------------------------------------
+----
 <?xml version="1.0" encoding="UTF-8"?>
 <OLFSConfig>
  
@@ -785,7 +785,7 @@ Hyrax does not currently support HTTP POST requests.
  
  
 </OLFSConfig>
----------------------------------------------------------------------------------------------------------------------------
+----
 
 == THREDDS Configuration *catalog.xml* File
 
@@ -827,7 +827,7 @@ _opendap.coreServlet.DispatchServlet_
 
 Here is a syntax example combining the two previous example values:
 
----------------------------------------------------------------------
+----
 <servlet>
     <servlet-name>hyrax</servlet-name>
     <servlet-class>opendap.coreServlet.DispatchServlet</servlet-name>
@@ -835,7 +835,7 @@ Here is a syntax example combining the two previous example values:
     .
     .
 </servlet>
----------------------------------------------------------------------
+----
 
 This servlet could then be accessed as:
 _http://hostname/opendap/servlet/argos_
@@ -844,7 +844,7 @@ You may also add to the end of the web.xml file a set of
 <__servlet-mapping__> elements. These allow you to abbreviate the URL or
 the servlet. By placing the servlet mappings:
 
----------------------------------------
+----
 <servlet-mapping>
     <servlet-name>argos</servlet-name>
     <url-pattern>/argos</url-pattern>
@@ -854,7 +854,7 @@ the servlet. By placing the servlet mappings:
     <servlet-name>argos</servlet-name>
     <url-pattern>/argos/*</url-pattern>
 </servlet-mapping>
----------------------------------------
+----
 
 At the end of the web.xml file our previous example changes it's URL to:
 _http://hostname/opendap/argos_
@@ -877,12 +877,12 @@ persistent content directory and is typically called *olfs.xml*
 
 For example:
 
------------------------------------------------
+----
     <init-param>
     <param-name>OLFSConfigFileName</param-name>
     <param-value>olfs.xml</param-value>
     </init-param>
------------------------------------------------
+----
 
 ==== DebugOn
 
@@ -900,12 +900,12 @@ disable when finshed!_
 
 __Example__:
 
--------------------------------------------
+----
     <init-param>
     <param-name>DebugOn</param-name>
     <param-value>probeRequest</param-value>
     </init-param>
--------------------------------------------
+----
 
 __Default__: If this parameter is not set, or the value field is empty
 then these features will be disabled - which is what you want unless
@@ -913,7 +913,7 @@ there is a problem to analyze.
 
 === Example of web.xml Content
 
-----------------------------------------------------------------------
+----
 <servlet>
 
     <servlet-name>hyrax</servlet-name>
@@ -943,7 +943,7 @@ there is a problem to analyze.
     <servlet-name>hyrax</servlet-name>
     <url-pattern>/hyrax/*</url-pattern>
 </servlet-mapping>
-----------------------------------------------------------------------
+----
 
 == Viewers Servlet (**viewers.xml** file)
 
@@ -961,7 +961,7 @@ in the persistent content directory $CATALINA_HOME/content/opendap.
 
 ==== Example Configuration
 
-------------------------------------------------------------------------------------------------------------
+----
 <ViewersConfig>
  
     <JwsHandler className="opendap.webstart.IdvViewerRequestHandler">
@@ -986,7 +986,7 @@ in the persistent content directory $CATALINA_HOME/content/opendap.
     </WebServiceHandler>
  
 </ViewersConfig>
-------------------------------------------------------------------------------------------------------------
+----
 
 == Docs Servlet
 
@@ -1106,7 +1106,7 @@ information will be able to easily access the different areas.
 
 For example in your *web.xml* file you might have:
 
------------------------------------------------------------
+----
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>fnoc1</web-resource-name>
@@ -1131,17 +1131,17 @@ For example in your *web.xml* file you might have:
         <auth-method>BASIC</auth-method>
         <realm-name>MyApplicationRealm</realm-name>
     </login-config>
------------------------------------------------------------
+----
 
  Where the security roles fn1 and fn2 (defined in the *tomcat-users.xml*
 file) have no common members.
 
 The complete URI's would be:
 
---------------------------------------------------
+----
 http://localhost:8080/mycontext/hyrax/nc/fnoc1.txt
 http://localhost:8080/mycontext/hyrax/nc/fnoc2.txt
---------------------------------------------------
+----
 
 Now - this works, for clients that aren't too smart - i.e. they don't
 cache anything. However, if you access these URLs with a typical
@@ -1182,7 +1182,7 @@ security configuration to be included in the *web.xml* file.
 
 Here is an example of an _ENTITY_ configuration:
 
--------------------------------------------------------------------------------------------------------
+----
     <?xml version="1.0" encoding="ISO-8859-1"?>
  
     <!DOCTYPE web-app
@@ -1204,7 +1204,7 @@ Here is an example of an _ENTITY_ configuration:
         .
  
     </web-app>
--------------------------------------------------------------------------------------------------------
+----
 
 This will not prevent you from losing your *web.xml* file when a new
 version of Hyrax is installed, but adding the _ENTITY_ stuff to the new
@@ -1242,23 +1242,23 @@ enable compression.
 With my Tomcat 5.5 distribution I found this default <__Connector__>
 element definition in my _server.xml_ file:
 
--------------------------------------------------------------------
+----
     <Connector port="8080" maxHttpHeaderSize="8192"
         maxThreads="150" minSpareThreads="25" maxSpareThreads="75";
         enableLookups="false" redirectPort="8443" acceptCount="100"
         connectionTimeout="20000" disableUploadTimeout="true"
         compression="no"
      >
--------------------------------------------------------------------
+----
 
 You will need to add to this four attributes:
 
-------------------------------------------------------------------
+----
 compression="force"
 compressionMinSize="2048"
 noCompressionUserAgents="gozilla, traviata"
 compressableMimeType="text/html,text/xml,application/octet-stream"
-------------------------------------------------------------------
+----
 
 Notice that there is a list of compressible MIME types. Basically:
 
@@ -1273,7 +1273,7 @@ OPeNDAP data transport.
 
 The final result being:
 
---------------------------------------------------------------------------
+----
     <Connector port="8080" maxHttpHeaderSize="8192"
         maxThreads="150" minSpareThreads="25" maxSpareThreads="75";
         enableLookups="false" redirectPort="8443" acceptCount="100"
@@ -1284,7 +1284,7 @@ The final result being:
         noCompressionUserAgents="gozilla, traviata"
         compressableMimeType="text/html,text/xml,application/octet-stream"
      >
---------------------------------------------------------------------------
+----
 
 Restart Tomcat for these changes to take effect.
 

@@ -22,19 +22,19 @@ that they have been elided.
 
 For a structure such as...
 
------------
+----
 Structure {
     Int x;
     Int y;
 } Point;
------------
+----
 
 ...represent that as...
 
--------
+----
 Point.x
 Point.y
--------
+----
 
 Explicitly including the dot seems ugly and like a kludge and so on, but
 it means that the new variable name can be feed back into the server to
@@ -152,7 +152,7 @@ Example files:
 
 Example:
 
---------------------------------------------------------
+----
 Dataset {
     Grid {
       Array:
@@ -187,7 +187,7 @@ Dataset {
         Float64 COADSX[COADSX = 90];
     } T;
 } coads_climatology.nc;
---------------------------------------------------------
+----
 
 ==== Array
 

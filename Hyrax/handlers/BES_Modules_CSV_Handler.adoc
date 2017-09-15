@@ -42,7 +42,7 @@ The CSV handler will return represent the columns in the dataset as
 arrays with the named dimension __record__. For example, the sample data
 shown above will be represented in DAP2 by this handler as:
 
---------------------------------------
+----
 Dataset {
     String Station[record = 5];
     Float32 latitude[record = 5];
@@ -50,7 +50,7 @@ Dataset {
     Float32 temperature_K[record = 5];
     String Notes[record = 5];
 } temperature.csv;
---------------------------------------
+----
 
 This is in contrast to the FreeForm handler that would represent these
 data as a Sequence with five columns.
@@ -86,7 +86,7 @@ file like the following. If that file has the name __dataset__.`das`
 then whenever Hyrax reads __dataset__, it will also read those
 attributes, and return them when asked.
 
----------------------------------------------
+----
 Attributes {
    Station {
       String bouy_type "flashing";
@@ -97,7 +97,7 @@ Attributes {
        String Conventions "CF-1.0", "CF-1.6";
    }
 }
----------------------------------------------
+----
 
 The format of this file is very simple: Each variable in the dataset may
 have a collection of attributes, each of which consists of a type, a

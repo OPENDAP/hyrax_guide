@@ -24,9 +24,9 @@ be named something like: _*olfs-x.x.x-webapp.tgz*_
 
 Unpack the jar file with the command:
 
-------------------------------
+----
 tar -xvf olfs-x.x.x-webapp.tgz
-------------------------------
+----
 
 which will unpack a directory called olfs-x.x.x-webapp
 
@@ -35,9 +35,9 @@ which will unpack a directory called olfs-x.x.x-webapp
 Inside the that directory find the opendap.war file, and copy it into
 the Tomcat's webapps directory:
 
-------------------------------------------------------------------------
+----
 cp olfs-x.x.x-webapp/opendap.war /usr/local/apache-tomcat-6.x.x/webapps/
-------------------------------------------------------------------------
+----
 
 (Assuming the your Tomcat server is in /usr/local)
 
@@ -61,18 +61,18 @@ CATALINA_HOME to the full path for the Tomcat distribution.
 
 In bash:
 
------------------------------------------------------
+----
 export CATALINA_HOME = /usr/local/apache-tomcat-6.x.x
------------------------------------------------------
+----
 
 == Start Tomcat
 
 In the top level tomcat directory (apache-tomcat-6.x.x on my machine)
 issue the command:
 
------------------------------------------
+----
 bin/startup.sh; tail -f logs/catalina.out
------------------------------------------
+----
 
 Wait a few seconds while it all starts up.
 
@@ -82,9 +82,9 @@ webapp.
  **Usage Note**: If you use _ctrl-c_ to stop watching the tail of the
 servers output, make sure to run the command...
 
----------------
+----
 bin/shutdown.sh
----------------
+----
 
 ...to shutdown Tomcat. If you don't, you may get errors when you next try
 to start the Tomcat server.

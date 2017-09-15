@@ -21,25 +21,25 @@ To start and stop the BES, use the _besctl_ command. The besctl command
 has a number of options, but the most important are the _start_ and
 _stop_ arguments. To start the BES use:
 
-------------
+----
 besctl start
-------------
+----
 
 and to stop it, use:
 
------------
+----
 besctl stop
------------
+----
 
 The general form for the _besctl_ command is:
 
------------------------------------------------------------
+----
 besctl (help|start|stop|restart|status|pids|kill) [options]
------------------------------------------------------------
+----
 
 where _options_ are:
 
------------------------------------------------------
+----
 -i back-end server installation directory
 -c use back-end server configuration file CONFIG
 -d send debugging for CONTEXT to cerr or <filename>
@@ -49,21 +49,21 @@ where _options_ are:
 -s specifies a secure server using SLL authentication
 -u set unix socket to UNIX_SOCKET
 -v echos version and exit
------------------------------------------------------
+----
 
 These options are used only in special circumstances; of them all the
 _-d_ option to turn on debugging is the most useful. The syntax for
 run-time debugging/diagnostic output is:
 
------------------------------------------------
+----
 -d "<output sink>,<context 1>, ...,<context n>"
------------------------------------------------
+----
 
 where a typical example would be:
 
---------------------------------
+----
 -d "cerr,ascii,netcdf,besdaemon"
---------------------------------
+----
 
 which would tell the daemon to send diagnostic output from the ASCII
 handler, the NetCDF handler and the BES daemon itself to the terminal's
@@ -122,18 +122,18 @@ Use the _-i_ option to force besctl to use a specific directory as the
 server's root directory. This option is useful if you have several BES
 daemons running on one machine.
 
---------------
+----
 -i <directory>
---------------
+----
 
 === server configuration file
 
 Use the _-c_ option to force the daemon to use a specific _bes.conf_
 file instead of the file found at __server root__/etc/bes/bes.conf
 
-----------------------------
+----
 -c <configuration file path>
-----------------------------
+----
 
 An alternative to usign this option is to use the BES_CONF environment
 variable to point to a configuration file. Set the value of the
@@ -156,9 +156,9 @@ besctl, although most define additional contexts. The best way to find
 out about the contexts available is to look at the source code for the
 server.
 
--------------------
+----
 -d "cerr,besdaemon"
--------------------
+----
 
 Use the special context _all_ to see output from all of the contexts.
 This will produce very verbose output.
@@ -178,18 +178,18 @@ argument like __start__, __stop__, et c., except for __help__.
 Use the _-p_ option to set the port the daemon uses for communication
 with the Hyrax front-end.
 
------------
+----
 -p <number>
------------
+----
 
 === PID file
 
 Use the _-r_ option to tell the BES where to store the master daemon's
 process id number.
 
---------------
+----
 -r <directory>
---------------
+----
 
 === SLL authentication
 
@@ -205,9 +205,9 @@ Use the _-u_ option to force the BES to use a Unix socket for
 communication with the front-end instead of the TCP socket. We rarely
 use this.
 
------------
+----
 -u <socket>
------------
+----
 
 === verbose
 

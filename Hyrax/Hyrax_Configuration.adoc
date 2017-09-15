@@ -24,15 +24,15 @@ include::./Hyrax_Logging_Configuration.adoc[leveloffset=+1, Logging configuratio
 Deploying a robots.txt file for Hyrax, is synonymous with deploying it for Tomcat. This means that your robots.txt file must be
 accessible here:
 
-----------------------------------
+----
    http://you.host:port/robots.txt
-----------------------------------
+----
 
 For example:
 
-------------------------------------
+----
    http://www.opendap.org/robots.txt
-------------------------------------
+----
 
 Placing it lower in the URL path doesn't seem to work.
 

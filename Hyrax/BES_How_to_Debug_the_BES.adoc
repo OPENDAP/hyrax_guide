@@ -23,11 +23,11 @@ will take care of getting the output sink and using the output operator.
 
 Example:
 
-------------------------------------------------
+----
 #include <BESDebug.h>
 ...
 BESDEBUG( "h4", "File Id:" << _file_id << endl);
-------------------------------------------------
+----
 
 Notes:
 
@@ -42,17 +42,17 @@ automatic code indent software (eclipse, emacs, ...) much happier.
 Use the _-d_ option to _besctl_ and give _-d_ one argument, a string,
 with two parts: "<output sink>,<context>". For example,
 
---------------------------
+----
 besctl start -d "cerr,bes"
---------------------------
+----
 
 would start up _beslistener_ with the _bes_ debug context active and
 write all the debugging info to __cerr__, which is standard error. You
 can provide several contexts. For example, you could say
 
-----------------------------------
+----
 besctl start -d "./bes.dbg,bes,nc"
-----------------------------------
+----
 
 This will send debug statements to the file ./bes.dbg for the context
 bes and nc (netcdf_handler). You can also specify the context __all__,
@@ -64,9 +64,9 @@ create your own context when writing your own module. In your Module
 class you would register your context, so as to be available with the
 help command, by using the following code:
 
----------------------------------------
+----
     BESDebug::Register( "<context>" ) ;
----------------------------------------
+----
 
 Where context is the string that will be used for your module's debug
 context. For example, nc for the netcdf_handler.
@@ -74,11 +74,11 @@ context. For example, nc for the netcdf_handler.
 To see what debug context is available, when you start the BES using
 __besctl__, use the help option:
 
------------
+----
 besctl help
------------
+----
 
---------------------------------------------------------------------------------------------------------------------------
+----
 BES install directory: /Users/westp/opendap/opendap
 BES configuration file: /Users/westp/opendap/opendap/etc/bes/bes.conf
 Developer Mode: not testing if BES is run by root
@@ -113,7 +113,7 @@ Possible context:
 
 USAGE: besctl (help|start|stop|restart|status) [options]
 where [options] are passed to besdaemon; see besdaemon -h
---------------------------------------------------------------------------------------------------------------------------
+----
 
 == Send Commands to the BES
 
@@ -121,7 +121,7 @@ Now run some commands using bescmdln. You should see debugging being
 output to either cerr, or the file you specified when you started the
 BES. Here's an example:
 
----------------------------------------------------------------
+----
 BESClient> set context dap_format to dap2;
 BESClient> set container in catalog values c,/data/nc/fnoc1.nc;
 BESClient> define d as c;
@@ -130,4 +130,4 @@ Attributes {
     u {
         String units "meter per second";
         String long_name "Vector wind eastward component";
----------------------------------------------------------------
+----

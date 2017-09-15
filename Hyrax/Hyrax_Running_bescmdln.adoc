@@ -9,9 +9,9 @@
 First we will issue some simple commands to make sure that the client is
 talking to the server. First, start the command-line client:
 
---------------------------------
+----
 % bescmdln -h localhost -p 10022
---------------------------------
+----
 
 The -h option specifies the machine on which the BES is running. In this
 case, it's your local machine. The -p option specifies the port the BES
@@ -24,21 +24,21 @@ version of the client. There are other options, but we'll start here.
 From here you should get a prompt. Let's try a simple command (remember
 to terminate each command with a semicolon):
 
------------------------
+----
 BESClient> show status;
------------------------
+----
 
 You should get a response showing the status of the server:
 
-------------------------------------------------
+----
 Listener boot time: MDT Thu Jun  9 14:12:22 2005
-------------------------------------------------
+----
 
 Try another one:
 
-----------------------
+----
 BESClient > show help;
-----------------------
+----
 
 This one should show both the BES core commands, DAP commands, and your
 help information.
@@ -47,17 +47,17 @@ If you have installed a data handler, let's take a look at your data. By
 executing this request you should see the root node of your data
 directory.
 
--------------------------
+----
 BESClient > show catalog;
--------------------------
+----
 
 If you can't see your data, then make sure that the RootDirectory
 parameters in the link:./Hyrax_BES_Configuration.adoc[BES
 Configuration file] are correct.
 
-----------------
+----
 BESClient > exit
-----------------
+----
 
 This one will exit out of interactive mode.
 
@@ -67,18 +67,18 @@ This one will exit out of interactive mode.
 
 ==== Show the Root Catalog
 
--------------
+----
 show catalog;
--------------
+----
 
 ==== ...will show the contents of "pathname"
 
 For example, show catalog for "/data/nc"; will show all the stuff in the
 /data/nc directory.
 
-----------------------------
+----
 show catalog for "pathname";
-----------------------------
+----
 
 === Get the BES to return a DAP response object
 
@@ -86,27 +86,27 @@ You need three commands to do this:
 
 ==== Bind the dataset to a container in a catalog
 
---------------------------------------------------
+----
 set container in catalog values c,/data/nc/feb.nc;
---------------------------------------------------
+----
 
 ==== Make a definition so you can access that container
 
---------------
+----
 define d as c;
---------------
+----
 
 ==== Request a particular response
 
---------------
+----
 get ddx for d;
---------------
+----
 
 == Command line options
 
 Other command line options available to the bescmdln program:
 
--------------------------------------------------------------------------------------
+----
 -u specifies the name of a Unix socket for connecting to the server.
 -h specifies the name of a host for TCP/IP connection
 -p specifies the port where the server is listening for TCP/IP connection.
@@ -116,7 +116,7 @@ Other command line options available to the bescmdln program:
 -t sets the timeout in seconds and is optional.
 -d "cerr|<filename>,<context>" sets the client session for debugging and is optional.
 -v forces the client to show the version and exit
--------------------------------------------------------------------------------------
+----
 
 Connection Flags: -u or -p -h are required to connect to a server and
 specify either a Unix socket or a TCP/IP socket.

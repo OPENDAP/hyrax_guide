@@ -67,13 +67,13 @@ run-time configuration parameters, these can go in either the _bes.conf_
 or _ff.conf_ file. Here's an example sniplet from ff.conf showing how
 these are used:
 
---------------------------------------------
+----
 # 
 # Data Handler Specific key/value parameters
 #
 FF.RSSFormatSupport = yes
 FF.RSSFormatFiles = /usr/local/RSS
---------------------------------------------
+----
 
 === Who is this Guide for?
 
@@ -156,8 +156,8 @@ of field values in data files. It is shown at the beginning of a data
 list in the documentation, but does not appear in the data file itself.
 It looks something like this:
 
----------------------------------------------------
+----
 1         2         3         4         5         6
 012345678901234567890123456789012345678901234567890
----------------------------------------------------
+----
  

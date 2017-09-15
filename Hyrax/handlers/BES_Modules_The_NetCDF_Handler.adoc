@@ -106,9 +106,9 @@ Accepted values: true,yes|false,no, defaults to false.
 
 Example:
 
---------------------------
+----
 NC.IgnoreUnknownTypes=true
---------------------------
+----
 
 ==== ShowSharedDimensions
 
@@ -128,9 +128,9 @@ Accepted values: true,yes|false,no, defaults to false.
 
 Example:
 
------------------------------
+----
 NC.ShowSharedDimensions=false
------------------------------
+----
 
 ==== PromoteByteToShort
 
@@ -164,15 +164,15 @@ default C types handle the value's sign won't work. One way around this
 incompatibility is to promote _Byte_ in DAP2 to __Int16__, which is a
 signed type.
 
---------------------------------------------------------------------------------------
+----
 Accepted values: true,yes|false,no, defaults to false, the server's original behavior.
---------------------------------------------------------------------------------------
+----
 
 Example:
 
---------------------------
+----
 NC.PromoteByteToShort=true
---------------------------
+----
 
 === NetCDF to DAP Type Mappings
 

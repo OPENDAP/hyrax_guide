@@ -22,33 +22,33 @@ __/usr/local__.
 
 Parameters set in the BES configuration file have the following format:
 
-----------
+----
 Name=Value
-----------
+----
 
 If you wish to add to the value of a parameter, then you would use +=
 instead of =
 
-------------
+----
 Name=Value1
 Name+=Value2
-------------
+----
 
 The above would return the values Value1 and Value2 in the software.
 
 And if you would like to include another configuration file you would
 use the following:
 
--------------------------------------------------
+----
 BES.Include=/path/to/configuration/file/blee.conf
--------------------------------------------------
+----
 
 The bes.conf file includes all .conf files in the modules directory with
 the following:
 
------------------------------
+----
 BES.Include=modules/.*\.conf$
------------------------------
+----
 
 Note that regular expressions can be used in the Include parameter to
 match a set of files.
@@ -65,11 +65,11 @@ BES is installed in /usr/local/bin but you start it in your home
 directory using the parameter value below, the log file will be
 `bes.log` in your home directory.
 
-------------------------------------------------
+----
 BES.ServerAdministrator=webmaster@some.place.edu
 BES.LogName=./bes.log
 BES.LogVerbose=no
-------------------------------------------------
+----
 
 Because the BES is a server in its own right, you will need to tell it
 which network port and interface to use. Assuming you are running the
@@ -84,27 +84,27 @@ listen for requests to the BES. This listener is started as root, but
 then the user and group of the process is set using parameters in the
 BES configuration file.
 
---------------------
+----
 BES.User=user_name
 BES.Group=group_name
---------------------
+----
 
 You can also set these to a user id and a group id. For example:
 
--------------
+----
 BES.User=#172
 BES.Group=#14
--------------
+----
 
 == Setting the Networking Parameters
 
 In the bes.conf configuration file, we have settings for how the BES
 should listen for requests:
 
-------------------------------------------
+----
 BES.ServerPort=10022
 # BES.ServerUnixSocket=/tmp/opendap.socket
-------------------------------------------
+----
 
 The _BES.ServerPort_ tells the BES which TCP/IP port to use when
 listening for commands. Unless you need to use a different port, use the
@@ -134,9 +134,9 @@ connections at once, like a typical server. The value `single` causes it
 to accept a single connection, process the commands sent to it and exit,
 greatly simplifying trouble shooting.
 
----------------------------------
+----
 BES.ProcessManagerMethod=multiple
----------------------------------
+----
 
 == Controlling how compressed files are treated
 
@@ -188,9 +188,9 @@ _$prefix/etc/bes/modules/_
 By default, all .conf files located in the modules are loaded by the BES
 per this parameter in the bes.conf configuration file:
 
------------------------------
+----
 BES.Include=modules/.*\.conf$
------------------------------
+----
 
 So if you don't want one of the modules to be loaded, simply change it's
 name to, say, nc.conf.sav and it won't be loaded.
@@ -206,10 +206,10 @@ modules directory.
 Each module should contain within it a line that will tell the BES to
 load the module at startup:
 
-------------------------------------------------
+----
 BES.modules+=nc
 BES.module.nc=/usr/local/lib/bes/libnc_module.so
-------------------------------------------------
+----
 
 Module specific parameters will be included in its own configuration
 file. For example, any parameters specific to the netcdf data handler
@@ -233,15 +233,15 @@ will not start.
 
 In bes.conf set the following:
 
------------------------------------------------------
+----
 BES.Data.RootDirectory=/full/path/data/root/directory
------------------------------------------------------
+----
 
 Also in bes.conf set the following if using Hyrax (usually the case)
 
-----------------------------------------------------------------
+----
 BES.Catalog.catalog.RootDirectory=/full/path/data/root/directory
-----------------------------------------------------------------
+----
 
 By default, the RootDirectory parameters are set to point to the test
 data supplied with the data handlers.
@@ -255,9 +255,9 @@ the data files for the data.
 For example, in nc.conf, for the netcdf data handler module, you'll find
 the line:
 
------------------------------------------------------------
+----
 BES.Catalog.catalog.TypeMatch+=nc:.*\.nc(\.bz2|\.gz|\.Z)?$;
------------------------------------------------------------
+----
 
 When the BES is asked to perform some commands on a particular data
 source, it uses regular expressions to figure out which data handler
@@ -275,15 +275,15 @@ that data sources ending in `.dat` should use the FreeForm handler.
 
 Here's the one for the hdf4 data handler module:
 
-----------------------------------------------------------------------
+----
 BES.Catalog.catalog.TypeMatch+=h4:.*\.(hdf|HDF|eos)(\.bz2|\.gz|\.Z)?$;
-----------------------------------------------------------------------
+----
 
 And for the FreeForm handler:
 
-------------------------------------------------------------
+----
 BES.Catalog.catalog.TypeMatch+=ff:.*\.dat(\.bz2|\.gz|\.Z)?$;
-------------------------------------------------------------
+----
 
 If you fail to configure this correctly, the BES will return error
 messages stating that the type information has to be provided. However,
@@ -305,10 +305,10 @@ The Include expressions are applied to the node first, followed by the
 Exclude expressions. For collections of nodes, only the Exclude
 expressions are applied.
 
-----------------------------------
+----
 BES.Catalog.catalog.Include=;
 BES.Catalog.catalog.Exclude=^\..*;
-----------------------------------
+----
 
 == Symbolic Links
 
@@ -325,15 +325,15 @@ to be followed you need to set this to Yes.
 
 The following is set in the bes.conf file:
 
--------------------------
+----
 BES.FollowSymLinks=No|Yes
--------------------------
+----
 
 And this one is set in the dap.conf file in the modules directory:
 
------------------------------------------
+----
 BES.Catalog.catalog.FollowSymLinks=No|Yes
------------------------------------------
+----
 
 == Parameters for Specific Handlers
 

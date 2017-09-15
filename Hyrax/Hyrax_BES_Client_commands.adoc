@@ -81,7 +81,7 @@ used in the BES
 
 * <define ...>
 
-----------------------------------------------------------
+----
  <define name="definition_name" space="store_name">
      <container name="container_name">
          <constraint>legal_constraint</constraint>
@@ -89,7 +89,7 @@ used in the BES
      </container>
      <aggregate handler="someHandler" cmd="someCommand" />
  </define>
-----------------------------------------------------------
+----
 
 * creates a definition using one or more containers, constraints for
 each of the containers, attributes to be retrieved from each container,
