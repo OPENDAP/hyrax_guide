@@ -41,13 +41,16 @@ include::./handlers/Hyrax_JSON.adoc[lines="1,6..-1", leveloffset=+1]
 // NOTE: Some of this overlaps with the Appendix on Aggregation.
 // include::./handlers/BES_Modules_NcML_Module.adoc[lines="1,8..-1"]
 
-NOTE: The following two descriptions of the Gateway module need to be combined
-
 NOTE: Maybe this should its own own Appendix - just like Server
 functions and aggregations which are really loaded in via the module
 system, get their own appendix
 
 include::./handlers/BES_Modules_Gateway_Module.adoc[lines="1,6..-1", leveloffset=+1]
+
+NOTE: I think we should group all of the 'other services' that Hyrax provides
+so that it's obvious that's what's going on. The server provides the DAP API,
+but it also provides the Gateway service, Aggregation service, WMS, and (soon)
+WCS. All these services have their own web API.
 
 include::./handlers/Gateway_Service.adoc[lines="1,6..-1", leveloffset=+1]
 

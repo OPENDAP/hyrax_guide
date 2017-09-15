@@ -7,43 +7,49 @@
 == Overview
 Installing a Hyrax binary release typically involves the following:
 
-* https://www.opendap.org/software/hyrax-data-server[Download the latest Hyrax release] usually composed of:
+* https://www.opendap.org/software/hyrax-data-server[Download the
+  latest Hyrax release] usually composed of:
 ** 2 RPM files (one for _libdap_, one for the _BES_).
 ** The OLFS binary distribution file.
 * Install the _libdap_ RPM.
 * Install the _BES_ RPM.
-* Unpack the OLFS distribution file, and install the _opendap.war_ file into your Tomcat instance's _webapps_ directory.
+* Unpack the OLFS distribution file, and install the _opendap.war_
+  file into your Tomcat instance's _webapps_ directory.
 
-The detailed download and installation instructions for Hyrax are published on the download page for each release of the server. Find the latest release and its associated installation details on https://www.opendap.org/software/hyrax-data-server[the Hyrax
-downloads page].
+The detailed download and installation instructions for Hyrax are
+published on the download page for each release of the server. Find
+the latest release and its associated installation details on
+https://www.opendap.org/software/hyrax-data-server[the Hyrax downloads
+page].
 
-=== Source Code Builds
+== Source Code Builds
 If you are interested in working on Hyrax or just want to build the
 server from source code (as opposed to using the prebuilt binaries we
-provide, you can get signed source distributions from the
+provide) you can get signed source distributions from the
 https://www.opendap.org/software/hyrax-data-server[download page]
 referenced above. See also the <<for-developers, For Software
 Developers>> section below.
 
 == BES Installation
-Install the _libdap_ and _BES_ binaries is straight forward
+Installing the _libdap_ and _BES_ binaries is straight forward.
+
+TODO: We should include roughtly the same level of information here for the BES as for the OLFS.
+Also, we should look at the software distribution page and decide if that's the place to put the
+'how to start the software' information or if this is the place. jhrg 9/15/17
 
 == OLFS Installation
-
 The OLFS comes with a default configuration that is compatible with the
 default configuration of the BES. If you do a default install of each
 one you should get a running Hyrax server that will be pre-populated
 with test data suitable for running the integrity tests.
 
 === Download
-
 If you haven't already got it, go
 http://www.opendap.org/download/olfs.html[get the latest OLFS
 distribution from here]. You should get the binary jar file which will
 be named something like: _*olfs-x.x.x-webapp.tgz*_
 
 === Unpack
-
 Unpack the jar file with the command:
 ------------------------------
 tar -xvf olfs-x.x.x-webapp.tgz
@@ -51,7 +57,6 @@ tar -xvf olfs-x.x.x-webapp.tgz
 which will unpack to a directory called olfs-x.x.x-webapp
 
 === Install
-
 Inside that directory find the opendap.war file, and copy it into
 the Tomcat's webapps directory:
 ------------------------------------------------------------------------
@@ -73,7 +78,6 @@ lists of DispatchHandlers and adjust your configuration to use the same
 ones.
 
 === Setup Tomcat
-
 Configure the Tomcat environment by setting the environment variable
 CATALINA_HOME to the full path for the Tomcat distribution.
 
@@ -84,7 +88,6 @@ export CATALINA_HOME = /usr/local/apache-tomcat-6.x.x
 -----------------------------------------------------
 
 === Start Tomcat
-
 In the top level tomcat directory (apache-tomcat-6.x.x on my machine)
 issue the command:
 
@@ -97,7 +100,7 @@ Wait a few seconds while it all starts up.
 When Tomcat starts up it will unpack your '__OLFS__ and install the
 webapp.
 
- **Usage Note**: If you use _ctrl-c_ to stop watching the tail of the
+NOTE: If you use _ctrl-c_ to stop watching the tail of the
 servers output, make sure to run the command...
 
 ---------------
@@ -106,3 +109,4 @@ bin/shutdown.sh
 
 ...to shutdown Tomcat. If you don't, you may get errors when you next try
 to start the Tomcat server.
+

@@ -6,9 +6,8 @@
 
 == Gateway Service Overview
 
-// image:../images/180px-Gateway_service.jpg[]
-
-/// image:../images/magnify-clip.png[]
+image:../images/Gateway_service.jpg[]
+//image:../images/800px-Gateway_service.jpg[]
 
 The Gateway Service provides Hyrax with the ability to apply DAP
 constraint expressions and server side functions to data available
