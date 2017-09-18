@@ -15,6 +15,6 @@ clean:
 	-rm $(HTML)
 
 %.html : %.adoc
-	$(ASCIIDOC) -d book -b html5 $<
+	$(ASCIIDOC) -b html5 $<
 
 
