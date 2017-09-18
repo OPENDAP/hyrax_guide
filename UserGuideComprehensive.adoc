@@ -35,24 +35,24 @@ NOTE: There are different implementations of OPeNDAP produced by various open so
 The OPeNDAP architecture uses a client/server model, with a _client_
 that sends requests for data out onto the network to a _server_,
 that answers with the requested data. This is the same model used by
-the http://www.w3.org/hypertext/WWW/TheProject.html[World Wide Web]
+the http://www.w3.org/hypertext/WWW/TheProject.html[World Wide Web],
 where client browsers submit requests to web servers for the data that
-compose web pages. Using flexible, general-purpose data types,
+compose web pages. Using flexible, general-purpose data types
 that can easily represent scientific data, OPeNDAP servers deliver real data
 directly to client programs in the format needed by that client. In addition to the OPeNDAP data encoding, our server can return data in the following formats: NetCDF, GeoTIFF, JPEG2000, JSON, ASCII.
 // replaced with the above. jhrg
 // OPeNDAP can return data in the following formats: NetCDF, GeoTIFF, JPEG2000, JSON, // ASCII.
 
-OPeNDAP clients are very specialized browsers, constructed by linking
-new or existing data analysis programs with OPeNDAP-enabled versions
-of the data
+OPeNDAP clients are very specialized browsers, constructed in one of two ways:
+either (1) by linking new or existing data analysis programs with 
+OPeNDAP-enabled versions of the data
 // legacy --> new or existing. jhrg
-access APIs they use or by modifying programs to use one of the
+access APIs they use, or (2) by modifying programs to use one of the
 OPeNDAP data access APIs. In addition to providing a sophisticated set
 of network-compatible APIs in several languages, there are also
-libraries of legacy APIs available in OPeNDAP-aware versions. The
+libraries of legacy APIs available in OPeNDAP-aware versions; for example, the
 popular http://www.unidata.ucar.edu/downloads/netcdf/index.jsp[NetCDF]
-library, for example, can read data from remote OPeNDAP data sources as
+library can read data from remote OPeNDAP data sources as
 easily as it reads from a local file.
 // The preceding is not exactly true - there is only the netCDF
 // 'legacy' API that has been 'opendap enabled'. We planned for more,
@@ -61,21 +61,24 @@ easily as it reads from a local file.
 // I know about). jhrg
 
 To expand the universe of data available to a user, OPeNDAP incorporates
-a powerful data translation facility, so that data may be stored in data
-structures and formats that are defined by the data provider but can be accessed by the
-users just like they access of local data files on the
-user's own system. Although there are limitations on the types of data
-that may be translated (see
-xref:Translation[Translating Data Models] in this guide), the facility is flexible and general enough to handle many translations. The upshot of this is... 
+a powerful data translation facility. Data may be stored in data
+structures and formats that are defined by the data provider, yet it 
+can be accessed by users with the ease that they access local data files 
+on their own systems.
+Although there are limitations on the types of data that may be translated (see
+xref:Translation[Translating Data Models] in this guide), the facility 
+is flexible and general enough to handle many translations. The upshot of this is:
 
-* A user may not need to know that data from one set are stored in a
+* Users may not need to know that data from one set are stored in a
 format different from data in another set. Also, it may be possible
-that _neither_ data set is stored in a format readable by the original
-version of the data analysis and display program he or she uses.
-* No segment of OPeNDAP users will be cut off from accessing
-data because of its storage format. A scientist who wants to make his
-or her data available to other OPeNDAP users may do so while keeping
-that data in what may be even a highly idiosyncratic storage format.
+that _neither_ data set is stored in a format readable by the
+// original version of the  I'm not sure how the version is relavent -AP
+data analysis and display program that they use.
+
+* No OPeNDAP user will be cut off from accessing
+data because of its storage format. Scientist who wants to make their 
+data available to other OPeNDAP users may do so while keeping
+that data in what may be a highly idiosyncratic format.
 
 The combination of the OPeNDAP network communication model and the data
 translation facility make OPeNDAP a powerful tool for the retrieval,
@@ -84,16 +87,19 @@ developed by oceanographers, its application is not limited to
 oceanographic data. The organizing principles and algorithms may be
 applied to many other fields.
 
-The uniformity with which data appears, which makes the system useful
-for data analysis, also enables you to automate data transport and manipulation
+The uniformity of the data's appearance makes the system useful
+for data analysis and also enables one to automate data transport and manipulation
 tasks. For example, NOAA's
 http://ferret.pmel.noaa.gov/Ferret/LAS/home/[Live Access Server (LAS)]
-(for example, http://mynasadata.larc.nasa.gov/data.html) uses
-OPeNDAP, as do many of the real-time observing systems that make up the
+// (for example, http://mynasadata.larc.nasa.gov/data.html) 
+uses OPeNDAP, as do many of the real-time observing systems that make up the
 https://ioos.noaa.gov/[Integrated Ocean Observing System (IOOS)], such as the
 http://gomoos.org[Gulf of Maine Ocean Observing System (GoMOOS)].
 
-Users who may be interested in OPeNDAP may be divided into data consumers and data providers (and these two roles are often assumed by the same scientists). The remainder of this guide is organized around this distinction between classes of users.
+Users who are interested in OPeNDAP may be divided into data consumers 
+and data providers (roles that are often assumed by the same 
+scientists). The remainder of this guide is organized around this distinction 
+between classes of users.
 
 === The OPeNDAP Client/Server ===
 
