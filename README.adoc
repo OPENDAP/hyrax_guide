@@ -18,6 +18,16 @@ provides general information about the OPeNDAP software, the two
 versions of the Data Access Protocol (DAP) and information about
 access to remote data made available using DAP.
 
+== Hyrax Installation and Configuration Guide
+
+The
+link:https://opendap.github.io/documentation/Master_Hyrax_Table_of_Contents.html[Hyrax Installation and Configuration Guide]
+link:https://opendap.github.io/documentation/Master_Hyrax_Table_of_Contents.pdf[(PDF)]
+provides information about the Hyrax Data Server. In this guide you
+will find a description of the server's featrues and all of its
+configuration parameters. Also described in teh guide are other web
+services that Hyrax provides, including WMS and WCS.
+
 == Notes about this repository
 
 === Building CommonMark from AsciiDoc
