@@ -4,8 +4,6 @@
 :numbered:
 :toc:
 
-:tabsize: 4
-
 // Handlers for different data formats - sources of data
 include::./handlers/BES_Modules_CSV_Handler.adoc[lines="1,6..-1", leveloffset=+1]
 

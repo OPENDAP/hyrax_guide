@@ -19,8 +19,6 @@ the second part of this appendix, we discuss user-specified
 aggregations. These aggregations currently use a new interface to the
 Hyrax server.
 
-:tabsize: 4
-
 include::./handlers/BES_Modules_NcML_Module.adoc[lines="1,6..-1", leveloffset=+1]
 
 [[join_new_aggregation]]

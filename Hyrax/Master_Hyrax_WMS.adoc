@@ -51,9 +51,7 @@ image:../images/ToolsUI-GridView.png[]
 
 ToolsUI Grid View
 
-----
-Note that ToolsUI supports opening both local files and remote (http accessible) datasets.
-----
+NOTE: ToolsUI supports opening both local files and remote (http accessible) datasets.
 
 == WMS Installation (suggested)
 
@@ -69,16 +67,16 @@ _$CATALINA_HOME/webapps_ directory
 
 * Restart Tomcat
 
-== OLFS/Hyrax Installation
+== Hyrax Installation
 
 As of the release of Hyrax 1.11 (and in particular OLFS 1.13.0) the
-support for WMS will be built into the server. All that is required is a
+support for WMS is built into the server. All that is required is a
 (collocated) ncWMS2 instance and then the configuration steps as
 detailed below. So - get the latest Hyrax (1.11.0 or later) install and
 configure using the normal methods and then follow the configuration
 steps detailed below.
 
-== Co-Configuration
+=== Co-Configuration
 
 The following sub sections assume that you have installed both Hyrax and
 the ncWMS2 on your server in a single Tomcat instance running on port
@@ -112,8 +110,8 @@ This configuration stipulates that access to the _ncWMS2/admin_ pages
 must be over a secure transport and that there will be no access without
 authentication  in the *`manager`* role:
 
+[source,xml]
 ----
-
 <!-- Define a Security Constraint on the Admin command and user interfaces -->
 <security-constraint>
     <web-resource-collection>
@@ -129,7 +127,6 @@ authentication  in the *`manager`* role:
         <transport-guarantee>CONFIDENTIAL</transport-guarantee>
     </user-data-constraint>
 </security-constraint>
-
 ----
 
 .Your choices
@@ -161,10 +158,10 @@ ncWMS2.
 Now that you can get to it, go to the ncWMS2 administration page:
 http://servername.org:8080/ncWMS2/admin/
 
-*NB:* _Any changes you make to the `web.xml` are volatile!
+NOTE: Any changes you make to the `web.xml` are volatile!
 Installing/Upgrading/Reinstalling the web archive (.war) file will
 overwrite `web.xml` file. Make a back-up copy of the `web.xml` in a
-different, more durable location._
+different, more durable location.
 
 ==== Configure a Dynamic Service
 
@@ -194,30 +191,28 @@ cumbersome then just use '.*' (as in the example) which matches
 everything.
 * Scroll to the bottom of the page and save the configuration.
 
-*Summary*
-
+.Creating a Dynamic Services Entry for Hyrax in the ncWMS2 Admin Page
 [width="100%",cols="16%,12%,12%,12%,12%,12%,12%,12%",options="header",]
-|=======================================================================
+|====
 |Unique ID |Service URL |Dataset Match Regex |Disabled? |Remove |Data
 Reading Class |Link to more info |Copyright Statement
 |lds |http://localhost:8080/opendap |.* | | | | |
-|=======================================================================
+|====
 
 === Hyrax Configuration
 
 The Hyrax WMS configuration is contained in the file
-__$OLFS_CONFIG_DIR/viewers.xml__. This file identifies data viewers and
+`$OLFS_CONFIG_DIR/viewers.xml`. This file identifies data viewers and
 Web Services that Hyrax can provide for datasets. There are two relevant
 sections, the first defines Hyrax's view of the WMS service and the
 second enables Hyrax to provide access to the Godiva service that is
 part of ncWMS.
 
- Edit the file _$OLFS_CONFIG_DIR/viewers.xml_
+Edit the file `$OLFS_CONFIG_DIR/viewers.xml`
 
- Uncomment the following sections:
-
+Uncomment the following sections:
+[source,xml]
 ----
-
 <!--
     <WebServiceHandler className="opendap.viewers.NcWmsService" serviceId="ncWms" >
         <applicationName>Web Mapping Service</applicationName>
@@ -232,12 +227,11 @@ part of ncWMS.
 -->
 ----
 
-==== NcWmsServce
+=== NcWmsServce
 
 In the first section...
-
+[source,xml]
 ----
-
 <WebServiceHandler className="opendap.viewers.NcWmsService" serviceId="ncWms" >
     <applicationName>Web Mapping Service</applicationName>
     <NcWmsService href="/ncWMS2/wms" base="/ncWMS2/wms" ncWmsDynamicServiceId="lds" />
@@ -254,18 +248,16 @@ locate the ncWMS service. If the ncWMS instance is NOT running on the
 same host as Hyrax, the values of the _href_ and _base_ attributes
 must be converted to fully qualified URLs.
 
-==== GodivaWebService
+=== GodivaWebService
 
 In the second section...
-
+[source,xml]
 ----
-
 <WebServiceHandler className="opendap.viewers.GodivaWebService" serviceId="godiva" >
     <applicationName>Godiva WMS GUI</applicationName>
     <NcWmsService href="http://yourNcWMSserver:8080/ncWMS2/wms" base="/ncWMS2/wms" ncWmsDynamicServiceId="lds"/>
     <Godiva href="/ncWMS2/Godiva3.html" base="/ncWMS2/Godiva3.html"/>
 </WebServiceHandler>
-
 ----
 
 Edit the _NcWmsService_ element so that...
@@ -282,14 +274,13 @@ URL paths to locate the Godiva service. If the ncWMS2 instance is NOT
 running on the same host as Hyrax then the values of the _href_ and
 _base_ attributes must be converted to fully qualified URLs.
 
-===== Apache Configuration
+=== Apache Configuration
 
 If you are running Hyrax with Apache linked to Tomcat (a fairly simple
 configuration described here), then add the following to the
 _httpd.conf_ file:
 
 ----
-
 # This is needed to configure ncWMS2 so that it will work when               
 # users access Hyrax using Apache (port 80). Because Godiva was             
 # configured in the olfs viewers.xml using <hostname>:8080, the             
@@ -313,7 +304,6 @@ dataset.
 WMS and Godiva links.
 * Try 'em.
 
-
 == Issues
 
 === Known Logging Issue
@@ -329,8 +319,7 @@ Tomcat and it's components including the ncWMS and Hyrax applications)
 The issue appears in the Tomcat log as a failure to lock files
 associated with the java.util.prefs.FileSystemPreferences:
 
-----
-
+....
 Dec 12, 2014 1:17:28 PM java.util.prefs.FileSystemPreferences checkLockFile0ErrorCode
 WARNING: Could not lock System prefs. Unix error code 32612.
 Dec 12, 2014 1:17:28 PM java.util.prefs.FileSystemPreferences syncWorld
@@ -339,7 +328,7 @@ Dec 12, 2014 1:17:58 PM java.util.prefs.FileSystemPreferences checkLockFile0Erro
 WARNING: Could not lock System prefs. Unix error code 32612.
 Dec 12, 2014 1:17:58 PM java.util.prefs.FileSystemPreferences syncWorld
 WARNING: Couldn't flush system prefs: java.util.prefs.BackingStoreException: Couldn't get file lock.
-----
+....
 
 And is logged every 30 seconds or so. So the problem is the logs fill up
 with this issue and not stuff we care about. The problem is that the
@@ -361,10 +350,10 @@ We found and tested these two ways to solve it:
 1) Create the global System Preference directory and set the owner to
 the Tomcat user:
 
----- 
+....
    sudo mkdir -P /etc/.java/.systemPrefs
    sudo chown -R tomcat-user /etc/.java/.systemPrefs
-----
+....
 
 This could also be accomplished by changing the group ownership to the
 tomcat-group and setting the group read/write flags.
@@ -376,16 +365,15 @@ directory.
 
 Create the directory:
 
-----
-
+....
    mkdir -P /home/tomcat-user/.java/.systemPrefs
    sudo chown -R tomcat-user /home/tomcat-user/.java/.systemPrefs
-----
+....
 
 Then, in each shell that launches Tomcat...
 
-----
-
+....
    export JAVA_OPTS="-Djava.util.prefs.systemRoot=/home/tomcat-user/.java"
    $CATALINA_HOME/bin/startup.sh
-----
+....
+

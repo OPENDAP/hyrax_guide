@@ -37,7 +37,8 @@ that's of no concern to the BES).
 *Need a description and such here.
 
 == BES Error Response
-
+// Shows line numbers [source,xml,linenums]. jhrg 9/17/17
+[source,xml]
 ----
 <BES>
     <response reqID="####">

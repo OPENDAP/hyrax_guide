@@ -6,6 +6,14 @@
 :tabsize: 4
 :indent: 4
 :doctype: book
+:source-highlighter: coderay
+:coderay-linenums-mode: inline
+:prewrap!:	// Disable line wrapping in litteral blocks. jhrg 9/17/17
+
+// See http://asciidoctor.org/docs/user-manual/#source-code-blocks
+// for information about source highlighting options.
+// Also see http://coderay.rubychan.de/ for information about supported
+// languages. jhrg 9/17/17
 
 [preface]
 include::preface.adoc[lines="1,6..-1", leveloffset=+1]

@@ -19,6 +19,13 @@ asciidoc.
 
 **warnings.txt** Same as above, but for 'WARNING:'
 
+Added jhrg 9/17/17
+* Use `----` for the delimeters for source code
+* Use `....` for the delimeters for litteral text like shell input
+* Use [source,xml] as a prefix to the source blocks (change language
+as needed). See info about coderay (http://coderay.rubychan.de/) for
+the allowed set.
+
 ## Notes about specific adoc files
 
 ### preface.adoc
