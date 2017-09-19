@@ -1,33 +1,47 @@
-= Hyrax WMS Service
-:Leonard Porrello <lporrel@gmail.com>:
+= Hyrax WCS Service
+:James Gallagher <jgallagher@opendap.org>:
 {docdate}
 :numbered:
 :toc:
 
 == Overview
 
-Using the Dynamic Services feature in the
-http://www.resc.rdg.ac.uk/trac/ncWMS/[ncWMS2 WMS Server] from
-http://www.resc.reading.ac.uk/[Reading e-Science Centre], Hyrax can 
-provide WMS services for all of it's appropriate holdings.
+Hyrax includes an optional WCS, version 2, service that can be used to
+access all of the geo-referenced data available to the server that
+meet the requirements of the WCS 2 specification. This appendix
+describes the the kinds of data that meet these requirements along
+with the installation and configuration process of the optional WCS
+service. 
 
 == Theory of Operation
 
-In an instance of the ncWMS2 WMS server, a Dynamic Service is configured
-that points to a Hyrax server. This allows the ncWMS2 instance to access
-all of the holdings of the DAP server. However, the ncWMS2 does not
-"crawl" or "discover" or in any other way catalog or inventory the DAP
-server. Instead, the user configures the Hyrax server to add the WMS
-service to its catalogs and services content. Hyrax then directs WMS
-traffic to the ncWMS2 instance. The ncWMS2 in turn retrieves the data
-directly from Hyrax and services the request.
+The operation of the WCS service is similar to that of the
+xref:WMS_Service[WMS service] described elsewhere in this manual. The
+WCS service provides access to data served using DAP through a Dynamic
+Service Interface. The WCS service is configured to read data served
+by a DAP server (e.g., a Hyrax server) and builds the WCS responses
+dynamically by accessing the data from the DAP server as those WCS
+responses are requested.
 
-The ncWMS2 instance may be hosted anywhere, however for a significant
-performance improvement we suggest you host your own ncWMS2 running in
-the same Tomcat instance as Hyrax's OLFS. With such a configuration, the
-WMS response performance for datasets, backed by the DAP service, is
-nearly as fast as the ncWMS2 response performance using direct file
-access.
+However, unlike the WMS service, the WCS is more tightly integrated
+into the Hyrax server's data catalog pages. There is no separate WCS
+catalog, per se, and instead the Hyrax catalogs' _viewers_ pages are
+used to access the WCS service interface for a particular dataset.
+This level of integration simplifies configuration.
+
+Because the links used to access the WCS service are incorporated into
+the web pages provided by Hyrax, the ability to easily reference data
+from other servers is not made available in the software we provide
+(although it the service could be configured that way if a new catalog
+system were added).
+
+The WCS service attempts to auto-configure data sets so that the data
+provider need not learn all of the details of the WCS specifications.
+However, to accommodate situations where the needed metadata cannot be
+read from the dataset, the WCS service can read values from a
+configuration file.
+
+WARNING: Old text beyond here.
 
 == Evaluating Candidate Datasets
 
@@ -284,7 +298,7 @@ _httpd.conf_ file:
 # This is needed to configure ncWMS2 so that it will work when               
 # users access Hyrax using Apache (port 80). Because Godiva was             
 # configured in the olfs viewers.xml using <hostname>:8080, the             
-# Godiva WMS service works when Hyrax is accesed over port 8080             
+# Godiva WMS service works when Hyrax is accessed over port 8080             
 # too.                                                                      
 ProxyPass /ncWMS2 ajp://localhost:8009/ncWMS2
 ----

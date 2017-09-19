@@ -105,8 +105,13 @@ include::Master_Troubleshooting.adoc[lines="1,6..-1", leveloffset=+1]
 // The [appendix] macro gives the following sections the correct numbering 
 
 // Install and configure Hyrax support for the OGC web mapping services protocol.
+[[WMS_Service]]
 [appendix]
 include::Master_Hyrax_WMS.adoc[lines="1,8..-1", leveloffset=+1] 
+
+[[WCS_Service]]
+[appendix]
+include::WCS_Service.adoc[lines="1,8..-1", leveloffset=+1] 
 
 // Specific configuration parameters for various Hyrax modules
 [appendix]
