@@ -3,12 +3,13 @@
 {docdate}
 :numbered:
 :toc: left
+:icons: font
 :tabsize: 4
 :indent: 4
 :doctype: book
 :source-highlighter: coderay
 :coderay-linenums-mode: inline
-:prewrap!:	// Disable line wrapping in litteral blocks. jhrg 9/17/17
+:prewrap!:
 
 // See http://asciidoctor.org/docs/user-manual/#source-code-blocks
 // for information about source highlighting options.
@@ -105,8 +106,13 @@ include::Master_Troubleshooting.adoc[lines="1,6..-1", leveloffset=+1]
 // The [appendix] macro gives the following sections the correct numbering 
 
 // Install and configure Hyrax support for the OGC web mapping services protocol.
+[[WMS_Service]]
 [appendix]
 include::Master_Hyrax_WMS.adoc[lines="1,8..-1", leveloffset=+1] 
+
+[[WCS_Service]]
+[appendix]
+include::WCS_Service.adoc[lines="1,8..-1", leveloffset=+1] 
 
 // Specific configuration parameters for various Hyrax modules
 [appendix]

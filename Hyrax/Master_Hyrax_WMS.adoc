@@ -1,4 +1,4 @@
-= Hyrax WMS
+= Hyrax WMS Service
 :Leonard Porrello <lporrel@gmail.com>:
 {docdate}
 :numbered:
