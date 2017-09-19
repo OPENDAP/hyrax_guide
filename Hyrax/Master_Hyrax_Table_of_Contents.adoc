@@ -3,12 +3,12 @@
 {docdate}
 :numbered:
 :toc: left
-:icons: font
+:icons: font // show the icons in the admonition text (must be here)
 :tabsize: 4
 :indent: 4
 :doctype: book
 :source-highlighter: coderay
-:coderay-linenums-mode: inline
+:coderay-linenums-mode: inline // add 'linenums' to [source, ...]
 :prewrap!:	// Disable line wrapping in litteral blocks. jhrg 9/17/17
 
 // See http://asciidoctor.org/docs/user-manual/#source-code-blocks
