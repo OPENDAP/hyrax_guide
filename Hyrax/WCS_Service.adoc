@@ -41,54 +41,107 @@ However, to accommodate situations where the needed metadata cannot be
 read from the dataset, the WCS service can read values from a
 configuration file.
 
-WARNING: Old text beyond here.
+NOTE: The _Open Geospatial Consortium_ has many documents that
+describe the concept of a _coverage_. The
+link:http://www.opengeospatial.org/standards/wcs[suite of
+specifications that describe WCS] can be found on their web site.
 
-== Evaluating Candidate Datasets
+== Candidate Datasets
 
-In order for ncWMS2 to recognize your dataset as valid for service, your
-data must meet the following requirements:
+In order for the WCS service to work with a dataset served using DAP,
+that dataset must contain one or more _coverages_, dataset variables
+that meet fairly strict requirements for both strucurte and metadata.
+To qualify as a WCS coverage, a variable in a dataset must satisfy the
+following criteria:
 
-* Contain gridded data (as DAP Grid objects or DAP Array objects
-utilizing shared dimensional coordinate arrays)
-**http://www.unidata.ucar.edu/software/thredds/v4.3/netcdf-java/tutorial/GridDatatype.html[as
-described by the Unidata Common Data Model]**.
-* The NetCDF-Java library (which is what provides data access services
-for ncWMS2) utilizes the Common Data Model and must be able to identify
-the coordinates system used. You can test this by using the
- *http://www.unidata.ucar.edu/software/thredds/current/netcdf-java/documentation.htm[Unidata
-ToolsUI application]* (which is also based on the NetCDF-Java library).
-Open your dataset with **ToolsUI**, and in the *Feature Types -> Grid
-Panel* there should be one or more variables shown with some kind of
-coordinate system.
+* The variable must have an associated _Spatial Reference System_
+  (SRS) that describes the organization of latitude and longitude for
+  the variable. The SRS also provides geo-referencing information that
+  enables analysis tools to account for irregularities in the Earth's
+  geoid. In practice, Hyrax is often used with data that have global
+  extent and so the SRS is _WGS84_ (aka _EPSG 4396_), and the current
+  version of the WCS service uses that SRS by default.
+  
+* The variable's fastest varying dimensions (e.g., the right-most
+  dimensions in most system's representations) must be axes defined by
+  the SRS (i.e., longitude and latitude) and they must match the SRS's
+  axis' order.
 
-image:../images/ToolsUI-GridView.png[]
+* Other dimentions of the variable (e.g., ensamble set) must be 'to
+  the left' of the dimensions defined by the SRS.
 
-ToolsUI Grid View
+* The SRS's axes define the _range_ of the coverage; the _domain_ of
+  the coverage is value of the variable. This value must have an
+  associated _unit of measure_.
 
-NOTE: ToolsUI supports opening both local files and remote (http accessible) datasets.
+WARNING: The above might be wrong and is probably missing stuff. If
+so, fix; if not, remove this note.
 
-== WMS Installation (suggested)
+== WCS Installation (suggested)
 
-The ncWMS2 web application is easy to install.
+The WCS 2 Service web application is easy to install.
 
-Simply...
+To add o the WCS 2 service to an running installtion of Hyrax, simply...
 
-* Retrieve the latest stable release from
-https://github.com/Reading-eScience-Centre/edal-java/releases
+* Install and configure any version of Hyrax later than 1.13.5. See
+  the link:https://www.opendap.org/software/hyrax-data-server[Hyrax
+  download and installation page] and this guide for configuration
+  information.
 
-* Copy the WAR files _ncWMS2.war_ and _opendap.war_ into the
-_$CATALINA_HOME/webapps_ directory
+* Retrieve the latest stable release of the WCS 2 Service from
+  link:https://www.opendap.org/software/hyrax-data-server[the Hyrax
+  Server Release web page].
+
+* Copy the WAR files _WCS-2.0.war_ into the _webapps_ directory of
+  Tomcat (e.g., _/usr/share/tomcat/webaps_ if you are using the RPM
+  package version of Tomcat on RedHat Linux, or more generally,
+  _$CATALINA_HOME/webapps_) 
 
 * Restart Tomcat
 
-== Hyrax Installation
+NOTE: While we don't test other servlet engines, users have reported
+that our Web Archive files work with alternatives to Tomcat (e.g.,
+GlassFish).
 
-As of the release of Hyrax 1.11 (and in particular OLFS 1.13.0) the
-support for WMS is built into the server. All that is required is a
-(collocated) ncWMS2 instance and then the configuration steps as
-detailed below. So - get the latest Hyrax (1.11.0 or later) install and
-configure using the normal methods and then follow the configuration
-steps detailed below.
+== Setting Dataset Fallback Values
+
+Because WCS requires certain metadata to work (where as, DAP can
+function with nothing more than a variable's name and type), our
+service provides a way to user WCS with datasets that natively lack
+the required WCS metadata. We do this using a pair of configuration
+files. These files use a simple XML document combined with regular
+expressions to establish default values for different groups of
+datasets.
+
+The configuration information is held in two different files, one that
+defines a named set of default parameters for a group of files and one
+that binds that set of parameters using the name) to a group of files
+(using a regular expression). The first of these two files is
+_wcs_service.xml_ which can be found in _FIXME_.
+
+.wcs_service.xml
+[source,xml,linenums]
+----
+<WcsService>
+    <WcsCatalog className="opendap.wcs.v2_0.DynamicServiceCatalog" >
+        <DynamicService name="lds" href="http://localhost:8080/opendap/"> <!--1-->
+            <DefaultSRS name="urn:ogc:def:crs:EPSG::4326"> <!--2-->
+                <axisLabels>latitude longitude</axisLabels>
+                <uomLabels>deg deg</uomLabels>
+                <srsDimension>2</srsDimension>
+            </DefaultSRS>
+        </DynamicService>
+    </WcsCatalog>
+</WcsService>
+----
+<1> The Dynamic Service definition, this links this information with the
+dataset(s) describd in the _FIXME_ file that can be found in the
+_FIXME_ directory.
+<2> The _DefaultSRS_ element defines the axis labels, order, units and
+number of dimensions for the SRS that will be used for any dataset
+that does not contain an explicit SRS definition.
+
+WARNING: This is where I stopped editing.
 
 === Co-Configuration
 
@@ -262,132 +315,5 @@ locate the ncWMS service. If the ncWMS instance is NOT running on the
 same host as Hyrax, the values of the _href_ and _base_ attributes
 must be converted to fully qualified URLs.
 
-=== GodivaWebService
-
-In the second section...
-[source,xml]
-----
-<WebServiceHandler className="opendap.viewers.GodivaWebService" serviceId="godiva" >
-    <applicationName>Godiva WMS GUI</applicationName>
-    <NcWmsService href="http://yourNcWMSserver:8080/ncWMS2/wms" base="/ncWMS2/wms" ncWmsDynamicServiceId="lds"/>
-    <Godiva href="/ncWMS2/Godiva3.html" base="/ncWMS2/Godiva3.html"/>
-</WebServiceHandler>
-----
-
-Edit the _NcWmsService_ element so that...
-
-* The value of the _href_ attribute is the fully qualified URL for
-public access to your WMS service. The server name in this _href_ should
-not be _localhost_ - Godiva won't work for users on other computers if
-you use _localhost_ for the host name.
-* The value of the _ncWmsDynamicServiceId_ matches the _Unique ID_ of
-the Dynamic Service you defined in ncWMS2.
-
-The _Godiva_ element's _href_ and _base_ attributes both use relative
-URL paths to locate the Godiva service. If the ncWMS2 instance is NOT
-running on the same host as Hyrax then the values of the _href_ and
-_base_ attributes must be converted to fully qualified URLs.
-
-=== Apache Configuration
-
-If you are running Hyrax with Apache linked to Tomcat (a fairly simple
-configuration described here), then add the following to the
-_httpd.conf_ file:
-
-----
-# This is needed to configure ncWMS2 so that it will work when               
-# users access Hyrax using Apache (port 80). Because Godiva was             
-# configured in the olfs viewers.xml using <hostname>:8080, the             
-# Godiva WMS service works when Hyrax is accessed over port 8080             
-# too.                                                                      
-ProxyPass /ncWMS2 ajp://localhost:8009/ncWMS2
-----
-
-This will form the linkage needed to access the Godiva interface when
-people access your server using Apache. Note that by using port _8080_
-in _yourNcWMSserver:8080_ for the value of the _WebServiceHandler_
-element, people will be able to access Godiva when talking to Hyrax
-directly via Tomcat. This configuration covers both access options.
-
-== Start and Test
-
-* Once the configuration steps are complete, restart your Tomcat server.
-* Point your browser at the Hyrax sever and navigate to a WMS-suitable
-dataset.
-* Clicking the dataset's *Viewers* link should return a page with both
-WMS and Godiva links.
-* Try 'em.
-
 == Issues
-
-=== Known Logging Issue
-
-* _Applies to ncWMS version 1.x_
-
-There is a small issue with deploying this configuration onto some Linux
-system in which everything has been installed from RPM (except maybe
-Tomcat and it's components including the ncWMS and Hyrax applications)
-
-==== The Symptom
-
-The issue appears in the Tomcat log as a failure to lock files
-associated with the java.util.prefs.FileSystemPreferences:
-
-....
-Dec 12, 2014 1:17:28 PM java.util.prefs.FileSystemPreferences checkLockFile0ErrorCode
-WARNING: Could not lock System prefs. Unix error code 32612.
-Dec 12, 2014 1:17:28 PM java.util.prefs.FileSystemPreferences syncWorld
-WARNING: Couldn't flush system prefs: java.util.prefs.BackingStoreException: Couldn't get file lock.
-Dec 12, 2014 1:17:58 PM java.util.prefs.FileSystemPreferences checkLockFile0ErrorCode
-WARNING: Could not lock System prefs. Unix error code 32612.
-Dec 12, 2014 1:17:58 PM java.util.prefs.FileSystemPreferences syncWorld
-WARNING: Couldn't flush system prefs: java.util.prefs.BackingStoreException: Couldn't get file lock.
-....
-
-And is logged every 30 seconds or so. So the problem is the logs fill up
-with this issue and not stuff we care about. The problem is that the
-files/directories in question either don't exist, or, if they do exist
-the Tomcat user does not have read/write permissions on them.
-
-==== The Fix
-
-We looked around and discovered that a number of people (including TDS
-deployers) had experienced this issue. It's a Linux problem and involves
-the existence and permissions of a global system preferences directory.
-We think this is only an issue on Linux systems in which everything is
-installed via yum/rpm, which may be why we only see this problem on
-certain systems, but we're not 100% confident that the issue is limited only
-to this type of installation.
-
-We found and tested these two ways to solve it:
-
-1) Create the global System Preference directory and set the owner to
-the Tomcat user:
-
-....
-   sudo mkdir -P /etc/.java/.systemPrefs
-   sudo chown -R tomcat-user /etc/.java/.systemPrefs
-....
-
-This could also be accomplished by changing the group ownership to the
-tomcat-group and setting the group read/write flags.
-
-2) Create a java System Preference directory for the "tomcat-user"
-(adjust name that for your circumstance) and then set the JAVA_OPTS
-environment variable so that the systemRoot value is set the new
-directory.
-
-Create the directory:
-
-....
-   mkdir -P /home/tomcat-user/.java/.systemPrefs
-   sudo chown -R tomcat-user /home/tomcat-user/.java/.systemPrefs
-....
-
-Then, in each shell that launches Tomcat...
-
-....
-   export JAVA_OPTS="-Djava.util.prefs.systemRoot=/home/tomcat-user/.java"
-   $CATALINA_HOME/bin/startup.sh
-....
 
