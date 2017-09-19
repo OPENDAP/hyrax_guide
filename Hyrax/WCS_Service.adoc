@@ -117,14 +117,15 @@ The configuration information is held in two different files, one that
 defines a named set of default parameters for a group of files and one
 that binds that set of parameters using the name) to a group of files
 (using a regular expression). The first of these two files is
-_wcs_service.xml_ which can be found in _FIXME_.
+_wcs_service.xml_ which can be found in  _WCS-2.0/WEB-INF/conf/_ and is
+shown below.
 
 .wcs_service.xml
 [source,xml,linenums]
 ----
 <WcsService>
     <WcsCatalog className="opendap.wcs.v2_0.DynamicServiceCatalog" >
-        <DynamicService name="lds" href="http://localhost:8080/opendap/"> <!--1-->
+        <DynamicService name="tb13" href="http://localhost:8080/opendap/"> <!--1-->
             <DefaultSRS name="urn:ogc:def:crs:EPSG::4326"> <!--2-->
                 <axisLabels>latitude longitude</axisLabels>
                 <uomLabels>deg deg</uomLabels>
@@ -134,12 +135,42 @@ _wcs_service.xml_ which can be found in _FIXME_.
     </WcsCatalog>
 </WcsService>
 ----
-<1> The Dynamic Service definition, this links this information with the
-dataset(s) describd in the _FIXME_ file that can be found in the
-_FIXME_ directory.
+
+<1> The _DynamicService_ definition, this links this information with the
+dataset(s) describd in the _viewers.xml_ file that can be found in the
+_opendap/WEB-INF/conf/_ directory.
+
 <2> The _DefaultSRS_ element defines the axis labels, order, units and
 number of dimensions for the SRS that will be used for any dataset
 that does not contain an explicit SRS definition.
+
+The second file is _viewers.xml_ found in the _opendap/WEB-INF/conf/_,
+shown below.
+
+.viewers.xml
+[source,xml,linenums]
+----
+<ViewersConfig>
+    ...
+    <WebServiceHandler className="opendap.viewers.WcsService" serviceId="WCS-TB13" >
+        <ApplicationName>Testbed-13 WCS Service</ApplicationName>
+        <ServiceEndpoint>http://localhost:8080/WCS-2.0/</ServiceEndpoint>
+        <DynamicServiceId>tb13</DynamicServiceId>	<!--1-->
+       <MatchRegex>/testbed-13/.*</MatchRegex>	<!--2-->
+     </WebServiceHandler>
+    ...
+</ViewersConfig>
+----
+
+<1> The _DynamicServiceId_ names a particular set of default SRS
+values in the _wcs_service.xml_ file show above. In this example the
+name _tb13_ in both documents connects the two sections. Note that the
+element is called _DynamicService_ in the _wcs_service.xml_ file.
+
+<2> This is the regular expression that defines the data that the
+Service accesses. If datasets that match the regular expression
+don't have the needed metadata, they will use the defaults from the
+_tb13_ section of the _wcs_service.xml_ file.
 
 WARNING: This is where I stopped editing.
 
