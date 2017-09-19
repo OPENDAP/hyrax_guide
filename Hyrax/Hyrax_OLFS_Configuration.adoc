@@ -61,7 +61,7 @@ The remainder of this document is concerned with how to correctly
 configure the Hyrax and Viewers servlets - the primary components of the
 OLFS web application.
 
-== OLFS Configuration Location
+=== OLFS Configuration Location
 
 Beginning with olfs-1.15.0 (part of hyrax-1.13.0) the OLFS will use the
 following procedure to locating it's configuration:
@@ -104,7 +104,7 @@ __$CATALINA_HOME/content/opendap__. This caused bootstrap problems when
 the OLFS tried to set itself up on a Linux system in which the Tomcat
 installation had been done via RPM.
 
-== OLFS Files
+=== OLFS Files
 
 The OLFS web application gets its configuration from 4 files. In general
 all of your configuration need will be met by making changes to the
@@ -786,19 +786,19 @@ Hyrax does not currently support HTTP POST requests.
  
 </OLFSConfig>
 ----
-
+\\Why isn't this its own file?
 == THREDDS Configuration *catalog.xml* File
 
 The *catalog.xml* file contains the static THREDDS catalog configuration
 for Hyrax. link:./Hyrax_THREDDS_Configuration.adoc[Read About It
 Here].
 
-== Logging Configuration (**logback.xml** file)
+=== Logging Configuration (**logback.xml** file)
 
 The *logback.xml* file contains the logging configuration for Hyrax.
 link:./Hyrax_Logging_Configuration.adoc[Read About It Here].
 
-== *web.xml* Configuration File
+=== *web.xml* Configuration File
 
 _We strongly recommend that you do *NOT* mess with the web.xml file. At
 least for now. Future versions of Server and the OLFS may have "user
@@ -806,7 +806,7 @@ configurable" stuff in the web.xml file, but this version does not. *SO
 JUST DON'T DO IT. OK?*_ Having said that, here are the details regarding
 the web.xml file:
 
-=== Servlet Definition
+==== Servlet Definition
 
 The OLFS running in the opendap context area needs an entry in the
 *web.xml* file. Multiple instances of a servlet and/or several different
@@ -862,14 +862,14 @@ _http://hostname/opendap/argos_
 Eliminating the need for the word servlet in the URL. For more on the
 <__servlet-mapping__> element see the Jakarta-Tomcat documentation.
 
-=== <init-param> Elements
+==== <init-param> Elements
 
 The OLFS uses <init-param> elements inside of each <servlet> element to
 get specific configuration information.
 
 <init-param>'s common to all OPeNDAP servlets are:
 
-==== OLFSConfigFileName
+===== OLFSConfigFileName
 
 This parameter identifies the name of the XML document file that
 contains the OLFS configuration. This file must be located in the
@@ -884,7 +884,7 @@ For example:
     </init-param>
 ----
 
-==== DebugOn
+===== DebugOn
 
 This controls output to the terminal from which the servlet engine was
 launched. The value is a list of flags that turn on debugging
@@ -911,7 +911,7 @@ __Default__: If this parameter is not set, or the value field is empty
 then these features will be disabled - which is what you want unless
 there is a problem to analyze.
 
-=== Example of web.xml Content
+==== Example of web.xml Content
 
 ----
 <servlet>
@@ -945,7 +945,7 @@ there is a problem to analyze.
 </servlet-mapping>
 ----
 
-== Viewers Servlet (**viewers.xml** file)
+=== Viewers Servlet (**viewers.xml** file)
 
 The Viewers servlet provides, for each dataset, and HTML page containing
 links to Java WebStart applications and to WebServices (such as WMS)
@@ -953,13 +953,13 @@ that can be utilized in conjunction with the dataset. The Viewers
 servlet is configured via the contents of the *viewers.xml* file located
 in the persistent content directory $CATALINA_HOME/content/opendap.
 
-=== *viewers.xml* Configuration File
+==== *viewers.xml* Configuration File
 
-==== *<JwsHandler>* Elements
+===== *<JwsHandler>* Elements
 
-==== *<WebServiceHandler>* Elements
+===== *<WebServiceHandler>* Elements
 
-==== Example Configuration
+===== Example Configuration
 
 ----
 <ViewersConfig>
@@ -988,7 +988,7 @@ in the persistent content directory $CATALINA_HOME/content/opendap.
 </ViewersConfig>
 ----
 
-== Docs Servlet
+=== Docs Servlet
 
 The Docs (or documentation) servlet provides the OLFS web application
 with the ability to serve a tree of static documentation files. By
@@ -1030,13 +1030,13 @@ In the Docs servlet, if a URL ends in a directory name or a "/" then the
 servlet will attempt to serve the *index.html* in that directory. In
 other words *index.html* is the default document.
 
-== Logging
+=== Logging
 
 Logging is a big enough subject to get link:./Hyrax_Logging_Configuration.com[it's own page.]
 
-== Authentication and Authorization
+=== Authentication and Authorization
 
-=== Apache Web Server (httpd)
+==== Apache Web Server (httpd)
 
 *If your organization desires secure access and authentication layers
 for Hyrax the recommended method is to use Hyrax in conjunction the
@@ -1054,7 +1054,7 @@ Apache Web Server.]
 * link:./Master_Hyrax_-\_User_Identification_(Authentication).adoc[Configuring
 Hyrax and Apache for User Authentication and Authorization]
 
-=== Tomcat
+==== Tomcat
 
 Hyrax may be used with the security features implemented by Tomcat for
 authentication and authorization services.
@@ -1094,7 +1094,7 @@ Examples of security content for the web.xml file can be found in the
 persistent content directory of the Hyrax server, which by default is
 located at __$CATALINA_HOME/content/opendap/__.
 
-=== Limitations
+==== Limitations
 
 Officially Tomcat security supports _context_ level authentication. What
 this means is that you can restrict access to the collection of servlets
@@ -1161,7 +1161,7 @@ this _realm-name_ (defined in the <__login-config__> element in the
 web.xml file - see above), resends the authentication information, and,
 since it's not valid for that url pattern, the request is denied.
 
-=== Persistence
+==== Persistence
 
 You should be careful to back up your modified *web.xml* file to a
 location outside of the _$CATALINA_HOME/webapps/opendap_ directory as
@@ -1211,7 +1211,7 @@ version of Hyrax is installed, but adding the _ENTITY_ stuff to the new
 *web.xml* file would be easier than remembering an extensive security
 configuration. Of course, Y.M.M.V.
 
-== Compressed Responses and Tomcat
+=== Compressed Responses and Tomcat
 
 Many OPeNDAP clients accept compressed responses. This can greatly
 increase the efficiency of the client/server interaction by diminishing
@@ -1230,7 +1230,7 @@ Configuration section)
 * http://tomcat.apache.org/tomcat-5.5-doc/config/http.html[Tomcat 5.x
 documentation section related to compression.]
 
-=== Details
+==== Details
 
 To enable compression you will need to edit the
 _$CATALINA_HOME/conf/server.xml_ file. You will need to locate the

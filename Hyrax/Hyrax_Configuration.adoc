@@ -4,24 +4,24 @@
 // :numbered:
 // :toc:
 
-== Introduction to Hyrax Configuration
+== Introduction to Hyrax Configuration ==
 
 When you install Hyrax for the first time it is pre-configured
 to serve test data sets that come with each of the installed
 data handlers. This will allow you to test the server and
-make sure it is functioning correctly. After that you can customize it for your data.*
+make sure it is functioning correctly. After that you can customize it for your data.
 
-include::./Hyrax_BES_Configuration.adoc[leveloffset=+1, BES configuration]
+//include::./Hyrax_BES_Configuration.adoc[leveloffset=+1, BES configuration]
 
-include::./Hyrax_OLFS_Configuration.adoc[leveloffset=+1, OLFS configuration]
+//include::./Hyrax_OLFS_Configuration.adoc[leveloffset=+1, OLFS configuration]
 
-include::./Hyrax_THREDDS_Configuration.adoc[leveloffset=+1, THREDDS Configuration]
+//include::./Hyrax_THREDDS_Configuration.adoc[leveloffset=+1, THREDDS Configuration]
 
-include::./Hyrax_Logging_Configuration.adoc[leveloffset=+1, Logging configuration]
+//include::./Hyrax_Logging_Configuration.adoc[leveloffset=+1, Logging configuration]
 
-=== 5 Robots
+=== Deploying Robots for Hyrax ===
 
-Deploying a robots.txt file for Hyrax, is synonymous with deploying it for Tomcat. This means that your robots.txt file must be
+Deploying a robots.txt file for Hyrax is synonymous with deploying it for Tomcat. This means that your robots.txt file must be
 accessible here:
 
 ----
@@ -34,12 +34,11 @@ For example:
    http://www.opendap.org/robots.txt
 ----
 
-Placing it lower in the URL path doesn't seem to work.
+NOTE: Placing robots.txt lower in the URL path does not seem to work
 
 In order to get Tomcat to serve the file from that location you must
-place it in *$CATALINA_HOME/webapps/ROOT*
+place it in _$CATALINA_HOME/webapps/ROOT_.
 
-If you still find that you system is being cruelly burdened with robot
+If you find that you system is still burdened with robot
 traffic then you might want to try the
-link:./Hyrax_OLFS_Configuration.adoc#BotBlocker[BotBlocker
-handler for the OLFS].
+xref:./Hyrax_OLFS_Configuration.adoc#BotBlocker[BotBlocker handler for the OLFS].
