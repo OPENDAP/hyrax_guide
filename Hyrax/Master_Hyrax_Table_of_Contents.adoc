@@ -3,6 +3,7 @@
 {docdate}
 :numbered:
 :toc: left
+:icons: font
 :tabsize: 4
 :indent: 4
 :doctype: book
