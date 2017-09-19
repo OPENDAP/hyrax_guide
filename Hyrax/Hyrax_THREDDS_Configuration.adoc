@@ -60,7 +60,7 @@ Element]
 * http://www.unidata.ucar.edu/software/thredds/v4.6/tds/reference/DatasetScan.html[_datasetScan_
 configuration] (applies to Hyrax as well).
 
-== Configuration Instructions
+=== Configuration Instructions
 
 * The current default
 (link:./Hyrax_OLFS_Configuration.adoc[olfs.xml])
@@ -69,7 +69,7 @@ file comes with THREDDS configured correctly.
 *$CATALINA_HOME/content/opendap/catalog.xml* it can be edited to provide
 additional static catalog access.
 
-== datasetScan Support
+=== datasetScan Support
 
 The *datasetScan* element is a powerful tool that can be used to sculpt
 the catalog's presentation of the BES catalog content. The Hyrax
@@ -77,7 +77,7 @@ implementation has a couple of key points that need to be considered
 when developing an instance of the *datasetScan* element in your THREDDS
 catalog.
 
-=== location attribute
+==== location attribute
 
 The *location* attribute specifies the place in the BES catalog graph
 that the *datasetScan* will be rooted. This value _must be_ expressed
@@ -95,13 +95,13 @@ Example ::
 <datasetScan name="DatasetScanExample" path="hyrax" location="/data/nc">
 ----
 
-=== name attribute
+==== name attribute
 
 The *name* attribute specifies name that will be used to in the
 presentation (HTML) view for the catalog containing the *datasetScan* is
 viewed.
 
-=== path attribute
+==== path attribute
 
 The *path* attribute specifies the place in the THREDDS catalog graph
 that the *datasetScan* will be rooted. In effect it is a relative URL
@@ -110,7 +110,7 @@ for the service. If *path* begins with a "/" then it is an absolute path
 *path* attribute should NEVER contain "catalog.xml" or "catalog.html".
 The service will create these endpoints dynamically.
 
- Relative path example ::
+===== Relative path example
   Consider a catalog accessed with the URL:
   http://localhost:8080/opendap/thredds/v27/Landsat/catalog.xml and that
   contains this *datasetScan* element:
@@ -134,7 +134,7 @@ And the top of *datasetScan* catalog graph will be found at the URL
 
 http://localhost:8080/opendap/thredds/v27/Landsat/hyrax/catalog.xml
 
- Absolute path examples ::
+===== Absolute path examples
   Consider a catalog accessed with the URL:
   http://localhost:8080/opendap/thredds/v27/Landsat/catalog.xml and that
   contains this *datasetScan* element:
@@ -194,7 +194,7 @@ http://localhost:8080/opendap/thredds/myDatasetScan/catalog.xml
 which keeps the URL referencing the Hyrax THREDDS service and not some
 other part of the web service stack.
 
-=== useHyraxServices attribute
+==== useHyraxServices attribute
 
 The Hyrax version of the *datasetScan* element employs the extra
 attribute **useHyraxServices**. This allows the *datasetScan* to
@@ -214,13 +214,13 @@ BES identifies as data.
 
 By default *useHyraxServices* is set to true.
 
-=== Functions
+==== Functions
 
 http://www.unidata.ucar.edu/software/thredds/v4.6/tds/reference/DatasetScan.html[DatasetScan
 allows you to apply the following functions to the names of the datasets
 in the datasetScan catalog graph.]
 
-==== Filter
+===== Filter
 
 A datasetScan element can specify which files and directories it will
 include with a filter element (also
@@ -243,7 +243,7 @@ collection attributes.
 </filter>
 ----
 
-===== Sort
+====== Sort
 
 Datasets at each collection level are listed in ascending order by name.
 With a sort element you can specify that they are to be sorted in
@@ -255,7 +255,7 @@ reverse order:
 </sort>
 ----
 
-==== Namer
+===== Namer
 
 If no namer element is specified, all datasets are named with the
 corresponding BES catalog dataset name. By adding a namer element, you
@@ -270,7 +270,7 @@ can specify more human readable dataset names.
 </namer>
 ----
 
-===== addTimeCoverage
+====== addTimeCoverage
 
 A datasetScan element may contain an addTimeCoverage element. The
 addTimeCoverage element indicates that a timeCoverage metadata element
@@ -295,7 +295,7 @@ following timeCoverage element:
   </timeCoverage>
 ----
 
-===== addProxies
+====== addProxies
 
 For real-time data you may want to have a special link that points to
 the "latest" data in the collection. Here, latest is simply means the
