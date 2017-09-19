@@ -16,8 +16,7 @@
 // Also see http://coderay.rubychan.de/ for information about supported
 // languages. jhrg 9/17/17
 
-[preface]
-include::preface.adoc[lines="1,6..-1", leveloffset=+1]
+include::preface.adoc[lines="1..2,7..-1", leveloffset=+1]
 
 // TODO Make this a multi-part book? Maybe... To do that with the
 // content we have, raise the levels up one notch. That means reduce the
