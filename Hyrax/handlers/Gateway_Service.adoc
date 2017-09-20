@@ -13,10 +13,13 @@ The Gateway Service provides Hyrax with the ability to apply DAP
 constraint expressions and server side functions to data available
 through any network URL. This is accomplished by encoding the data
 source URL into the DAP request URL supplied to the gateway_service. The
-gateway_service decodes the URL and uses the BES to to retrieve the
+Gateway Service decodes the URL and uses the BES to to retrieve the
 remote data resource and transmit the appropriate DAP response back to
 the client. The system employs a white list to control what data systems
 the BES will access.
+
+NOTE: Rewrite this to explain that we are providing a kind of 'URL
+enveloping' scheme. If we are still actually using this. jhrg 9/19/17
 
 A Data Service Portal (DSP), such as Mirador will:
 
@@ -27,29 +30,28 @@ A Data Service Portal (DSP), such as Mirador will:
 * Hand this to the client (via a link or what have you in the DSP
 interface)
 
-=== BES gateway_module
+=== BES Gateway Module
 
-The gateway_module handles the gathering of the remote data resource and
+The Gateway Module handles the gathering of the remote data resource and
 the construction of the DAP response.
 
-The gateway_module:
+The Gateway Module:
 
 * Evaluates the data source URL against a white list to access
-permission.
-* Retrieves remote data source .
+permission
+* Retrieves remote data source
 * Determines data type by:
-
-. Direct identification via the BesXmlApi. (You tell it.)
-. HTTP Content-Disposition header
-. Applying the BES.TypeMatch string to the last term in the path
+** Data type information supplied by the other parts of the server
+** HTTP Content-Disposition header
+** Applying the BES.TypeMatch string to the last term in the path
 section of the data source URL.
 
 The BES will *not* persist the data resources beyond the scope of each
 request.
 
-=== OLFS gateway_service
+=== OLFS Gateway Service
 
-The gateway_service is responsible for:
+The Gateway Service is responsible for:
 
 * Decoding the incoming dataset URLs.
 * Building the request for the BES.
@@ -58,7 +60,7 @@ The gateway_service is responsible for:
 === Encoding Data Source URLs
 
 The data source URLs need to be encoded in the DAP data request URL that
-is used to access the gateway_service.
+is used to access the Gateway Service.
 
 There are many ways to encode something in this context.
 
@@ -80,19 +82,16 @@ The source code for the EncodeDecode java class used by hexEncode is
 available here:
 http://scm.opendap.org/svn/trunk/olfs/src/opendap/gateway/EncodeDecode.java
 
-===== Example 1
+.Encoding a simple URL
+=====
+stringToHex(http://www.google.com) -> 687474703a2f2f7777772e676f6f676c652e636f6d
 
-source string::
-  http://www.google.com
+hexToString(687474703a2f2f7777772e676f6f676c652e636f6d) -> http://www.google.com
+=====
 
-stringToHex()::
-  687474703a2f2f7777772e676f6f676c652e636f6d
-
-hexToString(stringToHex()::
-  http://www.google.com
-
-===== Example 2
-
+// I think this example is pretty broken, lets fix this.
+// Or maybe we are not providing the Gate Service any more? jhrg 9/19/17
+////
 Source string::
   http://g0dup05u.ecs.nasa.gov/cgi-bin/ceopAIRX2RET?service=WCS&version=1.0.0&request=GetCoverage&coverage=H2OMMRStd&crs=WGS84&bbox=-107.375000,51.625000,-102.625000,56.375000&format=netCDF&TIME=2002-10-03&resx=0.25&resy=0.25&interpolationMethod=Nearest%20neighbor
 
@@ -102,14 +101,4 @@ stringToHex()::
 
 hexToString(stringToHex()::
   http://g0dup05u.ecs.nasa.gov/cgi-bin/ceopAIRX2RET?service=WCS&version=1.0.0&request=GetCoverage&coverage=H2OMMRStd&crs=WGS84&bbox=-107.375000,51.625000,-102.625000,56.375000&format=netCDF&TIME=2002-10-03&resx=0.25&resy=0.25&interpolationMethod=Nearest%20neighbor
-
-===== Example 3
-
-source string::
-  foobar
-
-stringToHex()::
-  666f6f626172
-
-hexToString(stringToHex()::
-  foobar
+////
