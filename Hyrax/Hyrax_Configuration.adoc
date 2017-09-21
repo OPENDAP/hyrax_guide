@@ -34,7 +34,7 @@ For example:
    http://www.opendap.org/robots.txt
 ----
 
-NOTE: Placing robots.txt lower in the URL path does not seem to work
+*Note:* Placing robots.txt lower in the URL path does not seem to work
 
 In order to get Tomcat to serve the file from that location you must
 place it in _$CATALINA_HOME/webapps/ROOT_.
