@@ -255,63 +255,25 @@ are not symbols.
 Runtimes for make_array() and $type, scanner/parser optimized, two
 trials
 
-Time in seconds
+.Using the make_array function is almost twelve times slower than the builtin operator
+[cols="4*^,options=header"]
+|===
+|      3+| Time in Seconds
 
-What
+| What | Real (s) | User | System
 
-Real (s)
+| $type, with hint | 19.844 | 19.355 | 0.437
 
-User
+| $type, with hint | 19.817 | 19.369 | 0.427
 
-System
+| $type, no hint | 19.912 | 19.444 | 0.430
 
-$type, with hint
+| $type, no hint | 19.988 | 19.444 | 0.428
 
-19.844
+| make_array() | 195.332 | 189.271 | 6.058
 
-19.355
-
-0.437
-
-$type, with hint
-
-19.817
-
-19.369
-
-0.427
-
-$type, no hint
-
-19.912
-
-19.444
-
-0.430
-
-$type, no hint
-
-19.988
-
-19.444
-
-0.428
-
-make_array()
-
-195.332
-
-189.271
-
-6.058
-
-make_array()
-
-197.900
-
-191.628
-
-6.254
+| make_array() | 197.900 | 191.628 | 6.254
+|===
 
 === bind_name() and bind_shape()
 
