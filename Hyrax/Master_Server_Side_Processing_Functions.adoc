@@ -1,4 +1,4 @@
-=  Server Side Processing Functions
+= Server Side Processing Functions
 :Leonard Porrello <lporrel@gmail.com>:
 {docdate}
 :numbered:
@@ -6,19 +6,24 @@
 
 == Server Functions, Invocation, and Composition
 
-=== Calling Syntax
-
 To run a server function, you call the function with its arguments in
 the 'query string' part of a URL. The server function call is a kind of
 DAP Constraint Expression. Here are some examples:
 
-Get the U and V components of the fnoc1 dataset, but apply the dataset's
-scale_factor attribute (the 'm' in y=mx+b; for these variables, 'b' is
-zero). Compare the values returned by the linear_scale() server function
-to those returned by accessing the variables without using the function
+Get the U and V components of the fnoc1 dataset, but apply the
+dataset's scale_factor attribute (the 'm' in y=mx+b; for these
+variables, 'b' is zero). Compare the values returned by the
+linear_scale() server function to those returned by accessing the
+variables without using the function
+
+.Normal accees versus Using a server function
+====
+// Normal access retrieves the values of two variables
+http://test.opendap.org/dap/data/nc/fnoc1.nc.ascii?u,v
+
+// However, using a server function, the values can be scaled
 http://test.opendap.org/dap/data/nc/fnoc1.nc.ascii?linear_scale(u),linear_scale(v)
-  +
-  http://test.opendap.org/dap/data/nc/fnoc1.nc.ascii?u,v
+====
 
 === Function Composition
 
@@ -40,9 +45,10 @@ All of these functions can be composed. Thus, the values from the
 geogrid() function can be used by the linear_scale() function. Here's an
 example:
 
-----
- linear_scale(geogrid(SST, 45, -82, 40, -78))  // spaces added for clarity; in reality spaces in server function arg lists are a syntax error
-----
+.Functional Composition: The output of one function and serve as input to another
+====
+ linear_scale(geogrid(SST, 45, -82, 40, -78)) // spaces added for clarity
+====
 
 This first subsets the variable _SST_, so only those values in latitude
 45 to 40 and longitude -82 to -78 are returned; it then passes those
@@ -61,6 +67,7 @@ large arrays filled with constant values into custom server functions.
 We will expand on these as part of an NSF-sponsored project in the
 coming two years.
 
+[[SSF_geogrid]]
 === geogrid()
 
 ==== Version Documented: 1.2
@@ -68,8 +75,8 @@ coming two years.
 The geogrid() function applies a constraint given in latitude and
 longitude to a DAP Grid variable. The arguments to the function are...
 
+.There are two ways to call *geogrid()*
 ----
-
 geogrid(grid variable, top, left, bottom, right[, expression ...])
 geogrid(grid variable, latitude map, longitude map, top, left, bottom, right[, expression ...])
 ----
@@ -101,7 +108,6 @@ The geogrid() function applies a constraint given in latitude and
 longitude to a DAP Grid variable. The arguments to the function are:
 
 ----
-
  geogrid(variable, top, left, bottom, right[, expression ...])
 ----
 
@@ -119,7 +125,8 @@ return those joined together as a single Grid. If the data are stored
 with the southern latitudes at the top of the array, the return result
 will be flipped so that the northern latitudes are at the top.
 
-=== 2.2 grid()
+[[SSF_grid]]
+=== grid
 
 ==== Version Documented: 1.0
 
@@ -132,15 +139,16 @@ grid values themselves
 
 Two forms of expression are provided:
 
-. "var relop const"
-. "const relop var relop const"
+. `var relop const`
+. `const relop var relop const`
 
-Where _relop_ stands for one of the relational operators, like `=` and
-` > `
+Where _relop_ stands for one of the relational operators, such as `=` 
+`>`, or `<`
 
-For example: grid(sst,"20>TIME>=10") and grid(sst,"20>TIME","TIME>=10")
+For example: `grid(sst,"20>TIME>=10")` and `grid(sst,"20>TIME","TIME>=10")`
 are both legal and, in this case, also equivalent.
 
+[[SSF_linear_scale]]
 === linear_scale
 
 ==== Version Documented: 1.0b1
@@ -148,9 +156,12 @@ are both legal and, in this case, also equivalent.
 The linear_scale() function applies the familiar y = mx + b equation to
 data. It has three forms:
 
-. linear_scale(var)
-. linear_scale(var,scale_factor,add_offset)
-. linear_scale(var,scale_factor,add_offset,missing_value)
+.There are three ways to call *linear_scale()*
+----
+linear_scale(var)
+linear_scale(var,scale_factor,add_offset)
+linear_scale(var,scale_factor,add_offset,missing_value)
+----
 
 If only the name of a variable is given, the function looks for the
 COARDS/CF-1.0 __scale_factor__, _add_offset_ and _missing_value_
@@ -348,6 +359,7 @@ information.
 This function is optional with Hyrax and is provided by the
 ugrid_functions module.
 
+[[SSF_version]]
 === version()
 
 The _version_ function provides a list of the server-side processing

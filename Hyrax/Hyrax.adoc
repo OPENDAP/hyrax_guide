@@ -10,7 +10,8 @@ and operation of the _Hyrax Data server_, a data server that integrates
 structured data with the world wide web. Hyrax is one example of a
 number of data servers that implement OPeNDAP's Data Access Protocol (DAP).
 
-//NOTE: TODO: Rewrite this text to be more about the sever's capabilities than how the software was implemented.
+// TODO Rewrite this text to be more about the sever's capabilities
+than how the software was implemented.
  
 Hyrax uses the Java servlet mechanism to hand off requests from a
 general web daemon to DAP format-specific software. This provides 
@@ -20,12 +21,13 @@ looks at each request and formulates a query to a second server (which
 may or may not on the same machine as the OLFS) called the **B**ack
 **E**nd **S**erver (BES).
 
-The BES is the high-performance server software from HAO. It reads data from the data stores and returning DAP-compliant responses to the OLFS. In turn, the OLFS may pass these response back to the
-requestor with little or no modification or it may use them to build
-more complex responses. The nature of the Inter Process Communication
-(IPC) between the OLFS and BES is such that they should both be on the
-same machine or be able to communicate over a very high bandwidth
-channel.
+The BES is the high-performance server software from HAO. It reads
+data from the data stores and returning DAP-compliant responses to the
+OLFS. In turn, the OLFS may pass these response back to the requestor
+with little or no modification or it may use them to build more
+complex responses. The nature of the Inter Process Communication (IPC)
+between the OLFS and BES is such that they should both be on the same
+machine or be able to communicate over a very high bandwidth channel.
 
 The OLFS and the BES will run and serve test data immediately
 after a default installation. Additional configuration is required for
@@ -72,18 +74,18 @@ Supports multiple source data formats ::
   the server.
 
  Server Side Functions ::
-  Hyrax supports a number of link:./Server_Side_Processing_Functions.adoc[Server side
+  Hyrax supports a number of xref:Server_Side_Processing_Functions[Server side
 functions] out of the box
   including (but not limited to):
   
-  * __link:./Server_Side_Processing_Functions.adoc#geogrid.28.29[geogrid]__:
+  * __xref:SSF_geogrid[geogrid]__:
   Subset applicable DAP Grids using latitude and longitude values.
-  * __link:./Server_Side_Processing_Functions.adoc#grid.28.29[grid]__:
+  * __xref:SSF_grid[grid]__:
   Subset any DAP Grid object using the values of it's map vectors.
-  * __link:./Server_Side_Processing_Functions#linear_scale.adoc[linear_scale]__:
+  * __xref:SSF_linear_scale[linear_scale]__:
   Apply a linear equation to the data returned, including automatic use
   of CF attributes.
-  * __link:./Server_Side_Processing_Functions.adoc#version.28.29[version]__:
+  * __xref:SSF_version[version]__:
   The version function provides a list of the server-side processing
   functions available.
   * New ones are easy to add.

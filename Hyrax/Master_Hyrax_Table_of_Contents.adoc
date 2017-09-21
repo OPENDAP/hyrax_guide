@@ -128,6 +128,7 @@ include::./aggregation/Aggregation_enhancements.adoc[lines="1,6..-1",leveloffset
 
 
 // The default server-side processing functions that are distributed with Hyrax
+[[Server_Side_Processing_Functions]]
 [appendix]
 include::Master_Server_Side_Processing_Functions.adoc[lines="1,6..-1", leveloffset=+1]
 
