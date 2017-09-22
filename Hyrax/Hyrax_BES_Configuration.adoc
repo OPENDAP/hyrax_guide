@@ -4,6 +4,7 @@
 //:numbered:
 //:toc:
 
+[[bess-configuration]]
 == BES Configuration Introduction ==
 
 Building the BES and its data handlers from source (or installing from
@@ -172,8 +173,6 @@ to recognize which files are its responsibility.
 
 The _BES.CacheSize_ parameter sets the size of the cache in megabytes.
 When the size of the cached files exceeds this value, the cache will be
-purged using a least-recently-used (where the file's access time is the
-'use time') approach. Because it's usually impossible to determine the
 purged using a least-recently-used approach, where the file's access time is the
 'use time'. Because it is usually impossible to determine the
 sizes of data files before decompressing them, there may be times when
@@ -228,13 +227,12 @@ data are stored. Which one you use depends on whether you are setting up
 the BES to work as part of Hyrax (and thus with THREDDS catalogs) or as
 a standalone server. In either case, set the value of the
 _.RootDirectory_ parameter to point to the root directory of your data
-files (only one may be specified). Use
-_BES.Catalog.catalog.RootDirectory_ in the dap.conf configuration file
-in the modules directory if the BES is being used as part of Hyrax, and
-_BES.Data.RootDirectory_ in bes.conf itself if not. So, if you are
-setting up Hyrax, set the value of _BES.Catalog.catalog.RootDirectory_
-but be *sure* to set _BES.Data.RootDirectory_ to some value or the BES
-will not start.
+files (only one may be specified). If the BES is being used as part of Hyrax, 
+use _BES.Catalog.catalog.RootDirectory_ in dap.conf, which is stored 
+in the _modules_ directory; otherwise, use _BES.Data.RootDirectory_ in bes.conf itself. 
+So, if you are setting up Hyrax, set the value of 
+_BES.Catalog.catalog.RootDirectory_ but be *sure* to set _BES.Data.RootDirectory_ 
+to some value or the BES will not start.
 
 In bes.conf set the following:
 
