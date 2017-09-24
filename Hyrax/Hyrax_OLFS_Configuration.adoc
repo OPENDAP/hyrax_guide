@@ -426,12 +426,14 @@ address 44.55.66.77.
 
 Hyrax uses the following DispatchHandlers to handle HTTP GET requests:
 
-* *VersionDispatchHandler:* This handles the version document requests.
-* *BotBlocker:* This optional handler may be used to block individual IP 
+* *VersionDispatchHandler:* Handles the version document requests.
+* *BotBlocker:* An optional handler that may be used to block individual IP 
   addresses or groups of IP addresses from accessing your server.
-* *NcmlDatasetDispatcher*
+* *NcmlDatasetDispatcher:* Specialized handler that filters NcML
+  content retrieved from the BES
 * *StaticCatalogDispatch:* Provides static THREDDS catalog services for Hyrax.
-* *Gateway*
+* *Gateway:* For more imformation, see the documentation for 
+  link:../Hyrax/handlers/Gateway_Service.adoc[Gateway Service].
 * *DapDispatcher:* Handles all DAP requests.
 * *DirectoryDispatchHandler:* Handles the OPeNDAP directory view (contents.html) requests.
 * *BESThreddsDispatchHandler:* Provides dynamic THREDDS catalogs of all BES holdings.
@@ -450,7 +452,7 @@ configuration elements, so it will always be written like this:
 === BotBlocker (optional)
 
 This optional handler can be used to block access from specific IP
-addresses and by a ranges of IP addresses using regular expressions. It
+addresses or a range of IP addresses using regular expressions. It
 turns out that many of the web crawling robots do not respect the
 robots.txt file when one is provided. Since many sites do not want their
 data holdings exhaustively queried by automated software, we created a
@@ -460,30 +462,23 @@ non-compliant robots.
 ==== *<IpAddress>* Element
 
 The text value of this element should be the IP address of a system
-which you would like to block from accessing your service. For example:
+which you would like to block from accessing your service.
 
----- 
-    <IpAddress>128.193.64.33</IPAddress>
-----
-
-Blocks the system located at 128.193.64.33 from accessing your server.
-There can be zero or more <IpAddress> elements in the <BotBlocker>
+For example, 
+`<IpAddress>128.193.64.33</IPAddress>` blocks the system located at 
+128.193.64.33 from accessing your server.
+There can be zero or more <IpAddress> elements in the <BotBlocker>.
 
 ==== *< IpMatch >* Element
 
 The text value of this element should be the regular expression that
-will be used to match the IP addresses clients attempting to access
+will be used to match the IP addresses of clients attempting to access
 Hyrax.
 
-For example:
-
----- 
-    <IpMatch>65\.55\.[012]?\d?\d\.[012]?\d?\d</IpMatch>
-----
-
-Matches all IP address beginning with 65.55 and thus block access for
+For example, `<IpMatch>65\.55\.[012]?\d?\d\.[012]?\d?\d</IpMatch>`
+matches all IP addresses beginning with 65.55 and thus blocks access for
 clients whose IP addresses lie in that range. There can be zero or more
-< IpMatch > elements in the Handler configuration for teh BotBlocker
+< IpMatch > elements in the Handler configuration for the BotBlocker
 
 ==== Example Configuration Element
 
@@ -506,45 +501,45 @@ clients whose IP addresses lie in that range. There can be zero or more
 The Ncml Dataset Dispatcher is a specialized handler that filters NcML
 content retrieved from the BES so that the path names in the NcML
 documents returned to clients are consistent with the paths from the
-external (to the server) perspective.
-
-==== Example Configuration Element
+external (to the server) perspective:
 
 ----
-            <Handler className="opendap.ncml.NcmlDatasetDispatcher" />
+    <Handler className="opendap.ncml.NcmlDatasetDispatcher" />
 ----
 
 === Static Thredds Catalog Dispatch Handler (required)
 
 Serves static THREDDS catalogs (i.e. THREDDS catalog files stored on
-disk). Provides both a presentation view (HTML) for humans using
-browsers, and direct catalog access (XML).
+disk). It provides both a presentation view (HTML) for humans using
+browsers and direct catalog access (XML).
 
 ==== *<prefix>* Element (required)
 
 Defines the path component that comes after the servlet context and
-before all catalog requests. For example, if the prefix is __thredds__,
+before all catalog requests. For example, if the prefix is _thredds_,
 then http://localhost:8080/opendap/thredds/ should give you the
 top-level static catalog (the contents of the file
-$CATALINA_HOME/content/opendap/catalog.xml)
+_$CATALINA_HOME/content/opendap/catalog.xml_)
 
 ==== *<useMemoryCache>* Element (optional)
 
-If the text value of this element is the string 'true' this will cause
+If the text value of this element is the string 'true,' this will cause
 the servlet to ingest all of the static catalog files at startup and
 hold their contents in memory. link:./THREDDS_using_XSLT.adoc[See
-this page for more information about the memory caching operations]
+this page for more information about the memory caching operations.]
 
 ==== *<ingestTransformFile>* Element (optional)
 
-This is a specific development option that allows one top specify the
+This is a specific development option that allows one to specify the
 fully qualified path to an XSLT file that will be used to preprocess
 each THREDDS catalog file read from disk. The default version of this
 file (found in
-$CATALINA_HOME/webapps/opndap/xsl/threddsCatalogIngest.xsl) processes
+_$CATALINA_HOME/webapps/opndap/xsl/threddsCatalogIngest.xsl_) processes
 the _thredds:datasetScan_ elements in each THREDDS catalog so that they
-contain specific content for Hyrax. *This is a developers option and in
-general is not recommended for use in an operational server.*
+contain specific content for Hyrax:
+
+NOTE: This is a developers option and in general is not recommended 
+for use in an operational server.
 
 ==== Example Configuration Element
 
@@ -558,16 +553,17 @@ general is not recommended for use in an operational server.*
 === Gateway Dispatcher
 
 Directs requests to the link:../Hyrax/handlers/Gateway_Service.adoc[Gateway
-Service]
+Service].
 
 ==== *<prefix>* Element (required)
 
 Defines the path component that comes after the servlet context and
-before all gateway requests. For example, if the prefix is __gateway__,
+before all gateway requests. For example, if the prefix is _gateway_,
 then http://localhost:8080/opendap/gateway/ will give you the gateway
 access form page.
 
 ==== Example Configuration Element
+
 ---- 
 <Handler className="opendap.gateway.DispatchHandler">
     <prefix>gateway</prefix>
@@ -576,27 +572,28 @@ access form page.
 
 === DapDispatchHandler (required)
 
-Handles DAP request for Hyrax. For example the DapDispatchHandler will
+Handles DAP request for Hyrax. For example, the DapDispatchHandler will
 handle requests for all DAP2 and DAP4 products
 
 ==== *<AllowDirectDataSourceAccess>* Element (optional)
 
-The <__AllowDirectDataSourceAccess__ /> element controls the users
+The <__AllowDirectDataSourceAccess__ /> element controls the user's
 ability to directly access data sources via the web interface. If this
-element is present (and not commented out as in the example below) a
-client can get an entire data source (such as an HDF file) by simply
-requesting it through the HTTP URL interface. This is NOT a good
-practice and is not recommended. By default Hyrax ships with this option
-turned off and I recommend that you leave it that way unless you really
-want users to be able to circumvent the OPeNDAP request interface and
+element is present (and not commented out, as in the example below) a
+client can get an entire data source (such as an HDF file) by
+requesting it through the HTTP URL interface. This is *not* a good
+practice and is not recommended. By default, Hyrax ships with this option
+disabled. We recommend that you leave it unchanged unless you requre
+that users be able to circumvent the OPeNDAP request interface and
 have direct access to the data products stored on your server.
 
 ==== *<UseDAP2ResourceUrlResponse>* Element (optional)
 
+// NOT SO SURE ABOUT THE "AT LEAST FOR NOW" ACP
 By default, at least for now, the server will provide the (undefined)
 DAP2 style response to requests for a dataset resource URL. Commenting
 out the "UseDAP2ResourceUrlResponse" element will cause the server to
-return the (well defined) DAP4 DSR response when a dataset resource URL
+return the (well-defined) DAP4 DSR response when a dataset resource URL
 is requested.
 
 ==== Example Configuration Element
@@ -610,21 +607,15 @@ is requested.
 
 === DirectoryDispatchHandler (required)
 
-Handles the OPeNDAP directory view (contents.html) requests.
+Handles the OPeNDAP directory view (contents.html) requests:
 
-==== Example Configuration Element
-
-----
-
- 
+---- 
 <Handler className="opendap.bes.DirectoryDispatchHandler" />
 ----
 
 === BES Thredds Dispatch Handler (required)
 
-Provides dynamic THREDDS catalogs of BES data holdings.
-
-==== Example Configuration Element
+Provides dynamic THREDDS catalogs of BES data holdings:
 
 ----
 <Handler className="opendap.bes.BESThreddsDispatchHandler" />
@@ -632,17 +623,14 @@ Provides dynamic THREDDS catalogs of BES data holdings.
 
 === File Dispatch Handler (required)
 
-
-Handles requests for file level access. (README files etc.). This
+Handles requests for file level access (README files, etc.). This
 handler only responds to requests for files that are not considered
 "data" by the BES. File requests for data files are handled by the
-__opendap.bes.dapResponders.DapDispatcher__.
-
-==== Example Configuration Element
+_opendap.bes.dapResponders.DapDispatcher_.
 
 In the following example, the FileDispatchHandler is configured to deny
 direct access to data sources (note that the
-<__AllowDirectDataSourceAccess__ /> element is commented out:
+<__AllowDirectDataSourceAccess__ /> element is commented out):
 
 ---- 
 <Handler className="opendap.bes.FileDispatchHandler" />
@@ -761,49 +749,37 @@ Hyrax does not currently support HTTP POST requests.
     -->
     <!-- Timer enabled="false" / -->
  
- 
 </OLFSConfig>
 ----
-\\Why isn't this its own file?
-== THREDDS Configuration *catalog.xml* File
 
-The *catalog.xml* file contains the static THREDDS catalog configuration
-for Hyrax. link:./Hyrax_THREDDS_Configuration.adoc[Read About It
-Here].
+=== _web.xml_ Configuration File
 
-=== Logging Configuration (**logback.xml** file)
-
-The *logback.xml* file contains the logging configuration for Hyrax.
-link:./Hyrax_Logging_Configuration.adoc[Read About It Here].
-
-=== *web.xml* Configuration File
-
-_We strongly recommend that you do *NOT* mess with the web.xml file. At
-least for now. Future versions of Server and the OLFS may have "user
-configurable" stuff in the web.xml file, but this version does not. *SO
-JUST DON'T DO IT. OK?*_ Having said that, here are the details regarding
-the web.xml file:
+We strongly recommend that you do *NOT* modfiy the web.xml file at 
+this time. Future versions of Server and the OLFS may have "user
+configurable" parameters in the web.xml file, but this version does not,
+_and doing so will almost certainly result in *severe* problems_. That 
+being said, the following is the details regarding the web.xml file.
 
 ==== Servlet Definition
 
-The OLFS running in the opendap context area needs an entry in the
-*web.xml* file. Multiple instances of a servlet and/or several different
-servlets can be configured in the one web.xml file. For instance you
-could have a DTS and a Hyrax running in from the same *web.xml* and thus
+The OLFS running in the OPeNDAP context area needs an entry in the
+_web.xml_ file. Multiple instances of a servlet and/or several different
+servlets can be configured in the one web.xml file. For instance, you
+could have a DTS and a Hyrax running from the same _web.xml_ and thus
 under the same servlet context. Running multiple instances of the OLFS
 in a single web.xml file (aka context) will *NOT* work.
 
 Each a servlet needs a unique name which is specified inside a
 <__servlet__> element in the web.xml file using the <__servlet-name__>
-tag. This is a name of convenience, for example if you where serving
-data from an ARGOS satellite you might call that servlet __argos__.
+tag. This is a name of convenience; for example, if one is serving
+data from an ARGOS satellite one might call that servlet __argos__.
 
-Additionally each instance of a <__servlet__> must specify which Java
+Additionally, each instance of a <__servlet__> must specify which Java
 class contains the actual servlet to run. This is done in the
-<__servlet-class__> element. For example the OLFS servlet class name is
-_opendap.coreServlet.DispatchServlet_
+<__servlet-class__> element. For example, the OLFS servlet class name is
+_opendap.coreServlet.DispatchServlet_.
 
-Here is a syntax example combining the two previous example values:
+===== Syntax Example
 
 ----
 <servlet>
@@ -815,12 +791,14 @@ Here is a syntax example combining the two previous example values:
 </servlet>
 ----
 
-This servlet could then be accessed as:
-_http://hostname/opendap/servlet/argos_
+This servlet could then be accessed as
+_http://hostname/opendap/servlet/argos_.
 
 You may also add to the end of the web.xml file a set of
 <__servlet-mapping__> elements. These allow you to abbreviate the URL or
-the servlet. By placing the servlet mappings:
+the servlet. By placing the servlet mappings at the end of the web.xml 
+file, our previous example changes its URL to _http://hostname/opendap/argos_, 
+eliminating the need for the word servlet in the URL:
 
 ----
 <servlet-mapping>
@@ -834,24 +812,22 @@ the servlet. By placing the servlet mappings:
 </servlet-mapping>
 ----
 
-At the end of the web.xml file our previous example changes it's URL to:
-_http://hostname/opendap/argos_
-
-Eliminating the need for the word servlet in the URL. For more on the
-<__servlet-mapping__> element see the Jakarta-Tomcat documentation.
+//SHOULD THERE BE A LINK HERE? -ACP
+For more on the <__servlet-mapping__> element see the 
+Jakarta-Tomcat documentation.
 
 ==== <init-param> Elements
 
 The OLFS uses <init-param> elements inside of each <servlet> element to
 get specific configuration information.
 
-<init-param>'s common to all OPeNDAP servlets are:
+The <init-param>s common to all OPeNDAP servlets are:
 
 ===== OLFSConfigFileName
 
 This parameter identifies the name of the XML document file that
 contains the OLFS configuration. This file must be located in the
-persistent content directory and is typically called *olfs.xml*
+persistent content directory and is typically called *olfs.xml*.
 
 For example:
 
@@ -868,15 +844,15 @@ This controls output to the terminal from which the servlet engine was
 launched. The value is a list of flags that turn on debugging
 instrumentation in different parts of the code. Supported values are:
 
-* **probeRequest**: Prints a lengthy inspection of the
-HttpServletRequest object to stdout. _Don't leave this on for long, it
-will clog your Catalina logs._
-* **DebugInterface**: Enables the servers debug interface. This
+* *probeRequest*: Prints a lengthy inspection of the HttpServletRequest 
+object to stdout. *Note:* Do not leave this on for long or 
+it will clog your Catalina logs.
+* *DebugInterface*: Enables the server's debug interface. This
 ineractive interface allows a user to look at (and change) the server
-state via a web browser. _Enable this only for analysis purposes,
-disable when finshed!_
+state via a web browser. *Note:* Enable this only for analysis purposes 
+and disable when finshed.
 
-__Example__:
+For example:
 
 ----
     <init-param>
@@ -885,9 +861,9 @@ __Example__:
     </init-param>
 ----
 
-__Default__: If this parameter is not set, or the value field is empty
-then these features will be disabled - which is what you want unless
-there is a problem to analyze.
+_Default:_ If this parameter is not set or the value field is empty,
+then these features will be disabled - which is what you want (unless
+there is a problem to analyze).
 
 ==== Example of web.xml Content
 
@@ -925,19 +901,20 @@ there is a problem to analyze.
 
 === Viewers Servlet (**viewers.xml** file)
 
-The Viewers servlet provides, for each dataset, and HTML page containing
+The Viewers servlet provides, for each dataset, an HTML page containing
 links to Java WebStart applications and to WebServices (such as WMS)
 that can be utilized in conjunction with the dataset. The Viewers
 servlet is configured via the contents of the *viewers.xml* file located
-in the persistent content directory $CATALINA_HOME/content/opendap.
+in the persistent content directory _$CATALINA_HOME/content/opendap_.
 
 ==== *viewers.xml* Configuration File
 
-===== *<JwsHandler>* Elements
+===== Consists of
 
-===== *<WebServiceHandler>* Elements
+* *<JwsHandler>* Elements
+* *<WebServiceHandler>* Elements
 
-===== Example Configuration
+===== Example Configuration:
 
 ----
 <ViewersConfig>
@@ -970,22 +947,21 @@ in the persistent content directory $CATALINA_HOME/content/opendap.
 
 The Docs (or documentation) servlet provides the OLFS web application
 with the ability to serve a tree of static documentation files. By
-default it will serve the files in the documentation tree provided with
+default, it will serve the files in the documentation tree provided with
 the OLFS in the Hyrax distribution. This tree is rooted at
 _$CATALINA_HOME/webapps/opendap/docs/_ and contains documentation
-pertaining to the software in the Hyrax distribution - installation and
+pertaining to the software in the Hyrax distribution: installation and
 configuration instruction, release notes, java docs, etc.
 
-If one wishes to replace this information with their own set of web
-pages, one can remove/replace the files in the default directory.
-However, installing a new version of Hyrax will cause these files to be
-overwritten, forcing them to be replaced after the install (and
-hopefully AFTER the new release documentation had been read and
-understood by the user).
+If one wishes to replace this information with one's own set of webpages, 
+one can remove or replace the files in the default directory;
+however, installing a new version of Hyrax will cause these files to be
+overwritten after the install (and hopefully AFTER the new 
+release documentation has been read and understood by the user).
 
 The Docs servlet provides an alternative to this. If a _docs_ directory
-is created in the _persistent content_ directory for Hyrax the Docs
-servlet will detect it (when Tomcat is launched) and it will serve files
+is created in the _persistent content_ directory for Hyrax, the Docs
+servlet will detect it when Tomcat is launched, and it will serve files
 from there instead of from the default location.
 
 This scheme provides 2 beneficial effects:
@@ -996,39 +972,42 @@ to persist through Hyrax upgrades with no user intervention.
 software.
 
 In summary, to provide persistent web pages as part of a Hyrax
-localization simple create the directory:
-_$CATALINA_HOME/content/opendap/**docs**_
+localization simple create the directory
+_$CATALINA_HOME/content/opendap/**docs**_, 
+Place your content in there and away you go. If you later wish to view
+the web-based documentation bundled with Hyrax, simply change the name of
+the directory from *docs* to something else and restart Tomcat (or 
+look in the _$CATALINA_HOME/webapps/opendap/docs_ directory).
 
-Place your content in there and away you go. If later you wish to view
-the web based documentation bundled with Hyrax simply change the name of
-the directory from *docs* to something else and restart Tomcat. (or, you
-could just look in the _$CATALINA_HOME/webapps/opendap/docs_ directory)
-
-In the Docs servlet, if a URL ends in a directory name or a "/" then the
+If a URL ends in a directory name or a "/" in the Docs servlet, then the
 servlet will attempt to serve the *index.html* in that directory. In
 other words *index.html* is the default document.
 
 === Logging
 
-Logging is a big enough subject to get link:./Hyrax_Logging_Configuration.com[it's own page.]
+//IS THIS A VALID LINK? -ACP
+For information about logging, please check out the 
+link:./Hyrax_Logging_Configuration.com[Hyrax Logging Configuration Documentation].
 
 === Authentication and Authorization
 
+The following sub-sections detail authentication and authorization.
+
 ==== Apache Web Server (httpd)
 
-*If your organization desires secure access and authentication layers
-for Hyrax the recommended method is to use Hyrax in conjunction the
-Apache Web Server (httpd).*
+If your organization desires secure access and authentication layers
+for Hyrax, the recommended method is to use Hyrax in conjunction the
+Apache Web Server (httpd).
 
 Most organizations that utilize secure access and authentication for
-their web presence are already doing so via Apache Web Server and Hyrax
+their web presence are already doing so via Apache Web Server, and Hyrax
 can be integrated nicely with this existing infrastructure.
 
 More about integrating Hyrax with Apache Web Server can be found at
 these pages:
 
 * link:./Master_Hyrax_Apache_Integration.adoc[Integrating Hyrax with
-Apache Web Server.]
+Apache Web Server]
 * link:./Master_Hyrax_-\_User_Identification_(Authentication).adoc[Configuring
 Hyrax and Apache for User Authentication and Authorization]
 
@@ -1036,8 +1015,7 @@ Hyrax and Apache for User Authentication and Authorization]
 
 Hyrax may be used with the security features implemented by Tomcat for
 authentication and authorization services.
-
-It is recommended that you read carefully and understand the Tomcat
+We recommend that you read carefully and understand the Tomcat
 security documentation.
 
 For Tomcat 5.x see:
@@ -1058,12 +1036,12 @@ Configuring/Managing User Realms]
 ** http://tomcat.apache.org/tomcat-6.0-doc/ssl-howto.html[Section 12:
 Configuring SSL]
 
-And that you read chapter 12 of the
+We also recommend that you read chapter 12 of the
 http://jcp.org/aboutJava/communityprocess/final/jsr154/index.html[Java
 Servlet Specification 2.4] that decribes how to configure security
 constraints at the web application level.
 
-Tomcat security requires fairly extensive additions to the *web.xml*
+Tomcat security requires fairly extensive additions to the _web.xml_
 file. (It is important to keep in mind that altering the <__servlet__>
 definitions may render your Hyrax server inoperable - please see the
 previous sections that discuss this.)
@@ -1074,15 +1052,15 @@ located at __$CATALINA_HOME/content/opendap/__.
 
 ==== Limitations
 
-Officially Tomcat security supports _context_ level authentication. What
-this means is that you can restrict access to the collection of servlets
-running in a single web application - in other words all of the stuff
-that is defined in a single *web.xml* file. You can call out different
-authentication rules for different <__url-pattern__>'s within the web
+Tomcat security officially supports _context_ level authentication. This
+means that you can restrict access to the collection of servlets
+running in a single web application (i.e. all of the stuff
+that is defined in a single _web.xml_ file). You can call out different
+authentication rules for different <__url-pattern__>s within the web
 application, but only clients which do not cache ANY security
 information will be able to easily access the different areas.
 
-For example in your *web.xml* file you might have:
+For example, in your _web.xml_ file you might have:
 
 ----
     <security-constraint>
@@ -1111,7 +1089,7 @@ For example in your *web.xml* file you might have:
     </login-config>
 ----
 
- Where the security roles fn1 and fn2 (defined in the *tomcat-users.xml*
+Where the security roles fn1 and fn2 (defined in the *tomcat-users.xml*
 file) have no common members.
 
 The complete URI's would be:
@@ -1121,44 +1099,38 @@ http://localhost:8080/mycontext/hyrax/nc/fnoc1.txt
 http://localhost:8080/mycontext/hyrax/nc/fnoc2.txt
 ----
 
-Now - this works, for clients that aren't too smart - i.e. they don't
-cache anything. However, if you access these URLs with a typical
-browser, once you authenticate for one URI, then you are locked out of
-the other one until you successfully "reset" the browser (purge all
-caches).
+This works for clients that do not cache anything; however, if you were 
+to access these URLs with a typical browser, then once you had authenticated 
+for one URI, you would be locked out of the other one until you 
+successfully "reset" the browser by purging all caches.
 
-I think the reason is as follows: In the exchange between Tomcat and the
-client, Tomcat is sending the header:
-
-`WWW-Authenticate: Basic realm="MyApplicationRealm"`
-
-And the client authenticates. When the second URI is accessed Tomcat
-sends the the same authentication challenge, with the same
+This happens because, in the exchange between Tomcat and the
+client, Tomcat sends the header 
+`WWW-Authenticate: Basic realm="MyApplicationRealm"`,
+and the client authenticates. When the second URI is accessed, Tomcat
+sends the the same authentication challenge with the same
 `WWW-Authenticate` header. The client, having recently authenticated to
 this _realm-name_ (defined in the <__login-config__> element in the
 web.xml file - see above), resends the authentication information, and,
-since it's not valid for that url pattern, the request is denied.
+since it is not valid for that url pattern, the request is denied.
 
 ==== Persistence
 
-You should be careful to back up your modified *web.xml* file to a
-location outside of the _$CATALINA_HOME/webapps/opendap_ directory as
-new versions of Hyrax will overwrite it when installed. You could use an
-_XML ENTITY_ and an _entity reference_ in the *web.xml* to cause a local
+You should be careful to back up your modified _web.xml_ file to a
+location outside of the _$CATALINA_HOME/webapps/opendap_ directory, as
+newly installed versions of Hyrax will overwrite it. You could use an
+_XML ENTITY_ and an _entity reference_ in the _web.xml_ to cause a local
 file containing the security configuration to be included in the
-web.xml. For example adding the __ENTITY__:
+web.xml. For example, add the __ENTITY__ 
 
-`    [<!ENTITY securityConfig      SYSTEM "file:/fully/qualified/path/to/your/security/config.xml">]`
+`[<!ENTITY securityConfig SYSTEM "file:/fully/qualified/path/to/your/security/config.xml">]`
 
-To the <__!DOCTYPE__> declaration at the top of the *web.xml* in
-conjunction with adding an __entity reference__:
+to the <__!DOCTYPE__> declaration at the top of the _web.xml_, and also
+add an __entity reference__ (`&securityConfig;`) 
+to the content of the <__web-app__> element. This would cause your external
+security configuration to be included in the _web.xml_ file.
 
-`&securityConfig;`
-
-To the content of the <__web-app__> element would cause your external
-security configuration to be included in the *web.xml* file.
-
-Here is an example of an _ENTITY_ configuration:
+===== Example _ENTITY_ configuration:
 
 ----
     <?xml version="1.0" encoding="ISO-8859-1"?>
@@ -1184,41 +1156,41 @@ Here is an example of an _ENTITY_ configuration:
     </web-app>
 ----
 
-This will not prevent you from losing your *web.xml* file when a new
-version of Hyrax is installed, but adding the _ENTITY_ stuff to the new
-*web.xml* file would be easier than remembering an extensive security
-configuration. Of course, Y.M.M.V.
+This will not prevent you from losing your _web.xml_ file when a new
+version of Hyrax is installed, but adding the _ENTITY_ to the new
+_web.xml_ file would be easier than remembering an extensive security
+configuration.
 
 === Compressed Responses and Tomcat
 
 Many OPeNDAP clients accept compressed responses. This can greatly
 increase the efficiency of the client/server interaction by diminishing
-the number of bytes actually transmitted over "the wire". Tomcat
+the number of bytes actually transmitted over "the wire." Tomcat
 provides native compression support for the GZIP compression mechanism,
 however it is NOT turned on by default.
 
-The following example is based on Tomcat 5.15. We recommend that you
-read carefully the Tomcat documentation related to this topic before
+The following example is based on Tomcat 5.15. We recommend that you 
+carefully read the Tomcat documentation related to this topic before
 proceeding:
 
 * http://tomcat.apache.org/[Tomcat Home]
 * http://tomcat.apache.org/tomcat-5.5-doc/index.html[Tomcat 5.x
-documentation.] (See Reference Section for the Apache Tomcat
+documentation] (see Reference Section for the Apache Tomcat
 Configuration section)
 * http://tomcat.apache.org/tomcat-5.5-doc/config/http.html[Tomcat 5.x
-documentation section related to compression.]
+documentation section related to compression]
 
 ==== Details
 
-To enable compression you will need to edit the
+To enable compression, you will need to edit the
 _$CATALINA_HOME/conf/server.xml_ file. You will need to locate the
-<__Connector__> element associated with your server, typically this will
+<__Connector__> element associated with your server; typically this will
 be the only <__Connector__> element whose _port_ attribute is set equal
-to 8080. To this you will need to add/change several attributes to
+to 8080. You will need to add or change several of its attributes to
 enable compression.
 
-With my Tomcat 5.5 distribution I found this default <__Connector__>
-element definition in my _server.xml_ file:
+With our Tomcat 5.5 distribution, we found this default <__Connector__>
+element definition in our _server.xml_ file:
 
 ----
     <Connector port="8080" maxHttpHeaderSize="8192"
@@ -1229,7 +1201,7 @@ element definition in my _server.xml_ file:
      >
 ----
 
-You will need to add to this four attributes:
+You will need to add four attributes:
 
 ----
 compression="force"
@@ -1266,8 +1238,8 @@ The final result being:
 
 Restart Tomcat for these changes to take effect.
 
-*NOTE: If you are using Tomcat in conjunction with the Apache Web Server
-(our friend httpd) via AJP you will need to
+NOTE: If you are using Tomcat in conjunction with the Apache Web Server
+(our friend httpd) via AJP you will need to also
 link:./Master_Hyrax_Apache_Integration.adoc[configure
-Apache to deliver compressed responses] too. Tomcat will not compress
+Apache to deliver compressed responses]. Tomcat will not compress
 content sent over the AJP connection.*
