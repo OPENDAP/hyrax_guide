@@ -295,7 +295,6 @@ ArcGIS understands CF, so that means that returning a netCDF file that
 follows CF provides a way to get information from our servers directly
 into this application without any modification to the app itself.
 
-Here's a link to information about CF:
-http://cf-pcmdi.llnl.gov/documents/cf-conventions/1.4/cf-conventions.html#appendix-grid-mappings[Grid
-Mappings].
+Here's a link to information about link:http://cfconventions.org/[CF].
+
 

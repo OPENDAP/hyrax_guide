@@ -184,7 +184,7 @@ The BES control panel provides one tab for each back-end server in this
 instance of Hyrax. Note that in these pictures we have only one BES
 running and it is called '/' (slash) meaning it is the default BES.
 
-image:..\images\Besctl-01.jpg[]
+image:../images/Besctl-01.jpg[]
 
 Beneath the "BES Management " banner you will see one or more tabs. You
 will always see a tab with the title of "/". This is the default BES for

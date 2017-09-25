@@ -1120,36 +1120,39 @@ _XML ENTITY_ and an _entity reference_ in the _web.xml_ to cause a local
 file containing the security configuration to be included in the
 web.xml. For example, add the __ENTITY__ 
 
-`[<!ENTITY securityConfig SYSTEM "file:/fully/qualified/path/to/your/security/config.xml">]`
+[source,xml]
+----
+[<!ENTITY securityConfig SYSTEM "file:/fully/qualified/path/to/your/security/config.xml">]
+----
 
-to the <__!DOCTYPE__> declaration at the top of the _web.xml_, and also
+to the _!DOCTYPE_ declaration at the top of the _web.xml_, and also
 add an __entity reference__ (`&securityConfig;`) 
-to the content of the <__web-app__> element. This would cause your external
+to the content of the _web-app_ element. This would cause your external
 security configuration to be included in the _web.xml_ file.
 
-===== Example _ENTITY_ configuration:
-
+._ENTITY_ configuration:
+[source,xml]
 ----
     <?xml version="1.0" encoding="ISO-8859-1"?>
- 
+
     <!DOCTYPE web-app
         PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.2//EN"
         "http://java.sun.com/j2ee/dtds/web-app_2_2.dtd"
         [<!ENTITY securityConfig      SYSTEM "file:/fully/qualified/path/to/your/security/config.xml">]
     >
     <web-app>
- 
+
         <!--
             Loads a persistent security configuration from the content directory.
             This configuration may be empty, in which case no security constraints will be
             applied by Tomcat.
         -->
         &securityConfig;
- 
+
         .
         .
         .
- 
+
     </web-app>
 ----
 
