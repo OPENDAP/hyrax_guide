@@ -27,6 +27,7 @@ include::preface.adoc[lines="1..2,7..-1", leveloffset=+1]
 //
 // An overview of the server. This document includes the section title
 // The 'lines' attribute tells the include macro to only include lines 1 and 8 to the end (-1)
+[[hyrax-overview]]
 include::Hyrax.adoc[lines="1,8..-1", leveloffset=+1]
 
 // Installation
@@ -58,6 +59,7 @@ include::Master_Hyrax_Configuration.adoc[lines="1,6..-1"]
 include::Master_Hyrax_Customizing_Hyrax.adoc[lines="1,8..-1"]
 
 // Integrate Hyrax with the Apache web demon.
+[[apache-integration]]
 include::Master_Hyrax_Apache_Integration.adoc[lines="1,8..-1"]
 
 :leveloffset: -2
@@ -75,6 +77,7 @@ NOTE: TODO Add text about using _besd_ to the following
 include::Hyrax_Starting_and_stopping_the_BES.adoc[lines="1,8..-1"]
 
 // The web GUI that enables an administrator to control the various parts of a Hyrax server.
+[[admin-interface]]
 include::Master_Hyrax_Administrators_Interface.adoc[lines="1,8..-1"]
 
 :leveloffset: -2
@@ -86,6 +89,7 @@ include::Master_Hyrax_Administrators_Interface.adoc[lines="1,8..-1"]
 include::Master_Hyrax_Secure_Installation_Guidelines.adoc[lines="1,8..-1"]
 
 // Configure a Hyrax server to support user authentication.
+[[user-authentication]]
 include::Master_Hyrax_User_Authentication.adoc[lines="1,8..-1"]
 
 // Configure client software such as browsers or curl

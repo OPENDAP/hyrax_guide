@@ -70,6 +70,7 @@ your apache2 server is running on localhost), the _mod_proxy_ajp_ will
 forward you request transparently using the AJP protocol to the tomcat
 application server on localhost:8009.
 
+[[apache-compressed-responses]]
 == Apache Compressed Responses
 
 Many OPeNDAP clients accept compressed responses. This can greatly
