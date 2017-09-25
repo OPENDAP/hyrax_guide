@@ -21,12 +21,11 @@ include::./handlers/The_FreeForm_Data_Handler.adoc[lines="1,6..-1", leveloffset=
 include::./handlers/BES_Modules_SQL_Hander.adoc[lines="1,6..-1", leveloffset=+1]
 
 // Handlers that build different kinds of responses
-NOTE: The following two descriptions of the File Out NetCDF code need to be combined.
-
-include::./handlers/BES_File_Out_NetCDF.adoc[lines="1,6..-1", leveloffset=+1]
 
 include::./handlers/BES_Modules_FileOut_Netcdf.adoc[lines="1,6..-1", leveloffset=+1]
 
+include::./handlers/BES_File_Out_NetCDF.adoc[lines="1,6..-1", leveloffset=+1]
+ 
 include::./handlers/BES_Modules_FileOut_GDAL.adoc[lines="1,6..-1", leveloffset=+1]
 
 include::./handlers/Hyrax_JSON.adoc[lines="1,6..-1", leveloffset=+1]

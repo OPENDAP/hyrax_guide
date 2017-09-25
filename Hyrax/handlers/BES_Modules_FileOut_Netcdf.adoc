@@ -24,18 +24,6 @@ command. The format is used to specify a "returnAs" format. Typically
 you will see responses of the dap2 format. This module provides the
 additional format of returning the OPenDAP data object as a netcdf file.
 
-==== Download
-
-The latest version of this handler is included in the BES RPM
-distribution as of Hyrax 1.12, which you can download from the
-https://www.opendap.org/software/hyrax-data-server[Hyrax download page]. You can get the
-source code for this module from the https://github.com/OPENDAP/bes[BES]
-or https://github.com/OPENDAP/fileout_netcdf[fileout_netcdf] projects
-from guthub. The BES project can be used to all of the source we use
-when building the bES for inclusion in the Hyrax releases; the
-fileout_netcdf project can be used to get just the source code for the
-module.
-
 === How to Use the Module
 
 Once installed, the fonc.conf file is installed in the BES
@@ -83,6 +71,7 @@ If not using the OLFS to serve your data, for example if using the
 bescmdln, you would run a command file that would look something like
 this:
 
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <request reqID="some_unique_value" >
@@ -94,3 +83,4 @@ this:
     <get type="dods" definition="d" returnAs="netcdf"/>
 </request>
 ----
+

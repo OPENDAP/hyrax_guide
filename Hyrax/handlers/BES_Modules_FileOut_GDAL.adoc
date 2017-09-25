@@ -78,3 +78,4 @@ initially built, you can use the _FONg.default_gcs_ configuration
 parameter to set the default Geographical Coordinate System (GCS) for
 the handler. This GCS will be used when the dataset's metadata 
 provides information GCS that the handler can not recognize.
+
