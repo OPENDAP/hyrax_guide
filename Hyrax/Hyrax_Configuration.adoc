@@ -11,14 +11,6 @@ to serve test data sets that come with each of the installed
 data handlers. This will allow you to test the server and
 make sure it is functioning correctly. After that you can customize it for your data.
 
-//include::./Hyrax_BES_Configuration.adoc[leveloffset=+1, BES configuration]
-
-//include::./Hyrax_OLFS_Configuration.adoc[leveloffset=+1, OLFS configuration]
-
-//include::./Hyrax_THREDDS_Configuration.adoc[leveloffset=+1, THREDDS Configuration]
-
-//include::./Hyrax_Logging_Configuration.adoc[leveloffset=+1, Logging configuration]
-
 === Deploying Robots for Hyrax ===
 
 Deploying a robots.txt file for Hyrax is synonymous with deploying it for Tomcat. This means that your robots.txt file must be
@@ -41,4 +33,4 @@ place it in _$CATALINA_HOME/webapps/ROOT_.
 
 If you find that you system is still burdened with robot
 traffic then you might want to try the
-xref:./Hyrax_OLFS_Configuration.adoc#BotBlocker[BotBlocker handler for the OLFS].
+<<bot-blocker, BotBlocker handler for the OLFS>>.

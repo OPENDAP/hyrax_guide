@@ -4,6 +4,7 @@
 //:numbered:
 //:toc:
 
+[[OLFS-config]]
 == OLFS Configuration Introduction
 
 This document should help you get started configuring the OLFS web
@@ -48,8 +49,8 @@ then provides DAP services for the retrieved files. The
 Gateway servlet does not require additional configuration, yet the
 BES must be correctly configured to perform gateway tasks.
 
-Additionally the OLFS web application relies on one or more instances of
-the link:./Hyrax_BES_Configuration.adoc#bess-configuration[BES] to provide it with
+Additionally the OLFS web application relies on one or more instances of the 
+<<bess-configuration, BES>> to provide it with
 data access and basic catalog metadata.
 
 The OLFS web application stores its configuration state in a number of
@@ -61,6 +62,7 @@ The remainder of this document is concerned with how to correctly
 configure the Hyrax and Viewers servlets - the primary components of the
 OLFS web application.
 
+[[OLFS-config-location]]
 === OLFS Configuration Location
 
 Beginning with olfs-1.15.0 (part of hyrax-1.13.0) the OLFS will use the
@@ -139,8 +141,7 @@ first two: *olfs.xml* and *catalog.xml*
   WEB-INF directory of the web application "opendap". Typically that
   means _$CATALINA_HOME/webapps/opendap/WEB-INF/log4j.xml_ However,
   Hyrax can be configured to look in additional places for the
-  _log4j.xml_ file. link:./Hyrax_Logging_Configuration.adoc[Read
-  More About It Here].
+  _log4j.xml_ file. <<logging-configuration, Read More About It Here>>.
 
 == Hyrax Servlet Configuration
 
@@ -212,7 +213,7 @@ whenever the software needs to access BES's services. This
 configuration is key to the function of Hyrax, for in it 
 is defined each BES that is connected to a Hyrax installation. The following examples
 will show a single BES example. For more information on configuring Hyrax to use multiple BES's
-link:./Hyrax_Configuring_The_OLFS_To_Work_With_Multiple_BES%27s.adoc[look here].
+<<config-hyrax-mult-BESs, look here>>.
 
 Each BES is identified using a seperate <__BES__> child element inside
 of the <__BESManager__> element.
@@ -244,8 +245,8 @@ There may be more than one <_BES_>, but only that one is required.
 effort is required; however, when using multiple BES's it is neccesary
 that each BES has a mount point exposed as a directory (aka collection)
 in the URI space where it's going to appear. See
-link:./Hyrax_Configuring_The_OLFS_To_Work_With_Multiple_BES%27s.adoc[Configuring
-With Multiple BES's] for more information.
+<<config-hyrax-mult-BESs, Configuring With Multiple BES's>>
+for more information.
 . The prefix string *must* always begin with the slash ("/")
 character. (See __example 2__.)
 
@@ -448,7 +449,7 @@ configuration elements, so it will always be written like this:
 <Handler className="opendap.bes.VersionDispatchHandler" />
 ----
 
-[[BotBlocker]]
+[[bot-blocker]]
 === BotBlocker (optional)
 
 This optional handler can be used to block access from specific IP
@@ -985,9 +986,8 @@ other words *index.html* is the default document.
 
 === Logging
 
-//IS THIS A VALID LINK? -ACP
-For information about logging, please check out the 
-link:./Hyrax_Logging_Configuration.com[Hyrax Logging Configuration Documentation].
+For information about logging, please check out the
+<<logging-configuration, Hyrax Logging Configuration Documentation>>.
 
 === Authentication and Authorization
 

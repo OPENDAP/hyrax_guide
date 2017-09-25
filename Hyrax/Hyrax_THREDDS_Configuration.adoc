@@ -63,7 +63,7 @@ configuration] (applies to Hyrax as well).
 === Configuration Instructions
 
 * The current default
-(link:./Hyrax_OLFS_Configuration.adoc[olfs.xml])
+(<<OLFS-config, olfs.xml>>)
 file comes with THREDDS configured correctly.
 * The THREDDS master catalog is stored in the file
 *$CATALINA_HOME/content/opendap/catalog.xml* it can be edited to provide

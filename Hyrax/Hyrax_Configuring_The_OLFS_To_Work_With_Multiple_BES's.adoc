@@ -4,6 +4,7 @@
 //:numbered:
 //:toc:
 
+[[config-hyrax-mult-BESs]]
 == Configuring The OLFS To Work With Multiple BES's
 
 Configuring Hyrax to use multiple BES backends is straight forward. It
