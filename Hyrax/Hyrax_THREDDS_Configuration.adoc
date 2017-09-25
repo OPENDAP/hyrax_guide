@@ -13,17 +13,17 @@ XSLT to provide HTML versions (presentation views) for human
 consumption.
 
 . Dynamic THREDDS catalogs for holdings provided by the BES are
-provided by the opendap.bes.BESThreddsDispatchHandler.
+provided by the _opendap.bes.BESThreddsDispatchHandler_.
 . Static THREDDS catalogs are provided by the
-opendap.threddsHandler.StaticCatalogDispatch. The static catalogs allow
+_opendap.threddsHandler.StaticCatalogDispatch_. The static catalogs allow
 catalog "graphs" to be decoupled from the filesystem "graph" of the data
 holdings, thus allowing data providers the ability to present and
 organize data collections independently of how they are organized in the
 underlying filesystem.
 
 Static THREDDS catalogs are "rooted" in a master catalog file,
-__catalog.xml__, located in the (persistent) content directory for the
-OLFS (Typically $CATALINA_HOME/content/opendap). The default
+_catalog.xml_, located in the (persistent) content directory for the
+OLFS (Typically _$CATALINA_HOME/content/opendap_). The default
 _catalog.xml_ that comes with Hyrax contains a simple catalogRef element
 that points to the dynamic THREDDS catalogs generated from the BES
 holdings. The default catalog example also contains a (commented out)
@@ -42,7 +42,7 @@ their configuration options, and other information can be found here.]
 === THREDDS Catalog Documentation
 
 Rather than provide an exhaustive explanation of the THREDDS catalog
-functionality and configuration I will appeal to the existing documents
+functionality and configuration,  we will appeal to the existing documents
 provided by our fine colleagues at UNIDATA:
 
 * http://www.unidata.ucar.edu/projects/THREDDS/tech/TDS.html#Catalogs[Catalog
@@ -62,34 +62,32 @@ configuration] (applies to Hyrax as well).
 
 === Configuration Instructions
 
-* The current default
-(<<OLFS-config, olfs.xml>>)
+* The current default (<<OLFS-config, olfs.xml>>)
 file comes with THREDDS configured correctly.
 * The THREDDS master catalog is stored in the file
-*$CATALINA_HOME/content/opendap/catalog.xml* it can be edited to provide
+_$CATALINA_HOME/content/opendap/catalog.xml_. It can be edited to provide
 additional static catalog access.
 
 === datasetScan Support
 
-The *datasetScan* element is a powerful tool that can be used to sculpt
+The _datasetScan_ element is a powerful tool that can be used to sculpt
 the catalog's presentation of the BES catalog content. The Hyrax
 implementation has a couple of key points that need to be considered
-when developing an instance of the *datasetScan* element in your THREDDS
+when developing an instance of the _datasetScan_ element in your THREDDS
 catalog.
 
 ==== location attribute
 
-The *location* attribute specifies the place in the BES catalog graph
-that the *datasetScan* will be rooted. This value _must be_ expressed
-relative to the BES catalog root (BES.Catalog.catalog.RootDirectory) and
+The _location_ attribute specifies the place in the BES catalog graph
+that the _datasetScan_ will be rooted. This value _must be_ expressed
+relative to the BES catalog root (_BES.Catalog.catalog.RootDirectory_) and
 not in terms of the underlying BES host file system.
 
-Example ::
-  If _BES.Catalog.catalog.RootDirectory=/usr/share/hyrax_ and the data
-  directory to which you wish to apply the *datasetScan* is (in
-  filesystem terms) located at _/Users/share/hyrax/data/nc_ then the
-  associated *datasetScan* element's *location* attribute would have a
-  value of _/data/nc_
+For example, if _BES.Catalog.catalog.RootDirectory=/usr/share/hyrax_ and the data
+directory to which you wish to apply the _datasetScan_ is (in
+filesystem terms) located at _/Users/share/hyrax/data/nc_, then the
+associated _datasetScan_ element's _location_ attribute would have a
+value of _/data/nc_:
 
 ----
 <datasetScan name="DatasetScanExample" path="hyrax" location="/data/nc">
@@ -97,28 +95,31 @@ Example ::
 
 ==== name attribute
 
-The *name* attribute specifies name that will be used to in the
-presentation (HTML) view for the catalog containing the *datasetScan* is
-viewed.
+The _name_ attribute specifies the name that will be used in the
+presentation (HTML) view for the catalog containing the _datasetScan_.
+//is viewed.
 
 ==== path attribute
 
-The *path* attribute specifies the place in the THREDDS catalog graph
-that the *datasetScan* will be rooted. In effect it is a relative URL
-for the service. If *path* begins with a "/" then it is an absolute path
-- rooted at the server and port of the web server. The values of the
-*path* attribute should NEVER contain "catalog.xml" or "catalog.html".
+The _path_ attribute specifies the place in the THREDDS catalog graph
+that the _datasetScan_ will be rooted. It is effectively a relative URL
+for the service. If _path_ begins with a "/" then it is an absolute path
+rooted at the server and port of the web server. The values of the
+_path_ attribute should NEVER contain "catalog.xml" or "catalog.html".
 The service will create these endpoints dynamically.
 
 ===== Relative path example
-  Consider a catalog accessed with the URL:
-  http://localhost:8080/opendap/thredds/v27/Landsat/catalog.xml and that
-  contains this *datasetScan* element:
+  
+Consider a catalog accessed with the URL:
+http://localhost:8080/opendap/thredds/v27/Landsat/catalog.xml and that
+contains this _datasetScan_ element:
 
+----
 <datasetScan name="DatasetScanExample" path="hyrax" location="/data/nc"
 /> </source>
+----
 
-In the client catalog the *datasetScan* becomes this *catalogRef*
+In the client catalog, the _datasetScan_ becomes this _catalogRef_
 element:
 
 ----
@@ -130,20 +131,20 @@ element:
 />
 ----
 
-And the top of *datasetScan* catalog graph will be found at the URL
-
-http://localhost:8080/opendap/thredds/v27/Landsat/hyrax/catalog.xml
+And the top of _datasetScan_ catalog graph will be found at the URL
+http://localhost:8080/opendap/thredds/v27/Landsat/hyrax/catalog.xml.
 
 ===== Absolute path examples
-  Consider a catalog accessed with the URL:
-  http://localhost:8080/opendap/thredds/v27/Landsat/catalog.xml and that
-  contains this *datasetScan* element:
+
+Consider a catalog accessed with the URL:
+http://localhost:8080/opendap/thredds/v27/Landsat/catalog.xml and that
+contains this _datasetScan_ element:
 
 ----
 <datasetScan name="DatasetScanExample" path="/hyrax" location="/data/nc" />
 ----
 
-In the client catalog the *datasetScan* becomes this *catalogRef*
+In the client catalog the _datasetScan_ becomes this _catalogRef_
 element:
 
 ----
@@ -155,11 +156,9 @@ element:
 />
 ----
 
-Then the top of *datasetScan* catalog graph will be found at the URL
-
-http://localhost:8080/hyrax/catalog.xml
-
-_*Which is probably not what you want!*_ This *catalogRef* directs the
+Then the top of _datasetScan_ catalog graph will be found at the URL
+http://localhost:8080/hyrax/catalog.xml,
+*_which is probably not what you want!_* This _catalogRef_ directs the
 catalog crawler away from the Hyrax THREDDS service and to an undefined
 (as far as Hyrax is concerned) endpoint, one that most likely will
 generate a 404 (Not Found) response from the Web Server.
@@ -169,7 +168,7 @@ Hyrax THREDDS service path or you will direct the clients away from the
 service. In these examples the Hyrax THREDDS service path would be
 _/opendap/thredds/" (look at the URLs in the above examples) If we
 change the *datasetScan* path attribute value to_
-/opendap/thredds/myDatasetScan__:__
+/opendap/thredds/myDatasetScan:
 
 ----
 <datasetScan name="DatasetScanExample" path="'/opendap/thredds/myDatasetScan" location="/data/nc" />
