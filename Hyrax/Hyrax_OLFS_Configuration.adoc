@@ -1,4 +1,4 @@
-//= Hyrax - OLFS Configuration - OPeNDAP Documentation
+Handles the OPeNDAP directory view//= Hyrax - OLFS Configuration - OPeNDAP Documentation
 //:Leonard Porrello <lporrel@gmail.com>:
 //{docdate}
 //:numbered:
@@ -610,7 +610,7 @@ is requested.
 
 Handles the OPeNDAP directory view (contents.html) requests:
 
----- 
+----
 <Handler className="opendap.bes.DirectoryDispatchHandler" />
 ----
 

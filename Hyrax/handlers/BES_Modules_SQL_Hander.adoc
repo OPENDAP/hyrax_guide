@@ -35,43 +35,46 @@ with an unsupported data type, the handler will return an error saying
 __SQL Handler: The datatype read from the Data Source is not supported.
 The problem type code is: <type code>__.
 
-Here's a table that maps ODBC to/from SQL:
-http://publib.boulder.ibm.com/infocenter/dzichelp/v2r2/index.jsp?topic=%2Fcom.ibm.db2.doc.odbc%2Fbjneappl1009305.htm
+// Here's a table that maps ODBC to/from SQL:
+// http://publib.boulder.ibm.com/infocenter/dzichelp/v2r2/index.jsp?topic=%2Fcom.ibm.db2.doc.odbc%2Fbjneappl1009305.htm
 
-. The Mapping between ODBC and DAP datatypes
-[width="100%",cols="34%,33%,33%",options="header",]
-|============================================================
-|ODBC Type |DAP Type |Comments
-|SQL_C_CHAR |Str |
-|SQL_C_SLONG, SQL_C_LONG |Int32 |
-|SQL_C_SHORT |Int16 |
-|SQL_C_FLOAT |Float32 |
-|SQL_C_DOUBLE |Float64 |
-|SQL_C_NUMERIC |Int32 |
-|SQL_C_DEFAULT |Str |
+.The Mapping between ODBC and DAP datatypes 
+[cols="2*",options="header"]
+|===
+|ODBC Type |DAP Type
+|SQL_C_CHAR |Str
+|SQL_C_SLONG, SQL_C_LONG |Int32
+|SQL_C_SHORT |Int16
+|SQL_C_FLOAT |Float32
+|SQL_C_DOUBLE |Float64
+|SQL_C_NUMERIC |Int32
+|SQL_C_DEFAULT |Str
 |SQL_C_DATE, SQL_C_TIME, SQL_C_TIMESTAMP, +
-SQL_C_TYPE_DATE, SQL_C_TYPE_TIME, SQL_C_TYPE_TIMESTAMP |Str |
-|SQL_C_BINARY, SQL_C_BIT |Int16 |
-|SQL_C_SBIGINT, SQL_C_UBIGINT |Int32 |
-|SQL_C_TINYINT, SQL_C_SSHORT, SQL_C_STINYINT |Int16 |
-|SQL_C_ULONG, SQL_C_USHORT |Int32 |
-|SQL_C_UTINYINT |Int32 |
-|SQL_C_CHAR |Str |
-|SQL_C_CHAR |Str |
-|============================================================
+SQL_C_TYPE_DATE, SQL_C_TYPE_TIME, SQL_C_TYPE_TIMESTAMP |Str
+|SQL_C_BINARY, SQL_C_BIT |Int16
+|SQL_C_SBIGINT, SQL_C_UBIGINT |Int32
+|SQL_C_TINYINT, SQL_C_SSHORT, SQL_C_STINYINT |Int16
+|SQL_C_ULONG, SQL_C_USHORT |Int32
+|SQL_C_UTINYINT |Int32
+|SQL_C_CHAR |Str
+|SQL_C_CHAR |Str
+|===
 
-. The Mapping between SQL and ODBC datatypes
-[width="100%",cols="50%,50%",options="header",]
-|========================================
+.The Mapping between SQL and ODBC datatypes
+[width="100%",cols="50%,50%",options="header"]
+|===
 |SQL Type |ODBC Type
 |SQL_CHAR, SQL_VARCHAR, SQL_LONGVARCHAR |
 |SQL_WCHAR, SQL_WVARCHAR, SQL_WCHAR |
 |SQL_DECIMAL, SQL_NUMERIC |
-|========================================
+|===
 
 === Known Problems
 
-There are no known problems.
+It's not exactly a _problem_, but the configuration of this handler
+is dependent on correctly configuring the ODBC driver and these
+drivers vary by operating system and implementation. This does not
+simplify the configuration this component of the server!
 
 === Configuration Parameters
 
@@ -93,8 +96,10 @@ addition, there is a _user_ and _password_ parameter set defined for a
 particular DSN; the sql handler will likely need that too (NB: This
 might not actually be needed 9/9/12).
 
-What the configuration files look like on OSX (This file likely will not change. odbcinst.ini):
+What the configuration files look like on OSX:
 
+.odbcinst.ini
+[source]
 ----
 [ODBC Drivers]
 MySQL ODBC 5.1 Driver = Installed
@@ -113,8 +118,10 @@ Driver = /usr/local/lib/libmyodbc5.so
 ----
 
 This file holds information about the database name and the Data Source
-Name (DSN). Here it's creatively named 'test'. odbc.ini:
+Name (DSN). Here it's creatively named 'test'.
 
+.odbc.ini:
+[source]
 ----
 [ODBC Data Sources]
 data_source_name = test
@@ -198,12 +205,14 @@ other::
 Each of the sections is denoted by starting a line in the dataset file
 with its name in square brackets such as:
 
+[source]
 ----
 [section]
 ----
 
 or
 
+[source]
 ----
 [select]
 ----
@@ -245,6 +254,7 @@ SELECT statement. Each column name has to be unique. You can use aliases
 for two columns from different database tables that are the same. For
 example, you could define aliases like these:
 
+[source]
 ----
 table1.theColumn as col1
 table2.theColumn as col2
@@ -279,6 +289,7 @@ variable, use _$variable$_ wherever you would otherwise use a literal.
 
 ===== Some Example Dataset Files
 
+[source]
 ----
 [section]
 #  Required.
@@ -301,3 +312,5 @@ wind_08_2010
 # the requests and can be used to limit the shared data.
 id<100
 ----
+
+
