@@ -137,5 +137,6 @@ include::./aggregation/Aggregation_enhancements.adoc[lines="1,6..-1",leveloffset
 include::Master_Server_Side_Processing_Functions.adoc[lines="1,6..-1", leveloffset=+1]
 
 [appendix]
+[[BES_XML]]
 include::BES_XML_Commands.adoc[leveloffset=+1"]
 

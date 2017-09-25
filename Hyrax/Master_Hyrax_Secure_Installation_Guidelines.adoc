@@ -75,8 +75,7 @@ http://en.wikipedia.org/wiki/Secure_Sockets_Layer[TSL/SSL].
 
 For Tomcat 5.x see:
 
-* link:./Hyrax_OLFS_Configuration.adoc[Our
-instructions for enabling Tomcat User Autentication]
+* <<OLFS-config, Our instructions for enabling Tomcat User Autentication>>
 * http://tomcat.apache.org/tomcat-5.5-doc/index.html[Tomcat 5.x
 Documentation]
 ** http://tomcat.apache.org/tomcat-5.5-doc/realm-howto.html[Section 6:

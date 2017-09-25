@@ -4,6 +4,7 @@
 :numbered:
 :toc:
 
+[[BES_Installation]]
 == Introduction
 
 This page will show some sample installations and configurations for the

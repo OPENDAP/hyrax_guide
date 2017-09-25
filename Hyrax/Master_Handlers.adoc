@@ -5,30 +5,40 @@
 :toc:
 
 // Handlers for different data formats - sources of data
+[[csv-handler]]
 include::./handlers/BES_Modules_CSV_Handler.adoc[lines="1,6..-1", leveloffset=+1]
 
+[[geotiff-handler]]
 include::./handlers/BES_Modules_GeoTiff,_GRIB2,_JPEG2000_Handler.adoc[lines="1,6..-1", leveloffset=+1]
 
+[[hdf4-handler]]
 include::./handlers/BES_Modules_The_HDF4_Handler.adoc[lines="1,6..-1", leveloffset=+1]
 
+[[hdf5-handler]]
 include::./handlers/BES_Modules_The_HDF5_Handler.adoc[lines="1,6..-1", leveloffset=+1]
 
+[[netcdf-handler]]
 include::./handlers/BES_Modules_The_NetCDF_Handler.adoc[lines="1,6..-1", leveloffset=+1]
 
+[[freeform-data-handler]]
 include::./handlers/The_FreeForm_Data_Handler.adoc[lines="1,6..-1", leveloffset=+1]
 
 // One experimental data format handler - available in source code only
+[[sql-handler]]
 include::./handlers/BES_Modules_SQL_Hander.adoc[lines="1,6..-1", leveloffset=+1]
 
 // Handlers that build different kinds of responses
 NOTE: The following two descriptions of the File Out NetCDF code need to be combined.
 
+[[file-out-netcdf]]
 include::./handlers/BES_File_Out_NetCDF.adoc[lines="1,6..-1", leveloffset=+1]
 
 include::./handlers/BES_Modules_FileOut_Netcdf.adoc[lines="1,6..-1", leveloffset=+1]
 
+[[file-out-gdal]]
 include::./handlers/BES_Modules_FileOut_GDAL.adoc[lines="1,6..-1", leveloffset=+1]
 
+[[hyrax-json]]
 include::./handlers/Hyrax_JSON.adoc[lines="1,6..-1", leveloffset=+1]
 
 // Special handlers
