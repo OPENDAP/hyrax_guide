@@ -38,12 +38,11 @@ available through the Docs servlet, the data provider can further
 customize the appearance and layout of the Hyrax server web pages, making them
 conform better to their parent organization's visual identity. The Docs
 servlet has no specific configuration file.
-* link:./Hyrax_-\_Administrators_Interface.adoc[*Admin Interface
-servlet*] - The Hyrax Administration Interface (HAI) provides server
-administrators with a GUI for monitoring, controlling, and configuring
-the server.
-* link:../Hyrax/handlers/BES_-\_Modules_Gateway_Module.adoc[*Gateway servlet*] -
-The Gateway Servlet provides a gateway service that allows Hyrax to be configured to
+* <<admin-interface, *Admin Interface Servlet*>> - The Hyrax Administration 
+Interface (HAI) provides server administrators with a GUI for monitoring,
+controlling, and configuring the server.
+* <<gateway-service, *Gateway Servlet*>> - The Gateway Servlet provides 
+a gateway service that allows Hyrax to be configured to
 retrieve files (that the server recognizes as data) from the web and
 then provides DAP services for the retrieved files. The
 Gateway servlet does not require additional configuration, yet the
@@ -146,7 +145,7 @@ first two: *olfs.xml* and *catalog.xml*
 == Hyrax Servlet Configuration
 
 The Hyrax servlet is the front end (public interface) for
-link:./Hyrax.adoc[Hyrax]. It provides DAP services, THREDDS
+<<hyrax-overview, Hyrax>>. It provides DAP services, THREDDS
 catalogs, directory views, logging, and authentication services. This is
 accomplished through a collection of software components called
 DispatchHandlers. At startup the Hyrax servlet reads the *olfs.xml* file
@@ -434,7 +433,7 @@ Hyrax uses the following DispatchHandlers to handle HTTP GET requests:
   content retrieved from the BES
 * *StaticCatalogDispatch:* Provides static THREDDS catalog services for Hyrax.
 * *Gateway:* For more imformation, see the documentation for 
-  link:../Hyrax/handlers/Gateway_Service.adoc[Gateway Service].
+   <<gateway-service, Gateway Service>>.
 * *DapDispatcher:* Handles all DAP requests.
 * *DirectoryDispatchHandler:* Handles the OPeNDAP directory view (contents.html) requests.
 * *BESThreddsDispatchHandler:* Provides dynamic THREDDS catalogs of all BES holdings.
@@ -526,8 +525,8 @@ _$CATALINA_HOME/content/opendap/catalog.xml_)
 
 If the text value of this element is the string 'true,' this will cause
 the servlet to ingest all of the static catalog files at startup and
-hold their contents in memory. link:./THREDDS_using_XSLT.adoc[See
-this page for more information about the memory caching operations.]
+hold their contents in memory.
+<<THREDDS-config, See this page for more information about the memory caching operations.>>
 
 ==== *<ingestTransformFile>* Element (optional)
 
@@ -553,8 +552,7 @@ for use in an operational server.
 
 === Gateway Dispatcher
 
-Directs requests to the link:../Hyrax/handlers/Gateway_Service.adoc[Gateway
-Service].
+Directs requests to the <<gateway-service, Gateway Service>>.
 
 ==== *<prefix>* Element (required)
 
@@ -1006,10 +1004,9 @@ can be integrated nicely with this existing infrastructure.
 More about integrating Hyrax with Apache Web Server can be found at
 these pages:
 
-* link:./Master_Hyrax_Apache_Integration.adoc[Integrating Hyrax with
-Apache Web Server]
-* link:./Master_Hyrax_-\_User_Identification_(Authentication).adoc[Configuring
-Hyrax and Apache for User Authentication and Authorization]
+* <<apache-integration, Integrating Hyrax with Apache Web Server>>
+* <<user-authentication, Configuring Hyrax and Apache for User Authentication and 
+Authorization>>
 
 ==== Tomcat
 
@@ -1240,6 +1237,5 @@ Restart Tomcat for these changes to take effect.
 
 NOTE: If you are using Tomcat in conjunction with the Apache Web Server
 (our friend httpd) via AJP you will need to also
-link:./Master_Hyrax_Apache_Integration.adoc[configure
-Apache to deliver compressed responses]. Tomcat will not compress
-content sent over the AJP connection.*
+<<apache-compressed-responses, configure Apache to deliver compressed responses>>
+Tomcat will not compress content sent over the AJP connection.*

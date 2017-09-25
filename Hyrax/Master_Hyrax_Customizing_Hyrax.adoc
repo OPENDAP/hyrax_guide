@@ -166,6 +166,7 @@ transform BES showCatalog responses into THREDDS catalogs.
 |*contents.xsl* | |_$CATALINA_HOME/content/opendap/docs/xsl_ | |The
 contents.xsl file contains the XSLT transformation that is used to build
 the
+//*I am not sure what this link is referring to - ACP*
 link:../index.php/ServerDispatchOperations#OPeNDAP_Directory_Response[OPeNDAP
 Directory Response] (__see
 image:../images/DirectoryView.png[]

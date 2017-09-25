@@ -36,6 +36,7 @@ that's of no concern to the BES).
 
 *Need a description and such here.
 
+[[bes-error-response]]
 == BES Error Response
 // Shows line numbers [source,xml,linenums]. jhrg 9/17/17
 [source,xml]
@@ -113,8 +114,7 @@ conform to is controlled by the dap_format context. It is possible
 
 ====== Response Example
 
-Normally no response. May return a
-link:../index.php/BES_XML_Commands#BES_Error_Response[BESError].
+Normally no response. May return a <<bes-error-response, BESError>>.
 
 '''''
 
@@ -131,8 +131,7 @@ link:../index.php/BES_XML_Commands#BES_Error_Response[BESError].
 
 ==== Response Example
 
-Normally no response. May return a
-link:../index.php/BES_XML_Commands#BES_Error_Response[BESError].
+Normally no response. May return a <<bes-error-response, BESError>>.
 
 '''''
 
@@ -160,8 +159,7 @@ link:../index.php/BES_XML_Commands#BES_Error_Response[BESError].
 
 ==== Response Example
 
-Normally no response. May return a
-link:../index.php/BES_XML_Commands#BES_Error_Response[BESError].
+Normally no response. May return a <<bes-error-response, BESError>>.
 
 '''''
 
@@ -428,8 +426,7 @@ This is available only if the BES is compiled in developer mode. A
 
 ==== Response Example
 
-Normally no response. May return a
-link:../index.php/BES_XML_Commands#BES_Error_Response[BESError].
+Normally no response. May return a <<bes-error-response, BESError>>.
 
 '''''
 

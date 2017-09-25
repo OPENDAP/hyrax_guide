@@ -52,8 +52,7 @@ BESClient > show catalog;
 ----
 
 If you can't see your data, then make sure that the RootDirectory
-parameters in the link:./Hyrax_BES_Configuration.adoc[BES
-Configuration file] are correct.
+parameters in the <<bess-configuration, BES Configuration file>> are correct.
 
 ----
 BESClient > exit

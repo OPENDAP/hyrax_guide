@@ -102,16 +102,13 @@ Extensible/Configurable web interface ::
 
 Administrator's interface ::
   Control and dynamically update Hyrax from a convenient web interface.
-  See link:./Hyrax_Administrators_Interface.adoc[the Admin
-  interface documentation].
+  <<admin-interface, the Admin interface documentation>>.
 
  WMS services ::
-  link:./MAster-Hyrax_WMS.adoc[Hyrax now supports WMS services via
-  integration with ncWMS.]
+ <<WMS_Service, Hyrax now supports WMS services via integration with ncWMS.>>
 
  JSON responses ::
-  link:./Hyrax_JSON.adoc[Both metadata and data are now available
-  in a JSON encoding.]
+ <<hyrax-json, Both metadata and data are now available in a JSON encoding.>>
 
  w10n ::
   Hyrax comes with a complete w10n service stack. W10n navigation is
@@ -147,37 +144,21 @@ these modules work with the BES but some are part of the front (web
 facing) part of the server.
 
 === BES modules
-// TODO Make these links work using anchors
 
-* link:../handlers/BES_Modules_The_NetCDF_Handler.adoc[NetCDF data
-handler]
-* link:../handlers/BES_Modules_The_HDF4_Handler.adoc.adoc[HDF4 data handler]
-* link:../handlers/BES_Modules_The_HDF5_Handler[HDF5 data handler]
-* link:../handlers/The_FreeForm_Data_Handler.adoc.adoc[FreeForm data handler]
-* link:../handlers/BES_Modules_NcML_Module.adoc[NcML data handler]
-** link:../handlers/BES_Modules_NcML_Module.adoc.adoc#Functionality[Variable
-and Metadata modification]
-** link:../handlers/BES_Modules_NcML_Module.adoc#Aggregation_Tutorials[Aggregated
-Datasets]__)__
-* link:../handlers/BES_Modules_Gateway_Module.adoc[Gateway handler]
-(Interoperability between Hyrax and other web services)
-* link:../handlers/BES_Modules_CSV_Handler.adoc[CSV handler]
-* link:../handlers/BES_Modules_GeoTiff,_GRIB2,_JPEG2000_Handler.adoc[GeoTiff,
-GRiB2, JPEG2000 hander]
-
-* link:../handlers/BES_Modules_FileOut_Netcdf.adoc.adoc[NetCDF File Response
-handler]
-* link:../handlers/BES_Modules_FileOut_GDAL.adoc[GDAL (GeoTIFF,
-JPEG2000) File Response handler]
-
-* link:../handlers/BES_Modules_SQL_Hander.adoc[SQL handler] (Unsupported)
+* <<netcdf-handler, NetCDF data handler>>
+* <<hdf4-handler, HDF4 data handler>>
+* <<hdf5-handler, HDF5 data handler>>
+* <<freeform-data-handler, FreeForm data handler>>
+* <<gateway-module, Gateway handler>> (Interoperability between Hyrax and other web services)
+* <<csv-handler, CSV handler>>
+* <<file-out-netcdf, NetCDF File Response handler>>
+* <<file-out-gdal, GDAL (GeoTIFF, JPEG2000) File Response handler>>
+* <<sql-handler, SQL handler>> (Unsupported)
 
 ==== Additional Java Modules that use the BES
 
-* link:./Master_Hyrax_WMS.adoc[WMS] - Web Mapping Service via integration
-with ncWMS.
-* link:../aggregation/Aggregation_enhancements.adoc[Aggregation enhancements]
-
+* <<WMS_Service, WMS>> - Web Mapping Service via integration with ncWMS.
+* <<user_specified_aggregation, Aggregation enhancements>>
 
 [[for-devlopers]]
 === For Software Developers
@@ -191,8 +172,9 @@ https://github.com/opendap/hyrax[Hyrax project] or by following the
 http://docs.opendap.org/index.php/Hyrax_GitHub_Source_Build[directions
 on our developer's wiki].
 
+//I am not sure to what this link is referring. -ACP
 * link:../index.php/How_to_use_Eclipse_with_Hyrax_Source_Code[How to use
-Eclipse with Hyrax Source Code] Note that this is a a work in progress,
+Eclipse with Hyrax Source Code]. Note that this is a a work in progress,
 but it will help with some of the odd steps that Eclipse seems to
 require.
 

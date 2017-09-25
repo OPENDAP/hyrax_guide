@@ -14,8 +14,8 @@ often the easiest to use because the SQL-like syntax of the 'text'
 commands can be confusing.
 
 If you want to find documentation on the XML document that the BES
-expects to receive, look at the link:./index.php/BES_XML_Commands[BES
-XML Commands] documentation. There you'll see that the commands listed
+expects to receive, look at the <<BES_XML, BES XML Commands>>
+documentation. There you'll see that the commands listed
 here are generally sent as given to the _bescmdln_ client but embedded
 in other XML that provides the BES with information such as a request ID
 and other bookkeeping information.

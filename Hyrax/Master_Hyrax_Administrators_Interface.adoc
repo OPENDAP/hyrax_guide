@@ -138,11 +138,9 @@ installation of Hyrax and they can be spread across several machines.
 Generally the front-end is run on a host that is outside your
 institution's firewall, while the back-end servers are inside that
 firewall on hosts where data are located. It may be helpful to review
-how link:../index.php/Hyrax#Overview[Hyrax] is structured: Hyrax is
-composed of one link:../index.php/Hyrax_OLFS_Configuration[front-end
-server (OLFS)] and one or more
-link:../index.php/Hyrax_BES_Configuration[back-end server (BES)]
-process.
+how <<hyrax-overview, Hyrax>> is structured: Hyrax is
+composed of one <<OLFS-config, front-end server (OLFS)>> and one or more
+<<bess-configuration, back-end server (BES)>> process.
 
 Since there is just one instance of the front-end, it has a fairly
 simple control panel. The back-end servers' control panel is a little

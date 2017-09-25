@@ -934,8 +934,7 @@ UrsTokenPath         /oauth/token
 
 Assuming that you have also:
 
-* Completed configuring link:./Master_Hyrax_Apache_Integration.adoc[AJP
-proxy for Tomcat]
+* Completed configuring <<apache-integration, AJP proxy for Tomcat>>
 * Authorized your server (aka Application) to access your URS profile.
 
 Simply restart Apache and Hyrax is ready to be accessed with your URS
