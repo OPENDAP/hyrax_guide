@@ -47,12 +47,12 @@ The Open Geospatial Consortium
 (link:http://www.opengeospatial.org/[OGC]) has developed the Web
 Coverage Service (WCS) as an open specification. In practice, there
 are a suite of standards documents that describe different aspects of
-the service and we support several beyond the basic WCS 2.0 core specification.
+the service, and we support several beyond the basic WCS 2.0 core specification.
 
 TIP: The _Open Geospatial Consortium_ has many documents that describe
 the concept of a _coverage_ and the different features of WCS. The
 link:http://www.opengeospatial.org/standards/wcs[suite of
-specifications that describe WCS] can be found on their web site.
+specifications that describe WCS] can be found on their website.
 
 The WCS service bundled with Hyrax 1.14 supports the following WCS
 specifications:
@@ -82,7 +82,7 @@ version 1.0.0, contact us.
 
 In order for the WCS service to work with a dataset served using DAP,
 that dataset must contain one or more _coverages_, dataset variables
-that meet fairly strict requirements for both strucurte and metadata.
+that meet fairly strict requirements for both structure and metadata.
 To qualify as a WCS coverage, a variable in a dataset must satisfy the
 following criteria:
 
@@ -123,7 +123,7 @@ so, fix; if not, remove this note.
 
 The WCS 2 Service web application is easy to install.
 
-To add o the WCS 2 service to an running installtion of Hyrax, simply...
+To add the WCS 2 service to an running installtion of Hyrax, simply...
 
 * Install and configure any version of Hyrax later than 1.13.5. See
   the link:https://www.opendap.org/software/hyrax-data-server[Hyrax
@@ -147,15 +147,15 @@ GlassFish).
 
 == Setting Dataset Fallback Values
 
-Because WCS requires certain metadata to work (where as, DAP can
+Because WCS requires certain metadata to work (whereas DAP can
 function with nothing more than a variable's name and type), our
-service provides a way to user WCS with datasets that natively lack
+service provides a way to use WCS with datasets that natively lack
 the required WCS metadata. We do this using a pair of configuration
 files. These files use a simple XML document combined with regular
 expressions to establish default values for different groups of
 datasets.
 
-The configuration information is held in two different files, one that
+The configuration information is held in two different files (one that
 defines a named set of default parameters for a group of files and one
 that binds that set of parameters using the name) to a group of files
 (using a regular expression). The first of these two files is
@@ -205,7 +205,7 @@ shown below.
 ----
 
 <1> The _DynamicServiceId_ names a particular set of default SRS
-values in the _wcs_service.xml_ file show above. In this example the
+values in the _wcs_service.xml_ file show above. In this example, the
 name _tb13_ in both documents connects the two sections. Note that the
 element is called _DynamicService_ in the _wcs_service.xml_ file.
 
