@@ -27,8 +27,8 @@ If you are interested in working on Hyrax or want to build the
 server from source code (as opposed to using the prebuilt binaries that we
 provide), you can get signed source distributions from the
 https://www.opendap.org/software/hyrax-data-server[download page]
-referenced above. See also the _<<for-developers, For Software
-Developers>>_ section below.
+referenced above. See also the <<for-developers, For Software Developers>>
+section below.
 
 == BES Installation
 Installing the _libdap_ and _BES_ binaries is straightforward.
@@ -61,10 +61,10 @@ cp olfs-x.x.x-webapp/opendap.war /usr/local/apache-tomcat-6.x.x/webapps/
 ----
 (Assuming that your Tomcat instance is in `/usr/local`)
 
-If you're replacing an older version of the OLFS you may:
+If you're replacing an older version of the OLFS you may
 
 * Need to remove the directory `$CATALINA_HOME/webapps/opendap` before
-restarting Tomcat.
+restarting Tomcat
 * Or determine if the existing configuration information for the
 OLFS needs to be updated. If things don't work after you start Tomcat, 
 you should compare the `$CATALINA_HOME/content/opendap/olfs.xml` file
@@ -85,7 +85,7 @@ export CATALINA_HOME = /usr/local/apache-tomcat-6.x.x
 ----
 
 === Start Tomcat
-In the top level tomcat directory (apache-tomcat-6.x.x on my machine)
+In the top level Tomcat directory (apache-tomcat-6.x.x on my machine)
 issue the command:
 
 ----
@@ -94,11 +94,10 @@ bin/startup.sh; tail -f logs/catalina.out
 
 Wait a few seconds while it all starts up.
 
-When Tomcat starts up, it will unpack your '__OLFS__ and install the
+When Tomcat starts up, it will unpack your _OLFS_ and install the
 webapp.
 
 NOTE: If you use _ctrl-c_ to stop watching the tail of the
 server's output, make sure to run the command `bin/shutdown.sh`
 to shutdown Tomcat. If you don't, you may get errors when you next try
 to start the Tomcat server.
-
