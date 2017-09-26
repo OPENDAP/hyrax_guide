@@ -11,7 +11,7 @@ structured data with the world wide web. Hyrax is one example of a
 number of data servers that implement OPeNDAP's Data Access Protocol (DAP).
 
 // TODO Rewrite this text to be more about the sever's capabilities
-than how the software was implemented.
+//than how the software was implemented.
  
 Hyrax uses the Java servlet mechanism to hand off requests from a
 general web daemon to DAP format-specific software. This provides 
