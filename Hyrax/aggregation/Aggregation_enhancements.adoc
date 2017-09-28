@@ -334,10 +334,10 @@ cd to __resources/aggregation/tests/demo__.
 
 The example files are also available here:
 
-* link:./D1_netcdf3_variable_subset.txt[d1_netcdf3_variable_subset.txt]
-* link:./D2_netcdf3_bbox_subset.txt[d2_netcdf3_bbox_subset.txt]
-* link:./D3_csv_subset.txt[d3_csv_subset.txt]
-* link:./D4_csv_subset_dim.txt[d4_csv_subset_dim.txt]
+* link:./extra_files/D1_netcdf3_variable_subset.txt[d1_netcdf3_variable_subset.txt]
+* link:./extra_files/D2_netcdf3_bbox_subset.txt[d2_netcdf3_bbox_subset.txt]
+* link:./extra_files/D3_csv_subset.txt[d3_csv_subset.txt]
+* link:./extra_files/D4_csv_subset_dim.txt[d4_csv_subset_dim.txt]
 
 In the OLFS repo on github, you'll see a file named
 __resources/aggregation/tests/demo/short_names/d1_netcdf3_variable_subset.txt__.
