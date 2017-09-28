@@ -4,6 +4,8 @@
 :numbered:
 :toc:
 
+// TODO: Add text about using _besd_ to the following
+
 == The _besctl_ Command
 
 The _besctl_ command is used to control the BES daemon. For Hyrax

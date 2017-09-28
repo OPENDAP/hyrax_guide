@@ -1,4 +1,4 @@
-= THREDDS using XSLT - OPeNDAP Documentation
+= THREDDS Catalogs using XSLT
 :Leonard Porrello <lporrel@gmail.com>:
 {docdate}
 :numbered:
@@ -28,8 +28,9 @@ response into a THREDDS catalog.
 
 === Default Configuration
 
+[source,xml]
 ----
-           <Handler className="opendap.bes.BESThreddsDispatchHandler" />
+<Handler className="opendap.bes.BESThreddsDispatchHandler" />
 ----
 
 == THREDDS Dispatch Handler
@@ -118,9 +119,11 @@ transform applied to the catalog XML document.
 
 === Default configuration
 
+[source,xml]
 ----
-           <Handler className="opendap.threddsHandler.Dispatch">
-               <prefix>thredds</prefix>
-               <useMemoryCache>true</useMemoryCache>
-           </Handler>
+<Handler className="opendap.threddsHandler.Dispatch">
+    <prefix>thredds</prefix>
+    <useMemoryCache>true</useMemoryCache>
+</Handler>
 ----
+

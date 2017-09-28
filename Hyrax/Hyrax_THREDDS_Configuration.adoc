@@ -32,14 +32,14 @@ datasetScan element that provides (if enabled) a simple demonstration of
 the datasetScan capabilities. Additional catalog components may be added
 to the _catalog.xml_ file to build (potentially large) static catalogs.
 
-NOTE:: THREDDS datasetScan elements are now fully supported and can be used
+NOTE: THREDDS datasetScan elements are now fully supported and can be used
 as a tool for altering the catalog presentation of any part of the BES
 catalog. These alterations include (but are not limited too) renaming,
 auto proxy generation, filtering, and metadata injection.
 
-//The below document does not seem to be included in "Master-Hyrax-Table-of-Contents.adoc" -ACP
-link:./THREDDS_using_XSLT.adoc[More details about the handlers,
-their configuration options, and other information can be found here.]
+//The below document is not included in any document -ACP
+// Fixed. jhrg 9/28/17
+include::THREDDS_using_XSLT.adoc[lines="1,8..-1", leveloffset=+1]
 
 === THREDDS Catalog Documentation
 
