@@ -62,13 +62,12 @@ include::Master_Hyrax_Apache_Integration.adoc[lines="1,8..-1"]
 == Operation
 
 ////
-    NOTE: TODO Add a section about starting the OLFS
-    NOTE: TODO Add information about configuration of the server so it starts automatically when a machine boots.
+NOTE: TODO Add a section about starting the OLFS
+NOTE: TODO Add information about configuration of the server so it starts automatically when a machine boots.
 ////
 
 :leveloffset: +2
 
-// About starting and stopping the BES,  TODO: Add text about using _besd_ to the following
 [[start-and-stop-BES]]
 include::Hyrax_Starting_and_stopping_the_BES.adoc[lines="1,8..-1"]
 
@@ -79,11 +78,6 @@ include::Master_Hyrax_Administrators_Interface.adoc[lines="1,8..-1"]
 :leveloffset: -1
 include::Master_Hyrax_Security.adoc[lines="1,6..-1"]
 :leveloffset: +1
-
-////
-NOTE: TODO Look at these files and determine how to better organize them so the TOC is not so bloated with level-two items
-NOTE: Fix Troubleshooting section - components should be stand alone 
-////
 
 :leveloffset: -2
 include::Master_Troubleshooting.adoc[lines="1,6..-1", leveloffset=+1]

@@ -1,5 +1,4 @@
 Not included:
-	Master_Hyrax_BES_Installation.adoc
 	Master_User_Authentication.adoc
 	THREDDS_Using_XSLT.adoc
 	Satellite_Time_Series_Aggregation.adoc
