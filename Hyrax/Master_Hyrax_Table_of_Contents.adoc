@@ -11,46 +11,41 @@
 :coderay-linenums-mode: inline
 :prewrap!:
 
-// See http://asciidoctor.org/docs/user-manual/#source-code-blocks
-// for information about source highlighting options.
-// Also see http://coderay.rubychan.de/ for information about supported
-// languages. jhrg 9/17/17
+////
+See http://asciidoctor.org/docs/user-manual/#source-code-blocks
+for information about source highlighting options.
+Also see http://coderay.rubychan.de/ for information about supported
+languages. jhrg 9/17/17
+////
 
 include::preface.adoc[lines="1..2,7..-1", leveloffset=+1]
 
-// TODO Make this a multi-part book? Maybe... To do that with the
-// content we have, raise the levels up one notch. That means reduce the
-// leveloffset values by one (+1 --> 0, +2 --> +1) and the sections in
-// this document by one ('==' --> '=', ...).
-//
-// Right now there are more pressing problems.
-//
-// An overview of the server. This document includes the section title
-// The 'lines' attribute tells the include macro to only include lines 1 and 8 to the end (-1)
+////
+TODO Make this a multi-part book? Maybe... To do that with the
+content we have, raise the levels up one notch. That means reduce the
+leveloffset values by one (+1 --> 0, +2 --> +1) and the sections in
+this document by one ('==' --> '=', ...).
+
+Right now there are more pressing problems.
+
+An overview of the server. This document includes the section title
+The 'lines' attribute tells the include macro to only include lines 1 and 8 to the end (-1)
+////
+
 [[hyrax-overview]]
 include::Hyrax.adoc[lines="1,8..-1", leveloffset=+1]
 
-// Installation
-
 ////
-NOTE: TODO Add (or find ...) a section on BES installation. It might
+TODO: Add (or find ...) a section on BES installation. It might
 have gotten lost; Use _Master_Hyrax_Sample_BES_Installations.adoc_? If
 so that file will need content edits of a massive nature.
 ////
 
+
 // This document explains how to install Hyrax.
 include::Master_Hyrax_Installation.adoc[lines="1,8..-1", leveloffset=1]
 
-// - - - - - - - - - - - - - 
-// I dropped this include as the content is now part 
-// of Master_Hyrax_Installation.adoc - ndp
-// This document explains how to install the OLFS.
-// include::Master_Hyrax_OLFS_Installation.adoc[lines="1,8..-1"]
-// - - - - - - - - - - - - - 
-
-== Configuration
-
-:leveloffset: +2
+:leveloffset: +1
 
 // General configuration informat
 include::Master_Hyrax_Configuration.adoc[lines="1,6..-1"]
@@ -62,81 +57,35 @@ include::Master_Hyrax_Customizing_Hyrax.adoc[lines="1,8..-1"]
 [[apache-integration]]
 include::Master_Hyrax_Apache_Integration.adoc[lines="1,8..-1"]
 
-:leveloffset: -2
+:leveloffset: -1
 
 == Operation
 
+////
+    NOTE: TODO Add a section about starting the OLFS
+    NOTE: TODO Add information about configuration of the server so it starts automatically when a machine boots.
+////
+
 :leveloffset: +2
 
-NOTE: TODO Add a section about starting the OLFS
-NOTE: TODO Add information about configuration of the server so it starts automatically when a machine boots.
-
-// About starting and stopping the BES.
-NOTE: TODO Add text about using _besd_ to the following
-
+// About starting and stopping the BES,  TODO: Add text about using _besd_ to the following
+[[start-and-stop-BES]]
 include::Hyrax_Starting_and_stopping_the_BES.adoc[lines="1,8..-1"]
 
 // The web GUI that enables an administrator to control the various parts of a Hyrax server.
 [[admin-interface]]
 include::Master_Hyrax_Administrators_Interface.adoc[lines="1,8..-1"]
 
-:leveloffset: -2
+:leveloffset: -1
+include::Master_Hyrax_Security.adoc[lines="1,6..-1"]
+:leveloffset: +1
 
-== Security
-:leveloffset: +2
-
-// Install Hyrax for use in production environments so it will meet typical organizational security requirements.
-include::Master_Hyrax_Secure_Installation_Guidelines.adoc[lines="1,8..-1"]
-
-// Configure a Hyrax server to support user authentication.
-[[user-authentication]]
-include::Master_Hyrax_User_Authentication.adoc[lines="1,8..-1"]
-
-// Configure client software such as browsers or curl
-// to authenticate with a server.
-include::DAP_Clients_Authentication.adoc[lines="1,8..-1"]
-
-:leveloffset: -2
-
-== Troubleshooting
-
+////
 NOTE: TODO Look at these files and determine how to better organize them so the TOC is not so bloated with level-two items
-
 NOTE: Fix Troubleshooting section - components should be stand alone 
+////
 
+:leveloffset: -2
 include::Master_Troubleshooting.adoc[lines="1,6..-1", leveloffset=+1]
-
-// The [appendix] macro gives the following sections the correct numbering 
-
-// Install and configure Hyrax support for the OGC web mapping services protocol.
-[[WMS_Service]]
-[appendix]
-include::Master_Hyrax_WMS.adoc[lines="1,8..-1", leveloffset=+1] 
-
-[[WCS_Service]]
-[appendix]
-include::WCS_Service.adoc[lines="1,8..-1", leveloffset=+1] 
-
-// Specific configuration parameters for various Hyrax modules
-[appendix]
-include::Master_Handlers.adoc[lines="1,6..-1", leveloffset=+1]
-
-// Install and configure Hyrax's support for user specified aggregations of
-// data.
-[appendix]
-include::Master_Aggregation.adoc[lines="1,6..-1", leveloffset=+1]
-
-[[user_specified_aggregation]]
-[appendix]
-include::./aggregation/Aggregation_enhancements.adoc[lines="1,6..-1",leveloffset=+1]
-
-
-// The default server-side processing functions that are distributed with Hyrax
-[[Server_Side_Processing_Functions]]
-[appendix]
-include::Master_Server_Side_Processing_Functions.adoc[lines="1,6..-1", leveloffset=+1]
-
-[appendix]
-[[BES_XML]]
-include::BES_XML_Commands.adoc[leveloffset=+1"]
-
+include::Master_Hyrax_Appendix.adoc[lines="1,6..-1", leveloffset=+1]
+:leveloffset: +2
