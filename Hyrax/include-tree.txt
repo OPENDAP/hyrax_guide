@@ -1,5 +1,4 @@
 Not included:
-	Master_Hyrax_OLFS_Installation.adoc
 	Master_Hyrax_BES_Installation.adoc
 	Master_User_Authentication.adoc
 	THREDDS_Using_XSLT.adoc
@@ -11,6 +10,7 @@ Master_Hyrax_Table_of_Contents.adoc
 	preface.adoc
 	Hyrax.adoc
 	Master_Hyrax_Installation.adoc
+		Master_Hyrax_OLFS_Installation.adoc
 	Master_Hyrax_Configuration.adoc
 		Hyrax_Configuration.adoc
 		Hyrax_BES_Configuration.adoc
