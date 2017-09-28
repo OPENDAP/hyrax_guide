@@ -6,7 +6,8 @@
 
 == Overview
 
-Hyrax includes an optional WCS, version 2, service that can be used to
+Hyrax includes an optional WCS-2 service (spcificlly version 2.0.1)
+that can be used to
 access all of the geo-referenced data available to the server that
 meet the requirements of the WCS 2 specification. This appendix
 describes the the kinds of data that meet these requirements along
@@ -16,23 +17,28 @@ service.
 == Hyrax Integration
 
 The integration of the WCS service into Hyrax is similar to that of the
-xref:WMS_Service[WMS service] described elsewhere in this manual in that it employs the concept of a DynamicService.
+xref:WMS_Service[WMS service] described elsewhere in this manual in that it
+employs the concept of a DynamicService.
 
-*WCS DynamicService*: A WCS DynamicService creates an association between a URL path prefix in the WCS service path, and two crucial things:
+*WCS DynamicService*: A WCS DynamicService creates an association between a
+URL path prefix in the WCS service path, and these crucial things:
 
-- A simple coverage template for a particular file or collection of files with similar domain coordinate characteristics.
+- A simple coverage template for a particular file or collection of files
+with similar domain coordinate characteristics.
 - The URL of either a DAP server from which to get the data, or a BES
-protocol reference (``bes://``) that tells the WCS engine that a direct BES connection should be used to service the requests.
-
-If a BES protocol reference is provided then the rest of the href value
-is must be a regular expression which is applied to the dataset file
-path in the server. At runtime when Hyrax uses the regex to determine if a particular dataset should get WCS service links in it's _viewers_ page and in its THREDDS catalog reference.
+protocol reference (``bes://``) that tells the WCS engine that a direct
+BES connection should be used to service the requests.
+- If a BES protocol reference is provided then the rest of the href value
+must be a regular expression which is applied to the dataset file
+path in the server. At runtime when Hyrax uses the regex to determine if
+a particular dataset should getWCS service links in it's _viewers_ page
+and in its THREDDS catalog reference.
 
 The DynamicService instances are defined in the wcs_service.xml file.
 
 In this WCS implementation there is no separate comprehensive
 WCS service with a catalog containing all of the coverages that might
-found in the server. Instead, the Hyrax catalogs' _viewers_ pages are
+be found in the server. Instead, the Hyrax catalogs' _viewers_ pages are
 used to access the WCS service interface for a particular dataset.
 From a programmatic access perspective the WCS endpoint URLs are easily
 constructed and appear as service links associated with datasets in
@@ -56,7 +62,7 @@ coverage metadata and binary data responses to service client WCS
 requests.
 
 The WCS service attempts to dynamically map DAP datasets to WCS
-coverages so that the data provider need not learn all of the details
+Coverages so that the data provider need not learn all of the details
 of the WCS specifications. At minimum the data provider will need to
 provide a simple template for each "collection" of related
 dataset/coverages. The amount of detail required in a template is
@@ -189,42 +195,31 @@ shown below.
 [source,xml,linenums]
 ----
 <WcsService>
-    <WcsCatalog className="opendap.wcs.v2_0.DynamicServiceCatalog" >
-        <DynamicService name="M2TMNXCHM" href="http://localhost:8080/opendap/" srs="urn:ogc:def:crs:EPSG::4326" >
+    <WcsCatalog className="opendap.wcs.v2_0.DynamicServiceCatalog">
+
+        <DynamicService          <!--1-->
+                prefix="M2SDNXSLV"   <!--2-->
+                name="MERRA-2 M2SDNXSLV WCS Service" <!--3-->
+                href="bes://^/testbed-13/M2SDNXSLV\.5\.12\.4/.*$" <!--4-->
+                srs="urn:ogc:def:crs:EPSG::4326" >  <!--5-->
             <DomainCoordinate name="time" dapID="time" size="1" units="Days since 1900-01-01T00:00:00.000Z" min="690" max="690"/>
-            <DomainCoordinate name="latitude" dapID="lat" size="361" units="deg"  min="-90" max="90"/>
+            <DomainCoordinate name="latitude" dapID="lat" size="361" units="deg" min="-90" max="90"/>
             <DomainCoordinate name="longitude" dapID="lon" size="576" units="deg" min="-180" max="180"/>
         </DynamicService>
-
     </WcsCatalog>
 </WcsService>
 ----
 
-<1> The _DynamicService_ definition, this links this information with the
-dataset(s) describd in the _viewers.xml_ file that can be found in the
-_opendap/WEB-INF/conf/_ directory.
-
-<2> The _DefaultSRS_ element defines the axis labels, order, units and
+<1> The _DynamicService_ definition, provides a link between datasets matching the regex and the WCS
+meta information provided in the DynamicService definition.
+<2> The _prefix_ is a simple string used by the WcsCatalg implementaiton to
+distinguish each DynamicService. Helpful if it has something to do with the
+collection being serviced.
+<3> A human meaningful name that will be used by the server when it creates a link to the service in the _viewers_ page.
+<4>            four
+<5> The _DefaultSRS_ element defines the axis labels, order, units and
 number of dimensions for the SRS that will be used for any dataset
 that does not contain an explicit SRS definition.
-
-The second file is _viewers.xml_ found in the _opendap/WEB-INF/conf/_,
-shown below.
-
-.viewers.xml
-[source,xml,linenums]
-----
-<ViewersConfig>
-    ...
-    <WebServiceHandler className="opendap.viewers.WcsService" serviceId="WCS-TB13" >
-        <ApplicationName>Testbed-13 WCS Service</ApplicationName>
-        <ServiceEndpoint>http://localhost:8080/WCS-2.0/</ServiceEndpoint>
-        <DynamicServiceId>tb13</DynamicServiceId>	<!--1-->
-       <MatchRegex>/testbed-13/.*</MatchRegex>	<!--2-->
-     </WebServiceHandler>
-    ...
-</ViewersConfig>
-----
 
 <1> The _DynamicServiceId_ names a particular set of default SRS
 values in the _wcs_service.xml_ file show above. In this example, the
