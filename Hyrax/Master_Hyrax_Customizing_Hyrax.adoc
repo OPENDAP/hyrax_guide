@@ -35,8 +35,10 @@ WARNING: Do NOT remove files from this new directory (or the old one).
 Each file, in its location, is required by Hyrax. You can
 make changes to the files but you should not rename or remove them.
 
-Nothing inside the _$CATALINA_HOME/content_ directory is (automatically)
-changed when installing new versions of Hyrax.
+NOTE: Beacuse nothing inside the _$CATALINA_HOME/content_ directory is
+(automatically) changed when installing new versions of Hyrax, changes
+you make to files in the _content_ directory will persist when you
+upgrade Hyrax.
 
 *The rest of these instructions are written with the assumption that a
 copy of the _docs_ directory has been made as described above.*
@@ -45,8 +47,7 @@ copy of the _docs_ directory has been made as described above.*
 
 ==== HTML Files
 
-The HTML files provide the static content of a Hyrax server.
-
+.The HTML files provide the static content of a Hyrax server.
 [width="100%",cols="20%,20%,60%"]
 |=======================================================================
 | File | Location | Description
@@ -82,9 +83,9 @@ Contains the default error page that Hyrax will return when the client request
 generates an **Bad Gateway**. (Associated with an HTML status of 502)
 |=======================================================================
 
-
 ==== CSS Files
 
+.The CSS Files provide style information for the HTML pages
 [width="100%",cols="20%,20%,60%"]
 |=======================================================================
 |File | Location | Description
@@ -99,13 +100,13 @@ The thredds.css style sheet provides the default colors and fonts used by
 the THREDDS component of Hyrax.
 |=======================================================================
 
-
-==== Image Files
-
 There are a number of image files shipped with Hyrax. Simply replacing
 key image files will allow you to customize the icons and logos
 associated with the Hyrax server.
 
+==== Image Files
+
+.The Image Files provide a way to change logos and other images
 [width="100%",cols="40%,20%,40%"]
 |=======================================================================
 |File | Location |Description
@@ -235,8 +236,7 @@ WARNING: All of these XSLT files are software and should be treated as such.
 They are intimately tied to the functions of Hyrax. The likelihood that
 you can change these files and not break Hyrax is fairly low.
 
-===== Current Operational XSLT
-
+.Current Operational XSLT
 [width="100%",cols="15%,20%,65%"]
 |=======================================================================
 |File |Location |Description
@@ -247,12 +247,9 @@ transform BES showCatalog responses into THREDDS catalogs.
 
 |*contents.xsl* | _$CATALINA_HOME/content/opendap/docs/xsl_ |
 The contents.xsl file contains the XSLT transformation that is used to build
-//*I am not sure what this link is referring to - ACP*
-the link:../index.php/ServerDispatchOperations#OPeNDAP_Directory_Response[OPeNDAP
-Directory Response] (__see image:../images/DirectoryView.png[]
-
-|*dap_3.2_ddxToRdfTriples.xsl* |_$CATALINA_HOME/content/opendap/docs/xsl_ |
-_Experimental_ - This XSLT is used to produce an RDF representation of a DAP 3.2 DDX.
+//*I am not sure what this link is referring to - ACP* FIXED jhrg 9/28/17
+the link:http://docs.opendap.org/index.php/ServerDispatchOperations[OPeNDAP
+Directory Response] image:../images/DirectoryView.png[]
 
 |*dataset.xsl* |_$CATALINA_HOME/content/opendap/docs/xsl_ |
 This transform is used to in conjunction with the opendap.threddsHandler code
@@ -281,46 +278,48 @@ This transform is used to provide a single location for the Hyrax version
 number shown in the public interface.
 |=======================================================================
 
-===== Experimental XSLT
-
+.Experimental XSLT
 [width="100%",cols="20%,20%,60%"]
 |=======================================================================
 |File | Location |Description
 
 |*dapAttributePromoter.xsl* | _$CATALINA_HOME/content/opendap/docs/xsl_|
-_Experimental_ - This XSLT file can be used to promote DAP Attributes
+This XSLT file can be used to promote DAP Attributes
 whose names contain a namespace prefix to XML elements of the same name
 as the Attribute. _Not currently in use._
 
 |*dapAttributesToXml.xsl*|_$CATALINA_HOME/content/opendap/docs/xsl_|
-_Experimental_ - This XSLT file might be used to promote DAP Attributes
+This XSLT file might be used to promote DAP Attributes
 encoded with special XML attributes to represent any XML to the XML the
 Attribute was encoded to represent. _Not currently in use._
 
 |*dap_2.0_ddxToRdfTriples.xsl*|_$CATALINA_HOME/content/opendap/docs/xsl_|
-_Experimental_ - This XSLT can be used to produce an RDF representation 
+This XSLT can be used to produce an RDF representation 
 of a DAP2 DDX. _Not currently in use._
 
+|*dap_3.2_ddxToRdfTriples.xsl* |_$CATALINA_HOME/content/opendap/docs/xsl_ |
+This XSLT is used to produce an RDF representation of a DAP 3.2 DDX.
+
 |*dap_3.3_ddxToRdfTriples.xsl*|_$CATALINA_HOME/content/opendap/docs/xsl_|
-_Experimental_ - This XSLT can be used to produce an RDF representation 
+This XSLT can be used to produce an RDF representation 
 of a DAP 3.3 DDX. _Not currently in use._
 
 |*namespaceFilter.xsl*|_$CATALINA_HOME/content/opendap/docs/xsl_|
-_Experimental_ - This XSLT can be used to filter documents so that only
+This XSLT can be used to filter documents so that only
 elements in a particular namespace are returned. _Not currently in use._
 
 |*wcs_coveragePage.xsl*|_$CATALINA_HOME/content/opendap/docs/xsl_|
-_Experimental_ - This XSLT is used by the prototype CEOP WCS gateway
+This XSLT is used by the prototype CEOP WCS gateway
 client to produce an HTML page with coverage details. _Not currently in
 use._
 
 |*wcs_coveragesList.xsl*|_$CATALINA_HOME/content/opendap/docs/xsl_|
-_Experimental_ - This XSLT is used by the prototype CEOP WCS gateway
+This XSLT is used by the prototype CEOP WCS gateway
 client to produce an HTML page with a list of available coverages. _Not
 currently in use._
 
 |*xmlToDapAttributes.xsl*|_$CATALINA_HOME/content/opendap/docs/xsl_|
-_Experimental_ - This XSLT can be used to covert any XML content into a
+This XSLT can be used to covert any XML content into a
 set of specially encoded DAP Attributes. The resulting Attribute
 elements have XML _type_ attributes that are not currently recognized by
 any OPeNDAP software. _Not currently in use._

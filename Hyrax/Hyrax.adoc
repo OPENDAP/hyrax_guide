@@ -157,7 +157,8 @@ facing) part of the server.
 
 ==== Additional Java Modules that use the BES
 
-* <<WMS_Service, WMS>> - Web Mapping Service via integration with ncWMS.
+* <<WMS_Service, WMS>> - Web Mapping Service via integration with
+  ncWMS.
 * <<user_specified_aggregation, Aggregation enhancements>>
 
 [[for-devlopers]]
@@ -172,8 +173,8 @@ https://github.com/opendap/hyrax[Hyrax project] or by following the
 http://docs.opendap.org/index.php/Hyrax_GitHub_Source_Build[directions
 on our developer's wiki].
 
-//I am not sure to what this link is referring. -ACP
-* link:../index.php/How_to_use_Eclipse_with_Hyrax_Source_Code[How to use
+//I am not sure to what this link is referring. -ACP. Fixed jhrg
+* link:http://docs.opendap.org/index.php/How_to_use_Eclipse_with_Hyrax_Source_Code[How to use
 Eclipse with Hyrax Source Code]. Note that this is a a work in progress,
 but it will help with some of the odd steps that Eclipse seems to
 require.
