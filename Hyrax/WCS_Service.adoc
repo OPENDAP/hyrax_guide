@@ -199,9 +199,27 @@ file, as a simple XML document.
                 name="MERRA-2 M2SDNXSLV WCS Service" <!--3-->
                 href="bes://^/testbed-13/M2SDNXSLV\.5\.12\.4/.*$" <!--4-->
                 srs="urn:ogc:def:crs:EPSG::4326" >  <!--5-->
-            <DomainCoordinate name="time" dapID="time" size="1" units="Days since 1900-01-01T00:00:00.000Z" min="690" max="690"/>
-            <DomainCoordinate name="latitude" dapID="lat" size="361" units="deg" min="-90" max="90"/>
-            <DomainCoordinate name="longitude" dapID="lon" size="576" units="deg" min="-180" max="180"/>
+            <DomainCoordinate
+                name="time"
+                dapID="time"
+                size="1"
+                units="Days since 1900-01-01T00:00:00.000Z"
+                min="690"
+                max="690" />
+            <DomainCoordinate
+                name="latitude"
+                dapID="lat"
+                size="361"
+                units="deg"
+                min="-90"
+                max="90" />
+            <DomainCoordinate
+                name="longitude"
+                dapID="lon"
+                size="576"
+                units="deg"
+                min="-180"
+                max="180" />
         </DynamicService>
     </WcsCatalog>
 </WcsService>
@@ -249,16 +267,34 @@ The domain coordinates must appear in the order that they appear in the dimensio
 Let's consider the DomainCoordinate definitions from the example above:
 
 -----
-<DomainCoordinate name="time" dapID="time" size="1" units="Days since 1900-01-01T00:00:00.000Z" min="690" max="690"/>
-<DomainCoordinate name="latitude" dapID="lat" size="361" units="deg" min="-90.0" max="90.0"/>
-<DomainCoordinate name="longitude" dapID="lon" size="576" units="deg" min="-180.0" max="180.0"/>
+<DomainCoordinate
+    name="time"
+    dapID="time"
+    size="1"
+    units="Days since 1900-01-01T00:00:00.000Z"
+    min="690"
+    max="690" />
+<DomainCoordinate
+    name="latitude"
+    dapID="lat"
+    size="361"
+    units="deg"
+    min="-90"
+    max="90" />
+<DomainCoordinate
+    name="longitude"
+    dapID="lon"
+    size="576"
+    units="deg"
+    min="-180"
+    max="180" />
 -----
 
 In our friend EPSG:4326 we know that the axis order is `latitude, longitude` and that's the order in the example. There is also an additional time coordinate which comes prior to the defintions for `latitude` and `longitude`.
 
 Consider the `latitude` DomainCoordinate:
 -----
-  <DomainCoordinate name="latitude" dapID="lat" size="361" units="deg" min="-90.0" max="90.0"/>
+<DomainCoordinate name="latitude" dapID="lat" size="361" units="deg" min="-90.0" max="90.0"/>
 -----
 
 This tells the service that the coordinate axis named `latitude` is bound to the DAP variable `lat`, that a default value for _size_ as 361 elements, the default _units_ are degrees "deg", the default minimum value is -90.0 and the default maximum value is 90.0. What this means is that when the DynamicService processes a DAP dataset into a coverage it will check the dataset's metadata for this tyoe of information. If any of these values can be determined from the dataset metadata then that value is used, otherwise the values expressed in the DOmainCoordinate definition are used.
@@ -272,8 +308,8 @@ Many DAP datasets either lack the metadata for determining which variables will 
         prefix="coads"
         name="COADS WCS Service"
         href="bes://^.*coads.*\.nc$"
-        srs="urn:ogc:def:crs:EPSG::4326"
->
+        srs="urn:ogc:def:crs:EPSG::4326">
+
     <DomainCoordinate
         name="time"
         dapID="time"
@@ -331,9 +367,9 @@ Many DAP datasets either lack the metadata for determining which variables will 
         max="9.99999979e+33"/>
 </DynamicService>
 ----
-Each DAP dataset in the variable is exposed as a field and basic information s provided that is required by WCS.
+Each DAP dataset in the variable is exposed as a WCS field and basic information is provided that is required by WCS.
 
-NOTE: WCS Field names must be valid https://stackoverflow.com/questions/1631396/what-is-an-xsncname-type-and-when-should-it-be-used[NCNAMEs]
+NOTE: When creating filed defintions remember that WCS Field names must be valid https://stackoverflow.com/questions/1631396/what-is-an-xsncname-type-and-when-should-it-be-used[NCNAMEs] and that DAP variables do not have such a limitation. Characters like % or $ are not allowed in an NCNAME.
 
 
 
