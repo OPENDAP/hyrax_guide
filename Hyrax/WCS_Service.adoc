@@ -302,7 +302,7 @@ This tells the service that the coordinate axis named `latitude` is bound to the
 Longitude and time are handled as latitude.
 
 ==== Providing Field defintions
-Many DAP datasets either lack the metadata for determining which variables will make suitable coverages, or it may just not be in an expected form or location. In order to enable these datasets to be exposed via WCS we allow the definition of a field in the DynamicService. Consider the following DynamicService definition:
+Many DAP datasets either lack the metadata for determining which variables will make suitable coverages, or the information may not be in an expected form or location. In order to enable these datasets to be exposed via WCS we allow the definition of a field in the DynamicService. Consider the following DynamicService definition:
 ----
 <DynamicService
         prefix="coads"
@@ -369,7 +369,7 @@ Many DAP datasets either lack the metadata for determining which variables will 
 ----
 Each DAP dataset in the variable is exposed as a WCS field and basic information is provided that is required by WCS.
 
-NOTE: When creating filed defintions remember that WCS Field names must be valid https://stackoverflow.com/questions/1631396/what-is-an-xsncname-type-and-when-should-it-be-used[NCNAMEs] and that DAP variables do not have such a limitation. Characters like % or $ are not allowed in an NCNAME.
+NOTE: When creating field definitions remember that WCS Field names must be valid https://stackoverflow.com/questions/1631396/what-is-an-xsncname-type-and-when-should-it-be-used[NCNAMEs] and that DAP variables do not have such a limitation. Characters like % or $ are not allowed in an NCNAME.
 
 
 
