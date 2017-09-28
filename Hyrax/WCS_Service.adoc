@@ -61,6 +61,10 @@ The WCS utilizes a DAP server (e.g., a Hyrax server) to supply both
 coverage metadata and binary data responses to service client WCS
 requests.
 
+In this operational model, each a DAP Dataset is considered a
+(potential) WCS Coverage and the variables within a Dataset are
+(potential) WCS Coverage Field entities.
+
 The WCS service attempts to dynamically map DAP datasets to WCS
 Coverages so that the data provider need not learn all of the details
 of the WCS specifications. At minimum the data provider will need to
@@ -212,14 +216,22 @@ shown below.
 
 <1> The _DynamicService_ definition, provides a link between datasets matching the regex and the WCS
 meta information provided in the DynamicService definition.
-<2> The _prefix_ is a simple string used by the WcsCatalg implementaiton to
-distinguish each DynamicService. Helpful if it has something to do with the
-collection being serviced.
-<3> A human meaningful name that will be used by the server when it creates a link to the service in the _viewers_ page.
-<4>            four
-<5> The _DefaultSRS_ element defines the axis labels, order, units and
-number of dimensions for the SRS that will be used for any dataset
-that does not contain an explicit SRS definition.
+<2> *prefix*: This is a simple string used by the WcsCatalg implementation to
+distinguish each DynamicService. Choosing a value that is in some way related to the
+collection being serviced can helpful if there are problems later.
+<3> *name*: A human meaningful name that will be used by the server when it creates a link to the service in the _viewers_ page.
+<4> *href*:  There are two fundamental ways to define a DynamicService. One is to use an _http://_ or
+_https://_  URL pointing to a Hyrax instance as  the value for the DynamicService _href_ attribute. The
+other is to use a _bes://_ protocol URL. In this latter case the DynamicService will be fully integrated
+into the locally running Hyrax: The data will be accessed using the BES system and the Hyrax THREDDS
+catalogs and HTML pages will contain links to the various WCS endpoints. Hyrax utilizes the regular
+expression stored in the body of the _bes://_ protocol _href_ to determine which services are to be
+associated with which DAP Datasets.
+<5> *srs*:  The _srs_ attribute defines the expected SRS for the coverages associated with this
+DynamicService. The SRS defines the axis labels, order, units and
+minimum number of domain coordinate dimensions and will be used for any dataset
+that does not contain an explicit SRS definition. Currently only _urn:ogc:def:crs:EPSG::4326_ is
+supported.
 
 <1> The _DynamicServiceId_ names a particular set of default SRS
 values in the _wcs_service.xml_ file show above. In this example, the
