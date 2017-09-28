@@ -73,7 +73,7 @@ dataset/coverages. The amount of detail required in a template is
 a function of the metadata available within a specific datatset..
 
 The template, called a DynamicService, provides the
-domain coordinates details (Latitdue, Longitude, etc) for a group of
+domain coordinate details (Latitdue, Longitude, etc) for a group of
 coverages and depending on available metadata may also need to provide
 field/variable definitions. The template uses a regular expression to
 create the association between the DynamicService definition (and its
@@ -159,7 +159,7 @@ following criteria:
 WARNING: The above might be wrong and is probably missing stuff. If
 so, fix; if not, remove this note.
 
-== WCS Installation (suggested)
+== WCS Installation
 
 The WCS 2 service comes bundled as part of Hyrax-1.14.0 and newer.
 See the link:https://www.opendap.org/software/hyrax-data-server[Hyrax
@@ -174,7 +174,7 @@ renderable HTML page of the _Capabilities_ document with a conspicuously
 empty _Contents_
 section.
 
-NOTE: Screen grab of endpoint page here?
+image::../images/WCS-NoContents.png[]
 
 
 == Configuration
