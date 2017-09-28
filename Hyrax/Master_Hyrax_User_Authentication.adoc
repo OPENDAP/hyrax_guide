@@ -47,6 +47,7 @@ http://www.thedotnetfactory.com/learningcenter/technologies/service-identity-pro
 Providers, Identity Providers & Security Token Services explained] for
 more.
 
+[[apache-httpd-auth-services-config]]
 == Apache _httpd_ Authentication Services Configuration
 
 There are many authentication methods available for use with our friend
@@ -61,7 +62,8 @@ it is likely that all you have to do is configure _httpd_ and Tomcat
 to work together and define and then define a security constraint for
 _httpd_ that enforces a login requirement (valid-user) for Hyrax.
 
-=== First: Configure Apache httpd and Tomcat to work together
+[[config-apache-tomcat-w-t]]
+=== Configure Apache httpd and Tomcat to work together
 
 In this part we configure Tomcat and Apache _httpd_ to work together so
 that _httpd_ can provide proxy and authentication services for Hyrax.
@@ -264,10 +266,9 @@ presented in the following sections.
 (http://httpd.apache.org/docs/2.2/mod/mod_ldap.html[mod_ldap],
 http://httpd.apache.org/docs/2.2/mod/mod_authnz_ldap.html[mod_authnz_ldap])
 
-NOTE: You must
-*#First:_Configure_Apache_httpd_and_Tomcat_to_work_together[configure
-Apache and Tomcat (Hyrax) to work together]* prior to completion of this
-section.
+NOTE: You must first 
+<<config-apache-tomcat-w-t, configure Apache and Tomcat (Hyrax) to work together>>
+prior to completion of this section.
 
 In order to get Apache httpd to use LDAP authentication you will have
 configure an Apache security constraint on the Hyrax web application.
@@ -497,12 +498,12 @@ contents of the LDAP service against which you are authenticating, and
 the richness of the group and attribute entries will in a large part
 determine the granularity of access control you will be able to provide.
 
+[[shibboleth]]
 ==== Shibboleth (mod_shib)
 
 NOTE: You must
-*#First:_Configure_Apache_httpd_and_Tomcat_to_work_together[configure
-Apache and Tomcat (Hyrax) to work together]* prior to completion of this
-section.
+<<config-apache-tomcat-w-t, configure Apache and Tomcat (Hyrax) to work together>>
+prior to completion of this section.
 
 The Shibboleth wiki provides excellent documentation on how to get
 Shibboleth authentication services working with Tomcat. This is
@@ -648,14 +649,13 @@ configuration. (First. Do this first.)
 * You need mod_auth_urs (which you will likely have to build from
 source; see below).
 * You must register a web application and authorize it. See
-link:#Obtain_URS_Application_Credentials[Obtain URS Application
-Credentials] below for more information on this. Note: You can register
+<<obtain-app-creds, Obtain URS Application Credentials>>
+below for more information on this. Note: You can register
 your application with either the
 https://uat.urs.earthdata.nasa.gov/profile[Test URS System] or the
 https://urs.earthdata.nasa.gov/profile[Main URS System].
 * You must complete the section
-**#First:_Configure_Apache_httpd_and_Tomcat_to_work_together[Configure
-Apache and Tomcat (Hyrax) to work together]**.
+<<config-apache-tomcat-w-t, Configure Apache and Tomcat (Hyrax) to work together>>.
 * You will need the public facing domain name or IP address of your
 server.
 
@@ -698,6 +698,8 @@ installs libraries into apache.
 apxs -i -c -n mod_auth_urs mod_auth_urs.c mod_auth_urs_cfg.c mod_auth_urs_session.c mod_auth_urs_ssl.c mod_auth_urs_http.c mod_auth_urs_json.c -lssl
 ----
 
+
+[[obtain-app-creds]]
 ===== Obtain URS Application Credentials
 
 * With your browser, navigate to your URS profile page.
@@ -969,11 +971,11 @@ documentation] for more information.
 
 ==== Clients keep getting *Internal Server Error*
 
- Problem ::
-  Everything seems to work fine but when the browser client is
-  redirected back to the originally requested resource it receives an
-  *Internal Server Error* from Apache httpd. In
-  /var/log/httpd/ssl_error.log you see this type of thing:
+ 
+Problem:: Everything seems to work fine but when the browser client is
+redirected back to the originally requested resource it receives an
+*Internal Server Error* from Apache httpd. In
+_/var/log/httpd/ssl_error.log_ you see this type of thing:
 
 ----
 [Sun Mar 22 20:05:47 2015] [notice] [client 71.56.150.130] UrsAuth: Redirecting to URS for authentication, referer: https://52.1.74.222/opendap/data/contents.html
@@ -1063,13 +1065,13 @@ file.
 === Shibboleth
 
 There is no actual Shibboleth integration with Tomcat beyond what is
-link:#Shibboleth_.28mod_shib.29[provided by running the Apache _httpd_
-module mod_shib and connecting Tomcat to _httpd_ using AJP as described
-in the Apache/Shibboleth section on this page.]
+provided by running the Apache _httpd_ module mod_shib and connecting 
+Tomcat to _httpd_ using AJP 
+<<shibboleth, as described in the Apache/Shibboleth section on this page>>.
 
 === URS OAuth2
 
 There is no actual URS integration with Tomcat beyond what is
-link:#URS_OAuth2_.28mod_auth_urs.29[provided by running the Apache httpd
-module mod_auth_urs and connecting Tomcat to httpd using AJP as
-described in the Apache/URS section on this page.]
+provided by running the Apache httpd module mod_auth_urs and 
+connecting Tomcat to httpd using AJP 
+<<apache-httpd-auth-services-config, as described in the Apache/URS section on this page>>.
