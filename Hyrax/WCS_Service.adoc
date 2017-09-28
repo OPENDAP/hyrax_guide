@@ -367,7 +367,7 @@ Many DAP datasets either lack the metadata for determining which variables will 
         max="9.99999979e+33"/>
 </DynamicService>
 ----
-Each DAP dataset in the variable is exposed as a WCS field and basic information is provided that is required by WCS.
+Each DAP variable in the dataset is exposed as a WCS field and basic information is provided that is required by WCS.
 
 NOTE: When creating field definitions remember that WCS Field names must be valid https://stackoverflow.com/questions/1631396/what-is-an-xsncname-type-and-when-should-it-be-used[NCNAMEs] and that DAP variables do not have such a limitation. Characters like % or $ are not allowed in an NCNAME.
 
