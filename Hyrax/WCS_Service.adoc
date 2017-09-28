@@ -178,22 +178,15 @@ NOTE: Screen grab of endpoint page here?
 
 
 == Configuration
-=== Setting Dataset Fallback Values
 
 Because WCS requires certain metadata to work (whereas DAP can
 function with nothing more than a variable's name and type), our
-service provides a way to use WCS with datasets that natively lack
-the required WCS metadata. We do this using a pair of configuration
-files. These files use a simple XML document combined with regular
-expressions to establish default values for different groups of
-datasets.
-
-The configuration information is held in two different files (one that
-defines a named set of default parameters for a group of files and one
-that binds that set of parameters using the name) to a group of files
-(using a regular expression). The first of these two files is
-_wcs_service.xml_ which can be found in  _WCS-2.0/WEB-INF/conf/_ and is
-shown below.
+service provides a way to use WCS with DAP datasets that natively lack
+the required WCS metadata. We do this by creating mappings (DynamicService
+instances) between collections of DAP datasets that have similar
+domain coordinates and a WCS service for the resulting Coverages.
+These relationships are expressed the _wcs_service.xml_ configuration
+file, as a simple XML document.
 
 .wcs_service.xml
 [source,xml,linenums]
@@ -214,37 +207,137 @@ shown below.
 </WcsService>
 ----
 
-<1> The _DynamicService_ definition, provides a link between datasets matching the regex and the WCS
-meta information provided in the DynamicService definition.
-<2> *prefix*: This is a simple string used by the WcsCatalg implementation to
+<1> The _DynamicService_ creates a WCS by creating a link between DAP datasets
+matching the regex and the WCS meta information provided in the DynamicService definition.
+<1> *prefix*: This is a simple string used by the WcsCatalog implementation to
 distinguish each DynamicService. Choosing a value that is in some way related to the
-collection being serviced can helpful if there are problems later.
-<3> *name*: A human meaningful name that will be used by the server when it creates a link to the service in the _viewers_ page.
-<4> *href*:  There are two fundamental ways to define a DynamicService. One is to use an _http://_ or
-_https://_  URL pointing to a Hyrax instance as  the value for the DynamicService _href_ attribute. The
-other is to use a _bes://_ protocol URL. In this latter case the DynamicService will be fully integrated
-into the locally running Hyrax: The data will be accessed using the BES system and the Hyrax THREDDS
-catalogs and HTML pages will contain links to the various WCS endpoints. Hyrax utilizes the regular
-expression stored in the body of the _bes://_ protocol _href_ to determine which services are to be
-associated with which DAP Datasets.
+collection being serviced can be helpful to people if there are problems later.
+<1> *name*: A human readable and meaningful name that will be used by the server when it
+creates a link to the service in the _viewers_ page.
+<1> *href*: The value of *href* controls which of two fundamental ways the DynamicService
+will be used. One way utilizes the BES as the source of metadata and adata for the
+WCS service and the other utilizes a remote Hyrax service for the role. To use a local
+BES the value of the `href` variable must begin with `bes://` and must be followed by a
+regular expression that is used by Hyrax to determine which DAP datasets will be associated
+with this DynamicService. In the example above the `href` attribute is set like this:
+
+    href="bes://^/testbed-13/M2SDNXSLV\.5\.12\.4/.*$"
+
++
+This value tells the server use the BES directly and to assocaiate this WCS definition with any DAP dataset
+whose local path name on the server matches the regular expression
+
+    `^/testbed-13/M2SDNXSLV\.5\.12\.4/.*$`
+
++
+Which can be read as _"Anything that starts with `/testbed-13/M2SDNXSLV.5.12.4/` "_
+
 <5> *srs*:  The _srs_ attribute defines the expected SRS for the coverages associated with this
 DynamicService. The SRS defines the axis labels, order, units and
 minimum number of domain coordinate dimensions and will be used for any dataset
 that does not contain an explicit SRS definition. Currently only _urn:ogc:def:crs:EPSG::4326_ is
 supported.
 
-<1> The _DynamicServiceId_ names a particular set of default SRS
-values in the _wcs_service.xml_ file show above. In this example, the
-name _tb13_ in both documents connects the two sections. Note that the
-element is called _DynamicService_ in the _wcs_service.xml_ file.
 
-<2> This is the regular expression that defines the data that the
-Service accesses. If datasets that match the regular expression
-don't have the needed metadata, they will use the defaults from the
-_tb13_ section of the _wcs_service.xml_ file.
+NOTE: Currently the only supported SRS is `urn:ogc:def:crs:EPSG::4326`
 
-==== Recognizing and Supplying Missing Metadata
-TBD
+==== Domain Coordinate Definitions
+The Hyrax WCS relies on the DynamicService definition to be
+responsible for identifying the specific variables in the DAP datasets that are to be used for the geo-referenced domain coordinates of the coverage.
+The domain coordinates must appear in the order that they appear in the dimensions of the DAP dataset. They must also match the order of axes represented in the SRS. _If there is an unresolvable conflict then until a suitable SRS can be identified the DAP dataset cannot be served as a Coverage._ Many DAP datasets have variables with more than two dimensions: latitude, longitude, elevation, and time are frequently seen as domain coordinates in scientific data. These can be utilized in the WCS as long as the inner most (last) two dimensions are in agreement with the SRS.
+
+Let's consider the DomainCoordinate definitions from the example above:
+
+-----
+<DomainCoordinate name="time" dapID="time" size="1" units="Days since 1900-01-01T00:00:00.000Z" min="690" max="690"/>
+<DomainCoordinate name="latitude" dapID="lat" size="361" units="deg" min="-90.0" max="90.0"/>
+<DomainCoordinate name="longitude" dapID="lon" size="576" units="deg" min="-180.0" max="180.0"/>
+-----
+
+In our friend EPSG:4326 we know that the axis order is `latitude, longitude` and that's the order in the example. There is also an additional time coordinate which comes prior to the defintions for `latitude` and `longitude`.
+
+Consider the `latitude` DomainCoordinate:
+-----
+  <DomainCoordinate name="latitude" dapID="lat" size="361" units="deg" min="-90.0" max="90.0"/>
+-----
+
+This tells the service that the coordinate axis named `latitude` is bound to the DAP variable `lat`, that a default value for _size_ as 361 elements, the default _units_ are degrees "deg", the default minimum value is -90.0 and the default maximum value is 90.0. What this means is that when the DynamicService processes a DAP dataset into a coverage it will check the dataset's metadata for this tyoe of information. If any of these values can be determined from the dataset metadata then that value is used, otherwise the values expressed in the DOmainCoordinate definition are used.
+
+Longitude and time are handled as latitude.
+
+==== Providing Field defintions
+Many DAP datasets either lack the metadata for determining which variables will make suitable coverages, or it may just not be in an expected form or location. In order to enable these datasets to be exposed via WCS we allow the definition of a field in the DynamicService. Consider the following DynamicService definition:
+----
+<DynamicService
+        prefix="coads"
+        name="COADS WCS Service"
+        href="bes://^.*coads.*\.nc$"
+        srs="urn:ogc:def:crs:EPSG::4326"
+>
+    <DomainCoordinate
+        name="time"
+        dapID="time"
+        size="12"
+        units="hour since 0000-01-01 00:00:00"
+        min="366.0"
+        max="8401.335"/>
+
+    <DomainCoordinate
+        name="latitude"
+        dapID="COADSY"
+        size="90"
+        units="deg"
+        min="-90"
+        max="90" />
+
+    <DomainCoordinate
+        name="longitude"
+        dapID="COADSX"
+        size="180"
+        units="deg"
+        min="-180"
+        max="180" />
+
+    <field
+        name="SST"
+        dapID="SST"
+        description="SEA SURFACE TEMPERATURE"
+        units="Deg C"
+        min="-9.99999979e+33"
+        max="9.99999979e+33"/>
+
+    <field
+        name="AIRT"
+        dapID="AIRT"
+        description="AIR TEMPERATURE"
+        units="DEG C"
+        min="-9.99999979e+33"
+        max="9.99999979e+33"/>
+
+    <field
+        name="UWND"
+        dapID="UWND"
+        description="ZONAL WIND"
+        units="M/S"
+        min="-9.99999979e+33"
+        max="9.99999979e+33"/>
+
+    <field
+        name="VWND"
+        dapID="VWND"
+        description="MERIDIONAL WIND"
+        units="M/S"
+        min="-9.99999979e+33"
+        max="9.99999979e+33"/>
+</DynamicService>
+----
+Each DAP dataset in the variable is exposed as a field and basic information s provided that is required by WCS.
+
+NOTE: WCS Field names must be valid https://stackoverflow.com/questions/1631396/what-is-an-xsncname-type-and-when-should-it-be-used[NCNAMEs]
+
+
+
+
 
 ==== Reading from Servers that Require Authentication
 TBD
