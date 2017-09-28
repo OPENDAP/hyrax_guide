@@ -37,7 +37,7 @@ as a tool for altering the catalog presentation of any part of the BES
 catalog. These alterations include (but are not limited too) renaming,
 auto proxy generation, filtering, and metadata injection.
 
-//The below document does not seem to be included in "Master-Hyrax-Table-of-Contents.adoc" -ACP
+//The below document is not included in any document -ACP
 link:./THREDDS_using_XSLT.adoc[More details about the handlers,
 their configuration options, and other information can be found here.]
 
