@@ -288,9 +288,12 @@ Service using these functions.
 
 === Design
 
-The design of the
-link:./Use_cases_for_swath_and_time_series_aggregation.adoc[Aggregation
-Service] is documented as well, although some aspects of that document
+////
+This link (now an xref) does not appear to refer to an included document - ACP
+link:./Use_cases_for_swath_and_time_series_aggregation.adoc[Aggregation Service]
+////
+The design of the <<use-cases-for-s-a-t-s-g, Aggregation Service>>
+is documented as well, although some aspects of that document
 are old and incorrect. it may also be useful to look at the source code,
 which can be found on GitHub at https://github.com/opendap/olfs[olfs]
 and https://github.com/opendap/bes[bes] in the

@@ -792,10 +792,8 @@ joinExisting, and fmrc (forecast model run collection).
 The current version of the NcML module supports two of these
 aggregations:
 
-* Union
-link:../aggregation/NCML_Module_Aggregation_Union.adoc[NCML_Module_Aggregation_Union]
-* JoinNew
-link:../aggregation/NCML_Module_Aggregation_JoinNew.adoc[NCML_Module_Aggregation_JoinNew]
+* Union <<union_aggregation, NCML_Module_Aggregation_Union>>
+* JoinNew <<join_new_aggregation, NCML_Module_Aggregation_JoinNew>>
 
 A _union_ aggregation specifies that the first instance of a variable or
 attribute (by name) that is found in the ordered list of datasets will
@@ -821,9 +819,8 @@ of an aggregation. This allows a static NcML file to refer to an
 aggregation which may change over time, such as where a new data file is
 generated each day.
 
-**link:../aggregation/NCML_Module_Aggregation_JoinNew.adoc[We describe usage of
-the <scan> element in detail in the joinNew aggregation tutorial
-here.]**.
+<<join_new_aggregation, *We describe usage of the <scan> element 
+in detail in the joinNew aggregation tutorial here*>>.
 
 == Errors
 

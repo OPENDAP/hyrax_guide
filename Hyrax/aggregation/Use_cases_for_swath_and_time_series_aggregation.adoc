@@ -1,3 +1,4 @@
+[[use-cases-for-s-a-t-s-g]]
 = Use cases for swath and time series aggregation
 {docdate}
 :numbered:

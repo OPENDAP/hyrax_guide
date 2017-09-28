@@ -135,6 +135,7 @@ Normally no response. May return a <<bes-error-response, BESError>>.
 
 '''''
 
+[[BES_XML_Define]]
 === Define
 
 ==== Request Example

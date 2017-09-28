@@ -401,10 +401,13 @@ Num_DeepBlue_Wavelengths, 0, 0, 0
 
 *NB:* Unresolved issues in bold below.
 
+////
+link:./BES_XML_Commands.adoc#define[_define_] 
+////
 There are two general technical solutions to this problem, both
 requiring iteration over a number of granules. We can use the BES's
-link:./BES_XML_Commands.adoc#define[_define_] command to do this
-or the capability can be built into the aggregating code.
+<<BES_XML_Define, _define_>> command to do this or the capability 
+can be built into the aggregating code.
 
 For a basic request, for each granule...
 
@@ -432,7 +435,8 @@ result limited to values that can be represented in a single table.
 
 ==== Using the BES Define Command
 
-The BES link:./BES_XML_Commands.adoc#define[_define_] command can
+// The BES link:./BES_XML_Commands.adoc#define[_define_] 
+<<BES_XML_Define, _define_>> command can
 aggregate a set of requests into a DAP2 Structure. We could
 modify/extend this to include Sequences, or process a Structure or Array
 of Sequences transforming that into a single Sequence. The challenges

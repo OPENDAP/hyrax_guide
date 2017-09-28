@@ -75,9 +75,8 @@ This handler has no specific configuration parameters.
 There are two ways to add custom attributes to a dataset. First, you can
 use an _ancillary attribute_ file in the same directory as the dataset.
 Alternatively, you can use NcML to add new attributes, variables, etc.
-See link:./BES_Modules_NcML_Module.adoc[the NcML Handler
-documentation] for more information on that option. Here we will
-describe how to set up an ancillary attribute file.
+See <<NcML_Module, the NcML Handler documentation>> for more information 
+on that option. Here we will describe how to set up an ancillary attribute file.
 
 ==== Simple Attribute Definitions
 

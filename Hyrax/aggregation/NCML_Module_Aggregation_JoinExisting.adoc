@@ -151,8 +151,7 @@ vectors.
 
 The collection of member datasets in a joinExisiting aggregation can be
 specified using the NcML _scan_ element as described in the
-link:./Dynamic_Aggregation_Tutorial.adoc[dynamic aggregation
-tutorial].
+<<dynamic_aggregation_tutorial, dynamic aggregation tutorial>>.
 
 === NcML Dimension Cache
 
