@@ -35,7 +35,7 @@ which will unpack a directory called _olfs-x.x.x-webapp_.
 Inside the that directory, find the opendap.war file, and copy it into
 the Tomcat's _webapps_ directory.
 
-TIP: If you are working via your terminal, use the command 
+TIP: If you are working via your terminal, use the command +
 `cp olfs-x.x.x-webapp/opendap.war /usr/local/apache-tomcat-6.x.x/webapps/`,
 where _usr/local_ should be the directory that the Tomacat server is in.
 
@@ -48,7 +48,7 @@ OLFS needs to be updated. If things don't work after you start Tomcat,
 you should compare the _$CATALINA_HOME/content/opendap/olfs.xml_ file
 that contains your exisiting configuration to the new default
 configuration located in
-_$CATALINA_HOME/webapps/opendap/intitalContent/olfs.xml_ Look at the
+_$CATALINA_HOME/webapps/opendap/intitalContent/olfs.xml_. Look at the
 lists of DispatchHandlers and adjust your configuration to use the same
 ones.
 
@@ -62,7 +62,8 @@ In bash: `export CATALINA_HOME = /usr/local/apache-tomcat-6.x.x`
 == Start Tomcat
 
 In the top level tomcat directory (apache-tomcat-6.x.x on my machine)
-issue the command `bin/startup.sh; tail -f logs/catalina.out` and
+issue the command + 
+`bin/startup.sh; tail -f logs/catalina.out` and
 wait a few seconds while it all starts up.
 
 When Tomcat starts up, it will unpack your _OLFS_ and install the

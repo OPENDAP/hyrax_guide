@@ -1,6 +1,5 @@
 Not included:
 	Master_User_Authentication.adoc
-	THREDDS_Using_XSLT.adoc
 	Satellite_Time_Series_Aggregation.adoc
 	Use_case_for_swath_and_time_series_aggregation.adoc
 	Master_Hyrax_Sample_BES_Installations.adoc
@@ -17,6 +16,7 @@ Master_Hyrax_Table_of_Contents.adoc
         Hyrax_Configuring_The_OLFS_To_Work_With_Multiple_BES's.adoc
 		Hyrax_Logging_Configuration.adoc
 		Hyrax_THREDDS_Configuration.adoc
+			THREDDS_using_XSLT.adoc
 	Master_Hyrax_Customizing_Hyrax.adoc
 	Master_Hyrax_Apache_Integration.adoc
 	Hyrax_Starting_and_stopping_the_BES.adoc
