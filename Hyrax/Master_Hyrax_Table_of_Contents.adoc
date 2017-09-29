@@ -43,6 +43,7 @@ so that file will need content edits of a massive nature.
 
 
 // This document explains how to install Hyrax.
+[[Download_and_Install_Hyrax]]
 include::Master_Hyrax_Installation.adoc[lines="1,8..-1", leveloffset=1]
 
 :leveloffset: +1

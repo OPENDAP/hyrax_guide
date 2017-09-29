@@ -1,3 +1,4 @@
+[[Hyrax_Configuration]]
 = Hyrax Configuration
 :Leonard Porrello <lporrel@gmail.com>:
 {docdate}
