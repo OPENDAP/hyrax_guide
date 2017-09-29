@@ -218,17 +218,7 @@ collection being serviced can be helpful to people if there are problems later.
 creates a link to the service in the _viewers_ page.
 <4> *pathMatch*: The value of `pathMatch` contains a regular expression which is
 used to by the server determine which DAP datasets will be associated with this
-DynamicService. In the example above the `pathMatch` attribute is set like this:
-+
-    pathMatch="^/testbed-13/M2SDNXSLV\.5\.12\.4/.*$"
-+
-This value tells the server to directly utilize the BES and to assocaiate this WCS definition with any DAP dataset
-whose local path name on the server matches the regular expression
-+
-    ^/testbed-13/M2SDNXSLV\.5\.12\.4/.*$
-+
-Which can be read as _"Anything that starts with `/testbed-13/M2SDNXSLV.5.12.4/` "_
-
+DynamicService.
 <5> *srs*:  The _srs_ attribute defines the expected SRS for the coverages associated with this
 DynamicService. The SRS defines the axis labels, order, units and
 minimum number of domain coordinate dimensions and will be used for any dataset
@@ -236,6 +226,46 @@ that does not contain an explicit SRS definition. Currently only _urn:ogc:def:cr
 supported.
 
 NOTE: Currently the only supported SRS is `urn:ogc:def:crs:EPSG::4326`
+
+=== Using _pathMatch_ to create virtual collections
+
+In the previous example the `pathMatch` attribute is set like this:
+
+    pathMatch="^/testbed-13/M2SDNXSLV\.5\.12\.4/.*$"
+
+This value tells the server to directly utilize the BES and to assocaiate this WCS definition with any DAP dataset
+whose local path name on the server matches the regular expression
+
+    ^/testbed-13/M2SDNXSLV\.5\.12\.4/.*$
+
+Which can be read as _"Anything that starts with `/testbed-13/M2SDNXSLV.5.12.4/` "_
+
+Regular expressions are very flexible and it is possible to
+use them to specify a number of things at a time.
+
+Example:
+
+A `pathMatch` regular expression like this:
+
+ pathMatch="^.*coads.*\.nc$"
+
+Will match any dataset path that contains the word "coads" and that ends with ".nc".
+
+Example:
+
+A `pathMatch` regular expression like this:
+
+ pathMatch="^/gesdisc/(M2IMNXINT|M2TMNXCHM|M2SDNXSLV|M2I1NXASM|M2TMNPMST)\.5\.12\.4/.*$"
+
+Will match any dataset whose name begins with
+/gesdisc/M2IMNXINT.5.12.4/ or
+/gesdisc/M2TMNXCHM.5.12.4/ or
+/gesdisc/M2SDNXSLV.5.12.4/ or
+/gesdisc/M2I1NXASM.5.12.4/ or
+/gesdisc/M2TMNPMST.5.12.4/
+
+The `pathMatch` feature allows a DynamicService defintion to be associated
+with a sort of "virtual collection" of datasets on the server which may be related by only the fact that their coverage representations are similar.
 
 === Domain Coordinate Definitions
 The Hyrax WCS relies on the DynamicService definition to be
