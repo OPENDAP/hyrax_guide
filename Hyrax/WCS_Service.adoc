@@ -173,11 +173,11 @@ file, a simple XML document.
 <WcsService>
     <WcsCatalog className="opendap.wcs.v2_0.DynamicServiceCatalog">
 
-        <DynamicService          <!--1-->
-                prefix="M2SDNXSLV"   <!--2-->
-                name="MERRA-2 M2SDNXSLV WCS Service" <!--3-->
-                href="bes://^/testbed-13/M2SDNXSLV\.5\.12\.4/.*$" <!--4-->
-                srs="urn:ogc:def:crs:EPSG::4326" >  <!--5-->
+        <DynamicService                                            <!--1-->
+                prefix="M2SDNXSLV"                                 <!--2-->
+                name="MERRA-2 M2SDNXSLV WCS Service"               <!--3-->
+                href="bes://^/testbed-13/M2SDNXSLV\.5\.12\.4/.*$"  <!--4-->
+                srs="urn:ogc:def:crs:EPSG::4326" >                 <!--5-->
             <DomainCoordinate
                 name="time"
                 dapID="time"
@@ -212,7 +212,7 @@ collection being serviced can be helpful to people if there are problems later.
 <3> *name*: A human readable and meaningful name that will be used by the server when it
 creates a link to the service in the _viewers_ page.
 <4> *href*: The value of *href* controls which of two fundamental ways the DynamicService
-will be used. One way utilizes the BES as the source of metadata and data for the
+will operate. One way utilizes the BES as the source of metadata and data for the
 WCS service and the other utilizes a remote Hyrax server for the role. To use a local
 BES, the value of the `href` variable must begin with `bes://` and must be followed by a
 regular expression. The regular expression is used to determine which DAP datasets will be associated
@@ -221,13 +221,13 @@ with this DynamicService. In the example above the `href` attribute is set like 
     href="bes://^/testbed-13/M2SDNXSLV\.5\.12\.4/.*$"
 
 +
-This value tells the server use the BES directly and to assocaiate this WCS definition with any DAP dataset
+This value tells the server to directly utilize the BES and to assocaiate this WCS definition with any DAP dataset
 whose local path name on the server matches the regular expression
 
-    `^/testbed-13/M2SDNXSLV\.5\.12\.4/.*$`
+    ^/testbed-13/M2SDNXSLV\.5\.12\.4/.*$
 
 +
-Which can be read as _"Anything that starts with `/testbed-13/M2SDNXSLV.5.12.4/` "_
+Which can be read as _"Anything that starts with `/testbed-13/M2SDNXSLV.5.12.4/` "
 
 +
 If the value of the `href` attribute begins with either `http://` or `https://` then the DynamicService
@@ -245,7 +245,14 @@ NOTE: Currently the only supported SRS is `urn:ogc:def:crs:EPSG::4326`
 === Domain Coordinate Definitions
 The Hyrax WCS relies on the DynamicService definition to be
 responsible for identifying the specific variables in the DAP datasets that are to be used for the geo-referenced domain coordinates of the coverage.
-The domain coordinates must appear in the order that they appear in the dimensions of the DAP dataset. They must also match the order of axes represented in the SRS. _If there is an unresolvable conflict then until a suitable SRS can be identified the DAP dataset cannot be served as a Coverage._ Many DAP datasets have variables with more than two dimensions: latitude, longitude, elevation, and time are frequently seen as domain coordinates in scientific data. These can be utilized in the WCS as long as the inner most (last) two dimensions are in agreement with the SRS.
+The domain coordinates must appear in the order that they appear in the dimensions of the DAP dataset. They must also match the order of axes represented in the SRS. _If there is an unresolvable conflict then until a suitable SRS can be identified the DAP dataset cannot be served as a Coverage._
+
+Many DAP datasets have variables with more than two dimensions, and in general WCS 2.0 only supports 2D data. However, latitude, longitude, and time are frequently seen as domain coordinates in scientific data. These can be utilized in the WCS as long as the inner most (last) two dimensions are in agreement with the SRS.
+
+NOTE: In the WCS data model time is not considered a "domain coordinate" and so it is not represented in the SRS. Yet it does accomodate transmitting the time domain to the client and subsetting the time domain in the manner of latitude and longitude.  The result is that 3D datasets with time, latitude, and longitude fit easily into the WCS model.
+
+In the server we treat time like any other coordinate dimension and so if there is a time dimension on the data it needs to appear in the set of DomainCoordinate definitions for the service.
+
 
 Let's consider the DomainCoordinate definitions from the example above:
 
@@ -375,14 +382,26 @@ WCS is provided.
         max="9.99999979e+33"/>
 
     <field
-        name="VWND"
-        dapID="VWND"
-        description="MERIDIONAL WIND"
-        units="M/S"
-        min="-9.99999979e+33"
-        max="9.99999979e+33"/>
+        name="VWND"                   <!--1-->
+        dapID="VWND"                  <!--2-->
+        description="MERIDIONAL WIND" <!--3-->
+        units="M/S"                   <!--4-->
+        min="-9.99999979e+33"         <!--5-->
+        max="9.99999979e+33"/>        <!--6-->
 </DynamicService>
 ----
+<1> *name* - The name of the WCS Field to associate with the DAP variable. This value must be an NCNAME as described above.
+<2> *dapID* - The name of the DAP variable that will provide the data for the Field.
+<3> *description* - A human readable description of the variable
+<4> *units* - The units of the values returned.
+<5> *min* - The minimum value.
+<6> *max* - The maximum value.
+
+== Remote DAP Server Example
+
+==== Reading from Servers that Require Authentication
+TBD
+
 
 ////
 == Hyrax Integration
@@ -420,5 +439,3 @@ constructed and appear as service links associated with datasets in
 the THREDDS catalogs generated by the server.
 ////
 
-==== Reading from Servers that Require Authentication
-TBD
