@@ -181,7 +181,7 @@ file, a simple XML document.
         <DynamicService                                            <!--1-->
                 prefix="M2SDNXSLV"                                 <!--2-->
                 name="MERRA-2 M2SDNXSLV WCS Service"               <!--3-->
-                href="bes://^/testbed-13/M2SDNXSLV\.5\.12\.4/.*$"  <!--4-->
+                pathMatch="^/testbed-13/M2SDNXSLV\.5\.12\.4/.*$"   <!--4-->
                 srs="urn:ogc:def:crs:EPSG::4326" >                 <!--5-->
             <DomainCoordinate
                 name="time"
@@ -216,25 +216,21 @@ distinguish each DynamicService. Choosing a value that is in some way related to
 collection being serviced can be helpful to people if there are problems later.
 <3> *name*: A human readable and meaningful name that will be used by the server when it
 creates a link to the service in the _viewers_ page.
-<4> *href*: The value of *href* controls which of two fundamental ways the DynamicService
-will operate. One way utilizes the BES as the source of metadata and data for the
-WCS service and the other utilizes a remote Hyrax server for the role. To use a local
-BES, the value of the `href` variable must begin with `bes://` and must be followed by a
-regular expression. The regular expression is used to determine which DAP datasets will be associated
-with this DynamicService. In the example above the `href` attribute is set like this:
-
+<4> *pathMatch*: The value of `pathMatch` contains a regular expression which is
+used to by the server determine which DAP datasets will be associated with this
+DynamicService. In the example above the `pathMatch` attribute is set like this:
++
     href="bes://^/testbed-13/M2SDNXSLV\.5\.12\.4/.*$"
 +
 This value tells the server to directly utilize the BES and to assocaiate this WCS definition with any DAP dataset
 whose local path name on the server matches the regular expression
-
++
     ^/testbed-13/M2SDNXSLV\.5\.12\.4/.*$
 +
 Which can be read as _"Anything that starts with `/testbed-13/M2SDNXSLV.5.12.4/` "_
 +
 If the value of the `href` attribute begins with either `http://` or `https://` then the DynamicService
-interprets the value as a URL pointing to a Hyrax server and will proceed to utilize the remote server to
-fufill metadata and data requests required to perform the WCS activities. The service can be configured to authenticate for data access as necessary.
+interprets the value as a URL pointing to a Hyrax server and will proceed to utilize the remote server to provide metadata and data required to perform the WCS activities. The service can be configured to authenticate for data access as necessary.
 
 <5> *srs*:  The _srs_ attribute defines the expected SRS for the coverages associated with this
 DynamicService. The SRS defines the axis labels, order, units and
