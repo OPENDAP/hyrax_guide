@@ -8,20 +8,19 @@
 This manual describes the features and operation of the Hyrax data
 server, a data server developed by OPeNDAP, Inc. as a reference server
 for the Data Access Protocol, versions 2 and 4. the Hyrax server is
-modular software with a number of 'handlers' that are loaded into a
+modular software with a number of _handlers_ that are loaded into a
 core framework based on the contents of configuration files. Each of
 the server's modules provides a distinct functional capability, such
 as reading data from a certain kind of file, encoding data, or
-processing dat in different ways.
+processing data in different ways.
 
 The text contained here was built up over several years as modules
-were added to the system. Originally the documentation was build using
+were added to the system. Originally, the documentation was built using
 a Wiki (because it was a collaborative writing tool for a distributed
-group of people) where each component had a separate page. Over time
-information was spread across many web pages and the Wiki this became
-unwieldy. We hope this new format reads more
-like a guide for people who want to install and configure the server
-and less like a design document.
+group of people), where each component had a separate page. Over time,
+as information was spread across many web pages and the Wiki, this became
+unmanageable. We hope this new format reads more like a guide for people
+who want to install and configure the server and less like a design document.
 
 == Devlopment Sponsored By
 
@@ -36,8 +35,6 @@ Science Foundation (NSF).]
 
 *http://www.noaa.gov[National Oceanic and Atmospheric Administration (NOAA)]*
 
-// Does this read OK?
-////
 === Acknowledgments
 
 The High Altitude Observatory at NCAR contributed the BES framework
@@ -45,5 +42,4 @@ that is the basis for the server's data processing engine and modular
 extensibility. 
 
 Keith Seyffarth extracted the Wiki's text that forms the basis of this
-manual and Alex and Leonard Perrello edited the text.
-////
+manual, and Alexander and Leonard Porrello edited the text.
