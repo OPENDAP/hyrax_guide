@@ -121,7 +121,7 @@ the following criteria:
 TODO: Fix this list.
 
 NOTE: In practice, Hyrax is often used with data that have global
-  extent, which corresponds to the SRS _WGS84_ (aka _EPSG 4396_). The
+  extent, which corresponds to the SRS _WGS84_ (aka _EPSG 4326). The
   current version of the WCS service only supports this SRS.
 
 TIP: We're interested in adding support for WCS 2.1 but would like to
@@ -142,7 +142,7 @@ link:mailto:support@opendap.org[support@opendap.org].
 
 The WCS 2 service comes bundled as part of Hyrax-1.14.0 and newer.
 See the link:https://www.opendap.org/software/hyrax-data-server[Hyrax
-download and installation page] and this guide for configuration
+download and installation page] to get Hyrax installed and running, and then return to this guide for WCS configuration
 information.
 
 Assuming that you have Hyrax installed and running on your local system
@@ -164,8 +164,8 @@ service provides a way to use WCS with DAP datasets that natively lack
 the required WCS metadata. We do this by creating mappings (DynamicService
 instances) between collections of DAP datasets that have similar
 domain coordinates and a WCS service for the resulting Coverages.
-These relationships are expressed the _wcs_service.xml_ configuration
-file, as a simple XML document.
+These relationships are expressed in the _wcs_service.xml_ configuration
+file, a simple XML document.
 
 .wcs_service.xml
 [source,xml]
@@ -231,15 +231,14 @@ Which can be read as _"Anything that starts with `/testbed-13/M2SDNXSLV.5.12.4/`
 
 +
 If the value of the `href` attribute begins with either `http://` or `https://` then the DynamicService
-interpret the value as a URL pointing to a Hyrax server and will proceed to utilize the remote server to
-fufill metadata and data requests required to perform the WCS activities.
+interprets the value as a URL pointing to a Hyrax server and will proceed to utilize the remote server to
+fufill metadata and data requests required to perform the WCS activities. The service can be configured to authenticate for data access as necessary.
 
 <5> *srs*:  The _srs_ attribute defines the expected SRS for the coverages associated with this
 DynamicService. The SRS defines the axis labels, order, units and
 minimum number of domain coordinate dimensions and will be used for any dataset
 that does not contain an explicit SRS definition. Currently only _urn:ogc:def:crs:EPSG::4326_ is
 supported.
-
 
 NOTE: Currently the only supported SRS is `urn:ogc:def:crs:EPSG::4326`
 
@@ -279,7 +278,7 @@ In our friend EPSG:4326 we know that the axis order is `latitude, longitude` and
 
 Consider the `latitude` DomainCoordinate:
 
-[source,xnl]
+[source,xml]
 -----
 <DomainCoordinate name="latitude" dapID="lat" size="361" units="deg" min="-90.0" max="90.0"/>
 -----
