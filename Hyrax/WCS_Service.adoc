@@ -401,11 +401,33 @@ WCS is provided.
 
 == Remote DAP Server Example
 === Configuration
-Need example of DynamicService entry for the WCS instance and of a WcsService (aka WebService def) for viewers.xml on the Hyrax instance.
-
 === Symetric URL Generation
+
 ////
 In which the remote Hyrax is configured with a WebService in the viewers.xml file that points to the WCS service, which in turn is configured to retrieve data from the remote Hyrax server.
+
+
+DynamicService configured on a WCS service running at wcs.opendap.org:8080/WCS/ to utilize a remote server at NASA
+[source,xml]
+----
+<DynamicService name="M2I1NXASM" href="https://goldsmr4.gesdisc.eosdis.nasa.gov/opendap/" srs="urn:ogc:def:crs:EPSG::4326" >
+    <DomainCoordinate name="time" dapID="time" size="24" units="Days since 1900-01-01T00:00:00.000Z" min="690" max="690"/>
+    <DomainCoordinate name="latitude" dapID="lat" size="361" units="deg" min="-90" max="90"/>
+    <DomainCoordinate name="longitude" dapID="lon" size="576" units="deg" min="-180" max="180"/>
+</DynamicService>
+----
+The corresponding  entry for the viewers.xml file for the Hyrax server runnning at https://goldsmr4.gesdisc.eosdis.nasa.gov/opendap/
+[source,xml]
+----
+<WebServiceHandler
+    className="opendap.viewers.WcsService"
+    serviceId="WCS-COADS" >
+    <ApplicationName>COADS Climatology WCS Service/</ApplicationName>
+    <ServiceEndpoint>http://wcs.opendap.org:8080/WCS/</ServiceEndpoint>
+    <MatchRegex>^.*coads.*\.nc$</MatchRegex>
+    <DynamicServiceId>coads</DynamicServiceId>
+</WebServiceHandler>
+----
 ////
 
 === Asymetric URL Generation
