@@ -39,6 +39,9 @@ include::Hyrax.adoc[lines="1,8..-1", leveloffset=+1]
 TODO: Add (or find ...) a section on BES installation. It might
 have gotten lost; Use _Master_Hyrax_Sample_BES_Installations.adoc_? If
 so that file will need content edits of a massive nature.
+
+Master_Hyrax_BES_Installation.adoc is now included in 
+Master_Hyrax_Installation.adoc. -ACP
 ////
 
 

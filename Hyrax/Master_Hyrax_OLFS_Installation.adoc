@@ -8,27 +8,36 @@
 
 The OLFS comes with a default configuration that is compatible with the
 default configuration of the BES. If you do a default install of each
-one you should get a running Hyrax server that will be pre-populated
+one, you should get a running Hyrax server that will be pre-populated
 with test data suitable for running the integrity tests.
 
-
 == Download
-If you haven't already got it, go
-http://www.opendap.org/download/olfs.html[get the latest OLFS
-distribution from here]. You should get the binary jar file which will
-be named something like: _*olfs-x.x.x-webapp.tgz*_
+
+Follow the steps below to get the latest OLFS distribution.
+
+. Visit the 
+  https://www.opendap.org/software/hyrax-data-server#block-hyraxversions-menu[Hyrax
+  Data Server Page].
+. Select the most recent in the list of *Available Versions*.
+. Scroll down the following page until you reach the section entitled 
+  *Binaries for Hyrax x.x.x*.
+. Directly underneath, you should see the OLFS download link, 
+  named something like *OLFS_x.x.x._Web_Archive_File*. Click to download.
+. The downloaded file should be named something like: _olfs-x.x.x-webapp.tgz_.
 
 == Unpack
-Unpack the jar file with the command `tar -xvf olfs-x.x.x-webapp.tgz`
+
+Unpack the jar file with the command `tar -xvf olfs-x.x.x-webapp.tgz`,
 which will unpack a directory called _olfs-x.x.x-webapp_.
 
 == Install
-Inside the that directory find the opendap.war file, and copy it into
-the Tomcat's webapps directory:
-----
-cp olfs-x.x.x-webapp/opendap.war /usr/local/apache-tomcat-6.x.x/webapps/
-----
-(Assuming the your Tomcat server is in `/usr/local`)
+
+Inside the that directory, find the opendap.war file, and copy it into
+the Tomcat's _webapps_ directory.
+
+TIP: If you are working via your terminal, use the command 
+`cp olfs-x.x.x-webapp/opendap.war /usr/local/apache-tomcat-6.x.x/webapps/`,
+where _usr/local_ should be the directory that the Tomacat server is in.
 
 If you're replacing an older version of the OLFS you may
 
@@ -44,26 +53,22 @@ lists of DispatchHandlers and adjust your configuration to use the same
 ones.
 
 == Setup Tomcat
+
 Configure the Tomcat environment by setting the environment variable
 CATALINA_HOME to the full path for the Tomcat distribution.
 
-In bash:
-----
-export CATALINA_HOME = /usr/local/apache-tomcat-6.x.x
-----
+In bash: `export CATALINA_HOME = /usr/local/apache-tomcat-6.x.x`
 
 == Start Tomcat
-In the top level tomcat directory (apache-tomcat-6.x.x on my machine)
-issue the command:
-----
-bin/startup.sh; tail -f logs/catalina.out
-----
-Wait a few seconds while it all starts up.
 
-When Tomcat starts up it will unpack your _OLFS_ and install the
+In the top level tomcat directory (apache-tomcat-6.x.x on my machine)
+issue the command `bin/startup.sh; tail -f logs/catalina.out` and
+wait a few seconds while it all starts up.
+
+When Tomcat starts up, it will unpack your _OLFS_ and install the
 webapp.
 
-NOTE: If you use `ctrl-c` to stop watching the tail of the
-servers output, make sure to run the command `bin/shutdown.sh`
+WARNING: If you use `ctrl-c` to stop watching the tail of the
+server's output, make sure to run the command `bin/shutdown.sh`
 to shutdown Tomcat. If you don't, you may get errors when you next try
 to start the Tomcat server.
