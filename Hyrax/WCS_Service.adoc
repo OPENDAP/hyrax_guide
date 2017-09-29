@@ -219,16 +219,13 @@ regular expression. The regular expression is used to determine which DAP datase
 with this DynamicService. In the example above the `href` attribute is set like this:
 
     href="bes://^/testbed-13/M2SDNXSLV\.5\.12\.4/.*$"
-
 +
 This value tells the server to directly utilize the BES and to assocaiate this WCS definition with any DAP dataset
 whose local path name on the server matches the regular expression
 
     ^/testbed-13/M2SDNXSLV\.5\.12\.4/.*$
-
 +
-Which can be read as _"Anything that starts with `/testbed-13/M2SDNXSLV.5.12.4/` "
-
+Which can be read as _"Anything that starts with `/testbed-13/M2SDNXSLV.5.12.4/` "_
 +
 If the value of the `href` attribute begins with either `http://` or `https://` then the DynamicService
 interprets the value as a URL pointing to a Hyrax server and will proceed to utilize the remote server to
@@ -399,13 +396,19 @@ WCS is provided.
 
 == Remote DAP Server Example
 === Configuration
+Need example of DynamicService entry and of a WevService
 === Symetric URL Generation
+////
 In which the remote Hyrax is configured with a WebService in the viewers.xml file that points to the WCS service, which in turn is configured to retrieve data from the remote Hyrax server.
+////
 === Asymetric URL Generation
+////
 In which some third entity generates the WCS access URL because it understands the organization of the Hyrax server and how the DynamicService occupies the URL space of the WCS service.
+////
 === Reading from Servers that Require Authentication
-In which the remote Hyrax requires authentication in order for clients to be granted access to metadata and/or data.
-
+////
+In which the remote Hyrax requires authentication in order for clients to be granted access to metadata and/or data, and the server uses .netrc to sort it out.
+////
 TBD
 
 
