@@ -112,19 +112,13 @@ the following criteria:
 * Other dimensions of the variable must be 'to the left' of the
   dimensions defined by the SRS.
 
-*; the _range_ of
-  the coverage is the values of the variable. These values must have an
-  associated _unit of measure_.
+* The _range_ of the coverage is comprised of the values of the
+  variable. These values must have an associated _unit of measure_.
 
-* The standard metadata for WCS 2.0 is limited to representing
-  two-dimensional metadata, so fields in a dataset with three or more
-  dimensions cannot be completely described by the
-  _CoverageDescription_ response object because of limitations in the
-  GML (link:http://www.opengeospatial.org/standards/gml[Geography
-  Markup Language]). WCS 2.1, on the other hand, uses the CIS 1.1
-  (link:http://docs.opengeospatial.org/is/09-146r6/09-146r6.html[Coverage
-  Implementation Schema]) standard and is more expressive with respect
-  to the coverage's domain.
+* _Describe how variable shape affects whether a variable can be a
+  coverage. Or say whatever is correct._
+
+TODO: Fix this list.
 
 NOTE: In practice, Hyrax is often used with data that have global
   extent, which corresponds to the SRS _WGS84_ (aka _EPSG 4396_). The
@@ -132,11 +126,19 @@ NOTE: In practice, Hyrax is often used with data that have global
 
 TIP: We're interested in adding support for WCS 2.1 but would like to
 hear from potential users to know there is interest in that before we
-commit development resources to it. Please contact us if you are
-interested by sending a note to
+commit development resources to it. The standard metadata for WCS 2.0
+is limited to representing two-dimensional metadata, so variables in a
+dataset with three or more dimensions cannot be completely described
+by the _CoverageDescription_ response object because of limitations in
+the GML (link:http://www.opengeospatial.org/standards/gml[Geography
+Markup Language]). WCS 2.1, on the other hand, uses the 
+link:http://docs.opengeospatial.org/is/09-146r6/09-146r6.html[Coverage
+Implementation Schema (CIS) 1.1] standard and is more expressive with respect
+to the coverage's domain. Please contact us if you are interested by
+sending a note to
 link:mailto:support@opendap.org[support@opendap.org].
 
-== WCS Installation (suggested)
+== WCS Installation
 
 The WCS 2 service comes bundled as part of Hyrax-1.14.0 and newer.
 See the link:https://www.opendap.org/software/hyrax-data-server[Hyrax
@@ -151,7 +153,7 @@ renderable HTML page of the _Capabilities_ document with a conspicuously
 empty _Contents_
 section.
 
-NOTE: Screen grab of endpoint page here?
+image::../images/WCS-NoContents.png[]
 
 
 == Configuration
@@ -166,7 +168,7 @@ These relationships are expressed the _wcs_service.xml_ configuration
 file, as a simple XML document.
 
 .wcs_service.xml
-[source,xml,linenums]
+[source,xml]
 ----
 <WcsService>
     <WcsCatalog className="opendap.wcs.v2_0.DynamicServiceCatalog">
@@ -210,10 +212,10 @@ collection being serviced can be helpful to people if there are problems later.
 <3> *name*: A human readable and meaningful name that will be used by the server when it
 creates a link to the service in the _viewers_ page.
 <4> *href*: The value of *href* controls which of two fundamental ways the DynamicService
-will be used. One way utilizes the BES as the source of metadata and adata for the
-WCS service and the other utilizes a remote Hyrax service for the role. To use a local
-BES the value of the `href` variable must begin with `bes://` and must be followed by a
-regular expression that is used by Hyrax to determine which DAP datasets will be associated
+will be used. One way utilizes the BES as the source of metadata and data for the
+WCS service and the other utilizes a remote Hyrax server for the role. To use a local
+BES, the value of the `href` variable must begin with `bes://` and must be followed by a
+regular expression. The regular expression is used to determine which DAP datasets will be associated
 with this DynamicService. In the example above the `href` attribute is set like this:
 
     href="bes://^/testbed-13/M2SDNXSLV\.5\.12\.4/.*$"
@@ -277,18 +279,41 @@ Consider the `latitude` DomainCoordinate:
 <DomainCoordinate name="latitude" dapID="lat" size="361" units="deg" min="-90.0" max="90.0"/>
 -----
 
-This tells the service that the coordinate axis named `latitude` is bound to the DAP variable `lat`, that a default value for _size_ as 361 elements, the default _units_ are degrees "deg", the default minimum value is -90.0 and the default maximum value is 90.0. What this means is that when the DynamicService processes a DAP dataset into a coverage it will check the dataset's metadata for this tyoe of information. If any of these values can be determined from the dataset metadata then that value is used, otherwise the values expressed in the DOmainCoordinate definition are used.
+This tells the service that the coordinate axis named `latitude` is
+bound to the DAP variable `lat`, that a default value for _size_ as
+361 elements, the default _units_ are degrees "deg", the default
+minimum value is -90.0 and the default maximum value is 90.0. What
+this means is that when the DynamicService processes a DAP dataset
+into a coverage it will check the dataset's metadata for this tyoe of
+information. If any of these values can be determined from the dataset
+metadata then that value is used, otherwise the values expressed in
+the DomainCoordinate definition are used.
 
-Longitude and time are handled as latitude.
+Longitude and time are handled in the same way as latitude.
+
 
 === Providing Field defintions
 Many DAP datasets either lack the metadata for determining which
-variables will make suitable coverages, or it may just not be in an
+variables will make suitable coverages, or the information may not be in an
 expected form or location. In order to enable these datasets to be
 exposed via WCS,  Hyrax allows the definition of a field in the
-_DynamicService_ element. Consider the following _DynamicService_ definition:
+_DynamicService_ element.
 
-.Each DAP dataset in the variable is exposed as a WCS field and basic information required by WCS is provided
+NOTE: WCS Field names have limitations on the kinds of characters they
+can contain. Specifically, these field names must be
+https://stackoverflow.com/questions/1631396/what-is-an-xsncname-type-and-when-should-it-be-used[NCNAMEs],
+which means that they cannot contain special sysmbols such as @, $, %,
+&, /, +, most punctuation, spaces, tabs, newlines or parentheses.
+Furthermore, they cannot begin with a digit, dot (.) or minus (-)
+although those can appear later in the name. Because DAP variables do
+not have such a limitation, you may have to provide a new name for the
+variable.
+
+In the following _DynamicService_ definition, each variable in the
+dataset is exposed as a WCS field and basic information required by
+WCS is provided.
+
+.A _DynamicService_ definition with _field_ elements
 [source,xml]
 ----
 <DynamicService
@@ -354,15 +379,6 @@ _DynamicService_ element. Consider the following _DynamicService_ definition:
         max="9.99999979e+33"/>
 </DynamicService>
 ----
-
-NOTE: When creating filed defintions remember that WCS Field names
-have limitations on the kinds of characters they can contain.
-Specifically, these field names must be
-https://stackoverflow.com/questions/1631396/what-is-an-xsncname-type-and-when-should-it-be-used[NCNAMEs],
-whci means that they cannot contain special sysmbols such as :, @, $,
-%, &, /, +, pubtuation, spaces, tabs or newlines or different
-parenthesis. Furthermore, they cannot begin with a digit, dot (.) or
-minus (-) although those can appear later in the name.
 
 ////
 == Hyrax Integration
