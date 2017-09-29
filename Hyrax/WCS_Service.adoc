@@ -229,6 +229,11 @@ whose local path name on the server matches the regular expression
 +
 Which can be read as _"Anything that starts with `/testbed-13/M2SDNXSLV.5.12.4/` "_
 
++
+If the value of the `href` attribute begins with either `http://` or `https://` then the DynamicService
+interpret the value as a URL pointing to a Hyrax server and will proceed to utilize the remote server to
+fufill metadata and data requests required to perform the WCS activities.
+
 <5> *srs*:  The _srs_ attribute defines the expected SRS for the coverages associated with this
 DynamicService. The SRS defines the axis labels, order, units and
 minimum number of domain coordinate dimensions and will be used for any dataset
