@@ -264,7 +264,7 @@ Will match any dataset whose name begins with
 /gesdisc/M2I1NXASM.5.12.4/ or
 /gesdisc/M2TMNPMST.5.12.4/
 
-The `pathMatch` feature allows a DynamicService defintion to be associated
+The `pathMatch` feature allows a DynamicService definition to be associated
 with a sort of "virtual collection" of datasets on the server which may be related by only the fact that their coverage representations are similar.
 
 === Domain Coordinate Definitions
