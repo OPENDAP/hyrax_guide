@@ -86,7 +86,7 @@ We have partial implementations for:
 * XML/POST protocol Binding Extension, version 1.0.0
 * XML/SOAP Protocol Binding Extension, version 1.0.0
 * Scaling Extension, version 1.0.0
-* CRS Extension, version1.0.0
+* CRS Extension, version 1.0.0
 
 If you are interested in the _Earth Observation Application Profile_,
 version 1.0.0, contact us.
