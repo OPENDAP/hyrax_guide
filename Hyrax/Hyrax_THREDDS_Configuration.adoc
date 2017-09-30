@@ -25,26 +25,24 @@ underlying filesystem.
 Static THREDDS catalogs are "rooted" in a master catalog file,
 _catalog.xml_, located in the (persistent) content directory for the
 OLFS (Typically _$CATALINA_HOME/content/opendap_). The default
-_catalog.xml_ that comes with Hyrax contains a simple catalogRef element
+_catalog.xml_ that comes with Hyrax contains a simple _catalogRef_ element
 that points to the dynamic THREDDS catalogs generated from the BES
 holdings. The default catalog example also contains a (commented out)
 datasetScan element that provides (if enabled) a simple demonstration of
 the datasetScan capabilities. Additional catalog components may be added
 to the _catalog.xml_ file to build (potentially large) static catalogs.
 
-NOTE: THREDDS datasetScan elements are now fully supported and can be used
+TIP: THREDDS datasetScan elements are now fully supported and can be used
 as a tool for altering the catalog presentation of any part of the BES
 catalog. These alterations include (but are not limited too) renaming,
 auto proxy generation, filtering, and metadata injection.
 
-//The below document is not included in any document -ACP
-// Fixed. jhrg 9/28/17
-include::THREDDS_using_XSLT.adoc[lines="1,8..-1", leveloffset=+1]
+include::THREDDS_using_XSLT.adoc[lines="1,8..-1", leveloffset=+2]
 
 === THREDDS Catalog Documentation
 
 Rather than provide an exhaustive explanation of the THREDDS catalog
-functionality and configuration,  we will appeal to the existing documents
+functionality and configuration, we will appeal to the existing documents
 provided by our fine colleagues at UNIDATA:
 
 * http://www.unidata.ucar.edu/projects/THREDDS/tech/TDS.html#Catalogs[Catalog
@@ -78,10 +76,10 @@ implementation has a couple of key points that need to be considered
 when developing an instance of the _datasetScan_ element in your THREDDS
 catalog.
 
-==== location attribute
+==== _location_ attribute
 
 The _location_ attribute specifies the place in the BES catalog graph
-that the _datasetScan_ will be rooted. This value _must be_ expressed
+where the _datasetScan_ will be rooted. This value _must be_ expressed
 relative to the BES catalog root (_BES.Catalog.catalog.RootDirectory_) and
 not in terms of the underlying BES host file system.
 
@@ -95,19 +93,19 @@ value of _/data/nc_:
 <datasetScan name="DatasetScanExample" path="hyrax" location="/data/nc">
 ----
 
-==== name attribute
+==== _name_ attribute
 
 The _name_ attribute specifies the name that will be used in the
 presentation (HTML) view for the catalog containing the _datasetScan_.
 //is viewed.
 
-==== path attribute
+==== _path_ attribute
 
 The _path_ attribute specifies the place in the THREDDS catalog graph
 that the _datasetScan_ will be rooted. It is effectively a relative URL
-for the service. If _path_ begins with a "/" then it is an absolute path
+for the service. If _path_ begins with a "/", then it is an absolute path
 rooted at the server and port of the web server. The values of the
-_path_ attribute should NEVER contain "catalog.xml" or "catalog.html".
+_path_ attribute should *never* contain "catalog.xml" or "catalog.html".
 The service will create these endpoints dynamically.
 
 ===== Relative path example
@@ -138,7 +136,7 @@ http://localhost:8080/opendap/thredds/v27/Landsat/hyrax/catalog.xml.
 
 ===== Absolute path examples
 
-Consider a catalog accessed with the URL:
+Consider a catalog accessed with the URL
 http://localhost:8080/opendap/thredds/v27/Landsat/catalog.xml and that
 contains this _datasetScan_ element:
 
@@ -162,15 +160,15 @@ Then the top of _datasetScan_ catalog graph will be found at the URL
 http://localhost:8080/hyrax/catalog.xml,
 *_which is probably not what you want!_* This _catalogRef_ directs the
 catalog crawler away from the Hyrax THREDDS service and to an undefined
-(as far as Hyrax is concerned) endpoint, one that most likely will
+(as far as Hyrax is concerned) endpoint, one that will most likely
 generate a 404 (Not Found) response from the Web Server.
 
 When using absolute paths you must be sure to prefix the path with the
-Hyrax THREDDS service path or you will direct the clients away from the
+Hyrax THREDDS service path, or you will direct the clients away from the
 service. In these examples the Hyrax THREDDS service path would be
-_/opendap/thredds/" (look at the URLs in the above examples) If we
-change the *datasetScan* path attribute value to_
-/opendap/thredds/myDatasetScan:
+_/opendap/thredds/_ (look at the URLs in the above examples). If we
+change the _datasetScan_ path attribute value to
+_/opendap/thredds/myDatasetScan_:
 
 ----
 <datasetScan name="DatasetScanExample" path="'/opendap/thredds/myDatasetScan" location="/data/nc" />
@@ -188,32 +186,32 @@ element:
 />
 ----
 
-Now the top of *datasetScan* catalog graph will be found at the URL
-
-http://localhost:8080/opendap/thredds/myDatasetScan/catalog.xml
-
+Now the top of the _datasetScan_ catalog graph will be found at the URL
+http://localhost:8080/opendap/thredds/myDatasetScan/catalog.xml,
 which keeps the URL referencing the Hyrax THREDDS service and not some
 other part of the web service stack.
 
-==== useHyraxServices attribute
+==== _useHyraxServices_ attribute
 
-The Hyrax version of the *datasetScan* element employs the extra
-attribute **useHyraxServices**. This allows the *datasetScan* to
+The Hyrax version of the _datasetScan_ element employs the extra
+attribute _useHyraxServices_. This allows the _datasetScan_ to
 automatically generate Hyrax data services definitions and access links
-for datasets in the catalog. The *datasetScan* can be used to augment
-the list of services (when *useHyraxServices* is set to true) or it can
+for datasets in the catalog. The _datasetScan_ can be used to augment
+the list of services (when _useHyraxServices_ is set to true) or it can
 be used to completely replace the Hyrax service stack (when
-*useHyraxServices* is set to false).
+_useHyraxServices_ is set to false).
 
-* If no services are referenced in the *datasetScan* and
-*useHyraxServices* is set to true, then Hyrax will provide catalogs with
+Keep the following in mind:
+
+* If no services are referenced in the _datasetScan_ and
+_useHyraxServices_ is set to true, then Hyrax will provide catalogs with
 service definitions and access elements for all the datasets that the
 BES identifies as data.
-* If no services are referenced in the *datasetScan* and
-*useHyraxServices* is set to false, then the catalogs generated by the
-*datasetScan* will have __no service definitions or access elements__.
+* If no services are referenced in the _datasetScan_ and
+_useHyraxServices_ is set to false, then the catalogs generated by the
+_datasetScan_ will have _no service definitions or access elements_.
 
-By default *useHyraxServices* is set to true.
+By default _useHyraxServices_ is set to true.
 
 ==== Functions
 
@@ -221,7 +219,7 @@ http://www.unidata.ucar.edu/software/thredds/v4.6/tds/reference/DatasetScan.html
 allows you to apply the following functions to the names of the datasets
 in the datasetScan catalog graph.]
 
-===== Filter
+===== _filter_
 
 A datasetScan element can specify which files and directories it will
 include with a filter element (also
@@ -244,7 +242,7 @@ collection attributes.
 </filter>
 ----
 
-====== Sort
+===== _sort_
 
 Datasets at each collection level are listed in ascending order by name.
 With a sort element you can specify that they are to be sorted in
@@ -256,7 +254,7 @@ reverse order:
 </sort>
 ----
 
-===== Namer
+===== _namer_
 
 If no namer element is specified, all datasets are named with the
 corresponding BES catalog dataset name. By adding a namer element, you
@@ -271,7 +269,7 @@ can specify more human readable dataset names.
 </namer>
 ----
 
-====== addTimeCoverage
+===== _addTimeCoverage_
 
 A datasetScan element may contain an addTimeCoverage element. The
 addTimeCoverage element indicates that a timeCoverage metadata element
@@ -296,7 +294,7 @@ following timeCoverage element:
   </timeCoverage>
 ----
 
-====== addProxies
+===== _addProxies_
 
 For real-time data you may want to have a special link that points to
 the "latest" data in the collection. Here, latest is simply means the
