@@ -30,6 +30,13 @@ include::Master_Hyrax_BES_Installation.adoc[lines="1,6..-1", leveloffset=+1]
 
 include::Master_Hyrax_OLFS_Installation.adoc[lines="1,6..-1", leveloffset=+1]
 
+== WCS Installation
+
+The WCS 2 service comes bundled as part of Hyrax-1.14.0 and newer.
+For more information about configuring WCS with your installation of Hyrax,
+please refer to the <<WCS_installation_guide, WCS Installation Guide>> that
+appears later in this document.
+
 == Source Code Builds
 
 If you are interested in working on Hyrax or want to build the

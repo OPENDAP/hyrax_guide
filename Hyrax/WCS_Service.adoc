@@ -27,7 +27,7 @@ is a simple template for each set of related datasets and coverages.
 The amount of detail required in a template is a function of the
 metadata available within a specific datatset. The template, called a
 _DynamicService_ definition, must provide the domain coordinate
-details (Latitdue, Longitude, et c.) for a group of coverages and,
+details (Latitdue, Longitude, etc.) for a group of coverages and,
 depending on available metadata, may also need to provide the
 field/variable definitions. The template uses a regular expression to
 create the association between the _DynamicService_ definition and
@@ -35,30 +35,31 @@ files in the DAP server.
 
 === WCS Definitions
 
-WARNING: Hack definitions. Look at the OGC abstract documents for a
+//We should probably provide a link here. -ACP
+WARNING: Hack definitions. Look at the *OGC abstract documents* for a
 more comprehensive set of definitions.
 
-Coverage:: A mapping between a _domain_ and a _range_. This might
+* *Coverage:* A mapping between a _domain_ and a _range_. This might
 sound familiar if you remember your first algebra class, because it is
-the definition of a function. A _coverage_ is a special case because
+the definition of a function. A _coverage_ is a special case, because
 the _domain_ is often limited to a specific geographic area defined by
-a rnage of latitude and longitude values.
+a range of latitude and longitude values.
 
-Domain Coordinate:: In a _coverage_, a variable that provides the
+* *Domain Coordinate:* In a _coverage_, a variable that provides the
 values for the coverage's domain. For example, the variable that
 provides the latitude values.
 
-Spatial Reference System (SRS):: The SRS's axes define the _domain_ of
+* *Spatial Reference System (SRS):* The SRS's axes define the _domain_ of
 the coverage, which are typically latitude and longitude. The SRS also
 provides geo-referencing information that enables analysis tools to
-account for irregularities in the Earth's geoid. The term _Coordinate
-Reference System (CRS)_ is a synomyn for this term.
+account for irregularities in the Earth's geoid.
+_Coordinate Reference System (CRS)_ is synonymous with this term.
 
 == WCS Versions Supported
 
 The Open Geospatial Consortium
 (link:http://www.opengeospatial.org/[OGC]) has developed the Web
-Coverage Service (WCS) as an open specification and there is a suite
+Coverage Service (WCS) as an open specification, and there is a suite
 of standards documents that describe different aspects of the service.
 Hyrax supports several of these standards beyond the basic WCS 2.0
 core specification.
@@ -89,14 +90,14 @@ We have partial implementations for:
 * CRS Extension, version 1.0.0
 
 If you are interested in the _Earth Observation Application Profile_,
-version 1.0.0, contact us.
+version 1.0.0, <<contact-us, contact us>>.
 
 == Candidate Datasets
 
 In order for the WCS service to work with a dataset served using DAP,
 that dataset must contain one or more _coverages_. The dataset
 variables must meet the WCS requirements for both structure and
-metadata. To qualify as a coverage, a variable in a dataset must meet
+metadata. To qualify as a _coverage_, a variable in a dataset must meet
 the following criteria:
 
 * The variable must have an associated _Spatial Reference System_
@@ -106,31 +107,31 @@ the following criteria:
 * The variable must be a numeric array of at least two dimentsions.
 
 * The variable's right-most dimensions must be axes defined by the SRS
-  (i.e., longitude and latitude) and they must match the SRS's axis'
+  (i.e., longitude and latitude), and they must match the SRS's axis'
   order.
 
 * Other dimensions of the variable must be 'to the left' of the
   dimensions defined by the SRS.
 
-* The _range_ of the coverage is comprised of the values of the
+* The _range_ of the coverage comprises the values of the
   variable. These values must have an associated _unit of measure_.
 
 * _Describe how variable shape affects whether a variable can be a
   coverage. Or say whatever is correct._
 
-TODO: Fix this list.
+//TODO: Fix this list.
 
 NOTE: In practice, Hyrax is often used with data that have global
-  extent, which corresponds to the SRS _WGS84_ (aka _EPSG 4326_), and the
-  current version of the WCS service only supports this SRS.
+extent, which corresponds to the SRS _WGS84_ (aka _EPSG 4326_), and the
+current version of the WCS service only supports this SRS.
 
-TIP: We're interested in adding support for WCS 2.1 but would like to
-hear from potential users to know there is interest in that before we
-commit development resources to its development. The standard metadata
-for WCS 2.0 is limited to representing two-dimensional data, so
-variables in a dataset with three or more dimensions cannot be
-completely described by the _CoverageDescription_ response. WCS 2.1,
-on the other hand can represent domains with more than two dimensions.
+TIP: We're interested in adding support for WCS 2.1, but we'd like to 
+gague the interest of potential users before we commit any development
+resources. The standard metadata for WCS 2.0 is limited to 
+representing two-dimensional data, so variables in a dataset with 
+three or more dimensions cannot be completely described by the 
+_CoverageDescription_ response. WCS 2.1, on the other hand, 
+can represent domains with more than two dimensions.
 Please contact us if you are interested by sending a note to
 link:mailto:support@opendap.org[support@opendap.org].
 
@@ -143,23 +144,23 @@ link:http://docs.opengeospatial.org/is/09-146r6/09-146r6.html[Coverage
 Implementation Schema (CIS) 1.1] standard and
 ////
 
+[[WCS_installation_guide]]
 == WCS Installation
 
 The WCS 2 service comes bundled as part of Hyrax-1.14.0 and newer.
-See the link:https://www.opendap.org/software/hyrax-data-server[Hyrax
-download and installation page] to get Hyrax installed and running, and then return to this guide for WCS configuration
-information.
+See the 
+<<Download_and_Install_Hyrax, Hyrax download and installation guide>>
+included earlier in this document to get Hyrax installed and running, 
+and then return to this guide for WCS configuration information.
 
-Assuming that you have Hyrax installed and running on your local system
+Assuming that you have Hyrax installed and running on your local system,
 you should be able to quickly verify the WCS service is available by
-pointing your browser at the default WCS endpoint
-`http://localhost:8080/opendap/wcs` Which should return a browser
+pointing your browser at the default WCS endpoint:
+http://localhost:8080/opendap/wcs. This link should return a browser
 renderable HTML page of the _Capabilities_ document with a conspicuously
-empty _Contents_
-section.
+empty _Contents_ section.
 
 image::../images/WCS-NoContents.png[]
-
 
 == Configuration
 
@@ -216,27 +217,31 @@ distinguish each DynamicService. Choosing a value that is in some way related to
 collection being serviced can be helpful to people if there are problems later.
 <3> *name*: A human readable and meaningful name that will be used by the server when it
 creates a link to the service in the _viewers_ page.
-<4> *pathMatch*: The value of `pathMatch` contains a regular expression which is
-used to by the server determine which DAP datasets will be associated with this
+<4> *pathMatch*: The value of `pathMatch` contains a regular expression that
+the server uses to determine which DAP datasets will be associated with this
 DynamicService.
-<5> *srs*:  The _srs_ attribute defines the expected SRS for the coverages associated with this
-DynamicService. The SRS defines the axis labels, order, units and
+<5> *srs*:  The _srs_ attribute defines the expected SRS for the coverages associated
+with this DynamicService. The SRS defines the axis labels, order, units and
 minimum number of domain coordinate dimensions and will be used for any dataset
-that does not contain an explicit SRS definition. Currently only _urn:ogc:def:crs:EPSG::4326_ is
-supported.
+that does not contain an explicit SRS definition. Currently only 
+_urn:ogc:def:crs:EPSG::4326_ is supported.
 
 NOTE: Currently the only supported SRS is `urn:ogc:def:crs:EPSG::4326`
 
-=== Using _pathMatch_
-The `pathMatch` attribute is used to assign a WCS DynamicService definition to some subset (or possibly all) of the Datasets available through the Hyrax server. This is accomplished by applying the regular expression contained in the value of the `pathMatch` attribute to the _local name_ (aka _local url_, _path part of url_, etc. ) of a candidate dataset.
+=== Using `pathMatch`
 
+The `pathMatch` attribute is used to assign a WCS DynamicService definition
+to some subset (or possibly all) of the Datasets available through the 
+Hyrax server. This is accomplished by applying the regular expression 
+contained in the value of the `pathMatch` attribute to the _local name_
+(aka _local url_, _path part of url_, etc. ) of a candidate dataset.
 
-[cols="15,75"]
+[cols="25,75"]
 |===
 |For example in this URL
-|`http://test.opendap.org:8080/opendap/data/nc/fnoc1.nc`
+|http://test.opendap.org:8080/opendap/data/nc/fnoc1.nc
 |The DAP service endpoint is:
-|`http://test.opendap.org:8080/opendap/`
+|http://test.opendap.org:8080/opendap/
 | And the _local name_ is:
 | `/data/nc/fnoc1.nc`
 |===
@@ -247,58 +252,75 @@ For example in this URL:
 
 The DAP service endpoint is `http://test.opendap.org:8080/opendap/`
 ////
-So for this dataset the string `/data/nc/fnoc1.nc` would be compared to the  `pathMatch` regex when determing if a DynamicService  endpoint should be advertised in the `viewers` page for the dataset.
-
+So for this dataset, the string `/data/nc/fnoc1.nc` would be compared
+to the  `pathMatch` regex when determing if a DynamicService  endpoint
+should be advertised in the `viewers` page for the dataset.
 
 In the previous example the `pathMatch` attribute is set like this:
 
     pathMatch="^/testbed-13/M2SDNXSLV\.5\.12\.4/.*$"
 
-This value tells the server to assocaiate this WCS definition with any DAP dataset
-whose local path name on the server matches the regular expression
-
-    ^/testbed-13/M2SDNXSLV\.5\.12\.4/.*$
-
-Which can be read as _"Anything that starts with `/testbed-13/M2SDNXSLV.5.12.4/` "_
+This value tells the server to assocaiate this WCS definition with any
+DAP dataset whose local path name on the server matches the regular
+expression `^/testbed-13/M2SDNXSLV\.5\.12\.4/.*$`, which can be read as,
+"_Anything that starts with_ `/testbed-13/M2SDNXSLV.5.12.4/`."
 
 Regular expressions are very flexible and it is possible to
 use them to specify a number of things at a time.
 
-Example:
+==== `pathMatch` Regular Expression Example 1
 
-A `pathMatch` regular expression like this:
+Consider the following `pathMatch` regular expression:
 
- pathMatch="^.*coads.*\.nc$"
+    pathMatch="^.*coads.*\.nc$"
 
-Will match any dataset path that contains the word "coads" and that ends with ".nc".
+This will match any dataset path that contains the word "coads"
+and that ends with ".nc".
 
-Example:
+==== `pathMatch` Regular Expression Example 2
 
-A `pathMatch` regular expression like this:
+Consider the following `pathMatch` regular expression:
 
  pathMatch="^/gesdisc/(M2IMNXINT|M2TMNXCHM|M2SDNXSLV|M2I1NXASM|M2TMNPMST)\.5\.12\.4/.*$"
 
-Will match any dataset whose name begins with
-/gesdisc/M2IMNXINT.5.12.4/ or
-/gesdisc/M2TMNXCHM.5.12.4/ or
-/gesdisc/M2SDNXSLV.5.12.4/ or
-/gesdisc/M2I1NXASM.5.12.4/ or
-/gesdisc/M2TMNPMST.5.12.4/
+This will match any dataset whose name begins with the following: 
+
+* `/gesdisc/M2IMNXINT.5.12.4/`
+* `/gesdisc/M2TMNXCHM.5.12.4/`
+* `/gesdisc/M2SDNXSLV.5.12.4/`
+* `/gesdisc/M2I1NXASM.5.12.4/`
+* `/gesdisc/M2TMNPMST.5.12.4/`
 
 The `pathMatch` feature allows a DynamicService definition to be associated
-with a sort of "virtual collection" of datasets on the server which may be related by only the fact that their coverage representations are similar.
+with a sort of "virtual collection" of datasets on the server, which may
+be related merely by the fact that their coverage representations are similar.
 
 === Domain Coordinate Definitions
-The Hyrax WCS relies on the DynamicService definition to be
-responsible for identifying the specific variables in the DAP datasets that are to be used for the geo-referenced domain coordinates of the coverage.
-The domain coordinates must appear in the order that they appear in the dimensions of the DAP dataset. They must also match the order of axes represented in the SRS. _If there is an unresolvable conflict then until a suitable SRS can be identified the DAP dataset cannot be served as a Coverage._
 
-Many DAP datasets have variables with more than two dimensions, and in general WCS 2.0 only supports 2D data. However, latitude, longitude, and time are frequently seen as domain coordinates in scientific data. These can be utilized in the WCS as long as the inner most (last) two dimensions are in agreement with the SRS.
+The Hyrax WCS relies on the DynamicService definition to be responsible for
+identifying the specific variables in the DAP datasets that are to be used
+for the geo-referenced domain coordinates of the coverage. The domain 
+coordinates must appear in the order that they appear in the dimensions of 
+the DAP dataset. They must also match the order of axes represented in the SRS.
 
-NOTE: In the WCS data model *time* is not considered a "domain coordinate" and so it is not represented in the SRS. Yet it does accomodate transmitting the time domain to the client and subsetting the time domain in the manner of latitude and longitude.  The result is that 3D datasets with time, latitude, and longitude fit easily into the WCS model.
+WARNING: If there is an unresolvable conflict, the DAP dataset cannot 
+be served as a Coverage until a suitable SRS can be identified.
 
-In the server we treat time like any other coordinate dimension and so if there is a time dimension on the data it needs to appear in the set of DomainCoordinate definitions for the service.
+Many DAP datasets have variables with more than two dimensions, and in
+general WCS 2.0 only supports 2D data. However, latitude, longitude,
+and time are frequently seen as domain coordinates in scientific data.
+These can be utilized in the WCS as long as the inner most (last)
+two dimensions are in agreement with the SRS.
 
+NOTE: In the WCS data model *time* is not considered a "domain coordinate,"
+and is therefore not represented in the SRS. Yet it does accomodate
+transmitting the time domain to the client and subsetting the time domain
+in the manner of latitude and longitude. The result is that 3D datasets
+with time, latitude, and longitude fit easily into the WCS model.
+
+In the server we treat time like any other coordinate dimension, so if
+there is a time dimension on the data, it needs to appear in the set of
+DomainCoordinate definitions for the service.
 
 Let's consider the DomainCoordinate definitions from the example above:
 
@@ -327,7 +349,10 @@ Let's consider the DomainCoordinate definitions from the example above:
     max="180" />
 -----
 
-In our friend EPSG:4326 we know that the axis order is `latitude, longitude` and that's the order in the example. There is also an additional time coordinate which comes prior to the defintions for `latitude` and `longitude`.
+In our friend EPSG:4326, we know that the axis order is
+`latitude,longitude` and that's the order in the example. There is
+also an additional time coordinate which comes prior to the 
+defintions for `latitude` and `longitude`.
 
 Consider the `latitude` DomainCoordinate:
 
@@ -337,31 +362,31 @@ Consider the `latitude` DomainCoordinate:
 -----
 
 This tells the service that the coordinate axis named `latitude` is
-bound to the DAP variable `lat`, that a default value for _size_ as
-361 elements, the default _units_ are degrees "deg", the default
+bound to the DAP variable `lat`, that a default value for _size_ is
+361 elements, the default _units_ are degrees ("deg"), the default
 minimum value is -90.0 and the default maximum value is 90.0. What
 this means is that when the DynamicService processes a DAP dataset
-into a coverage it will check the dataset's metadata for this tyoe of
+into a coverage, it will check the dataset's metadata for this type of
 information. If any of these values can be determined from the dataset
-metadata then that value is used, otherwise the values expressed in
+metadata, then that value is used; otherwise the values expressed in
 the DomainCoordinate definition are used.
 
 Longitude and time are handled in the same way as latitude.
 
-
 === Providing Field defintions
+
 Many DAP datasets either lack the metadata for determining which
-variables will make suitable coverages, or the information may not be in an
+variables will make suitable coverages or the information may not be in an
 expected form or location. In order to enable these datasets to be
-exposed via WCS,  Hyrax allows the definition of a field in the
+exposed via WCS, Hyrax allows the definition of a field in the
 _DynamicService_ element.
 
 NOTE: WCS Field names have limitations on the kinds of characters they
 can contain. Specifically, these field names must be
 https://stackoverflow.com/questions/1631396/what-is-an-xsncname-type-and-when-should-it-be-used[NCNAMEs],
-which means that they cannot contain special sysmbols such as @, $, %,
+which means that they cannot contain special symbols such as @, $, %,
 &, /, +, most punctuation, spaces, tabs, newlines or parentheses.
-Furthermore, they cannot begin with a digit, dot (.) or minus (-)
+Furthermore, they cannot begin with a digit, dot (.) or minus (-),
 although those can appear later in the name. Because DAP variables do
 not have such a limitation, you may have to provide a new name for the
 variable.
@@ -436,12 +461,14 @@ WCS is provided.
         max="9.99999979e+33"/>         <!--6-->
 </DynamicService>
 ----
-<1> *name* - The name of the WCS Field to associate with the DAP variable. This value must be an NCNAME as described above.
-<2> *dapID* - The name of the DAP variable that will provide the data for the Field.
+<1> *name* - The name of the WCS Field to associate with the
+    DAP variable. This value must be an NCNAME as described above.
+<2> *dapID* - The name of the DAP variable that will provide the
+    data for the Field
 <3> *description* - A human readable description of the variable
-<4> *units* - The units of the values returned.
-<5> *min* - The minimum value.
-<6> *max* - The maximum value.
+<4> *units* - The units of the values returned
+<5> *min* - The minimum value
+<6> *max* - The maximum value
 
 == Remote DAP Server Example
 === Configuration
