@@ -35,7 +35,7 @@ Science Foundation (NSF).]
 
 *http://www.noaa.gov[National Oceanic and Atmospheric Administration (NOAA)]*
 
-=== Acknowledgments
+== Acknowledgments
 
 The High Altitude Observatory at NCAR contributed the BES framework
 that is the basis for the server's data processing engine and modular
