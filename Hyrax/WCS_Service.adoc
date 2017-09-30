@@ -227,7 +227,28 @@ supported.
 
 NOTE: Currently the only supported SRS is `urn:ogc:def:crs:EPSG::4326`
 
-=== Using _pathMatch_ to create virtual collections
+=== Using _pathMatch_
+The `pathMatch` attribute is used to assign a WCS DynamicService definition to some subset (or possibly all) of the Datasets available through the Hyrax server. This is accomplished by applying a the regular expression contained in the value of the `pathMatch` attribute to the _local name_ (aka _local url_, _path part of url_, etc. ) of a candidate dataset.
+
+
+[cols="15,75"]
+|===
+|For example in this URL
+|`http://test.opendap.org:8080/opendap/data/nc/fnoc1.nc`
+|The DAP service endpoint is:
+|`http://test.opendap.org:8080/opendap/`
+| And the _local name_ is:
+| `/data/nc/fnoc1.nc`
+|===
+
+////
+For example in this URL:
+`http://test.opendap.org:8080/opendap/data/nc/fnoc1.nc`
+
+The DAP service endpoint is `http://test.opendap.org:8080/opendap/`
+////
+So for this dataset the string `/data/nc/fnoc1.nc` would be compared to the  `pathMatch` regex when determing if a DynamicService  endpoint should be advertised in the `viewers` page for the dataset.
+
 
 In the previous example the `pathMatch` attribute is set like this:
 
@@ -274,7 +295,7 @@ The domain coordinates must appear in the order that they appear in the dimensio
 
 Many DAP datasets have variables with more than two dimensions, and in general WCS 2.0 only supports 2D data. However, latitude, longitude, and time are frequently seen as domain coordinates in scientific data. These can be utilized in the WCS as long as the inner most (last) two dimensions are in agreement with the SRS.
 
-NOTE: In the WCS data model time is not considered a "domain coordinate" and so it is not represented in the SRS. Yet it does accomodate transmitting the time domain to the client and subsetting the time domain in the manner of latitude and longitude.  The result is that 3D datasets with time, latitude, and longitude fit easily into the WCS model.
+NOTE: In the WCS data model *time* is not considered a "domain coordinate" and so it is not represented in the SRS. Yet it does accomodate transmitting the time domain to the client and subsetting the time domain in the manner of latitude and longitude.  The result is that 3D datasets with time, latitude, and longitude fit easily into the WCS model.
 
 In the server we treat time like any other coordinate dimension and so if there is a time dimension on the data it needs to appear in the set of DomainCoordinate definitions for the service.
 
