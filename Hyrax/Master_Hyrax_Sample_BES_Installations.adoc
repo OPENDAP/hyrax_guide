@@ -254,7 +254,7 @@ libdap, bes, dap-server (General purpose handler), hdf4_handler,
 hdf5_handler and fileout_netcdf.
 
 You can download the latest versions of these from the
-http://opendap.org/download/hyrax.html[Hyrax download page].
+https://www.opendap.org/software/hyrax-data-server#block-hyraxversions-menu[Hyrax download page].
 
 Let's create a directory /home/bob/packages/opendap, and work from
 there.

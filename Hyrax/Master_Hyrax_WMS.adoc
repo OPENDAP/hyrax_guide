@@ -36,12 +36,12 @@ data must meet the following requirements:
 
 * Contain gridded data (as DAP Grid objects or DAP Array objects
 utilizing shared dimensional coordinate arrays)
-**http://www.unidata.ucar.edu/software/thredds/v4.3/netcdf-java/tutorial/GridDatatype.html[as
-described by the Unidata Common Data Model]**.
+*http://www.unidata.ucar.edu/software/thredds/v4.3/netcdf-java/tutorial/GridDatatype.html[as
+described by the Unidata Common Data Model]*.
 * The NetCDF-Java library (which is what provides data access services
 for ncWMS2) utilizes the Common Data Model and must be able to identify
 the coordinates system used. You can test this by using the
- *http://www.unidata.ucar.edu/software/thredds/current/netcdf-java/documentation.htm[Unidata
+*http://www.unidata.ucar.edu/software/thredds/current/netcdf-java/documentation.htm[Unidata
 ToolsUI application]* (which is also based on the NetCDF-Java library).
 Open your dataset with **ToolsUI**, and in the *Feature Types -> Grid
 Panel* there should be one or more variables shown with some kind of

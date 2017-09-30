@@ -110,7 +110,7 @@ The service will create these endpoints dynamically.
 
 ===== Relative path example
   
-Consider a catalog accessed with the URL:
+Consider a catalog accessed with the URL
 http://localhost:8080/opendap/thredds/v27/Landsat/catalog.xml and that
 contains this _datasetScan_ element:
 

@@ -144,7 +144,7 @@ Configure httpd to use the newly installed certs and restart:
 * and then restart: _sudo /usr/sbin/apachectl restart_
 
 NOTE: More complete instructions can be found here:
-http://wiki.centos.org/HowTos/Https
+http://wiki.centos.org/HowTos/Https.
 
 ==== Configure Tomcat (Hyrax)
 

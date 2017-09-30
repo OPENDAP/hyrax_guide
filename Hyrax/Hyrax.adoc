@@ -107,7 +107,7 @@ image::../images/HyraxArchitecture.jpg[]
 
 * *Administrator's interface:*
   Control and dynamically update Hyrax from a convenient web interface.
-  <<admin-interface, the Admin interface documentation>>.
+  <<admin-interface, See the Admin interface documentation>>.
 
  * *WMS services:*
    <<WMS_Service, Hyrax now supports WMS services via integration with ncWMS.>>
@@ -121,6 +121,7 @@ image::../images/HyraxArchitecture.jpg[]
   "structure" variables appear as graph nodes. Data can be acquired for
   atomic types or arrays of atomic types in a number of formats.
 
+//The subscribe link doesn't seem to work -ACP
 * *Feature Request:*
   If there is a feature you would like to see but don't, let us know:
   support@opendap.org or opendap-tech@opendap.org. (You need to
