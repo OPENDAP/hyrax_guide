@@ -228,7 +228,7 @@ supported.
 NOTE: Currently the only supported SRS is `urn:ogc:def:crs:EPSG::4326`
 
 === Using _pathMatch_
-The `pathMatch` attribute is used to assign a WCS DynamicService definition to some subset (or possibly all) of the Datasets available through the Hyrax server. This is accomplished by applying a the regular expression contained in the value of the `pathMatch` attribute to the _local name_ (aka _local url_, _path part of url_, etc. ) of a candidate dataset.
+The `pathMatch` attribute is used to assign a WCS DynamicService definition to some subset (or possibly all) of the Datasets available through the Hyrax server. This is accomplished by applying the regular expression contained in the value of the `pathMatch` attribute to the _local name_ (aka _local url_, _path part of url_, etc. ) of a candidate dataset.
 
 
 [cols="15,75"]
@@ -254,7 +254,7 @@ In the previous example the `pathMatch` attribute is set like this:
 
     pathMatch="^/testbed-13/M2SDNXSLV\.5\.12\.4/.*$"
 
-This value tells the server to directly utilize the BES and to assocaiate this WCS definition with any DAP dataset
+This value tells the server to assocaiate this WCS definition with any DAP dataset
 whose local path name on the server matches the regular expression
 
     ^/testbed-13/M2SDNXSLV\.5\.12\.4/.*$
