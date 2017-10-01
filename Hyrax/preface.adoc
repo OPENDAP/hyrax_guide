@@ -42,4 +42,4 @@ that is the basis for the server's data processing engine and modular
 extensibility. 
 
 Keith Seyffarth extracted the Wiki's text that forms the basis of this
-manual, and Alexander and Leonard Porrello edited the text.
+manual, and Alexander Porrello and Leonard Porrello edited the text.
