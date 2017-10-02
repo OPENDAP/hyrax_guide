@@ -44,3 +44,7 @@ To convert to CM from adoc, use 'asciidoctor' and 'pandoc' like this:
 The https://opendap.github.io site is populated with HTML and PDF
 documents that are automatically built any time an AsciiDoc file in
 the documentation repo is updated on the master branch.
+
+=== Automaic github.io updates
+
+See link:http://mgreau.com/posts/2016/03/28/asciidoc-to-gh-pages-with-travis-ci-docker-asciidoctor.html[Convert AsciiDoc to HTML/PDF & publish to GitHub Pages with Travis CI and Asciidoctor Docker containers] for the low-down on how the automatic updates work.
