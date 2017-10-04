@@ -47,4 +47,8 @@ the documentation repo is updated on the master branch.
 
 === Automaic github.io updates
 
-See link:http://mgreau.com/posts/2016/03/28/asciidoc-to-gh-pages-with-travis-ci-docker-asciidoctor.html[Convert AsciiDoc to HTML/PDF & publish to GitHub Pages with Travis CI and Asciidoctor Docker containers] for the low-down on how the automatic updates work.
+See link:http://mgreau.com/posts/2016/03/28/asciidoc-to-gh-pages-with-travis-ci-docker-asciidoctor.html[Convert AsciiDoc to HTML/PDF & publish to GitHub Pages with Travis CI and Asciidoctor Docker containers] for the low-down on how the automatic updates work. 
+
+Another take on the same sort of process - updating gh-pages from a .travis.yml file - that does not use asciidoctor: link:http://www.steveklabnik.com/automatically_update_github_pages_with_travis_example/[Automatically Update GitHub Pages with Travis].
+
+
