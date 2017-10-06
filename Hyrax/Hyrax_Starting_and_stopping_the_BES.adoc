@@ -24,7 +24,11 @@ In Linux, if you want Hyrax to start at boot time then you can:
 `chkconfig --list besd` +
 You should get something like this back: +
 `besd           	0:off	1:off	2:on	3:on	4:on	5:on	6:off`
-
+* You can turn it off like this: +
+`chkconfig besd off`
+* And you can remove it from the chkconfig management like this: +
+`chkconfig --del besd` +
+_"The service is removed from chkconfig management, and any symbolic links in /etc/rc[0-6].d which pertain to it are removed."_ - chkconfig manpage
 
 == The _besctl_ Command
 

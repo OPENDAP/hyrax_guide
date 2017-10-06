@@ -471,10 +471,13 @@ WCS is provided.
 <6> *max* - The maximum value
 
 == Remote DAP Server Example
-=== Configuration
-=== Symetric URL Generation
+TBD
 
 ////
+
+=== Configuration
+
+=== Symetric URL Generation
 In which the remote Hyrax is configured with a WebService in the viewers.xml file that points to the WCS service, which in turn is configured to retrieve data from the remote Hyrax server.
 
 
@@ -499,15 +502,10 @@ The corresponding  entry for the viewers.xml file for the Hyrax server runnning 
     <DynamicServiceId>coads</DynamicServiceId>
 </WebServiceHandler>
 ----
-////
 
 === Asymetric URL Generation
-////
 In which some third entity generates the WCS access URL because it understands the organization of the Hyrax server and how the DynamicService occupies the URL space of the WCS service.
-////
 
 === Reading from Servers that Require Authentication
-////
 In which the remote Hyrax requires authentication in order for clients to be granted access to metadata and/or data, and the server uses .netrc to sort it out.
 ////
-TBD
