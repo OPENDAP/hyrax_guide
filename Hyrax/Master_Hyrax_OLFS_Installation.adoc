@@ -39,34 +39,50 @@ TIP: If you are working via your terminal, use the command +
 `cp olfs-x.x.x-webapp/opendap.war /usr/local/apache-tomcat-6.x.x/webapps/`,
 where _usr/local_ should be the directory that the Tomacat server is in.
 
-If you're replacing an older version of the OLFS you may
+If you're replacing an older version of the OLFS you may need do one or more of:
 
-* Need to remove the directory _$CATALINA_HOME/webapps/opendap_ before
+* Remove the directory `$CATALINA_HOME/webapps/opendap` before
 restarting Tomcat.
-* Or determine if the existing configuration information for the
+* Determine if the existing configuration information for the
 OLFS needs to be updated. If things don't work after you start Tomcat,
-you should compare the _$CATALINA_HOME/content/opendap/olfs.xml_ file
-that contains your exisiting configuration to the new default
+you should compare your local configuration with the distributed one. Typically the local configuration or the OLFS will be located in the the `/etc/olfs` directory. The file `/etc/olfs/olfs.xml` should be compared to the new default
 configuration located in
-_$CATALINA_HOME/webapps/opendap/intitalContent/olfs.xml_. Look at the
-lists of DispatchHandlers and adjust your configuration to use the same
-ones.
-
-== Setup Tomcat
-
-Configure the Tomcat environment by setting the environment variable
-CATALINA_HOME to the full path for the Tomcat distribution.
-
-In bash: `export CATALINA_HOME = /usr/local/apache-tomcat-6.x.x`
+`$CATALINA_HOME/webapps/opendap/WEB-INF/conf/olfs.xml` If they differ
+significantly:
+** Backup your current configuration and move it out of the way:
++
+`cd /etc; tar -cvzf ~/olfs_backup.tgz olfs; mv olfs ~/olfs_backup`
+** Restart Tomcat. If the directory `/etc/olfs` exists and can be written to by
+the Tomcat user then the OLFS will copy its default configuration set to the
+`/etc/olfs` location at start up.
+** Compare your previous configuration files `~/olfs_backup` with the new default
+ones in `/etc/olfs` and adjust the new ones accordingly.
 
 == Start Tomcat
 
+=== Linux w/YUM installed Tomcat
+If you are utilizing a YUM installed Tomcat then it should already be integrated
+into the system with a `tomcat` entry in `/etc/init.d` and you can start the server
+with the command: +
+`sudo service tomcat start`
+
+
+=== All systems running Tomcat from Apache distribution
+
+
+If you have a Tomcat instance inflated from a downloaded distribution file
+from Apache Tomcat then  you will need to configure the Tomcat environment
+by setting the environment variable CATALINA_HOME to the full path of the
+unpacked Tomcat distribution.
+
+In bash: `export CATALINA_HOME = /usr/local/apache-tomcat-6.x.x`
+
 In the top level tomcat directory (apache-tomcat-6.x.x on my machine)
-issue the command + 
+issue the command +
 `bin/startup.sh; tail -f logs/catalina.out` and
 wait a few seconds while it all starts up.
 
-When Tomcat starts up, it will unpack your _OLFS_ and install the
+When Tomcat starts up, it will unpack your opendap.war file and install the
 webapp.
 
 WARNING: If you use `ctrl-c` to stop watching the tail of the
