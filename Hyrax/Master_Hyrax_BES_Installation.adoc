@@ -43,14 +43,21 @@ from the Hyrax install page.
 ////
 == Install
 
-. Use yum to install the libdap and bes RPMs (`sudo yum install libdap-3.x.x.rpm bes-3.x.x.rpm`).
+. Use yum to install the libdap and bes RPMs: +
+  `sudo yum install libdap-3.x.x.rpm bes-3.x.x.rpm`).
 . At this point you can test the BES by typing the following into a terminal:
-.. start it: `sudo service besd start` (Or use the script in _/etc/init.d with sudo_: _/etc/init.d/besd start_)
-.. connect using a simple client: `bescmdln`
-.. get version information: `show version`
-.. exit from `bescmdln`
+.. start it: +
+   `sudo service besd start` +
+   (Or use the script in _/etc/init.d with sudo_: _/etc/init.d/besd start_)
+.. connect using a simple client: +
+   `bescmdln`
+.. get version information: +
+   `BESClient> show version`
+.. exit from `bescmdln`: +
+   `BESClient> exit`
 
-NOTE: *If you are upgrading to Hyrax 1.13.4 from an existing installation 
+
+NOTE: *If you are upgrading to Hyrax 1.13.4 or newer from an existing installation
 older than 1.13.0,* in the bes.conf file the keys _BES.CacheDir_, 
 _BES.CacheSize_, and _BES.CachePrefix_ have been replaced with 
 _BES.UncompressCache.dir_, _BES.UncompressCache.size_, and 
