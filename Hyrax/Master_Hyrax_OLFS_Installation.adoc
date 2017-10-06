@@ -58,17 +58,33 @@ the Tomcat user then the OLFS will copy its default configuration set to the
 ** Compare your previous configuration files `~/olfs_backup` with the new default
 ones in `/etc/olfs` and adjust the new ones accordingly.
 
-== Start Tomcat
+== Starting and Stopping the OLFS/Tomcat
+The OLFS component of Hyrax is web application made up of several components all of which get started when Tomcat is started, assuming that the `opendap.war` has been placed in the $CATALINA_HOME/webapps directory prior to Tomcat start.
 
-=== Linux w/YUM installed Tomcat
+=== Linux with a YUM installed Tomcat
 If you are utilizing a YUM installed Tomcat then it should already be integrated
-into the system with a `tomcat` entry in `/etc/init.d` and you can start the server
-with the command: +
-`sudo service tomcat start`
+into the system with a `tomcat` entry in `/etc/init.d` and you should be able to:
 
+* *Start Tomcat*: `sudo service tomcat start`
+* *Stop  Tomcat*: `sudo service tomcat stop`
+
+
+==== Start Hyrax At Boot
+
+In Linux, if you want Hyrax to start at boot time then you can do the following:
+
+* Add Tomcat to the startup process:  `chkconfig --add tomcat`
+* Add the BES to the startup process: `chkconfig --add besd`
+
+Confirm that this worked by using the list function of `chkconfig`:
+```
+[~]$ chkconfig --list besd
+besd           	0:off	1:off	2:on	3:on	4:on	5:on	6:off
+[~]$ chkconfig --list tomcat
+tomcat         	0:off	1:off	2:on	3:on	4:on	5:on	6:off
+```
 
 === All systems running Tomcat from Apache distribution
-
 
 If you have a Tomcat instance inflated from a downloaded distribution file
 from Apache Tomcat then  you will need to configure the Tomcat environment
@@ -77,13 +93,17 @@ unpacked Tomcat distribution.
 
 In bash: `export CATALINA_HOME = /usr/local/apache-tomcat-6.x.x`
 
-In the top level tomcat directory (apache-tomcat-6.x.x on my machine)
-issue the command +
-`bin/startup.sh; tail -f logs/catalina.out` and
-wait a few seconds while it all starts up.
+With your shell environment configured correctly you should be able to control Tomcat like this:
+
+* *Start Tomcat*: `$CATALINA_HOME/bin/startup.sh`
+* *Stop  Tomcat*: `$CATALINA_HOME/bin/shutdown.sh`
 
 When Tomcat starts up, it will unpack your opendap.war file and install the
-webapp.
+webapp. You can watch this process and see other logging output by starting the
+Tomcat like so:
+
+* *Start and Watch Tomcat*: `$CATALINA_HOME/bin/startup.sh; tail -f $CATALINA_HOME/logs/catalina.out`
+
 
 WARNING: If you use `ctrl-c` to stop watching the tail of the
 server's output, make sure to run the command `bin/shutdown.sh`
