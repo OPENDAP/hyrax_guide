@@ -6,6 +6,26 @@
 
 // TODO: Add text about using _besd_ to the following
 
+There are two methods of controlling the BES, `besd` and `besctl`. The `besd` command is part of the init.d service architecture and provides system controls for the *besdaemon*. while `besctl` is the normative commandline control for the *besdaemon*.
+
+== The _besd_ Command
+The `besd` command is used on Unix systems utilizing the init.d service architecture
+to control the besdaemon. The controls are as follows:
+
+* *Start BES*: `service besd start`
+* *Stop  BES*: `service besd stop`
+
+=== Starting the BES At Boot Time
+In Linux, if you want Hyrax to start at boot time then you can:
+
+ * Add the BES to the startup process: +
+`chkconfig --add besd` +
+* Confirm that this worked: +
+`chkconfig --list besd` +
+You should get something like this back: +
+`besd           	0:off	1:off	2:on	3:on	4:on	5:on	6:off`
+
+
 == The _besctl_ Command
 
 The _besctl_ command is used to control the BES daemon. For Hyrax

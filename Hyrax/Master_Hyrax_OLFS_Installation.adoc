@@ -69,7 +69,7 @@ into the system with a `tomcat` entry in `/etc/init.d` and you should be able to
 * *Stop  Tomcat*: `sudo service tomcat stop`
 
 
-==== Start Hyrax At Boot
+==== Starting Hyrax At Boot Time
 
 In Linux, if you want Hyrax to start at boot time then you can do the following:
 
