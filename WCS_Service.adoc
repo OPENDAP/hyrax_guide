@@ -160,7 +160,7 @@ http://localhost:8080/opendap/wcs. This link should return a browser
 renderable HTML page of the _Capabilities_ document with a conspicuously
 empty _Contents_ section.
 
-image::../images/WCS-NoContents.png[]
+image::WCS-NoContents.png[]
 
 == Configuration
 

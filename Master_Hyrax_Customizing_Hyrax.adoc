@@ -153,7 +153,7 @@ transform BES showCatalog responses into THREDDS catalogs.
 The contents.xsl file contains the XSLT transformation that is used to build
 //*I am not sure what this link is referring to - ACP* FIXED jhrg 9/28/17
 the link:http://docs.opendap.org/index.php/ServerDispatchOperations[OPeNDAP
-Directory Response] image:../images/DirectoryView.png[]
+Directory Response] image:DirectoryView.png[]
 
 |*dataset.xsl* |_$CATALINA_HOME/content/opendap/docs/xsl_ |
 This transform is used to in conjunction with the opendap.threddsHandler code

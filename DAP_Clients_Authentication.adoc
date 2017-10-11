@@ -3,7 +3,7 @@
 {docdate}
 :numbered:
 :toc:
-:imagesdir: ../images/
+:imagesdir: 
 
 == Overview ==
 Many users access DAP servers using a browser as their primary software interface. However there is also a growing group of users that utilize either:

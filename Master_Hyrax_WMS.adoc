@@ -47,7 +47,7 @@ Open your dataset with **ToolsUI**, and in the *Feature Types -> Grid
 Panel* there should be one or more variables shown with some kind of
 coordinate system.
 
-image:../images/ToolsUI-GridView.png[]
+image:ToolsUI-GridView.png[]
 
 ToolsUI Grid View
 
@@ -168,7 +168,7 @@ different, more durable location.
 Once you have authenticated and can view the ncWMS2 admin page, scroll
 down to the Dynamic Services section:
 
-image:../images/Screen_Shot_2014-08-11_at_12.34.19_PM.png[]
+image:Screen_Shot_2014-08-11_at_12.34.19_PM.png[]
 
 Create a new Dynamic Service for Hyrax:
 

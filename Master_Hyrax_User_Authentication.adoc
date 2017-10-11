@@ -723,7 +723,7 @@ your profile's *My Applications* tab.
 
 Its status will show pending a while:
 
-../index.php/File:URSApplicationPending.png[image:../images/b/b7/URSApplicationPending.png[image]]
+../index.php/File:URSApplicationPending.png[image:b/b7/URSApplicationPending.png[image]]
 
 Freshly registered application *tesy_tesy* awaits approval...
 
@@ -751,7 +751,7 @@ On the *My Applications* page:
 
 This will display the application search page:
 
-../index.php/File:UrsApplicationSearch.png[image:../images/4/47/UrsApplicationSearch.png[image]]
+../index.php/File:UrsApplicationSearch.png[image:4/47/UrsApplicationSearch.png[image]]
 
 URS Application Search Page
 
@@ -759,7 +759,7 @@ URS Application Search Page
 your new application and click the *Search For Applications* button,
 this will bring you to the URS Application Approval page:
 
-../index.php/File:UrsApproveApplication.png[image:../images/8/84/UrsApproveApplication.png[image]]
+../index.php/File:UrsApproveApplication.png[image:8/84/UrsApproveApplication.png[image]]
 
 URS Application Approval Page
 
@@ -769,7 +769,7 @@ Applications* button.
 You will be returned to the *My Applications* page where you should now
 see your new application on the list of **Approved Applications**.
 
-../index.php/File:UrsApprovedApplicationList.png[image:../images/e/e0/UrsApprovedApplicationList.png[image]]
+../index.php/File:UrsApprovedApplicationList.png[image:e/e0/UrsApprovedApplicationList.png[image]]
 
 URS Approved Applications
 

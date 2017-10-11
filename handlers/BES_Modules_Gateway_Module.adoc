@@ -178,13 +178,13 @@ the change in the _refresh_pattern_ described above do the following:
 
 . Under Preferences... choose the 'Template' tab and scroll to the
 bottom of the
-text; image:../images/Edit_the_squid.conf_file.png[]
+text; image:Edit_the_squid.conf_file.png[]
 . Edit the line, replacing "0 0% 0" with "1440 20% 10080"; and
 . 'Save' and then 'Stop Squid' and 'Start Squid' (note the helpful
 status messages in the 'Start/Stop'
-window)image:../images/squid_1.png[]
-image:../images/Squid_2.png[]
-image:../images/Squid_3.png[]
+window)image:squid_1.png[]
+image:Squid_2.png[]
+image:Squid_3.png[]
 
 == Known Problems
 

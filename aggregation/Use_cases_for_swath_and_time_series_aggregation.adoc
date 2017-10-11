@@ -106,7 +106,7 @@ We may be able to use the BES _stored result_ feature to eliminate
 the multiple trips to the BES. More investigation is needed.
 ////
 
-link:"../images/a/a6/Aggregation_component.png"[Click here 
+link:"a/a6/Aggregation_component.png"[Click here 
 to see a component diagram for the aggregation service.]
 
 === BES support for the service
@@ -339,14 +339,14 @@ Click on the  icon next to any dataset and click on the "API Endpoints" tab. Tha
 </p><p><strike>Alternate version for the netCDF return implementation: We may be able to use the BES <i>stored result</i> feature to eliminate the multiple trips to the BES. More investigation is needed.</strike>
 </p>
 <dl>
-<dd><a href="../index.php/File:Aggregation_component.png" class="image" title="Component diagram for the aggregation service."><img alt="Component diagram for the aggregation service." src="../images/a/a6/Aggregation_component.png" width="505" height="420" /></a>
+<dd><a href="../index.php/File:Aggregation_component.png" class="image" title="Component diagram for the aggregation service."><img alt="Component diagram for the aggregation service." src="a/a6/Aggregation_component.png" width="505" height="420" /></a>
 </dd>
 </dl>
 <h3><span class="mw-headline" id="BES_support_for_the_service"><span class="mw-headline-number">3.1</span> BES support for the service</span></h3>
 <p>Here is a Sequence diagram for the BES code used to build the responses:
 </p>
 <dl>
-<dd><a href="../index.php/File:Aggregation_Sequnece.png" class="image" title="Sequence diagram for the aggregation server showing how the BES is used by the service. Note that the OLFS is not part of this interaction."><img alt="Sequence diagram for the aggregation server showing how the BES is used by the service. Note that the OLFS is not part of this interaction." src="../images/d/dc/Aggregation_Sequnece.png" width="556" height="654" /></a>
+<dd><a href="../index.php/File:Aggregation_Sequnece.png" class="image" title="Sequence diagram for the aggregation server showing how the BES is used by the service. Note that the OLFS is not part of this interaction."><img alt="Sequence diagram for the aggregation server showing how the BES is used by the service. Note that the OLFS is not part of this interaction." src="d/dc/Aggregation_Sequnece.png" width="556" height="654" /></a>
 </dd>
 </dl>
 <p>In the figure, the BES iterates over each (of <i>N</i>) container and calls a function that takes <i>M</i> arrays and forms them into a single Sequence (DAP2 or DAP4; both are implemented now). One important feature that is not shown in the diagram is that all of the data from the arrays are read into the sequence object, to be filtered later. It's possible that a later optimization might drop that, and some code used to build the netCDF response might help with that - see below. The initial version of the function will read all of the data from the arrays passed to it, assuming some later step will be used to filter them.

@@ -160,23 +160,23 @@ shipped with the server is generally the most useful level of detail. By
 default the log lines are not displayed - just click the start button to
 see them.
 
-image:../images/Hai-Slide12.jpg[]
+image:Hai-Slide12.jpg[]
 
 ==== Log Viewer Controls
 
-image:../images/Hai-Slide13.jpg[]
+image:Hai-Slide13.jpg[]
 
-image:../images/Hai-Slide14.jpg[]
+image:Hai-Slide14.jpg[]
 
 ==== Setting Logging Levels
 
-image:../images/Hai-Slide15.jpg[]
+image:Hai-Slide15.jpg[]
 
-image:../images/Hai-Slide16.jpg[]
+image:Hai-Slide16.jpg[]
 
-image:../images/Hai-Slide17.jpg[]
+image:Hai-Slide17.jpg[]
 
-image:../images/Hai-Slide18.jpg[]
+image:Hai-Slide18.jpg[]
 
 === BES Controls
 
@@ -184,7 +184,7 @@ The BES control panel provides one tab for each back-end server in this
 instance of Hyrax. Note that in these pictures we have only one BES
 running and it is called '/' (slash) meaning it is the default BES.
 
-image:../images/Besctl-01.jpg[]
+image:Besctl-01.jpg[]
 
 Beneath the "BES Management " banner you will see one or more tabs. You
 will always see a tab with the title of "/". This is the default BES for
@@ -192,27 +192,27 @@ this Hyrax. If the particular installation of Hyrax has multiple BES
 configured in its OLFS they will appear here as tabs where the "prefix"
 for the BES from the olfs.xml file will be used as the tab title.
 
-image:../images/Hai-Slide02.jpg[Admin
+image:Hai-Slide02.jpg[Admin
 Page Tour 1]
 
-image:../images/Hai-Slide03.jpg[Admin
+image:Hai-Slide03.jpg[Admin
 Page Tour 2]
 
 ==== BES Configuration
 
-image:../images/Hai-Slide04.jpg[]
+image:Hai-Slide04.jpg[]
 
-image:../images/Hai-Slide05.jpg[]
+image:Hai-Slide05.jpg[]
 
 ==== BES Logging
 
-image:../images/Hai-Slide06.jpg[BES
+image:Hai-Slide06.jpg[BES
 Logging 1]
 
-image:../images/Hai-Slide07.jpg[BES
+image:Hai-Slide07.jpg[BES
 Logging 2]
 
-image:../images/Hai-Slide08.jpg[BES
+image:Hai-Slide08.jpg[BES
 Logging Configuration 1]
 
 image:../images4/Hai-Slide09.jpg[BES
@@ -220,8 +220,8 @@ Logging 3]
 
 ==== OLFS Connections
 
-image:../images/Hai-Slide10.jpg[OLFS
+image:Hai-Slide10.jpg[OLFS
 Connections 1]
 
-image:../images/Hai-Slide11.jpg[OLFS
+image:Hai-Slide11.jpg[OLFS
 Connections 2]
