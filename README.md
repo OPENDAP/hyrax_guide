@@ -35,7 +35,7 @@ should move the acknowledgements from Hyrax.adoc to there (I think)
 along with other text like, this is why Hyrax exists and/or other
 stuff that one usually finds in a Preface.
 
-### Master\_Hyrax\_Table\_of\_Contents.adoc
+### Master\_Hyrax\_Guide.adoc
 
 This is the main document for the whole manual. It now uses _include_
 directives in place of _link_s. There are notes in the file about
