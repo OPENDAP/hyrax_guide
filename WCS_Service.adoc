@@ -406,7 +406,7 @@ WCS is provided.
 
     <DomainCoordinate
         name="time"
-        dapID="time"
+        dapID="TIME"
         size="12"
         units="hour since 0000-01-01 00:00:00"
         min="366.0"
