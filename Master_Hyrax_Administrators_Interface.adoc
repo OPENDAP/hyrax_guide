@@ -215,7 +215,7 @@ Logging 2]
 image:Hai-Slide08.jpg[BES
 Logging Configuration 1]
 
-image:../images4/Hai-Slide09.jpg[BES
+image:..Hai-Slide09.jpg[BES
 Logging 3]
 
 ==== OLFS Connections

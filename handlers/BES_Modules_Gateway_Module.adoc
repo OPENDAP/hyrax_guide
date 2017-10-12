@@ -181,8 +181,9 @@ bottom of the
 text; image:Edit_the_squid.conf_file.png[]
 . Edit the line, replacing "0 0% 0" with "1440 20% 10080"; and
 . 'Save' and then 'Stop Squid' and 'Start Squid' (note the helpful
-status messages in the 'Start/Stop'
-window)image:squid_1.png[]
+status messages in the 'Start/Stop' window)
+
+image:squid_1.png[]
 image:Squid_2.png[]
 image:Squid_3.png[]
 

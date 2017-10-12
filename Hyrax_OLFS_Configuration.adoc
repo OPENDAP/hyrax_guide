@@ -1,4 +1,4 @@
-Handles the OPeNDAP directory view//= Hyrax - OLFS Configuration - OPeNDAP Documentation
+//= Hyrax - OLFS Configuration - OPeNDAP Documentation
 //:Leonard Porrello <lporrel@gmail.com>:
 //{docdate}
 //:numbered:

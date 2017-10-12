@@ -723,7 +723,7 @@ your profile's *My Applications* tab.
 
 Its status will show pending a while:
 
-../index.php/File:URSApplicationPending.png[image:b/b7/URSApplicationPending.png[image]]
+image::URSApplicationPending.png[]
 
 Freshly registered application *tesy_tesy* awaits approval...
 
@@ -732,9 +732,8 @@ process in URS land its status will be changed to *Active* and your
 instance of _mod_auth_urs_ will be permitted to interact with the URS
 system. You should get an email acknowledging your application
 registration and another one indicating that your application has been
-activated. (The last time I did this it took ~20 minutes to receive the
-activation notification. ../index.php/User:Ndp[ndp]
-(../index.php?title=User_talk:Ndp&action=edit&redlink=1[talk]))
+activated (in the past, it took about ~20 minutes to receive the
+activation notification).
 
 ===== Approve your URS Application
 
@@ -751,7 +750,7 @@ On the *My Applications* page:
 
 This will display the application search page:
 
-../index.php/File:UrsApplicationSearch.png[image:4/47/UrsApplicationSearch.png[image]]
+image::UrsApplicationSearch.png[]
 
 URS Application Search Page
 
@@ -759,7 +758,7 @@ URS Application Search Page
 your new application and click the *Search For Applications* button,
 this will bring you to the URS Application Approval page:
 
-../index.php/File:UrsApproveApplication.png[image:8/84/UrsApproveApplication.png[image]]
+image::UrsApproveApplication.png[]
 
 URS Application Approval Page
 
@@ -769,7 +768,7 @@ Applications* button.
 You will be returned to the *My Applications* page where you should now
 see your new application on the list of **Approved Applications**.
 
-../index.php/File:UrsApprovedApplicationList.png[image:e/e0/UrsApprovedApplicationList.png[image]]
+image::UrsApprovedApplicationList.png[]
 
 URS Approved Applications
 
