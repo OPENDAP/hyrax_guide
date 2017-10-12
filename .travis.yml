@@ -1,3 +1,4 @@
+
 sudo: required
 
 services:
@@ -7,12 +8,12 @@ before_install:
   - mkdir -p output
   - docker pull asciidoctor/docker-asciidoctor
 
-# Name the file explicitly until we sort out the organization of the
-# 'documentation' project.
-script:
-  - docker run -v $TRAVIS_BUILD_DIR:/documents/ --name asciidoc-to-html asciidoctor/docker-asciidoctor asciidoctor -D /documents/output *.adoc ./Hyrax/Master_Hyrax_Table_of_Contents.adoc
-  - docker run -v $TRAVIS_BUILD_DIR:/documents/ --name asciidoc-to-pdf asciidoctor/docker-asciidoctor asciidoctor-pdf -D /documents/output *.adoc ./Hyrax/Master_Hyrax_Table_of_Contents.adoc
+# Name the file explicitly until we sort out the organization of the 'documentation'
+# project.
 
+script:
+  - docker run -v $TRAVIS_BUILD_DIR:/documents/ --name asciidoc-to-html asciidoctor/docker-asciidoctor asciidoctor -D /documents/output Master_Hyrax_Guide.adoc
+  - docker run -v $TRAVIS_BUILD_DIR:/documents/ --name asciidoc-to-pdf asciidoctor/docker-asciidoctor asciidoctor-pdf -D /documents/output Master_Hyrax_Guide.adoc
 
 after_error: 
   - docker logs asciidoc-to-html
@@ -22,8 +23,13 @@ after_failure:
   - docker logs asciidoc-to-html
   - docker logs asciidoc-to-pdf
 
+# This is a bit different than the 'after_success' section in the 'documentation'
+# repo because that build installs the github.io index.html page from its
+# README.adoc file. I extracted the Hyrax Guide from that repo because of problems
+# getting the images to work in the online version of the Hyrax Guide. jhrg 10/11/17
+
 after_success:      
-  - cd output ; mv README.html index.html ; cp -R ../images images
+  - cd output ; cp -R ../images images
   - git init
   - git config user.name "${GH_USER_NAME}"
   - git config user.email "{GH_USER_EMAIL}"
