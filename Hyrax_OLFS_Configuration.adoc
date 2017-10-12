@@ -1120,7 +1120,7 @@ _XML ENTITY_ and an _entity reference_ in the _web.xml_ to cause a local
 file containing the security configuration to be included in the
 web.xml. For example, add the __ENTITY__ 
 
-[source,xml]
+[source]
 ----
 [<!ENTITY securityConfig SYSTEM "file:/fully/qualified/path/to/your/security/config.xml">]
 ----
