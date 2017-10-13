@@ -5,27 +5,26 @@
 :toc:
 :imagesdir: 
 
-== Overview ==
+== Overview
 Many users access DAP servers using a browser as their primary software interface. However there is also a growing group of users that utilize either:
 * A "smart" tool. Where "smart" means that the tool understands how to interact with a DAP service and construct DAP queries for data and use that in higher level  client side activities like GUI based graphs, image display, selection, navigation etc.
 * A command line tool such as "wget" or "curl" that can be used to extract data from a DAP service, but the URL construction is left to other software.
 In both these examples we want these client software applications to be able to manage authentication without user intervention, otherwise the automation benefits of these tools is lost.
 
-=== Earthdata Login Users
-
+== Earthdata Login Users
 Earthdata Login is a NASA run Single Sign-On service. In order to access NASA held data you will need to:
 
 1. Obtain (for free) your own set of https://urs.earthdata.nasa.gov/users/new[Earthdata Login credentials]. 
-1. _Approve_ the DAP server application that is serving the data you want. as described in the following section.
-1. Use this guide to configure your DAP client of choice (_curl_, browser, etc.) to utilize these credentials.
+2. _Approve_ the DAP server application that is serving the data you want. as described in the following section.
+3. Use this guide to configure your DAP client of choice (_curl_, browser, etc.) to utilize these credentials.
 
-NOTE: _Throughout this document NASA's Earthdata Login is referred to as and is synonymous with *URS* (NASA changed the name of this service shortly before it's use became mandatory for all data access requests.)_
+NOTE: Throughout this document NASA's Earthdata Login is referred to as and is synonymous with *URS* (NASA changed the name of this service shortly before it's use became mandatory for all data access requests.)
 
-==== Acquire Earthdata Login credentials 
+=== Acquire Earthdata Login credentials 
 Registering with Earthdata Login and getting a
 user account is free. Point you browser at the https://urs.earthdata.nasa.gov/users/new[Earthdata Login New User] page and do the stuff that needs the doing. 
 
-==== Approving The DAP Server Application 
+=== Approving The DAP Server Application 
 
 Regardless of which software client you decide to employ, before you can access any new Earthdata Login authenticated server you must first add that sever to the list of *Approved Applications* in your Earthdata Login profile. 
 
@@ -60,20 +59,26 @@ NOTE: The application named *tesy_tesy* used in this example does not really exi
 I was able to use command line _curl_ to retrieve URS authenticated  resources using the following technique.
 
 First in my home directory I created a _.netrc_ file and set its file permissions to read only for owner:
+[source,sh]
 ----
 [spooky:~] ndp% touch .netrc
 [spooky:~] ndp% chmod 600 .netrc
 [spooky:~] ndp% ls -l .netrc
 -rw-------@ 1 ndp  staff  92 Nov 13 06:08 .netrc
 ----
+
 Then I edited the _.netrc_ file and associated my URS credentials with the URS IdP instance utilized by my target DAP server:
+
 [source,apache]
 ----
 machine urs.earthdata.nasa.gov
 	login your_urs_uid
 	password your_urs_password
 ----
+
 I could then retrieve a DDS object in the URS authentication enabled Hyrax server with the following _curl_ command: 
+
+[source,sh]
 ----
 curl -k -n -c ursCookies -b ursCookies -L --url https://54.172.97.47/opendap/data/nc/fnoc1.nc.dds
 ----
@@ -95,6 +100,7 @@ NOTE: The ``--location-trusted`` option should not be used as it will cause _cur
 
 In order to retrieve multiple URLs with out reauthenticating you can use multiple instances of the _--url_ parameter:
 
+[source,sh]
 ----
 curl -k -n -c ursCookies -b ursCookies -L --url https://54.172.97.47/opendap --url https://54.172.97.47/opendap/data/nc/fnoc1.nc.dds --url https://54.172.97.47/opendap/data/nc/coads_climatology.nc.dds
 ----
@@ -107,12 +113,13 @@ curl -k -n -c ursCookies -b ursCookies -L --url https://54.172.97.47/opendap/dat
 curl -k -n -c ursCookies -b ursCookies -L --url https://54.172.97.47/opendap/data/nc/coads_climatology.nc.dds 
 ----
 
-===LDAP ===
+=== LDAP
 
 I was able to use command line _curl_ to retrieve LDAP authenticated resources using the following technique.
 
 First in my home directory I created a _.netrc_ file and set its file permissions to read only for owner:
 
+[source,sh]
 ----
 [spooky:~] ndp% touch .netrc
 [spooky:~] ndp% chmod 600 .netrc
@@ -122,6 +129,7 @@ First in my home directory I created a _.netrc_ file and set its file permission
 
 Then I edited the _.netrc_ file and associated my LDAP credentials with the LDAP authenticated DAP server:
 
+[source,apache]
 ----
 machine 130.56.244.153
 	login tesla
@@ -130,6 +138,7 @@ machine 130.56.244.153
 
 I could then access the top level directory of the LDAP authentication enabled Hyrax server with the following _curl_ command: 
 
+[source,sh]
 ----
 curl -k -n -c ldapCookies -b ldapCookies  --url https://130.56.244.153/opendap
 ----
@@ -170,11 +179,13 @@ But the Shibboleth system doesn't respond to them. This may be a simple configur
 ==== certificates ====
 
 == _wget_ ==
+
 === URS ===
 
 The _wget_ documentation indicates that _wget_ understands to use the _.netrc_ file that we created for _curl_, and happily it appears to work, as long as other things are in place.
 Consider this _wget_ command:
 
+[source,sh]
 ----
 wget  --load-cookies cookies --save-cookies cookies --keep-session-cookie --no-check-certificate https://54.172.97.47/opendap/data/nc/fnoc1.nc.dds
 ----
@@ -189,6 +200,7 @@ https://54.172.97.47/opendap/data/nc/fnoc1.nc.dds:: The URL to retrieve.
 
 Here's the output of said _wget_ request:
 
+[source,sh]
 ----
 [spooky:olfs/testsuite/urs] ndp% wget  --load-cookies cookies --save-cookies cookies --keep-session-cookie --no-check-certificate https://54.172.97.47/opendap/data/nc/fnoc1.nc.dds
 --2014-11-14 11:22:18--  https://54.172.97.47/opendap/data/nc/fnoc1.nc.dds
@@ -249,6 +261,7 @@ The following works with the ncdump (and oc client) code bundled with NetCDF-4.3
 
 Edit (create as needed) the file _.netrc_ in your HOME directory, and set its file permissions to read only for owner:
 
+[source,sh]
 ----
 [spooky:~] ndp% touch .netrc
 [spooky:~] ndp% chmod 600 .netrc
@@ -266,6 +279,7 @@ machine urs.earthdata.nasa.gov
 ----
 
 Next, edit the _.dodsrc_ file in your HOME directory so that it tells DAP clients to use the _.netrc_ file for password information:
+
 [source,apache]
 ----
 HTTP.COOKIEJAR=/Users/jimg/.cookies
@@ -273,6 +287,7 @@ HTTP.NETRC=/Users/jimg/.netrc
 ----
 
 Here is a typical _.dodsrc_ file.
+
 [source,apache]
 ----
 # OPeNDAP client configuration file. See the OPeNDAP
@@ -304,6 +319,7 @@ To configure ncdump (and thus just about every client application that uses netC
 Edit (create as needed) the file _.netrc_ in your HOME directory, and set its file permissions to read only for owner:
 
 
+[source,sh]
 ----
 [spooky:~] ndp% touch .netrc
 [spooky:~] ndp% chmod 600 .netrc
@@ -321,6 +337,7 @@ machine opendap.server.using.ldap
 ----
 
 Next, edit the _.dodsrc_ file in your HOME directory so that it tells DAP clients to use the _.netrc_ file for password information:
+
 [source,apache]
 ----
 HTTP.COOKIEJAR=/Users/jimg/.cookies
