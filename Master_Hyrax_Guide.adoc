@@ -1,6 +1,6 @@
 = The Hyrax Data Server Installation and Configuration Guide
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
+OPeNDAP, Inc.
+v1.0, {docdate}
 :numbered:
 :toc: left
 :icons: font
@@ -11,6 +11,7 @@
 :coderay-linenums-mode: inline
 :prewrap!:
 :imagesdir: ./images
+:homepage: www.opendap.org
 
 ////
 See http://asciidoctor.org/docs/user-manual/#source-code-blocks
