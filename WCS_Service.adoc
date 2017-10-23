@@ -6,7 +6,7 @@
 
 == Overview
 
-Hyrax includes an optional WCS-2 service (spcificlly version 2.0.1)
+Hyrax includes an optional WCS-2 service (specifically version 2.0.1)
 that can be used to access all of the geo-referenced data available to
 the server that meet the requirements of the WCS 2 specification. This
 appendix describes the the kinds of data that meet these requirements
