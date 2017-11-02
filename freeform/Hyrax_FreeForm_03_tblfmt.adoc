@@ -1,10 +1,4 @@
 :Alexander Porrello <alexporrello@gmail.com>:
-:numbered:
-:toc:
-
-////
-Content from http://docs.opendap.org/index.php/Wiki_Testing/tblfmt
-////
 
 = Format Descriptions for Tabular Data =
 
@@ -27,10 +21,8 @@ types. The characteristics of the types that FreeForm ND supports are
 summarized in the table below, which is followed by a
 description of each type.
 
-OPeNDAP FreeForm ND Data Types
-
-
 |===
+5.1+^| *OPeNDAP FreeForm ND Data Types*
 |*Name*   |*Minimum Value*        |*Maximum Value*       |*Size in Bytes* |*Precision*
 |char     |                       |                      |**              |
 |uchar    |0                      |255                   |1               |

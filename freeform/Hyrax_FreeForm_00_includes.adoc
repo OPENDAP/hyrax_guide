@@ -1,0 +1,114 @@
+:Alexander Porrello <alexporrello@gmail.com>:
+:imagesdir: ../images
+
+= The FreeForm Data Handler
+:Leonard Porrello <lporrel@gmail.com>:
+{docdate}
+:numbered:
+:toc:
+
+== Introduction
+
+This document describes the OPeNDAP FreeForm ND Data Handler, which can
+be used with the OPeNDAP data server. It is not a complete description
+of the FreeForm ND software. For that, please refer to the ND manual.
+
+This document contains much material originally written at the National
+Oceanic and Atmospheric Administration's National Environmental
+Satellite, Data, and Information Service, which is part of the National
+Geophysical Data Center in Boulder, Colorado.
+
+We are interested in your comments about the OPeNDAP software, and the
+FreeForm ND software and this document. Send them to:
+support@opendap.org.
+
+Using FreeForm ND with OPeNDAP, a researcher can easily make his or her
+data available to the wider community of OPeNDAP users without having to
+convert that data into another data file format. This document presents
+the FreeForm ND software, and shows how to use it with the OPeNDAP
+server.
+
+=== Tasks Illustrated in this Section
+
+For a quick start to using the FreeForm ND software, see the list below
+of tasks described in this document.
+
+* Quick start. (link:../index.php/Wiki_Testing/dquick[here])
+* Serving tabular data. (link:../index.php/Wiki_Testing/tblfmt[here])
+* Array tabular data. (link:../index.php/Wiki_Testing/arrayfmt[here])
+* Dealing with data file headers
+(link:../index.php/Wiki_Testing/hdrfmts[here])
+* Setup of File servers (link:../index.php/Wiki_Testing/fileserv[here])
+
+==== Serving Data with Timestamps in the File Names
+
+This handler can read data stored in files that incorporate data strings
+in their names. This feature was added to support serving data produced
+and hosted by Remote Sensing Systems (RSS) and while the run-time
+parameters bear the name of that organization, they can be used for any
+data that fit the naming conventions they have developed. The naming
+convention is as follows:
+
+The convention::
+  + '_' + <date_string> + <version> + [_d3d]
+Daily data::
+  When <date_string> includes YYYYMMDDVV, the file contains _daily_
+  data.
+Averaged data::
+  When <date_string> only includes YYYYMMVV (no __DD__), or includes
+  (__DD__) and optional __d3d_ then the file contains _averaged_ data.
+
+For _daily_ data the format file should be named _<data
+source>_daily.fmt_ while averaged data should be named __<data
+source>_averaged.fmt__.
+
+To use this feature, set the run-time parameter _FF.RSSFormatSupport_ to
+_yes_ or __true__. If you store the format files (and optional ancillary
+DAS files) in a directory other than the data, use the parameter
+_FF.RSSFormatFiles_ to name that other directory. Like all handler
+run-time configuration parameters, these can go in either the _bes.conf_
+or _ff.conf_ file. Here's an example sniplet from ff.conf showing how
+these are used:
+
+----
+# 
+# Data Handler Specific key/value parameters
+#
+FF.RSSFormatSupport = yes
+FF.RSSFormatFiles = /usr/local/RSS
+----
+
+=== Who is this Guide for?
+
+This guide is for people who wish to use FreeForm ND to serve scientific
+datasets using the OPeNDAP software. Scientists who wish to share their
+data with colleagues may also find this a useful system, since it is a
+relatively simple matter to set up a server that can allow remote access
+to your data.
+
+This documentation assumes that the readers are familiar with computers
+and the internet, but are not necessarily programmers. More than a
+passing familiarity with different data file formats will be useful, as
+will an understanding of elementary internet concepts, such as URLs and
+http.
+
+This manual also assumes some familiarity with the OPeNDAP software. If
+you are starting from scratch, knowing nothing at all about OPeNDAP, we
+strongly encourage you to browse the
+link:../index.php/Wiki_Testing/OpeNDAP_User%27s_Guide[The OPeNDAP User
+Guide] before reading too far here.
+
+== Document Contents
+
+include::./Hyrax_FreeForm_01_dintro.adoc[leveloffset=2]
+include::./Hyrax_FreeForm_02_dquick.adoc[leveloffset=2]
+include::./Hyrax_FreeForm_03_tblfmt.adoc[leveloffset=2]
+include::./Hyrax_FreeForm_04_arrayfmt.adoc[leveloffset=2]
+include::./Hyrax_FreeForm_05_hdrfmts.adoc[leveloffset=2]
+include::./Hyrax_FreeForm_06_ff-server.adoc[leveloffset=2]
+include::./Hyrax_FreeForm_07_fileserv.adoc[leveloffset=2]
+include::./Hyrax_FreeForm_08_convs.adoc[leveloffset=2]
+include::./Hyrax_FreeForm_09_fmtconv.adoc[leveloffset=2]
+include::./Hyrax_FreeForm_10_datachk.adoc[leveloffset=2]
+include::./Hyrax_FreeForm_A1_hdfutils.adoc[leveloffset=2]
+include::./Hyrax_FreeForm_A2_errors.adoc[leveloffset=2]

@@ -1,7 +1,247 @@
 :Alexander Porrello <alexporrello@gmail.com>:
-:numbered:
-:toc:
 
-////
-Content from 
-////
+= Data Checking =
+
+The FreeForm ND-based utility program _checkvar_ creates variable
+summary files, lists of maximum and minimum values, and summaries of
+processing activity. You can use this information to check data
+quality and to examine the distribution of the data.
+
+== Generating the Summaries ==
+
+A variable summary file (or list file), which contains histogram
+information showing the variable's distribution in the data file, is
+created for each variable (or designated variables) in the specified
+data file. You can optionally specify an output file in which a
+summary of processing activity is saved.
+
+Variable summaries (list files) can be helpful for performing quality
+control checks of data. For example, you could run _checkvar_ on
+an ASCII file, convert the file to binary, and then run _checkvar_
+on the binary file. The output from _checkvar_ should be the same
+for both the ASCII and binary files. You can also use variable
+summaries to look at the data distribution in a data set before
+extracting data.
+
+The _checkvar_ command has the following form:
+
+----
+    checkvar input_file [-f format_file] [-if input_format_file] [-of output_format_file]
+
+    [-ft title] [-ift title] [-oft title] [-b local_buffer_size] [-c count] [-v var_file] [-q query_file]  [-p precision] [-m maxbins] [-md missing_data_flag] [-mm] [-o processing_summary]
+----
+
+The _checkvar_ program needs to find only an input format
+description. Output format descriptions will be ignored. If conversion
+variables are included in input or output formats, no conversion is
+performed when you run _checkvar_, since it ignores output
+formats.
+
+For descriptions of the standard arguments (first eleven arguments
+above), see _!!!Conventions_.
+
+*-p precision:*
+Option flag followed by the number of decimal places. The number
+represents the power of 10 that data is multiplied by prior to
+binning. A value of 0 bins on one's, 1 on tenth's, and so on. This
+option allows an adjustment of the resolution of the _checkvar_
+output. The default is 0; maximum is 5.
+
+NOTE: If you use the _-p_ option on the command line, the precision set in 
+the relevant format file is overridden. The precision in the format file 
+serves as the default. 
+
+*-m maxbins:*
+Option flag followed by the approximate maximum number of bins
+desired in _checkvar_ output. The _checkvar_ program keeps track of the number of bins filled as the data is processed. The
+smaller the number of bins, the faster _checkvar_ runs. By
+keeping the number of bins small, you can check the gross aspects of
+data distribution rather than the details. The number of bins is adjusted dynamically as _checkvar_ runs depending on the distribution of data in the input file. If the number of filled bins becomes  1.5 * maxbins, the width of the bins is doubled to keep the total number near the desired maximum. The default is 100 bins; minimum is 6. Must be &lt; 10,000.
+
+NOTE: The precision (-p) and maxbins (-m) options have no effect on
+character variables. 
+
+*-md missing_data_flag:*
+Option flag followed by a flag value that _checkvar_ should
+ignore across all variables in creating histogram data. Missing data flags are used in a data file to indicate missing or meaningless data. If you want _checkvar_ to ignore more than one value, use the query (_-q_) option in conjunction with the variable file (_-v_) option.
+
+*-mm:*
+Option flag indicating that only the maximum and minimum values of variables are calculated and displayed in the processing summary. Variable summary files are not created.
+
+*-o _processing_summary_:*
+Option flag followed by the name of the file in which summary information displayed during processing is stored.
+
+== 1.2 Example ==
+
+You will use _checkvar_ with a precision of 3 to create a
+processing summary file and summary files for the two variables
+latitude and longitude in the file _latlon.dat_.
+
+Here is _latlon.dat_:
+
+----
+-47.303545 -176.161101
+-0.928001    0.777265
+-28.286662   35.591879
+12.588231  149.408117
+-83.223548   55.319598
+54.118314 -136.940570
+38.818812   91.411330
+-34.577065   30.172129
+27.331551 -155.233735
+11.624981 -113.660611
+77.652742  -79.177679
+77.883119  -77.505502
+-65.864879  -55.441896
+-63.211962  134.124014
+35.130219 -153.543091
+29.918847  144.804390
+-69.273601   38.875778
+-63.002874   36.356024
+35.086084  -21.643402
+-12.966961   62.152266
+----
+
+To create the summary files, enter the following command:
+
+----
+checkvar latlon.dat -p 3 -o latlon.sum
+----
+
+A summary of processing information and the maximum and minimum for
+each variable are displayed on the screen. The following three files
+are created:
+
+* _latlon.sum_ recaps processing activity, maximums and minimums
+* _latitude.lst_ shows distribution of the latitude values in _latlon.dat_
+* _longitude.lst_ shows distribution of the longitude values in _latlon.dat_.
+
+== 1.3 Interpreting the Summaries ==
+
+The processing and variable summary files output by _checkvar_
+from the example in the previous section are shown and discussed
+below.
+
+=== 1.3.1 Processing Summary ===
+
+If you specify an output file on the command line, it stores the
+information that is displayed on the screen during processing. The
+file _latlon.sum_ was specified as the output file in the example
+above.
+
+Here is _latlon.sum_:
+
+----
+Input file: latlon.dat
+Requested precision = 3, Approximate number of sorting bins = 100
+
+Input data format       (latlon.fmt)
+ASCII_input_data       ASCII format
+The format contains 2 variables; length is 24.
+
+Output data format       (latlon.fmt)
+binary_output_data       binary format
+The format contains 2 variables; length is 16.
+
+Histogram data precision: 3, Number of sorting bins: 20
+latitude: 20 values read
+minimum: -83.223548 found at record  5
+maximum:  77.883119 found at record 12
+Summary file: latitude.lst
+
+Histogram data precision: 3, Number of sorting bins: 20
+longitude: 20 values read
+minimum: -176.161101 found at record 1
+maximum:  149.408117 found at record 4
+Summary file: longitude.lst.
+----
+
+The processing summary file _latlon.sum_ first shows the name of
+the input data file (_latlon.dat_). If you specified precision and
+a maximum number of bins on the command line, those values are given
+as Requested precision, in this case 3, and Approximate number of
+sorting bins, in this case the default value of 100. If precision is
+not specified, No requested precision is shown.
+
+A summary of each format shows the type of format (in this case, Input
+data format and Output data format) and the name of the format file
+containing the format descriptions (_latlon.fmt_), whether
+specified on the command line or located through the default search
+sequence. In this case, it was located by
+default. Since _checkvar_ only needs an input format description,
+it ignores output format descriptions. Next, you see the format
+descriptor as resolved by FreeForm ND (e.g., _ASCII_input_data_)
+and the format title (e.g., "ASCII format"). Then the number of
+variables in a record and total record length are given; for ASCII,
+record length includes the end-of-line character (1 byte for Unix).
+
+A section for each variable processed by _checkvar_ indicates the
+histogram precision and actual number of sorting bins. Under some
+circumstances, the precision of values in the histogram file may be
+different than the precision you specified on the command line. The
+default value for precision, if none is specified on the command line,
+is the precision specified in the relevant format description file or
+5, whichever is smaller. The second line shows the name of the
+variable (latitude, longitude) and the number of values in the data
+file for the variable (20 for both latitude and longitude).
+
+The minimum and maximum values for the variable are shown next
+(-83.223548 is the minimum and 77.883119 is the maximum value for
+latitude). The maximum and minimum values are given here with a
+precision of 6, which is the precision specified in the format
+description file. The locations of the maximum and minimum values in
+the input file are indicated. (-83.223548 is the fifth latitude value
+in _latlon.dat_ and 77.883119 is the twelfth). Finally, the name
+of the histogram data (or variable summary) file generated for each
+variable is given (_latitude.lst_ and _longitude.lst_).
+
+=== 1.3.2 Variable Summaries ===
+
+The name of each variable summary file (list file) output by
+_checkvar_ is of the form _variable.lst_ for numeric variables and _variable.cst_ for character variables. The data in *_.lst_, and *_.cst_ files can be loaded into histogram plot programs for graphical representation. (You must be familiar enough
+with your program of choice to manipulate the data as necessary in order to achieve the desired result.) In Unix, there is no need to abbreviate the base file name.
+
+NOTE: If you use the -v option, the order of variables in var_file has
+no effect on the numbering of base file names of the variable summary files. 
+
+[width="60%"]
+|===
+2.1+^|*Example Variable Summary Files*
+^|*latitude.lst* ^|	*longitude.lst*
+|-83.224 1	|-176.162 1
+|-69.274 1	|-155.234 1
+|-65.865 1	|-153.544 1
+|-63.212 1	|-136.941 1
+|-63.003 1	|-113.661 1
+|-47.304 1	|-79.178 1
+|-34.578 1	|-77.506 1
+|-28.287 1	|-55.442 1
+|-12.967 1	|-21.644 1
+|-0.929 1	|0.777 1
+|11.624 1	|30.172 1
+|12.588 1	|35.591 1
+|27.331 1	|36.356 1
+|29.918 1	|38.875 1
+|35.086 1	|55.319 1
+|35.130 1	|62.152 1
+|38.818 1	|91.411 1
+|54.118 1	|134.124 1
+|77.652 1	|144.804 1
+|77.883 1	|149.408
+|===
+
+The variable summary files consist of two columns. The first indicates
+boundary values for data bins and the second gives the number of data
+points in each bin. Because a precision of 3 was specified in the
+example, each boundary value has three decimal places. The boundary
+values are determined dynamically by _checkvar_ and often do not
+correspond to data values in the input file, even if the
+_checkvar_ and data file precisions are the same.
+
+The first data bin in _latitude.lst_ contains data points in the
+range -83.224 (inclusive) to -69.274 (exclusive); neither boundary
+number exists in _latlon.dat_. The first bin has one data point,
+-83.223548. The fourth data bin contains latitude values from -63.212
+(inclusive) to -63.003 (exclusive), again with neither boundary value
+occurring in the data file. The data point in the fourth bin is
+-63.211962.

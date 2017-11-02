@@ -1,10 +1,4 @@
 :Alexander Porrello <alexporrello@gmail.com>:
-:numbered:
-:toc:
-
-////
-Content from http://docs.opendap.org/index.php/Wiki_Testing/fileserv
-////
 
 = File Servers
 

@@ -1,6 +1,4 @@
 :Alexander Porrello <alexporrello@gmail.com>:
-:numbered:
-:toc:
 :imagesdir: ../images
 
 = Introduction =
