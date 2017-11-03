@@ -1,6 +1,7 @@
 :Alexander Porrello <alexporrello@gmail.com>:
 :imagesdir: ../images
 
+[[dintro]]
 = Introduction =
 
 The OPeNDAP FreeForm ND Data Handler is an OPeNDAP data handler
@@ -33,7 +34,7 @@ of one or more data files.  This descriptor file is a simple text file
 that can be created with a text editor, describing the structure of
 your data files.
 
-A traditional DAP2 server, illustrated <<dintro, below>>,
+A traditional DAP2 server, illustrated <<dintro-image-01, below>>,
 receives a request for data from a DAP2 client who may be at some
 remote computer footnote:[The request comes via http. The DAP2 
 server is, in reality, an ordinary http server, equipped with 
@@ -48,7 +49,7 @@ When it receives a request, the server reads the requested data from
 its archive, reformats the data into the DAP2 transmission format and
 sends the data back to the client.
 
-[[dintro]]
+[[dintro-image-01]]
 image::dintro_01.jpg[A Traditional DAP2 Server, align="center"]
 
 The OPeNDAP FreeForm ND Data Handler works in a similar fashion to a traditional DAP2 server, but

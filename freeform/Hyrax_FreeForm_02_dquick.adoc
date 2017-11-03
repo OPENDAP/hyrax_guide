@@ -13,17 +13,20 @@ follow these steps:
 
 . Install the OPeNDAP FreeForm ND Data Handler.
 
+//I was not certain what the below link for OPeNDAP User Guide should point to -ACP
 . Examine the structure of the data file(s) you intend to serve, and
 construct a OPeNDAP FreeForm ND format definition file that describes 
-the layout of data in the files. (Refer to the (_!!! Table Format_) for
-instructions about sequence data and (_!!! Array Format_) for array data. 
-Consult The <_!!! OPeNDAP User Guide_> if you do not know the difference
-between the two data types.)
+the layout of data in the files. (Refer to the <<tblfmt, Table Format>>
+for instructions about sequence data and <<arrayfmt, Array Format>>
+for array data. Consult The 
+link:http://docs.opendap.org/index.php/UserGuide[OPeNDAP User Guide]
+if you do not know the difference between the two data types.)
 
 . If you wish, you may include an output definition format within this file,
 to allow you to test that your input description is accurate. You can use
 the OPeNDAP FreeForm ND utilities, such as _newform_, to validate the
-conversion. The (_!!! Format Conversion_) contains a detailed description of
+conversion. The <<fmtconv, Format Conversion>>
+contains a detailed description of
 _newform_. This step is optional, since the OPeNDAP FreeForm ND Data Handler
 ignores the output definition section of the format definition file.
 
@@ -34,8 +37,9 @@ descriptions are based on the format of the data the the OPeNDAP FreeForm ND
 Data Handler receives from the OPeNDAP FreeForm ND engine.
 
 . Place the data files, and a corresponding format file for each data file,
-in a place where _!!! Hyrax_ can find them. See the Hyrax configuration
-instructions for information about where Hyrax looks for its files.
+in a place where <<hyrax-overview, Hyrax>> can find them.
+See the <<Hyrax_Configuration, Hyrax Configuration Instructions>>
+for information about where Hyrax looks for its files.
 
 Your data is now available to anyone who knows about your server.
 
@@ -47,14 +51,15 @@ Data Handler and other OPeNDAP FreeForm ND -based programs then use these
 files to correctly access and manipulate data in various formats. An 
 example format description file is shown and described below.
 
-For complete information about writing format descriptions, see _!!! Chapter 3_ and _!!! Chapter4_.
+For complete information about writing format descriptions, see the 
+<<tblfmt, Table Format>> and <<arrayfmt, Array Format>> docs.
 
 === Sequence Data
 
 Here is a data file, containing a sequence of four data types. (This data
 file and several of the other examples in this chapter are available.
 
-Here is the data file, called _!!! ffsimple.dat_:
+Here is the data file, called _ffsimple.dat_:
 
 //Should the below values be aligned? -ACP
 
@@ -77,7 +82,7 @@ records, each of which contains a latitude, longitude, temperature, and
 salinity.
 
 Here is a format file you can use to read ffsimple.dat. It is called
-_!!! ffsimple.fmt_:
+_ffsimple.fmt_:
 
 ----
 ASCII_file_header "Latitude/Longitude Limits"
@@ -146,7 +151,9 @@ Each record contains 7 fields and is 51 characters long.
 ----
 
 Now take both the ffsimple files and put them into a directory in your web
-server's document root directory. (Refer to the The _!!!OPeNDAP User Guide_ for some tips on figuring out where that is.)
+server's document root directory. (Refer to the The
+link:http://docs.opendap.org/index.php/UserGuide[OPeNDAP User Guide]
+for some tips on figuring out where that is.)
 
 Here's an example, on a computer on which the web server document root is _/export/home/http/htdocs_:
 
@@ -183,7 +190,10 @@ Try this URL:
 http://test.opendap.org/opendap/nph-dods/data/ffsimple.dat.dds
 ----
 
-This will show a description of the dataset structure (See _!!!The OPeNDAP User Guide_ for a detailed description of the DAP2 "Dataset Description Structure," or DDS.):
+This will show a description of the dataset structure (See
+link:http://docs.opendap.org/index.php/UserGuide[OPeNDAP User Guide]
+for a detailed description of the DAP2 "Dataset Description Structure,"
+or DDS.):
 
 ----
  Dataset {
@@ -202,7 +212,7 @@ If your data more naturally comes in arrays, you can still use the OPeNDAP FreeF
 
 ==== One-dimensional Arrays
 
-Here is a data file, called _!!! ffarr1.dat_, containingfour ten-element vectors:
+Here is a data file, called _ffarr1.dat_, containingfour ten-element vectors:
 
 ----
  123456789012345678901234567
@@ -218,7 +228,7 @@ Here is a data file, called _!!! ffarr1.dat_, containingfour ten-element vectors
 10.00 149.00 0.9955 -0.3226
 ----
 
-Here is a format file to read this data (_!!! ffarr1.fmt_):
+Here is a format file to read this data (_ffarr1.fmt_):
 
 ----
 ASCII_input_data "simple array format"
@@ -284,7 +294,7 @@ Here's another example, with a two-dimensional array. (ffarr2.dat):
  25.00 26.00 27.00 28.00 29.00 30.00
 ----
 
-There are no spaces between the data columns within an array row, but in order to skip reading the newline character, we have to skip one character at the end of each row. Here is a format file to read this data (_!!! ffarr2.fmt_):
+There are no spaces between the data columns within an array row, but in order to skip reading the newline character, we have to skip one character at the end of each row. Here is a format file to read this data (_ffarr2.fmt_):
 
 ----
 ASCII_input_data "one"
@@ -310,7 +320,7 @@ XXXX 19.00 20.00 21.00 22.00 23.00 24.00YY
 XXXX 25.00 26.00 27.00 28.00 29.00 30.00YY
 ----
 
-In order to read this file successfully, we define three vectors to read the "XXXX", the "YY", and the newline. Here is a format file that does this (_!!! ffarr3.fmt_):
+In order to read this file successfully, we define three vectors to read the "XXXX", the "YY", and the newline. Here is a format file that does this (_ffarr3.fmt_):
 
 ----
 dBASE_input_data "one"

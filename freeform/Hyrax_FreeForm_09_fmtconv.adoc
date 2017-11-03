@@ -1,5 +1,6 @@
 :Alexander Porrello <alexporrello@gmail.com>:
 
+[[fmtconv]]
 = Format Conversion =
 
 The FreeForm ND utility program newform lets you convert data from one

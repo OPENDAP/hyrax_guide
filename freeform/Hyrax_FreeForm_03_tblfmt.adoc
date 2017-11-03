@@ -1,5 +1,6 @@
 :Alexander Porrello <alexporrello@gmail.com>:
 
+[[tblfmt]]
 = Format Descriptions for Tabular Data =
 
 Format descriptions define the formats of input and output data and

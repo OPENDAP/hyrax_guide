@@ -1,5 +1,6 @@
 :Alexander Porrello <alexporrello@gmail.com>:
 
+[[arrayfmt]]
 = Format Descriptions for Array Data =
 
 If the tabular format discussed in _!!!Table Format_ doesn't
