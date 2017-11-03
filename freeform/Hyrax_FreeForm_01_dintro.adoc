@@ -33,15 +33,22 @@ of one or more data files.  This descriptor file is a simple text file
 that can be created with a text editor, describing the structure of
 your data files.
 
-A traditional DAP2 server, illustrated _!!!below_ 
+A traditional DAP2 server, illustrated <<dintro, below>>,
 receives a request for data from a DAP2 client who may be at some
-remote computer_!!!(2)_. The data served by this server must be stored in one of the data formats supported by the OPeNDAP server (such as netCDF, HDF, or JGOFS), and the server uses specialized software to read this data
+remote computer footnote:[The request comes via http. The DAP2 
+server is, in reality, an ordinary http server, equipped with 
+a set of CGI programs to process requests from DAP2 clients. 
+See Section  and The OPeNDAP User Guide for more information.]. 
+The data served by this server must be stored in one of the data 
+formats supported by the OPeNDAP server (such as netCDF, HDF, or 
+JGOFS), and the server uses specialized software to read this data
 from disk.
 
 When it receives a request, the server reads the requested data from
 its archive, reformats the data into the DAP2 transmission format and
 sends the data back to the client.
 
+[[dintro]]
 image::dintro_01.jpg[A Traditional DAP2 Server, align="center"]
 
 The OPeNDAP FreeForm ND Data Handler works in a similar fashion to a traditional DAP2 server, but
@@ -62,7 +69,8 @@ in The FreeForm ND User's Guide.
 
 The OPeNDAP FreeForm ND Data Handler includes the following programs:
 
-*dap_ff_handler:* The OPeNDAP FreeForm ND Data Handler _data handler_. This program is run by the OPeNDAP server to handle the parts of any requests that require knowledge specifically about FreeForm. This program is run by the main server 'dispatch' software. That software is described in the Server Installation Guide, available on the _!!!OPeNDAP Home Page_ .
+*dap_ff_handler:* The OPeNDAP FreeForm ND Data Handler _data handler_. This program is run by the OPeNDAP server to handle the parts of any requests that require knowledge specifically about FreeForm. This program is run by the main server 'dispatch' software. That software is described in the Server Installation Guide, available on the 
+link:https://www.opendap.org/[OPeNDAP Home Page].
 
 The OPeNDAP FreeForm ND Data Handler distribution also includes the following OPeNDAP FreeForm ND utilities. These are quite useful to write and debug format description files.
 
@@ -74,9 +82,11 @@ The OPeNDAP FreeForm ND Data Handler distribution also includes the following OP
 
 == Installing the OPeNDAP FreeForm ND Data Handler ==
 
-If you don't have the OPeNDAP FreeForm ND Data Handler , and want it, follow these directions.  If you have a copy of the OPeNDAP FreeForm ND Data Handler , and want to know how to use it, see (_!!! ff,dquick_) for quick instructions and examples of its use, and _!!! Chapter 6_ for further information.
+If you don't have the OPeNDAP FreeForm ND Data Handler , and want it, follow these directions.  If you have a copy of the OPeNDAP FreeForm ND Data Handler , and want to know how to use it, see <<dquick, The FreeForm ND Data Handler Quickstart Guide>> for quick instructions and examples of its use, 
+and <<ff-server, Chapter 6>> for further information.
 
-You can get the OPeNDAP FreeForm ND Data Handler from the _!!!OPeNDAP_ . Follow the links to
+You can get the OPeNDAP FreeForm ND Data Handler from the 
+link:https://www.opendap.org/[OPeNDAP Home Page]. Follow the links to
 "Download Software" and then to "Current Release."  If your
 computer is one of the platforms for which we provide a binary release,
 get that, otherwise get the source code.
@@ -87,9 +97,9 @@ Click the Download button, and follow the directions.  The
 server will make a custom binary file for you, which you then
 download.
 
-Install the resulting shared library in a place where _!!!Hyrax_ can
-find it, and then consult the Hyrax configuration instructions for the
-remaining configuration steps.
+Install the resulting shared library in a place where 
+<<hyrax-overview, Hyrax>> can find it, and then consult the Hyrax
+configuration instructions for the remaining configuration steps.
 
 
 === Compiling the OPeNDAP FreeForm ND Data Handler ===
