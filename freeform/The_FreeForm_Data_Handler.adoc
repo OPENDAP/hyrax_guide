@@ -26,12 +26,11 @@ server.
 For a quick start to using the FreeForm ND software, see the list below
 of tasks described in this document.
 
-* Quick start. (link:../index.php/Wiki_Testing/dquick[here])
-* Serving tabular data. (link:../index.php/Wiki_Testing/tblfmt[here])
-* Array tabular data. (link:../index.php/Wiki_Testing/arrayfmt[here])
-* Dealing with data file headers
-(link:../index.php/Wiki_Testing/hdrfmts[here])
-* Setup of File servers (link:../index.php/Wiki_Testing/fileserv[here])
+* <<dquick, Quick Start>>
+* <<tblfmt, Serving tabular data>>
+* <<arrayfmt, Array tabular data>>
+* <<hdrfmts, Dealing with data file headers>>
+* <<fileserv, Setup of File servers>>
 
 === Serving Data with Timestamps in the File Names
 
@@ -91,17 +90,15 @@ strongly encourage you to browse the
 link:http://docs.opendap.org/index.php/UserGuide[OPeNDAP User Guide]
 before reading too far here.
 
-== Documentation
-
-include::./Hyrax_FreeForm_01_dintro.adoc[leveloffset=2]
-include::./Hyrax_FreeForm_02_dquick.adoc[leveloffset=2]
-include::./Hyrax_FreeForm_03_tblfmt.adoc[leveloffset=2]
-include::./Hyrax_FreeForm_04_arrayfmt.adoc[leveloffset=2]
-include::./Hyrax_FreeForm_05_hdrfmts.adoc[leveloffset=2]
-include::./Hyrax_FreeForm_06_ff-server.adoc[leveloffset=2]
-include::./Hyrax_FreeForm_07_fileserv.adoc[leveloffset=2]
-include::./Hyrax_FreeForm_08_convs.adoc[leveloffset=2]
-include::./Hyrax_FreeForm_09_fmtconv.adoc[leveloffset=2]
-include::./Hyrax_FreeForm_10_datachk.adoc[leveloffset=2]
-include::./Hyrax_FreeForm_A1_hdfutils.adoc[leveloffset=2]
-include::./Hyrax_FreeForm_A2_errors.adoc[leveloffset=2]
+include::./Hyrax_FreeForm_01_dintro.adoc[leveloffset=1]
+include::./Hyrax_FreeForm_02_dquick.adoc[leveloffset=1]
+include::./Hyrax_FreeForm_03_tblfmt.adoc[leveloffset=1]
+include::./Hyrax_FreeForm_04_arrayfmt.adoc[leveloffset=1]
+include::./Hyrax_FreeForm_05_hdrfmts.adoc[leveloffset=1]
+include::./Hyrax_FreeForm_06_ff-server.adoc[leveloffset=1]
+include::./Hyrax_FreeForm_07_fileserv.adoc[leveloffset=1]
+include::./Hyrax_FreeForm_08_convs.adoc[leveloffset=1]
+include::./Hyrax_FreeForm_09_fmtconv.adoc[leveloffset=1]
+include::./Hyrax_FreeForm_10_datachk.adoc[leveloffset=1]
+include::./Hyrax_FreeForm_A1_hdfutils.adoc[leveloffset=1]
+include::./Hyrax_FreeForm_A2_errors.adoc[leveloffset=1]

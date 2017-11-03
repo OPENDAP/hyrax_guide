@@ -1,5 +1,6 @@
 :Alexander Porrello <alexporrello@gmail.com>:
 
+[[dquick]]
 = Quick Tour of the OPeNDAP FreeForm ND Data Handler
 
 This section provides you a quick introduction to the OPeNDAP FreeForm ND Data Handler, including writing format descriptions and serving test datasets.
