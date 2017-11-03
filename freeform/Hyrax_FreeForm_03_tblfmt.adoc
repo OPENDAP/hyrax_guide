@@ -12,7 +12,7 @@ description file.
 
 This page explains how to write format descriptions for data
 arranged in tabular format---rows and columns---only. For data in
-non-tabular formats, see _!!!Array Format_.
+non-tabular formats, see <<arrayfmt, Array Format>>.
 
 
 == FreeForm ND Variable Types ==
@@ -191,7 +191,7 @@ Format Descriptors:
 ** Return (lets FreeForm ND skip over end-of-line characters in the data.)
 ** EOL (a constant indicating an end-of-line character should be inserted in a multi-line record.)
 
-For more information about header formats, see (_!!!Header Formats_).
+For more information about header formats, see <<hdrfmts, Header Formats>>.
 
 === Variable Descriptions ===
 
