@@ -21,7 +21,7 @@ include::./handlers/BES_Modules_The_HDF5_Handler.adoc[lines="1,6..-1", leveloffs
 include::./handlers/BES_Modules_The_NetCDF_Handler.adoc[lines="1,6..-1", leveloffset=+1]
 
 [[freeform-data-handler]]
-include::./handlers/The_FreeForm_Data_Handler.adoc[lines="1,6..-1", leveloffset=+1]
+include::./freeform/The_FreeForm_Data_Handler.adoc[leveloffset=+1]
 
 // One experimental data format handler - available in source code only
 [[sql-handler]]

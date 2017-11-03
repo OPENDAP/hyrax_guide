@@ -1,13 +1,6 @@
 :Alexander Porrello <alexporrello@gmail.com>:
-:imagesdir: ../images
 
 = The FreeForm Data Handler
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
-:numbered:
-:toc:
-
-== Introduction
 
 This document describes the OPeNDAP FreeForm ND Data Handler, which can
 be used with the OPeNDAP data server. It is not a complete description
@@ -28,7 +21,7 @@ convert that data into another data file format. This document presents
 the FreeForm ND software, and shows how to use it with the OPeNDAP
 server.
 
-=== Tasks Illustrated in this Section
+== Tasks Illustrated in this Section
 
 For a quick start to using the FreeForm ND software, see the list below
 of tasks described in this document.
@@ -40,7 +33,7 @@ of tasks described in this document.
 (link:../index.php/Wiki_Testing/hdrfmts[here])
 * Setup of File servers (link:../index.php/Wiki_Testing/fileserv[here])
 
-==== Serving Data with Timestamps in the File Names
+=== Serving Data with Timestamps in the File Names
 
 This handler can read data stored in files that incorporate data strings
 in their names. This feature was added to support serving data produced
@@ -78,7 +71,7 @@ FF.RSSFormatSupport = yes
 FF.RSSFormatFiles = /usr/local/RSS
 ----
 
-=== Who is this Guide for?
+== Who is this Guide for?
 
 This guide is for people who wish to use FreeForm ND to serve scientific
 datasets using the OPeNDAP software. Scientists who wish to share their
@@ -95,10 +88,10 @@ http.
 This manual also assumes some familiarity with the OPeNDAP software. If
 you are starting from scratch, knowing nothing at all about OPeNDAP, we
 strongly encourage you to browse the
-link:../index.php/Wiki_Testing/OpeNDAP_User%27s_Guide[The OPeNDAP User
-Guide] before reading too far here.
+link:http://docs.opendap.org/index.php/UserGuide[OPeNDAP User Guide]
+before reading too far here.
 
-== Document Contents
+== Documentation
 
 include::./Hyrax_FreeForm_01_dintro.adoc[leveloffset=2]
 include::./Hyrax_FreeForm_02_dquick.adoc[leveloffset=2]
