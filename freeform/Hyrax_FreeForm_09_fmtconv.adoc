@@ -30,7 +30,7 @@ _newform_ follows the FreeForm ND search sequence to find a format
 file.
 
 For details about FreeForm ND naming conventions and the search
-sequence, see _!!!Conventions_.
+sequence, see <<convs, Conventions>>.
 
 The _newform_ command has the following form:
 
@@ -40,7 +40,7 @@ _newform_ _input_file_ [-f format_file] [-if-if input_format_file] [-of output_f
 [-ft "title"] [-ift "title"] [-oft "title"] [-b local_buffer_size] [-c count] [-v var_file] [-q query_file] [-o output_file]
 ----
 
-For descriptions of the arguments, see _!!!Conventions_.
+For descriptions of the arguments, see <<convs, Conventions>>.
 
 If you want to convert an ASCII file to a binary file, and you follow
 the FreeForm ND naming conventions, the command is simply:
@@ -98,7 +98,7 @@ _chkform_ follows the FreeForm ND search sequence to find a format
 file.
 
 For details about FreeForm ND naming conventions and the search
-sequence, see _!!!Conventions_.
+sequence, see <<convs, Conventions>>.
 
 The _chkform_ command has the following form:
 
@@ -108,7 +108,7 @@ chkform input_file [-if input_format_file] [-ift title] [-b local_buffer_size]
 ----
 
 Most of the arguments are described in
-_!!!Conventions_.  The following are specific to
+<<convs, Conventions>>.  The following are specific to
 _chkform_:
 
 
@@ -392,7 +392,7 @@ It creates the binary archive file _latlon2.bin_ with the 20
 latitude and longitude values in _latlon.dat_ stored as binary
 longs.
 
-This example duplicates one in _!!!Quick Start_. If you completed that
+This example duplicates one in <<dquick, the Quickstart Guide>>. If you completed that
 example, an error message will indicate that _latlon2.bin_ exists.
 You can rename, move, or delete the existing file.
 
@@ -528,7 +528,7 @@ format for output. The ASCII data is written to the screen because an
 output file was not specified.
 
 For information about FreeForm ND file name conventions, see
-_!!!Conventions_.
+<<convs, Conventions>>.
 
 === "Nonstandard" Data File Names ===
 

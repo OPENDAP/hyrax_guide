@@ -3,7 +3,7 @@
 [[arrayfmt]]
 = Format Descriptions for Array Data =
 
-If the tabular format discussed in _!!!Table Format_ doesn't
+If the tabular format discussed in <<tblfmt, Table Format>> doesn't
 describe your data well, FreeForm ND's array notation may prove
 useful. Describing a data file's organization as a set of as
 n-dimensional arrays allows for much more flexibility in writing

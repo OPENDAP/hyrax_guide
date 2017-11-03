@@ -4,7 +4,7 @@
 = The OPeNDAP FreeForm ND Data Handler =
 
 The OPeNDAP FreeForm ND Data Handler is a OPeNDAP server add-on that uses OPeNDAP FreeForm ND to convert and serve data
-in formats that are not directly supported by existing _!!!Hyrax_ data handlers.  Bringing
+in formats that are not directly supported by existing <<hyrax-overview, Hyrax>> data handlers.  Bringing
 OPeNDAP FreeForm ND 's data conversion capacity into the OPeNDAP world widens data
 access for DAP2 clients, since any format that can be described in
 OPeNDAP FreeForm ND can now be served by the OPeNDAP data server.
@@ -24,8 +24,8 @@ The following sequence of steps illustrates how the OPeNDAP FreeForm ND Data Han
 . Finally, the server sends the DDS, DAS, and converted data back to the client.
 
 For information about how to write a OPeNDAP FreeForm ND data description, refer to
-the _!!!Table Format_ for sequence data and
-_!!!Array Format_ for array data.
+the <<tblfmt, Table Format>> for sequence data and
+<<arrayfmt, Array Format>> for array data.
 
 For an introduction to DAP2 and to the OPeNDAP project, please refer
 to The Opendap User Guide.
@@ -68,7 +68,7 @@ _int64_ and _uint64_ in the format definition file.
 The examples show how the OPeNDAP FreeForm ND Data Handler treats data
 received from the OPeNDAP FreeForm ND engine.  Please see the OPeNDAP
 FreeForm ND Data Handler distribution for more test data and format
-definition files, and the (_!!!Table Format_) for
+definition files, and the <<tblfmt, Table Format>> for
 more information on writing format definitions.
 
 ==== Arrays ====

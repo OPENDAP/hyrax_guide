@@ -145,7 +145,9 @@ maintaining it.)
 
 === What It Looks Like ===
 
-Consider again the set of data files shown in (_!!! fs,problem_).
+//fs,problem is a link on the original Wiki, but it points to nothing -ACP
+
+Consider again the set of data files shown in (_fs,problem_).
 We could associate each one of these files with a date, and this would
 provide the rudiments of a file server if we then serve that data with
 an OPeNDAP server such as the OPeNDAP FreeForm ND Data Handler .

@@ -38,7 +38,7 @@ performed when you run _checkvar_, since it ignores output
 formats.
 
 For descriptions of the standard arguments (first eleven arguments
-above), see _!!!Conventions_.
+above), see <<convs, Conventions>>.
 
 *-p precision:*
 Option flag followed by the number of decimal places. The number

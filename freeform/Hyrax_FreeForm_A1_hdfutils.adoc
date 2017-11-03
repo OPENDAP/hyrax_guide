@@ -28,7 +28,7 @@ incomplete.
 Using _makehdf_ you can convert data files with formats described
 in a FreeForm format file into HDF files. You should follow FreeForm
 naming conventions for the data and format files. For details about
-FreeForm conventions, see (_!!! Chapter 8_).
+FreeForm conventions, see the <<convs, Conventions documentation>>.
 
 
 A dBASE input file must be converted to ASCII or binary using
@@ -238,7 +238,7 @@ FreeForm format description file. To use _splitdat_ for
 translating files to HDF, the input format must be described in a
 FreeForm format description file. You should follow FreeForm naming
 conventions for the data and format files. For details about FreeForm
-conventions, see (_!!! ff,convs_).
+conventions, see the <<convs, Conventions documentation>>.
 
 The _splitdat_ command has the following form:
 
@@ -412,7 +412,7 @@ HDF objects. For information about equivalence tables, see the GeoVu
 Tools Reference Guide. The input and output formats must be described
 in a FreeForm format description file. You should follow FreeForm
 naming conventions for the data and format files. For details about
-FreeForm conventions, see (_!!! ff,convs_).
+FreeForm conventions, see the <<convs, Conventions documentation>>.
 
 If a format description file is not specified on the command line, the
 output format is taken by default from the FreeForm output format
