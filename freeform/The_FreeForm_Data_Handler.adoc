@@ -1,5 +1,4 @@
 :Alexander Porrello <alexporrello@gmail.com>:
-:toc:
 
 = The FreeForm Data Handler
 
