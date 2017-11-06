@@ -1,5 +1,5 @@
 :Alexander Porrello <alexporrello@gmail.com>:
-:imagesdir: ../images
+
 
 [[dintro]]
 = Introduction =
