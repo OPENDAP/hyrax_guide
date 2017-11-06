@@ -19,6 +19,10 @@ include::WCS_Service.adoc[lines="1,8..-1", leveloffset=+1]
 [appendix]
 include::Master_Handlers.adoc[lines="1,6..-1", leveloffset=+1]
 
+[appendix]
+[[freeform-data-handler]]
+include::./freeform/The_FreeForm_Data_Handler.adoc[leveloffset=+1]
+
 // Install and configure Hyrax's support for user specified aggregations of data.
 [appendix]
 include::Master_Aggregation.adoc[lines="1,6..-1", leveloffset=+1]

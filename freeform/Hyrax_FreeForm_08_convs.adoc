@@ -247,4 +247,3 @@ will process only those records meeting the query criteria.
 *-q query_file:*
 Option flag followed by the name of the file containing query
 criteria.
-

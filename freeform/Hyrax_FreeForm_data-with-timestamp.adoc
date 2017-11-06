@@ -1,0 +1,37 @@
+= Serving Data with Timestamps in the File Names
+
+This handler can read data stored in files that incorporate data strings
+in their names. This feature was added to support serving data produced
+and hosted by Remote Sensing Systems (RSS) and while the run-time
+parameters bear the name of that organization, they can be used for any
+data that fit the naming conventions they have developed. The naming
+convention is as follows:
+
+The convention::
+  + '_' + <date_string> + <version> + [_d3d]
+Daily data::
+  When <date_string> includes YYYYMMDDVV, the file contains _daily_
+  data.
+Averaged data::
+  When <date_string> only includes YYYYMMVV (no __DD__), or includes
+  (__DD__) and optional __d3d_ then the file contains _averaged_ data.
+
+For _daily_ data the format file should be named _<data
+source>_daily.fmt_ while averaged data should be named __<data
+source>_averaged.fmt__.
+
+To use this feature, set the run-time parameter _FF.RSSFormatSupport_ to
+_yes_ or __true__. If you store the format files (and optional ancillary
+DAS files) in a directory other than the data, use the parameter
+_FF.RSSFormatFiles_ to name that other directory. Like all handler
+run-time configuration parameters, these can go in either the _bes.conf_
+or _ff.conf_ file. Here's an example sniplet from ff.conf showing how
+these are used:
+
+----
+# 
+# Data Handler Specific key/value parameters
+#
+FF.RSSFormatSupport = yes
+FF.RSSFormatFiles = /usr/local/RSS
+----

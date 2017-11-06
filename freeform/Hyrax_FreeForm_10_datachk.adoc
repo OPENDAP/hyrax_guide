@@ -1,4 +1,5 @@
 :Alexander Porrello <alexporrello@gmail.com>:
+:toc:
 
 = Data Checking =
 
@@ -71,7 +72,7 @@ Option flag indicating that only the maximum and minimum values of variables are
 *-o _processing_summary_:*
 Option flag followed by the name of the file in which summary information displayed during processing is stored.
 
-== 1.2 Example ==
+=== Example
 
 You will use _checkvar_ with a precision of 3 to create a
 processing summary file and summary files for the two variables
@@ -116,13 +117,13 @@ are created:
 * _latitude.lst_ shows distribution of the latitude values in _latlon.dat_
 * _longitude.lst_ shows distribution of the longitude values in _latlon.dat_.
 
-== 1.3 Interpreting the Summaries ==
+== Interpreting the Summaries ==
 
 The processing and variable summary files output by _checkvar_
 from the example in the previous section are shown and discussed
 below.
 
-=== 1.3.1 Processing Summary ===
+=== Processing Summary ===
 
 If you specify an output file on the command line, it stores the
 information that is displayed on the screen during processing. The
@@ -195,7 +196,7 @@ in _latlon.dat_ and 77.883119 is the twelfth). Finally, the name
 of the histogram data (or variable summary) file generated for each
 variable is given (_latitude.lst_ and _longitude.lst_).
 
-=== 1.3.2 Variable Summaries ===
+=== Variable Summaries ===
 
 The name of each variable summary file (list file) output by
 _checkvar_ is of the form _variable.lst_ for numeric variables and _variable.cst_ for character variables. The data in *_.lst_, and *_.cst_ files can be loaded into histogram plot programs for graphical representation. (You must be familiar enough
