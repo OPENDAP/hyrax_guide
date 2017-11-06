@@ -3,18 +3,19 @@
 [[dquick]]
 = Quick Tour of the OPeNDAP FreeForm ND Data Handler
 
-This section provides you a quick introduction to the OPeNDAP FreeForm ND Data Handler, including writing format descriptions and serving test datasets.
+This section provides you a quick introduction to the OPeNDAP 
+FreeForm ND Data Handler, including writing format descriptions
+and serving test datasets.
 
 == Getting Started Serving Data
 
 To get going with the OPeNDAP FreeForm ND Data Handler,
 follow these steps:
 
-. See Hyrax for instructions about installing the OPeNDAP data server
-
-. Install the OPeNDAP FreeForm ND Data Handler.
-
 //I was not certain what the below link for OPeNDAP User Guide should point to -ACP
+
+. See Hyrax for instructions about installing the OPeNDAP data server.
+. Install the OPeNDAP FreeForm ND Data Handler.
 . Examine the structure of the data file(s) you intend to serve, and
 construct a OPeNDAP FreeForm ND format definition file that describes 
 the layout of data in the files. (Refer to the <<tblfmt, Table Format>>
@@ -22,21 +23,17 @@ for instructions about sequence data and <<arrayfmt, Array Format>>
 for array data. Consult The 
 link:http://docs.opendap.org/index.php/UserGuide[OPeNDAP User Guide]
 if you do not know the difference between the two data types.)
-
 . If you wish, you may include an output definition format within this file,
 to allow you to test that your input description is accurate. You can use
 the OPeNDAP FreeForm ND utilities, such as _newform_, to validate the
-conversion. The <<fmtconv, Format Conversion>>
-contains a detailed description of
+conversion. The <<fmtconv, Format Conversion>> contains a detailed description of
 _newform_. This step is optional, since the OPeNDAP FreeForm ND Data Handler
 ignores the output definition section of the format definition file.
-
 . Although the OPeNDAP FreeForm ND Data Handler can generate default DDS and
 DAS files, you may want to write these files yourself, to override the
 default data descriptions, or to add attribute data. The default
 descriptions are based on the format of the data the the OPeNDAP FreeForm ND
 Data Handler receives from the OPeNDAP FreeForm ND engine.
-
 . Place the data files, and a corresponding format file for each data file,
 in a place where <<hyrax-overview, Hyrax>> can find them.
 See the <<Hyrax_Configuration, Hyrax Configuration Instructions>>
@@ -47,8 +44,8 @@ Your data is now available to anyone who knows about your server.
 == Examples
 
 You can easily create FreeForm ND format description files that describe 
-the formats of input and output data and headers. The OPeNDAP FreeForm ND
-Data Handler and other OPeNDAP FreeForm ND -based programs then use these
+the formats of input and output data and headers. The OPeNDAP reeForm ND
+Data Handler and other OPeNDAP FreeForm ND-based programs then use these
 files to correctly access and manipulate data in various formats. An 
 example format description file is shown and described below.
 
@@ -58,11 +55,9 @@ For complete information about writing format descriptions, see the
 === Sequence Data
 
 Here is a data file, containing a sequence of four data types. (This data
-file and several of the other examples in this chapter are available.
+file and several of the other examples in this chapter are available.)
 
 Here is the data file, called _ffsimple.dat_:
-
-//Should the below values be aligned? -ACP
 
 ----
 Latitude and Longitude: -63.223548 54.118314  -176.161101 149.408117
@@ -109,12 +104,12 @@ temp 41 50 double 2
 ----
 
 The format file consists of three sections. The first shows OPeNDAP FreeForm
-ND\ how to parse the file header. The second section describes the contents
+ND how to parse the file header. The second section describes the contents
 of the data file. The third part describes how to write the data to another
-file. This part is not important for the OPeNDAP FreeForm ND Data Handler,
+file. This part is not important for the OPeNDAP FreeForm ND Data Handler
 but is useful for debugging the input descriptions.
 
-Download the ffsimple files described above, and type:
+Download the _ffsimple_ files described above and type:
 
 ----
 > newform ffsimple.dat
@@ -151,19 +146,21 @@ Each record contains 7 fields and is 51 characters long.
 100\
 ----
 
-Now take both the ffsimple files and put them into a directory in your web
+Now take both the _ffsimple_ files and put them into a directory in your web
 server's document root directory. (Refer to the The
 link:http://docs.opendap.org/index.php/UserGuide[OPeNDAP User Guide]
 for some tips on figuring out where that is.)
 
-Here's an example, on a computer on which the web server document root is _/export/home/http/htdocs_:
+Here's an example on a computer on which the web server document root is _/export/home/http/htdocs_:
 
 ----
 > mkdir /export/home/http/htdocs/data
 > cp ffsimple.* /export/home/http/htdocs/data
 ----
 
-Now, using a common web browser such as Netscape Navigator, enter the following URL (substitute your machine name and CGI directory for the ones in the example):
+Now, using a common web browser, enter the following URL
+(substitute your machine name and CGI directory for the
+ones in the example):
 
 ----
 http://test.opendap.org/opendap/nph-dods/data/ff/ffsimple.dat.asc
@@ -209,11 +206,16 @@ or DDS.):
 
 === Array Data
 
-If your data more naturally comes in arrays, you can still use the OPeNDAP FreeForm ND Data Handler to serve your data. The OPeNDAP FreeForm ND format for sequence data is somewhat simpler than the format for array data, so you may find it easier to begin with the example in the previous section.
+If your data more naturally comes in arrays, you can still
+use the OPeNDAP FreeForm ND Data Handler to serve your data.
+The OPeNDAP FreeForm ND format for sequence data is somewhat
+simpler than the format for array data, so you may find it
+easier to begin with the example in the previous section.
 
 ==== One-dimensional Arrays
 
-Here is a data file, called _ffarr1.dat_, containingfour ten-element vectors:
+Here is a data file, called _ffarr1.dat_, containing
+four ten-element vectors:
 
 ----
  123456789012345678901234567
@@ -245,7 +247,9 @@ index 1 7 ARRAY["line" 1 to 10] OF float 0
 /data3 20 27 ARRAY["line" 1 to 10 sb 20] OF float 4
 ----
 
-The output section is not essential for the OPeNDAP FreeForm ND Data Handler, but is included so you can check out the data with the newform command.
+The output section is not essential for the OPeNDAP
+FreeForm ND Data Handler but is included so you can check
+out the data with the newform command.
 
 Download the files from the OPeNDAP web site, and try typing:
 
@@ -253,7 +257,9 @@ Download the files from the OPeNDAP web site, and try typing:
 > newform ffarr1.dat
 ----
 
-You should see the index array printed out. Uncomment different lines in the output section of the example file to see different data vectors.
+You should see the index array printed out. Uncomment different
+lines in the output section of the example file to see different
+data vectors.
 
 Now look a little closer at the input section of the file:
 
@@ -261,28 +267,41 @@ Now look a little closer at the input section of the file:
 index 1 5 ARRAY["line" 1 to 10 sb 23] OF float 1
 ----
 
-This line says that the array in question -- called "index" -- starts in column one of the first line, and each element takes up five bytes. The first element starts in column one and goes into column five. The array has one dimension, "line", and is composed of floating point data. The remaining elements of this array are found by skipping the next 23 bytes (the newline counts as a character), reading the following five bytes, skipping the next 23 bytes, and so on.
+This line says that the array in question -- called "index" -- starts
+in column one of the first line, and each element takes up five bytes.
+The first element starts in column one and goes into column five. The
+array has one dimension, "line," and is composed of floating point data.
+The remaining elements of this array are found by skipping the next 23
+bytes (the newline counts as a character), reading the following five
+bytes, skipping the next 23 bytes, and so on.
 
-Of course, the 23 bytes skipped in between the index array elements also contain data from other arrays. The second array, data1, starts in column 6 of line one, and has 21 bytes between values. The third array starts in column 13 of the first line, and the fourth starts in column 20.
+Of course, the 23 bytes skipped in between the index array elements also
+contain data from other arrays. The second array, data1, starts in column
+6 of line one, and has 21 bytes between values. The third array starts in
+column 13 of the first line, and the fourth starts in column 20.
+
 Move the ffarr1.* files into your data directory:
 
 ----
 > cp ffarr1.* /export/home/http/htdocs/data
 ----
 
-Now you can look at this data the same way you looked at the sequence data. Request the DDS for the dataset with a URL like this one:
+Now you can look at this data the same way you looked at the sequence data.
+Request the DDS for the dataset with a URL like this one:
 
 ----
 http://test.opendap.org/opendap/nph-dods/data/ffarr1.dat.dds
 ----
 
-You can see that the dataset is a collection of one-dimensional vectors. You can see the individual vectors with a URL like this:
+You can see that the dataset is a collection of one-dimensional
+vectors. You can see the individual vectors with a URL like this:
 
 ----
 http://test.opendap.org/opendap/nph-dods/data/ffarr1.dat.asc?index
 ----
 
 ==== Multi-dimensional Arrays
+
 Here's another example, with a two-dimensional array. (ffarr2.dat):
 
 ----
@@ -295,7 +314,10 @@ Here's another example, with a two-dimensional array. (ffarr2.dat):
  25.00 26.00 27.00 28.00 29.00 30.00
 ----
 
-There are no spaces between the data columns within an array row, but in order to skip reading the newline character, we have to skip one character at the end of each row. Here is a format file to read this data (_ffarr2.fmt_):
+There are no spaces between the data columns within an array row,
+but in order to skip reading the newline character, we have to skip
+one character at the end of each row. Here is a format file to read
+this data (_ffarr2.fmt_):
 
 ----
 ASCII_input_data "one"
@@ -305,11 +327,16 @@ ASCII_output_data "two"
 data 1 4 ARRAY["x" 1 to 6 sb 2]["y" 1 to 5] OF float 1
 ----
 
-Again, the output section is only for using with the newform tool. Put these data files into your htdocs directory, and look at the DDS as you did with the previous example.
+Again, the output section is only for using with the newform tool.
+Put these data files into your htdocs directory, and look at the
+DDS as you did with the previous example.
 
 ==== A Little More Complicated
 
-You can use the OPeNDAP FreeForm ND Data Handler to serve data with multi-dimensional arrays and one-dimensional vectors interspersed among one another. Here's a file containing this kind of data (ffarr3.dat):
+You can use the OPeNDAP FreeForm ND Data Handler to serve data with
+multi-dimensional arrays and one-dimensional vectors interspersed
+among one another. Here's a file containing this kind of data
+(ffarr3.dat):
 
 ----
 1         2         3         4
@@ -321,7 +348,9 @@ XXXX 19.00 20.00 21.00 22.00 23.00 24.00YY
 XXXX 25.00 26.00 27.00 28.00 29.00 30.00YY
 ----
 
-In order to read this file successfully, we define three vectors to read the "XXXX", the "YY", and the newline. Here is a format file that does this (_ffarr3.fmt_):
+In order to read this file successfully, we define three vectors
+to read the "XXXX", the "YY", and the newline. Here is a format
+file that does this (_ffarr3.fmt_):
 
 ----
 dBASE_input_data "one"
@@ -337,11 +366,18 @@ data 1 4 ARRAY["x" 1 to 6 sb 2]["y" 1 to 5] OF float 0
 /newline 1 4 ARRAY["line" 1 to 5] OF text 0
 ----
 
-The following chapters offer more detailed information about how exactly to create a format description file.
+The following chapters offer more detailed information
+about how exactly to create a format description file.
 
 ==== Non-interleaved Multi-dimensional Arrays
 
-So far the array examples have shown how to read interleaved arrays (either vectors or higher dimensional arrays). Reading array data where one array follows another is pretty straightforward. Use _the same_ syntax as for the interleaved array case, but set the start and stop points to be the same and to be the offset from the start of the data file. Here is a format file for a real dataset that contains a number of arrays of binary data:
+So far the array examples have shown how to read interleaved arrays
+(either vectors or higher dimensional arrays). Reading array data
+where one array follows another is pretty straightforward.
+Use _the same_ syntax as for the interleaved array case, but set the
+start and stop points to be the same and to be the offset from the
+start of the data file. Here is a format file for a real dataset
+that contains a number of arrays of binary data:
 
 ----
 BINARY_input_data "AMSR-E_Ocean_Product"
@@ -350,7 +386,11 @@ sst_a 1036801 1036801 array["lat" 1 to 720]["lon" 1 to 1440] OF uint8 0
 wind_a 2073601 2073601 array["lat" 1 to 720]["lon" 1 to 1440] OF uint8 0
 ----
 
-Note that the array _time_a_ uses start and stop values of _1_ and then the array sst_a uses start and stop values of _1 036 801_ which is exactly the size of the preceding array. Note that in this dataset, each array is of an unsigned 8-bit integer. Here's another example with different size and type arrays:
+Note that the array _time_a_ uses start and stop values of _1_ and
+then the array sst_a uses start and stop values of _1 036 801_
+which is exactly the size of the preceding array. Note that in this
+dataset, each array is of an unsigned 8-bit integer. Here's another
+example with different size and type arrays:
 
 ----
 BINARY_input_data "test_data"
@@ -359,4 +399,6 @@ sst_a 101 108 array["lat" 1 to 10]["lon" 1 to 20] OF float64 0
 wind_a 301 302 array["lat" 1 to 10]["lon" 1 to 5] OF uint16 0
 ----
 
-The first array starts at offset 1; the second array starts at offset 100 (10 * 10); and the third array starts at 300 (100 + (10 * 20). Note that FreeForm offsets are given in terms of _elements_, not bytes.
+The first array starts at offset 1; the second array starts at
+offset 100 (10 * 10); and the third array starts at 300 (100 + (10 * 20).
+Note that FreeForm offsets are given in terms of _elements_, not bytes.
