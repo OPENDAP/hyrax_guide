@@ -69,10 +69,13 @@ following procedure to locating it's configuration:
 
 . It will first look at the value of the user environment variable
 `OLFS_CONFIG_DIR`. If the variable is set and its value is the pathname
-of an existing directory that is readable by Tomcat, it is used.
+of an existing directory that is readable and writable by Tomcat, it is
+used.
 Otherwise,
-. If the directory `/etc/olfs` exists and is readable it will use
-that. Otherwise,
+. If the directory `/etc/olfs` exists and is readable and writable by
+Tomcat user the OLFS will use it. Otherwise,
+. If the directory `/usr/share/olfs` exists and is readable and writable
+ by Tomcat then the OLFS will use it. Otherwise,
 . It will utilize the default configuration bundled with in the web
 application web archive file (opendap.war).
 
@@ -89,10 +92,11 @@ done by creating an empty directory and identifying it with the
 export OLFS_CONFIG_DIR="/home/tomcat/hyrax"
 ----
 
-Alternatively, you can create the directory `/etc/olfs`, and ensure that
-it is both readable and writeable by Tomcat.
+Alternatively, you can create either the directory `/etc/olfs` or the
+directory `/usr/share/olfs`. _Make sure that the directory you create is
+both readable and writeable by Tomcat._
 
-Once the directory is created (and in the former case the environment
+Once the directory is created (and in the first case the environment
 variable is set) restart the OLFS (Tomcat). This will cause the OLFS to
 move a copy of its default configuration into the empty directory and
 then utilize it. You can then edit the local copy.
