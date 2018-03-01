@@ -851,10 +851,8 @@ appropriate page on your server for failed authentication:
 
 * UrsAccessErrorUrl
 
- Example _urs.conf_ file for __httpd__:
-
+.Example _urs.conf_ file for __httpd__:
 ----
-
 # Load the URS module
 LoadModule auth_urs_module    modules/mod_auth_urs.so
 #

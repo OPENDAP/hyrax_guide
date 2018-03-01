@@ -1,0 +1,62 @@
+:Alexander Porrello <alexporrello@gmail.com>:
+
+= The FreeForm Data Handler
+
+This section of the documentation describes the
+OPeNDAP FreeForm ND Data Handler, which can
+be used with the OPeNDAP data server. It is not a complete description
+of the FreeForm ND software. For that, please refer to the ND manual.
+
+This section contains much material originally written at the National
+Oceanic and Atmospheric Administration's National Environmental
+Satellite, Data, and Information Service, which is part of the National
+Geophysical Data Center in Boulder, Colorado.
+
+////
+We are interested in your comments about the OPeNDAP software, and the
+FreeForm ND software and this document. Send them to:
+support@opendap.org.
+////
+
+Using FreeForm ND with OPeNDAP, a researcher can easily make his or her
+data available to the wider community of OPeNDAP users without having to
+convert that data into another data file format. This document presents
+the FreeForm ND software, and shows how to use it with the OPeNDAP
+server.
+
+////
+== Who is this Guide for?
+
+This guide is for people who wish to use FreeForm ND to serve scientific
+datasets using the OPeNDAP software. Scientists who wish to share their
+data with colleagues may also find this a useful system, since it is a
+relatively simple matter to set up a server that can allow remote access
+to your data.
+
+This documentation assumes that the readers are familiar with computers
+and the internet, but are not necessarily programmers. More than a
+passing familiarity with different data file formats will be useful, as
+will an understanding of elementary internet concepts, such as URLs and
+http.
+
+This manual also assumes some familiarity with the OPeNDAP software. If
+you are starting from scratch, knowing nothing at all about OPeNDAP, we
+strongly encourage you to browse the
+link:http://docs.opendap.org/index.php/UserGuide[OPeNDAP User Guide]
+before reading too far here.
+////
+
+include::./Hyrax_FreeForm_01_dintro.adoc[leveloffset=+1]
+include::./Hyrax_FreeForm_02_dquick.adoc[leveloffset=+1]
+include::./Hyrax_FreeForm_03_tblfmt.adoc[leveloffset=+1]
+include::./Hyrax_FreeForm_04_arrayfmt.adoc[leveloffset=+1]
+include::./Hyrax_FreeForm_05_hdrfmts.adoc[leveloffset=+1]
+include::./Hyrax_FreeForm_06_ff-server.adoc[leveloffset=+1]
+include::./Hyrax_FreeForm_07_fileserv.adoc[leveloffset=+1]
+include::./Hyrax_FreeForm_08_convs.adoc[leveloffset=+1]
+include::./Hyrax_FreeForm_09_fmtconv.adoc[leveloffset=+1]
+include::./Hyrax_FreeForm_10_datachk.adoc[leveloffset=+1]
+include::./Hyrax_FreeForm_A1_hdfutils.adoc[leveloffset=+1]
+include::./Hyrax_FreeForm_A2_errors.adoc[leveloffset=+1]
+
+include::./Hyrax_FreeForm_data-with-timestamp.adoc[leveloffset=+1]

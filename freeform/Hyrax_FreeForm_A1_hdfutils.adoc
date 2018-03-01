@@ -1,0 +1,568 @@
+:Alexander Porrello <alexporrello@gmail.com>:
+
+= HDF Utilities =
+
+FreeForm ND includes three utilities for use with HDF (hierarchical
+data format) files: _makehdf_, _splitdat_, and _pntshow_.
+These programs were built using both the FreeForm library and the HDF
+library, which was developed at the National Center for Supercomputer
+Applications (NCSA).
+
+The _makehdf_ program converts binary and ASCII data files to HDF
+files and converts multiplexed band interleaved by pixel image files
+into a series of single parameter files. The _splitdat_ program is
+used to separate and reformat data files containing headers and data
+into separate header and data files, or to translate them into HDF
+files. The _pntshow_ program extracts point data from HDF files
+into binary or ASCII format.
+
+It is assumed in this chapter that you have a working familiarity with
+HDF terminology and conventions. See the HDF user documentation for
+detailed information.
+
+NOTE: Do not try the examples in this chapter. The example file set is
+incomplete.  
+
+== _makehdf_ ==
+
+Using _makehdf_ you can convert data files with formats described
+in a FreeForm format file into HDF files. You should follow FreeForm
+naming conventions for the data and format files. For details about
+FreeForm conventions, see the <<convs, Conventions documentation>>.
+
+
+A dBASE input file must be converted to ASCII or binary using
+_newform_ before you can run _makehdf_ on it.  
+The HDF file resulting from a conversion consists either of a group of
+scientific datasets (SDS's), one for each variable in the input data
+file, or of a _vgroup_ containing all the variables as one
+_vdata_. If you are working with grid data, you will want SDS's
+(the default) in the output HDF file. A vdata (_-vd_ option) is the
+appropriate choice for point data.
+
+The _makehdf_ command has the following form:
+
+----
+    makehdf input_file [-r rows] [-c columns] [-v var_file] [-d HDF_description_file]
+
+    [-xl x_label -yl y_label] [-xu x_units -yu y_units] [-xf x_format -yf y_format] [-id file_id] [-vd [vdata_file]] [-dmx [-sep]] [-df] [-md missing_data_file] [-dof HDF_file] 
+----
+
+*_input_file_:*
+Name of the input data file. Following FreeForm naming conventions,
+the standard extensions for data files are _.dat_ for ASCII
+format and _.bin_ for binary.
+
+*-r rows:*
+Option flag followed by the number of rows in each resulting
+scientific dataset. The number of rows must be specified through
+this option on the command line, or in an equivalence table, or in a
+header (_.hdr_) file defined according to FreeForm standards.
+
+*-c columns:*
+Option flag followed by the number of columns in each resulting
+scientific dataset. The number of columns must be specified through
+this option on the command line, or in an equivalence table, or in a
+header (_.hdr_) file defined according to FreeForm standards.
+For information about equivalence tables, see the GeoVu Tools
+Reference Guide.
+
+*-v var_file:*
+Option flag followed by the name of the variable file. The file
+contains names of the variables in the input data file to be
+processed by _makehdf_. Variable names in \var{var_file} can be
+separated by one or more spaces or each name can be on a separate
+line.
+
+*-d HDF_description_file:*
+Option flag followed by the name of the file containing a
+description of the input file. The description will be stored as a
+file annotation in the resulting HDF file.
+
+*-xl x_label -yl y_label:*
+Option flags followed by strings (labels) describing the x and y
+axes; labels must be in quotes (_" "_) if more than one word.
+
+*-xu x_units -yu y_units:*
+Option flags followed by strings indicating the measurement units
+for the x and y axes; strings must be in quotes (_" "_) if more than
+one word.
+
+*- xf x_format -yf y_format:*
+Option flags followed by strings indicating the formats to be used
+in displaying scale for the x and y dimensions; strings must be in
+quotes (_" "_) if more than one word.
+
+*- id file_id:*
+Option flag followed by a string that will be stored as the ID of
+the resulting HDF file.
+
+*- vd [vdata_file]:*
+Option flag indicating that the output HDF file should contain a
+vdata. The optional file name specifies the name of the output HDF
+file; the default is _input_file.HDF_.
+
+*- dmx [-sep]:*
+The option flag _-dmx_ indicates that input data should be
+demultiplexed from band interleaved by pixel to band sequential form
+in _input_file.dmx_. If _-dmx_ is followed by _-sep_,
+the input data are demultiplexed into separate variable files called
+_data_file.1_ \ldots _data_file.n_
+
+*- df:*
+
+To use this option, the input file (_data_file.ext_) must be a
+binary demultiplexed (band sequential) file.  For each input
+variable in the applicable FreeForm format description file, there
+is a corresponding demultiplexed section in the output HDF file.
+
+*- md missing_data_file:*
+Option flag followed by the name of the file defining missing data
+(data you want to exclude). Use this option only along with the
+vdata (-vd) option. Each line in the missing data file has the form:
+
+----
+variable_name lower_limit upper_limit
+----
+
+The precision of the upper and lower limits matches the precision of
+the input data.
+
+*- dof HDF_file:*
+
+Option flag followed by the name of the output HDF file. If you do
+not use the _-dof_ option, the default output file name is
+_input_file.HDF_.
+
+=== 1.1.1 Example ===
+
+You will use _makehdf_ to store _latlon.dat_ as an HDF file.
+The HDF file will consist of two SDS's, one each for the two variables
+latitude and longitude. Each SDS will have four rows and five columns.
+
+To convert _latlon.dat_ to an HDF file, enter the following
+command:
+
+----
+makehdf latlon.dat -r 4 -c 5
+----
+
+As _makehdf_ translates _latlon.dat_ into HDF, processing
+information is displayed on the screen:
+
+----
+1   Caches (1150 bytes) Processed: 800 bytes written to latlon.dmx
+Writing latlon.HDF and calculating maxima and minima ...
+
+Variable latitude:
+Minimum: -86.432712  Maximum 89.170904
+Variable longitude:
+Minimum: -176.161101  Maximum 165.066193
+----
+
+The output from _makehdf_ is an HDF file named _latlon.HDF_
+(by default). It contains the minimum and maximum values for the two
+variables as well as the two SDS's.
+
+A temporary file named _latlon.dmx_ was also created. It contains
+the data from latlon.dat in demultiplexed form . The data was
+converted from its original multiplexed form to enable _makehdf_
+to write sections of data to SDS's.
+
+If you start with a demultiplexed file such as _latlon.dmx_, the
+translation process is much quicker, particularly for large data
+files. As an illustration, try this. Rename _latlon.dmx_ to
+_latlon.bin_ (renaming is necessary for _makehdf_ to find the
+format description file _latlon.fmt_ by default). Enter the
+following command:
+
+----
+makehdf latlon.bin -df -r 4 -c 5
+----
+
+The output file again is _latlon.HDF_, but notice that no
+demultiplexing was done.
+
+== _splitdat_ ==
+
+The _splitdat_ program translates files with headers and data into
+separate header and data files or into HDF files. If the translation
+is to separate header and data files, the header file can include
+indexing information.
+
+The combination of header and data records in a file is often used for
+point data sets that include a number of observations made at one or
+more stations or locations in space. The header records contain
+information about the stations or locations of the measurements. The
+data records hold the observational data. A station record usually
+indicates how many data records follow it. The structure of such a
+file is similar to the following:
+
+----
+Header for Station 1
+Observation 1 for Station 1
+Observation 2 for Station 1
+
+.
+
+.
+Observation N for Station 1
+
+Header for Station 2
+Observation 1 for Station 2
+Observation 2 for Station 2
+
+.
+
+.
+
+.
+Observation N for Station 2
+
+Header for Station 3
+
+.
+
+.
+
+.
+----
+
+Many applications have difficulty reading this sort of heterogeneous
+data file. One solution is to split the data into two homogeneous
+files, one containing the headers, the other containing the data. With
+_splitdat_, you can easily create the separate data and header
+files. To use _splitdat_ for this purpose, the input and output
+formats for the record headers and the data must be described in a
+FreeForm format description file. To use _splitdat_ for
+translating files to HDF, the input format must be described in a
+FreeForm format description file. You should follow FreeForm naming
+conventions for the data and format files. For details about FreeForm
+conventions, see the <<convs, Conventions documentation>>.
+
+The _splitdat_ command has the following form:
+
+\proto{_splitdat_ \var{input_file} [\var{output_data_file}  \var{output_header_file}]}
+
+*\var{input_file} :*
+Name of the file to be processed. Following FreeForm naming
+conventions, the standard extensions for data files are _.dat_
+for ASCII format and _.bin_ for binary.
+
+*\var{output_data_file} :*
+Name of the output file into which data are transferred with the
+format specified in the applicable FreeForm format description file.
+The standard extensions are the same as for input files. If an
+output file name is not specified, the default is standard output.
+
+*\var{output_header_file} :*
+Name of the output file into which headers from the input file are
+transferred with the format specified in the applicable FreeForm
+format description file. If an output header file name is not
+specified, the default is standard output.
+
+=== Index Creation ===
+
+You can use the two variables begin and extent (described below) in
+the format description for the output record headers to indicate the
+location and size of the data block associated with each record
+header. If you then use _splitdat_, the header file that results
+can be used as an index to the data file.
+
+*_begin_:*
+Indicates the offset to the beginning of the data associated with a
+particular header. If the data is being translated to HDF, the units
+are records; if not, the units are bytes.
+
+*_extent_:*
+Indicates the number of records (HDF) or bytes (non-HDF) associated
+with each header record.
+
+==== Example ====
+
+You will use _splitdat_ to extract the headers and data from a
+rawinsonde (a device for gathering meteorological data) ASCII data
+file named _hara.dat_ (HARA = Historic Arctic Rawinsonde Archive)
+and create two output files-_23338.dat_ containing the ASCII data
+and _23338hdr.dat_ containing the ASCII headers. The format
+description file _hara.fmt_ should contain the necessary format
+descriptions.
+
+Here is _hara.fmt_:
+
+----
+ASCII_input_record_header ASCII Location Record input format
+WMO_station_ID_number 1 5 char 0
+latitude 6 10 long 2
+longitude_east 11 15 long 2
+year 17 18 uchar 0
+month 19 20 uchar 0
+day 21 22 uchar 0
+hour 23 24 uchar 0
+flag_processing_1 28 28 char 0
+flag_processing_2 29 29 char 0
+flag_processing_3 30 30 char 0
+station_type 31 31 char 0
+sea_level_elev 32 36 long 0
+instrument_type 37 38 uchar 0
+number_of_observations 40 42 ushort 0
+identification_code 44 44 char 0
+
+ASCII_input_data Historical Arctic Rawinsonde Archive input format
+atmospheric_pressure 1 5 long 1
+geopotential_height 7 11 long 0
+temperature_deg 13 16 short 0
+dewpoint_depression 18 20 short 0
+wind_direction 22 24 short 0
+wind_speed_m/s 26 28 short 0
+flag_qg 30 30 char 0
+flag_qg1 31 31 char 0
+flag_qt 33 33 char 0
+flag_qt1 34 34 char 0
+flag_qd 36 36 char 0
+flag_qd1 37 37 char 0
+flag_qw 39 39 char 0
+flag_qw1 40 40 char 0
+flag_qp 42 42 char 0
+flag_levck 43 43 char 0
+
+ASCII_output_record_header ASCII Location Record output format
+
+.
+
+.
+
+.
+
+ASCII_output_data Historical Arctic Rawinsonde Archive output format
+
+.
+
+.
+
+.
+----
+
+To "split" _hara.dat_, enter the following command:
+
+----
+splitdat hara.dat 23338.dat  23338hdr.dat
+----
+
+The data values from _hara.dat_ are stored in _23338.dat_ and
+the headers in _23338hdr.dat_.
+
+Because the variables begin and extent were used in the header output
+format in _hara.fmt_ to indicate data offset and number of
+records, _23338hdr.dat_ has two columns of data showing offset and
+extent. Thus, it can serve as an index into _23338.dat_.
+
+=== HDF Translation ===
+
+If output files are not specified on the _splitdat_ command line,
+a file named _input_file.HDF_ is created. It is hierarchically
+named and organized as follows:
+
+----
+
+vgroup
+
+input_file_name
+
+/      \
+
+/        \
+
+vdata1       vdata2
+PointIndex      input_file_name
+----
+
+* _vdata1_ contains the record headers
+* _vdata2_ contains the data
+* If writing to a Vset (represented by a vgroup), both output
+formats are converted to binary, if not binary already.
+
+
+==== Example ====
+
+To create the file _hara.HDF_ from _hara.dat_, enter the
+following abbreviated command:
+
+----
+splitdat hara.dat
+----
+
+The output formats in _hara.fmt_ are automatically converted to
+binary, and subsequently the ASCII data in _hara.dat_ are also
+converted to binary for HDF storage.
+
+== _pntshow_ ==
+
+The _pntshow_ program is a versatile tool for extracting point
+data  from HDF files containing scientific datasets and Vsets. The
+extraction can be done into any binary or ASCII format described in a
+FreeForm format description file. Before using _pntshow_ on an HDF
+file, you should pack the file using the NCSA-developed HDF utility
+hdfpack.
+
+You can use _pntshow_ to extract headers and data from an HDF file
+into separate files or to extract just the data. It's a good idea to
+define GeoVu keywords in an equivalence table to facilitate access to
+HDF objects. For information about equivalence tables, see the GeoVu
+Tools Reference Guide. The input and output formats must be described
+in a FreeForm format description file. You should follow FreeForm
+naming conventions for the data and format files. For details about
+FreeForm conventions, see the <<convs, Conventions documentation>>.
+
+If a format description file is not specified on the command line, the
+output format is taken by default from the FreeForm output format
+annotation stored in the HDF file. If there is no annotation, a
+default ASCII output format is used.
+
+
+An equivalence table takes precedence over
+everything. (vdata=1963, SDS=702)
+If you have not specified an HDF object in an equivalence table,
+_pntshow_ uses the following sequence to determine the appropriate
+source for output:
+
+
+* Output the first vdata with class name Data.
+* Output the largest vdata.
+* Output the first SDS.
+
+
+If no vdatas exist in the file, but an SDS is found, it is extracted
+and a default ASCII output format is used.
+
+=== Extracting Headers and Data ===
+
+The _pntshow_ command takes the following form when you want to
+extract headers and data from HDF files into separate files.
+
+----
+    pntshow input_HDF_file [-h [output_header_file]] [-hof output_header_format_file]
+
+    [-hof output_header_format_file] [-d [output_data_file]] [-dof output_data_format_file]
+----
+
+*\var{input_HDF_file}:*
+Name of the input HDF file, which has been packed using
+_hdfpack_.
+
+*\hdfh:*
+Option flag followed optionally by the name of the file designated
+to contain the record headers currently stored in a vdata with a
+class name of Index. If an output header file name is not specified,
+the default is standard output.
+
+*\hdfhof:*
+Option flag followed by the name of the FreeForm format file that
+describes the format for the headers extracted to standard output or
+output_header_file.
+
+*\hdfd:*
+Option flag followed optionally by the name of the file designated
+to contain the data currently stored in a vdata with a class name of
+Data. If an output file name is not specified, the default is
+standard output.
+
+*\hdfdof:*
+Option flag followed by the name of the FreeForm format file that
+describes the format for data extracted to standard output or
+\var{output_data_file}.
+
+==== Example ====
+
+You will extract data and headers from _hara.HDF_ (created by
+_splitdat_ in a previous example). This file contains two vdatas:
+one has the class name Data and the other has the class name Index.
+Because this file is extremely small, no appending links were created
+in the file, so there is no need to pack the file before using
+_pntshow_, though you can if you wish.
+
+To extract data and headers from _hara.HDF_, enter the following
+command:
+
+----
+pntshow hara.HDF -d haradata.dat -h harahdrs.dat
+----
+
+The data from the vdata designated as Data in _hara.HDF_ are now
+stored in _haradata.dat_. The data are in their original format
+because the original output format was stored by _splitdat_ in the
+HDF file. The header data from the vdata designated as Index in
+_hara.HDF_ are now stored in _harahdrs.dat_. In addition to
+the original header data, the variables begin and extent have also
+been extracted to _harahdrs.dat_.
+
+
+=== Extracting Data Only ===
+
+The _pntshow_ command takes the following form when you want to
+extract just the data from an HDF file:
+
+----
+    pntshow input_HDF_file [-of default_output_format_file]
+
+    [ output_file]
+----
+
+*\var{input_HDF_file}:*
+Name of the input HDF file, which has been packed using _hdfpack_.
+
+*\hdfof:*
+Option flag followed by the name of the FreeForm format file that
+describes the format for data extracted to standard output or
+\var{output_file.}
+
+*\var{output_file}:*
+Name of the output file into which data is transferred. If an output
+file name is not specified, the default is standard output.
+
+==== Examples ====
+
+You can use _pntshow_ to extract designated variables from an HDF
+file. In this example, you will extract temperature and pressure
+values from _hara.HDF_ to an ASCII format. First, the following
+format description file must exist.
+
+Here is _haradata.fmt_:
+
+----
+ASCII_output_data ASCII format for pressure, temp
+atmospheric_pressure 1 10 long 1
+temperature_deg 15 25 float 1
+----
+
+To create a file named _temppres.dat_ containing only the
+temperature and pressure variables, enter either of the following
+commands:
+
+----
+pntshow hara.HDF -of haradata.fmt  temppres.dat
+----
+
+or
+
+----
+pntshow hara.HDF -d temppres.dat -dof haradata.fmt
+----
+
+If you use the first command, _pntshow_ searches _hara.HDF_
+for a vdata named Data. Since _hara.HDF_ contains only one vdata
+named _Data_, this vdata is extracted by default with the format
+specified in _haradata.fmt_.
+
+The results are the same if you use the second command. Now, try
+running _pntshow_ on the previously created file _latlon.HDF_,
+which contains two SDS's. Use the following command:
+
+----
+pntshow latlon.HDF  latlon.SDS
+----
+
+The _latlon.SDS_ file now contains the latitude and longitude
+values extracted from _latlon.HDF_. They have the default ASCII
+output format. You could have used the -of option to specify an output
+format included in a FreeForm format description file.

@@ -1,0 +1,832 @@
+:Alexander Porrello <alexporrello@gmail.com>:
+
+[[fmtconv]]
+= Format Conversion =
+
+The FreeForm ND utility program newform lets you convert data from one
+format to another. This allows you to pass data to applications in the
+format they require. You may also want to create binary archives for
+efficient data storage and access. With newform, conversion of ASCII
+data to binary format is straightforward. If you wish to read the data
+in a binary file, you can convert it to ASCII with newform, or use the
+interactive program readfile. You can also convert data from one ASCII
+format to another ASCII format with newform.
+
+
+== _newform_ ==
+
+The FreeForm ND-based program _newform_ is a general tool for changing the format ofa data file. The only required command line argument, if you use FreeForm ND naming conventions, is the name of the input data file.
+The reformatted data is written to standard output (the screen) unless
+you specify an output file. If you reformat to binary, you will
+generally want to store the output in a file.
+
+You must create a format description file (or files) with format
+descriptions for the data files involved in a conversion before you
+can use _newform_ to perform the conversion. The standard
+extension for format description files is _.fmt_. If you do not
+explicitly specify the format description file on the command line,
+which is unnecessary if you use FreeForm ND naming conventions,
+_newform_ follows the FreeForm ND search sequence to find a format
+file.
+
+For details about FreeForm ND naming conventions and the search
+sequence, see <<convs, Conventions>>.
+
+The _newform_ command has the following form:
+
+----
+_newform_ _input_file_ [-f format_file] [-if-if input_format_file] [-of output_format_file]
+
+[-ft "title"] [-ift "title"] [-oft "title"] [-b local_buffer_size] [-c count] [-v var_file] [-q query_file] [-o output_file]
+----
+
+For descriptions of the arguments, see <<convs, Conventions>>.
+
+If you want to convert an ASCII file to a binary file, and you follow
+the FreeForm ND naming conventions, the command is simply:
+
+----
+newform datafile.dat -o datafile.bin
+----
+
+where datafile is the file name of your choosing.
+
+If data files and format files are not in the current directory or in
+the same directory, you can specify the appropriate path name.  For
+example, if the input data file is not in the current directory, you
+can enter:
+
+----
+newform /path/datafile.dat -o datafile.bin
+----
+
+To read the data in the resulting binary file, you can reformat back
+to ASCII using the command:
+
+----
+newform datafile.bin -o datafile.ext
+----
+
+or you can use the _readfile_ program, described in
+<strong class="selflink">Format Conversion</strong>.
+
+
+== _chkform_ ==
+
+Though _newform_ is useful for checking data formats, it is
+limited by requiring a format file to specify an output format.  Since
+some OPeNDAP FreeForm ND applications (such as the OPeNDAP FreeForm handler) do not
+require an output format, this is extra work for the dataset
+administrator.  For these occasions, OPeNDAP FreeForm ND provides a simpler
+format-checking program, called _chkform_.
+
+The _chkform_ program attempts to read an ASCII file, using the
+specified input format.  If the format allows the file to be read
+
+properly, _chkform_ says so.  However, if the input format
+contains errors, or does not accurately reflect the contents of the
+given data file, _chkform_ delivers an error message, and attempts
+to provide a rudimentary diagnosis of the problem.
+
+You must create a format description file (or files) with format
+descriptions for the data files involved before you can use
+_chkform_ to chack the format.  As with _newform_, the
+standard extension for format description files is _.fmt_. If you
+do not explicitly specify the format description file on the command
+line (unnecessary if you use FreeForm ND naming conventions)
+_chkform_ follows the FreeForm ND search sequence to find a format
+file.
+
+For details about FreeForm ND naming conventions and the search
+sequence, see <<convs, Conventions>>.
+
+The _chkform_ command has the following form:
+
+----
+chkform input_file [-if input_format_file] [-ift title] [-b local_buffer_size]
+[-c count] [-q query_file] [-ol log_file] [-el error_log_file] [-ep]
+----
+
+Most of the arguments are described in
+<<convs, Conventions>>.  The following are specific to
+_chkform_:
+
+
+*-ol log_file:*
+Puts a log of processing information into the specified _log_file_.
+
+*-el error_log_file:*
+Creates an error log file that contains whatever error messages are issued by _chkform_.
+
+*-ep:*
+In normal operation, _chkform_ asks you to manually acknowledge each important error by typing something on the keyboard.  If you use this option, _chkform_ will not stop to prompt, but will continue processing until either the file is procesed, or there is an error preventing more processing.
+
+As in the above examples, if you have an ASCII data file called
+_datafile.dat_, supposedly described in a format file called
+_datafile.fmt_, you can use _chkform_ like this:
+
+----
+chkform datafile.dat
+----
+
+If processing is successful, you will see something like the
+following:
+
+----
+Welcome to Chkform release 4.2.3 -- an NGDC FreeForm ND application
+
+(llmaxmin.fmt) ASCII_input_file_header  Latitude/Longitude Limits
+File llmaxmin.dat contains 1 header record (71 bytes)
+Each record contains 6 fields and is 71 characters long.
+
+(llmaxmin.fmt) ASCII_input_data lat/lon
+File llmaxmin.dat contains 10 data records (230 bytes)
+Each record contains 3 fields and is 23 characters long.
+
+100
+
+No errors found (11 lines checked)
+----
+
+== _readfile_ ==
+
+FreeForm ND includes _readfile_, a simple interactive binary file
+reader. The program has one required command line argument, the name
+of the file to be read. You do not have to write format descriptions
+to use _readfile_.
+
+The _readfile_ command has the following form:
+
+_readfile_ _binary_data_file_
+
+When the program starts, it shows the available options, shown in
+table 9.3. At the _readfile_ prompt, type
+these option codes to view binary encoded values. (Pressing return
+repeats the last option.)
+
+|===
+2.1+^|*The _readfile_ program options*
+|c	|char --- 1 byte character
+|s	|short --- 2 byte signed integer
+|l	|long --- 4 byte signed integer
+|f	|float --- 4 byte single-precision floating point
+|d	|double --- 8 byte double-precision floating point
+|uc	|uchar --- 1 byte unsigned integer
+|us	|ushort --- 2 byte unsigned integer
+|ul	|ulong --- 4 byte unsigned integer
+|b	|Toggle between "big-endian" and your machine's native byte
+|order|
+|P	|Show present file position and length
+|h	|Display this help screen
+|q	|Quit
+|===
+
+The options let you interactively read your way through the specified
+binary file. The first position in the file is 0. You must type the
+character(s) indicating variable type (e.g., us for unsigned short) to
+view each value, so you need to know the data types of variables in
+the file and the order in which they occur. If successive variables
+are of the same type, you can press Return to view each value after
+the first of that type.
+
+You can toggle the byte-order switch on and off by typing b. The
+byte-order option is used to read a binary data file that requires
+byte swapping. This is the case when you need cross-platform access to
+a file that is not byte-swapped, for example, if you are on a Unix
+machine reading data from a CD-ROM formatted for a PC. When the switch
+is on, type s or l to swap short or long integers
+respectively, or type f or d to swap floats or doubles.
+The _readfile_ program does not byte swap the file itself (the
+file is unchanged) but byte swaps the data values internally for
+display purposes only.
+
+To go to another position in the file, type p. You are prompted
+to enter the new file position in bytes. If, for example, each value
+in the file is 4 bytes long and you type 16, you will be positioned at
+the first byte of the fifth value. If you split fields (by not
+repositioning at the beginning of a field), the results will probably
+be garbage. Type P to find out your current position in the file
+and total file length in bytes. Type q to exit from
+_readfile_.
+
+You can also use an input command file rather than entering commands
+directly. In that case, the _readfile_ command has the following
+form:
+
+----
+readfile binary_data_file &lt; input_command_file
+----
+
+== Creating a Binary Archive ==
+
+By storing data files in binary, you save disk space and make access
+by applications more efficient. An ASCII data file can take two to
+five times the disk space of a comparable binary data file. Not only
+is there less information in each byte, but extra bytes are needed for
+decimal points, delimiters, and end-of-line markers.
+
+It is very easy to create a binary archive using _newform_ as the
+following examples show. The input data for these examples are in the
+ASCII file _latlon.dat_ (shown below). They consist of 20 random
+latitude and longitude values. The size of the file on a Unix system
+is 460 bytes.
+
+Here is the _latlon.dat_ file:
+
+----
+-47.303545 -176.161101
+-0.928001    0.777265
+-28.286662   35.591879
+12.588231  149.408117
+-83.223548   55.319598
+54.118314 -136.940570
+38.818812   91.411330
+-34.577065   30.172129
+27.331551 -155.233735
+11.624981 -113.660611
+77.652742  -79.177679
+77.883119  -77.505502
+-65.864879  -55.441896
+-63.211962  134.124014
+35.130219 -153.543091
+29.918847  144.804390
+-69.273601   38.875778
+-63.002874   36.356024
+35.086084  -21.643402
+-12.966961   62.152266
+----
+
+=== Simple ASCII to Binary Conversion ===
+
+In this example, you will use _newform_ to convert the ASCII data
+file _latlon.dat_ into the binary file _latlon.bin_. The input
+and output data formats are described in _latlon.fmt_.
+
+Here is the _latlon.fmt_ file:
+
+----
+/ This is the format description file for data files latlon.bin
+/ and latlon.dat. Each record in both files contains two fields,
+/ latitude and longitude.
+
+binary_data binary format
+latitude 1 8 double 6
+longitude 9 16 double 6
+
+ASCII_data ASCII format
+latitude 1 10 double 6
+longitude 12 22 double 6
+----
+
+The binary and ASCII variables both have the same names. The binary
+variable latitude occupies positions 1 to 8 and longitude occupies
+positions 9-16. The corresponding ASCII variables occupy positions
+1-10 and 12-22. Both the binary and ASCII variables are stored as
+doubles and have a precision of 6.
+
+=== Converting to Binary ===
+
+To convert from an ASCII representation of the numbers in
+_latlon.dat_ to a binary representation:
+
+* Change to the directory that contains the FreeForm ND example files.
+* Enter the following command:  
+
+----
+newform latlon.dat -o latlon.bin
+----
+
+Because FreeForm ND filenaming conventions have been used,
+_newform_ will locate and use _latlon.fmt_ for the
+translation. The _newform_ program creates a new data file
+(effectively a binary archive) called _latlon.bin_. The size of
+the archive file is 2/3 the size of _latlon.dat_. Additionally,
+the data do not have to be converted to machine-readable
+representation by applications.
+
+There are two methods for checking the data in _latlon.bin_ to
+make sure they converted correctly. You can reformat back to ASCII and
+view the resulting file, or use _readfile_ to read
+_latlon.bin_.
+
+=== Reconverting to Native Format ===
+
+Use the following _newform_ command to reformat the binary data in
+_latlon.bin_ to its native ASCII format:
+
+----
+newform latlon.bin -o latlon.rf
+----
+
+The ASCII file _latlon.rf_ matches (but does not overwrite) the
+original input file _latlon.dat_. You can confirm this by using a
+file comparison utility. The _diff_ command is generally available on
+Unix platforms.
+
+To use _diff_ to compare the _latlon_ ASCII files, enter the
+command:
+
+----
+diff latlon.dat latlon.rf
+----
+
+The output should be something along these lines:
+
+----
+Files are effectively identical.
+----
+
+Several implementations of the _diff_ utility don't print anything
+if the two input files are identical.
+
+NOTE: The _diff_ utility may detect a difference in other similar
+cases because FreeForm ND adds a leading zero in front of a decimal
+and interprets a blank as a zero if the field is described as a
+number. (A blank described as a character is interpreted as a
+blank.) 
+
+=== Conversion to a More Portable Binary ===
+
+In this example, you will use _newform_ to reformat the latitude
+and longitude values in the ASCII data file _latlon.dat_ into
+binary longs in the binary file _latlon2.bin_. The input and
+output data formats are described in _latlon2.fmt_.
+
+This is what's in _latlon2.fmt_:
+
+----
+/ This is the format description file for data files latlon.dat
+/ and latlon2.bin. Each record in both files contains two fields,
+/ latitude and longitude.
+
+ASCII_data ASCII format
+latitude 1 10 double 6
+longitude 12 22 double 6
+
+binary_data binary format
+latitude 1 4 long 6
+longitude 5 8 long 6
+----
+
+The ASCII and binary variables both have the same names. The ASCII
+variable latitude occupies positions 1-10 and longitude occupies
+positions 12-22. The ASCII variables are defined to be of type double.
+The binary variables occupy four bytes each (positions 1-4 and 5-8)
+and are of type long. The precision for all is 6.
+
+
+=== Converting to Binary Long ===
+
+In the previous example, both the ASCII and binary variables were
+defined to be doubles. Binary longs, which are 4-byte integers, may be
+more portable across different platforms than binary doubles or
+floats.
+
+To convert the ASCII data in _latlon.dat_ to binary longs:
+
+* Change to the directory that contains the FreeForm ND example files.
+* Enter the following command: +
+`newform latlon.dat -f latlon2.fmt -o latlon2.bin`
+
+It creates the binary archive file _latlon2.bin_ with the 20
+latitude and longitude values in _latlon.dat_ stored as binary
+longs.
+
+This example duplicates one in <<dquick, the Quickstart Guide>>. If you completed that
+example, an error message will indicate that _latlon2.bin_ exists.
+You can rename, move, or delete the existing file.
+
+The size of the archive file _latlon2.bin_ is about 1/3 the size
+of _latlon.dat_. Also, the data do not have to be converted to
+machine representation by applications. The main tradeoff in achieving
+savings in space and access time is that although binary longs are
+more portable than binary doubles or floats, any binary representation
+is less portable than ASCII.
+
+CAUTION: There may be a loss of precision when input data of
+type double is converted to long. 
+
+=== 1.4.6 Reading the Binary File ===
+
+Once again, you can use _readfile_ to check the data in the binary
+archive you created.
+
+* Enter the following command: +
+`readfile latlon2.bin`
+* The data are stored as longs, so enter l to view each value (or press Return to view each value after the first).
+* Enter q to quit _readfile_.
+
+If desired, you can enter the commands to _readfile_ from an input command file rather than directly from the command line. The example command file _latlon.in_ is shown next.
+
+.latlon.in
+----
+llllllp0 llPq
+----
+
+The 6 l's (l for _long_) cause the first 6 values in the file to be
+displayed. The sequence p0 causes a return to the top (position 0) of
+the file. A position number (0) must be followed by a blank space. The
+2 l's display the first two values again. The P displays the
+current file position and length, and q closes _readfile_.
+
+If you enter the following command:
+
+----
+readfile latlon2.bin &lt; latlon.in
+----
+
+you should see the following output on the screen:
+
+----
+long:  -47303545
+long: -176161101
+long:    -928001
+long:     777265
+long:  -28286662
+long:   35591879
+New File Position = 0
+long:  -47303545
+long: -176161101
+File Position: 8       File Length: 160
+----
+
+The floating point numbers have been multiplied by 106, the precision
+of the long variables in _latlon2.fmt_.
+
+=== Including a Query ===
+
+You can use the query option (_-q_ _query_file_) to specify
+exactly which records in the data file _newform_ should process.
+The query file contains query criteria. Query syntax is summarized in
+Appendix C.
+
+In this example, you will specify a query so that _newform_ will
+reformat only those value pairs in _latlon.dat_ where latitude is
+positive and longitude is negative into the binary file
+_llposneg.bin_. The input and output data formats are described in
+_latlon2.fmt_.
+
+The query criteria are specified in the following file, called
+_llposneg.qry_:
+
+----
+[latitude]  0 &amp; [longitude] &lt; 0
+----
+
+To convert the desired data in _latlon.dat_ to binary and then
+view the results:
+
+
+. Enter the following command: +
+`newform latlon.dat -f latlon2.fmt -q llposneg.qry -o llposneg.bin` +
+The _llposneg.bin_ file now contains the positive/negative latitude/longitude pairs in binary form.
+. To view the data, first convert the data in _llposneg.bin_ back to ASCII format:  newform llposneg.bin -f latlon2.fmt -o llposneg.dat
+. Enter the appropriate command to display the data in _llposneg.dat_, e.g. _more_: The following output appears on the screen:  
+
+---- 
+54.118314 -136.940570
+27.331551 -155.233735
+11.624981 -113.660611
+77.652742  -79.177679
+77.883119  -77.505502
+35.130219 -153.543091
+35.086084  -21.643402
+----
+  
+NOTE: As demonstrated in the examples above, you can check the data in
+a binary file either by using _readfile_ or by converting the
+data back to ASCII using _newform_ and then viewing it.  
+
+== File Names and Context ==
+
+In the preceding examples, the read/write type (input or output) was
+not included in the format descriptors (_ASCII_data_ and
+_binary_data_). FreeForm ND naming conventions were used, so
+_newform_ can determine from the context which format should be
+used for input and which for output. Consider the command:
+
+----
+newform latlon.dat -o latlon.bin
+----
+
+The input file extension is _.dat_ and the output file extension
+is _.bin_. These extensions provide context indicating that ASCII
+should be used as the input format and binary should be used as the
+output format. The format description file that _newform_ will
+look for is the file with the same name as the input file and the
+extension _.fmt_, i.e., _latlon.fmt_.
+
+If you use the following command:
+
+----
+newform latlon.bin
+----
+
+to translate the binary archive _latlon.bin_ back to ASCII,
+_newform_ identifies the input format as binary and uses the ASCII
+format for output. The ASCII data is written to the screen because an
+output file was not specified.
+
+For information about FreeForm ND file name conventions, see
+<<convs, Conventions>>.
+
+=== "Nonstandard" Data File Names ===
+
+If you are working with data files that do not use FreeForm ND naming
+conventions, you need to more explicitly define the context. For
+example, the files _lldat1.ll_, _lldat2.ll_, _lldat3.ll_,
+_lldat4.ll_, and _lldat5.ll_ all have latitude and longitude values in the ASCII format given in the format description file _lldat.fmt_. If you wanted to archive these files in binary format, you could not use a command of the form used in the previous
+examples, i.e., _newform_ _datafile.dat_ -o _datafile.bin_
+with _datafile.fmt_ as the default format description file.
+
+First, the ASCII data files do not have the extension _.dat_,
+which identifies them as ASCII files. Second, you would need five
+separate format description files, all with the same content:
+_lldat1.fmt_, _lldat2.fmt_, _lldat3.fmt_,
+_lldat4.fmt_, and _lldat5.fmt_. Creating the format
+description file _ll.fmt_ solves both problems.
+
+Here is the _ll.fmt_ file:
+
+----
+/ This is the format description file that describes latlon
+/ data in files with the extension .ll
+
+ASCII_input_data ASCII format for .ll latlon data
+latitude 1 10 double 6
+longitude 12 22 double 6
+
+binary_output_data binary format for .ll latlon data
+latitude 1 4 long 6
+longitude 5 8 long 6
+----
+
+The name used for the format description file, _ll.fmt_, follows the FreeForm ND convention that one format description file can be
+utilized for multiple data files, all with the same extension, if the
+format description file is named _ext.fmt_. Also, the read/write type (input or output) is made explicit by including it in the format
+descriptors _ASCII_input_data_ and _binary_output_data_. This provides the context needed for FreeForm ND programs to determine which format to use for input and which for output.
+
+Use the following commands to produce binary versions of the ASCII
+input files:
+
+----
+newform lldat1.ll -o llbin1.ll
+newform lldat2.ll -o llbin2.ll
+newform lldat3.ll -o llbin3.ll
+newform lldat4.ll -o llbin4.ll
+newform lldat5.ll -o llbin5.ll
+----
+
+If you want to convert back to ASCII, you can switch the words input
+and output in the format description file _ll.fmt_. You could then use the following commands to convert back to native ASCII format with output written to the screen:
+
+----
+newform llbin1.ll
+newform llbin2.ll
+newform llbin3.ll
+newform llbin4.ll
+newform llbin5.ll
+----
+
+It is also possible to convert back to ASCII without switching the
+read/write types input and output in _ll.fmt_. You can specify input and output formats by title instead. In this case, you want to
+use the output format in _ll.fmt_ as the input format and the input format in _ll.fmt_ as the output format. Use the following command to convert _llbin1.ll_ back to ASCII:
+
+----
+newform llbin1 -ift binary format for .ll latlon data
+
+-oft ASCII format for .ll latlon data
+----
+
+Notice that _newform_ reports back the read/write type actually used. Since _ASCII_input_data_ was used as the output format, _newform_ reports it as _ASCII_output_data_.
+
+Now assume that you want to convert the ASCII data file _llvals.asc_ (not included in the example file set) to the binary
+file _latlon3.bin_, and the input and output data formats are described in _latlon.fmt_. The data file names do not provide the context allowing _newform_ to find _latlon.fmt_ by default, so you must include all file names on the command line:
+
+----
+newform llvals.asc -f latlon.fmt -o latlon3.bin
+----
+
+=== "Nonstandard" Format Description File Names ===
+
+If you are using a format description file that does not follow
+FreeForm ND file naming conventions, you must include its name on the
+command line. Assume that you want to convert the ASCII data file
+_latlon.dat_ to the binary file _latlon.bin_, and the input
+and output data formats are both described in _llvals.frm_ (not included in the example file set). The data file names follow FreeForm
+ND conventions, but the name of the format description file does not,
+so it will not be located through the default search sequence. Use the
+following command to convert to binary:
+
+----
+newform latlon.dat -f llvals.frm -o latlon.bin
+----
+
+Suppose now that the input format is described in _latlon.fmt_ and
+the output format in _llvals.frm_. You do not need to explicitly specify the input format description file because it will be located
+by default, but you must specify the output format description file
+name. In this case, the command would be:
+
+----
+newform latlon.dat -of llvals.frm -o latlon.bin
+----
+
+You can always unambiguously specify the names of format description
+files and data files, whether or not their names follow FreeForm ND
+conventions. Assume you want to look only at longitude values in
+_latlon.bin_ and that you want them defined as integers (longs) which are right-justified at column 30. You will reformat the
+specified binary data in _latlon.bin_ into ASCII data in
+_longonly.dat_ and then view it. The input format is found in _latlon.fmt_, the output format in _longonly.fmt_.
+
+.longonly.fmt
+----
+/ This is the format description file for viewing longitude as an
+/ integer value right-justified at column 30.
+
+ASCII_data ASCII output format, right-justified at 30
+longitude 20 30 long 6
+----
+
+In this case, you have decided to look at the first 5 longitude values. Use the following command to unambiguously designate all files involved:
+
+----
+newform latlon.bin -if latlon.fmt -of longonly.fmt -c 5
+-o longonly.dat
+----
+
+When you view _longonly.dat_, you should see the following 5 values:
+
+----
+1         2         3         4
+1234567890123456789012345678901234567890
+
+-176161101
+777265
+35591879
+149408117
+55319598
+----
+
+== Changing ASCII Formats ==
+
+You may encounter situations where a specific ASCII format is
+required, and your data cannot be used in its native ASCII format.
+With _newform_, you can easily reformat one ASCII format to
+another. In this example, you will reformat California earthquake data
+from one ASCII format to three other ASCII formats commonly used for
+such data.The file _calif.tap_ contains data about earthquakes in
+California with magnitudes  5.0 since 1980. The data were initially
+distributed by NGDC on tape, hence the _.tap_ extension. The data
+format is described in _eqtape.fmt_:
+
+Here is the _eqtape.fmt_ file:
+
+----
+/ This is the format description file for the NGDC .tap format,
+/ which is used for data distributed on floppy disks or tapes.
+
+ASCII_data .tap format
+source_code 1 3 char 0
+century 4 6 short 0
+year 7 8 short 0
+month 9 10 short 0
+day 11 12 short 0
+hour 13 14 short 0
+minute 15 16 short 0
+second 17 19 short 1
+latitude_abs 20 24 long 3
+latitude_ns 25 25 char 0
+longitude_abs 26 31 long 3
+longitude_ew 32 32 char 0
+depth 33 35 short 0
+magnitude_mb 36 38 short 2
+MB 39 40 constant 0
+isoseismal 41 43 char 0
+intensity 44 44 char 0
+
+/ The NGDC record check format includes
+/ six flags in characters 45 to 50. These
+/ can be treated as one variable to allow
+/ multiple flags to be set in a single pass,
+/ or each can be set by itself.
+
+ngdc_flags 45 50 char 0
+diastrophic 45 45 char 0
+tsunami 46 46 char 0
+seiche 47 47 char 0
+volcanism 48 48 char 0
+non_tectonic 49 49 char 0
+infrasonic 50 50 char 0
+
+fe_region 51 53 short 0
+magnitude_ms 54 55 short 1
+MS 56 57 char 0
+z_h 58 58 char 0
+cultural 59 59 char 0
+other 60 60 char 0
+magnitude_other 61 63 short 2
+other_authority 64 66 char 0
+ide 67 67 char 0
+depth_control 68 68 char 0
+number_stations_qual 69 71 char 0
+time_authority 72 72 char 0
+magnitude_local 73 75 short 2
+local_scale 76 77 char 0
+local_authority 78 80 char 0
+----
+
+Three other formats used for California earthquake data are
+hypoellipse, hypoinverse, and hypo71. Subsets of these formats are
+described in the format description file _hypo.fmt_. The format
+descriptions include the parameters required by the AcroSpin program
+that is distributed as part of the IASPEI Software Library (Volume 2).
+AcroSpin shows 3D views of earthquake point data.
+
+Here is the _hypo.fmt_ file:
+
+----
+/ This format description file describes subsets of the
+/ hypoellipse, hypoinverse, and hypo71 formats.
+
+ASCII_data hypoellipse format
+
+year 1 2 uchar 0
+month 3 4 uchar 0
+day 5 6 uchar 0
+hour 7 8 uchar 0
+minute 9 10 uchar 0
+second 11 14 ushort 2
+latitude_deg_abs 15 16 uchar 0
+latitude_ns 17 17 char 0
+latitude_min 18 21 ushort 2
+longitude_deg_abs 22 24 uchar 0
+longitude_ew 25 25 char 0
+longitude_min 26 29 ushort 2
+depth 30 34 short 2
+magnitude_local 35 36 uchar 1
+
+ASCII_data hypoinverse format
+year 1 2 uchar 0
+month 3 4 uchar 0
+day 5 6 uchar 0
+hour 7 8 uchar 0
+minute 9 10 uchar 0
+second 11 14 ushort 2
+latitude_deg_abs 15 16 uchar 0
+latitude_ns 17 17 char 0
+latitude_min 18 21 ushort 2
+longitude_deg_abs 22 24 uchar 0
+longitude_ew 25 25 char 0
+longitude_min 26 29 ushort 2
+depth 30 34 short 2
+magnitude_local 35 36 uchar 1
+number_of_times 37 39 short 0
+maximum_azimuthal_gap 40 42 short 0
+nearest_station 43 45 short 1
+rms_travel_time_residual 46 49 short 2
+
+ASCII_data hypo71 format
+year 1 2 uchar 0
+month 3 4 uchar 0
+day 5 6 uchar 0
+hour 8 9 uchar 0
+minute 10 11 uchar 0
+second 12 17 float 2
+latitude_deg_abs 18 20 uchar 0
+latitude_ns 21 21 char 0
+latitude_min 22 26 float 2
+longitude_deg_abs 27 30 uchar 0
+longitude_ew 31 31 char 0
+longitude_min 32 36 float 2
+depth 37 43 float 2
+magnitude_local 44 50 float 2
+number_of_times 51 53 short 0
+maximum_azimuthal_gap 54 57 float 0
+nearest_station 58 62 short 1
+rms_travel_time_residual 63 67 float 2
+error_horizontal 68 72 float 1
+error_vertical 73 77 float 1
+s_waves_used 79 79 char 0
+----
+
+The parameters from the California earthquake data in the NGDC format
+needed for use with the AcroSpin program can be extracted and
+converted using the following commands:
+
+----
+newform calif.tap -if eqtape.fmt -of hypo.fmt
+
+-oft hypoellipse format -o calif.he
+newform calif.tap -if eqtape.fmt -of hypo.fmt
+
+-oft hypoinverse format -o calif.hi
+newform calif.tap -if eqtape.fmt -of hypo.fmt
+
+-oft hypo71 format -o calif.h71
+----
+
+If you develop an application that accesses seismicity data in a
+particular ASCII format, you need only to write an appropriate format
+description file in order to convert NGDC data into the format used by
+the application. This lets you make use of the data that NGDC provides
+in a format that works for you.
