@@ -65,18 +65,17 @@ OLFS web application.
 === OLFS Configuration Location
 
 Beginning with olfs-1.15.0 (part of hyrax-1.13.0) the OLFS will use the
-following procedure to locating it's configuration:
+following procedure to deterimine its configuration location:
 
 . It will first look at the value of the user environment variable
 `OLFS_CONFIG_DIR`. If the variable is set and its value is the pathname
-of an existing directory that is readable and writable by Tomcat, it is
-used.
-Otherwise,
+of an existing directory that is readable and writable by Tomcat, the OLFS
+will use it. Otherwise,
 . If the directory `/etc/olfs` exists and is readable and writable by
-Tomcat user the OLFS will use it. Otherwise,
+Tomcat the OLFS will use it. Otherwise,
 . If the directory `/usr/share/olfs` exists and is readable and writable
  by Tomcat then the OLFS will use it. Otherwise,
-. It will utilize the default configuration bundled with in the web
+. The OLFS will utilize the default configuration bundled in the web
 application web archive file (opendap.war).
 
 In this way the OLFS can start without a persistent local configuration.
