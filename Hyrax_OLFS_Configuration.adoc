@@ -74,7 +74,7 @@ will use it. Otherwise,
 . If the directory `/etc/olfs` exists and is readable and writable by
 Tomcat the OLFS will use it. Otherwise,
 . If the directory `/usr/share/olfs` exists and is readable and writable
- by Tomcat then the OLFS will use it. Otherwise,
+ by Tomcat then the OLFS will use it (this was added for Hyrax 1.14.1). Otherwise,
 . The OLFS will utilize the default configuration bundled in the web
 application web archive file (opendap.war).
 
