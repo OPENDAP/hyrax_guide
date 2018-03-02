@@ -96,7 +96,7 @@ directory `/usr/share/olfs`. _Make sure that the directory you create is
 both readable and writable by Tomcat._
 
 *NB:* _On CentOS-7.x or any other Linux environment that is essentially
-an *SELinux* variant, the `/etc/olfs` location will not work. However the
+a *SELinux* variant, the `/etc/olfs` location will not work. However the
  `/usr/share/olfs` location will work in an *SELinux* environment._
 
 Once the directory is created (and in the first case the environment
