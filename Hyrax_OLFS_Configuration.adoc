@@ -114,7 +114,7 @@ You must alter the SELinux access policies to give the Tomcat user
 permission to read and write to one of these directories.
 
 Here is a script/recipe for configuring the `/usr/share/olfs` directory for reading
-and writing by the Tomcat user. There are pribably a number of alternative ways to accomplish this,
+and writing by the Tomcat user. There are probably a number of alternative ways to accomplish this,
 but this one worked for me.
 ----
 #!/bin/sh
