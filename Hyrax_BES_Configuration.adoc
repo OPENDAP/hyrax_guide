@@ -5,7 +5,7 @@
 //:toc:
 
 [[bess-configuration]]
-== BES Configuration Introduction ==
+== BES Configuration ==
 
 Building the BES and its data handlers from source (or installing from
 the Linux RPMs) will provide the default installation with data and a

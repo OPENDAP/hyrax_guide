@@ -5,7 +5,7 @@
 //:toc:
 
 [[OLFS-config]]
-== OLFS Configuration Introduction
+== OLFS Configuration
 
 This document should help you get started configuring the OLFS web
 application component of Hyrax. This software package was developed,
@@ -62,7 +62,7 @@ configure the Hyrax and Viewers servlets - the primary components of the
 OLFS web application.
 
 [[OLFS-config-location]]
-=== OLFS Configuration Location
+=== Location of the OLFS Configuration Files
 
 Beginning with olfs-1.15.0 (part of hyrax-1.13.0) the OLFS will use the
 following procedure to deterimine its configuration location:
@@ -106,7 +106,7 @@ SELinux (which is a special gift you get with CentOS-7) will cause some new chal
 not familiar with the changes it brings to the system environment. For one, Tomcat runs as a
 _confined_ user. Here we'll examine how these changes affect the OLFS.
 
-===== OLFS Local Configuration
+===== Localizing the OLFS Configuration under SELinux
 When using a _yum_ installed Tomcat on CentOS-7.x (or any other Linux
 environment that is essentially an *SELinux* variant), neither the `/etc/olfs`
 or the `/usr/share/olfs` configuration locations will work without taking extra steps.
