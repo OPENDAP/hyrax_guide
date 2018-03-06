@@ -22,7 +22,7 @@ as information was spread across many web pages and the Wiki, this became
 unmanageable. We hope this new format reads more like a guide for people
 who want to install and configure the server and less like a design document.
 
-== Devlopment Sponsored By
+== Development Sponsored By
 
 *http://www.nsf.gov[National Science Foundation (NSF)]* footnote:[This
 material is based upon work supported by the National Science
