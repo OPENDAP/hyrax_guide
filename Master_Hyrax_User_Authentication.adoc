@@ -705,7 +705,7 @@ cd urs;
 apxs -i -c -n mod_auth_urs mod_auth_urs.c mod_auth_urs_cfg.c mod_auth_urs_session.c mod_auth_urs_ssl.c mod_auth_urs_http.c mod_auth_urs_json.c mod_auth_urs_crypto.c;
 ----
 
-:leveloffset: +5
+:leveloffset: +4
 [[obtain-app-creds]]
 include::Hyrax_Obtain_Earthdata_Login_Credentials.adoc[lines="1,8..-1"]
 
