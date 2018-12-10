@@ -1,0 +1,125 @@
+= Earthdata Login OAuth2
+
+Former iterations of Hyrax offered only the _mod_auth_urs_ Apache module 
+to provide users with support for NASA’s OAuth2 Earthdata login services, 
+also known as the User Registration System (URS). 
+_Mod_auth_urs_ is inconvenient for some users, 
+in that it must be bound to an instance of Apache webserver, 
+which is not required to run the OPeNDAP software.
+
+For users who do not need the Apache webserver, Hyrax now offers a standalone 
+implementation of the Earthdata login client that can be deployed using only 
+Tomcat or a preferred servlet engine.
+
+If you are looking for instructions on how to conifgure `mod_auth_urs`,
+please see the <<apache-httpd-auth-services-config, Apache/URS section on this page>>.
+
+== Enabling Hyrax's Standalone Earthdata Login Client Implementation
+
+To enable Hyrax’s standalone implementation of the Earthdata login, 
+you need to first modify a few lines of code in the _web.xml_ file. 
+If you installed Tomcat using the instructions in this manual (via `yum`), 
+you can locate _web.xml_ at the following location: 
+`/usr/share/tomcat/webapps/opendap/WEB-INF/`.
+
+WARNING: You should generally avoid editing _web.xml_, 
+since the file is overwritten whenever you upgrade to a new version of Hyrax;
+however, in the software’s current iteration, 
+the only way to enable Hyrax’s standalone implementation of the 
+Earthdata login client is by modifying _web.xml_.
+
+After navigating to the above directory and opening web.xml, 
+scroll down until you encounter the Identity Provider (IdP) 
+filter and the Policy Enforcement Point (PEP) filter, 
+both of which are commented out (see the code block below). 
+To enable this feature, uncomment these two filters.
+
+....
+    <!-- Uncomment These two filters to enable access control.
+    <filter>
+        <filter-name>IdP</filter-name>
+        <filter-class>opendap.auth.IdFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>IdP</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+    <filter>
+        <filter-name>PEP</filter-name>
+        <filter-class>opendap.auth.PEPFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>PEP</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    -->
+....
+
+TIP: The IdP filter is responsible for figuring out who users are, 
+and the PEP filter determines what users can or cannot do.
+
+== Configuring the Identification Provider
+
+After uncommenting the IdP and PEP filters in _web.xml_, you must configure
+the Identification Provider (`IdProvider`) by modifying a few lines of code
+in _user-access.xml_, which (if you installed Tomcat via `yum`) 
+can be found in one of the following locations:
+
+1.	`/etc/olfs`
+2.	`/usr/share/olfs`
+
+NOTE: If neither of these directories exist, 
+please reference the
+link:https://opendap.github.io/hyrax_guide/Master_Hyrax_Guide.html#_localizing_the_olfs_configuration_under_selinux[Localizing the OLFS Configuration] section.
+
+After accessing the file, scroll down until you locate the 
+`IdProvider` element:
+
+....
+<IdProvider class="opendap.auth.UrsIdP">
+        <authContext>urs</authContext>
+        <isDefault />
+        <UrsClientId>iPlEjZjMvrdwLUlnbaKxWQ</UrsClientId>
+        <UrsClientAuthCode>aVBsRWpaak12cmR3TFVsbmJhS3hXUTpKSEdqa2hmZzY3OA==</UrsClientAuthCode>
+        <UrsUrl>https://uat.urs.earthdata.nasa.gov</UrsUrl>
+</IdProvider>
+....
+
+To configure your Identification provider, update the child elements 
+of the IdProvider element (specifically UrsClientID and URSClientAuthCode) 
+with your application credential information. 
+If you have not yet created an Earthdata Login Application, 
+please see link:https://opendap.github.io/hyrax_guide/Master_Hyrax_Guide.html#_nasas_earthdata_login_oauth2_mod_auth_urs[Nasa’s Earthdata Login - OAuth2 (mod_auth_urs) section].
+For more information about generating the `<URSClientAuthCode>`, please see the following section.
+
+NOTE: For the `<UrsClientAuthCode> URL`, `urs` is the production service, 
+and `uat` is the test service. 
+You should hook up your server to the one that is right for you.
+
+== Compute `<URSClientAuthCode>`
+
+There are three methods for computing the URS client authorization code:
+
+. Shell Script:
++
+....
+echo -n "<cid>:<pw>" | base64
+....
+
+. Perl Script:
++
+....
+perl -e 'use MIME::Base64; print encode_base64("<cid>:<pw>");'
+....
+
+. PHP Script:
++
+....
+php -r 'echo base64_encode("<cid>:<pw>");'
+....
+
+In the above examples, `<cid>` is the Client ID (found on your application's 
+_Application Administration_ page), and `<pw>` is your application's password.
