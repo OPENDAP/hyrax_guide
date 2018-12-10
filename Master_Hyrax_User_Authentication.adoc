@@ -710,37 +710,32 @@ apxs -i -c -n mod_auth_urs mod_auth_urs.c mod_auth_urs_cfg.c mod_auth_urs_sessio
 include::Hyrax_Obtain_Earthdata_Login_Credentials.adoc[lines="1,8..-1"]
 
 :leveloffset: 0
-===== Compute the Authorization Code
+===== Compute the Authorization Code (`<URSClientAuthCode>`)
 
-The last thing to do before configuring _mod_auth_urs_ is to compute the
-authorization code for your freshly registered application. To do this
-you will need to hex encode the Application Username (UID) and password
-that you assigned to your application when you registered it. The are a
-number of ways to generate the Authorization Code.
+Before configuring _mod_auth_urs_, you must compute the authorization code
+for your freshly registered application. 
+There are three methods for computing the URS client authorization code:
 
-Use a simple perl script:
+. Shell Script:
++
+....
+echo -n "<cid>:<pw>" | base64
+....
 
-----
+. Perl Script:
++
+....
+perl -e 'use MIME::Base64; print encode_base64("<cid>:<pw>");'
+....
 
-perl -e 'use MIME::Base64; print encode_base64("<uid>:<pw>");'
-----
+. PHP Script:
++
+....
+php -r 'echo base64_encode("<cid>:<pw>");'
+....
 
-Or php script:
-
----- 
-php -r 'echo base64_encode("<uid>:<pw>");'
-----
-
-Or shell script:
-
----- 
-echo -n "<uid>:<pw>" | base64
-----
-
-Where _<uid>_ is the Application Username (UID) and _<pw>_ is the
-password associated with your freshly registered application. The
-resulting string of base64 encoded stuff is your application's Earthdata Login
-authorization code, aka UrsAuthCode in __mod_auth_urs__.
+In the above examples, `<cid>` is the Client ID (found on your application's 
+_Application Administration_ page), and `<pw>` is your application's password.
 
 ===== Configuration
 
