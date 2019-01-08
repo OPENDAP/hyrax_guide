@@ -3,17 +3,17 @@
 A new cache, the MetaData Store (MDS), has been added to the BES for 
 metadata responses. This cache is unlike the other 
 BES caches in that it is intended to be operated as either a "cache"
-or a "store." In the latter case, items added will never be removed. 
+or a "store." In the latter case, added items will never be removed. 
 It is an open-ended place where metadata response objects 
-will be kept indefinitely. The MDS contents (as a cache or a store)
+are kept indefinitely. The contents of the MDS (as a cache or a store)
 will persist through Hyrax restarts.
 
 TIP: The MDS is especially important for scenarios where data is 
 not as close as you need it to be. By using the MDS, you can reduce 
-the time it takes to look through files. 
-You can make quick decisions based on the metadata that the MDS has saved;
+the time it takes to look through files
+and make quick decisions based on the metadata that the MDS has saved;
 however, because the underlying data in the MDS does not update automatically, 
-the metadata may be slightly out-of-date.
+the metadata may be out-of-sync with the actual data.
 
 === Enable or Disable the MDS
 
@@ -53,16 +53,22 @@ DAP.GlobalMetadataStore.ledger = /usr/share/mds_ledger.txt
 # DAP.Use.Dmrpp = yes
 ----
 
-This can also be edited in `site.conf`. For more information please see the `site.conf` section. 
+=== Configure the MDS
 
-//Which has not been written!!!
+// the site.conf section is yet to be written.
 
-If `Dap.GlobalMetadataSote.size` is set to 0, the MDS will work as a store, rather than a cache.
+The MDS' parameters should be configured in `site.conf`. 
+For more information, please see the `site.conf` section. 
 
-==== Cache Ejection Strategy
+To configure the MDS to work as a store, rather than a cache, 
+set the `Dap.GlobalMetadataSote.size` to 0.
+
+=== Cache Ejection Strategy
 
 The MDS caches complete metadata responses and serves those directly.
 
-The MDS can be configured to not exceed a certain size. When the configured size is filled up, the MDS will eject the metadat files in the cache that were least recently accessed.
+The MDS can be configured to not exceed a certain size. 
+When the configured size is filled up, the MDS will 
+eject the metadata files in the cache that were least recently accessed.
 
 By default the metadata files are stored in `usr/share/mds`.
