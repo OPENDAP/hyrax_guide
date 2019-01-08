@@ -1,0 +1,32 @@
+== JSON-LD
+
+This release Hyrax adds link:https://json-ld.org[JSON-LD]
+content to every browser-navigable catalog page 
+(i.e. _*/contents.html_") and to every dataset/granule OPeNDAP 
+Data Access Form. This feature along with the site map generation
+can be used to assist search engines to
+catalog/index/find the data the data that you want the world to access.
+
+=== Under the Hood
+
+The JSON-LD is dynamically built from the metadata. It uses the MDS metadata if it is there; otherwise, it loads it from the file.
+
+=== How to Use it
+
+The server ships with this enabled. By default all the information about the publisher is set to OPeNDAP. This can be configured in 
+`/etc/bes/bes.conf`; however, it should be configured in `site.conf`.
+For more information, please see the `site.conf` section.
+
+// Which has not yet been written!!!
+
+----
+BES.ServerAdministrator=email:support@opendap.org
+BES.ServerAdministrator+=organization:OPeNDAP Inc.
+BES.ServerAdministrator+=street:165 NW Dean Knauss Dr.
+BES.ServerAdministrator+=city:Narragansett
+BES.ServerAdministrator+=region:RI
+BES.ServerAdministrator+=postalCode:02882
+BES.ServerAdministrator+=country:US
+BES.ServerAdministrator+=telephone:+1.401.575.4835
+BES.ServerAdministrator+=website:http://www.opendap.org
+----
