@@ -1,0 +1,69 @@
+= site.conf
+
+== About
+
+Many users configure at least one of Hyrax's many modules,
+the most common example being the BES's server administrator parameters.
+Prior to Hyrax 1.15.2, users who wanted to customize a module's configuration
+had to modify the configuration each module's `.config` file.
+Unfortunately, these modifications did not persist through upgrades,
+so users were responsible for restoring their configurations post-upgrade.
+
+Hyrax 1.15.2 introduces the _site.conf_ file in. Within _site.conf_,
+users can store custom module configurations that will persist through upgrades.
+When starting up, the BES loads all the configuration files for each module,
+but it reads the configuration for _site.conf_ last, 
+thereby overwriting the modules' default configuration settings.
+
+Beginning with Hyrax 1.15.3, Hyrax will include a template file,
+_site.conf.proto_, that will include many commonly modified settings
+and that will reside in `\etc\bes`. All of _site.conf.pronto_ will be commented;
+to take advantage of the template, users must copy _site.conf.pront_
+to _site.conf_ with the following command:
+`cp site.conf.pronto site.conf`, and they must uncomment the settings that
+they would like to modify.
+
+== Configuration Instructions
+
+To customize configuration settings in _site.conf_, follow the following instructions:
+
+1. Create _site.conf_ in `\etc\bes` with the following command: `sudo touch site.conf`.
+2. Copy the data you would like the customize into site.conf from the 
+individual configuration files.
++
+*Example:* The following is the default BES Server Administrator configuraiton
+from **INSERT LOCATION HERE**:
++
+----
+BES.ServerAdministrator=email:support@opendap.org
+BES.ServerAdministrator+=organization:OPeNDAP Inc.
+BES.ServerAdministrator+=street:165 NW Dean Knauss Dr.
+BES.ServerAdministrator+=city:Narragansett
+BES.ServerAdministrator+=region:RI
+BES.ServerAdministrator+=postalCode:02882
+BES.ServerAdministrator+=country:US
+BES.ServerAdministrator+=telephone:+1.401.575.4835
+BES.ServerAdministrator+=website:http://www.opendap.org
+----
++
+Users who want to update the Server Administrator information
+should copy it from its default location to site.conf.
+There, they can update to their organization's information:L
++
+....
+BES.ServerAdministrator=email:smootchy@woof.org
+BES.ServerAdministrator+=organization:Mogogogo Inc.
+BES.ServerAdministrator+=street:165 Buzzknucker Blvd.
+BES.ServerAdministrator+=city: KnockBuzzer
+BES.ServerAdministrator+=region:OW
+BES.ServerAdministrator+=postalCode:00007
+BES.ServerAdministrator+=country:MG
+BES.ServerAdministrator+=telephone:+1.800.555.1212
+BES.ServerAdministrator+=website:http://www.mogogogo.org
+....
+
+3. Save the file, and restart Hyrax. 
+
+NOTE: If modifying such information as the Server Administrator information,
+you want to use `+=`. This means that you are adding module configuration,
+rather than overwriting them entirely.
