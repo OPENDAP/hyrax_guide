@@ -2,39 +2,49 @@
 
 == About
 
-Many users configure at least one of Hyrax's many modules,
-the most common example being the BES's server administrator parameters.
 Prior to Hyrax 1.15.2, users who wanted to customize a module's configuration
-had to modify the configuration each module's `.config` file.
-Unfortunately, these modifications did not persist through upgrades,
-so users were responsible for restoring their configurations post-upgrade.
+had to modify individual moduels'  configuration files, 
+which unfortunately do not persist through updates.
+Users, therefore, were responsible for restoring their custom configurations post-upgrade.
 
-Hyrax 1.15.2 introduces the _site.conf_ file in. Within _site.conf_,
-users can store custom module configurations that will persist through upgrades.
-When starting up, the BES loads all the configuration files for each module,
-but it reads the configuration for _site.conf_ last, 
-thereby overwriting the modules' default configuration settings.
+Hyrax 1.15.2 introduces _site.conf_, where users can store
+custom module configuraitons that will persist through updates.
+To take advantage of _site.conf_, please see its <<site-conf-config>>.
 
 Beginning with Hyrax 1.15.3, Hyrax will include a template file,
-_site.conf.proto_, that will include many commonly modified settings
-and that will reside in `\etc\bes`. All of _site.conf.pronto_ will be commented;
-to take advantage of the template, users must copy _site.conf.pront_
-to _site.conf_ with the following command:
-`cp site.conf.pronto site.conf`, and they must uncomment the settings that
-they would like to modify.
+_site.conf.proto_, that will include many commonly-modified settings.
+To take advantage of the template, please see its <<site-conf-proto-config>>.
 
-== Configuration Instructions
+== How does it work?
 
-To customize configuration settings in _site.conf_, follow the following instructions:
+When the BES is launched, it loads the configuration files for each module
+_before_ it loads _site.conf_. It overwrites previously-read configuration
+instructions with those that it discovers in _Site.conf_.
 
-1. Create _site.conf_ in `\etc\bes` with the following command: `sudo touch site.conf`.
-2. Copy the data you would like the customize into site.conf from the 
-individual configuration files.
+[[site-conf-config,configuration instructions section]]
+== _site.conf_ Configuration Instructions
+
+The following details how users can customize a module's configuration with _site.conf_:
+
+1. Create _site.conf_ in `\etc\bes` with the following command:
 +
-*Example:* The following is the default BES Server Administrator configuraiton
+....
+sudo touch site.conf
+....
++
+2. Copy the configuration settings that you would like the customize 
+into _site.conf_ from the individual configuration files. For an example, 
+please see the <<site-conf-example-configuration>> section.
+3. Save your updates to _site.conf_.
+4. Restart the server.
+
+[[site-conf-example-configuration,example configuration]]
+== _site.conf_ Configuraiton Example
+
+The following is the default BES Server Administrator configuraiton
 from **INSERT LOCATION HERE**:
-+
-----
+
+....
 BES.ServerAdministrator=email:support@opendap.org
 BES.ServerAdministrator+=organization:OPeNDAP Inc.
 BES.ServerAdministrator+=street:165 NW Dean Knauss Dr.
@@ -44,12 +54,13 @@ BES.ServerAdministrator+=postalCode:02882
 BES.ServerAdministrator+=country:US
 BES.ServerAdministrator+=telephone:+1.401.575.4835
 BES.ServerAdministrator+=website:http://www.opendap.org
-----
-+
-Users who want to update the Server Administrator information
-should copy it from its default location to site.conf.
-There, they can update to their organization's information:L
-+
+....
+
+If you would like to update the `ServerAdministrator`
+parameters with your own information, copy the above block of text
+from its default configuration file to _site.conf_.
+Once you have copied the text, update it with your organization's information:
+
 ....
 BES.ServerAdministrator=email:smootchy@woof.org
 BES.ServerAdministrator+=organization:Mogogogo Inc.
@@ -62,8 +73,27 @@ BES.ServerAdministrator+=telephone:+1.800.555.1212
 BES.ServerAdministrator+=website:http://www.mogogogo.org
 ....
 
-3. Save the file, and restart Hyrax. 
+NOTE: When adding parameters to the `ServerAdministrator` setting,
+notice how used `+=` instead of just `+` following the first addition.
+`+=` indicates to the system that you are adding new configuration parameters,
+rather than overrwriting those that were already loaded. Had we used just `+`
+in the above example, the only configured parameter would have been `website`.
 
-NOTE: If modifying such information as the Server Administrator information,
-you want to use `+=`. This means that you are adding module configuration,
-rather than overwriting them entirely.
+[[site-conf-proto-config,configuration instructions section]]
+== _site.conf.proto_ Configuration Instructions
+
+The entirety of _site.conf.proto_
+will be commented; users who want to take advantage of the template
+must copy _site.conf_proto_ into _site.conf_ with the following command:
+
+....
+cp site.conf.proto site.conf
+....
+
+and that will reside in `\etc\bes`.
+
+All of _site.conf.pronto_ will be commented;
+to take advantage of the template, users must copy _site.conf.pront_
+to _site.conf_ with the following command:
+`cp site.conf.pronto site.conf`, and they must uncomment the settings that
+they would like to modify.
