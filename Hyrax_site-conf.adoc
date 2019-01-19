@@ -1,27 +1,29 @@
-= site.conf
+= Custom Module Configuration, _site.conf_
 
 == About
 
-Prior to Hyrax 1.15.2, users who wanted to customize a module's configuration
-had to modify individual moduels'  configuration files, 
-which unfortunately do not persist through updates.
+Prior to Hyrax 1.15.2, users who wanted to customize their modules' configurations
+had to modify their _.config_ files, which do not persist through updates.
 Users, therefore, were responsible for restoring their custom configurations post-upgrade.
 
-Hyrax 1.15.2 introduces _site.conf_, where users can store
-custom module configuraitons that will persist through updates.
-To take advantage of _site.conf_, please see its <<site-conf-config>>.
+Hyrax 1.15.2 introduces _site.conf_, a special configuration file
+that persists through updates, where users can store custom module configuraitons.
+To start using _site.conf_, please see its 
+<<site-conf-config, configuration instruction section>>.
 
 Beginning with Hyrax 1.15.3, Hyrax will include a template file,
 _site.conf.proto_, that will include many commonly-modified settings.
-To take advantage of the template, please see its <<site-conf-proto-config>>.
+To use the template, please see its 
+<<site-conf-proto-config, configuration instruction section>>.
 
 == How does it work?
 
 When the BES is launched, it loads the configuration files for each module
-_before_ it loads _site.conf_. It overwrites previously-read configuration
-instructions with those that it discovers in _Site.conf_.
+_before_ it loads _site.conf_. As it loads _site.conf_,
+it overrides existing configuration key/value pairs with those
+that the user has copied into _site.conf_.
 
-[[site-conf-config,configuration instructions section]]
+[[site-conf-config]]
 == _site.conf_ Configuration Instructions
 
 The following details how users can customize a module's configuration with _site.conf_:
@@ -32,18 +34,20 @@ The following details how users can customize a module's configuration with _sit
 sudo touch site.conf
 ....
 +
-2. Copy the configuration settings that you would like the customize 
+2. Copy the configuration key/value pairs that you would like to customize 
 into _site.conf_ from the individual configuration files. For an example, 
-please see the <<site-conf-example-configuration>> section.
+please see the <<site-conf-example-configuration, example configuration>> section.
 3. Save your updates to _site.conf_.
 4. Restart the server.
 
-[[site-conf-example-configuration,example configuration]]
+[[site-conf-example-configuration, site.conf Configuration Example]]
 == _site.conf_ Configuraiton Example
 
-The following is the default BES Server Administrator configuraiton
-from **INSERT LOCATION HERE**:
+A user updates the BES's `ServerAdministrator` configuration 
+with their organization's information:
 
+1. The user locates the existing `ServerAdministrator` configuration:
++
 ....
 BES.ServerAdministrator=email:support@opendap.org
 BES.ServerAdministrator+=organization:OPeNDAP Inc.
@@ -55,12 +59,12 @@ BES.ServerAdministrator+=country:US
 BES.ServerAdministrator+=telephone:+1.401.575.4835
 BES.ServerAdministrator+=website:http://www.opendap.org
 ....
-
-If you would like to update the `ServerAdministrator`
-parameters with your own information, copy the above block of text
-from its default configuration file to _site.conf_.
-Once you have copied the text, update it with your organization's information:
-
++
+2. The user copies the above block of text 
+from its default _.config_ file to _site.conf_.
+3. After copying the block of text, the user updates it 
+with his or her information; for example...
++
 ....
 BES.ServerAdministrator=email:smootchy@woof.org
 BES.ServerAdministrator+=organization:Mogogogo Inc.
@@ -72,28 +76,27 @@ BES.ServerAdministrator+=country:MG
 BES.ServerAdministrator+=telephone:+1.800.555.1212
 BES.ServerAdministrator+=website:http://www.mogogogo.org
 ....
++
+4. The user saves his or her changes and restarts the server.
 
-NOTE: When adding parameters to the `ServerAdministrator` setting,
-notice how used `+=` instead of just `+` following the first addition.
-`+=` indicates to the system that you are adding new configuration parameters,
-rather than overrwriting those that were already loaded. Had we used just `+`
-in the above example, the only configured parameter would have been `website`.
+NOTE: When adding key/value pairs to the `ServerAdministrator` configuration,
+notice how, following the first key/value pair, we used `+=` instead of just `+`.
+`+=` indicates to the system that we are adding new configuration parameters,
+rather than overriding those that were already loaded. Had we used just `+`
+in the above example, the only configured key/value pair would have been `website`.
 
 [[site-conf-proto-config,configuration instructions section]]
 == _site.conf.proto_ Configuration Instructions
 
-The entirety of _site.conf.proto_
-will be commented; users who want to take advantage of the template
-must copy _site.conf_proto_ into _site.conf_ with the following command:
+The _site.conf.proto_ template resides in `\etc\bes`.
+Users who want to take advantage of the template must first copy
+_site.conf.proto_ into _site.conf_ with the following command:
 
 ....
 cp site.conf.proto site.conf
 ....
 
-and that will reside in `\etc\bes`.
-
-All of _site.conf.pronto_ will be commented;
-to take advantage of the template, users must copy _site.conf.pront_
-to _site.conf_ with the following command:
-`cp site.conf.pronto site.conf`, and they must uncomment the settings that
-they would like to modify.
+The entirety of _site.conf_ will be commented. Users should uncomment
+the settings that they would like to modify and update the key value pairs.
+For an _site.conf_ configuration example, please see the previous section,
+<<site-conf-example-configuration>>.
