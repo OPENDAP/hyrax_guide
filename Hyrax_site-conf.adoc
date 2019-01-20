@@ -1,32 +1,34 @@
-= Custom Module Configuration, _site.conf_
+= Custom Module Configuration with _site.conf_
 
 == About
 
-Prior to Hyrax 1.15.2, users who wanted to customize their modules' configurations
-had to modify their _.config_ files, which do not persist through updates.
-Users, therefore, were responsible for restoring their custom configurations post-upgrade.
+Prior to Hyrax 1.15.2, users who wanted to customize a modules' configuration
+had to modify its _.config_ file. 
+Unfortunately, _.config_ files do not persist through updates,
+so users were responsible for restoring their custom configurations post-update.
 
 Hyrax 1.15.2 introduces _site.conf_, a special configuration file
-that persists through updates, where users can store custom module configuraitons.
+that persists through updates, where users can store custom module configurations.
 To start using _site.conf_, please see its 
 <<site-conf-config, configuration instruction section>>.
 
-Beginning with Hyrax 1.15.3, Hyrax will include a template file,
+Beginning with Hyrax 1.15.3, Hyrax will ship with a template file,
 _site.conf.proto_, that will include many commonly-modified settings.
 To use the template, please see its 
 <<site-conf-proto-config, configuration instruction section>>.
 
-== How does it work?
+== Theory of Operation
 
-When the BES is launched, it loads the configuration files for each module
-_before_ it loads _site.conf_. As it loads _site.conf_,
-it overrides existing configuration key/value pairs with those
-that the user has copied into _site.conf_.
+When Tomcat launches the BES, the BES loads the module configuration files that reside within `/etc/bes/modules`.
+The BES then loads _site.conf_, which resides in `/etc/bes`.
+
+As the BES reads the user-configured parameters that he or she has copied into _site.conf_, 
+the BES overrides the default configuration parameters that it loaded from the individual module configuration files.
 
 [[site-conf-config]]
 == _site.conf_ Configuration Instructions
 
-The following details how users can customize a module's configuration with _site.conf_:
+The following details how users can customize a module's configuration with _site.conf:_
 
 1. Create _site.conf_ in `\etc\bes` with the following command:
 +
@@ -35,13 +37,13 @@ sudo touch site.conf
 ....
 +
 2. Copy the configuration key/value pairs that you would like to customize 
-into _site.conf_ from the individual configuration files. For an example, 
+from the individual configuration files into _site.conf_. For an example, 
 please see the <<site-conf-example-configuration, example configuration>> section.
 3. Save your updates to _site.conf_.
 4. Restart the server.
 
 [[site-conf-example-configuration, site.conf Configuration Example]]
-== _site.conf_ Configuraiton Example
+== _site.conf_ Configuration Example
 
 A user updates the BES's `ServerAdministrator` configuration 
 with their organization's information:
@@ -98,5 +100,5 @@ cp site.conf.proto site.conf
 
 The entirety of _site.conf_ will be commented. Users should uncomment
 the settings that they would like to modify and update the key value pairs.
-For an _site.conf_ configuration example, please see the previous section,
+For a _site.conf_ configuration example, please see the previous section,
 <<site-conf-example-configuration>>.
