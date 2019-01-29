@@ -1,39 +1,54 @@
 = Earthdata Login OAuth2
 
-Former iterations of Hyrax offered only the _mod_auth_urs_ Apache module 
-to provide users with support for NASA’s OAuth2 Earthdata login services, 
-also known as the User Registration System (URS). 
-_Mod_auth_urs_ is inconvenient for some users, 
-in that it must be bound to an instance of Apache webserver, 
-which is not required to run the OPeNDAP software.
+If you wanted to secure the data on your server with 
+NASA’s OAuth2 Earthdata Login services prior to Hyrax 1.15.2,
+your only option was `mod_auth_urs`.
+While `mod_auth_urs` is robust and thoroughly tested,
+it is inconvenient for some in that it must be bound 
+to an instance of Apache webserver, which is not required to run Hyrax.
 
-For users who do not need the Apache webserver, Hyrax now offers a standalone 
-implementation of the Earthdata login client that can be deployed using only 
-Tomcat or a preferred servlet engine.
+If you do not need Apache webserver but would still like to
+take advantage of NASA’s OAuth2 Earthdata login services,
+also known as the User Registration System (URS),
+Hyrax 1.15.2 offers a standalone implementation 
+of the Earthdata Login Client that can deployed 
+using only Tomcat or a preferred servlet engine.
 
-If you are looking for instructions on how to conifgure `mod_auth_urs`,
-please see the <<apache-httpd-auth-services-config, Apache/URS section on this page>>.
+If you require a robust security solution that has undergone
+thorough testing, you should implement mod_auth_urs.
+You can find instructions for configuring mod_auth_urs 
+in the Apache/URS section of this manual.
+
+//TODO: Add link to this section!
+
+IMPORTANT:	To take advantage of this feature, 
+you must create an Earthdata Login Application. 
+If you have not yet done this, see the 
+Nasa’s Earthdata Login - OAuth2 (mod_auth_urs) section of this manual.
+
+// TODO: Add the link to this section!
 
 == Enabling Hyrax's Standalone Earthdata Login Client Implementation
 
 To enable Hyrax’s standalone implementation of the Earthdata login, 
-you need to first modify a few lines of code in the _web.xml_ file. 
-If you installed Tomcat using the instructions in this manual (via `yum`), 
+you need to first modify a few lines of code in _web.xml_. 
+If you installed Tomcat using the instructions in this manual (via `YUM`), 
 you can locate _web.xml_ at the following location: 
 `/usr/share/tomcat/webapps/opendap/WEB-INF/`.
 
-WARNING: You should generally avoid editing _web.xml_, 
+NOTE: You should generally avoid editing _web.xml_, 
 since the file is overwritten whenever you upgrade to a new version of Hyrax;
 however, in the software’s current iteration, 
 the only way to enable Hyrax’s standalone implementation of the 
 Earthdata login client is by modifying _web.xml_.
 
-After navigating to the above directory and opening web.xml, 
-scroll down until you encounter the Identity Provider (IdP) 
-filter and the Policy Enforcement Point (PEP) filter, 
-both of which are commented out (see the code block below). 
-To enable this feature, uncomment these two filters.
+After navigating to `/usr/share/tomcat/webapps/opendap/WEB-INF/`...
 
+1.	Open _web.xml_.
+2.	Scroll down until you locate the Identity Provider (IdP) 
+filter and the Policy Enforcement Point (PEP) filter, both of which are commented.
+3.	Remove the comments around these filters:
++
 ....
     <!-- Uncomment These two filters to enable access control.
     <filter>
@@ -63,17 +78,17 @@ and the PEP filter determines what users can or cannot do.
 
 == Configuring the Identification Provider
 
-After uncommenting the IdP and PEP filters in _web.xml_, you must configure
-the Identification Provider (`IdProvider`) by modifying a few lines of code
-in _user-access.xml_, which (if you installed Tomcat via `yum`) 
-can be found in one of the following locations:
+After uncommenting the `IdP` and `PEP` filters in _web.xml_, 
+you must link your server to your Earthdata Login Application 
+by configuring the identification provider.
 
-1.	`/etc/olfs`
-2.	`/usr/share/olfs`
+You must first modify a few lines of code in user-access.xml. If you installed Tomcat via YUM, user-access.xml can be found in one of the following locations:
 
-NOTE: If neither of these directories exist, 
-please reference the
-link:https://opendap.github.io/hyrax_guide/Master_Hyrax_Guide.html#_localizing_the_olfs_configuration_under_selinux[Localizing the OLFS Configuration] section.
+* /etc/olfs
+* /usr/share/olfs
++
+NOTE: If neither of these directories exist, see the
+link:https://opendap.github.io/hyrax_guide/Master_Hyrax_Guide.html#_localizing_the_olfs_configuration_under_selinux[Localizing the OLFS Configuration] section of this manual
 
 After accessing the file, scroll down until you locate the 
 `IdProvider` element:
@@ -88,20 +103,23 @@ After accessing the file, scroll down until you locate the
 </IdProvider>
 ....
 
-To configure your Identification provider, update the child elements 
-of the IdProvider element (specifically UrsClientID and URSClientAuthCode) 
-with your application credential information. 
-If you have not yet created an Earthdata Login Application, 
-please see link:https://opendap.github.io/hyrax_guide/Master_Hyrax_Guide.html#_nasas_earthdata_login_oauth2_mod_auth_urs[Nasa’s Earthdata Login - OAuth2 (mod_auth_urs) section].
-For more information about generating the `<URSClientAuthCode>`, please see the following section.
+Configure your identification provider by updating the following child elements:
 
-NOTE: For the `<UrsClientAuthCode> URL`, `urs` is the production service, 
-and `uat` is the test service. 
-You should hook up your server to the one that is right for you.
+* `authContex`: Determines whether you are using the production (`urs`) or test (`uat`) service.
+Only NASA-authorized applications can use the production service.
+* `UrsClientID`: The Client ID can be located on your application’s
+Application Administration page.
+* `UrsClientAuthCode`: You must generate the authorization code
+using your Earthdata Login Application’s Client ID and password.
+See <<compute-urs-code,the following section>> for more information. 
+* `UrsUrl`: Depending on the authContext, should be one of the following:
+** https://*uat.urs*.earthdata.nasa.gov
+** https://*urs*.earthdata.nasa.gov
 
+[[compute-urs-code]]
 == Compute `<URSClientAuthCode>`
 
-There are three methods for computing the URS client authorization code:
+You can compute the URS client authorization code with one of the following methods:
 
 . Shell Script:
 +

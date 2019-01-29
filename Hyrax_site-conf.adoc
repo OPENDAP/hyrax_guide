@@ -1,3 +1,4 @@
+[[site-conf]]
 = Custom Module Configuration with _site.conf_
 
 == About

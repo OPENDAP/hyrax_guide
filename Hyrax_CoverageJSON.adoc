@@ -1,7 +1,7 @@
 == CoverageJSON
 
 CoverageJSON uses heuristics to determine if a data set is suitable for CoverageJSON expression.
-You can take advantage of the CoverageJSON feature in one of two ways:
+You can take advantage of the CoverageJSON feature in the following ways:
 
 * Click the _Get as CoverageJSON_ button in the Data Request Form:
 +
@@ -15,7 +15,5 @@ http://test.opendap.org:8080/opendap/data/nc/coads_climatology.nc
 ** *After:*
 http://test.opendap.org:8080/opendap/data/nc/coads_climatology.nc.covjson
 
-
-It also works for DAP4. It is a data response. it is a secondary encoding of the primary dap4 response, so it's url expression 
-
-If you do `.dap.covjson`, it will return it as a JSON file.
+//It also works for DAP4. It is a data response. it is a secondary encoding of the primary dap4 response, so it's url expression 
+// If you do `.dap.covjson`, it will return it as a JSON file.

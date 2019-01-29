@@ -13,13 +13,18 @@ not as close as you need it to be. By using the MDS, you can reduce
 the time it takes to look through files
 and make quick decisions based on the metadata that the MDS has saved;
 however, because the underlying data in the MDS does not update automatically, 
-the metadata may be out-of-sync with the actual data.
+the metadata may be out of sync with the actual data.
 
 === Enable or Disable the MDS
 
 To enable or disable the MDS, access `dap.conf` in the 
 `/etc/bes/modules` directory, and remove the comment before 
-the following line of code: `DAP.GlobalMetadataStore.path = /usr/share/mds`. 
+the following line of code:
+
+....
+DAP.GlobalMetadataStore.path = /usr/share/mds
+....
+
 See the code block below for the MDS section of `dap.conf`:
 
 ----
@@ -55,20 +60,23 @@ DAP.GlobalMetadataStore.ledger = /usr/share/mds_ledger.txt
 
 === Configure the MDS
 
-// the site.conf section is yet to be written.
-
 The MDS' parameters should be configured in `site.conf`. 
-For more information, please see the `site.conf` section. 
+For more information, please see <<site-conf,the site.conf section>>. 
 
 To configure the MDS to work as a store, rather than a cache, 
 set the `Dap.GlobalMetadataSote.size` to 0.
+To configure the MDS as a cache, set it to your desired size.
 
 === Cache Ejection Strategy
 
 The MDS caches complete metadata responses and serves those directly.
 
 The MDS can be configured to not exceed a certain size. 
-When the configured size is filled up, the MDS will 
-eject the metadata files in the cache that were least recently accessed.
+When the configured size is met, the MDS ejects
+the metadata files in the cache that were least recently accessed.
 
 By default the metadata files are stored in `usr/share/mds`.
+You can change this location by modifying the 
+`DAP.GlobalMetadataStore.path`. You can modify this parameter
+in _dap.conf_, but you should modify it in _site.conf_.
+For more information, please see <<site-conf,the site.conf section>>. 
