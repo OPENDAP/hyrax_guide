@@ -23,6 +23,8 @@ languages. jhrg 9/17/17
 
 include::preface.adoc[lines="1..2,7..-1", leveloffset=+1]
 
+include::Hyrax_1-15-2_release_features.adoc[lines="3..-1", leveloffset+0]
+
 ////
 TODO Make this a multi-part book? Maybe... To do that with the
 content we have, raise the levels up one notch. That means reduce the

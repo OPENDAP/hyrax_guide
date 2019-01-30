@@ -1,3 +1,4 @@
+[[hyrax-standalone-earthdata-login-client]]
 = Earthdata Login OAuth2
 
 If you wanted to secure the data on your server with 

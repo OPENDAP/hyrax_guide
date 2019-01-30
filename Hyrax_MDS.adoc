@@ -1,4 +1,5 @@
-== MetaData Store (MDS)
+[[mds]]
+= MetaData Store (MDS)
 
 A new cache, the MetaData Store (MDS), has been added to the BES for 
 metadata responses. This cache is unlike the other 
@@ -15,7 +16,7 @@ and make quick decisions based on the metadata that the MDS has saved;
 however, because the underlying data in the MDS does not update automatically, 
 the metadata may be out of sync with the actual data.
 
-=== Enable or Disable the MDS
+== Enable or Disable the MDS
 
 To enable or disable the MDS, access `dap.conf` in the 
 `/etc/bes/modules` directory, and remove the comment before 
@@ -58,7 +59,7 @@ DAP.GlobalMetadataStore.ledger = /usr/share/mds_ledger.txt
 # DAP.Use.Dmrpp = yes
 ----
 
-=== Configure the MDS
+== Configure the MDS
 
 The MDS' parameters should be configured in `site.conf`. 
 For more information, please see <<site-conf,the site.conf section>>. 
@@ -67,7 +68,7 @@ To configure the MDS to work as a store, rather than a cache,
 set the `Dap.GlobalMetadataSote.size` to 0.
 To configure the MDS as a cache, set it to your desired size.
 
-=== Cache Ejection Strategy
+== Cache Ejection Strategy
 
 The MDS caches complete metadata responses and serves those directly.
 

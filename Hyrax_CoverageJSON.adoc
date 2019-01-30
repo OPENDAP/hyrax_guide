@@ -1,4 +1,5 @@
-== CoverageJSON
+[[cov-json]]
+= CoverageJSON
 
 CoverageJSON uses heuristics to determine if a data set is suitable for CoverageJSON expression.
 You can take advantage of the CoverageJSON feature in the following ways:
