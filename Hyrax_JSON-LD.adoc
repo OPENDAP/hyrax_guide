@@ -12,10 +12,12 @@ catalog, index, and find the data that you want the world to access.
 
 The JSON-LD is dynamically built from the metadata. It uses the MDS metadata if it is there; otherwise, it loads it from the file.
 
-== How to Use it
+== Configuration Instructions
 
-The server ships with this enabled. By default all the information 
-about the publisher is set to OPeNDAP:
+//Talk about how to disable, maybe?
+
+The server ships with this feature enabled. By default the publisher information 
+is set to OPeNDAP:
 
 ----
 BES.ServerAdministrator=email:support@opendap.org
@@ -29,6 +31,7 @@ BES.ServerAdministrator+=telephone:+1.401.575.4835
 BES.ServerAdministrator+=website:http://www.opendap.org
 ----
 
-This can be configured in `/etc/bes/bes.conf`;
-however, it should be configured in `site.conf`.
-For more information, please see the <<site-conf,site.conf section>>.
+This information can and should be updated to your organization's information.
+You can update the information in `/etc/bes/bes.conf`;
+however, you should configure the parameters in `site.conf`.
+For more information, see the <<site-conf,site.conf section>>.
