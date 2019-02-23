@@ -59,6 +59,16 @@ Or, if you installed tomcat from the ASF distribution, its web application direc
 ....
 /usr/local/apache-tomcat-8.5.34/webapps
 ....
+=== CentOS-7/SELinux and Yum installed Tomcat
+Recent versions of CentOS-7 are shipped with default SELinux settings that prohibit Tomcat from reading or opening the *opendap.war* file. This can be addressed by issuing the following two commands:
+----
+sudo semanage fcontext -a -t tomcat_var_lib_t /var/lib/tomcat/webapps/opendap.war
+sudo restorecon -rv /var/lib/tomcat/webapps/
+----
+After this you will need to restart Tomcat:
+----
+sudo service tomcat restart
+----
 
 ////
 If you're replacing an older version of the OLFS you may need do one or more of:

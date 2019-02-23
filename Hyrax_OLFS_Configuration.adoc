@@ -106,12 +106,13 @@ SELinux (which is a special gift you get with CentOS-7) will cause some new chal
 not familiar with the changes it brings to the system environment. For one, Tomcat runs as a
 _confined_ user. Here we'll examine how these changes affect the OLFS.
 
-The most recent version of CentOS-7 (latest) has default SELinux settings that prohibit Tomcat from reading or opening the *opendap.war* file. This can be remediated by issuing the following two commands:
+===== Allowing Tomcat to unpack the *opendap.war* file.
+Recent versions of CentOS-7 are shipped with default SELinux settings that prohibit Tomcat from reading or opening the *opendap.war* file. This can be addressed by issuing the following two commands:
 ----
 sudo semanage fcontext -a -t tomcat_var_lib_t /var/lib/tomcat/webapps/opendap.war
 sudo restorecon -rv /var/lib/tomcat/webapps/
 ----
-After this you will need to restart tomcat:
+After this you will need to restart Tomcat:
 ----
 sudo service tomcat restart
 ----
