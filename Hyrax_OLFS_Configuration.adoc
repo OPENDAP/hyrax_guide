@@ -1277,22 +1277,23 @@ You will need to add four attributes:
 ----
 compression="force"
 compressionMinSize="2048"
-noCompressionUserAgents="gozilla, traviata"
-compressableMimeType="text/html,text/xml,application/octet-stream"
+compressableMimeType="text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/octet-stream,application/vnd.opendap.dap4.dataset-services+xml,application/vnd.opendap.dap4.dataset-metadata+xml,application/vnd.opendap.dap4.data,application/vnd.opendap.dap4.error+xml,application/json,application/prs.coverage+json,application/rdf+xml,application/x-netcdf;ver=4,application/x-netcdf,image/tiff;application=geotiff"
 ----
 
-Notice that there is a list of compressible MIME types. Basically:
+The list of compressible MIME types includes all known response types for Hyrax.
 
-* *compression="no"* means nothing gets compressed.
+The *compression* attribute may have the following values:
+
+* *compression="no"* means nothing gets compressed (default if not provided).
 * *compression="yes"* means only the compressible MIME types get
 compressed.
 * *compression="force"* means everything gets compressed (assuming the
 client accepts gzip and the response is bigger than compressionMinSize)
 
-You MUST set *compression="force"* for compression to work with the
+NOTE: You MUST set *compression="force"* for compression to work with the
 OPeNDAP data transport.
 
-The final result being:
+When finished your *Connector* element should look like this:
 
 ----
     <Connector
@@ -1302,8 +1303,9 @@ The final result being:
         redirectPort="8443"
         compression="force"
         compressionMinSize="2048"
-        compressableMimeType="text/html,text/xml,application/octet-stream"
-    />
+        compressableMimeType="text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/octet-stream,application/vnd.opendap.dap4.dataset-services+xml,application/vnd.opendap.dap4.dataset-metadata+xml,application/vnd.opendap.dap4.data,application/vnd.opendap.dap4.error+xml,application/json,application/prs.coverage+json,application/rdf+xml,application/x-netcdf;ver=4,application/x-netcdf,image/tiff;application=geotiff"
+     />
+
 ----
 
 Restart Tomcat for these changes to take effect.
