@@ -1260,16 +1260,16 @@ be the only <__Connector__> element whose _port_ attribute is set equal
 to 8080. You will need to add or change several of its attributes to
 enable compression.
 
-With our Tomcat 5.5 distribution, we found this default <__Connector__>
+With our Tomcat 7.0.76 distribution, we found this default <__Connector__>
 element definition in our _server.xml_ file:
 
 ----
-    <Connector port="8080" maxHttpHeaderSize="8192"
-        maxThreads="150" minSpareThreads="25" maxSpareThreads="75";
-        enableLookups="false" redirectPort="8443" acceptCount="100"
-        connectionTimeout="20000" disableUploadTimeout="true"
-        compression="no"
-     >
+    <Connector
+        port="8080"
+        protocol="HTTP/1.1"
+        connectionTimeout="20000"
+        redirectPort="8443"
+    />
 ----
 
 You will need to add four attributes:
@@ -1295,19 +1295,29 @@ OPeNDAP data transport.
 The final result being:
 
 ----
-    <Connector port="8080" maxHttpHeaderSize="8192"
-        maxThreads="150" minSpareThreads="25" maxSpareThreads="75";
-        enableLookups="false" redirectPort="8443" acceptCount="100"
-        connectionTimeout="20000" disableUploadTimeout="true"
-        compression="no"
+    <Connector
+        port="8080"
+        protocol="HTTP/1.1"
+        connectionTimeout="20000"
+        redirectPort="8443"
         compression="force"
         compressionMinSize="2048"
-        noCompressionUserAgents="gozilla, traviata"
         compressableMimeType="text/html,text/xml,application/octet-stream"
-     >
+    />
 ----
 
 Restart Tomcat for these changes to take effect.
+
+You can verify the change by using curl as follows:
+----
+curl -H "Accept-Encoding: gzip" -I http://localhost:8080/opendap/data/nc/fnoc1.nc.ascii
+----
+NOTE: The above URL is for Hyrax running on your local system and accessing a dataset that ships with the server.
+
+You'll know that compression is enabled if the response to the curl command contains:
+----
+Content-Encoding: gzip
+----
 
 NOTE: If you are using Tomcat in conjunction with the Apache Web Server
 (our friend httpd) via AJP you will need to also
