@@ -423,6 +423,7 @@ _Example:_
         <adminPort>11002</adminPort>
     </BES>
 </BESManager >
+
 ----
 
 === *<CatalogCache>* Element
