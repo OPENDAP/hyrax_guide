@@ -302,6 +302,7 @@ _Example:_
         <ClientPool maximum="10" maxCmds="2000" />
     </BES>
 </BESManager >
+
 ----
 
 
@@ -599,6 +600,7 @@ For information about logging, please check out the
 === Authentication and Authorization
 
 The following sub-sections detail authentication and authorization.
+
 
 ==== Apache Web Server (httpd)
 
