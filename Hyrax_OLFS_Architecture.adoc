@@ -8,9 +8,47 @@
 == OLFS Configuration
 
 This document should help you get started configuring the OLFS web
-application component of Hyrax.
+application component of Hyrax. This software package was developed,
+compiled, and tested using the java 1.6.x compiler, the 1.6.x Java
+Virtual Machine, and Jakarta Tomcat 7.x.x (which also provided the
+javax.servlet packages).
 
-Additionally the OLFS web application relies on one or more instances of the
+The OLFS web application is composed of these servlets:
+
+* *Hyrax servlet* - The Hyrax servlet provides DAP (and other) services
+for the Hyrax server. The Hyrax servlet does the majority of the work in
+the OLFS web application. It does this by providing a flexible
+"dispatch" mechanism through which incoming requests are evaluated by a
+series of DispatchHandlers (pieces of software) that can choose to
+handle or ignore the request. The OLFS ships with a standard set of
+DispathHandlers which handle requests for OPeNDAP data products, THREDDS
+catalogs, and OPeNDAP directories. These defalut DispatchHandlers can be
+augmented by adding custom handlers without the need to recompile the
+software. All of the DispatchHandlers used by the Hyrax servlet are
+identified in the *olfs.xml* configuration file.
+* *Viewers servlet* - The Viewers servlet provides a service for
+datasets through which both the Web Services and Java WebStart applications that
+might be used with the dataset are identified.
+The Viewers servlet is configured via the *viewers.xml* file.
+* *Docs servlet* - The Docs servlet provides clients access to a tree of
+static documents. By default, a minimal set of documents are provided
+(containing information about Hyrax). These can be replaced by user
+supplied documents and images. By changing the images and documents
+available through the Docs servlet, the data provider can further
+customize the appearance and layout of the Hyrax server web pages, making them
+conform better to their parent organization's visual identity. The Docs
+servlet has no specific configuration file.
+* <<admin-interface, *Admin Interface Servlet*>> - The Hyrax Administration 
+Interface (HAI) provides server administrators with a GUI for monitoring,
+controlling, and configuring the server.
+* <<gateway-service, *Gateway Servlet*>> - The Gateway Servlet provides 
+a gateway service that allows Hyrax to be configured to
+retrieve files (that the server recognizes as data) from the web and
+then provides DAP services for the retrieved files. The
+Gateway servlet does not require additional configuration, yet the
+BES must be correctly configured to perform gateway tasks.
+
+Additionally the OLFS web application relies on one or more instances of the 
 <<bess-configuration, BES>> to provide it with
 data access and basic catalog metadata.
 
@@ -18,6 +56,10 @@ The OLFS web application stores its configuration state in a number of
 files. The server's configuration is altered by carefully modifying the
 content of one or more of these files and then restarting the web
 application (or simply restarting Tomcat).
+
+The remainder of this document is concerned with how to correctly
+configure the Hyrax and Viewers servlets - the primary components of the
+OLFS web application.
 
 [[OLFS-config-location]]
 === Location of the OLFS Configuration Files
@@ -63,6 +105,17 @@ then utilize it. You can then edit the local copy.
 SELinux (which is a special gift you get with CentOS-7) will cause some new challenges for those
 not familiar with the changes it brings to the system environment. For one, Tomcat runs as a
 _confined_ user. Here we'll examine how these changes affect the OLFS.
+
+===== Allowing Tomcat to unpack the *opendap.war* file.
+Recent versions of CentOS-7 are shipped with default SELinux settings that prohibit Tomcat from reading or opening the *opendap.war* file. This can be addressed by issuing the following two commands:
+----
+sudo semanage fcontext -a -t tomcat_var_lib_t /var/lib/tomcat/webapps/opendap.war
+sudo restorecon -rv /var/lib/tomcat/webapps/
+----
+After this you will need to restart Tomcat:
+----
+sudo service tomcat restart
+----
 
 ===== Localizing the OLFS Configuration under SELinux
 When using a _yum_ installed Tomcat on CentOS-7.x (or any other Linux
@@ -115,16 +168,23 @@ journalctl -u tomcat
 ----
 
 
-=== OLFS Configuration Files
+=== Retired
+
+In olfs-1.14.1 (part of hyrax-1.12.2) and earlier, the OLFS web
+application was located in the 'persistent content directory':
+__$CATALINA_HOME/content/opendap__. This caused bootstrap problems when
+the OLFS tried to set itself up on a Linux system in which the Tomcat
+installation had been done via RPM.
+
+=== OLFS Files
 
 The OLFS web application gets its configuration from four files. In general
 all of your configuration need will be met by making changes to the
 first two: *olfs.xml* and *catalog.xml*
 
 *olfs.xml* ::
-  *Role*: Contains the primary OLFS configuration - BES(s) associations,
-   directory view instructions, gateway service behavior options,
-   static THREDDS catalog behavior, etc. +
+  *Role*: Contains the localized OLFS configuration - location of the
+  BES(s), directory view instructions, etc. +
   *Location:* In the persistent content directory which by default is
   located at _$CATALINA_HOME/content/opendap/_
 
@@ -139,20 +199,82 @@ first two: *olfs.xml* and *catalog.xml*
   *Location:* In the persistent content directory which by default is
   located at _$CATALINA_HOME/content/opendap/_
 
+*web.xml* ::
+  *Role*: Core servlet configuration. +
+  *Location:* The servlet's web.xml file located in the WEB-INF
+  directory of the web application "opendap". Typically that means
+  _$CATALINA_HOME/webapps/opendap/WEB-INF/web.xml_
+
+*log4j.xml* ::
+  *Role*: Contains the logging configuration for Hyrax. +
+  *Location:* The default location for the _log4j.xml_ is in the
+  WEB-INF directory of the web application "opendap". Typically that
+  means _$CATALINA_HOME/webapps/opendap/WEB-INF/log4j.xml_ However,
+  Hyrax can be configured to look in additional places for the
+  _log4j.xml_ file. <<logging-configuration, Read More About It Here>>.
+
+== Hyrax Servlet Configuration
+
+The Hyrax servlet is the front end (public interface) for
+<<hyrax-overview, Hyrax>>. It provides DAP services, THREDDS
+catalogs, directory views, logging, and authentication services. This is
+accomplished through a collection of software components called
+DispatchHandlers. At startup the Hyrax servlet reads the *olfs.xml* file
+which contains a list of DispatchHandlers and their configurations.
+DispatchHandlers on the list are loaded, configured/initialized, and
+then used to provide the aforementioned services.
+
+=== Dispatch Handlers
+
+Request dispatch is the process by which the OLFS determines
+what actual piece of code is going to respond to a given incoming
+request. This version of the OLFS handles each incoming request by
+offering the request to a series of DispatchHandlers. Each
+DispatchHandler is asked if it can handle the request. The first
+DispatchHandler to say that it can handle the request is then asked to
+do so. The OLFS creates an ordered list of DispatchHandlers objects in
+memory by reading the **olfs.xml**.
+
+The order of the list is significant. There is no guarantee that two (or
+more) DispatchHandlers may claim a particular request. Since the first
+DispatchHandler in the list to claim a request gets to service it,
+changing the order of the DispatchHandlers can change the behavior of
+the OLFS (and thus of Hyrax). For example the URL
+`http://localhost:8080/opendap/data/` is recognized by both the 
+_DirectoryDispatchHandler_ and the _ThreddsDispatchHandler_, each of which 
+can provide a directory view; however, only the _DirectoryDispatchHandler_ 
+can be configured to reject the request and pass it on to another
+handler, in this case the _ThreddsDispatchHandler_. The
+result is that if you put the _ThreddsDispatchHandler_ prior to the
+_DirectoryDispatchHandler_ on the list, there will be no way to
+//*Not sure if this should be simly "OPeNDAP" or "an OPeNDAP"*
+get an OPeNDAP directory view - the _ThreddsDispatchHandler_ will claim
+them all.
+
+This dispatching scheme is useful because it creates
+extensibility. If a third party wishes to add new functionality to Hyrax,
+one way is to write a DispatchHandler. To incorporate it into Hyrax, they
+need only add it to the list in the *olfs.xml* and add the java
+classes to the Tomcat lib directory.
 
 === *olfs.xml* Configuration File
 
 The *olfs.xml* file contains the core configuration of the Hyrax
 servlet:
 
+. It configures the BESManager with at least one BES to be used by the OLFS
+web application.
+. It identifies all of the DispatchHandlers to be used by the Hyrax
+servlet.
+. It controls both view and access behaviours of the Hyrax servlet.
 
-==== OLFSConfig Element
+=== OLFSConfig Element
 
 The <__OLFSConfig__> element is the document root. It contains two
 elements that suppy the configuration for the OLFS: <__BesManager__> and
 <__DispatchHandlers__ >.
 
-==== *<BESManager>* Element (required)
+=== *<BESManager>* Element (required)
 
 The BESManager element provides configuration for the BESManager class.
 The BESManager is used 
@@ -166,13 +288,13 @@ will show a single BES example. For more information on configuring Hyrax to use
 Each BES is identified using a seperate <__BES__> child element inside
 of the <__BESManager__> element.
 
-===== *<BES>* Element (required)
+==== *<BES>* Element (required)
 
 The <__BES__> element provides the OLFS with connection and control
 information for a BES. There are 4 child elements in a <__BES__>
 element: <__prefix__>, <__host__>, <__port__>, and <__ClientPool__>.
 
-===== *<prefix>* Element (required)
+==== *<prefix>* Element (required)
 
 This child element of the <__BES__> element contains the URL prefix that
 the OLFS will associate with this BES. This provides a mapping between
@@ -210,7 +332,7 @@ _Example 2:_
  <prefix>/data/nc</prefix>
 ----
 
-===== *<host>* Element (required)
+==== *<host>* Element (required)
 
 This child element of the <__BES__> element contains the host name or IP
 address of the BES.
@@ -221,7 +343,7 @@ _Example:_
 <host>test.opendap.org</host >
 ----
 
-===== *<port>* Element (required)
+==== *<port>* Element (required)
 
 This child element of the <__BES__> element contains port number on
 which the BES is listening.
@@ -231,7 +353,7 @@ _Example:_
 <port>10022</port >
 ----
 
-===== *<timeOut>* Element (optional)
+==== *<timeOut>* Element (optional)
 
 This child element of the <__BES__> element contains the timeout time,
 in seconds, for the OLFS to wait for this BES to respond. Defaults to 300
@@ -243,7 +365,7 @@ _Example:_
 <timeOut>600</timeOut >
 ----
 
-===== *<maxResponseSize>* Element (optional)
+==== *<maxResponseSize>* Element (optional)
 
 This child element of the <__BES__> element contains in bytes
 the maximum response size allowed for this BES. Requests that produce a
@@ -256,7 +378,7 @@ _Example:_
 <maxResponseSize>0</maxResponseSize>
 ----
 
-===== *<ClientPool>* Element (optional)
+==== *<ClientPool>* Element (optional)
 
 This child element of the <__BES__> element configures the behavior of
 the pool of client connections that the OLFS maintains with this
@@ -270,12 +392,12 @@ by the _maximum_ attribute. The default value of _maximum_ is 200.
 _Example:_
 
 ---- 
-<ClientPool maximum="200" />
+<ClientPool maximum="17" />
 ----
 
 If the <ClientPool> element is missing, the pool size defaults to 200.
 
-===== *<adminPort>* element (optional)
+==== *<adminPort>* element (optional)
 
 This child element of the <__BES__> element contains the port on the BES
 system that can be used by the Hyrax Admin Interface to control the BES.
@@ -287,7 +409,7 @@ _Example:_
 <adminPort>11002</adminPort>
 ----
 
-===== Example BESManager Configuration Element
+==== Example BESManager Configuration Element
 
 ---- 
 <BESManager>
@@ -298,12 +420,12 @@ _Example:_
         <timeOut>300</timeOut>
         <maxResponseSize>0</maxResponseSize>
         <ClientPool maximum="10" maxCmds="2000" />
+        <adminPort>11002</adminPort>
     </BES>
 </BESManager >
 ----
 
-[[catalog-cache]]
-==== <CatalogCache> Element (optional)
+=== *<CatalogCache>* Element
 
 The catalog cache element configures the OLFS memory cache of BES
 catalog responses. This cache can greatly increase server performance
@@ -323,6 +445,79 @@ timely manner. The `updateIntervalSeconds` default value 10000 seconds
 * If for some reason you wish to disable the `CatalogCache`, simply
 remove (or comment out) the `CatalogCache` element and its children
 from the `olfs.xml` file.
+
+=== *<DispatchHandlers>* Element
+
+The <__DispatchHandlers__> element has two child elements:
+<__HttpGetHandlers__> and <__HttpPostHandlers__>. The
+<__HttpGetHandlers__> contains an ordered list of the DispatchHandler
+classes used by the OLFS to handle incoming HTTP GET requests.
+
+=== *<HttpGetHandlers>* Element
+
+The <__HttpGetHandlers__> contains an ordered list of the
+DispatchHandler classes used by the OLFS to handle incoming HTTP GET
+requests. The list order is significant, and permutating the order will
+(probably negatively) change the behavior of the OLFS. Each
+DispatchHandler on the list will be asked to handle the request. The
+first DispatchHandler on the list to claim the request will be asked to
+build the response.
+
+=== *<HttpPostHandlers>* Element
+
+While programmatic support for POST request handlers as part of the
+Hyrax servlet, there are currently no HttpPostHandlers implemented for
+use with Hyrax. Maybe down the road...
+//*I'm not so sure about the "Maybe down the road..." ACP *
+
+=== *<Handler>* Elements
+
+Both the <__HttpGetHandlers__> and <__HttpPostHandlers__> contain an
+orderd list of <__Handler__> elements. Each <__Handler__> must have an
+attribute called _className_ whose value is set to the fully qualified
+Java class name for the DispatchHandler implementation to be used. For
+example, `<Handler className="opendap.bes.VersionDispatchHandler" />` 
+names the class __opendap.bes.VersionDispatchHandler__.
+
+Each <__Handler__> element may contain a collection of child elements
+that provide configuration information to the DispatchHandler
+implementation. In this example,
+
+----
+  <Handler className="opendap.coreServlet.BotBlocker">
+      <IpAddress&>44.55.66.77</IpAddress>
+  </Handler>
+----
+
+the <__Handler__> element contains a child element (<__IpAddress__>) that
+indicates to the _BotBlocker_ class to block requests from the IP
+address 44.55.66.77.
+
+=== HTTP GET Handlers
+
+Hyrax uses the following DispatchHandlers to handle HTTP GET requests:
+
+* *VersionDispatchHandler:* Handles the version document requests.
+* *BotBlocker:* An optional handler that may be used to block individual IP 
+  addresses or groups of IP addresses from accessing your server.
+* *NcmlDatasetDispatcher:* Specialized handler that filters NcML
+  content retrieved from the BES
+* *StaticCatalogDispatch:* Provides static THREDDS catalog services for Hyrax.
+* *Gateway:* For more imformation, see the documentation for 
+   <<gateway-service, Gateway Service>>.
+* *DapDispatcher:* Handles all DAP requests.
+* *DirectoryDispatchHandler:* Handles the OPeNDAP directory view (contents.html) requests.
+* *BESThreddsDispatchHandler:* Provides dynamic THREDDS catalogs of all BES holdings.
+* *FileDispatchHandler:* Handles requests for file level access. (README files etc.)
+
+=== VersionDispatchHandler (required)
+
+Handles the version document requests. This DispatchHandler has no
+configuration elements, so it will always be written like this:
+
+----
+<Handler className="opendap.bes.VersionDispatchHandler" />
+----
 
 [[bot-blocker]]
 === BotBlocker (optional)
@@ -356,12 +551,12 @@ matches all IP addresses beginning with 65.55 and thus blocks access for
 clients whose IP addresses lie in that range. There can be zero or more
 < IpMatch > elements in the Handler configuration for the BotBlocker
 
-==== Example BotBlocker Configuration
+==== Example Configuration Element
 
 ----
     <Handler className="opendap.coreServlet.BotBlocker">
  
-        <IpAddress>128.193.64.33</IpAddress>
+        <IpAddress>127.0.0.1</IpAddress>
  
         <!-- This matches all IPv4 addresses, work yours out from here.... -->
         <!--<IpMatch>[012]?\d?\d\.[012]?\d?\d\.[012]?\d?\d\.[012]?\d?\d</IpMatch> -->
@@ -372,49 +567,43 @@ clients whose IP addresses lie in that range. There can be zero or more
     </Handler>
 ----
 
+=== Ncml Dataset Dispatcher (required)
 
-=== ThreddsService  (optional)
-This configuration parameter controls
+The Ncml Dataset Dispatcher is a specialized handler that filters NcML
+content retrieved from the BES so that the path names in the NcML
+documents returned to clients are consistent with the paths from the
+external (to the server) perspective:
 
-* The location of the static THREDDS catalog root in the server.
-* If the static THREDDS catalogs are held in memory (faster) or read from disk for each request (slower).
-* If the server will broker remote THREDDS catalogs and their data by following `thredds:catalogRef` links that point to THREDDS catalogs on other systems.
+----
+    <Handler className="opendap.ncml.NcmlDatasetDispatcher" />
+----
 
-==== *<prefix>* attribute (optional)
+=== Static Thredds Catalog Dispatch Handler (required)
 
-Sets the name of the root of the static THREDDS catalogs in Hyrax.
-For example, if the prefix is `thredds`,
-then `http://localhost:8080/opendap/thredds/` should give you the
-top-level static catalog (Typically the contents of the file
-`/etc/olfs/opendap/catalog.xml`)
+Serves static THREDDS catalogs (i.e. THREDDS catalog files stored on
+disk). It provides both a presentation view (HTML) for humans using
+browsers and direct catalog access (XML).
 
-Default: `thredds`
+==== *<prefix>* Element (required)
 
-==== *<useMemoryCache>* attribute (optional)
+Defines the path component that comes after the servlet context and
+before all catalog requests. For example, if the prefix is _thredds_,
+then http://localhost:8080/opendap/thredds/ should give you the
+top-level static catalog (the contents of the file
+_$CATALINA_HOME/content/opendap/catalog.xml_)
 
-If the text value of this attribute is the string 'true,' this will cause
+==== *<useMemoryCache>* Element (optional)
+
+If the text value of this element is the string 'true,' this will cause
 the servlet to ingest all of the static catalog files at startup and
-hold their contents in memory. If set to false then then each request for a static THREDDS catalog will cause the server to read and parse the catalog from disk.
-<<THREDDS-config, See this page for more information about the memory caching
-operations.>>
-
-Default: `true`
-
-==== *<allowRemote>* attribute (optional)
-
-If this attribute is present and it's value is set to true then the server will "broker"
-remote THREDDS catalogs and the data that they serve. THis means that the server, not the
-client, will retrieve the remote catalogs and render them for the requesting client and
-provide an interface for retrieving the remote data, allow Hyrax to perform any subsequent
-processing before returning the result to the requesting client.
-
-Default: `false`
+hold their contents in memory.
+<<THREDDS-config, See this page for more information about the memory caching operations.>>
 
 ==== *<ingestTransformFile>* Element (optional)
 
-This child element of ThreddsService is a specific code development option that allows
-a developer to specify the fully qualified path to an XSLT file that will be used to
-preprocess each THREDDS catalog file read from disk. The default version of this
+This is a specific development option that allows one to specify the
+fully qualified path to an XSLT file that will be used to preprocess
+each THREDDS catalog file read from disk. The default version of this
 file (found in
 _$CATALINA_HOME/webapps/opndap/xsl/threddsCatalogIngest.xsl_) processes
 the _thredds:datasetScan_ elements in each THREDDS catalog so that they
@@ -426,10 +615,13 @@ for use in an operational server.
 ==== Example Configuration Element
 
 ----
-    <ThreddsService  prefix="thredds" useMemoryCache="true" allowRemote="false" />
+<Handler className="opendap.threddsHandler.StaticCatalogDispatch">
+     <prefix>thredds</prefix>
+     <useMemoryCache>true</useMemoryCache>
+</Handler>
 ----
 
-=== GatewayService (optional)
+=== Gateway Dispatcher
 
 Directs requests to the <<gateway-service, Gateway Service>>.
 
@@ -483,13 +675,47 @@ is requested.
 </Handler>
 ----
 
+=== DirectoryDispatchHandler (required)
+
+Handles the OPeNDAP directory view (contents.html) requests:
+
+----
+<Handler className="opendap.bes.DirectoryDispatchHandler" />
+----
+
+=== BES Thredds Dispatch Handler (required)
+
+Provides dynamic THREDDS catalogs of BES data holdings:
+
+----
+<Handler className="opendap.bes.BESThreddsDispatchHandler" />
+----
+
+=== File Dispatch Handler (required)
+
+Handles requests for file level access (README files, etc.). This
+handler only responds to requests for files that are not considered
+"data" by the BES. File requests for data files are handled by the
+_opendap.bes.dapResponders.DapDispatcher_.
+
+In the following example, the FileDispatchHandler is configured to deny
+direct access to data sources (note that the
+<__AllowDirectDataSourceAccess__ /> element is commented out):
+
+---- 
+<Handler className="opendap.bes.FileDispatchHandler" />
+----
+
+=== HTTP POST Handlers
+
+Hyrax does not currently support HTTP POST requests.
 
 === Example olfs.xml File
 
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <OLFSConfig>
-
+ 
     <BESManager>
         <BES>
             <prefix>/</prefix>
@@ -504,46 +730,96 @@ is requested.
             <ClientPool maximum="200" maxCmds="2000" />
         </BES>
     </BESManager>
-
-
-    <ThreddsService  prefix="thredds" useMemoryCache="true" allowRemote="true" />
-    <GatewayService  prefix="gateway" useMemoryCache="true" />
-    <UseDAP2ResourceUrlResponse />
-    <HttpPost enabled="true" max="2000000"/>
-
-    <!-- AddFileoutTypeSuffixToDownloadFilename / -->
-    <AllowDirectDataSourceAccess />
-    <!-- PreloadNcmlIntoBes -->
-
-    <!-- CatalogCache>
-        <maxEntries>10000</maxEntries>
-        <updateIntervalSeconds>10000</updateIntervalSeconds>
-    </CatalogCache -->
-
+    <DispatchHandlers>
+        <HttpGetHandlers>
+ 
+            <Handler className="opendap.bes.VersionDispatchHandler" />
+ 
+            <Handler className="opendap.coreServlet.BotBlocker">
+                <<IpMatch>65\.55\.[012]?\d?\d\.[012]?\d?\d</IpMatch>
+            </Handler>
+ 
+ 
+            <Handler className="opendap.ncml.NcmlDatasetDispatcher" />            
+ 
+            <Handler className="opendap.threddsHandler.StaticCatalogDispatch">
+                <prefix>thredds</prefix>
+                <useMemoryCache>true</useMemoryCache>
+            </Handler>
+ 
+            <Handler className="opendap.gateway.DispatchHandler">
+                <prefix>gateway</prefix>
+            </Handler>
+ 
+ 
+ 
+            <Handler className="opendap.bes.BesDapDispatcher" >
+                <!-- AllowDirectDataSourceAccess / -->
+                <UseDAP2ResourceUrlResponse />
+            </Handler>
+ 
+            <Handler className="opendap.bes.DirectoryDispatchHandler">
+                <!--
+                  If your particular authentication scheme (usually brokered by Apache httpd) utilizes
+                  a particular logout or login location you can have Hyrax display links to those locations
+                  as part of the generated web pages by uncommenting the "AuthenticationControls" element and
+                  editing the logout and/or login locations to match your service instance.
+                  -->
+                <!-- AuthenticationControls>
+                    <logout>loginPath?login_param=foo</logout>
+                    <logout>logoutPath?logout_param=foo</logout>
+                </AuthenticationControls -->
+            </Handler>
+ 
+ 
+            <Handler className="opendap.bes.BESThreddsDispatchHandler"/>
+            <Handler className="opendap.bes.FileDispatchHandler" />
+        </HttpGetHandlers>
+ 
+ 
+        <!--
+           If you need to accept a constraint expression (ce) that is larger than will fit in a URL query string then you
+           can configure the server to accept the ce as the body of a POST request referencing the same resource.
+           If the the Content-Encoding of the request is set to "application/x-www-form-urlencoded" then the server
+           will ingest all of parameter names "ce" and "dap4:ce"  to build the DAP constraint expression. Otherwise
+           the server will treat the entire POST body as a DAP ce.
+ 
+           By default the maximum length of the POST body is limited to 2000000 characters, and may never be
+           larger than 10000000 characters (if you need more then get in touch with support@opendap.org). You can adjust
+           the limit in the configuration for the BesDapDispatcher.
+ 
+           Configuration:
+           Uncomment the HttpPostHandlers element below. Make sure that the body of the BesDapDispatcher Handler element is
+           IDENTICAL to it's sister in the HttpGetHandlers element above.
+ 
+           If you need to change the default value of the maximum POST body length do it by adding a
+           "PostBodyMaxLength" element to the BesDapDispatcher Handler below:
+ 
+           <PostBodyMaxLength>500</PostBodyMaxLength>
+ 
+           The text content of which must be an integer between 0 and 10000000
+        -->
+        <!--
+        <HttpPostHandlers>
+            <Handler className="opendap.bes.dapResponders.BesDapDispatcher" >
+                MAKE SURE THAT THE CONTENT OF THIS ELEMENT IS IDENTICAL TO IT'S SISTER IN THE  HttpGetHandlers ELEMENT!
+                (Disregarding the presence of a PostBodyMaxLength element)
+            </Handler>
+        </HttpPostHandlers>
+        -->
+ 
+ 
+    </DispatchHandlers>
+ 
     <!--
-       'Bot Blocker' is used to block access from specific IP addresses
-       and by a range of IP addresses using a regular expression.
-    -->
-    <!-- BotBlocker -->
-    <!-- <IpAddress>127.0.0.1</IpAddress> -->
-    <!-- This matches all IPv4 addresses, work yours out from here.... -->
-    <!-- <IpMatch>[012]?\d?\d\.[012]?\d?\d\.[012]?\d?\d\.[012]?\d?\d</IpMatch> -->
-    <!-- Any IP starting with 65.55 (MSN bots the don't respect robots.txt  -->
-    <!-- <IpMatch>65\.55\.[012]?\d?\d\.[012]?\d?\d</IpMatch>   -->
-    <!-- /BotBlocker -->
-
-
-    <!--
-      'Timer' enables or disables the generation of internal timing metrics for the OLFS
+      This enables or disables the generation of internal timing metrics for the OLFS
       If commented out the timing is disabled. If you want timing metrics to be output
       to the log then uncomment the Timer and set the enabled attribute's value to "true"
       WARNING: There is some performance cost to utilizing the Timer.
     -->
     <!-- Timer enabled="false" / -->
-
-
+ 
 </OLFSConfig>
-
 ----
 
 === _web.xml_ Configuration File

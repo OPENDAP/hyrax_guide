@@ -1,11 +1,10 @@
-= Hyrax Overview
+= Overview
 :Leonard Porrello <lporrel@gmail.com>:
 {docdate}
 :numbered:
 :toc:
 
-== Overview
-This documentation describes the installation, configuration,
+This section describes the installation, configuration,
 and operation of the _Hyrax Data server_, a data server that integrates
 structured data with the world wide web. Hyrax is one example of a
 number of data servers that implement OPeNDAP's Data Access Protocol (DAP).
