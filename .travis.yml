@@ -1,6 +1,16 @@
 
 sudo: required
 
+# whitelist
+branches:
+  only:
+    - master
+
+notifications:
+  email:
+    - ndp@opendap.org
+    - jgallagher@opendap.org
+
 services:
   - docker                  
 
