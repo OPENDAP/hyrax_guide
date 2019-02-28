@@ -1063,6 +1063,7 @@ For information about logging, please check out the
 
 The following sub-sections detail authentication and authorization.
 
+
 ==== Apache Web Server (httpd)
 
 If your organization desires secure access and authentication layers
