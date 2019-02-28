@@ -152,7 +152,7 @@ The <__OLFSConfig__> element is the document root. It contains two
 elements that suppy the configuration for the OLFS: <__BesManager__> and
 <__DispatchHandlers__ >.
 
-==== *<BESManager>* Element (required)
+==== `<BESManager>` Element (required)
 
 The BESManager element provides configuration for the BESManager class.
 The BESManager is used 
@@ -166,13 +166,13 @@ will show a single BES example. For more information on configuring Hyrax to use
 Each BES is identified using a seperate <__BES__> child element inside
 of the <__BESManager__> element.
 
-===== *<BES>* Element (required)
+===== `<BES>` Element (required)
 
 The <__BES__> element provides the OLFS with connection and control
 information for a BES. There are 4 child elements in a <__BES__>
 element: <__prefix__>, <__host__>, <__port__>, and <__ClientPool__>.
 
-===== *<prefix>* Element (required)
+===== `<prefix>` Element (required)
 
 This child element of the <__BES__> element contains the URL prefix that
 the OLFS will associate with this BES. This provides a mapping between
@@ -210,7 +210,7 @@ _Example 2:_
  <prefix>/data/nc</prefix>
 ----
 
-===== *<host>* Element (required)
+===== `<host>` Element (required)
 
 This child element of the <__BES__> element contains the host name or IP
 address of the BES.
@@ -218,20 +218,20 @@ address of the BES.
 _Example:_
 
 ----
-<host>test.opendap.org</host >
+<host>test.opendap.org</host>
 ----
 
-===== *<port>* Element (required)
+===== `<port>` Element (required)
 
 This child element of the <__BES__> element contains port number on
 which the BES is listening.
 
 _Example:_
 ----
-<port>10022</port >
+<port>10022</port>
 ----
 
-===== *<timeOut>* Element (optional)
+===== `<timeOut>` Element (optional)
 
 This child element of the <__BES__> element contains the timeout time,
 in seconds, for the OLFS to wait for this BES to respond. Defaults to 300
@@ -243,7 +243,7 @@ _Example:_
 <timeOut>600</timeOut >
 ----
 
-===== *<maxResponseSize>* Element (optional)
+===== `<maxResponseSize>` Element (optional)
 
 This child element of the <__BES__> element contains in bytes
 the maximum response size allowed for this BES. Requests that produce a
@@ -256,26 +256,28 @@ _Example:_
 <maxResponseSize>0</maxResponseSize>
 ----
 
-===== *<ClientPool>* Element (optional)
+===== `<ClientPool>` Element (optional)
 
 This child element of the <__BES__> element configures the behavior of
 the pool of client connections that the OLFS maintains with this
 particular BES. These connections are pooled for efficiency and speed.
-Currently, the only configuration item available is to control the
+This element has two attributes: `maximum` and `maxCmds`.
+
+The `maximum` attribute specifies the
 maximum number of concurrent BES client connections that the OLFS can
-make. The default is 200, but the size should be optimized for your
-locale by empirical testing. The size of the Client Pool is controlled
-by the _maximum_ attribute. The default value of _maximum_ is 200.
+make. The default value of `maximum` is 200.
+
+The `maxCmds` attribute specifies the maximum number of commands that can be issued over a particular BESClient connection. The default is 2000.
 
 _Example:_
 
 ---- 
-<ClientPool maximum="200" />
+<ClientPool maximum="200" maxCmds="2000" />
 ----
 
-If the <ClientPool> element is missing, the pool size defaults to 200.
+If the <ClientPool> element is missing, the pool (`maximum`) size defaults to 200 and `maxCmds` defaults to 2000.
 
-===== *<adminPort>* element (optional)
+===== `<adminPort>` element (optional)
 
 This child element of the <__BES__> element contains the port on the BES
 system that can be used by the Hyrax Admin Interface to control the BES.
@@ -302,27 +304,114 @@ _Example:_
 </BESManager >
 ----
 
-[[catalog-cache]]
-==== <CatalogCache> Element (optional)
 
-The catalog cache element configures the OLFS memory cache of BES
-catalog responses. This cache can greatly increase server performance
-for small requests. It is configured by it's two child elements,
-`maxEntries` and `updateIntervalSeconds`.
 
-* The value of `maxEntries` determines the total number of catalog
-responses to hold in memory. The default value for `maxEntries` is
-10000.
-* The value of `updateIntervalSeconds` determines how long the catalog
-update thread will sleep between updates. This value affects the server's
-responsiveness to changes in its holdings. If your server's contents
-changes frequently, then the `updateIntervalSeconds` should be set to a
-value that will allow the server to publish new additions/deletions in a
-timely manner. The `updateIntervalSeconds` default value 10000 seconds
-(2.7 hours).
-* If for some reason you wish to disable the `CatalogCache`, simply
-remove (or comment out) the `CatalogCache` element and its children
-from the `olfs.xml` file.
+=== `<ThreddsService>`  (optional)
+This configuration parameter controls
+
+* The location of the static THREDDS catalog root in the server.
+* If the static THREDDS catalogs are held in memory (faster) or read from disk for each request (slower).
+* If the server will broker remote THREDDS catalogs and their data by following `thredds:catalogRef` links that point to THREDDS catalogs on other systems.
+
+==== `<prefix>` attribute (optional)
+
+Sets the name of the root of the static THREDDS catalogs in Hyrax.
+For example, if the prefix is `thredds`,
+then `http://localhost:8080/opendap/thredds/` should give you the
+top-level static catalog (Typically the contents of the file
+`/etc/olfs/opendap/catalog.xml`)
+
+Default: `thredds`
+
+==== `<useMemoryCache>` attribute (optional)
+
+If the text value of this attribute is the string 'true,' this will cause
+the servlet to ingest all of the static catalog files at startup and
+hold their contents in memory. If set to false then then each request for a static THREDDS catalog will cause the server to read and parse the catalog from disk.
+<<THREDDS-config, See this page for more information about the memory caching
+operations.>>
+
+Default: `true`
+
+==== `<allowRemote>` attribute (optional)
+
+If this attribute is present and it's value is set to true then the server will "broker"
+remote THREDDS catalogs and the data that they serve. THis means that the server, not the
+client, will retrieve the remote catalogs and render them for the requesting client and
+provide an interface for retrieving the remote data, allow Hyrax to perform any subsequent
+processing before returning the result to the requesting client.
+
+Default: `false`
+
+==== `<ingestTransformFile>` Element (optional)
+
+This child element of ThreddsService is a specific code development option that allows
+a developer to specify the fully qualified path to an XSLT file that will be used to
+preprocess each THREDDS catalog file read from disk. The default version of this
+file (found in
+_$CATALINA_HOME/webapps/opndap/xsl/threddsCatalogIngest.xsl_) processes
+the _thredds:datasetScan_ elements in each THREDDS catalog so that they
+contain specific content for Hyrax:
+
+NOTE: This is a developers option and in general is not recommended 
+for use in an operational server.
+
+==== Example Configuration Element
+
+----
+    <ThreddsService  prefix="thredds" useMemoryCache="true" allowRemote="false" />
+----
+
+=== `<GatewayService>` (optional)
+
+Directs requests to the <<gateway-service, Gateway Service>>.
+
+==== `<prefix>` Element (optional)
+
+Sets localtion of the gateway service in Hyrax.
+For example, if the prefix is `gateway`,
+then `http://localhost:8080/opendap/gateway/` should give you the
+Gateway Service page.
+
+Default: `gateway`
+
+==== Example Configuration Element
+---- 
+    <GatewayService  prefix="gateway" />
+----
+
+
+=== `<AllowDirectDataSourceAccess />` Element (optional)
+
+The `<AllowDirectDataSourceAccess/>` element controls the user's
+ability to directly access data sources via the Hyrax web interface. If this
+element is present (and not commented out, as in the example below) a
+client can get an entire data source (such as an HDF file) by
+requesting it through the HTTP URL interface. By default, Hyrax ships with this option
+disabled. We recommend that you leave it unchanged unless you requre that users be able
+to circumvent the OPeNDAP request interface and have direct access to the data products
+stored on your server.
+
+Default: Not enabled.
+
+==== Example Configuration Element
+----
+    <!-- AllowDirectDataSourceAccess / -->
+----
+
+=== `<UseDAP2ResourceUrlResponse />` Element (optional)
+
+This element controls the Hyrax's response to a clients request for the data resource URL.
+When this element is present the server will rresponed to requests for data resources URLs
+by returning the (not clearly defined by a specification)
+DAP2 style response. Commenting out or removing  the `<UseDAP2ResourceUrlResponse />`
+element will cause the server to return the (well-defined by a specification) DAP4 DSR
+response when a dataset resource URL is requested.
+
+==== Example Configuration Element
+----
+    <UseDAP2ResourceUrlResponse />
+----
 
 [[bot-blocker]]
 === BotBlocker (optional)
@@ -335,17 +424,17 @@ data holdings exhaustively queried by automated software, we created a
 simple robot blocking handler to protect system resources from
 non-compliant robots.
 
-==== *<IpAddress>* Element
+==== `<IpAddress>` Element
 
 The text value of this element should be the IP address of a system
 which you would like to block from accessing your service.
 
-For example, 
-`<IpAddress>128.193.64.33</IPAddress>` blocks the system located at 
+For example,
+`<IpAddress>128.193.64.33</IPAddress>` blocks the system located at
 128.193.64.33 from accessing your server.
 There can be zero or more <IpAddress> elements in the <BotBlocker>.
 
-==== *< IpMatch >* Element
+==== `<IpMatch>` Element
 
 The text value of this element should be the regular expression that
 will be used to match the IP addresses of clients attempting to access
@@ -370,117 +459,6 @@ clients whose IP addresses lie in that range. There can be zero or more
         <IpMatch>65\.55\.[012]?\d?\d\.[012]?\d?\d</IpMatch>
  
     </Handler>
-----
-
-
-=== ThreddsService  (optional)
-This configuration parameter controls
-
-* The location of the static THREDDS catalog root in the server.
-* If the static THREDDS catalogs are held in memory (faster) or read from disk for each request (slower).
-* If the server will broker remote THREDDS catalogs and their data by following `thredds:catalogRef` links that point to THREDDS catalogs on other systems.
-
-==== *<prefix>* attribute (optional)
-
-Sets the name of the root of the static THREDDS catalogs in Hyrax.
-For example, if the prefix is `thredds`,
-then `http://localhost:8080/opendap/thredds/` should give you the
-top-level static catalog (Typically the contents of the file
-`/etc/olfs/opendap/catalog.xml`)
-
-Default: `thredds`
-
-==== *<useMemoryCache>* attribute (optional)
-
-If the text value of this attribute is the string 'true,' this will cause
-the servlet to ingest all of the static catalog files at startup and
-hold their contents in memory. If set to false then then each request for a static THREDDS catalog will cause the server to read and parse the catalog from disk.
-<<THREDDS-config, See this page for more information about the memory caching
-operations.>>
-
-Default: `true`
-
-==== *<allowRemote>* attribute (optional)
-
-If this attribute is present and it's value is set to true then the server will "broker"
-remote THREDDS catalogs and the data that they serve. THis means that the server, not the
-client, will retrieve the remote catalogs and render them for the requesting client and
-provide an interface for retrieving the remote data, allow Hyrax to perform any subsequent
-processing before returning the result to the requesting client.
-
-Default: `false`
-
-==== *<ingestTransformFile>* Element (optional)
-
-This child element of ThreddsService is a specific code development option that allows
-a developer to specify the fully qualified path to an XSLT file that will be used to
-preprocess each THREDDS catalog file read from disk. The default version of this
-file (found in
-_$CATALINA_HOME/webapps/opndap/xsl/threddsCatalogIngest.xsl_) processes
-the _thredds:datasetScan_ elements in each THREDDS catalog so that they
-contain specific content for Hyrax:
-
-NOTE: This is a developers option and in general is not recommended 
-for use in an operational server.
-
-==== Example Configuration Element
-
-----
-    <ThreddsService  prefix="thredds" useMemoryCache="true" allowRemote="false" />
-----
-
-=== GatewayService (optional)
-
-Directs requests to the <<gateway-service, Gateway Service>>.
-
-==== *<prefix>* Element (required)
-
-Defines the path component that comes after the servlet context and
-before all gateway requests. For example, if the prefix is _gateway_,
-then http://localhost:8080/opendap/gateway/ will give you the gateway
-access form page.
-
-==== Example Configuration Element
-
----- 
-<Handler className="opendap.gateway.DispatchHandler">
-    <prefix>gateway</prefix>
-</Handler>
-----
-
-=== DapDispatchHandler (required)
-
-Handles DAP request for Hyrax. For example, the DapDispatchHandler will
-handle requests for all DAP2 and DAP4 products
-
-==== *<AllowDirectDataSourceAccess>* Element (optional)
-
-The <__AllowDirectDataSourceAccess__ /> element controls the user's
-ability to directly access data sources via the web interface. If this
-element is present (and not commented out, as in the example below) a
-client can get an entire data source (such as an HDF file) by
-requesting it through the HTTP URL interface. This is *not* a good
-practice and is not recommended. By default, Hyrax ships with this option
-disabled. We recommend that you leave it unchanged unless you requre
-that users be able to circumvent the OPeNDAP request interface and
-have direct access to the data products stored on your server.
-
-==== *<UseDAP2ResourceUrlResponse>* Element (optional)
-
-// NOT SO SURE ABOUT THE "AT LEAST FOR NOW" ACP
-By default, at least for now, the server will provide the (undefined)
-DAP2 style response to requests for a dataset resource URL. Commenting
-out the "UseDAP2ResourceUrlResponse" element will cause the server to
-return the (well-defined) DAP4 DSR response when a dataset resource URL
-is requested.
-
-==== Example Configuration Element
-
-----
-<Handler className="opendap.bes.dapResponders.DapDispatcher" >
-    <!-- AllowDirectDataSourceAccess / -->
-    <UseDAP2ResourceUrlResponse />
-</Handler>
 ----
 
 
@@ -512,7 +490,7 @@ is requested.
     <HttpPost enabled="true" max="2000000"/>
 
     <!-- AddFileoutTypeSuffixToDownloadFilename / -->
-    <AllowDirectDataSourceAccess />
+    <!-- AllowDirectDataSourceAccess / -->
     <!-- PreloadNcmlIntoBes -->
 
     <!-- CatalogCache>
@@ -545,155 +523,30 @@ is requested.
 </OLFSConfig>
 
 ----
+[[catalog-cache]]
+==== `<CatalogCache>` Element (optional)
 
-=== _web.xml_ Configuration File
+The catalog cache element configures the OLFS memory cache of BES
+catalog responses. This cache can greatly increase server performance
+for small requests. It is configured by it's two child elements,
+`maxEntries` and `updateIntervalSeconds`.
 
-We strongly recommend that you do *NOT* modfiy the web.xml file at 
-this time. Future versions of Server and the OLFS may have "user
-configurable" parameters in the web.xml file, but this version does not,
-_and doing so will almost certainly result in *severe* problems_. That 
-being said, the following is the details regarding the web.xml file.
+* The value of `maxEntries` determines the total number of catalog
+responses to hold in memory. The default value for `maxEntries` is
+10000.
+* The value of `updateIntervalSeconds` determines how long the catalog
+update thread will sleep between updates. This value affects the server's
+responsiveness to changes in its holdings. If your server's contents
+changes frequently, then the `updateIntervalSeconds` should be set to a
+value that will allow the server to publish new additions/deletions in a
+timely manner. The `updateIntervalSeconds` default value 10000 seconds
+(2.7 hours).
+* If for some reason you wish to disable the `CatalogCache`, simply
+remove (or comment out) the `CatalogCache` element and its children
+from the `olfs.xml` file.
 
-==== Servlet Definition
 
-The OLFS running in the OPeNDAP context area needs an entry in the
-_web.xml_ file. Multiple instances of a servlet and/or several different
-servlets can be configured in the one web.xml file. For instance, you
-could have a DTS and a Hyrax running from the same _web.xml_ and thus
-under the same servlet context. Running multiple instances of the OLFS
-in a single web.xml file (aka context) will *NOT* work.
-
-Each a servlet needs a unique name which is specified inside a
-<__servlet__> element in the web.xml file using the <__servlet-name__>
-tag. This is a name of convenience; for example, if one is serving
-data from an ARGOS satellite one might call that servlet __argos__.
-
-Additionally, each instance of a <__servlet__> must specify which Java
-class contains the actual servlet to run. This is done in the
-<__servlet-class__> element. For example, the OLFS servlet class name is
-_opendap.coreServlet.DispatchServlet_.
-
-===== Syntax Example
-
-----
-<servlet>
-    <servlet-name>hyrax</servlet-name>
-    <servlet-class>opendap.coreServlet.DispatchServlet</servlet-name>
-    .
-    .
-    .
-</servlet>
-----
-
-This servlet could then be accessed as
-_http://hostname/opendap/servlet/argos_.
-
-You may also add to the end of the web.xml file a set of
-<__servlet-mapping__> elements. These allow you to abbreviate the URL or
-the servlet. By placing the servlet mappings at the end of the web.xml 
-file, our previous example changes its URL to _http://hostname/opendap/argos_, 
-eliminating the need for the word servlet in the URL:
-
-----
-<servlet-mapping>
-    <servlet-name>argos</servlet-name>
-    <url-pattern>/argos</url-pattern>
-</servlet-mapping>
-
-<servlet-mapping>
-    <servlet-name>argos</servlet-name>
-    <url-pattern>/argos/*</url-pattern>
-</servlet-mapping>
-----
-
-//SHOULD THERE BE A LINK HERE? -ACP
-For more on the <__servlet-mapping__> element see the 
-Jakarta-Tomcat documentation.
-
-==== <init-param> Elements
-
-The OLFS uses <init-param> elements inside of each <servlet> element to
-get specific configuration information.
-
-The <init-param>s common to all OPeNDAP servlets are:
-
-===== OLFSConfigFileName
-
-This parameter identifies the name of the XML document file that
-contains the OLFS configuration. This file must be located in the
-persistent content directory and is typically called *olfs.xml*.
-
-For example:
-
-----
-    <init-param>
-    <param-name>OLFSConfigFileName</param-name>
-    <param-value>olfs.xml</param-value>
-    </init-param>
-----
-
-===== DebugOn
-
-This controls output to the terminal from which the servlet engine was
-launched. The value is a list of flags that turn on debugging
-instrumentation in different parts of the code. Supported values are:
-
-* *probeRequest*: Prints a lengthy inspection of the HttpServletRequest 
-object to stdout. *Note:* Do not leave this on for long or 
-it will clog your Catalina logs.
-* *DebugInterface*: Enables the server's debug interface. This
-ineractive interface allows a user to look at (and change) the server
-state via a web browser. *Note:* Enable this only for analysis purposes 
-and disable when finshed.
-
-For example:
-
-----
-    <init-param>
-    <param-name>DebugOn</param-name>
-    <param-value>probeRequest</param-value>
-    </init-param>
-----
-
-_Default:_ If this parameter is not set or the value field is empty,
-then these features will be disabled - which is what you want (unless
-there is a problem to analyze).
-
-==== Example of web.xml Content
-
-----
-<servlet>
-
-    <servlet-name>hyrax</servlet-name>
-
-    <servlet-class>opendap.coreServlet.DispatchServlet</servlet-class>
-
-    <init-param>
-        <param-name>DebugOn</param-name>
-        <param-value></param-value>
-    </init-param>
-
-    <load-on-startup>1</load-on-startup>
-
-</servlet>
-
-<servlet-mapping>
-    <servlet-name>hyrax</servlet-name>
-    <url-pattern>*</url-pattern>
-</servlet-mapping>
-
-<servlet-mapping>
-    <servlet-name>hyrax</servlet-name>
-    <url-pattern>/hyrax</url-pattern>
-</servlet-mapping>
-
-<servlet-mapping>
-    <servlet-name>hyrax</servlet-name>
-    <url-pattern>/hyrax/*</url-pattern>
-</servlet-mapping>
-----
-
-=== Viewers Servlet (**viewers.xml** file)
+=== Viewers Servlet (`viewers.xml` file)
 
 The Viewers servlet provides, for each dataset, an HTML page containing
 links to Java WebStart applications and to WebServices (such as WMS)
@@ -701,7 +554,7 @@ that can be utilized in conjunction with the dataset. The Viewers
 servlet is configured via the contents of the *viewers.xml* file located
 in the persistent content directory _$CATALINA_HOME/content/opendap_.
 
-==== *viewers.xml* Configuration File
+==== `viewers.xml` Configuration File
 
 ===== Consists of
 
@@ -737,45 +590,6 @@ in the persistent content directory _$CATALINA_HOME/content/opendap_.
 </ViewersConfig>
 ----
 
-=== Docs Servlet
-
-The Docs (or documentation) servlet provides the OLFS web application
-with the ability to serve a tree of static documentation files. By
-default, it will serve the files in the documentation tree provided with
-the OLFS in the Hyrax distribution. This tree is rooted at
-_$CATALINA_HOME/webapps/opendap/docs/_ and contains documentation
-pertaining to the software in the Hyrax distribution: installation and
-configuration instruction, release notes, java docs, etc.
-
-If one wishes to replace this information with one's own set of webpages, 
-one can remove or replace the files in the default directory;
-however, installing a new version of Hyrax will cause these files to be
-overwritten after the install (and hopefully AFTER the new 
-release documentation has been read and understood by the user).
-
-The Docs servlet provides an alternative to this. If a _docs_ directory
-is created in the _persistent content_ directory for Hyrax, the Docs
-servlet will detect it when Tomcat is launched, and it will serve files
-from there instead of from the default location.
-
-This scheme provides 2 beneficial effects:
-
-. It allows localizations of the web documents associated with Hyrax
-to persist through Hyrax upgrades with no user intervention.
-. It preserves important release documents that ship with the Hyrax
-software.
-
-In summary, to provide persistent web pages as part of a Hyrax
-localization simple create the directory
-_$CATALINA_HOME/content/opendap/**docs**_, 
-Place your content in there and away you go. If you later wish to view
-the web-based documentation bundled with Hyrax, simply change the name of
-the directory from *docs* to something else and restart Tomcat (or 
-look in the _$CATALINA_HOME/webapps/opendap/docs_ directory).
-
-If a URL ends in a directory name or a "/" in the Docs servlet, then the
-servlet will attempt to serve the *index.html* in that directory. In
-other words *index.html* is the default document.
 
 === Logging
 
