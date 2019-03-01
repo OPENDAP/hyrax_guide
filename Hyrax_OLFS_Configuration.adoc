@@ -510,7 +510,10 @@ If `enabled` is set to `true then the timer will be enabled.
 If you want timing metrics to be output to the log then uncomment the Timer and set the
 enabled attribute's value to "true"
 
-WARNING: There significant performance costs to utilizing the Timer.
+WARNING: _Enabling the Timer will impose significant performance overhead on the
+server's operation and should ony be done in an effort to understand the
+*relative* times spent in different operations and *not* as a mechanism for
+measuring the server's objective performance._
 
 Example:
 [source,xml]
