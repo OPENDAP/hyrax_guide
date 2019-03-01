@@ -444,6 +444,11 @@ response will have a HTTP Content-Disposition header like this:
 Content-Disposition: attachment; filename="somedatafile.hdf.nc"
 ----
 
+===== Example configuration element
+[source,xml]
+----
+    <AddFileoutTypeSuffixToDownloadFilename />
+----
 
 
 [[bot-blocker]]
