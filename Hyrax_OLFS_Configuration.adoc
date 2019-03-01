@@ -340,7 +340,7 @@ Default: `true`
 
 ===== `allowRemote` attribute (optional)
 
-If this attribute is present and it's value is set to `true` then the server will "broker"
+If this attribute is present and its value is set to `true` then the server will "broker"
 remote THREDDS catalogs and the data that they serve. This means that the server, not the
 client, will retrieve the remote catalogs and render them for the requesting client and
 provide an interface for retrieving the remote data and allow Hyrax to perform any
@@ -348,23 +348,11 @@ subsequent processing before returning the result to the requesting client.
 
 Default: `false`
 
-===== `<ingestTransformFile>` child element (<<developer-options,developer>>)
 
-This child element of `ThreddsService` is a specific code development option that allows
-a developer to specify the fully qualified path to an XSLT file that will be used to
-preprocess each THREDDS catalog file read from disk. The default version of this
-file (found in
-`$CATALINA_HOME/webapps/opndap/xsl/threddsCatalogIngest.xsl`) processes
-the `thredds:datasetScan` elements in each THREDDS catalog so that they
-contain specific content for Hyrax:
-
-NOTE: _This is a developers option and in general is not recommended
-for use in an operational server._
-
-===== Example configuration element
+===== Example `ThreddsService` configuration element
 [source,xml]
 ----
-    <ThreddsService  prefix="thredds" useMemoryCache="true" allowRemote="false" />
+<ThreddsService  prefix="thredds" useMemoryCache="true" allowRemote="false" />
 ----
 
 ==== `<GatewayService>` (optional)
@@ -526,6 +514,23 @@ Example:
  <Timer enabled="true"/>
 ----
 
+===== `<ingestTransformFile>` child element (developer)
+WARNING: _This is a developers option and in general is not recommended
+for use in an operational server._
+
+This child element of the `ThreddsService` element is a special code development option
+that allows a developer to specify the fully qualified path to an XSLT file that will be
+used to preprocess each THREDDS catalog file read from disk. The default version of this
+file (found in `$CATALINA_HOME/webapps/opendap/xsl/threddsCatalogIngest.xsl`) processes
+the `thredds:datasetScan` elements in each THREDDS catalog so that they contain specific
+content for Hyrax:
+
+Example:
+[source,xml]
+----
+<ingestTransformFile>/fully/qualified/path/to/transfrm.xsl</ingestTransformFile>
+----
+
 ==== `<PreloadNcmlIntoBes />` (developer)
 WARNING: *_This is a partially implemented,  non-functional feature._*
 
@@ -545,7 +550,7 @@ remains unresloved in the code that does the cache which prevents the cache from
 updated without restarting the server. Because of this option has been taken out of
 production until resources can be allocated to resolve the underlying issues.
 
-The `<CatalogCache>` is configured by it's two child elements,
+The `<CatalogCache>` is configured by its two child elements,
 `<maxEntries>` and `<updateIntervalSeconds>`.
 
 * The value of `maxEntries` determines the total number of catalog
