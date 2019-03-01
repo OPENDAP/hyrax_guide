@@ -9,9 +9,9 @@
 The OLFS is the outward facing component of the Hyrax server. In following sections you 
 will find the details of how to configure the OLFS for you instance of Hyrax. 
 
-NOTE: The OLFS web application relies on one or more instances of the
+NOTE: _The OLFS web application relies on one or more instances of the
 <<bess-configuration, BES>> to provide it with
-data access and basic catalog metadata.
+data access and basic catalog metadata._
 
 The OLFS web application stores its configuration state in a number of
 files. The server's configuration is altered by carefully modifying the
@@ -420,9 +420,10 @@ Default: Enabled.
 
 This optional element controls how the server will construct the download file name that
 is transmitted in the HTTP Content-Disposition header.  A simple example will provide the
-best explanation.: If the `<AddFileoutTypeSuffixToDownloadFilename />` element iseither
-commented out or not present and a user requests a data response from `somedatafile.hdf`
-in netCDF-3 format the HTTP Content-Disposition header will be set like this:
+best explanation.: If the `<AddFileoutTypeSuffixToDownloadFilename />` element is either
+commented out or not present, then when a user requests a data response from
+`somedatafile.hdf` in netCDF-3 format the HTTP Content-Disposition header will be set
+like this:
 ----
 Content-Disposition: attachment; filename="somedatafile.hdf"
 ----
@@ -431,6 +432,8 @@ response will have a HTTP Content-Disposition header like this:
 ----
 Content-Disposition: attachment; filename="somedatafile.hdf.nc"
 ----
+
+Default: By default the server ships with this disabled.
 
 ===== Example configuration element
 [source,xml]
@@ -445,7 +448,7 @@ Content-Disposition: attachment; filename="somedatafile.hdf.nc"
 This optional element can be used to block access from specific IP
 addresses or a range of IP addresses using regular expressions. It
 turns out that many of the web crawling robots do not respect the
-robots.txt file when one is provided. Since many sites do not want their
+`robots.txt` file when one is provided. Since many sites do not want their
 data holdings exhaustively queried by automated software, we created a
 simple robot blocking handler to protect system resources from
 non-compliant robots.
@@ -476,7 +479,7 @@ For example:
 ----
  <IpMatch>65\.55\.[012]?\d?\d\.[012]?\d?\d</IpMatch>
 ----
-Matches all IP addresses beginning with 65.55 and thus blocks access for
+Matches all IP addresses beginning with `65.55` and thus blocks access for
 clients whose IP addresses lie in that range.
 
 ===== Example BotBlocker Configuration
@@ -492,7 +495,7 @@ clients whose IP addresses lie in that range.
 [[developer-options]]
 ==== Developer Options
 
-These configuration options are intended to be used by developers that are engaged in code developement for components of Hyrax and are not meant to be enabled in any kind of production environment. They are included here for transparency to help potential contributors to the Hyrax project.
+These configuration options are intended to be used by developers that are engaged in code developement for components of Hyrax and are not meant to be enabled in any kind of production environment. They are included here for transparency and to help potential contributors to the Hyrax project.
 
 ==== `<Timer>` (developer)
 The `Timer` enables or disables the generation of internal timing metrics for the OLFS
@@ -503,10 +506,10 @@ If `enabled` is set to `true then the timer will be enabled.
 If you want timing metrics to be output to the log then uncomment the Timer and set the
 enabled attribute's value to "true"
 
-WARNING: _Enabling the Timer will impose significant performance overhead on the
+WARNING: *_Enabling the Timer will impose significant performance overhead on the
 server's operation and should ony be done in an effort to understand the
-*relative* times spent in different operations and *not* as a mechanism for
-measuring the server's objective performance._
+relative times spent in different operations and [.underline]#not# as a mechanism for
+measuring the server's objective performance._*
 
 Example:
 [source,xml]
@@ -515,15 +518,15 @@ Example:
 ----
 
 ===== `<ingestTransformFile>` child element (developer)
-WARNING: _This is a developers option and in general is not recommended
-for use in an operational server._
+WARNING: *_This is a developers option and in general is not recommended
+for use in an operational server._*
 
 This child element of the `ThreddsService` element is a special code development option
 that allows a developer to specify the fully qualified path to an XSLT file that will be
 used to preprocess each THREDDS catalog file read from disk. The default version of this
-file (found in `$CATALINA_HOME/webapps/opendap/xsl/threddsCatalogIngest.xsl`) processes
+file, found in `$CATALINA_HOME/webapps/opendap/xsl/threddsCatalogIngest.xsl`, processes
 the `thredds:datasetScan` elements in each THREDDS catalog so that they contain specific
-content for Hyrax:
+content for Hyrax.
 
 Example:
 [source,xml]
@@ -536,19 +539,21 @@ WARNING: *_This is a partially implemented,  non-functional feature._*
 
 The presence of this developer option in the configuration will cause the OLFS to attempt
 to preload all of the NcML content found in the static THREDDS catalogs and attempt to
-transmit it to the BES. There is at this time no software in the BEat can accept, store,
-or otherwise utilize and respond to such a command.
+transmit it to the BES. There is at this time no software in the BES that can accept,
+store, or otherwise utilize and respond to such a command.
 
 
 [[catalog-cache]]
 ==== `<CatalogCache>` (developer)
-WARNING: *_This feature is currently out of production and non-functional._*
+WARNING: *_This feature is currently broken and using it may result in the server
+behaving unpredictably_*
 
 This configuration parameter causes the OLFS to cache (in memory) all of the BES `getNode`
 responses in order to reduce system latency. There is at least one serious bug that
-remains unresloved in the code that does the cache which prevents the cache from being
-updated without restarting the server. Because of this option has been taken out of
-production until resources can be allocated to resolve the underlying issues.
+remains unresolved in the code that performs the caching which prevents the cache from
+being updated without restarting the server. Because of this problem the `CatalogCache`
+option has been taken out of production until resources can be allocated to resolve the
+underlying issues.
 
 The `<CatalogCache>` is configured by its two child elements,
 `<maxEntries>` and `<updateIntervalSeconds>`.
@@ -747,8 +752,8 @@ constraints at the web application level.
 Tomcat security requires fairly extensive additions to the `web.xml`
 file located here: `${CATALINA_HOME}/webapps/opendap/WEB-INF/web.xml`
 
-WARNING: _It is important to keep in mind that altering the `<servlet>`
-definitions may render your Hyrax server inoperable._)
+WARNING: *_Altering the `<servlet>` definitions may render your Hyrax
+server inoperable._*
 
 Examples of security content for the `web.xml` file can be found in the
 persistent content directory of the Hyrax server, which by default is
@@ -926,8 +931,8 @@ compressed.
 * *compression="force"* means everything gets compressed (assuming the
 client accepts gzip and the response is bigger than compressionMinSize)
 
-NOTE: You MUST set *compression="force"* for compression to work with the
-OPeNDAP data transport.
+NOTE: _You MUST set *compression="force"* for compression to work with the
+OPeNDAP data transport._
 
 When finished your *Connector* element should look like this:
 [source,xml]
@@ -950,14 +955,14 @@ You can verify the change by using curl as follows:
 ----
 curl -H "Accept-Encoding: gzip" -I http://localhost:8080/opendap/data/nc/fnoc1.nc.ascii
 ----
-NOTE: The above URL is for Hyrax running on your local system and accessing a dataset that ships with the server.
+NOTE: _The above URL is for Hyrax running on your local system and accessing a dataset that ships with the server._
 
 You'll know that compression is enabled if the response to the curl command contains:
 ----
 Content-Encoding: gzip
 ----
 
-NOTE: If you are using Tomcat in conjunction with the Apache Web Server
+NOTE: _If you are using Tomcat in conjunction with the Apache Web Server
 (our friend httpd) via AJP you will need to also
 <<apache-compressed-responses, configure Apache to deliver compressed responses>>
-Tomcat will not compress content sent over the AJP connection.*
+Tomcat will not compress content sent over the AJP connection._
