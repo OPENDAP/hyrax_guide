@@ -6,11 +6,10 @@
 
 [[OLFS-config]]
 == OLFS Configuration
+The OLFS is the outward facing component of the Hyrax server. In following sections you 
+will find the details of how to configure the OLFS for you instance of Hyrax. 
 
-This document should help you get started configuring the OLFS web
-application component of Hyrax.
-
-Additionally the OLFS web application relies on one or more instances of the
+NOTE: The OLFS web application relies on one or more instances of the
 <<bess-configuration, BES>> to provide it with
 data access and basic catalog metadata.
 
@@ -38,7 +37,7 @@ application web archive file (opendap.war).
 
 In this way the OLFS can start without a persistent local configuration.
 If the default configuration works for your intended use, then there is
-no need create a persistent localized configuration. If changes need to
+no need to create a persistent localized configuration. If changes need to
 be made to the configuration, then it is *strongly recommended* that the
 user enable the use of a persistent local configuration. This way
 updating the web application won't destroy your changes. This is easily
@@ -50,8 +49,10 @@ export OLFS_CONFIG_DIR="/home/tomcat/hyrax"
 ----
 
 Alternatively, you can create either the directory `/etc/olfs` or the
-directory `/usr/share/olfs`. _Make sure that the directory you create is
-both readable and writable by Tomcat._
+directory `/usr/share/olfs`. 
+
+TIP: _Make sure that the directory you create is
+both readable and writable by the user running the Tomcat application._
 
 Once the directory is created (and in the first case the environment
 variable is set) restart the OLFS (Tomcat). This will cause the OLFS to
@@ -123,7 +124,7 @@ first two: *olfs.xml* and *catalog.xml*
 
 *olfs.xml* ::
   *Role*: Contains the primary OLFS configuration - BES(s) associations,
-   directory view instructions, gateway service behavior options,
+   directory view instructions, gateway service location,
    static THREDDS catalog behavior, etc. +
   *Location:* `/etc/olfs/olfs.xml`
   :: (See <<OLFS-config-location>> for alternates)
@@ -144,34 +145,33 @@ first two: *olfs.xml* and *catalog.xml*
 === *olfs.xml* Configuration File
 
 The *olfs.xml* file contains the core configuration of the Hyrax
-front end service. What follows is a detailed explantion of the files content.
+front end service. What follows is a detailed explanation of its content.
 
 ==== `<OLFSConfig>` Element
 
-The <__OLFSConfig__> element is the document root. It contains several
-elements that suppy the configuration for the OLFS.
+The `<OLFSConfig>` element is the document root. It contains several
+elements that supply the configuration for the OLFS.
 
 ==== `<BESManager>` Element (required)
-
-The `BESManager` element provides configuration for the BESManager class.
-The BESManager is used whenever the software needs to access the BES's services.
+The BESManager information is used whenever the software needs to access the BES's services.
 This configuration is key to the function of Hyrax, for in it
 is defined each BES instance that is connected to a given Hyrax installation. The following examples
 will show a single BES example. For more information on configuring Hyrax to use multiple BES's
 <<config-hyrax-mult-BESs, look here>>.
 
-Each BES is identified using a seperate <__BES__> child element inside
-of the <__BESManager__> element.
+Each BES is identified using a seperate `<BES>` child element inside
+of the `<BESManager>` element.
 
 ===== `<BES>` Element (required)
 
-The <__BES__> element provides the OLFS with connection and control
-information for a BES. There are 4 child elements in a <__BES__>
-element: <__prefix__>, <__host__>, <__port__>, and <__ClientPool__>.
+The `<BES>` element provides the OLFS with connection and control
+information for a BES. There are 3 required child elements within a `<BES>`
+element: `<prefix>`, `<host>`, `<port>`, and 4 optional child elements: `<timeOut>`,
+`<maxResponseSize>`, `<ClientPool>`, and `<adminPort>`.
 
 ===== `<prefix>` Element (required)
 
-This child element of the <__BES__> element contains the URL prefix that
+This child element of the `<BES>` element contains the URL prefix that
 the OLFS will associate with this BES. This provides a mapping between
 this BES to the URI space serviced by the OLFS. The prefix, then, is 
 a token that is placed between the
@@ -180,12 +180,11 @@ The catalog root is used to designate a particular BES instance in the
 event that multiple BES's are available to a single OLFS.
 
 For a single BES (the default configuration) the tag *must* be designated 
-by "/". This prefix provides a mapping for each BES connected to the OLFS
-and the URI space serviced by the OLFS.
+by "/".
 
 . There *must* be at least one BES element in the BESManager 
 handler configuration whose prefix has a value of "/" (see _example 1_).
-There may be more than one <_BES_>, but only that one is required.
+There may be more than one `<BES>`, but only that one is required.
 . For a single BES (the one with "/" as its prefix) no additional
 effort is required; however, when using multiple BES's it is neccesary
 that each BES has a mount point exposed as a directory (aka collection)
@@ -209,7 +208,7 @@ _Example 2:_
 
 ===== `<host>` Element (required)
 
-This child element of the <__BES__> element contains the host name or IP
+This child element of the `<BES>` element contains the host name or IP
 address of the BES.
 
 _Example:_
@@ -220,7 +219,7 @@ _Example:_
 
 ===== `<port>` Element (required)
 
-This child element of the <__BES__> element contains port number on
+This child element of the `<BES>` element contains port number on
 which the BES is listening.
 
 _Example:_
@@ -231,9 +230,10 @@ _Example:_
 
 ===== `<timeOut>` Element (optional)
 
-This child element of the <__BES__> element contains the timeout time,
-in seconds, for the OLFS to wait for this BES to respond. Defaults to 300
-seconds.
+This child element of the `<BES>` element contains the timeout time,
+in seconds, for the OLFS to wait for this BES to respond.
+
+_Default_: *300*
 
 _Example:_
 [source,xml]
@@ -243,10 +243,12 @@ _Example:_
 
 ===== `<maxResponseSize>` Element (optional)
 
-This child element of the <__BES__> element contains in bytes
+This child element of the `<BES>` element contains in bytes
 the maximum response size allowed for this BES. Requests that produce a
 larger response will receive an error. A value of zero (_0_)
-indicates that there is no imposed limit. The default value is 0.
+indicates that there is no imposed limit.
+
+_Default_: *0*
 
 _Example:_
 [source,xml]
@@ -256,16 +258,20 @@ _Example:_
 
 ===== `<ClientPool>` Element (optional)
 
-This child element of the <__BES__> element configures the behavior of
+This child element of the `<BES>` element configures the behavior of
 the pool of client connections that the OLFS maintains with this
 particular BES. These connections are pooled for efficiency and speed.
 This element has two attributes: `maximum` and `maxCmds`.
 
 The `maximum` attribute specifies the
 maximum number of concurrent BES client connections that the OLFS can
-make. The default value of `maximum` is 200.
+make.
+
+_Default_: *200*
 
 The `maxCmds` attribute specifies the maximum number of commands that can be issued over a particular BESClient connection. The default is 2000.
+
+_Default_: *2000*
 
 _Example:_
 [source,xml]
@@ -273,13 +279,13 @@ _Example:_
 <ClientPool maximum="200" maxCmds="2000" />
 ----
 
-If the <ClientPool> element is missing, the pool (`maximum`) size defaults to 200 and `maxCmds` defaults to 2000.
+If the `<ClientPool>` element is missing, the pool (`maximum`) size defaults to 200 and `maxCmds` defaults to 2000.
 
 ===== `<adminPort>` element (optional)
 
-This child element of the <__BES__> element contains the port on the BES
+This child element of the `<BES>` element contains the port on the BES
 system that can be used by the Hyrax Admin Interface to control the BES.
-THe BES must also be configured to open and utilize this admin port.
+The BES must also be configured to open and utilize this admin port.
 
 _Example:_
 [source,xml]
@@ -299,20 +305,20 @@ _Example:_
         <maxResponseSize>0</maxResponseSize>
         <ClientPool maximum="10" maxCmds="2000" />
     </BES>
-</BESManager >
+</BESManager>
 
 ----
 
-
-
 === `<ThreddsService>`  (optional)
-This configuration parameter controls
+This configuration parameter controls:
 
-* The location of the static THREDDS catalog root in the server.
-* If the static THREDDS catalogs are held in memory (faster) or read from disk for each request (slower).
-* If the server will broker remote THREDDS catalogs and their data by following `thredds:catalogRef` links that point to THREDDS catalogs on other systems.
+* The location of the static THREDDS catalog root in the URI space serviced by Hyrax.
+* If the static THREDDS catalogs are held in memory (faster, but more memory intensive) or
+read from disk for each request (slower, but uses less memory).
+* If the server will broker remote THREDDS catalogs and their data by following
+`thredds:catalogRef` links that point to THREDDS catalogs on other systems.
 
-==== `<prefix>` attribute (optional)
+==== `prefix` attribute (optional)
 
 Sets the name of the root of the static THREDDS catalogs in Hyrax.
 For example, if the prefix is `thredds`,
@@ -322,9 +328,9 @@ top-level static catalog (Typically the contents of the file
 
 Default: `thredds`
 
-==== `<useMemoryCache>` attribute (optional)
+==== `useMemoryCache` attribute (optional)
 
-If the text value of this attribute is the string 'true,' this will cause
+If the text value of this attribute is the string `true`, this will cause
 the servlet to ingest all of the static catalog files at startup and
 hold their contents in memory. If set to false then then each request for a static THREDDS catalog will cause the server to read and parse the catalog from disk.
 <<THREDDS-config, See this page for more information about the memory caching
@@ -332,24 +338,24 @@ operations.>>
 
 Default: `true`
 
-==== `<allowRemote>` attribute (optional)
+==== `allowRemote` attribute (optional)
 
-If this attribute is present and it's value is set to true then the server will "broker"
-remote THREDDS catalogs and the data that they serve. THis means that the server, not the
+If this attribute is present and it's value is set to `true` then the server will "broker"
+remote THREDDS catalogs and the data that they serve. This means that the server, not the
 client, will retrieve the remote catalogs and render them for the requesting client and
-provide an interface for retrieving the remote data, allow Hyrax to perform any subsequent
-processing before returning the result to the requesting client.
+provide an interface for retrieving the remote data and allow Hyrax to perform any
+subsequent processing before returning the result to the requesting client.
 
 Default: `false`
 
-==== `<ingestTransformFile>` Element (optional)
+==== `<ingestTransformFile>` child element (optional)
 
-This child element of ThreddsService is a specific code development option that allows
+This child element of `ThreddsService` is a specific code development option that allows
 a developer to specify the fully qualified path to an XSLT file that will be used to
 preprocess each THREDDS catalog file read from disk. The default version of this
 file (found in
-_$CATALINA_HOME/webapps/opndap/xsl/threddsCatalogIngest.xsl_) processes
-the _thredds:datasetScan_ elements in each THREDDS catalog so that they
+`$CATALINA_HOME/webapps/opndap/xsl/threddsCatalogIngest.xsl`) processes
+the `thredds:datasetScan` elements in each THREDDS catalog so that they
 contain specific content for Hyrax:
 
 NOTE: This is a developers option and in general is not recommended 
@@ -367,7 +373,7 @@ Directs requests to the <<gateway-service, Gateway Service>>.
 
 ==== `<prefix>` Element (optional)
 
-Sets localtion of the gateway service in Hyrax.
+Sets location of the gateway service the URI space serviced by Hyrax.
 For example, if the prefix is `gateway`,
 then `http://localhost:8080/opendap/gateway/` should give you the
 Gateway Service page.
@@ -669,7 +675,7 @@ Tomcat security officially supports _context_ level authentication. This
 means that you can restrict access to the collection of servlets
 running in a single web application (i.e. all of the stuff
 that is defined in a single _web.xml_ file). You can call out different
-authentication rules for different <__url-pattern__>s within the web
+authentication rules for different `<url-pattern>`s within the web
 application, but only clients which do not cache ANY security
 information will be able to easily access the different areas.
 
@@ -724,7 +730,7 @@ client, Tomcat sends the header
 and the client authenticates. When the second URI is accessed, Tomcat
 sends the the same authentication challenge with the same
 `WWW-Authenticate` header. The client, having recently authenticated to
-this _realm-name_ (defined in the <__login-config__> element in the
+this _realm-name_ (defined in the `<login-config>` element in the
 web.xml file - see above), resends the authentication information, and,
 since it is not valid for that url pattern, the request is denied.
 
@@ -800,12 +806,12 @@ documentation for the HTTP/1.1 Connector](see Standard Implementation section)
 
 To enable compression, you will need to edit the
 _$CATALINA_HOME/conf/server.xml_ file. You will need to locate the
-<__Connector__> element associated with your server; typically this will
-be the only <__Connector__> element whose _port_ attribute is set equal
+`<Connector>` element associated with your server; typically this will
+be the only `<Connector>` element whose _port_ attribute is set equal
 to 8080. You will need to add or change several of its attributes to
 enable compression.
 
-With our Tomcat 7.0.76 distribution, we found this default <__Connector__>
+With our Tomcat 7.0.76 distribution, we found this default `<Connector>`
 element definition in our _server.xml_ file:
 [source,xml]
 ----
