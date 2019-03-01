@@ -125,41 +125,38 @@ first two: *olfs.xml* and *catalog.xml*
   *Role*: Contains the primary OLFS configuration - BES(s) associations,
    directory view instructions, gateway service behavior options,
    static THREDDS catalog behavior, etc. +
-  *Location:* In the persistent content directory which by default is
-  located at _$CATALINA_HOME/content/opendap/_
+  *Location:* `/etc/olfs/olfs.xml`
+  :: (See <<OLFS-config-location>> for alternates)
 
 *catalog.xml* ::
   *Role*: Master(top-level) THREDDS catalog content for static THREDDS
   catalogs. +
-  *Location:* In the persistent content directory which by default is
-  located at _$CATALINA_HOME/content/opendap/_
+  *Location:* `/etc/olfs/catalog.xml`
+  :: _(See <<OLFS-config-location>> for alternates)_
+
 
 *viewers.xml* ::
   *Role*: Contains the localized Viewers configuration. +
-  *Location:* In the persistent content directory which by default is
-  located at _$CATALINA_HOME/content/opendap/_
+  *Location:* `/etc/olfs/viewers.xml`
+  :: (See <<OLFS-config-location>> for alternates)
 
 
 === *olfs.xml* Configuration File
 
 The *olfs.xml* file contains the core configuration of the Hyrax
-servlet:
+front end service. What follows is a detailed explantion of the files content.
 
+==== `<OLFSConfig>` Element
 
-==== OLFSConfig Element
-
-The <__OLFSConfig__> element is the document root. It contains two
-elements that suppy the configuration for the OLFS: <__BesManager__> and
-<__DispatchHandlers__ >.
+The <__OLFSConfig__> element is the document root. It contains several
+elements that suppy the configuration for the OLFS.
 
 ==== `<BESManager>` Element (required)
 
-The BESManager element provides configuration for the BESManager class.
-The BESManager is used 
-//in various parts of the OLFS web application
-whenever the software needs to access BES's services. This
-configuration is key to the function of Hyrax, for in it 
-is defined each BES that is connected to a Hyrax installation. The following examples
+The `BESManager` element provides configuration for the BESManager class.
+The BESManager is used whenever the software needs to access the BES's services.
+This configuration is key to the function of Hyrax, for in it
+is defined each BES instance that is connected to a given Hyrax installation. The following examples
 will show a single BES example. For more information on configuring Hyrax to use multiple BES's
 <<config-hyrax-mult-BESs, look here>>.
 
