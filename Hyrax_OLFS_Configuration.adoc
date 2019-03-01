@@ -522,14 +522,18 @@ Example:
 ----
 
 ==== `<PreloadNcmlIntoBes />` (developer)
-The presence of this developer option in the configuration will cause the OLFS to preload
-all of the NcML content found in the static THREDDS catalogs and attempt to transmit it to
-the BES. There is at this time no software in the BEat can accept, store, or otherwise
-utilize and respond to such a command  and so this should be considered a mothballed
-feature.
+WARNING: *_This is a partially implemented,  non-functional feature._*
+
+The presence of this developer option in the configuration will cause the OLFS to attempt
+to preload all of the NcML content found in the static THREDDS catalogs and attempt to
+transmit it to the BES. There is at this time no software in the BEat can accept, store,
+or otherwise utilize and respond to such a command.
+
 
 [[catalog-cache]]
 ==== `<CatalogCache>` (developer)
+WARNING: *_This feature is currently out of production and non-functional._*
+
 This configuration parameter causes the OLFS to cache (in memory) all of the BES `getNode`
 responses in order to reduce system latency. There is at least one serious bug that
 remains unresloved in the code that does the cache which prevents the cache from being
