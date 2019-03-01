@@ -147,12 +147,12 @@ first two: *olfs.xml* and *catalog.xml*
 The *olfs.xml* file contains the core configuration of the Hyrax
 front end service. What follows is a detailed explanation of its content.
 
-==== `<OLFSConfig>` Element
+==== `<OLFSConfig>` element
 
 The `<OLFSConfig>` element is the document root. It contains several
 elements that supply the configuration for the OLFS.
 
-==== `<BESManager>` Element (required)
+==== `<BESManager>` element (required)
 The BESManager information is used whenever the software needs to access the BES's services.
 This configuration is key to the function of Hyrax, for in it
 is defined each BES instance that is connected to a given Hyrax installation. The following examples
@@ -162,14 +162,14 @@ will show a single BES example. For more information on configuring Hyrax to use
 Each BES is identified using a seperate `<BES>` child element inside
 of the `<BESManager>` element.
 
-===== `<BES>` Element (required)
+===== `<BES>` element (required)
 
 The `<BES>` element provides the OLFS with connection and control
 information for a BES. There are 3 required child elements within a `<BES>`
 element: `<prefix>`, `<host>`, `<port>`, and 4 optional child elements: `<timeOut>`,
 `<maxResponseSize>`, `<ClientPool>`, and `<adminPort>`.
 
-===== `<prefix>` Element (required)
+===== `<prefix>` element (required)
 
 This child element of the `<BES>` element contains the URL prefix that
 the OLFS will associate with this BES. This provides a mapping between
@@ -206,7 +206,7 @@ _Example 2:_
  <prefix>/data/nc</prefix>
 ----
 
-===== `<host>` Element (required)
+===== `<host>` element (required)
 
 This child element of the `<BES>` element contains the host name or IP
 address of the BES.
@@ -217,7 +217,7 @@ _Example:_
 <host>test.opendap.org</host>
 ----
 
-===== `<port>` Element (required)
+===== `<port>` element (required)
 
 This child element of the `<BES>` element contains port number on
 which the BES is listening.
@@ -228,7 +228,7 @@ _Example:_
 <port>10022</port>
 ----
 
-===== `<timeOut>` Element (optional)
+===== `<timeOut>` element (optional)
 
 This child element of the `<BES>` element contains the timeout time,
 in seconds, for the OLFS to wait for this BES to respond.
@@ -241,7 +241,7 @@ _Example:_
 <timeOut>600</timeOut >
 ----
 
-===== `<maxResponseSize>` Element (optional)
+===== `<maxResponseSize>` element (optional)
 
 This child element of the `<BES>` element contains in bytes
 the maximum response size allowed for this BES. Requests that produce a
@@ -256,7 +256,7 @@ _Example:_
 <maxResponseSize>0</maxResponseSize>
 ----
 
-===== `<ClientPool>` Element (optional)
+===== `<ClientPool>` element (optional)
 
 This child element of the `<BES>` element configures the behavior of
 the pool of client connections that the OLFS maintains with this
@@ -309,7 +309,7 @@ _Example:_
 
 ----
 
-=== `<ThreddsService>`  (optional)
+==== `<ThreddsService>`  (optional)
 This configuration parameter controls:
 
 * The location of the static THREDDS catalog root in the URI space serviced by Hyrax.
@@ -318,7 +318,7 @@ read from disk for each request (slower, but uses less memory).
 * If the server will broker remote THREDDS catalogs and their data by following
 `thredds:catalogRef` links that point to THREDDS catalogs on other systems.
 
-==== `prefix` attribute (optional)
+===== `prefix` attribute (optional)
 
 Sets the name of the root of the static THREDDS catalogs in Hyrax.
 For example, if the prefix is `thredds`,
@@ -328,7 +328,7 @@ top-level static catalog (Typically the contents of the file
 
 Default: `thredds`
 
-==== `useMemoryCache` attribute (optional)
+===== `useMemoryCache` attribute (optional)
 
 If the text value of this attribute is the string `true`, this will cause
 the servlet to ingest all of the static catalog files at startup and
@@ -338,7 +338,7 @@ operations.>>
 
 Default: `true`
 
-==== `allowRemote` attribute (optional)
+===== `allowRemote` attribute (optional)
 
 If this attribute is present and it's value is set to `true` then the server will "broker"
 remote THREDDS catalogs and the data that they serve. This means that the server, not the
@@ -348,7 +348,7 @@ subsequent processing before returning the result to the requesting client.
 
 Default: `false`
 
-==== `<ingestTransformFile>` child element (optional)
+===== `<ingestTransformFile>` child element (<<developer-options,developer>>)
 
 This child element of `ThreddsService` is a specific code development option that allows
 a developer to specify the fully qualified path to an XSLT file that will be used to
@@ -358,73 +358,98 @@ file (found in
 the `thredds:datasetScan` elements in each THREDDS catalog so that they
 contain specific content for Hyrax:
 
-NOTE: This is a developers option and in general is not recommended 
-for use in an operational server.
+NOTE: _This is a developers option and in general is not recommended
+for use in an operational server._
 
-==== Example Configuration Element
+===== Example configuration element
 [source,xml]
 ----
     <ThreddsService  prefix="thredds" useMemoryCache="true" allowRemote="false" />
 ----
 
-=== `<GatewayService>` (optional)
+==== `<GatewayService>` (optional)
 
 Directs requests to the <<gateway-service, Gateway Service>>.
 
-==== `<prefix>` Element (optional)
+===== `<prefix>` element (optional)
 
-Sets location of the gateway service the URI space serviced by Hyrax.
+Sets location of the gateway service in the URI space serviced by Hyrax.
 For example, if the prefix is `gateway`,
 then `http://localhost:8080/opendap/gateway/` should give you the
 Gateway Service page.
 
 Default: `gateway`
 
-==== Example Configuration Element
+===== Example configuration element
 [source,xml]
 ----
     <GatewayService  prefix="gateway" />
 ----
 
 
-=== `<AllowDirectDataSourceAccess />` Element (optional)
+==== `<AllowDirectDataSourceAccess />` element (optional)
 
 The `<AllowDirectDataSourceAccess/>` element controls the user's
 ability to directly access data sources via the Hyrax web interface. If this
 element is present (and not commented out, as in the example below) a
-client can get an entire data source (such as an HDF file) by
+client can retrieve an entire data source (such as an HDF file) by
 requesting it through the HTTP URL interface. By default, Hyrax ships with this option
-disabled. We recommend that you leave it unchanged unless you requre that users be able
+disabled. We recommend that you leave it unchanged unless you desire that users be able
 to circumvent the OPeNDAP request interface and have direct access to the data products
 stored on your server.
 
+This element has no attributes or child elements.
+
 Default: Not enabled.
 
-==== Example Configuration Element
+===== Example configuration element
 [source,xml]
 ----
     <!-- AllowDirectDataSourceAccess / -->
 ----
 
-=== `<UseDAP2ResourceUrlResponse />` Element (optional)
+==== `<UseDAP2ResourceUrlResponse />` element (optional)
 
-This element controls the Hyrax's response to a clients request for the data resource URL.
-When this element is present the server will rresponed to requests for data resources URLs
-by returning the (not clearly defined by a specification)
-DAP2 style response. Commenting out or removing  the `<UseDAP2ResourceUrlResponse />`
-element will cause the server to return the (well-defined by a specification) DAP4 DSR
-response when a dataset resource URL is requested.
+This element controls the type of response that Hyrax will provide to a client's request
+for the data resource URL. When this element is present the server will respond to
+requests for data resource URLs by returning the (not clearly defined by any specification)
+DAP2 response (either an error or the underlying data object). Commenting out or removing
+the `<UseDAP2ResourceUrlResponse />` element will cause the server to return the
+(well-defined by a specification) DAP4 DSR response when a dataset resource URL is
+requested.
 
-==== Example Configuration Element
+This element has no attributes or child elements.
+
+Default: Enabled.
+
+===== Example configuration element
 [source,xml]
 ----
     <UseDAP2ResourceUrlResponse />
 ----
 
-[[bot-blocker]]
-=== BotBlocker (optional)
+==== `<AddFileoutTypeSuffixToDownloadFilename />` element (optional)
 
-This optional handler can be used to block access from specific IP
+This optional element controls how the server will construct the download file name that
+is transmitted in the HTTP Content-Disposition header.  A simple example will provide the
+best explanation.: If the `<AddFileoutTypeSuffixToDownloadFilename />` element iseither
+commented out or not present and a user requests a data response from `somedatafile.hdf`
+in netCDF-3 format the HTTP Content-Disposition header will be set like this:
+----
+Content-Disposition: attachment; filename="somedatafile.hdf"
+----
+However if the `<AddFileoutTypeSuffixToDownloadFilename />` is present then the resulting
+response will have a HTTP Content-Disposition header like this:
+----
+Content-Disposition: attachment; filename="somedatafile.hdf.nc"
+----
+
+
+
+[[bot-blocker]]
+==== `<BotBlocker>` (optional)
+
+This optional element can be used to block access from specific IP
 addresses or a range of IP addresses using regular expressions. It
 turns out that many of the web crawling robots do not respect the
 robots.txt file when one is provided. Since many sites do not want their
@@ -432,46 +457,107 @@ data holdings exhaustively queried by automated software, we created a
 simple robot blocking handler to protect system resources from
 non-compliant robots.
 
-==== `<IpAddress>` Element
+===== `<IpAddress>` element
 
 The text value of this element should be the IP address of a system
 which you would like to block from accessing your service.
 
-For example,
-`<IpAddress>128.193.64.33</IPAddress>` blocks the system located at
-128.193.64.33 from accessing your server.
-There can be zero or more <IpAddress> elements in the <BotBlocker>.
+There can be zero or more `<IpAddress>` child elements in the `<BotBlocker>` element.
 
-==== `<IpMatch>` Element
+For example:
+[source,xml]
+----
+    <IpAddress>128.193.64.33</IPAddress>
+----
+Will block the system located at 128.193.64.33 from accessing your server.
 
+===== `<IpMatch>` element
 The text value of this element should be the regular expression that
 will be used to match the IP addresses of clients attempting to access
 Hyrax.
 
-For example, `<IpMatch>65\.55\.[012]?\d?\d\.[012]?\d?\d</IpMatch>`
-matches all IP addresses beginning with 65.55 and thus blocks access for
-clients whose IP addresses lie in that range. There can be zero or more
-< IpMatch > elements in the Handler configuration for the BotBlocker
+There can be zero or more `<IpMatch>` child  elements in `<BotBlocker` element.
 
-==== Example BotBlocker Configuration
+For example:
+[source,xml]
+----
+ <IpMatch>65\.55\.[012]?\d?\d\.[012]?\d?\d</IpMatch>
+----
+Matches all IP addresses beginning with 65.55 and thus blocks access for
+clients whose IP addresses lie in that range.
+
+===== Example BotBlocker Configuration
 
 [source,xml]
 ----
-    <Handler className="opendap.coreServlet.BotBlocker">
- 
+    <BotBlocker>
         <IpAddress>128.193.64.33</IpAddress>
- 
-        <!-- This matches all IPv4 addresses, work yours out from here.... -->
-        <!--<IpMatch>[012]?\d?\d\.[012]?\d?\d\.[012]?\d?\d\.[012]?\d?\d</IpMatch> -->
- 
-        <!-- Any IP starting with 65.55 (MSN bots the don't respect robots.txt  -->
         <IpMatch>65\.55\.[012]?\d?\d\.[012]?\d?\d</IpMatch>
- 
-    </Handler>
+    </BotBlocker>
+----
+
+[[developer-options]]
+==== Developer Options
+
+These configuration options are intended to be used by developers that are engaged in code developement for components of Hyrax and are not meant to be enabled in any kind of production environment. They are included here for transparency to help potential contributors to the Hyrax project.
+
+==== `<Timer>` (developer)
+The `Timer` enables or disables the generation of internal timing metrics for the OLFS
+
+===== `enabled` attribute
+If `enabled` is set to `true then the timer will be enabled.
+
+If you want timing metrics to be output to the log then uncomment the Timer and set the
+enabled attribute's value to "true"
+
+WARNING: There significant performance costs to utilizing the Timer.
+
+Example:
+[source,xml]
+----
+ <Timer enabled="true"/>
+----
+
+==== `<PreloadNcmlIntoBes />` (developer)
+The presence of this developer option in the configuration will cause the OLFS to preload
+all of the NcML content found in the static THREDDS catalogs and attempt to transmit it to
+the BES. There is at this time no software in the BEat can accept, store, or otherwise
+utilize and respond to such a command  and so this should be considered a mothballed
+feature.
+
+[[catalog-cache]]
+==== `<CatalogCache>` (developer)
+This configuration parameter causes the OLFS to cache (in memory) all of the BES `getNode`
+responses in order to reduce system latency. There is at least one serious bug that
+remains unresloved in the code that does the cache which prevents the cache from being
+updated without restarting the server. Because of this option has been taken out of
+production until resources can be allocated to resolve the underlying issues.
+
+The `<CatalogCache>` is configured by it's two child elements,
+`<maxEntries>` and `<updateIntervalSeconds>`.
+
+* The value of `maxEntries` determines the total number of catalog
+responses to hold in memory. The default value for `maxEntries` is
+10000.
+* The value of `updateIntervalSeconds` determines how long the catalog
+update thread will sleep between updates. This value affects the server's
+responsiveness to changes in its holdings. If your server's contents
+changes frequently, then the `updateIntervalSeconds` should be set to a
+value that will allow the server to publish new additions/deletions in a
+timely manner. The `updateIntervalSeconds` default value 10000 seconds
+(2.7 hours).
+
+Example:
+[source,xml]
+----
+    <CatalogCache>
+        <maxEntries>10000</maxEntries>
+        <updateIntervalSeconds>10000</updateIntervalSeconds>
+    </CatalogCache>
 ----
 
 
-=== Example olfs.xml File
+==== Example olfs.xml File
 
 [source,xml]
 ----
@@ -533,45 +619,27 @@ clients whose IP addresses lie in that range. There can be zero or more
 </OLFSConfig>
 
 ----
-[[catalog-cache]]
-==== `<CatalogCache>` Element (optional)
-
-The catalog cache element configures the OLFS memory cache of BES
-catalog responses. This cache can greatly increase server performance
-for small requests. It is configured by it's two child elements,
-`maxEntries` and `updateIntervalSeconds`.
-
-* The value of `maxEntries` determines the total number of catalog
-responses to hold in memory. The default value for `maxEntries` is
-10000.
-* The value of `updateIntervalSeconds` determines how long the catalog
-update thread will sleep between updates. This value affects the server's
-responsiveness to changes in its holdings. If your server's contents
-changes frequently, then the `updateIntervalSeconds` should be set to a
-value that will allow the server to publish new additions/deletions in a
-timely manner. The `updateIntervalSeconds` default value 10000 seconds
-(2.7 hours).
-* If for some reason you wish to disable the `CatalogCache`, simply
-remove (or comment out) the `CatalogCache` element and its children
-from the `olfs.xml` file.
 
 
 === Viewers Service (`viewers.xml` file)
 
 The Viewers service provides, for each dataset, an HTML page containing
-links to Java WebStart applications and to WebServices (such as WMS)
+links to Java WebStart applications and to WebServices (such as WMS and WCS)
 that can be utilized in conjunction with the dataset. The Viewers
 service is configured via the contents of the `viewers.xml` file typically located
 here: `/etc/olfs/viewers.xml`.
 
 ==== `viewers.xml` Configuration File
 
-===== Consists of
+The `viewers.xml` contains a list of two types of elements:
 
-* *<JwsHandler>* Elements
-* *<WebServiceHandler>* Elements
+* `<JwsHandler>` elements
+* `<WebServiceHandler>` elements
 
-===== Example Configuration:
+The details of these are discussed elsewhere in the documentation and are type
+the implementations each handler.
+
+==== Example Configuration:
 
 [source,xml]
 ----
