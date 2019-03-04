@@ -6,66 +6,87 @@
 
 [[OLFS-config]]
 == OLFS Configuration
-The OLFS is the outward facing component of the Hyrax server. In following sections you 
-will find the details of how to configure the OLFS for you instance of Hyrax. 
 
-NOTE: _The OLFS web application relies on one or more instances of the
+The OLFS is the outward facing component of the Hyrax server. In following sections, you 
+will find the details of how to configure the OLFS for your instance of Hyrax. 
+
+// Is this necessary? Shouldn't users know this by now?
+NOTE: The OLFS web application relies on one or more instances of the
 <<bess-configuration, BES>> to provide it with
-data access and basic catalog metadata._
+data access and basic catalog metadata.
 
 The OLFS web application stores its configuration state in a number of
-files. The server's configuration is altered by carefully modifying the
-content of one or more of these files and then restarting the web
-application (or simply restarting Tomcat).
+files. You can change the server's default configuration by modifying
+the content of one or more of these files and then restarting Tomcat
+or the web application. These configuration files include the following:
+
+* *olfs.xml:* Contains the primary OLFS configuration, such as 
+BES associations, directory view instructions, gateway service location,
+and static THREDDS catalog behavior. Located at `/etc/olfs/olfs.xml`.
+For more information about `olfs.xml`, please see
+<<olfs-config, the `olfs.xml` configuration section.>>
+
+* *catalog.xml:* Master(top-level) THREDDS catalog content for static THREDDS
+catalogs. Located at `/etc/olfs/catalog.xml`.
+
+* *viewers.xml*: Contains the localized viewers configuration.
+Located at `/etc/olfs/viewers.xml`.
+
+Generally, you can meet your configuration needs by making changes to
+`olfs.xml` and `catalog.xml`. For more information about where these files
+might be located, please see the following section, <<OLFS-config-location>>.
 
 [[OLFS-config-location]]
 === Location of the OLFS Configuration Files
 
-Beginning with olfs-1.15.0 (part of hyrax-1.13.0) the OLFS will use the
-following procedure to deterimine its configuration location:
+//TODO Think of a better way to lead into the list.
+Beginning with olfs-1.15.0 (part of hyrax-1.13.0) the OLFS 
+looks at the value of the `OLFS_CONFIG_DIR` user environment variable.
+The following are the possible options:
 
-. It will first look at the value of the user environment variable
-`OLFS_CONFIG_DIR`. If the variable is set and its value is the pathname
-of an existing directory that is readable and writable by Tomcat, the OLFS
-will use it. Otherwise,
-. If the directory `/etc/olfs` exists and is readable and writable by
-Tomcat the OLFS will use it. Otherwise,
-. If the directory `/usr/share/olfs` exists and is readable and writable
- by Tomcat then the OLFS will use it (this was added for Hyrax 1.14.1). Otherwise,
-. The OLFS will utilize the default configuration bundled in the web
-application web archive file (opendap.war).
+* If the variable is set and its value is the pathname of an existing directory
+that is both readable and writable by Tomcat, the OLFS will use it.
+* If the directory `/etc/olfs` exists and is readable and writable by
+Tomcat, the OLFS will use it.
+* If the directory `/usr/share/olfs` exists and is readable and writable
+by Tomcat, then the OLFS will use it (this was added for Hyrax 1.14.1).
+* The OLFS will use the default configuration bundled in the web
+application web archive file (`opendap.war`).
 
-In this way the OLFS can start without a persistent local configuration.
-If the default configuration works for your intended use, then there is
-no need to create a persistent localized configuration. If changes need to
-be made to the configuration, then it is *strongly recommended* that the
-user enable the use of a persistent local configuration. This way
-updating the web application won't destroy your changes. This is easily
-done by creating an empty directory and identifying it with the
-`OLFS_CONFIG_DIR` environment variable. For example:
+In this way, the OLFS can start without a persistent local configuration.
+If the default configuration works for your intended use, there is
+no need to create a persistent localized configuration.
+If, however, you need to change the configuration, we *strongly recommend*
+that you enable a persistent local configuration. This way, 
+updating the web application won't override your custom configuration.
+
+==== Creating a Persistent Local Configuration
+
+You can easily enable a persistent local configuration for the OLFS by 
+creating an empty directory and identifying it with the 
+`OLFS_CONFIG_DIR` environment variable. For example...
 
 ----
 export OLFS_CONFIG_DIR="/home/tomcat/hyrax"
 ----
 
-Alternatively, you can create either the directory `/etc/olfs` or the
-directory `/usr/share/olfs`. 
+Alternately, you can create `/etc/olfs` or `/usr/share/olfs`. 
 
-TIP: _Make sure that the directory you create is
-both readable and writable by the user running the Tomcat application._
-
-Once the directory is created (and in the first case the environment
-variable is set) restart the OLFS (Tomcat). This will cause the OLFS to
+Once you have created the directory (and, in the first case, set the
+environment variable), restart Tomcat. Restarting Tomcat prompts the OLFS
 move a copy of its default configuration into the empty directory and
-then utilize it. You can then edit the local copy.
+then use it. You can then edit the local copy.
 
-==== CentOS-7.x and/or SELinux
+WARNING: The directory that you create _must_ be both readable and writable
+by the user who is running the Tomcat application.
 
-SELinux (which is a special gift you get with CentOS-7) will cause some new challenges for those
+=== Pitfalls with CentOS-7.x and/or SELinux
+
+SELinux (bundled by default with CentOS-7) will create some new challenges for those
 not familiar with the changes it brings to the system environment. For one, Tomcat runs as a
 _confined_ user. Here we'll examine how these changes affect the OLFS.
 
-===== Localizing the OLFS Configuration under SELinux
+==== Localizing the OLFS Configuration under SELinux
 When using a _yum_ installed Tomcat on CentOS-7.x (or any other Linux
 environment that is essentially an *SELinux* variant), neither the `/etc/olfs`
 or the `/usr/share/olfs` configuration locations will work without taking extra steps.
@@ -107,7 +128,7 @@ https://noobient.com/post/165842438861/selinux-crash-course
 
 https://noobient.com/post/165972214381/selinux-woes-with-tomcat-on-centos-74
 
-===== Tomcat Logs
+==== Tomcat Logs
 
 In SELinux the _yum_ installed Tomcat does not produce a catalina.out file, rather that
 output is sent to the *_journal_* and can be viewed with the command:
@@ -115,33 +136,7 @@ output is sent to the *_journal_* and can be viewed with the command:
 journalctl -u tomcat
 ----
 
-
-=== OLFS Configuration Files
-
-The OLFS web application gets its configuration from four files. In general
-all of your configuration need will be met by making changes to the
-first two: *olfs.xml* and *catalog.xml*
-
-*olfs.xml* ::
-  *Role*: Contains the primary OLFS configuration - BES(s) associations,
-   directory view instructions, gateway service location,
-   static THREDDS catalog behavior, etc. +
-  *Location:* `/etc/olfs/olfs.xml`
-  :: (See <<OLFS-config-location>> for alternates)
-
-*catalog.xml* ::
-  *Role*: Master(top-level) THREDDS catalog content for static THREDDS
-  catalogs. +
-  *Location:* `/etc/olfs/catalog.xml`
-  :: _(See <<OLFS-config-location>> for alternates)_
-
-
-*viewers.xml* ::
-  *Role*: Contains the localized Viewers configuration. +
-  *Location:* `/etc/olfs/viewers.xml`
-  :: (See <<OLFS-config-location>> for alternates)
-
-
+[[olfs-config]]
 === *olfs.xml* Configuration File
 
 The *olfs.xml* file contains the core configuration of the Hyrax
