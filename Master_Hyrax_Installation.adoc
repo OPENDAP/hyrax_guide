@@ -1,10 +1,9 @@
-= Hyrax Installation =
+= Installation =
 :Leonard Porrello <lporrel@gmail.com>:
 {docdate}
 :numbered:
 :toc:
 
-== Overview ==
 Installing a Hyrax binary release typically involves the following:
 
 * https://www.opendap.org/software/hyrax-data-server[Download the
