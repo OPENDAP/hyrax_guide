@@ -87,15 +87,16 @@ not familiar with the changes it brings to the system environment. For one, Tomc
 _confined_ user. Here we'll examine how these changes affect the OLFS.
 
 ==== Localizing the OLFS Configuration under SELinux
-When using a _yum_ installed Tomcat on CentOS-7.x (or any other Linux
+
+When using a `yum`-installed Tomcat on CentOS-7.x (or any other Linux
 environment that is essentially an *SELinux* variant), neither the `/etc/olfs`
 or the `/usr/share/olfs` configuration locations will work without taking extra steps.
 You must alter the SELinux access policies to give the Tomcat user
 permission to read and write to one of these directories.
 
-Here is a script/recipe for configuring the `/usr/share/olfs` directory for reading
-and writing by the Tomcat user. There are probably a number of alternative ways to accomplish this,
-but this one worked for me.
+The following code block will configures the `/usr/share/olfs` directory for reading
+and writing by the Tomcat user:
+
 ----
 #!/bin/sh
 # You must be the super user to do this stuff...
@@ -118,20 +119,25 @@ semanage fcontext -a -t tomcat_var_lib_t "/usr/share/olfs(/.*)?"
 # Use restorecon to commit/do the labeling.
 restorecon -rv /usr/share/olfs
 ----
+
+////
+This is a how-to, so I think the below is unnecessary.
+
 There is a lot going in the above script and to fully understand it you will need to study the man
-pages for _semanage_ and _restorecon_. You may also get some benefit from these articles about
-SELinux and the permissions issues therein:
+pages for _semanage_ and _restorecon_. 
+////
 
-https://wiki.centos.org/HowTos/SELinux
+For further reading about SELinux and its permissions issues, see the following:
 
-https://noobient.com/post/165842438861/selinux-crash-course
-
-https://noobient.com/post/165972214381/selinux-woes-with-tomcat-on-centos-74
+* https://wiki.centos.org/HowTos/SELinux
+* https://noobient.com/post/165842438861/selinux-crash-course
+* https://noobient.com/post/165972214381/selinux-woes-with-tomcat-on-centos-74
 
 ==== Tomcat Logs
 
 In SELinux the _yum_ installed Tomcat does not produce a catalina.out file, rather that
 output is sent to the *_journal_* and can be viewed with the command:
+
 ----
 journalctl -u tomcat
 ----
