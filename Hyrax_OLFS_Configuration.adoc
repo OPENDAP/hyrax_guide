@@ -148,21 +148,27 @@ The `<OLFSConfig>` element is the document root. It contains several
 elements that supply the configuration for the OLFS.
 
 ==== `<BESManager>` element (required)
-The BESManager information is used whenever the software needs to access the BES's services.
-This configuration is key to the function of Hyrax, for in it
-is defined each BES instance that is connected to a given Hyrax installation. The following examples
-will show a single BES example. For more information on configuring Hyrax to use multiple BES's
+The BESManager information is used whenever the software needs to access the
+BES's services. This configuration is key to the function of Hyrax, for in it
+is defined each BES instance that compose a given Hyrax installation. The
+following examples will show a single BES example. For more information on
+configuring Hyrax to use multiple BES's
 <<config-hyrax-mult-BESs, look here>>.
 
-Each BES is identified using a seperate `<BES>` child element inside
-of the `<BESManager>` element.
+Within the BESManager element there are 3 principle child elements:
+
+1. The BES element(s) (one or more required).
+1. The NodeCache element (optional).
+1. The SiteMapCache element (optional).
 
 ===== `<BES>` element (required)
 
-The `<BES>` element provides the OLFS with connection and control
+Each BES component of hyrax is identified using a seperate `<BES>` child
+element inside of the `<BESManager>` element.
+This `<BES>` element provides the OLFS with connection and control
 information for a BES. There are 3 required child elements within a `<BES>`
-element: `<prefix>`, `<host>`, `<port>`, and 4 optional child elements: `<timeOut>`,
-`<maxResponseSize>`, `<ClientPool>`, and `<adminPort>`.
+element: `<prefix>`, `<host>`, `<port>`, and 4 optional child elements:
+`<timeOut>`, `<maxResponseSize>`, `<ClientPool>`, and `<adminPort>`.
 
 ===== `<prefix>` element (required)
 
@@ -264,7 +270,8 @@ make.
 
 _Default_: *200*
 
-The `maxCmds` attribute specifies the maximum number of commands that can be issued over a particular BESClient connection. The default is 2000.
+The `maxCmds` attribute specifies the maximum number of commands that can be
+issued over a particular BESClient connection. The default is 2000.
 
 _Default_: *2000*
 
@@ -274,7 +281,8 @@ _Example:_
 <ClientPool maximum="200" maxCmds="2000" />
 ----
 
-If the `<ClientPool>` element is missing, the pool (`maximum`) size defaults to 200 and `maxCmds` defaults to 2000.
+If the `<ClientPool>` element is missing, the pool (`maximum`) size defaults to
+200 and `maxCmds` defaults to 2000.
 
 ===== `<adminPort>` element (optional)
 
@@ -286,6 +294,51 @@ _Example:_
 [source,xml]
 ---- 
 <adminPort>11002</adminPort>
+----
+
+===== `<NodeCache>` element (optional)
+The NodeCache element controls the state of the in-memory LRU cache for BES
+catalog/node responses. It has two attributes, `refreshInterval` and
+`maxEntries`.
+
+The `refreshInterval` attribute specifies the time (in seconds) that any
+particular item remains in the cache. If the underlying system has a lot of
+change (model result output etc) then making this number smaller will increase
+the rate at which the change becomes "available" through the Hyrax service, at
+the expense of more cache churn and slower responses. If the underlying system
+is fairly stable (undergoes little change) then refreshInterval can be larger
+which will mean less cache churn and faster responses.
+
+The `maxEntries` attribute defines the maximum number of entries to allowed in
+the cache. If the serviced collection is large then making this larger will
+definitely improve response times for catalogs etc.
+
+_Example:_
+[source,xml]
+----
+<NodeCache maxEntries="20000" refreshInterval="600"/>
+----
+
+===== `<SiteMapCache>` element (optional)
+
+The `SiteMapCache` element defines the location and life span of the SiteMap
+response cache. A cache for the BES SiteMap response can be time consuming to
+produce for larger systems (~4 minutes for a system with 110k directories and
+560k files) This configuration element addresses this by providing a location
+and refresh interval for a SiteMap cache. `SiteMapCache` has two attributes,
+`cacheFile` and `refreshInterval`.
+
+The optional `cacheFile` attribute may be used to identify a particular location
+for the SiteMap cache file, if not provided it will be placed by default into
+cache directory located in the active OLFS configuration directory.
+
+The `refreshInterval` attribute expresses, in seconds, the time that a SiteMap
+is held in the cache before the system generates a new one.
+
+_Example:_
+[source,xml]
+----
+<SiteMapCache cacheFile="/tmp/SiteMap.cache" refreshInterval="600" />
 ----
 
 ===== Example BESManager Configuration Element
@@ -300,6 +353,8 @@ _Example:_
         <maxResponseSize>0</maxResponseSize>
         <ClientPool maximum="10" maxCmds="2000" />
     </BES>
+    <NodeCache maxEntries="20000" refreshInterval="600"/>
+    <SiteMapCache cacheFile="/tmp/SiteMap.cache" refreshInterval="600" />
 </BESManager>
 
 ----
@@ -594,6 +649,8 @@ Example:
             <maxResponseSize>0</maxResponseSize>
             <ClientPool maximum="200" maxCmds="2000" />
         </BES>
+        <NodeCache maxEntries="20000" refreshInterval="600"/>
+        <SiteMapCache refreshInterval="600" />
     </BESManager>
 
 
