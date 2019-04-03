@@ -89,12 +89,10 @@ by the user who is running Tomcat.
 The `olfs.xml` file contains the core configuration of the Hyrax
 front end service. What follows is a detailed explanation of its contents.
 
-=== `<OLFSConfig>` element
-
-The `<OLFSConfig>` element is the document root. It contains several
+At the document's root is the `<OLFSConfig>` element. It contains several
 elements that supply the configuration for the OLFS.
 
-==== `<BESManager>` element (required)
+=== `<BESManager>` Element (required)
 
 The BESManager information is used whenever the software needs to access the BES's services.
 This configuration is key to the function of Hyrax, for in it
@@ -103,7 +101,7 @@ will show a single BES example. For more information on configuring Hyrax to use
 <<config-hyrax-mult-BESs, look here>>.
 
 Each BES is identified using a seperate `<BES>` child element inside
-of the `<BESManager>` element.
+of the `<BESManager>` element:
 
 [source,xml]
 ---- 
@@ -115,22 +113,20 @@ of the `<BESManager>` element.
         <timeOut>300</timeOut>
         <maxResponseSize>0</maxResponseSize>
         <ClientPool maximum="10" maxCmds="2000" />
+        <adminPort>11002</adminPort>
     </BES>
 </BESManager>
 ----
 
-=== `<BES>` element (required)
+The `<BES>` child elemenst provide the OLFS with connection and control
+information for a BES. There are three required child elements
+within a `<BES>` element and four optional child elements:
 
-The `<BES>` element provides the OLFS with connection and control
-information for a BES. There are 3 required child elements within a `<BES>`
-element: `<prefix>`, `<host>`, `<port>`, and 4 optional child elements: `<timeOut>`,
-`<maxResponseSize>`, `<ClientPool>`, and `<adminPort>`.
-
-==== `<prefix>` element (required)
-
-This element contains the URL prefix that the OLFS will associate with this BES
-and maps this BES to the URI space that the OLFS services.
-
+* *`<prefix>` element (required)*: 
+This element contains the URL prefix that the OLFS will associate with this BES.
+It also maps this BES to the URI space that the OLFS services.
++
+--
 The prefix is a token that is placed between the
 `host:port/context/` part of the Hyrax URL and the catalog root.
 The catalog root is used to designate a particular BES instance in the
@@ -154,202 +150,150 @@ to appear. It is important to note that the prefix string *must*
 always begin with the slash (`/`) character: `<prefix>/data/nc</prefix>`.
 For more information, see 
 <<config-hyrax-mult-BESs, Configuring With Multiple BESs>>.
+--
 
-==== `<host>` element (required)
+* *`<host>` element (required)*: 
+Contains the host name or IP address of the BES, 
+such as `<host>test.opendap.org</host>`.
 
-This child element of the `<BES>` element contains the host name or IP
-address of the BES.
+* *`<port>` element (required)*:
+Contains port number on which the BES is listening,
+such as `<port>10022</port>`.
 
-_Example:_
-[source,xml]
-----
-<host>test.opendap.org</host>
-----
+* *`<timeOut>` element (optional)*:
+Contains the timeout time, in seconds, for the OLFS to wait 
+for this BES to respond, such as `<timeOut>600</timeOut>`.
+Its default value is 300.
 
-==== `<port>` element (required)
+* *`<maxResponseSize>` element (optional)*:
+Contains in bytes the maximum response size allowed for this BES.
+Requests that produce a larger response will receive an error.
+Its default value of zero indicates that there is no imposed limit:
+`<maxResponseSize>0</maxResponseSize>`.
 
-This child element of the `<BES>` element contains port number on
-which the BES is listening.
+* *`<ClientPool>` element (optional)*: 
+Configures the behavior of the pool of client connections that the OLFS
+maintains with this particular BES. These connections are pooled for 
+efficiency and speed: `<ClientPool maximum="200" maxCmds="2000" />`.
++
+--
+Notice that this element has two attributes, `maximum` and `maxCmds`:
 
-_Example:_
-[source,xml]
-----
-<port>10022</port>
-----
+** The `maximum` attribute specifies the maximum number of concurrent
+BES client connections that the OLFS can make. Its default value is 200.
 
-==== `<timeOut>` element (optional)
+** The `maxCmds` attribute specifies the maximum number of commands that
+can be issued over a particular `BESClient` connection. The default is 2000.
+ 
+If the `<ClientPool>` element is missing, the pool (`maximum`) size defaults
+to 200 and `maxCmds` defaults to 2000.
+--
 
-This child element of the `<BES>` element contains the timeout time,
-in seconds, for the OLFS to wait for this BES to respond.
+* *`<adminPort>` element (optional)*: 
+Contains the port on the BES system that can be used by the Hyrax Admin Interface
+to control the BES, such as `<adminPort>11002</adminPort>`.
+The BES must also be configured to open and use this admin port.
 
-_Default_: *300*
+=== `<ThreddsService>` Element (optional)
 
-_Example:_
-[source,xml]
-----
-<timeOut>600</timeOut>
-----
+This configuration parameter controls the following:
 
-==== `<maxResponseSize>` element (optional)
+* The location of the static THREDDS catalog root in the 
+URI space serviced by Hyrax.
 
-This child element of the `<BES>` element contains in bytes
-the maximum response size allowed for this BES. Requests that produce a
-larger response will receive an error. A value of zero (_0_)
-indicates that there is no imposed limit.
+* Whether the static THREDDS catalogs are held in memory or
+read from disk for each request.
 
-_Default_: *0*
-
-_Example:_
-[source,xml]
----- 
-<maxResponseSize>0</maxResponseSize>
-----
-
-==== `<ClientPool>` element (optional)
-
-This child element of the `<BES>` element configures the behavior of
-the pool of client connections that the OLFS maintains with this
-particular BES. These connections are pooled for efficiency and speed.
-This element has two attributes: `maximum` and `maxCmds`.
-
-The `maximum` attribute specifies the
-maximum number of concurrent BES client connections that the OLFS can
-make.
-
-_Default_: *200*
-
-The `maxCmds` attribute specifies the maximum number of commands that can be issued over a particular BESClient connection. The default is 2000.
-
-_Default_: *2000*
-
-_Example:_
-[source,xml]
----- 
-<ClientPool maximum="200" maxCmds="2000" />
-----
-
-If the `<ClientPool>` element is missing, the pool (`maximum`) size defaults to 200 and `maxCmds` defaults to 2000.
-
-==== `<adminPort>` element (optional)
-
-This child element of the `<BES>` element contains the port on the BES
-system that can be used by the Hyrax Admin Interface to control the BES.
-The BES must also be configured to open and utilize this admin port.
-
-_Example:_
-[source,xml]
----- 
-<adminPort>11002</adminPort>
-----
-
-
-
-=== `<ThreddsService>`  (optional)
-This configuration parameter controls:
-
-* The location of the static THREDDS catalog root in the URI space serviced by Hyrax.
-* If the static THREDDS catalogs are held in memory (faster, but more memory intensive) or
-read from disk for each request (slower, but uses less memory).
 * If the server will broker remote THREDDS catalogs and their data by following
 `thredds:catalogRef` links that point to THREDDS catalogs on other systems.
 
-==== `prefix` attribute (optional)
+The following is an example configuration for the `<ThreddsService>` element:
 
-Sets the name of the root of the static THREDDS catalogs in Hyrax.
-For example, if the prefix is `thredds`,
-then `http://localhost:8080/opendap/thredds/` should give you the
-top-level static catalog (Typically the contents of the file
-`/etc/olfs/opendap/catalog.xml`)
-
-Default: `thredds`
-
-==== `useMemoryCache` attribute (optional)
-
-If the text value of this attribute is the string `true`, this will cause
-the servlet to ingest all of the static catalog files at startup and
-hold their contents in memory. If set to false then then each request for a static THREDDS catalog will cause the server to read and parse the catalog from disk.
-<<THREDDS-config, See this page for more information about the memory caching
-operations.>>
-
-Default: `true`
-
-==== `allowRemote` attribute (optional)
-
-If this attribute is present and its value is set to `true` then the server will "broker"
-remote THREDDS catalogs and the data that they serve. This means that the server, not the
-client, will retrieve the remote catalogs and render them for the requesting client and
-provide an interface for retrieving the remote data and allow Hyrax to perform any
-subsequent processing before returning the result to the requesting client.
-
-Default: `false`
-
-
-==== Example `ThreddsService` configuration element
 [source,xml]
 ----
 <ThreddsService  prefix="thredds" useMemoryCache="true" allowRemote="false" />
 ----
 
+Notice that `<ThreddsService>` has several attributes:
+
+* *`prefix` attribute (optional)*: Sets the name of the static THREDDS 
+catalogs' root in Hyrax. For example, 
+if the prefix is `thredds`, then `http://localhost:8080/opendap/thredds/`
+will give you the top-level static catalog, 
+which is typically the contents of the file `/etc/olfs/opendap/catalog.xml`.
+This attribute's default value is `thredds`.
+
+[[useMemoryCacheAttribute]]
+* *`useMemoryCache` attribute (optional)*: This is a boolean value with a
+default value of `true`.
++
+--
+** If the value of this attribute is set to `true`,
+the servlet will ingest all of the static
+catalog files at startup and hold their contents in memory,
+which is faster but more memory intensive.
+
+** If set to `false`, each request for a static THREDDS catalog
+will cause the server to read and parse the catalog from disk,
+which is slower but uses less memory.
+
+See <<THREDDS-config, this page>> for more information about the memory caching operations.
+--
+
+* *`allowRemote` attribute (optional)*:
+If this attribute is present and its value is set to `true`, then the server
+will "broker" remote THREDDS catalogs and the data that they serve.
+This means that the server, not the client, will perform the following steps:
++
+--
+. Retrieve the remote catalogs.
+. Render them for the requesting client.
+. Provide an interface for retrieving the remote data.
+. Allow Hyrax to perform any subsequent processing 
+before returning the result to the requesting client.
+
+This attribute has a default value of `false`.
+--
+
 === `<GatewayService>` (optional)
 
-Directs requests to the <<gateway-service, Gateway Service>>.
+Directs requests to the <<gateway-service, Gateway Service>>:
 
-==== `<prefix>` element (optional)
+[source,xml]
+----
+<GatewayService  prefix="gateway" useMemoryCache="true" />
+----
 
-Sets location of the gateway service in the URI space serviced by Hyrax.
-For example, if the prefix is `gateway`,
+The following are the attributes of `<GatewayService>`:
+
+* *`prefix` attribute (optional)*: Sets location of the gateway service
+in the URI space serviced by Hyrax. For example, if the prefix is `gateway`,
 then `http://localhost:8080/opendap/gateway/` should give you the
-Gateway Service page.
+Gateway Service page. This attribute's default value is `gateway`.
 
-Default: `gateway`
-
-==== Example configuration element
-[source,xml]
-----
-    <GatewayService  prefix="gateway" />
-----
-
-
-=== `<AllowDirectDataSourceAccess />` element (optional)
-
-The `<AllowDirectDataSourceAccess/>` element controls the user's
-ability to directly access data sources via the Hyrax web interface. If this
-element is present (and not commented out, as in the example below) a
-client can retrieve an entire data source (such as an HDF file) by
-requesting it through the HTTP URL interface. By default, Hyrax ships with this option
-disabled. We recommend that you leave it unchanged unless you desire that users be able
-to circumvent the OPeNDAP request interface and have direct access to the data products
-stored on your server.
-
-This element has no attributes or child elements.
-
-Default: Not enabled.
-
-==== Example configuration element
-[source,xml]
-----
-    <!-- AllowDirectDataSourceAccess / -->
-----
+* *`useMemoryCache` attribute (optional)*:
+See <<useMemoryCacheAttribute,the previous section>> for more information.
 
 === `<UseDAP2ResourceUrlResponse />` element (optional)
 
 This element controls the type of response that Hyrax will provide to a client's request
-for the data resource URL. When this element is present the server will respond to
-requests for data resource URLs by returning the (not clearly defined by any specification)
-DAP2 response (either an error or the underlying data object). Commenting out or removing
-the `<UseDAP2ResourceUrlResponse />` element will cause the server to return the
-(well-defined by a specification) DAP4 DSR response when a dataset resource URL is
-requested.
+for the data resource URL:
 
-This element has no attributes or child elements.
-
-Default: Enabled.
-
-==== Example configuration element
 [source,xml]
 ----
     <UseDAP2ResourceUrlResponse />
 ----
+
+When this element is present, the server will respond to
+requests for data resource URLs by returning the DAP2 response 
+(either an error or the underlying data object). Commenting out or removing
+the `<UseDAP2ResourceUrlResponse />` element will cause the server to return the
+DAP4 DSR response when a dataset resource URL is requested.
+
+NOTE: DAP2 responses are not clearly defined by any specification, whereas DAP4 DSR
+responses are well-defined by a specification.
+
+This element has no attributes or child elements and is enabled by default.
 
 === `<AddFileoutTypeSuffixToDownloadFilename />` element (optional)
 
@@ -370,91 +314,105 @@ Content-Disposition: attachment; filename="somedatafile.hdf.nc"
 
 Default: By default the server ships with this disabled.
 
-==== Example configuration element
 [source,xml]
 ----
     <AddFileoutTypeSuffixToDownloadFilename />
 ----
 
+=== `<AllowDirectDataSourceAccess/>` element (optional)
 
-[[bot-blocker]]
+The `<AllowDirectDataSourceAccess/>` element controls the user's
+ability to directly access data sources via the Hyrax web interface. If this
+element is present (and not commented out, as in the example below) a
+client can retrieve an entire data source (such as an HDF file) by
+requesting it through the HTTP URL interface. By default, Hyrax ships with this option
+disabled. We recommend that you leave it unchanged unless you desire that users be able
+to circumvent the OPeNDAP request interface and have direct access to the data products
+stored on your server:
+
+[source,xml]
+----
+    <!-- AllowDirectDataSourceAccess / -->
+----
+
+This element has no attributes or child elements and is desabled by default.
+
+
+
+
+
+[[bot-blocker]] 
 === `<BotBlocker>` (optional)
 
 This optional element can be used to block access from specific IP
-addresses or a range of IP addresses using regular expressions. It
-turns out that many of the web crawling robots do not respect the
-`robots.txt` file when one is provided. Since many sites do not want their
+addresses or a range of IP addresses using regular expressions:
+
+////
+
+This businessy paragraph seems out of place in this user guide.
+
+Many of the web crawling robots do not respect the `robots.txt` file
+when one is provided. Since many sites do not want their
 data holdings exhaustively queried by automated software, we created a
 simple robot blocking handler to protect system resources from
 non-compliant robots.
+////
 
-==== `<IpAddress>` element
+[source,xml]
+----
+<BotBlocker>
+    <IpAddress>128.193.64.33</IpAddress>
+    <IpMatch>65\.55\.[012]?\d?\d\.[012]?\d?\d</IpMatch>
+</BotBlocker>
+----
 
-The text value of this element should be the IP address of a system
-which you would like to block from accessing your service.
+`<BotBlocker>` has the following child elements:
 
+* *`<IpAddress>` element*: The text value of this element
+should be the IP address of a system that you would like to
+block from accessing your service. For example, `<IpAddress>128.193.64.33</IPAddress>`
+Will block the system located at `128.193.64.33` from accessing your server.
++
 There can be zero or more `<IpAddress>` child elements in the `<BotBlocker>` element.
 
-For example:
-[source,xml]
-----
-    <IpAddress>128.193.64.33</IPAddress>
-----
-Will block the system located at 128.193.64.33 from accessing your server.
-
-==== `<IpMatch>` element
-The text value of this element should be the regular expression that
-will be used to match the IP addresses of clients attempting to access
-Hyrax.
-
+* *`<IpMatch>` element*: The text value of this element
+should be the regular expression that will be used to match
+the IP addresses of clients attempting to access Hyrax.
+For example, `<IpMatch>65\.55\.[012]?\d?\d\.[012]?\d?\d</IpMatch>` matches
+all IP addresses beginning with `65.55`, and thus blocks access for
+clients whose IP addresses lie in that range.
++
 There can be zero or more `<IpMatch>` child  elements in `<BotBlocker` element.
 
-For example:
-[source,xml]
-----
- <IpMatch>65\.55\.[012]?\d?\d\.[012]?\d?\d</IpMatch>
-----
-Matches all IP addresses beginning with `65.55` and thus blocks access for
-clients whose IP addresses lie in that range.
 
-==== Example BotBlocker Configuration
 
-[source,xml]
-----
-    <BotBlocker>
-        <IpAddress>128.193.64.33</IpAddress>
-        <IpMatch>65\.55\.[012]?\d?\d\.[012]?\d?\d</IpMatch>
-    </BotBlocker>
-----
+
+
+
+
 
 [[developer-options]]
 === Developer Options
 
-These configuration options are intended to be used by developers that are engaged in code developement for components of Hyrax and are not meant to be enabled in any kind of production environment. They are included here for transparency and to help potential contributors to the Hyrax project.
+These configuration options are intended to be used by developers that are engaged in code developement for components of Hyrax and are *not meant to be enabled* in any kind of production environment. They are included here for transparency and to help potential contributors to the Hyrax project.
 
-=== `<Timer>` (developer)
-The `Timer` enables or disables the generation of internal timing metrics for the OLFS
+==== `<Timer>`
 
-==== `enabled` attribute
-If `enabled` is set to `true then the timer will be enabled.
+The `<Timer>` attribute enables or disables the generation of internal timing metrics for the OLFS:
 
-If you want timing metrics to be output to the log then uncomment the Timer and set the
-enabled attribute's value to "true"
-
-WARNING: *_Enabling the Timer will impose significant performance overhead on the
-server's operation and should ony be done in an effort to understand the
-relative times spent in different operations and [.underline]#not# as a mechanism for
-measuring the server's objective performance._*
-
-Example:
-[source,xml]
 ----
  <Timer enabled="true"/>
 ----
 
+`Timer` has a single attribute, `enabled`, which is a boolean value.
+Uncommenting this value and setting it to `true` will output timing metrics to the log.
+
+WARNING: Enabling the `Timer` will impose significant performance overhead on the
+server's operation and should ony be done in an effort to understand the
+relative times spent in different operations--*not* as a mechanism for
+measuring the server's objective performance.
+
 ==== `<ingestTransformFile>` child element (developer)
-WARNING: *_This is a developers option and in general is not recommended
-for use in an operational server._*
 
 This child element of the `ThreddsService` element is a special code development option
 that allows a developer to specify the fully qualified path to an XSLT file that will be
@@ -469,7 +427,13 @@ Example:
 <ingestTransformFile>/fully/qualified/path/to/transfrm.xsl</ingestTransformFile>
 ----
 
+////
+
+Since both of these features are broken or not implemented fully, 
+I've commented them out.
+
 === `<PreloadNcmlIntoBes />` (developer)
+
 WARNING: *_This is a partially implemented,  non-functional feature._*
 
 The presence of this developer option in the configuration will cause the OLFS to attempt
@@ -477,9 +441,9 @@ to preload all of the NcML content found in the static THREDDS catalogs and atte
 transmit it to the BES. There is at this time no software in the BES that can accept,
 store, or otherwise utilize and respond to such a command.
 
-
 [[catalog-cache]]
 === `<CatalogCache>` (developer)
+
 WARNING: *_This feature is currently broken and using it may result in the server
 behaving unpredictably_*
 
@@ -512,6 +476,7 @@ Example:
         <updateIntervalSeconds>10000</updateIntervalSeconds>
     </CatalogCache>
 ----
+////
 
 == Viewers Service (`viewers.xml` file)
 
@@ -560,7 +525,6 @@ the implementations each handler.
  
 </ViewersConfig>
 ----
-
 
 == Logging
 
