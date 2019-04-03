@@ -18,6 +18,8 @@
             <maxResponseSize>0</maxResponseSize>
             <ClientPool maximum="200" maxCmds="2000" />
         </BES>
+        <NodeCache maxEntries="20000" refreshInterval="600"/>
+        <SiteMapCache refreshInterval="600" />
     </BESManager>
 
 
