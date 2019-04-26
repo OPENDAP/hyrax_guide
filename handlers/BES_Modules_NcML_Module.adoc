@@ -133,14 +133,17 @@ dataset of an aggregation. The <netcdf> element is assumed to be the
 topmost node, or as a child of an aggregation element.
 
 ==== Local vs. Remote Datasets
+The location attribute (__netcdf@location__) can be used to reference either
+local or remote files. If the value of __netcdf@location__ *does not* begin
+with the string `http` then the value is interpreted as a path to dataset
+relative to the BES data root directory. However, if the value of the
+__netcdf@location__ attributte begins with `http` then the value is treated
+as a URL and the Gateway System is used to access the remote data. As a
+result any URL used in an __netcdf@location__ attribute value must match one
+of the Gateway.Whitelist expressions in the `bes.conf` stack.
 
-We assume that the location attribute (__netcdf@location__) refers to
-the full path (with respect to the BES data root directory) of a
-_*local*_ dataset (served by the same Hyrax server). The current version
-of the module cannot be used to modify remote datasets.
-
-If _netcdf@location_ is the empty string (or unspecified, as empty is
-the default), the dataset is a pure virtual dataset, fully specified
+If the value of _netcdf@location_ is the empty string (or unspecified, as
+empty is the default), the dataset is a pure virtual dataset, fully specified
 within the NcML file itself. Attributes and variables may be fully
 described and accessed with constraints just as normal datasets in this
 manner. The installed sample datafile "sample_virtual_dataset.ncml" is
