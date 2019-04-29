@@ -5,9 +5,11 @@
 :numbered:
 :toc:
 
+:leveloffset: +1
 include::Hyrax_Configuration.adoc[]
 include::Hyrax_BES_Configuration.adoc[]
 include::Hyrax_OLFS_Configuration.adoc[]
 include::Hyrax_Configuring_The_OLFS_To_Work_With_Multiple_BES's.adoc[]
 include::Hyrax_Logging_Configuration.adoc[]
 include::Hyrax_THREDDS_Configuration.adoc[]
+:leveloffset: -1

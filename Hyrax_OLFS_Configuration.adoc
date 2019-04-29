@@ -157,9 +157,9 @@ configuring Hyrax to use multiple BES's
 
 Within the BESManager element there are 3 principle child elements:
 
-1. The BES element(s) (one or more required).
-1. The NodeCache element (optional).
-1. The SiteMapCache element (optional).
+. The BES element(s) (one or more required).
+. The NodeCache element (optional).
+. The SiteMapCache element (optional).
 
 ===== `<BES>` element (required)
 

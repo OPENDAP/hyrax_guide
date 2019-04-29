@@ -49,12 +49,11 @@ Master_Hyrax_BES_Installation.adoc is now included in
 Master_Hyrax_Installation.adoc. -ACP
 ////
 
+:leveloffset: +1
 
 // This document explains how to install Hyrax.
 [[Download_and_Install_Hyrax]]
-include::Master_Hyrax_Installation.adoc[lines="1,8..-1", leveloffset=1]
-
-:leveloffset: +1
+include::Master_Hyrax_Installation.adoc[lines="1,8..-1"]
 
 // General configuration informat
 include::Master_Hyrax_Configuration.adoc[lines="1,6..-1"]
@@ -88,7 +87,6 @@ include::Master_Hyrax_Administrators_Interface.adoc[lines="1,8..-1"]
 include::Master_Hyrax_Security.adoc[lines="1,6..-1"]
 :leveloffset: +1
 
-:leveloffset: -2
+:leveloffset: -1
 include::Master_Troubleshooting.adoc[lines="1,6..-1", leveloffset=+1]
 include::Master_Hyrax_Appendix.adoc[lines="1,6..-1", leveloffset=+1]
-:leveloffset: +2
