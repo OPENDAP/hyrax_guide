@@ -209,6 +209,7 @@ The BES data root and the file name are combined by the BES. So the actuall inst
 
 The program *build_dmrpp* is a `C\++` program that utilizes the BES code base and the HDF5 library to interrogate an HDF5 file and build a `dmr++` from it.
 
+---
 `build_dmrpp [-v] -c <bes.conf> -f <data file>  [-u <href url>]`
 
 - `-v` Verbose ouput (optional)
@@ -216,15 +217,18 @@ The program *build_dmrpp* is a `C\++` program that utilizes the BES code base an
 - `-f <data_file>` Read data from `<data_file>`
 - `-u <href url>` The remote URL for the binary oject to reference in the `dmr++` file. (optional)
 
+---
 `build_dmrpp -f <data file> -r <dmr file>`
 
 - `-f <data_file>` Read data from `<data_file>`
 - `-r <dmr file>` Write only the DMR (not the `dmr++`) to `<dmr file>`
 
+---
 `build_dmrpp -h`
 
 - `-h` Show usage
 
+---
 *Limitations:*
 
  * The pathname to the hdf5 file must be relative to the
