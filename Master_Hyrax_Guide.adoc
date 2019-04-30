@@ -21,35 +21,16 @@ Also see http://coderay.rubychan.de/ for information about supported
 languages. jhrg 9/17/17
 ////
 
-include::preface.adoc[lines="1..2,7..-1", leveloffset=+1]
-
-include::Hyrax_1-15-2_release_features.adoc[lines="3..-1", leveloffset+0]
-
-////
-TODO Make this a multi-part book? Maybe... To do that with the
-content we have, raise the levels up one notch. That means reduce the
-leveloffset values by one (+1 --> 0, +2 --> +1) and the sections in
-this document by one ('==' --> '=', ...).
-
-Right now there are more pressing problems.
-
-An overview of the server. This document includes the section title
-The 'lines' attribute tells the include macro to only include lines 1 and 8 to the end (-1)
-////
-
-[[hyrax-overview]]
-include::Hyrax.adoc[lines="1,8..-1", leveloffset=+1]
-
-////
-TODO: Add (or find ...) a section on BES installation. It might
-have gotten lost; Use _Master_Hyrax_Sample_BES_Installations.adoc_? If
-so that file will need content edits of a massive nature.
-
-Master_Hyrax_BES_Installation.adoc is now included in 
-Master_Hyrax_Installation.adoc. -ACP
-////
-
 :leveloffset: +1
+
+include::Master_Hyrax_Preface.adoc[lines="1..2,7..-1"]
+
+// This document will be always kept up to date with new release docs.
+include::Master_Hyrax_New_Features.adoc[lines="3..-1"]
+
+// This document is an overview of the server.
+[[hyrax-overview]]
+include::Master_Hyrax_Overview.adoc[lines="1,8..-1"]
 
 // This document explains how to install Hyrax.
 [[Download_and_Install_Hyrax]]

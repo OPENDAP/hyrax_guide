@@ -21,13 +21,9 @@ the latest release and its associated installation details on
 https://www.opendap.org/software/hyrax-data-server[the Hyrax downloads
 page].
 
-== BES Installation
+include::Hyrax_BES_Installation.adoc[lines="1,6..-1", leveloffset=+1]
 
-include::Master_Hyrax_BES_Installation.adoc[lines="1,6..-1", leveloffset=+1]
-
-== OLFS Installation
-
-include::Master_Hyrax_OLFS_Installation.adoc[lines="1,6..-1", leveloffset=+1]
+include::Hyrax_OLFS_Installation.adoc[lines="1,6..-1", leveloffset=+1]
 
 == WCS Installation
 

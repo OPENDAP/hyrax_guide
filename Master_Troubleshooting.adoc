@@ -7,7 +7,7 @@
 :leveloffset: +1
 
 include::Hyrax_Running_bescmdln.adoc[]
-include::BES_How_to_Debug_the_BES.adoc[]
+include::Hyrax_BES_How_to_Debug_the_BES.adoc[]
 include::Hyrax_BES_Client_commands.adoc[]
 
 :leveloffset: -1
