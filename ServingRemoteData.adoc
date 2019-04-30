@@ -163,6 +163,11 @@ And you can even exclude certain files based on a match expression:
 cd /usr/share/hyrax
 aws s3 cp --recursive --exclude "*.jpg" myDir s3://mybucket/
 ```
+---
+---
+---
+---
+---
 
 == Appendix - Worker Bees
 
