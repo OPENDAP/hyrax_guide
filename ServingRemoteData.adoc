@@ -9,7 +9,7 @@ There are several ways that Hyrax can serve remotely located data. In this paper
 
 In this scheme the original data files are held in S3 (or any other HTTP service that supports Range GET) as objects. The metadata, along with access information about the S3 object, are held as `dmr++` files on the Hyrax platform.
 
-Each `dmr++` file needs to know the network location(s) of the objects(s) from which its data will be read. For some representations multiple objects may be used, but for these examples each `dmr++` will be associated with a single web accessible object (helpd in S3 for this example).
+Each `dmr\++` file needs to know the network location(s) of the objects(s) from which its data will be read. For some representations multiple objects may be used, but for these examples each `dmr++` will be associated with a single web accessible object (helpd in S3 for this example).
 
 === Process
 
@@ -22,21 +22,20 @@ Most of this process is about creating and organizing content for Hyrax.
 1. w00t ftw
 
 === Portability and data catalog organization.
-Once the `dmr++` files are built they are "portable" in the sense that they can be arranged in any Hyrax server's "catalog" in any manner desired, as each `dmr++` file is self contained and includes a reference to the data objects HTTP service (S3 in this case) URL. However if the underlying data object is (re)moved then the `dmr++` file will become invalid.
+Once the `dmr\++` files are built they are "portable" in the sense that they can be arranged in any Hyrax server's "catalog" in any manner desired, as each `dmr++` file is self contained and includes a reference to the data objects HTTP service (S3 in this case) URL. However if the underlying data object is (re)moved then the `dmr++` file will become invalid.
 
 === Where are the source data?
-Where the source data are located will dictate which program will be used to build the `dmr++` files.
+Where the source data are located will dictate which program will be used to build the `dmr\++` files.
 If the data are present on the local filesystem then the program *ingest_filesystem* is the best choice for building the `dmr++` files.
 Even if the data are already in S3 (or some other HTTP service), if the data are also available on the local filesystem then we want to use *ingest_filesystem* to build the `dmr++` files.
 
 If the data are only available in an S3 bucket then the program *ingest_s3bucket* can be used to build the `dmr++` files, which will be placed in the local filesystem.
 
-(Both *ingest_filesystem* and *ingest_s3bucket* utilize the program *get_dmrpp* to build each `dmr++` file.)
 
 == ingest_filesystem - for data in the local filesystem
-When the data are held in the locally mounted filesystem we can use the program *ingest_filesystem* to construct the `dmr++` files. It will crawl filesystem and make a DMR++ for every file whose path name matches the default (or user supplied) regex.
+When the data are held in the locally mounted filesystem we can use the program *ingest_filesystem* to construct the `dmr\++` files. It will crawl filesystem and make a DMR++ for every file whose path name matches the default (or user supplied) regex.
 
-The DMR++ is built using the DMR as returned by the HDF5 handler, using options as set in the bes configuration file used by get_dmrpp.
+The `dmr++` is built using the DMR as returned by the HDF5 handler, using options as set in the bes configuration file used by get_dmrpp.
 
 The options for *ingest_filesystem* are as follows:
 
@@ -85,7 +84,7 @@ ingest_filesystem -u https://s3.amazonaws.com/cloudydap -d /usr/share/hyrax/ -t 
 
 == ingest_s3bucket - for data in an S3 bucket
 
-The program *ingest_s3bucket* will (optionally) list an AWS S3 bucket and make a DMR++ for every object name matching the default (or user supplied) regex. This program will list an S3 bucket and filter the results using the default (or user supplied regex) to create a list of target data files. It will then iterate over this list and:
+The program *ingest_s3bucket* will (optionally) list an AWS S3 bucket and make a DMR++ for every object name matching the default (or user supplied) regex. When run *ingest_s3bucket* will list an S3 bucket and filter the results using the default (or user supplied regex) to create a list of target data files. It will then iterate over this list of target data files and foreach one:
 
 - Retrieve each file from S3.
 - Create the `dmr++` for the retrieved file.
@@ -132,20 +131,21 @@ The options for *ingest_s3bucket* are as follows:
 === Example
 
 ```
-ingest_s3bucket -d /usr/share/hyrax -b cloudydap -t ./dmrpp -f
+ingest_s3bucket -d ./tmp_data -b cloudydap -t ./dmrpp -f
 ```
-- `-d cloudydap` Use the S3 bucket named `cloudydap`.
+- `-d ./tmp_data` Download the S3 data objects into a directory `./tmp_data` in the CWD.
+- `-b cloudydap` Use the S3 bucket named `cloudydap`.
 - `-t ./dmrpp` Place the `dmr++` files into a directpry called `./dmrpp` in the CWD.
 - `-f` Run a new search for matching files, don't rely in an existing list.
 
 == Copying Data To S3
 
-If you have al your data on a local file system and it has not been loaded into S3 this can be easily accomplished using the AWS Command Line Interface (*CLI*).
+If you have all your data on a local file system and it has not been loaded into S3 this can be easily accomplished using the AWS Command Line Interface (*CLI*).
 If you are using an AWS EC2 system then it should be available through *yum* or *apt-get*. Otherwise, https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html[Detailed instructions may be found here]
 
 Once installed you'll need to run the `aws configure` command to configure the installation with AWS `ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` values that have adequate permissions to write data to the target AWS S3 bucket.
 
-Withthis in place it's a simple matter to copy a single file to an S3 bucket:
+With this in place it's a simple matter to copy a single file to an S3 bucket:
 ```
 aws s3 cp foo.txt s3://mybucket/foo.txt
 ```
@@ -168,6 +168,8 @@ Both `ingest_filesystem` and `ingest_S3bucket` utilize the *get_dmrpp* progiram 
 
 The *get_dmrpp* program writes the DMR++ for an hdf5_file to stdout
 
+Both *ingest_filesystem* and *ingest_s3bucket* utilize the program *get_dmrpp* to build each `dmr++` file.
+
 By default the BES Data Root directory is set to the CWD. This
 utility will add an entry to the bes.log specified in the
 configuration file. The DMR++ is built using the DMR as returned
@@ -184,7 +186,7 @@ configuration file found here.
  -o: The name of the file  to create.
 
  Limitations:
- * The pathname to the hdf5 file must be relative from the
+ * The pathname to the hdf5 file must be relative to the
    data root directory for the BES; absolute paths will not work.
  * The build_dmrpp command must be on the path.
 
@@ -200,23 +202,25 @@ The BES data root and the file name are combined by the BES. So the actuall inst
 
 === build_dmrpp
 
-The program *build_dmrpp* is a C++ prgram that utilizes the BES code base and the HDF5 library to interrogate an HDF5 file and build a `dmr++` from it.
+The program *build_dmrpp* is a `C\++` program that utilizes the BES code base and the HDF5 library to interrogate an HDF5 file and build a `dmr++` from it.
 
- build_dmrpp [-v] -c <bes.conf> -f <data file>  [-u <href url>]
+`build_dmrpp [-v] -c <bes.conf> -f <data file>  [-u <href url>]`
 
 - `-v` Verbose ouput (optional)
 - `-c <bes.conf>` Supplies the name of the bes.conf file to utilize.
 - `-f <data_file>` Read data from `<data_file>`
 - `-u <href url>` The remote URL for the binary oject to reference in the `dmr++` file. (optional)
 
-
- build_dmrpp -f <data file> -r <dmr file>
+`build_dmrpp -f <data file> -r <dmr file>`
 
 - `-f <data_file>` Read data from `<data_file>`
 - `-r <dmr file>` Write only the DMR (not the `dmr++`) to `<dmr file>`
 
- build_dmrpp -h
+`build_dmrpp -h`
 
 - `-h` Show usage
 
+*Limitations:*
 
+ * The pathname to the hdf5 file must be relative to the
+   data root directory for the BES; absolute paths will not work.
