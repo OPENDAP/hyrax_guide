@@ -88,7 +88,7 @@ ingest_filesystem -u https://s3.amazonaws.com/cloudydap -d /usr/share/hyrax/ -t 
 
 == ingest_s3bucket - for data in an S3 bucket
 
-The program *ingest_s3bucket* can be used to build `dmr++` files from objects/files held in an AWS S3 bucket. Optionally, it can list the AWS S3 bucket to create an inventory list and then filter this list using the default (or user supplied) regex to create a list of target datasets. Otherwise it can use an existing list of target data files. It will then iterate over the list of target data files and for each one:
+The program *ingest_s3bucket* can be used to build `dmr++` files from objects/files held in an AWS S3 bucket. Optionally, it can list the AWS S3 bucket to create an inventory list and then filter this list using the default (or user supplied) regex to create a list of target data files. Otherwise it can use an existing list of target data files. It will then iterate over the list of target data files and for each one:
 
 - Retrieve the file from S3.
 - Create the `dmr++` for the retrieved file.
