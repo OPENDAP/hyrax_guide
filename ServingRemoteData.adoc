@@ -32,7 +32,7 @@ Even if the data are already in S3 (or some other HTTP service), if the data are
 
 If the data are only available in an S3 bucket then the program *ingest_s3bucket* can be used to build the `dmr++` files, which will be placed in the local filesystem.
 
-image::images/ServingRemoteData_Fig3.png[]
+image::images/ServingRemoteData_Fig3.png[Decide,418,444,role="center"]
 
 
 == ingest_filesystem - for data in the local filesystem
