@@ -163,7 +163,11 @@ And you can even exclude certain files based on a match expression:
 cd /usr/share/hyrax
 aws s3 cp --recursive --exclude "*.jpg" myDir s3://mybucket/
 ```
-
+---
+---
+---
+---
+---
 == Appendix - Worker Bees
 
 Both *ingest_filesystem* and *ingest_s3bucket* utilize the *get_dmrpp* program for constructing `dmr\++` content. In turn, the *get_dmrpp* program utilizes the *build_dmrpp* program to perform the `dmr++` construction activity. Some details on these two follow.
