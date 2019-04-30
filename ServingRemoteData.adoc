@@ -21,6 +21,9 @@ Most of this process is about creating and organizing content for Hyrax.
 1. Restart Hyrax
 1. w00t ftw
 
+image::ServingRemoteData_Fig3.png[]
+
+
 === Portability and data catalog organization.
 Once the `dmr\++` files are built they are "portable" in the sense that they can be arranged in any Hyrax server's "catalog" in any manner desired, as each `dmr++` file is self contained and includes a reference to the data objects HTTP service (S3 in this case) URL. However if the underlying data object is (re)moved then the `dmr++` file will become invalid.
 
@@ -43,14 +46,14 @@ The options for *ingest_filesystem* are as follows:
  -v: Verbose: Print the DMR too
  -V: Very Verbose: Verbose plus so much more!
  -j: Just print the DMR that will be used to build the DMR++
- -u: The base endpoint URL for the DMRPP data objects. The assumption
+ -u: The base endpoint URL for the DMR++ data objects. The assumption
      is that they will be organized the same way the source dataset
      files below the "data_root" (see -d)
      (default: https://s3.amazonaws.com/cloudydap)
  -d: The local filesystem root from which the data are to be ingested.
      The filesystem will be searched beginning at this point for files
      whose names match the dataset match regex (see -r).
-     (default: CWD)
+     (default: "^.*\\.(h5|he5|nc4)(\\.bz2|\\.gz|\\.Z)?$")
  -t: The target directory for the dmrpp files. Below this point
      the organization of the data files vis-a-vis their "/" path
      separator divided names will be replicated and dmr++ files placed
@@ -101,16 +104,16 @@ The options for *ingest_s3bucket* are as follows:
      the scanning of it all.
  -j: Just print the DMR that will be used to build the DMR++
  -s: The endpoint URL for the S3 datastore.
-     (default: ${s3_service_endpoint})
+     (default: https://s3.amazonaws.com)
  -b: The S3 bucket name.
-     (default: ${s3_bucket_name})
+     (default: cloudydap)
  -d: The "local" filesystem root for the downloaded data.
-     (default: ./s3_data/bucket_name})
+     (default: ./s3_data/cloudydap})
  -t: The target directory for the dmrpp files. Below this point
      the structure of the bucket objects vis-a-vis their "/" path
      separator divided names will be replicted and dmr++ placed into
      it accordingly.
-     (default: ${target_dir})
+     (default: CWD)
  -f: Retrieve object list from S3 bucket into the list file for the bucket,
      apply the dataset match regex to the object names to create
      the data files list for the bucket. If this is omitted the files named
@@ -118,7 +121,7 @@ The options for *ingest_s3bucket* are as follows:
      (default: Not Set)
  -r: The dataset match regex used to screen the filenames
      for matching datasets.
-     (default: ${dataset_regex_match})
+     (default: "^.*\\.(h5|he5|nc4)(\\.bz2|\\.gz|\\.Z)?$")
  -k: Keep the downloaded datafiles after the dmr++ file has been
      created. Be careful! S3 buckets can be quite large!
 
