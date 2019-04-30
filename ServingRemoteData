@@ -1,0 +1,127 @@
+= Serving Remote Data with HDF5/NetCDF-4 and DMR++
+:Nathan Potter <ndp@opendap.org>:
+{docdate}
+:numbered:
+:toc:
+
+== Overview
+There are several ways that Hyrax can serve remotely located data. In this paper we discuss how to construct a Hyrax data system that utilizes Amazon's S3 service (or any HTTP service that supports the use of Range GET) in conjunction with local metadata held in `dmr++` files to create a system that provides quick access to data and that minimizes (for constrained DAP requests) the data egress volume from the HTTP service.
+
+In this scheme the original data files are held in S3 (or any other HTTP service that supports Range GET) as objects. The metadata, along with access information about the S3 object, are held as `dmr++` files on the Hyrax platform.
+
+Each `dmr++` file needs to know the network location(s) of the objects(s) from which its data will be read. For some representations multiple objects may be used, but for these examples each `dmr++` will be associated with a single web accessible object (helpd in S3 for this example).
+
+= shmoo
+
+Most of this process is about creating and organizing content for Hyrax.
+
+ Process the data to create the content -  `dmr++` files
+- and stick them in the server
+- the only configurtion is making sure the bucket URL is on the whitelist (edited)
+- put the "bucket" on the whitelist
+- restart
+- go
+
+=== Portability and data catalog organization.
+Once the `dmr++` files are built they are "portable" in the sense that they can be arranged in any Hyrax server's "catalog" in any manner desired, as each `dmr++` file is self contained and includes a reference to the data objects HTTP service (S3 in this case) URL. However if the underlying data object is (re)moved then the `dmr++` file will become invalid.
+
+=== Where are the source data?
+Where the source data are located will dictate which program will be used to build the `dmr++` files.
+If the data are present on the local filesystem then the program *ingest_filesystem* is the best choice for building the `dmr++` files.
+Even if the data are already in S3 (or some other HTTP service), if the data are also available on the local filesystem then we want to use *ingest_filesystem* to build the `dmr++` files.
+
+If the data are only available in an S3 bucket then the program *ingest_s3bucket* can be used to build the `dmr++` files, which will be placed in the local filesystem.
+
+(Both *ingest_filesystem* and *ingest_s3bucket* utilize the program *get_dmrpp* to build each `dmr++` file.)
+
+== ingest_filesystem - for data in the local filesystem
+When the data are held in the locally mounted filesystem we can use the program *ingest_filesystem* to construct the `dmr++` files. It will crawl filesystem and make a DMR++ for every file whose path name matches the default (or user supplied) regex.
+
+The DMR++ is built using the DMR as returned by the HDF5 handler, using options as set in the bes configuration file used by get_dmrpp.
+
+The options for *ingest_filesystem* are as follows:
+
+ -h: Show help
+ -v: Verbose: Print the DMR too
+ -V: Very Verbose: Verbose plus so much more!
+ -j: Just print the DMR that will be used to build the DMR++
+ -u: The base endpoint URL for the DMRPP data objects. The assumption
+     is that they will be organized the same way the source dataset
+     files below the "data_root" (see -d)
+     (default: ${dmrpp_url_base})
+ -d: The local filesystem root from which the data are to be ingested.
+     The filesystem will be searched beginning at this point for files
+     whose names match the dataset match regex (see -r).
+     (default: ${data_root})
+ -t: The target directory for the dmrpp files. Below this point
+     the organization of the data files vis-a-vis their "/" path
+     separator divided names will be replicated and dmr++ files placed
+     accordingly.
+     (default: ${target_dir})
+ -r: The dataset match regex used to screen the base filesystem
+     for datasets.
+     (default: ${dataset_regex_match})
+ -f: Use "find" to list all regular files below the data root directory
+     and store the list in "${ALL_FILES}" The the dataset match regex is applied
+     to each string in ${ALL_FILES} and the matching data files list is placed in
+     "${DATA_FILES}". If this option is omitted the files named in "${DATA_FILES}"
+      (if any) will be processed.
+     (default: Not Set)
+
+=== Dependencies
+*ingest_filesystem* requires that:
+
+- The bes installation directory is on the PATH.
+
+=== Example
+
+```
+ingest_filesystem -u https://s3.amazonaws.com/cloudydap -d /usr/share/hyrax/ -t ./dmrpp -f
+```
+
+
+== ingest_s3bucket - for data in an S3 bucket
+
+Lists an AWS S3 bucket and make a DMR++ for every dataset matching the default (or user supplied) regex.
+
+The DMR++ is built using the DMR as returned by the HDF5 handler, using options as set in the bes configuration file used by get_dmrpp.
+
+ -h: Show help
+ -v: Verbose: Print the DMR too
+ -V: Very Verbose: Verbose plus so much more. Your eyes will water from
+     the scanning of it all.
+ -j: Just print the DMR that will be used to build the DMR++
+ -s: The endpoint URL for the S3 datastore.
+     (default: ${s3_service_endpoint})
+ -b: The S3 bucket name.
+     (default: ${s3_bucket_name})
+ -d: The "local" filesystem root for the downloaded data.
+     (default: ./s3_data/bucket_name})
+ -t: The target directory for the dmrpp files. Below this point
+     the structure of the bucket objects vis-a-vis their "/" path
+     separator divided names will be replicted and dmr++ placed into
+     it accordingly.
+     (default: ${target_dir})
+ -f: Retrieve object list from S3 bucket into ${ALL_FILES} and
+     apply the dataset match regex to the object names to create
+     the data files list in ${DATA_FILES}. If this is omitted the
+     files named in ${DATA_FILES} (if any) will be processed.
+     (default: Not Set)
+ -r: The dataset match regex used to screen the filenames
+     for matching datasets.
+     (default: ${dataset_regex_match})
+ -k: Keep the downloaded datafiles after the dmr++ file has been
+     created. Be careful! S3 buckets can be quite large!
+
+=== Dependencies
+ingest_s3bucket requires that:
+
+- The bes installation directory is on the PATH.
+- The AWS Commandline Tools are installed and on the path.
+- The AWS Commandline Tools have been configured for this user with AWS `ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` that have adequate permissions to access the target AWS S3 bucket.
+
+
+== get_dmrpp
+
+== build_dmrpp
+
