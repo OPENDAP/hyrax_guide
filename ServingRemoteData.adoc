@@ -38,7 +38,7 @@ image::images/ServingRemoteData_Fig3.png[Decide,418,444,role="center"]
 == ingest_filesystem - for data in the local filesystem
 When the data are held in the locally mounted filesystem we can use the program *ingest_filesystem* to construct the `dmr\++` files. It will crawl filesystem and make a DMR++ for every file whose path name matches the default (or user supplied) regex.
 
-The `dmr++` is built using the DMR as returned by the HDF5 handler, using options as set in the bes configuration file used by get_dmrpp.
+The `dmr++` is built using the DMR as returned by the HDF5 handler, using options as set in the bes configuration file used by *get_dmrpp*.
 
 The options for *ingest_filesystem* are as follows:
 
@@ -80,17 +80,17 @@ The options for *ingest_filesystem* are as follows:
 ```
 ingest_filesystem -u https://s3.amazonaws.com/cloudydap -d /usr/share/hyrax/ -t ./dmrpp -f
 ```
-- `-u https://s3.amazonaws.com/cloudydap` Use this URL as the base URL for all each `dmr++` file.
+- `-u https://s3.amazonaws.com/cloudydap` Use this URL as the base URL for each `dmr++` file.
 - `-d /usr/share/hyrax/` Process all of the matching files starting at `/usr/share/hyrax`
 - `-t ./dmrpp` Place the `dmr++` files into a directpry called `./dmrpp` in the CWD.
-- `-f` Run a new search for matching files, don't rely in an existing list.
+- `-f` Run a new search for matching files, don't rely on an existing list.
 
 
 == ingest_s3bucket - for data in an S3 bucket
 
-The program *ingest_s3bucket* will (optionally) list an AWS S3 bucket and make a DMR++ for every object name matching the default (or user supplied) regex. When run *ingest_s3bucket* will list an S3 bucket and filter the results using the default (or user supplied regex) to create a list of target data files. It will then iterate over this list of target data files and foreach one:
+The program *ingest_s3bucket* can be used to build `dmr++` files from objects/files held in an AWS S3 bucket. Optionally, it can list the AWS S3 bucket to create an inventory list and then filter this list using the default (or user supplied) regex to create a list of target datasets. Otherwise it can use an existing list of target data files. It will then iterate over the list of target data files and for each one:
 
-- Retrieve each file from S3.
+- Retrieve the file from S3.
 - Create the `dmr++` for the retrieved file.
 - Delete the downloaded file (unless instructed not to).
 
@@ -128,9 +128,9 @@ The options for *ingest_s3bucket* are as follows:
 === Dependencies
 *ingest_s3bucket* requires that:
 
-- The bes installation directory is on the PATH.
+- The BES installation's bin directory is on the PATH.
 - The AWS Commandline Interface is installed and on the path.
-- The AWS Commandline Interface has been configured for this user with AWS `ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` that have adequate permissions to access the target AWS S3 bucket.
+- The AWS Commandline Interface has been configured for with an AWS `ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` that have adequate permissions to access the target AWS S3 bucket.
 
 === Example
 
@@ -166,7 +166,7 @@ aws s3 cp --recursive --exclude "*.jpg" myDir s3://mybucket/
 
 == Appendix - Worker Bees
 
-Both `ingest_filesystem` and `ingest_S3bucket` utilize the *get_dmrpp* progiram for acquiring `dmr++` content. The *get_dmrpp* program utilizes the *build_dmrpp* program in it's activity. Some details onthese two follow.
+Both *ingest_filesystem* and *ingest_s3bucket* utilize the *get_dmrpp* program for constructing `dmr\++` content. In turn, the *get_dmrpp* program utilizes the *build_dmrpp* program to perform the `dmr++` construction activity. Some details on these two follow.
 
 === get_dmrpp
 
