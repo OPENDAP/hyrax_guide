@@ -94,7 +94,7 @@ The program *ingest_s3bucket* can be used to build `dmr++` files from objects/fi
 - Create the `dmr++` for the retrieved file.
 - Delete the downloaded file (unless instructed not to).
 
-The DMR++ is built using the DMR as returned by the HDF5 handler, using options as set in the bes configuration file used by get_dmrpp.
+The `dmr++` is built using the DMR as returned by the HDF5 handler, using options as set in the bes configuration file used by *get_dmrpp*.
 
 The options for *ingest_s3bucket* are as follows:
 
