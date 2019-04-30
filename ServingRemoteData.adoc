@@ -11,16 +11,15 @@ In this scheme the original data files are held in S3 (or any other HTTP service
 
 Each `dmr++` file needs to know the network location(s) of the objects(s) from which its data will be read. For some representations multiple objects may be used, but for these examples each `dmr++` will be associated with a single web accessible object (helpd in S3 for this example).
 
-= shmoo
+=== Process
 
 Most of this process is about creating and organizing content for Hyrax.
 
- Process the data to create the content -  `dmr++` files
-- and stick them in the server
-- the only configurtion is making sure the bucket URL is on the whitelist (edited)
-- put the "bucket" on the whitelist
-- restart
-- go
+1. Process the data to create the content - `dmr++` files
+1. Place the `dmr++` files into a Hyrax server's data tree.
+1. Making sure the S3 bucket URL is on the whitelist.
+1. Restart Hyrax
+1. w00t ftw
 
 === Portability and data catalog organization.
 Once the `dmr++` files are built they are "portable" in the sense that they can be arranged in any Hyrax server's "catalog" in any manner desired, as each `dmr++` file is self contained and includes a reference to the data objects HTTP service (S3 in this case) URL. However if the underlying data object is (re)moved then the `dmr++` file will become invalid.
@@ -78,6 +77,10 @@ The options for *ingest_filesystem* are as follows:
 ```
 ingest_filesystem -u https://s3.amazonaws.com/cloudydap -d /usr/share/hyrax/ -t ./dmrpp -f
 ```
+- `-u https://s3.amazonaws.com/cloudydap` Use this URL as the base URL for all each `dmr++` file.
+- `-d /usr/share/hyrax/` Process all of the matching files starting at `/usr/share/hyrax`
+- `-t ./dmrpp` Place the `dmr++` files into a directpry called `dmrpp` in the CWD.
+- `-f` Run a new search for matching files, don't rely in an existing list.
 
 
 == ingest_s3bucket - for data in an S3 bucket
