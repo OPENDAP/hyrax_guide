@@ -21,8 +21,6 @@ Most of this process is about creating and organizing content for Hyrax.
 1. Restart Hyrax
 1. w00t ftw
 
-image::ServingRemoteData_Fig3.png[]
-
 
 === Portability and data catalog organization.
 Once the `dmr\++` files are built they are "portable" in the sense that they can be arranged in any Hyrax server's "catalog" in any manner desired, as each `dmr++` file is self contained and includes a reference to the data objects HTTP service (S3 in this case) URL. However if the underlying data object is (re)moved then the `dmr++` file will become invalid.
@@ -33,6 +31,8 @@ If the data are present on the local filesystem then the program *ingest_filesys
 Even if the data are already in S3 (or some other HTTP service), if the data are also available on the local filesystem then we want to use *ingest_filesystem* to build the `dmr++` files.
 
 If the data are only available in an S3 bucket then the program *ingest_s3bucket* can be used to build the `dmr++` files, which will be placed in the local filesystem.
+
+image::images/ServingRemoteData_Fig3.png[]
 
 
 == ingest_filesystem - for data in the local filesystem
