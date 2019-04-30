@@ -1,4 +1,4 @@
-= Serving Remote Data with HDF5/NetCDF-4 and DMR++
+= Serving Remote Data, Including Data in S3, with HDF5/NetCDF-4 and DMR++
 :Nathan Potter <ndp@opendap.org>:
 {docdate}
 :numbered:
@@ -163,11 +163,6 @@ And you can even exclude certain files based on a match expression:
 cd /usr/share/hyrax
 aws s3 cp --recursive --exclude "*.jpg" myDir s3://mybucket/
 ```
----
----
----
----
----
 
 == Appendix - Worker Bees
 
