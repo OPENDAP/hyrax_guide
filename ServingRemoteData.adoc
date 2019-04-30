@@ -46,24 +46,25 @@ The options for *ingest_filesystem* are as follows:
  -u: The base endpoint URL for the DMRPP data objects. The assumption
      is that they will be organized the same way the source dataset
      files below the "data_root" (see -d)
-     (default: ${dmrpp_url_base})
+     (default: https://s3.amazonaws.com/cloudydap)
  -d: The local filesystem root from which the data are to be ingested.
      The filesystem will be searched beginning at this point for files
      whose names match the dataset match regex (see -r).
-     (default: ${data_root})
+     (default: CWD)
  -t: The target directory for the dmrpp files. Below this point
      the organization of the data files vis-a-vis their "/" path
      separator divided names will be replicated and dmr++ files placed
      accordingly.
-     (default: ${target_dir})
+     (default: CWD)
  -r: The dataset match regex used to screen the base filesystem
      for datasets.
      (default: ${dataset_regex_match})
  -f: Use "find" to list all regular files below the data root directory
-     and store the list in "${ALL_FILES}" The the dataset match regex is applied
-     to each string in ${ALL_FILES} and the matching data files list is placed in
-     "${DATA_FILES}". If this option is omitted the files named in "${DATA_FILES}"
-      (if any) will be processed.
+     and store the list in ./all_files.txt The the dataset match regex is applied
+     to each line in ./all_files.txt and the corresponding data files list is
+     placed in ./data_files.txt
+     If this option is omitted the files named in ./data_files.txt (if any)
+     will be processed.
      (default: Not Set)
 
 === Dependencies
@@ -110,10 +111,10 @@ The options for *ingest_s3bucket* are as follows:
      separator divided names will be replicted and dmr++ placed into
      it accordingly.
      (default: ${target_dir})
- -f: Retrieve object list from S3 bucket into ${ALL_FILES} and
+ -f: Retrieve object list from S3 bucket into the list file for the bucket,
      apply the dataset match regex to the object names to create
-     the data files list in ${DATA_FILES}. If this is omitted the
-     files named in ${DATA_FILES} (if any) will be processed.
+     the data files list for the bucket. If this is omitted the files named
+     in an existing, matching, bucket list file (if any) will be processed.
      (default: Not Set)
  -r: The dataset match regex used to screen the filenames
      for matching datasets.
@@ -136,7 +137,7 @@ ingest_s3bucket -d ./tmp_data -b cloudydap -t ./dmrpp -f
 - `-d ./tmp_data` Download the S3 data objects into a directory `./tmp_data` in the CWD.
 - `-b cloudydap` Use the S3 bucket named `cloudydap`.
 - `-t ./dmrpp` Place the `dmr++` files into a directpry called `./dmrpp` in the CWD.
-- `-f` Run a new search for matching files, don't rely in an existing list.
+- `-f` Run a new search for matching files, don't rely on an existing list.
 
 == Copying Data To S3
 
@@ -160,7 +161,7 @@ cd /usr/share/hyrax
 aws s3 cp --recursive --exclude "*.jpg" myDir s3://mybucket/
 ```
 
-== Appendix
+== Appendix - Worker Bees
 
 Both `ingest_filesystem` and `ingest_S3bucket` utilize the *get_dmrpp* progiram for acquiring `dmr++` content. The *get_dmrpp* program utilizes the *build_dmrpp* program in it's activity. Some details onthese two follow.
 
@@ -170,11 +171,12 @@ The *get_dmrpp* program writes the DMR++ for an hdf5_file to stdout
 
 Both *ingest_filesystem* and *ingest_s3bucket* utilize the program *get_dmrpp* to build each `dmr++` file.
 
-By default the BES Data Root directory is set to the CWD. This
-utility will add an entry to the bes.log specified in the
-configuration file. The DMR++ is built using the DMR as returned
-by the HDF5 handler, using options as set in the bes
-configuration file found here.
+By default the BES Data Root directory is set to the CWD.
+If no BES configuration is specified on the command line then an internally held
+default configuration will be used. This utility will add an entry to the
+bes.log specified in the BES configuration file. The DMR++ is built using the
+DMR as returned by the HDF5 handler, using options as set in the bes
+configuration file found here (ed: In the text of the *get_dmrpp* program.)
 
  -h: Show help
  -v: Verbose: Print the DMR too
