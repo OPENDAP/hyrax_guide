@@ -5,10 +5,10 @@
 //:toc:
 
 [[OLFS-config]]
-== OLFS Configuration
+= OLFS Configuration
 
-The OLFS is the outward facing component of the Hyrax server. In following sections, you 
-will find the details of how to configure the OLFS for your instance of Hyrax. 
+The OLFS is the outward facing component of the Hyrax server. This section 
+provides OLFS configuration instructions.
 
 // Is this necessary? Shouldn't users know this by now?
 NOTE: The OLFS web application relies on one or more instances of the
@@ -20,16 +20,16 @@ files. You can change the server's default configuration by modifying
 the content of one or more of these files and then restarting Tomcat
 or the web application. These configuration files include the following:
 
-* *olfs.xml:* Contains the primary OLFS configuration, such as 
+* `olfs.xml`: Contains the primary OLFS configuration, such as 
 BES associations, directory view instructions, gateway service location,
 and static THREDDS catalog behavior. Located at `/etc/olfs/olfs.xml`.
 For more information about `olfs.xml`, please see
 <<olfs-config, the `olfs.xml` configuration section.>>
 
-* *catalog.xml:* Master(top-level) THREDDS catalog content for static THREDDS
+* `catalog.xml`: Master(top-level) THREDDS catalog content for static THREDDS
 catalogs. Located at `/etc/olfs/catalog.xml`.
 
-* *viewers.xml*: Contains the localized viewers configuration.
+* `viewers.xml`: Contains the localized viewers configuration.
 Located at `/etc/olfs/viewers.xml`.
 
 Generally, you can meet your configuration needs by making changes to
@@ -37,34 +37,37 @@ Generally, you can meet your configuration needs by making changes to
 might be located, please see the following section, <<OLFS-config-location>>.
 
 [[OLFS-config-location]]
-=== Location of the OLFS Configuration Files
+== OLFS Configuration Files
 
-//TODO Think of a better way to lead into the list.
-Beginning with olfs-1.15.0 (part of hyrax-1.13.0) the OLFS 
-looks at the value of the `OLFS_CONFIG_DIR` user environment variable.
-The following are the possible options:
-
-* If the variable is set and its value is the pathname of an existing directory
-that is both readable and writable by Tomcat, the OLFS will use it.
-* If the directory `/etc/olfs` exists and is readable and writable by
-Tomcat, the OLFS will use it.
-* If the directory `/usr/share/olfs` exists and is readable and writable
-by Tomcat, then the OLFS will use it (this was added for Hyrax 1.14.1).
-* The OLFS will use the default configuration bundled in the web
-application web archive file (`opendap.war`).
-
-In this way, the OLFS can start without a persistent local configuration.
-If the default configuration works for your intended use, there is
-no need to create a persistent localized configuration.
-If, however, you need to change the configuration, we *strongly recommend*
+If the default configuration of the OLFS works for your intended use, 
+there is no need to create a persistent localized configuration;
+however, if you need to change the configuration, we strongly recommend
 that you enable a persistent local configuration. This way, 
 updating the web application won't override your custom configuration.
 
-==== Creating a Persistent Local Configuration
+//Beginning with olfs-1.15.0 (part of hyrax-1.13.0), 
+The OLFS locates its configuration file by looking at the value of
+the `OLFS_CONFIG_DIR` user environment variable:
+
+* If the variable is set and its value is the pathname of an existing directory
+that is both readable and writable by Tomcat, the OLFS will use it.
+
+* If the directory `/etc/olfs` exists and is readable and writable by
+Tomcat, the OLFS will use it.
+
+* If the directory `/usr/share/olfs` exists and is readable and writable
+by Tomcat, then the OLFS will use it. (This was added for Hyrax 1.14.1.)
+
+If none of the above directories exist or the variable has not been set,
+the OLFS uses the default configuration bundled in the web application 
+web archive file (`opendap.war`). In this way, the OLFS can start 
+without a persistent local configuration.
+
+== Create a Persistent Local Configuration
 
 You can easily enable a persistent local configuration for the OLFS by 
 creating an empty directory and identifying it with the 
-`OLFS_CONFIG_DIR` environment variable. For example...
+`OLFS_CONFIG_DIR` environment variable:
 
 ----
 export OLFS_CONFIG_DIR="/home/tomcat/hyrax"
@@ -78,225 +81,127 @@ move a copy of its default configuration into the empty directory and
 then use it. You can then edit the local copy.
 
 WARNING: The directory that you create _must_ be both readable and writable
-by the user who is running the Tomcat application.
-
-=== Pitfalls with CentOS-7.x and/or SELinux
-
-SELinux (bundled by default with CentOS-7) will create some new challenges for those
-not familiar with the changes it brings to the system environment. For one, Tomcat runs as a
-_confined_ user. Here we'll examine how these changes affect the OLFS.
-
-==== Localizing the OLFS Configuration under SELinux
-When using a _yum_ installed Tomcat on CentOS-7.x (or any other Linux
-environment that is essentially an *SELinux* variant), neither the `/etc/olfs`
-or the `/usr/share/olfs` configuration locations will work without taking extra steps.
-You must alter the SELinux access policies to give the Tomcat user
-permission to read and write to one of these directories.
-
-Here is a script/recipe for configuring the `/usr/share/olfs` directory for reading
-and writing by the Tomcat user. There are probably a number of alternative ways to accomplish this,
-but this one worked for me.
-----
-#!/bin/sh
-# You must be the super user to do this stuff...
-sudo -s
-
-# Create the location for the local configuration
-mkdir -p /usr/share/olfs
-
-# Change the group ownership to the tomcat group.
-# (SELinux will not allow you make the owner tomcat.)
-chgrp tomcat /usr/share/olfs
-
-# Make it writable by the tomcat group
-sudo chmod g+w /usr/share/olfs
-
-# Use semanage to change the context of the target
-# directory and any (future) child dirs
-semanage fcontext -a -t tomcat_var_lib_t "/usr/share/olfs(/.*)?"
-
-# Use restorecon to commit/do the labeling.
-restorecon -rv /usr/share/olfs
-----
-There is a lot going in the above script and to fully understand it you will need to study the man
-pages for _semanage_ and _restorecon_. You may also get some benefit from these articles about
-SELinux and the permissions issues therein:
-
-https://wiki.centos.org/HowTos/SELinux
-
-https://noobient.com/post/165842438861/selinux-crash-course
-
-https://noobient.com/post/165972214381/selinux-woes-with-tomcat-on-centos-74
-
-==== Tomcat Logs
-
-In SELinux the _yum_ installed Tomcat does not produce a catalina.out file, rather that
-output is sent to the *_journal_* and can be viewed with the command:
-----
-journalctl -u tomcat
-----
+by the user who is running Tomcat.
 
 [[olfs-config]]
-=== *olfs.xml* Configuration File
+== `olfs.xml` Configuration File
 
-The *olfs.xml* file contains the core configuration of the Hyrax
-front end service. What follows is a detailed explanation of its content.
+The `olfs.xml` file contains the core configuration of the Hyrax
+front-end service. The following subsections detailed its contents.
 
-==== `<OLFSConfig>` element
+At the document's root is the `<OLFSConfig>` element. It contains several
+elements that supply the configuration for the OLFS. 
+The following is an example OLFS Configuration file:
 
-The `<OLFSConfig>` element is the document root. It contains several
-elements that supply the configuration for the OLFS.
+include::Hyrax_OLFS_Configuration_example-olfs-file.adoc[]
 
-==== `<BESManager>` element (required)
-The BESManager information is used whenever the software needs to access the
-BES's services. This configuration is key to the function of Hyrax, for in it
-is defined each BES instance that compose a given Hyrax installation. The
-following examples will show a single BES example. For more information on
-configuring Hyrax to use multiple BES's
+=== `<BESManager>` Element (required)
+
+The BESManager information is used whenever the software needs to access the BES's services.
+This configuration is key to the function of Hyrax, for in it
+is defined each BES instance that is connected to a given Hyrax installation. The following examples
+will show a single BES example. For more information on configuring Hyrax to use multiple BESs
 <<config-hyrax-mult-BESs, look here>>.
 
-Within the BESManager element there are 3 principle child elements:
+Each BES is identified using a seperate `<BES>` child element inside
+of the `<BESManager>` element:
 
-. The BES element(s) (one or more required).
-. The NodeCache element (optional).
-. The SiteMapCache element (optional).
+[source,xml]
+---- 
+<BESManager>
+    <BES>
+        <prefix>/</prefix>
+        <host>localhost</host>
+        <port>10022</port>
+        <timeOut>300</timeOut>
+        <maxResponseSize>0</maxResponseSize>
+        <ClientPool maximum="10" maxCmds="2000" />
+        <adminPort>11002</adminPort>
+    </BES>
+    <NodeCache maxEntries="20000" refreshInterval="600"/>
+    <SiteMapCache cacheFile="/tmp/SiteMap.cache" refreshInterval="600" />
+</BESManager>
+----
 
-===== `<BES>` element (required)
+==== `<BES>` Child Elements
 
-Each BES component of hyrax is identified using a seperate `<BES>` child
-element inside of the `<BESManager>` element.
-This `<BES>` element provides the OLFS with connection and control
-information for a BES. There are 3 required child elements within a `<BES>`
-element: `<prefix>`, `<host>`, `<port>`, and 4 optional child elements:
-`<timeOut>`, `<maxResponseSize>`, `<ClientPool>`, and `<adminPort>`.
+The `<BES>` child elements provide the OLFS with connection and control
+information for a BES. There are three required child elements
+within a `<BES>` element and four optional child elements:
 
-===== `<prefix>` element (required)
-
-This child element of the `<BES>` element contains the URL prefix that
-the OLFS will associate with this BES. This provides a mapping between
-this BES to the URI space serviced by the OLFS. The prefix, then, is 
-a token that is placed between the
-_host:port/context/_ part of the Hyrax URL and the catalog root.
+* *`<prefix>` element (required)*: 
+This element contains the URL prefix that the OLFS will associate with this BES.
+It also maps this BES to the URI space that the OLFS services.
++
+--
+The prefix is a token that is placed between the
+`host:port/context/` part of the Hyrax URL and the catalog root.
 The catalog root is used to designate a particular BES instance in the
-event that multiple BES's are available to a single OLFS.
+event that multiple BESs are available to a single OLFS.
 
-For a single BES (the default configuration) the tag *must* be designated 
-by "/".
+////
+Having trouble with wording of "must be designated by."
+I want to revise to, "the elements value must be a forward slash,"
+or, "the element must be a forward slash." Are either of these correct?
+////
+If you have maintained the default configuration of a single BES,
+the tag must be designated by a forward slash: `<prefix>/</prefix>`.
 
-. There *must* be at least one BES element in the BESManager 
-handler configuration whose prefix has a value of "/" (see _example 1_).
-There may be more than one `<BES>`, but only that one is required.
-. For a single BES (the one with "/" as its prefix) no additional
-effort is required; however, when using multiple BES's it is neccesary
-that each BES has a mount point exposed as a directory (aka collection)
-in the URI space where it's going to appear. See
-<<config-hyrax-mult-BESs, Configuring With Multiple BES's>>
-for more information.
-. The prefix string *must* always begin with the slash ("/")
-character. (See __example 2__.)
+IMPORTANT:  There must be at least one `BES` element in the `BESManager` 
+handler configuration whose prefix has a value of `/`.
+There may be more than one `<BES>`, but only this one is required.
 
-_Example 1:_
-[source,xml]
-----
- <prefix>/</prefix>
-----
+When using multiple BESs, each BES must have an exposed mount point
+as a directory (aka collection) in the URI space where it is going 
+to appear. It is important to note that the prefix string *must*
+always begin with the slash (`/`) character: `<prefix>/data/nc</prefix>`.
+For more information, see 
+<<config-hyrax-mult-BESs, Configuring With Multiple BESs>>.
+--
 
-_Example 2:_
-[source,xml]
-----
- <prefix>/data/nc</prefix>
-----
+* *`<host>` element (required)*: 
+Contains the host name or IP address of the BES, 
+such as `<host>test.opendap.org</host>`.
 
-===== `<host>` element (required)
+* *`<port>` element (required)*:
+Contains port number on which the BES is listening,
+such as `<port>10022</port>`.
 
-This child element of the `<BES>` element contains the host name or IP
-address of the BES.
+* *`<timeOut>` element (optional)*:
+Contains the timeout time, in seconds, for the OLFS to wait 
+for this BES to respond, such as `<timeOut>600</timeOut>`.
+Its default value is 300.
 
-_Example:_
-[source,xml]
-----
-<host>test.opendap.org</host>
-----
+* *`<maxResponseSize>` element (optional)*:
+Contains in bytes the maximum response size allowed for this BES.
+Requests that produce a larger response will receive an error.
+Its default value of zero indicates that there is no imposed limit:
+`<maxResponseSize>0</maxResponseSize>`.
 
-===== `<port>` element (required)
+* *`<ClientPool>` element (optional)*: 
+Configures the behavior of the pool of client connections that the OLFS
+maintains with this particular BES. These connections are pooled for 
+efficiency and speed: `<ClientPool maximum="200" maxCmds="2000" />`.
++
+--
+Notice that this element has two attributes, `maximum` and `maxCmds`:
 
-This child element of the `<BES>` element contains port number on
-which the BES is listening.
+** The `maximum` attribute specifies the maximum number of concurrent
+BES client connections that the OLFS can make. Its default value is 200.
 
-_Example:_
-[source,xml]
-----
-<port>10022</port>
-----
+** The `maxCmds` attribute specifies the maximum number of commands that
+can be issued over a particular `BESClient` connection. The default is 2000.
+ 
+If the `<ClientPool>` element is missing, the pool (`maximum`) size defaults
+to 200 and `maxCmds` defaults to 2000.
+--
 
-===== `<timeOut>` element (optional)
+* *`<adminPort>` element (optional)*: 
+Contains the port on the BES system that can be used by the Hyrax Admin Interface
+to control the BES, such as `<adminPort>11002</adminPort>`.
+The BES must also be configured to open and use this admin port.
 
-This child element of the `<BES>` element contains the timeout time,
-in seconds, for the OLFS to wait for this BES to respond.
-
-_Default_: *300*
-
-_Example:_
-[source,xml]
-----
-<timeOut>600</timeOut>
-----
-
-===== `<maxResponseSize>` element (optional)
-
-This child element of the `<BES>` element contains in bytes
-the maximum response size allowed for this BES. Requests that produce a
-larger response will receive an error. A value of zero (_0_)
-indicates that there is no imposed limit.
-
-_Default_: *0*
-
-_Example:_
-[source,xml]
----- 
-<maxResponseSize>0</maxResponseSize>
-----
-
-===== `<ClientPool>` element (optional)
-
-This child element of the `<BES>` element configures the behavior of
-the pool of client connections that the OLFS maintains with this
-particular BES. These connections are pooled for efficiency and speed.
-This element has two attributes: `maximum` and `maxCmds`.
-
-The `maximum` attribute specifies the
-maximum number of concurrent BES client connections that the OLFS can
-make.
-
-_Default_: *200*
-
-The `maxCmds` attribute specifies the maximum number of commands that can be
-issued over a particular BESClient connection. The default is 2000.
-
-_Default_: *2000*
-
-_Example:_
-[source,xml]
----- 
-<ClientPool maximum="200" maxCmds="2000" />
-----
-
-If the `<ClientPool>` element is missing, the pool (`maximum`) size defaults to
-200 and `maxCmds` defaults to 2000.
-
-===== `<adminPort>` element (optional)
-
-This child element of the `<BES>` element contains the port on the BES
-system that can be used by the Hyrax Admin Interface to control the BES.
-The BES must also be configured to open and utilize this admin port.
-
-_Example:_
-[source,xml]
----- 
-<adminPort>11002</adminPort>
-----
-
-===== `<NodeCache>` element (optional)
+=== `<NodeCache>` Child Element (optional)
 The NodeCache element controls the state of the in-memory LRU cache for BES
 catalog/node responses. It has two attributes, `refreshInterval` and
 `maxEntries`.
@@ -319,7 +224,7 @@ _Example:_
 <NodeCache maxEntries="20000" refreshInterval="600"/>
 ----
 
-===== `<SiteMapCache>` element (optional)
+=== `<SiteMapCache>` Child Element (optional)
 
 The `SiteMapCache` element defines the location and life span of the SiteMap
 response cache. A cache for the BES SiteMap response can be time consuming to
@@ -341,242 +246,227 @@ _Example:_
 <SiteMapCache cacheFile="/tmp/SiteMap.cache" refreshInterval="600" />
 ----
 
-===== Example BESManager Configuration Element
-[source,xml]
----- 
-<BESManager>
-    <BES>
-        <prefix>/</prefix>
-        <host>localhost</host>
-        <port>10022</port>
-        <timeOut>300</timeOut>
-        <maxResponseSize>0</maxResponseSize>
-        <ClientPool maximum="10" maxCmds="2000" />
-    </BES>
-    <NodeCache maxEntries="20000" refreshInterval="600"/>
-    <SiteMapCache cacheFile="/tmp/SiteMap.cache" refreshInterval="600" />
-</BESManager>
+=== `<ThreddsService>` Element (optional)
 
-----
+This configuration parameter controls the following:
 
-==== `<ThreddsService>`  (optional)
-This configuration parameter controls:
+* The location of the static THREDDS catalog root in the 
+URI space serviced by Hyrax.
 
-* The location of the static THREDDS catalog root in the URI space serviced by Hyrax.
-* If the static THREDDS catalogs are held in memory (faster, but more memory intensive) or
-read from disk for each request (slower, but uses less memory).
+* Whether the static THREDDS catalogs are held in memory or
+read from disk for each request.
+
 * If the server will broker remote THREDDS catalogs and their data by following
 `thredds:catalogRef` links that point to THREDDS catalogs on other systems.
 
-===== `prefix` attribute (optional)
+The following is an example configuration for the `<ThreddsService>` element:
 
-Sets the name of the root of the static THREDDS catalogs in Hyrax.
-For example, if the prefix is `thredds`,
-then `http://localhost:8080/opendap/thredds/` should give you the
-top-level static catalog (Typically the contents of the file
-`/etc/olfs/opendap/catalog.xml`)
-
-Default: `thredds`
-
-===== `useMemoryCache` attribute (optional)
-
-If the text value of this attribute is the string `true`, this will cause
-the servlet to ingest all of the static catalog files at startup and
-hold their contents in memory. If set to false then then each request for a static THREDDS catalog will cause the server to read and parse the catalog from disk.
-<<THREDDS-config, See this page for more information about the memory caching
-operations.>>
-
-Default: `true`
-
-===== `allowRemote` attribute (optional)
-
-If this attribute is present and its value is set to `true` then the server will "broker"
-remote THREDDS catalogs and the data that they serve. This means that the server, not the
-client, will retrieve the remote catalogs and render them for the requesting client and
-provide an interface for retrieving the remote data and allow Hyrax to perform any
-subsequent processing before returning the result to the requesting client.
-
-Default: `false`
-
-
-===== Example `ThreddsService` configuration element
 [source,xml]
 ----
 <ThreddsService  prefix="thredds" useMemoryCache="true" allowRemote="false" />
 ----
 
-==== `<GatewayService>` (optional)
+Notice that `<ThreddsService>` has several attributes:
 
-Directs requests to the <<gateway-service, Gateway Service>>.
+* *`prefix` attribute (optional)*: Sets the name of the static THREDDS 
+catalogs' root in Hyrax. For example, 
+if the prefix is `thredds`, then `http://localhost:8080/opendap/thredds/`
+will give you the top-level static catalog, 
+which is typically the contents of the file `/etc/olfs/opendap/catalog.xml`.
+This attribute's default value is `thredds`.
 
-===== `<prefix>` element (optional)
+[[useMemoryCacheAttribute]]
+* *`useMemoryCache` attribute (optional)*: This is a boolean value with a
+default value of `true`.
++
+--
+** If the value of this attribute is set to `true`,
+the servlet will ingest all of the static
+catalog files at startup and hold their contents in memory,
+which is faster but more memory intensive.
 
-Sets location of the gateway service in the URI space serviced by Hyrax.
-For example, if the prefix is `gateway`,
+** If set to `false`, each request for a static THREDDS catalog
+will cause the server to read and parse the catalog from disk,
+which is slower but uses less memory.
+
+See <<THREDDS-config, this page>> for more information about the memory caching operations.
+--
+
+* *`allowRemote` attribute (optional)*:
+If this attribute is present and its value is set to `true`, then the server
+will "broker" remote THREDDS catalogs and the data that they serve.
+This means that the server, not the client, will perform the following steps:
++
+--
+. Retrieve the remote catalogs.
+. Render them for the requesting client.
+. Provide an interface for retrieving the remote data.
+. Allow Hyrax to perform any subsequent processing 
+before returning the result to the requesting client.
+
+This attribute has a default value of `false`.
+--
+
+=== `<GatewayService>` (optional)
+
+Directs requests to the <<gateway-service, Gateway Service>>:
+
+[source,xml]
+----
+<GatewayService  prefix="gateway" useMemoryCache="true" />
+----
+
+The following are the attributes of `<GatewayService>`:
+
+* *`prefix` attribute (optional)*: Sets location of the gateway service
+in the URI space serviced by Hyrax. For example, if the prefix is `gateway`,
 then `http://localhost:8080/opendap/gateway/` should give you the
-Gateway Service page.
+Gateway Service page. This attribute's default value is `gateway`.
 
-Default: `gateway`
+* *`useMemoryCache` attribute (optional)*:
+See <<useMemoryCacheAttribute,the previous section>> for more information.
 
-===== Example configuration element
-[source,xml]
-----
-    <GatewayService  prefix="gateway" />
-----
-
-
-==== `<AllowDirectDataSourceAccess />` element (optional)
-
-The `<AllowDirectDataSourceAccess/>` element controls the user's
-ability to directly access data sources via the Hyrax web interface. If this
-element is present (and not commented out, as in the example below) a
-client can retrieve an entire data source (such as an HDF file) by
-requesting it through the HTTP URL interface. By default, Hyrax ships with this option
-disabled. We recommend that you leave it unchanged unless you desire that users be able
-to circumvent the OPeNDAP request interface and have direct access to the data products
-stored on your server.
-
-This element has no attributes or child elements.
-
-Default: Not enabled.
-
-===== Example configuration element
-[source,xml]
-----
-    <!-- AllowDirectDataSourceAccess / -->
-----
-
-==== `<UseDAP2ResourceUrlResponse />` element (optional)
+=== `<UseDAP2ResourceUrlResponse />` element (optional)
 
 This element controls the type of response that Hyrax will provide to a client's request
-for the data resource URL. When this element is present the server will respond to
-requests for data resource URLs by returning the (not clearly defined by any specification)
-DAP2 response (either an error or the underlying data object). Commenting out or removing
-the `<UseDAP2ResourceUrlResponse />` element will cause the server to return the
-(well-defined by a specification) DAP4 DSR response when a dataset resource URL is
-requested.
+for the data resource URL:
 
-This element has no attributes or child elements.
-
-Default: Enabled.
-
-===== Example configuration element
 [source,xml]
 ----
     <UseDAP2ResourceUrlResponse />
 ----
 
-==== `<AddFileoutTypeSuffixToDownloadFilename />` element (optional)
+When this element is present, the server will respond to
+requests for data resource URLs by returning the DAP2 response 
+(either an error or the underlying data object). Commenting out or removing
+the `<UseDAP2ResourceUrlResponse />` element will cause the server to return the
+DAP4 DSR response when a dataset resource URL is requested.
 
-This optional element controls how the server will construct the download file name that
-is transmitted in the HTTP Content-Disposition header.  A simple example will provide the
-best explanation.: If the `<AddFileoutTypeSuffixToDownloadFilename />` element is either
-commented out or not present, then when a user requests a data response from
-`somedatafile.hdf` in netCDF-3 format the HTTP Content-Disposition header will be set
-like this:
-----
-Content-Disposition: attachment; filename="somedatafile.hdf"
-----
-However if the `<AddFileoutTypeSuffixToDownloadFilename />` is present then the resulting
-response will have a HTTP Content-Disposition header like this:
-----
-Content-Disposition: attachment; filename="somedatafile.hdf.nc"
-----
+NOTE: DAP2 responses are not clearly defined by any specification, whereas DAP4 DSR
+responses are well-defined by a specification.
 
-Default: By default the server ships with this disabled.
+This element has no attributes or child elements and is enabled by default.
 
-===== Example configuration element
+=== `<AddFileoutTypeSuffixToDownloadFilename />` element (optional)
+
+This optional element controls how the server constructs the download file name that
+is transmitted in the HTTP Content-Disposition header:
+
 [source,xml]
 ----
     <AddFileoutTypeSuffixToDownloadFilename />
 ----
 
+For example, suppose the `<AddFileoutTypeSuffixToDownloadFilename />` element is 
+either commented out or not present. When a user requests a data response from
+`somedatafile.hdf` in netCDF-3 format, the HTTP Content-Disposition header will be set
+like this:
 
-[[bot-blocker]]
-==== `<BotBlocker>` (optional)
+----
+Content-Disposition: attachment; filename="somedatafile.hdf"
+----
+
+However, if the `<AddFileoutTypeSuffixToDownloadFilename />` is present, then the 
+resulting response will have an HTTP Content-Disposition header:
+
+----
+Content-Disposition: attachment; filename="somedatafile.hdf.nc"
+----
+
+By default the server ships with this disabled.
+
+=== `<AllowDirectDataSourceAccess/>` element (optional)
+
+The `<AllowDirectDataSourceAccess/>` element controls the user's
+ability to directly access data sources via the Hyrax web interface:
+
+[source,xml]
+----
+    <!-- AllowDirectDataSourceAccess / -->
+----
+
+If this element is present and not commented out, a
+client can retrieve an entire data source (such as an HDF file) by
+requesting it through the HTTP URL interface.
+
+This element has no attributes or child elements and is disabled by default.
+We recommend that you leave it unchanged, unless you want users to be able
+to circumvent the OPeNDAP request interface and have direct access to the data products
+stored on your server.
+
+[[bot-blocker]] 
+=== `<BotBlocker>` (optional)
 
 This optional element can be used to block access from specific IP
-addresses or a range of IP addresses using regular expressions. It
-turns out that many of the web crawling robots do not respect the
-`robots.txt` file when one is provided. Since many sites do not want their
+addresses or a range of IP addresses using regular expressions:
+
+////
+
+This businessy paragraph seems out of place in this user guide.
+
+Many of the web crawling robots do not respect the `robots.txt` file
+when one is provided. Since many sites do not want their
 data holdings exhaustively queried by automated software, we created a
 simple robot blocking handler to protect system resources from
 non-compliant robots.
+////
 
-===== `<IpAddress>` element
+[source,xml]
+----
+<BotBlocker>
+    <IpAddress>128.193.64.33</IpAddress>
+    <IpMatch>65\.55\.[012]?\d?\d\.[012]?\d?\d</IpMatch>
+</BotBlocker>
+----
 
-The text value of this element should be the IP address of a system
-which you would like to block from accessing your service.
+`<BotBlocker>` has the following child elements:
 
+* *`<IpAddress>` element*: The text value of this element
+should be the IP address of a system that you would like to
+block from accessing your service. For example, `<IpAddress>128.193.64.33</IPAddress>`
+Will block the system located at `128.193.64.33` from accessing your server.
++
 There can be zero or more `<IpAddress>` child elements in the `<BotBlocker>` element.
 
-For example:
-[source,xml]
-----
-    <IpAddress>128.193.64.33</IPAddress>
-----
-Will block the system located at 128.193.64.33 from accessing your server.
-
-===== `<IpMatch>` element
-The text value of this element should be the regular expression that
-will be used to match the IP addresses of clients attempting to access
-Hyrax.
-
+* *`<IpMatch>` element*: The text value of this element
+should be the regular expression that will be used to match
+the IP addresses of clients attempting to access Hyrax.
+For example, `<IpMatch>65\.55\.[012]?\d?\d\.[012]?\d?\d</IpMatch>` matches
+all IP addresses beginning with `65.55`, and thus blocks access for
+clients whose IP addresses lie in that range.
++
 There can be zero or more `<IpMatch>` child  elements in `<BotBlocker` element.
 
-For example:
-[source,xml]
-----
- <IpMatch>65\.55\.[012]?\d?\d\.[012]?\d?\d</IpMatch>
-----
-Matches all IP addresses beginning with `65.55` and thus blocks access for
-clients whose IP addresses lie in that range.
-
-===== Example BotBlocker Configuration
-
-[source,xml]
-----
-    <BotBlocker>
-        <IpAddress>128.193.64.33</IpAddress>
-        <IpMatch>65\.55\.[012]?\d?\d\.[012]?\d?\d</IpMatch>
-    </BotBlocker>
-----
-
 [[developer-options]]
-==== Developer Options
+=== Developer Options
 
-These configuration options are intended to be used by developers that are engaged in code developement for components of Hyrax and are not meant to be enabled in any kind of production environment. They are included here for transparency and to help potential contributors to the Hyrax project.
+These configuration options are intended to be used by developers
+that are engaged in code developement for components of Hyrax.
+They are *not meant to be enabled* in any kind of production environment.
+They are included here for transparency and to help 
+potential contributors to the Hyrax project.
 
-==== `<Timer>` (developer)
-The `Timer` enables or disables the generation of internal timing metrics for the OLFS
+==== `<Timer>`
 
-===== `enabled` attribute
-If `enabled` is set to `true then the timer will be enabled.
+The `<Timer>` attribute enables or disables the generation of internal timing metrics for the OLFS:
 
-If you want timing metrics to be output to the log then uncomment the Timer and set the
-enabled attribute's value to "true"
-
-WARNING: *_Enabling the Timer will impose significant performance overhead on the
-server's operation and should ony be done in an effort to understand the
-relative times spent in different operations and [.underline]#not# as a mechanism for
-measuring the server's objective performance._*
-
-Example:
-[source,xml]
 ----
  <Timer enabled="true"/>
 ----
 
-===== `<ingestTransformFile>` child element (developer)
-WARNING: *_This is a developers option and in general is not recommended
-for use in an operational server._*
+`Timer` has a single attribute, `enabled`, which is a boolean value.
+Uncommenting this value and setting it to `true` will output timing metrics to the log.
+
+WARNING: Enabling the `Timer` will impose significant performance overhead on the
+server's operation and should ony be done in an effort to understand the
+relative times spent in different operations--*not* as a mechanism for
+measuring the server's objective performance.
+
+==== `<ingestTransformFile>` child element (developer)
 
 This child element of the `ThreddsService` element is a special code development option
 that allows a developer to specify the fully qualified path to an XSLT file that will be
-used to preprocess each THREDDS catalog file read from disk. The default version of this
-file, found in `$CATALINA_HOME/webapps/opendap/xsl/threddsCatalogIngest.xsl`, processes
-the `thredds:datasetScan` elements in each THREDDS catalog so that they contain specific
-content for Hyrax.
+used to preprocess each THREDDS catalog file read from disk:
 
 Example:
 [source,xml]
@@ -584,7 +474,18 @@ Example:
 <ingestTransformFile>/fully/qualified/path/to/transfrm.xsl</ingestTransformFile>
 ----
 
-==== `<PreloadNcmlIntoBes />` (developer)
+The default version of this file, found in
+`$CATALINA_HOME/webapps/opendap/xsl/threddsCatalogIngest.xsl`,
+processes the `thredds:datasetScan` elements in each THREDDS catalog
+so that they contain specific content for Hyrax.
+
+////
+
+Since both of these features are broken or not implemented fully, 
+I've commented them out.
+
+=== `<PreloadNcmlIntoBes />` (developer)
+
 WARNING: *_This is a partially implemented,  non-functional feature._*
 
 The presence of this developer option in the configuration will cause the OLFS to attempt
@@ -592,9 +493,9 @@ to preload all of the NcML content found in the static THREDDS catalogs and atte
 transmit it to the BES. There is at this time no software in the BES that can accept,
 store, or otherwise utilize and respond to such a command.
 
-
 [[catalog-cache]]
-==== `<CatalogCache>` (developer)
+=== `<CatalogCache>` (developer)
+
 WARNING: *_This feature is currently broken and using it may result in the server
 behaving unpredictably_*
 
@@ -627,93 +528,25 @@ Example:
         <updateIntervalSeconds>10000</updateIntervalSeconds>
     </CatalogCache>
 ----
+////
 
+== Viewers Service (`viewers.xml` file)
 
-==== Example olfs.xml File
+The Viewers service provides, for each dataset, an HTML page that contains
+links to Java WebStart applications and to WebServices, such as WMS and WCS,
+that can be used in conjunction with the dataset. The Viewers
+service is configured via the contents of the `viewers.xml` file, typically located
+at the following location: `/etc/olfs/viewers.xml`.
 
-[source,xml]
-----
-<?xml version="1.0" encoding="UTF-8"?>
-<OLFSConfig>
-
-    <BESManager>
-        <BES>
-            <prefix>/</prefix>
-            <host>localhost</host>
-            <port>10022</port>
- 
-            <timeOut>300</timeOut>
- 
-            <adminPort>11002</adminPort>
- 
-            <maxResponseSize>0</maxResponseSize>
-            <ClientPool maximum="200" maxCmds="2000" />
-        </BES>
-        <NodeCache maxEntries="20000" refreshInterval="600"/>
-        <SiteMapCache refreshInterval="600" />
-    </BESManager>
-
-
-    <ThreddsService  prefix="thredds" useMemoryCache="true" allowRemote="true" />
-    <GatewayService  prefix="gateway" useMemoryCache="true" />
-    <UseDAP2ResourceUrlResponse />
-    <HttpPost enabled="true" max="2000000"/>
-
-    <!-- AddFileoutTypeSuffixToDownloadFilename / -->
-    <!-- AllowDirectDataSourceAccess / -->
-    <!-- PreloadNcmlIntoBes -->
-
-    <!-- CatalogCache>
-        <maxEntries>10000</maxEntries>
-        <updateIntervalSeconds>10000</updateIntervalSeconds>
-    </CatalogCache -->
-
-    <!--
-       'Bot Blocker' is used to block access from specific IP addresses
-       and by a range of IP addresses using a regular expression.
-    -->
-    <!-- BotBlocker -->
-    <!-- <IpAddress>127.0.0.1</IpAddress> -->
-    <!-- This matches all IPv4 addresses, work yours out from here.... -->
-    <!-- <IpMatch>[012]?\d?\d\.[012]?\d?\d\.[012]?\d?\d\.[012]?\d?\d</IpMatch> -->
-    <!-- Any IP starting with 65.55 (MSN bots the don't respect robots.txt  -->
-    <!-- <IpMatch>65\.55\.[012]?\d?\d\.[012]?\d?\d</IpMatch>   -->
-    <!-- /BotBlocker -->
-
-
-    <!--
-      'Timer' enables or disables the generation of internal timing metrics for the OLFS
-      If commented out the timing is disabled. If you want timing metrics to be output
-      to the log then uncomment the Timer and set the enabled attribute's value to "true"
-      WARNING: There is some performance cost to utilizing the Timer.
-    -->
-    <!-- Timer enabled="false" / -->
-
-
-</OLFSConfig>
-
-----
-
-
-=== Viewers Service (`viewers.xml` file)
-
-The Viewers service provides, for each dataset, an HTML page containing
-links to Java WebStart applications and to WebServices (such as WMS and WCS)
-that can be utilized in conjunction with the dataset. The Viewers
-service is configured via the contents of the `viewers.xml` file typically located
-here: `/etc/olfs/viewers.xml`.
-
-==== `viewers.xml` Configuration File
+=== `viewers.xml` Configuration File
 
 The `viewers.xml` contains a list of two types of elements:
 
 * `<JwsHandler>` elements
 * `<WebServiceHandler>` elements
 
-The details of these are discussed elsewhere in the documentation and are type
-the implementations each handler.
-
-==== Example Configuration:
+The details of these are discussed elsewhere in the documentation.
+The following is an example configuration:
 
 [source,xml]
 ----
@@ -743,24 +576,22 @@ the implementations each handler.
 </ViewersConfig>
 ----
 
+== Logging
 
-=== Logging
-
-For information about logging, please check out the
+For information about logging, see the
 <<logging-configuration, Hyrax Logging Configuration Documentation>>.
 
-=== Authentication and Authorization
+== Authentication and Authorization
 
-The following sub-sections detail authentication and authorization.
+The following subsections detail authentication and authorization.
 
-
-==== Apache Web Server (httpd)
+=== Apache Web Server (httpd)
 
 If your organization desires secure access and authentication layers
 for Hyrax, the recommended method is to use Hyrax in conjunction the
 Apache Web Server (httpd).
 
-Most organizations that utilize secure access and authentication for
+Most organizations that use secure access and authentication for
 their web presence are already doing so via Apache Web Server, and Hyrax
 can be integrated nicely with this existing infrastructure.
 
@@ -771,7 +602,7 @@ these pages:
 * <<user-authentication, Configuring Hyrax and Apache for User Authentication and 
 Authorization>>
 
-==== Tomcat
+=== Tomcat
 
 Hyrax may be used with the security features implemented by Tomcat for
 authentication and authorization services.
@@ -799,7 +630,7 @@ SSL/TLS Configuration HOW-TO]
 We also recommend that you read chapter 12 of the
 http://jcp.org/aboutJava/communityprocess/final/jsr154/index.html[Java
 Servlet Specification 2.4] that decribes how to configure security
-constraints at the web application level.
+constraints at the web-application-level.
 
 Tomcat security requires fairly extensive additions to the `web.xml`
 file located here: `${CATALINA_HOME}/webapps/opendap/WEB-INF/web.xml`
@@ -811,17 +642,17 @@ Examples of security content for the `web.xml` file can be found in the
 persistent content directory of the Hyrax server, which by default is
 located here `$CATALINA_HOME/webapps/opendap/WEB-INF/conf/TomcatSecurityExample.xml`
 
-==== Limitations
+=== Limitations
 
-Tomcat security officially supports _context_ level authentication. This
+Tomcat security officially supports _context_-level authentication. This
 means that you can restrict access to the collection of servlets
 running in a single web application (i.e. all of the stuff
 that is defined in a single _web.xml_ file). You can call out different
 authentication rules for different `<url-pattern>`s within the web
-application, but only clients which do not cache ANY security
+application, but only clients that do not cache ANY security
 information will be able to easily access the different areas.
 
-For example, in your _web.xml_ file you might have:
+For example, in your _web.xml_ file you might have the following:
 
 [source,xml]
 ----
@@ -851,51 +682,56 @@ For example, in your _web.xml_ file you might have:
     </login-config>
 ----
 
-Where the security roles fn1 and fn2 (defined in the *tomcat-users.xml*
+Where the security roles fn1 and fn2 (defined in the *tomcat-users.xml* 
 file) have no common members.
 
-The complete URI's would be:
+The complete URI's would be...
 
 ----
 http://localhost:8080/mycontext/hyrax/nc/fnoc1.txt
 http://localhost:8080/mycontext/hyrax/nc/fnoc2.txt
 ----
 
-This works for clients that do not cache anything; however, if you were 
-to access these URLs with a typical browser, then once you had authenticated 
-for one URI, you would be locked out of the other one until you 
-successfully "reset" the browser by purging all caches.
-
-This happens because, in the exchange between Tomcat and the
+This works for clients that do not cache anything; however, if you access
+these URLs with a typical internet browser, authenticating one URI
+would lock you out of the other URI until you "reset" the browser by
+purging all caches.
+This happens, because, in the exchange between Tomcat and the
 client, Tomcat sends the header 
 `WWW-Authenticate: Basic realm="MyApplicationRealm"`,
-and the client authenticates. When the second URI is accessed, Tomcat
-sends the the same authentication challenge with the same
-`WWW-Authenticate` header. The client, having recently authenticated to
+and the client authenticates.
+
+When you access the second URI, Tomcat sends the same authentication challenge
+with the same `WWW-Authenticate` header. The client, having recently authenticated to
 this _realm-name_ (defined in the `<login-config>` element in the
 web.xml file - see above), resends the authentication information, and,
 since it is not valid for that url pattern, the request is denied.
 
-==== Persistence
+=== Persistence
 
-You should be careful to back up your modified _web.xml_ file to a
+Be sure to back up your modified _web.xml_ file to a
 location outside of the _$CATALINA_HOME/webapps/opendap_ directory, as
-newly installed versions of Hyrax will overwrite it. You could use an
-_XML ENTITY_ and an _entity reference_ in the _web.xml_ to cause a local
-file containing the security configuration to be included in the
-web.xml. For example, add the __ENTITY__ 
+newly-installed versions of Hyrax will overwrite it.
 
+You could, for example, use an _XML ENTITY_ and an _entity reference_ in the _web.xml_.
+This will cause a local file containing the security configuration to be included in the
+`web.xml`. For example...
+
+. Add the _ENTITY_
++
 [source]
 ----
 [<!ENTITY securityConfig SYSTEM "file:/fully/qualified/path/to/your/security/config.xml">]
 ----
++
+to the _!DOCTYPE_ declaration at the top of the _web.xml_.
 
-to the _!DOCTYPE_ declaration at the top of the _web.xml_, and also
-add an __entity reference__ (`&securityConfig;`) 
-to the content of the _web-app_ element. This would cause your external
+. Add an _entity reference_ (`&securityConfig;`) to the content of
+the _web-app_ element. This would cause your external
 security configuration to be included in the _web.xml_ file.
 
-._ENTITY_ configuration:
+The following is an example _ENTITY_ configuration:
+
 [source,xml]
 ----
     <?xml version="1.0" encoding="ISO-8859-1"?>
@@ -923,16 +759,16 @@ security configuration to be included in the _web.xml_ file.
 
 This will not prevent you from losing your _web.xml_ file when a new
 version of Hyrax is installed, but adding the _ENTITY_ to the new
-_web.xml_ file would be easier than remembering an extensive security
+_web.xml_ file is easier than remembering an extensive security
 configuration.
 
-=== Compressed Responses and Tomcat
+== Compressed Responses and Tomcat
 
 Many OPeNDAP clients accept compressed responses. This can greatly
 increase the efficiency of the client/server interaction by diminishing
 the number of bytes actually transmitted over "the wire." Tomcat
-provides native compression support for the GZIP compression mechanism,
-however it is NOT turned on by default.
+provides native compression support for the GZIP compression mechanism;
+however, it is NOT turned on by default.
 
 The following example is based on Tomcat 7.0.76. We recommend that you
 carefully read the Tomcat documentation related to this topic before
@@ -944,17 +780,16 @@ documentation for the HTTP Connector] (see Standard Implementation section)
 * https://tomcat.apache.org/tomcat-8.5-doc/config/http.html[Tomcat 8.5.x
 documentation for the HTTP/1.1 Connector](see Standard Implementation section)
 
-==== Details
+=== Details
 
-To enable compression, you will need to edit the
-_$CATALINA_HOME/conf/server.xml_ file. You will need to locate the
-`<Connector>` element associated with your server; typically this will
-be the only `<Connector>` element whose _port_ attribute is set equal
-to 8080. You will need to add or change several of its attributes to
-enable compression.
+To enable compression, you will need to edit the _$CATALINA_HOME/conf/server.xml_ file. 
+Locate the `<Connector>` element associated with your server. It is typically 
+the only `<Connector>` element whose _port_ attribute is set equal to 8080.
+You will need to add or change several of its attributes to enable compression.
 
 With our Tomcat 7.0.76 distribution, we found this default `<Connector>`
 element definition in our _server.xml_ file:
+
 [source,xml]
 ----
     <Connector
@@ -966,6 +801,7 @@ element definition in our _server.xml_ file:
 ----
 
 You will need to add four attributes:
+
 [source,java]
 ----
 compression="force"
@@ -973,20 +809,19 @@ compressionMinSize="2048"
 compressableMimeType="text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/octet-stream,application/vnd.opendap.dap4.dataset-services+xml,application/vnd.opendap.dap4.dataset-metadata+xml,application/vnd.opendap.dap4.data,application/vnd.opendap.dap4.error+xml,application/json,application/prs.coverage+json,application/rdf+xml,application/x-netcdf;ver=4,application/x-netcdf,image/tiff;application=geotiff"
 ----
 
-The list of compressible MIME types includes all known response types for Hyrax.
+The list of compressible MIME types includes all known response types for Hyrax. 
+The `compression` attribute may have the following values:
 
-The *compression* attribute may have the following values:
+* *`compression="no"`*: Nothing is compressed (default if not provided).
+* *`compression="yes"`*: Only the compressible MIME types are compressed.
+* *`compression="force"`*: Everything gets compressed (assuming the
+client accepts gzip and the response is bigger than compressionMinSize).
++
+NOTE: You *must* set `compression="force"` for compression to work with the
+OPeNDAP data transport.
 
-* *compression="no"* means nothing gets compressed (default if not provided).
-* *compression="yes"* means only the compressible MIME types get
-compressed.
-* *compression="force"* means everything gets compressed (assuming the
-client accepts gzip and the response is bigger than compressionMinSize)
+When you are finished, your `<Connector>` element should look like the following:
 
-NOTE: _You MUST set *compression="force"* for compression to work with the
-OPeNDAP data transport._
-
-When finished your *Connector* element should look like this:
 [source,xml]
 ----
     <Connector
@@ -1004,17 +839,83 @@ When finished your *Connector* element should look like this:
 Restart Tomcat for these changes to take effect.
 
 You can verify the change by using curl as follows:
+
 ----
 curl -H "Accept-Encoding: gzip" -I http://localhost:8080/opendap/data/nc/fnoc1.nc.ascii
 ----
-NOTE: _The above URL is for Hyrax running on your local system and accessing a dataset that ships with the server._
+
+NOTE: The above URL is for Hyrax running on your local system and accessing a dataset that ships with the server.
 
 You'll know that compression is enabled if the response to the curl command contains:
+
 ----
 Content-Encoding: gzip
 ----
 
-NOTE: _If you are using Tomcat in conjunction with the Apache Web Server
-(our friend httpd) via AJP you will need to also
+NOTE: If you are using Tomcat in conjunction with the Apache Web Server
+(our friend httpd) via AJP, you will need to also
 <<apache-compressed-responses, configure Apache to deliver compressed responses>>
-Tomcat will not compress content sent over the AJP connection._
+Tomcat will not compress content sent over the AJP connection.
+
+=== Pitfalls with CentOS-7.x and/or SELinux
+
+SELinux (bundled by default with CentOS-7) will create some new challenges for those
+not familiar with the changes it brings to the system environment. For one, Tomcat runs as a
+_confined_ user. Here we'll examine how these changes affect the OLFS.
+
+==== Localizing the OLFS Configuration under SELinux
+
+When using a `yum`-installed Tomcat on CentOS-7.x (or any other Linux
+environment that is essentially an *SELinux* variant), neither the `/etc/olfs`
+or the `/usr/share/olfs` configuration locations will work without taking extra steps.
+You must alter the SELinux access policies to give the Tomcat user
+permission to read and write to one of these directories.
+
+The following code block will configures the `/usr/share/olfs` directory for reading
+and writing by the Tomcat user:
+
+----
+#!/bin/sh
+# You must be the super user to do this stuff...
+sudo -s
+
+# Create the location for the local configuration
+mkdir -p /usr/share/olfs
+
+# Change the group ownership to the tomcat group.
+# (SELinux will not allow you make the owner tomcat.)
+chgrp tomcat /usr/share/olfs
+
+# Make it writable by the tomcat group
+sudo chmod g+w /usr/share/olfs
+
+# Use semanage to change the context of the target
+# directory and any (future) child dirs
+semanage fcontext -a -t tomcat_var_lib_t "/usr/share/olfs(/.*)?"
+
+# Use restorecon to commit/do the labeling.
+restorecon -rv /usr/share/olfs
+----
+
+////
+This is a how-to, so I think the below is unnecessary.
+
+There is a lot going in the above script and to fully understand it you will need to study the man
+pages for _semanage_ and _restorecon_. 
+////
+
+For further reading about SELinux and its permissions issues, see the following:
+
+* https://wiki.centos.org/HowTos/SELinux
+* https://noobient.com/post/165842438861/selinux-crash-course
+* https://noobient.com/post/165972214381/selinux-woes-with-tomcat-on-centos-74
+
+=== Tomcat Logs
+
+In SELinux the `yum`-installed Tomcat does not produce a `catalina.out` file;
+rather, the output is sent to the *_journal_* and can be viewed with the
+following command:
+
+----
+journalctl -u tomcat
+----
