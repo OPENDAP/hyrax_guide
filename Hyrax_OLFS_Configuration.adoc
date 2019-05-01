@@ -87,10 +87,13 @@ by the user who is running Tomcat.
 == `olfs.xml` Configuration File
 
 The `olfs.xml` file contains the core configuration of the Hyrax
-front end service. What follows is a detailed explanation of its contents.
+front-end service. The following subsections detailed its contents.
 
 At the document's root is the `<OLFSConfig>` element. It contains several
-elements that supply the configuration for the OLFS.
+elements that supply the configuration for the OLFS. 
+The following is an example OLFS Configuration file:
+
+include::Hyrax_OLFS_Configuration_example-olfs-file.adoc[]
 
 === `<BESManager>` Element (required)
 
@@ -346,45 +349,50 @@ This element has no attributes or child elements and is enabled by default.
 
 === `<AddFileoutTypeSuffixToDownloadFilename />` element (optional)
 
-This optional element controls how the server will construct the download file name that
-is transmitted in the HTTP Content-Disposition header.  A simple example will provide the
-best explanation.: If the `<AddFileoutTypeSuffixToDownloadFilename />` element is either
-commented out or not present, then when a user requests a data response from
-`somedatafile.hdf` in netCDF-3 format the HTTP Content-Disposition header will be set
-like this:
-----
-Content-Disposition: attachment; filename="somedatafile.hdf"
-----
-However if the `<AddFileoutTypeSuffixToDownloadFilename />` is present then the resulting
-response will have a HTTP Content-Disposition header like this:
-----
-Content-Disposition: attachment; filename="somedatafile.hdf.nc"
-----
-
-Default: By default the server ships with this disabled.
+This optional element controls how the server constructs the download file name that
+is transmitted in the HTTP Content-Disposition header:
 
 [source,xml]
 ----
     <AddFileoutTypeSuffixToDownloadFilename />
 ----
 
+For example, suppose the `<AddFileoutTypeSuffixToDownloadFilename />` element is 
+either commented out or not present. When a user requests a data response from
+`somedatafile.hdf` in netCDF-3 format, the HTTP Content-Disposition header will be set
+like this:
+
+----
+Content-Disposition: attachment; filename="somedatafile.hdf"
+----
+
+However, if the `<AddFileoutTypeSuffixToDownloadFilename />` is present, then the 
+resulting response will have an HTTP Content-Disposition header:
+
+----
+Content-Disposition: attachment; filename="somedatafile.hdf.nc"
+----
+
+By default the server ships with this disabled.
+
 === `<AllowDirectDataSourceAccess/>` element (optional)
 
 The `<AllowDirectDataSourceAccess/>` element controls the user's
-ability to directly access data sources via the Hyrax web interface. If this
-element is present (and not commented out, as in the example below) a
-client can retrieve an entire data source (such as an HDF file) by
-requesting it through the HTTP URL interface. By default, Hyrax ships with this option
-disabled. We recommend that you leave it unchanged unless you desire that users be able
-to circumvent the OPeNDAP request interface and have direct access to the data products
-stored on your server:
+ability to directly access data sources via the Hyrax web interface:
 
 [source,xml]
 ----
     <!-- AllowDirectDataSourceAccess / -->
 ----
 
-This element has no attributes or child elements and is desabled by default.
+If this element is present and not commented out, a
+client can retrieve an entire data source (such as an HDF file) by
+requesting it through the HTTP URL interface.
+
+This element has no attributes or child elements and is disabled by default.
+We recommend that you leave it unchanged, unless you want users to be able
+to circumvent the OPeNDAP request interface and have direct access to the data products
+stored on your server.
 
 [[bot-blocker]] 
 === `<BotBlocker>` (optional)
@@ -432,7 +440,11 @@ There can be zero or more `<IpMatch>` child  elements in `<BotBlocker` element.
 [[developer-options]]
 === Developer Options
 
-These configuration options are intended to be used by developers that are engaged in code developement for components of Hyrax and are *not meant to be enabled* in any kind of production environment. They are included here for transparency and to help potential contributors to the Hyrax project.
+These configuration options are intended to be used by developers
+that are engaged in code developement for components of Hyrax.
+They are *not meant to be enabled* in any kind of production environment.
+They are included here for transparency and to help 
+potential contributors to the Hyrax project.
 
 ==== `<Timer>`
 
@@ -454,16 +466,18 @@ measuring the server's objective performance.
 
 This child element of the `ThreddsService` element is a special code development option
 that allows a developer to specify the fully qualified path to an XSLT file that will be
-used to preprocess each THREDDS catalog file read from disk. The default version of this
-file, found in `$CATALINA_HOME/webapps/opendap/xsl/threddsCatalogIngest.xsl`, processes
-the `thredds:datasetScan` elements in each THREDDS catalog so that they contain specific
-content for Hyrax.
+used to preprocess each THREDDS catalog file read from disk:
 
 Example:
 [source,xml]
 ----
 <ingestTransformFile>/fully/qualified/path/to/transfrm.xsl</ingestTransformFile>
 ----
+
+The default version of this file, found in
+`$CATALINA_HOME/webapps/opendap/xsl/threddsCatalogIngest.xsl`,
+processes the `thredds:datasetScan` elements in each THREDDS catalog
+so that they contain specific content for Hyrax.
 
 ////
 
@@ -518,11 +532,11 @@ Example:
 
 == Viewers Service (`viewers.xml` file)
 
-The Viewers service provides, for each dataset, an HTML page containing
-links to Java WebStart applications and to WebServices (such as WMS and WCS)
-that can be utilized in conjunction with the dataset. The Viewers
-service is configured via the contents of the `viewers.xml` file typically located
-here: `/etc/olfs/viewers.xml`.
+The Viewers service provides, for each dataset, an HTML page that contains
+links to Java WebStart applications and to WebServices, such as WMS and WCS,
+that can be used in conjunction with the dataset. The Viewers
+service is configured via the contents of the `viewers.xml` file, typically located
+at the following location: `/etc/olfs/viewers.xml`.
 
 === `viewers.xml` Configuration File
 
@@ -531,10 +545,8 @@ The `viewers.xml` contains a list of two types of elements:
 * `<JwsHandler>` elements
 * `<WebServiceHandler>` elements
 
-The details of these are discussed elsewhere in the documentation and are type
-the implementations each handler.
-
-=== Example Configuration:
+The details of these are discussed elsewhere in the documentation.
+The following is an example configuration:
 
 [source,xml]
 ----
@@ -566,13 +578,12 @@ the implementations each handler.
 
 == Logging
 
-For information about logging, please check out the
+For information about logging, see the
 <<logging-configuration, Hyrax Logging Configuration Documentation>>.
 
 == Authentication and Authorization
 
-The following sub-sections detail authentication and authorization.
-
+The following subsections detail authentication and authorization.
 
 === Apache Web Server (httpd)
 
@@ -580,7 +591,7 @@ If your organization desires secure access and authentication layers
 for Hyrax, the recommended method is to use Hyrax in conjunction the
 Apache Web Server (httpd).
 
-Most organizations that utilize secure access and authentication for
+Most organizations that use secure access and authentication for
 their web presence are already doing so via Apache Web Server, and Hyrax
 can be integrated nicely with this existing infrastructure.
 
@@ -619,7 +630,7 @@ SSL/TLS Configuration HOW-TO]
 We also recommend that you read chapter 12 of the
 http://jcp.org/aboutJava/communityprocess/final/jsr154/index.html[Java
 Servlet Specification 2.4] that decribes how to configure security
-constraints at the web application level.
+constraints at the web-application-level.
 
 Tomcat security requires fairly extensive additions to the `web.xml`
 file located here: `${CATALINA_HOME}/webapps/opendap/WEB-INF/web.xml`
@@ -633,15 +644,15 @@ located here `$CATALINA_HOME/webapps/opendap/WEB-INF/conf/TomcatSecurityExample.
 
 === Limitations
 
-Tomcat security officially supports _context_ level authentication. This
+Tomcat security officially supports _context_-level authentication. This
 means that you can restrict access to the collection of servlets
 running in a single web application (i.e. all of the stuff
 that is defined in a single _web.xml_ file). You can call out different
 authentication rules for different `<url-pattern>`s within the web
-application, but only clients which do not cache ANY security
+application, but only clients that do not cache ANY security
 information will be able to easily access the different areas.
 
-For example, in your _web.xml_ file you might have:
+For example, in your _web.xml_ file you might have the following:
 
 [source,xml]
 ----
@@ -671,51 +682,56 @@ For example, in your _web.xml_ file you might have:
     </login-config>
 ----
 
-Where the security roles fn1 and fn2 (defined in the *tomcat-users.xml*
+Where the security roles fn1 and fn2 (defined in the *tomcat-users.xml* 
 file) have no common members.
 
-The complete URI's would be:
+The complete URI's would be...
 
 ----
 http://localhost:8080/mycontext/hyrax/nc/fnoc1.txt
 http://localhost:8080/mycontext/hyrax/nc/fnoc2.txt
 ----
 
-This works for clients that do not cache anything; however, if you were 
-to access these URLs with a typical browser, then once you had authenticated 
-for one URI, you would be locked out of the other one until you 
-successfully "reset" the browser by purging all caches.
-
-This happens because, in the exchange between Tomcat and the
+This works for clients that do not cache anything; however, if you access
+these URLs with a typical internet browser, authenticating one URI
+would lock you out of the other URI until you "reset" the browser by
+purging all caches.
+This happens, because, in the exchange between Tomcat and the
 client, Tomcat sends the header 
 `WWW-Authenticate: Basic realm="MyApplicationRealm"`,
-and the client authenticates. When the second URI is accessed, Tomcat
-sends the the same authentication challenge with the same
-`WWW-Authenticate` header. The client, having recently authenticated to
+and the client authenticates.
+
+When you access the second URI, Tomcat sends the same authentication challenge
+with the same `WWW-Authenticate` header. The client, having recently authenticated to
 this _realm-name_ (defined in the `<login-config>` element in the
 web.xml file - see above), resends the authentication information, and,
 since it is not valid for that url pattern, the request is denied.
 
 === Persistence
 
-You should be careful to back up your modified _web.xml_ file to a
+Be sure to back up your modified _web.xml_ file to a
 location outside of the _$CATALINA_HOME/webapps/opendap_ directory, as
-newly installed versions of Hyrax will overwrite it. You could use an
-_XML ENTITY_ and an _entity reference_ in the _web.xml_ to cause a local
-file containing the security configuration to be included in the
-web.xml. For example, add the __ENTITY__ 
+newly-installed versions of Hyrax will overwrite it.
 
+You could, for example, use an _XML ENTITY_ and an _entity reference_ in the _web.xml_.
+This will cause a local file containing the security configuration to be included in the
+`web.xml`. For example...
+
+. Add the _ENTITY_
++
 [source]
 ----
 [<!ENTITY securityConfig SYSTEM "file:/fully/qualified/path/to/your/security/config.xml">]
 ----
++
+to the _!DOCTYPE_ declaration at the top of the _web.xml_.
 
-to the _!DOCTYPE_ declaration at the top of the _web.xml_, and also
-add an __entity reference__ (`&securityConfig;`) 
-to the content of the _web-app_ element. This would cause your external
+. Add an _entity reference_ (`&securityConfig;`) to the content of
+the _web-app_ element. This would cause your external
 security configuration to be included in the _web.xml_ file.
 
-._ENTITY_ configuration:
+The following is an example _ENTITY_ configuration:
+
 [source,xml]
 ----
     <?xml version="1.0" encoding="ISO-8859-1"?>
@@ -743,7 +759,7 @@ security configuration to be included in the _web.xml_ file.
 
 This will not prevent you from losing your _web.xml_ file when a new
 version of Hyrax is installed, but adding the _ENTITY_ to the new
-_web.xml_ file would be easier than remembering an extensive security
+_web.xml_ file is easier than remembering an extensive security
 configuration.
 
 == Compressed Responses and Tomcat
@@ -751,8 +767,8 @@ configuration.
 Many OPeNDAP clients accept compressed responses. This can greatly
 increase the efficiency of the client/server interaction by diminishing
 the number of bytes actually transmitted over "the wire." Tomcat
-provides native compression support for the GZIP compression mechanism,
-however it is NOT turned on by default.
+provides native compression support for the GZIP compression mechanism;
+however, it is NOT turned on by default.
 
 The following example is based on Tomcat 7.0.76. We recommend that you
 carefully read the Tomcat documentation related to this topic before
@@ -766,15 +782,14 @@ documentation for the HTTP/1.1 Connector](see Standard Implementation section)
 
 === Details
 
-To enable compression, you will need to edit the
-_$CATALINA_HOME/conf/server.xml_ file. You will need to locate the
-`<Connector>` element associated with your server; typically this will
-be the only `<Connector>` element whose _port_ attribute is set equal
-to 8080. You will need to add or change several of its attributes to
-enable compression.
+To enable compression, you will need to edit the _$CATALINA_HOME/conf/server.xml_ file. 
+Locate the `<Connector>` element associated with your server. It is typically 
+the only `<Connector>` element whose _port_ attribute is set equal to 8080.
+You will need to add or change several of its attributes to enable compression.
 
 With our Tomcat 7.0.76 distribution, we found this default `<Connector>`
 element definition in our _server.xml_ file:
+
 [source,xml]
 ----
     <Connector
@@ -786,6 +801,7 @@ element definition in our _server.xml_ file:
 ----
 
 You will need to add four attributes:
+
 [source,java]
 ----
 compression="force"
@@ -793,20 +809,19 @@ compressionMinSize="2048"
 compressableMimeType="text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/octet-stream,application/vnd.opendap.dap4.dataset-services+xml,application/vnd.opendap.dap4.dataset-metadata+xml,application/vnd.opendap.dap4.data,application/vnd.opendap.dap4.error+xml,application/json,application/prs.coverage+json,application/rdf+xml,application/x-netcdf;ver=4,application/x-netcdf,image/tiff;application=geotiff"
 ----
 
-The list of compressible MIME types includes all known response types for Hyrax.
+The list of compressible MIME types includes all known response types for Hyrax. 
+The `compression` attribute may have the following values:
 
-The *compression* attribute may have the following values:
+* *`compression="no"`*: Nothing is compressed (default if not provided).
+* *`compression="yes"`*: Only the compressible MIME types are compressed.
+* *`compression="force"`*: Everything gets compressed (assuming the
+client accepts gzip and the response is bigger than compressionMinSize).
++
+NOTE: You *must* set `compression="force"` for compression to work with the
+OPeNDAP data transport.
 
-* *compression="no"* means nothing gets compressed (default if not provided).
-* *compression="yes"* means only the compressible MIME types get
-compressed.
-* *compression="force"* means everything gets compressed (assuming the
-client accepts gzip and the response is bigger than compressionMinSize)
+When you are finished, your `<Connector>` element should look like the following:
 
-NOTE: _You MUST set *compression="force"* for compression to work with the
-OPeNDAP data transport._
-
-When finished your *Connector* element should look like this:
 [source,xml]
 ----
     <Connector
@@ -824,20 +839,23 @@ When finished your *Connector* element should look like this:
 Restart Tomcat for these changes to take effect.
 
 You can verify the change by using curl as follows:
+
 ----
 curl -H "Accept-Encoding: gzip" -I http://localhost:8080/opendap/data/nc/fnoc1.nc.ascii
 ----
-NOTE: _The above URL is for Hyrax running on your local system and accessing a dataset that ships with the server._
+
+NOTE: The above URL is for Hyrax running on your local system and accessing a dataset that ships with the server.
 
 You'll know that compression is enabled if the response to the curl command contains:
+
 ----
 Content-Encoding: gzip
 ----
 
-NOTE: _If you are using Tomcat in conjunction with the Apache Web Server
-(our friend httpd) via AJP you will need to also
+NOTE: If you are using Tomcat in conjunction with the Apache Web Server
+(our friend httpd) via AJP, you will need to also
 <<apache-compressed-responses, configure Apache to deliver compressed responses>>
-Tomcat will not compress content sent over the AJP connection._
+Tomcat will not compress content sent over the AJP connection.
 
 === Pitfalls with CentOS-7.x and/or SELinux
 
