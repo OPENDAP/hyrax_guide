@@ -857,7 +857,7 @@ NOTE: If you are using Tomcat in conjunction with the Apache Web Server
 <<apache-compressed-responses, configure Apache to deliver compressed responses>>
 Tomcat will not compress content sent over the AJP connection.
 
-=== Pitfalls with CentOS-7.x and/or SELinux
+== Pitfalls with CentOS-7.x and/or SELinux
 
 SELinux (bundled by default with CentOS-7) will create some new challenges for those
 not familiar with the changes it brings to the system environment. For one, Tomcat runs as a
