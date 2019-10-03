@@ -26,17 +26,37 @@
     <UseDAP2ResourceUrlResponse />
     <HttpPost enabled="true" max="2000000"/>
 
-    <!-- AddFileoutTypeSuffixToDownloadFilename / -->
+    <!--
+        'AllowDirectDataSourceAccess' - When enabled users will be able to use
+        Hyrax as a file server and download the underlying data files/granules/objects
+        directly, without utilizing the DAP APIs.
+    -->
     <!-- AllowDirectDataSourceAccess / -->
-    <!-- PreloadNcmlIntoBes -->
-
-    <!-- CatalogCache>
-        <maxEntries>10000</maxEntries>
-        <updateIntervalSeconds>10000</updateIntervalSeconds>
-    </CatalogCache -->
 
     <!--
-       'Bot Blocker' is used to block access from specific IP addresses
+        'AddFileoutTypeSuffixToDownloadFilename' - When enabled the server will add
+        the file type suffix of the requested data format to the download file name.
+    -->
+    <!-- AddFileoutTypeSuffixToDownloadFilename / -->
+
+    <!--
+        `EnableCombinedLog` - Enabling this feature means that the OLFS will send
+        a portion of it's log information set to the BES for inclusion in the BES
+        log. The combined log can be instrumental in understand both server and
+        client behavior.
+    -->
+    <!-- EnableCombinedLog / -->
+
+    <!--
+        'NoDynamicNavigation' - This is an "alpha" feature that disables dynamic
+        navigation/catalog content generation. When enabled, the static (user
+        supplied) THREDDS catalogs will still work. All of the regular dynamic
+        catalog/contents pages will be disabled.
+    -->
+    <!-- NoDynamicNavigation /-->
+
+    <!--
+       'Bot Blocker' - Used to block access from specific IP addresses
        and by a range of IP addresses using a regular expression.
     -->
     <!-- BotBlocker -->
@@ -55,6 +75,12 @@
       WARNING: There is some performance cost to utilizing the Timer.
     -->
     <!-- Timer enabled="false" / -->
+
+    <!--
+        'PreloadNcmlIntoBes' This is a prototype feature that was never readied
+        for production. ENABLE AT YOUR OWN RISK.
+    -->
+    <!-- PreloadNcmlIntoBes -->
 
 
 </OLFSConfig>

@@ -347,6 +347,25 @@ responses are well-defined by a specification.
 
 This element has no attributes or child elements and is enabled by default.
 
+=== `<AllowDirectDataSourceAccess/>` element (optional)
+
+The `<AllowDirectDataSourceAccess/>` element controls the user's
+ability to directly access data sources via the Hyrax web interface:
+
+[source,xml]
+----
+    <AllowDirectDataSourceAccess />
+----
+
+If this element is present and not commented out, a
+client can retrieve an entire data source (such as an HDF file) by
+requesting it through the HTTP URL interface.
+
+This element has no attributes or child elements and is disabled by default.
+We recommend that you leave it unchanged, unless you want users to be able
+to circumvent the OPeNDAP request interface and have direct access to the data products
+stored on your server.
+
 === `<AddFileoutTypeSuffixToDownloadFilename />` element (optional)
 
 This optional element controls how the server constructs the download file name that
@@ -375,24 +394,28 @@ Content-Disposition: attachment; filename="somedatafile.hdf.nc"
 
 By default the server ships with this disabled.
 
-=== `<AllowDirectDataSourceAccess/>` element (optional)
+=== `<EnableCombinedLog />` element (optional)
 
-The `<AllowDirectDataSourceAccess/>` element controls the user's
-ability to directly access data sources via the Hyrax web interface:
-
+This optional element, when enabled, will cause the OLFS to send
+a portion of it's log information to the BES for inclusion in the BES
+log. The combined log can be instrumental in understanding both server and
+client behavior.
 [source,xml]
 ----
-    <!-- AllowDirectDataSourceAccess / -->
+    <EnableCombinedLog />
 ----
 
-If this element is present and not commented out, a
-client can retrieve an entire data source (such as an HDF file) by
-requesting it through the HTTP URL interface.
+=== `<NoDynamicNavigation />` element (optional)
 
-This element has no attributes or child elements and is disabled by default.
-We recommend that you leave it unchanged, unless you want users to be able
-to circumvent the OPeNDAP request interface and have direct access to the data products
-stored on your server.
+This optional element, when enabled, provides an "alpha" feature that disables dynamic
+navigation/catalog content generation. When enabled, the static (user
+supplied) THREDDS catalogs will still work. All of the regular dynamic
+catalog/contents pages will be disabled.
+[source,xml]
+----
+    <NoDynamicNavigation />
+----
+
 
 [[bot-blocker]] 
 === `<BotBlocker>` (optional)
@@ -863,7 +886,7 @@ SELinux (bundled by default with CentOS-7) will create some new challenges for t
 not familiar with the changes it brings to the system environment. For one, Tomcat runs as a
 _confined_ user. Here we'll examine how these changes affect the OLFS.
 
-==== Localizing the OLFS Configuration under SELinux
+=== Localizing the OLFS Configuration under SELinux
 
 When using a `yum`-installed Tomcat on CentOS-7.x (or any other Linux
 environment that is essentially an *SELinux* variant), neither the `/etc/olfs`
