@@ -863,7 +863,7 @@ SELinux (bundled by default with CentOS-7) will create some new challenges for t
 not familiar with the changes it brings to the system environment. For one, Tomcat runs as a
 _confined_ user. Here we'll examine how these changes affect the OLFS.
 
-==== Localizing the OLFS Configuration under SELinux
+=== Localizing the OLFS Configuration under SELinux
 
 When using a `yum`-installed Tomcat on CentOS-7.x (or any other Linux
 environment that is essentially an *SELinux* variant), neither the `/etc/olfs`
