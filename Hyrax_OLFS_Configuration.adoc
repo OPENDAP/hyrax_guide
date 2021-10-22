@@ -326,26 +326,90 @@ Gateway Service page. This attribute's default value is `gateway`.
 * *`useMemoryCache` attribute (optional)*:
 See <<useMemoryCacheAttribute,the previous section>> for more information.
 
-=== `<UseDAP2ResourceUrlResponse />` element (optional)
+=== [.line-through]##`<UseDAP2ResourceUrlResponse />` element (DEPRECATED)##
+The  `<UseDAP2ResourceUrlResponse />` key has been deprecated use
 
-This element controls the type of response that Hyrax will provide to a client's request
-for the data resource URL:
+ `<UseDAP2ResourceUrlResponse />`
+
+[.line-through]##This element controls the type of response that Hyrax will provide to a client's request
+for the data resource URL:##
+
+[.line-through]##`<UseDAP2ResourceUrlResponse />`##
+
+[.line-through]##When this element is present, the server will respond to
+requests for data resource URLs by returning the DAP2 response
+(either an error or the underlying data object). Commenting out or removing
+the `<UseDAP2ResourceUrlResponse />` element will cause the server to return the
+DAP4 DSR response when a dataset resource URL is requested.##
+
+[.line-through]##NOTE: DAP2 responses are not clearly defined by any specification, whereas DAP4 DSR
+responses are well-defined by a specification.##
+
+[.line-through]##This element has no attributes or child elements and is enabled by default.##
+
+=== `<DatasetUrlResponse type="download|requestForm|dsr"/>`
+
+The `DatasetUrlResponse` configuration element is used to configure the type of response
+that the server will generate when a client attempts to access the Dataset URL.
+The type of response is controlled by the value of the type attribute.
+There are three supported values are: `dsr`, `download`, and `requestForm`.
+
+* **`download`** - If the configuration parameter AllowDirectDataSourceAccess is set (present) then
+the source data file will be returned for the dataset URL. If the configuration
+parameter AllowDirectDataSourceAccess is not present then a 403 forbidden will
+be returned for the dataset URL. (This is basically a file retrieval service,
+any constraint expression submitted with the dataset URL will be ignored.)
+
+* **`requestForm`** - The Hyrax Data Request Form Page will be returned for the
+dataset URL.
+
+* **`dsr`** - The dap4 DSR response will be returned for the dataset URL.
+
+The default value is **`download`**:
+[source,xml]
+----
+<DatasetUrlResponse type="download"/>
+----
+
+=== `<DataRequestForm type="dap2|dap4"/>`
+
+The value of the `DataRequestForm` element defines these server behaviors:
+
+* The DAP centric view of the catalog pages. This value controls if the catalog pages are of
+the DAP2 or DAP4 form. The "blue-bar" catalog(catalog.html)  pages (catalog.html) for the
+preferred DAP data model contain links specifically associated with that data model.
+This includes the link to the Data Request Form.
+
+* This element also determines the type of Data request form page returned when the
+`DatasetUrlResponse` type is set to `requestForm` and the request is for the Dataset URL the
+request will be redirected to the DAP2 or DAP4 Data Request form.
+
+Supported type values are: `dap2` and `dap4`
+
+The default value is **`dap4`**:
+[source,xml]
+----
+<DataRequestForm type="dap4" />
+----
+
+=== `<AllowDirectDataSourceAccess/>` element (optional)
+
+The `<AllowDirectDataSourceAccess/>` element controls the user's
+ability to directly access data sources via the Hyrax web interface:
 
 [source,xml]
 ----
-    <UseDAP2ResourceUrlResponse />
+    <!-- AllowDirectDataSourceAccess / -->
 ----
 
-When this element is present, the server will respond to
-requests for data resource URLs by returning the DAP2 response 
-(either an error or the underlying data object). Commenting out or removing
-the `<UseDAP2ResourceUrlResponse />` element will cause the server to return the
-DAP4 DSR response when a dataset resource URL is requested.
+If this element is present and not commented out, a
+client can retrieve an entire data source (such as an HDF file) by
+requesting it through the HTTP URL interface.
 
-NOTE: DAP2 responses are not clearly defined by any specification, whereas DAP4 DSR
-responses are well-defined by a specification.
-
-This element has no attributes or child elements and is enabled by default.
+This element has no attributes or child elements and is disabled by default.
+We recommend that you leave it unchanged, unless you want users to be able
+to circumvent the OPeNDAP request interface and have direct access to the data products
+stored on your server.
 
 === `<AddFileoutTypeSuffixToDownloadFilename />` element (optional)
 
@@ -375,24 +439,6 @@ Content-Disposition: attachment; filename="somedatafile.hdf.nc"
 
 By default the server ships with this disabled.
 
-=== `<AllowDirectDataSourceAccess/>` element (optional)
-
-The `<AllowDirectDataSourceAccess/>` element controls the user's
-ability to directly access data sources via the Hyrax web interface:
-
-[source,xml]
-----
-    <!-- AllowDirectDataSourceAccess / -->
-----
-
-If this element is present and not commented out, a
-client can retrieve an entire data source (such as an HDF file) by
-requesting it through the HTTP URL interface.
-
-This element has no attributes or child elements and is disabled by default.
-We recommend that you leave it unchanged, unless you want users to be able
-to circumvent the OPeNDAP request interface and have direct access to the data products
-stored on your server.
 
 [[bot-blocker]] 
 === `<BotBlocker>` (optional)
