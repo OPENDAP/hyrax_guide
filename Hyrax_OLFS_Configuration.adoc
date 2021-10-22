@@ -327,9 +327,10 @@ Gateway Service page. This attribute's default value is `gateway`.
 See <<useMemoryCacheAttribute,the previous section>> for more information.
 
 === [.line-through]##`<UseDAP2ResourceUrlResponse />` element (DEPRECATED)##
-The  `<UseDAP2ResourceUrlResponse />` key has been deprecated use
+The  `UseDAP2ResourceUrlResponse` key has been deprecated.
 
- `<UseDAP2ResourceUrlResponse />`
+Use `DatasetUrlResponse` and `DataRequestForm` to determine what kind of
+response Hyrax will return for the dataset URL.
 
 [.line-through]##This element controls the type of response that Hyrax will provide to a client's request
 for the data resource URL:##
