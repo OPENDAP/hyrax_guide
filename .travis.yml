@@ -16,6 +16,10 @@ env:
     - secure: "O5/2M9+gVN5WhHVJoeDTHmAF1AtLztr522IQ7JSXSQZtXjPpI1YrQiSRcXuqjXCmVmwjKSCpyAoj0XvUllQGAg7n4rIO95AEOp20l0EmMmEMKTgfuAe0xGt96aWXyIO4C37glVTgyh7VXy5hEqRAVx3ZcgKYlDQXPjJD9fz8bTriGyAMez8iZl8MMbBlWw8PPDRwMMMPGbceOLgo3bGVkG1caJA60ZtVPi8a6L7JzpE798vW1IEGGhVmTurxhEpf3dAvAXzh8xD5pFfgbGP3fS4hCSAmDrCHJ755yCRUFXKgWfy8g3PlXn9yXdo6Zn9YY/1wN8IHBKOt3lYoNMK3dEwKo61MwTz/3WPsrwN1HL4bos+AwTckJbor/O8HLTLZjPFKfFVcVomG8wXFcgbuW35ON+wVLGsrKSP3LSa9Opp2b5dj2xvfQGk9HyP5sK88UnkLNRugwZ8oV+L5FjLWg4HomDWPr4js0Ujm+VAgHsDup4RWJEhFhJQntfH2zbWdgoDDNtNxZWlf+fbDM07E/X52aIgDpbqKM6/7HsdMOZi4oc+yPmFED6YvEWAB6OmNk94CpaIn4b8LVT1XuGxIRU1gMIGdK1SeIcm5nb3Bpq+0sHFUhCBbZ3nFuEb/Q5+I4dC9NEyr4fH7a7fXGmhapF0Ini8csswBY1wJrAwHHK0="
     # DOCKER_HUB_PSWD for our DockerHub account
     - secure: "nynvK2M/8MCsFeRk+sFSvGWfZvNMcryvDhDA2/dy6Lpe85U7L/5/CB4EVjI142dMsEn6QBo9Co4oa+bxOlDiOK0Vgx8zlg09V1iZB4S49QOecOaQdcpuzLFKABV9TtyKLqACATFq/l1TzH0glslgevD18Rv1pfkNQNHiWYDW90mx8qWFmOUUuziS7Hl+Xegrox0NtRJL6Njel7rOL/FQzN0KHnDe2GaF8f5aU5Sp72X08cCW0RNrd9Njm47HeyYmBtIQ1hwaeeqqYFDOBds2MiPnt9BdPmOR/8//OmZqKULoPMHeLxCff4H8vTQpEpVp4w4dbx/7k+aTe0lh7FL/ToCPbj7VFbOsNByGZNtAk92dznGJHi8KJTY0GaRMvnqriz1oOW4XjHgBjeH7RGJr5tHGJvOc7rlDmejsYouRrZEuONZONI5Bu6Yg0TP3aXNK4Fsj1+D4ZMGcOBM7QyY9LZd3Kn1xDSZUJZjInFsEf1TJ0q9EmS1AYtoOnfF9umMi6N6wI+IMs2tqGC/fm4SeuJNo+a9S9Zlcwf8/X0X3hzbiEk9z8wE/leiiJzxE1VPxtW9jmkakr5akE4xHy29EfcyGkoJi+7UJ4KSQZoMSZ8J2gLDW2MDA3vz4UYKBYH4dBHWPJQrtu1rpGcdOt/RJcPpNM98uNk4DyjdKBekuSnY="
+    # Git User
+    - secure: "j5bMLr4MMVMLlWXEi0lRhNOTWDAFZdaFXm5ELHY0upnPGjcA1JmpapG2KLqRqAEKw+zZqc85L2y9SZwMcy9cPzedvP4lempIfvW+9YT0lg/hLN2t8ZiJ1hP7P2asToHSTWZdYJNxzYRLXWupegWLabeTCwBPKw6vdYIN1AeoO1S2RqaYz2G0mwQ+1Pkdrr4rfE5YjSDeWKeSQ5tWqMwXFSF2jisW9n8VVNWUM24VSPhIqZxXwazDBzgNinHyKtEtRWHtDSlidzx01XiT74M+qVALMzlb5iybMd3lFjGObX8BORfBm/gbXnjnpTfS/0J11zw9F7WB3feCHsTpRtJGL/6wIvA4c3RyeBs5FqT/6H/38NMKbvKAJHMbZaP144ZIUwO18Iop3XTEu5vGZmItoIc5Xi5SHgP90TVy60E5WRIkvwYY4YDtcyyUMKbdv0RNLdPkWLB3YiVYsZBTbkSXlGTWIAagv2XJhvRPToBOJNYDr15xUx0xsjdbJ9gBAziXD+8KjXDA849/19Li9jJ6Ju87ToABdZOmCea2x9sLSwvzKtonpHVZyW8f+hRP+2Y161NCfeu6UouWMk8dBzF/k0GiBtYGfkoeKimtkuYkBFj+EGKnp22peAcnp0PVvYzc4E+44ToqW0En9BAbCydfrFTaXs7QANrxeqSjNVASQVw="
+    # GIT_TOKEN
+    - secure: "jXHCjczaV3Es2eRPzAK3zE7JZi25xvCO22nAqmKN9DPCTuJycb0QZnKr/l81ohcY3xXyO7+tyJpPoroj8M5vNaW0RTmm2COX9/f4EIMZmsgnxYBQc2N0w9HMlfL+CobmM76uV6JY8mu4JVkkGovA7lU0HnNkG1mnCLwFrKsceftKXrXl2g1Dq4+VufXjxqtvkP4/MW0/UE28nwpcTzTg++raNOr/5jzZhb+gLdp5XWc7G0s2iCplLKzzaVnP3f5NuGlZByaJwZFCNCR1O3R1XsnBHSBFa/r0GbZKxSsQqUpEOW8c28l+60GRY5c8l3KQ4I/VjbIWgjkRfXvSaz+yy6vwjJQGXtZdtilPXJtNBUrFUAFSrajgeiCeqAf1oXqDMxNwYm2uA9NYu6gK3WPwgAPCL1zVAMffECfJD3y5bwwOhJrqthOfo48oeBw6y8CGYc9W2lwOFiV7ayC7GNj/SQGBzcSH8zBkWhCBilgZMUy7bIlEGc6EK3m3swL4GjOmkxS/J1k6k0VjStDd83zBj8UzPbaesI3Di3yTJgfuTw9gzZvsdyG7oEsVSNOrB8dJ8Kswz6D3dMyUXD8a0PBTrHuKk86+6bPr8XPWgB5BnAsMG5xceYSxUcl8+cJ8Mx0IAbRX24ZJYbnSKPjTZpqgD3mtY2yx+0a/k9KJkdopS2M="
 
 services:
   - docker                  
@@ -34,11 +38,11 @@ script:
 
 after_error: 
   - docker logs asciidoc-to-html
-  - docker logs asciidoc-to-pdf
+  #- docker logs asciidoc-to-pdf
 
 after_failure:
   - docker logs asciidoc-to-html
-  - docker logs asciidoc-to-pdf
+  #- docker logs asciidoc-to-pdf
 
 # This is a bit different than the 'after_success' section in the 'documentation'
 # repo because that build installs the github.io index.html page from its
@@ -52,4 +56,4 @@ after_success:
   - git config user.email "{GH_USER_EMAIL}"
   - git add .
   - git commit -m "Deploy to GitHub Pages"
-  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:gh-pages
+  - git push --force --quiet "https://${GIT_TOKEN}@github.com/OPENDAP/hyrax_guide.git" master:gh-pages
