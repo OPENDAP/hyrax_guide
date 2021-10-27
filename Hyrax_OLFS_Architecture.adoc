@@ -1197,14 +1197,14 @@ web.xml. For example, add the __ENTITY__
 ----
 
 to the _!DOCTYPE_ declaration at the top of the _web.xml_, and also
-add an __entity reference__ (`&securityConfig;`) 
+add an _entity reference_ (`&securityConfig;`)
 to the content of the _web-app_ element. This would cause your external
 security configuration to be included in the _web.xml_ file.
 
 ._ENTITY_ configuration:
 [source,xml]
 ----
-    <?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="ISO-8859-1"?>
 
     <!DOCTYPE web-app
         PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.2//EN"
