@@ -1189,7 +1189,7 @@ location outside of the _$CATALINA_HOME/webapps/opendap_ directory, as
 newly installed versions of Hyrax will overwrite it. You could use an
 _XML ENTITY_ and an _entity reference_ in the _web.xml_ to cause a local
 file containing the security configuration to be included in the
-web.xml. For example, add the __ENTITY__ 
+web.xml. For example, add the _ENTITY_
 
 [source]
 ----
@@ -1197,7 +1197,7 @@ web.xml. For example, add the __ENTITY__
 ----
 
 to the _!DOCTYPE_ declaration at the top of the _web.xml_, and also
-add an _entity reference_ (`\&amp;securityConfig;`)
+add an _entity reference_ (`\&securityConfig;`)
 to the content of the _web-app_ element. This would cause your external
 security configuration to be included in the _web.xml_ file.
 
