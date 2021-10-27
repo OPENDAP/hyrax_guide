@@ -10,11 +10,18 @@ notifications:
   email:
     - ndp@opendap.org
     - jgallagher@opendap.org
+env:
+  global:
+    # DOCKER_HUB_UID for our DockerHub account
+    - secure: "O5/2M9+gVN5WhHVJoeDTHmAF1AtLztr522IQ7JSXSQZtXjPpI1YrQiSRcXuqjXCmVmwjKSCpyAoj0XvUllQGAg7n4rIO95AEOp20l0EmMmEMKTgfuAe0xGt96aWXyIO4C37glVTgyh7VXy5hEqRAVx3ZcgKYlDQXPjJD9fz8bTriGyAMez8iZl8MMbBlWw8PPDRwMMMPGbceOLgo3bGVkG1caJA60ZtVPi8a6L7JzpE798vW1IEGGhVmTurxhEpf3dAvAXzh8xD5pFfgbGP3fS4hCSAmDrCHJ755yCRUFXKgWfy8g3PlXn9yXdo6Zn9YY/1wN8IHBKOt3lYoNMK3dEwKo61MwTz/3WPsrwN1HL4bos+AwTckJbor/O8HLTLZjPFKfFVcVomG8wXFcgbuW35ON+wVLGsrKSP3LSa9Opp2b5dj2xvfQGk9HyP5sK88UnkLNRugwZ8oV+L5FjLWg4HomDWPr4js0Ujm+VAgHsDup4RWJEhFhJQntfH2zbWdgoDDNtNxZWlf+fbDM07E/X52aIgDpbqKM6/7HsdMOZi4oc+yPmFED6YvEWAB6OmNk94CpaIn4b8LVT1XuGxIRU1gMIGdK1SeIcm5nb3Bpq+0sHFUhCBbZ3nFuEb/Q5+I4dC9NEyr4fH7a7fXGmhapF0Ini8csswBY1wJrAwHHK0="
+    # DOCKER_HUB_PSWD for our DockerHub account
+    - secure: "nynvK2M/8MCsFeRk+sFSvGWfZvNMcryvDhDA2/dy6Lpe85U7L/5/CB4EVjI142dMsEn6QBo9Co4oa+bxOlDiOK0Vgx8zlg09V1iZB4S49QOecOaQdcpuzLFKABV9TtyKLqACATFq/l1TzH0glslgevD18Rv1pfkNQNHiWYDW90mx8qWFmOUUuziS7Hl+Xegrox0NtRJL6Njel7rOL/FQzN0KHnDe2GaF8f5aU5Sp72X08cCW0RNrd9Njm47HeyYmBtIQ1hwaeeqqYFDOBds2MiPnt9BdPmOR/8//OmZqKULoPMHeLxCff4H8vTQpEpVp4w4dbx/7k+aTe0lh7FL/ToCPbj7VFbOsNByGZNtAk92dznGJHi8KJTY0GaRMvnqriz1oOW4XjHgBjeH7RGJr5tHGJvOc7rlDmejsYouRrZEuONZONI5Bu6Yg0TP3aXNK4Fsj1+D4ZMGcOBM7QyY9LZd3Kn1xDSZUJZjInFsEf1TJ0q9EmS1AYtoOnfF9umMi6N6wI+IMs2tqGC/fm4SeuJNo+a9S9Zlcwf8/X0X3hzbiEk9z8wE/leiiJzxE1VPxtW9jmkakr5akE4xHy29EfcyGkoJi+7UJ4KSQZoMSZ8J2gLDW2MDA3vz4UYKBYH4dBHWPJQrtu1rpGcdOt/RJcPpNM98uNk4DyjdKBekuSnY="
 
 services:
   - docker                  
 
-before_install:            
+before_install:
+  - echo $DOCKER_HUB_PSWD | docker login -u $DOCKER_HUB_UID --password-stdin
   - mkdir -p output
   - docker pull asciidoctor/docker-asciidoctor
 
