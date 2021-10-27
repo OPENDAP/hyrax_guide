@@ -1197,7 +1197,7 @@ web.xml. For example, add the __ENTITY__
 ----
 
 to the _!DOCTYPE_ declaration at the top of the _web.xml_, and also
-add an _entity reference_ (`&securityConfig;`)
+add an _entity reference_ (`&amp;securityConfig;`)
 to the content of the _web-app_ element. This would cause your external
 security configuration to be included in the _web.xml_ file.
 
@@ -1219,11 +1219,9 @@ security configuration to be included in the _web.xml_ file.
             applied by Tomcat.
         -->
         &securityConfig;
-
         .
         .
         .
-
     </web-app>
 ----
 
