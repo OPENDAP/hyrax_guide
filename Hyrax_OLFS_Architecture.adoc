@@ -1196,9 +1196,10 @@ web.xml. For example, add the _ENTITY_
 [<!ENTITY securityConfig SYSTEM "file:/fully/qualified/path/to/your/security/config.xml">]
 ----
 
-to the _DOCTYPE_ declaration at the top of the _web.xml_, and also add an _entity reference_ (_securityConfig_)
-to the content of the _web-app_ element. This would cause your external
-security configuration to be included in the _web.xml_ file.
+to the _DOCTYPE_ declaration at the top of the _web.xml_, and
+also add an _entity reference_ (_securityConfig_ as above)
+to the content of the _web-app_ element. This would cause your externally
+held security configuration to be included in the _web.xml_ file.
 
 ._ENTITY_ configuration:
 [source,xml]
