@@ -1185,19 +1185,18 @@ since it is not valid for that url pattern, the request is denied.
 ==== Persistence
 
 You should be careful to back up your modified _web.xml_ file to a
-location outside of the _$CATALINA_HOME/webapps/opendap_ directory, as
+location outside the _$CATALINA_HOME/webapps/opendap_ directory, as
 newly installed versions of Hyrax will overwrite it. You could use an
 _XML ENTITY_ and an _entity reference_ in the _web.xml_ to cause a local
 file containing the security configuration to be included in the
 web.xml. For example, add the _ENTITY_
 
-[source]
+[source,xml]
 ----
 [<!ENTITY securityConfig SYSTEM "file:/fully/qualified/path/to/your/security/config.xml">]
 ----
 
-to the _!DOCTYPE_ declaration at the top of the _web.xml_, and also
-add an _entity reference_ (`\&securityConfig;`)
+to the _DOCTYPE_ declaration at the top of the _web.xml_, and also add an _entity reference_ (`securityConfig`)
 to the content of the _web-app_ element. This would cause your external
 security configuration to be included in the _web.xml_ file.
 
