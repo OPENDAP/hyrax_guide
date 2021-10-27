@@ -55,5 +55,8 @@ after_success:
   - git config user.name "${GH_USER_NAME}"
   - git config user.email "{GH_USER_EMAIL}"
   - git add .
+  - git status
   - git commit -m "Deploy to GitHub Pages"
-  - git push --force "https://${GIT_TOKEN}@github.com/OPENDAP/hyrax_guide.git" master:gh-pages
+  - git status
+  - git push --force -v "https://${GIT_TOKEN}@github.com/OPENDAP/hyrax_guide.git" master:gh-pages
+  - git status
