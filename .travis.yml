@@ -52,8 +52,8 @@ after_failure:
 after_success:      
   - cd output ; cp -R ../images images
   - git init
-  - git config user.name "${GH_USER_NAME}"
-  - git config user.email "{GH_USER_EMAIL}"
+  - git config user.name "${GIT_UID}"
+  - git config user.email "ndp@opendap.org"
   - git add .
   - git status
   - git commit -m "Deploy to GitHub Pages"
