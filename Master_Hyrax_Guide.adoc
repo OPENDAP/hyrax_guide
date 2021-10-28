@@ -20,9 +20,9 @@ for information about source highlighting options.
 Also see http://coderay.rubychan.de/ for information about supported
 languages. jhrg 9/17/17
 ////
++++<em>document version: GUIDE_VERSION_TEMPLATE</em>+++.
 
 :leveloffset: +1
-+++<em>version: GUIDE_VERSION_TEMPLATE</em>+++.
 include::Master_Hyrax_Preface.adoc[lines="1..2,7..-1"]
 
 // This document will be always kept up to date with new release docs.
