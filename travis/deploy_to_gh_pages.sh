@@ -3,6 +3,7 @@
 
 GUIDE_FILE="Master_Hyrax_Guide.html"
 echo "GUIDE_FILE: ${GUIDE_FILE}"
+ls -l ${GUIDE_FILE}
 
 GUIDE_VERSION=`cat VERSION`"-${TRAVIS_BUILD_NUMBER}"
 echo "GUIDE_VERSION: ${GUIDE_VERSION}"
@@ -31,7 +32,7 @@ echo "${index_html}" | tee index.html
 
 #cat ${GUIDE_FILE} | sed -e "s/GUIDE_VERSION_TEMPLATE/${GUIDE_VERSION}/g" > foo
 #mv -f foo ${GUIDE_FILE}
-#head -25 ${GUIDE_FILE}
+head -25 ${GUIDE_FILE}
 
 # Now we set up the git repo
 git config user.name "The-Robot-Travis"
