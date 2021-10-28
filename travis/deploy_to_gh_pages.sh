@@ -9,7 +9,7 @@ cat <<EOF
       <meta http-equiv="refresh" content ="0" url="https://opendap.github.io/hyrax_guide/Master_Hyrax_Guide.html" />
    </head>
    <body>
-      <p>Redirecting to another URL</p>
+      <p>Redirecting to Master_Hyrax_Guide</p>
    </body>
 </html>
 EOF
