@@ -17,7 +17,8 @@ EOF
 
 cd output
 cp -R ../images images
-echo "${index_html}" | tee index.html
+# echo "${index_html}" | tee index.html
+cp Master_Hyrax_Guide.html index.html
 git init
 git config user.name "The-Robot-Travis"
 git config user.email "npotter@opendap.org"
