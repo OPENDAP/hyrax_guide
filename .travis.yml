@@ -56,7 +56,7 @@ after_success:
   - git config user.email "npotter@opendap.org"
   - git add .
   - git status
-  - git commit -m "Deploy to GitHub Pages"
+  - git commit -m "Deploying update to GitHub Pages"
   - git status
   - git push --force -v "https://$GIT_UID:$GIT_TOKEN@github.com/OPENDAP/hyrax_guide" master:gh-pages; echo $?
   - git status
