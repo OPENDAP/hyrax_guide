@@ -58,5 +58,5 @@ after_success:
   - git status
   - git commit -m "Deploy to GitHub Pages"
   - git status
-  - git push --force -v "https://$GIT_UID:$GIT_PSWD@github.com/OPENDAP/hyrax_guide.git" master:gh-pages
+  - git push --force -v "https://$GIT_UID:$GIT_TOKEN@github.com/OPENDAP/hyrax_guide.git" master:gh-pages
   - git status
