@@ -31,7 +31,7 @@ echo "${index_html}" | tee index.html
 
 cat ${GUIDE_FILE} | sed -e "s/GUIDE_VERSION_TEMPLATE/${GUIDE_VERSION}/g" > foo
 mv -f foo ${GUIDE_FILE}
-head 25 ${GUIDE_FILE}
+head -25 ${GUIDE_FILE}
 
 # Now we set up the git repo
 git config user.name "The-Robot-Travis"
