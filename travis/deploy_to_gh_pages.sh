@@ -28,7 +28,7 @@ cp -R ../images images
 
 # GitHub Pages requires an functional index.html file.
 # Here we add an index.html that redirects to Master_Hyrax_Guide.html
-#echo "${index_html}" | tee index.html
+echo "${index_html}" | tee index.html
 
 #cat ${GUIDE_FILE} | sed -e "s/GUIDE_VERSION_TEMPLATE/${GUIDE_VERSION}/g" > foo
 #mv -f foo ${GUIDE_FILE}
