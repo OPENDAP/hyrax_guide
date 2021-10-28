@@ -35,6 +35,7 @@ cp -R ../images images
 #head -25 ${GUIDE_FILE}
 
 # Now we set up the git repo
+git init
 git config user.name "The-Robot-Travis"
 git config user.email "npotter@opendap.org"
 
