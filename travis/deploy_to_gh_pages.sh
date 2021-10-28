@@ -1,11 +1,12 @@
 #!/bin/bash
 
+cd output
 
 GUIDE_FILE="Master_Hyrax_Guide.html"
 echo "GUIDE_FILE: ${GUIDE_FILE}"
 ls -l ${GUIDE_FILE}
 
-GUIDE_VERSION=`cat VERSION`"-${TRAVIS_BUILD_NUMBER}"
+GUIDE_VERSION=`cat ../VERSION`"-${TRAVIS_BUILD_NUMBER}"
 echo "GUIDE_VERSION: ${GUIDE_VERSION}"
 
 index_html=$(
@@ -23,7 +24,6 @@ cat <<EOF
 EOF
 )
 
-cd output
 cp -R ../images images
 
 # GitHub Pages requires an functional index.html file.
