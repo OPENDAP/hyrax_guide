@@ -15,10 +15,9 @@ cat <<EOF
 EOF
 )
 
-
 cd output
 cp -R ../images images
-echo "${index_html}" > index.html
+echo "${index_html}" | tee index.html
 git init
 git config user.name "The-Robot-Travis"
 git config user.email "npotter@opendap.org"
