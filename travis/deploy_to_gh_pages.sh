@@ -1,14 +1,19 @@
 #!/bin/bash
-VERSION=`cat VERSION`"-${TRAVIS_BUILD_NUMBER}"
-echo "VERSION: ${VERSION}"
+
+
+GUIDE_FILE="Master_Hyrax_Guide.html"
+echo "GUIDE_FILE: ${GUIDE_FILE}"
+
+GUIDE_VERSION=`cat VERSION`"-${TRAVIS_BUILD_NUMBER}"
+echo "GUIDE_VERSION: ${GUIDE_VERSION}"
 
 index_html=$(
 cat <<EOF
 <!DOCTYPE html>
 <html>
    <head>
-      <title>Hyrax Guide</title>
-      <meta http-equiv="refresh" content ="0; url=Master_Hyrax_Guide.html" />
+      <title>Hyrax Guide ${GUIDE_VERSION}</title>
+      <meta http-equiv="refresh" content ="0; url=${GUIDE_FILE}" />
    </head>
    <body>
       <p>Redirecting to Master_Hyrax_Guide.html</p>
@@ -24,6 +29,9 @@ cp -R ../images images
 # Here we add an index.html that redirects to Master_Hyrax_Guide.html
 echo "${index_html}" | tee index.html
 
+cat ${GUIDE_FILE} | sed -e "s/GUIDE_VERSION_TEMPLATE/${GUIDE_VERSION}/g" > foo
+mv foo ${GUIDE_FILE}
+
 # Now we set up the git repo
 git config user.name "The-Robot-Travis"
 git config user.email "npotter@opendap.org"
@@ -34,5 +42,5 @@ git status
 git commit -m "Deploying update to GitHub Pages"
 git status
 # Push to GitHub Pages
-git push --force -v "https://$GIT_UID:$GIT_TOKEN@github.com/OPENDAP/hyrax_guide" master:gh-pages; echo $?
+git push --force -v "https://${GIT_UID}:${GIT_TOKEN}@github.com/OPENDAP/hyrax_guide" master:gh-pages; echo $?
 git status

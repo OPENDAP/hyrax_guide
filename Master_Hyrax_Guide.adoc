@@ -22,7 +22,7 @@ languages. jhrg 9/17/17
 ////
 
 :leveloffset: +1
-
++++<em>version: GUIDE_VERSION_TEMPLATE</em>+++.
 include::Master_Hyrax_Preface.adoc[lines="1..2,7..-1"]
 
 // This document will be always kept up to date with new release docs.
