@@ -6,7 +6,7 @@ cat <<EOF
 <html>
    <head>
       <title>Hyrax Guide</title>
-      <meta http-equiv="refresh" content ="0" url="./Master_Hyrax_Guide.html" />
+      <meta http-equiv="refresh" content ="0" url="Master_Hyrax_Guide.html" />
    </head>
    <body>
       <p>Redirecting to another URL</p>
