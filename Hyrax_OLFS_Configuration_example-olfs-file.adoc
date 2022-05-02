@@ -23,11 +23,17 @@
 
     <ThreddsService  prefix="thredds" useMemoryCache="true" allowRemote="true" />
     <GatewayService  prefix="gateway" useMemoryCache="true" />
-    <UseDAP2ResourceUrlResponse />
+
+    <!-- DEPRECATED UseDAP2ResourceUrlResponse / -->
+
+    <DatasetUrlResponse type="download"/>
+    <DataRequestForm type="dap4" />
+
+    <!-- AllowDirectDataSourceAccess / -->
+
     <HttpPost enabled="true" max="2000000"/>
 
     <!-- AddFileoutTypeSuffixToDownloadFilename / -->
-    <!-- AllowDirectDataSourceAccess / -->
     <!-- PreloadNcmlIntoBes -->
 
     <!-- CatalogCache>
