@@ -6,121 +6,82 @@
 
 == Introduction
 
-This release of the server supports HDF5 files written using any version
-of the HDF5 API. The handler should be built/linked with version 1.8.x
-of the API.
+HDF5 handler not only supports the general mapping from HDF5 to either DAP2 or DAP4, but can also make NASA Earth Science HDF5/HDF-EOS5/netCDF-4-like files follow the CF conventions so that the CF-friendly visualization clients like Panoply can visualize those files via Hyrax seamlessly. This feature is realized by setting a BES key _H5.EnableCF_ to true.  This is the default BES key setting in the Hyrax distribution.  
 
-== Mappings Between the HDF5 Data Model and DAP2 Data Types
+//ADD DMR/DDS/DAS explanations 
+Four different DAP output can be generated via the HDF5 handler. 
 
-The mapping between the HDF5 and HDF-EOS5 data model and DAP2 is
-documented in a NASA Technical Note
-(http://www.esdswg.org/spg/rfc/esds-rfc-017[ESDS-RFC-017]). This note is
-quite detailed; a summary from its appendix is provided below.
+* CF option for DAP4
+* CF option for DAP2
+* Default option for DAP4 
+* Default option for DAP2
 
-== Special Characters in HDF Identifiers
+Section 2 gives the highlights of the above options. Section 3 to section 6 provide the detailed information about these four options.  The HDF5 handler uses the BES keys for the hyrax data service customers to obtain the customized results and to achieve better performance. Section 7 provides the information for the most useful BES keys. Section 8 lists the limitations of the handler at the current release. Section 9  provides the other miscellaneous information. 
 
-A number of non-alphanumeric characters (e.g., space, #, +, -) used in
-HDF identifiers are not allowed in the names of DAP objects, object
-components or in URLs. The HDF5 data handler therefore deals internally
-with translated versions of these identifiers. To translate the WWW
-convention of escaping such characters by replacing them with "%"
-followed by the hexadecimal value of their ASCII code is used. For
-example, "Raster Image #1" becomes "Raster%20Image%20%231". These
-translations should be transparent to users of the server (but they will
-be visible in the DDS, DAS and in any applications which use a client
-that does not translate the identifiers back to their original form).
 
-== Known Problems
 
-=== Handling of Floating Point Attributes
+== Highlight
 
-Because the DAP software encodes attribute values as ASCII strings there
-will be a loss of accuracy for floating point attributes. This loss of
-accuracy is dependent on the version of the C++ I/O library used in
-compiling/linking the software (i.e., the amount of floating point
-precision preserved when outputting to ASCII is dependent on the
-library). Typically it is very small (e.g., at least six decimal places
-are preserved).
+=== CF option for DAP4 
+By definition, the CF option means the handler will follow the CF convetions [insert URL] to translate HDF5 to DAP. CF option is set in the Hyrax source and RPM distribution since most NASA data centers uses the CF option.  To check if the CF option is used, go to _h5.conf_ and see if the BES key _H5.EnableCF_ is set to true.  
 
-== Configuration Parameters
+Key features for the CF option:
 
-H5.EnableCF::
-  This is an option to support NASA HDF5/HDF-EOS5 data products. The
-  HDF5/HDF-EOS5 data products do not follow CF conventions. However,
-  hdf5_handler can make them follow the conventions if you turn on this
-  option. The key benefit of this option is to allow OPeNDAP
-  visualization clients to display remote data seamlessly. Please visit
-  http://hdfeos.org/software/hdf5_handler/doc/cf.php[here] for details.
+* Follow the CF naming conventions, only alphanumeric characters and underscore (‘`_`’) are allowed for a variable or attribute names. For any character not allowed by the CF name conventions [7], change that character to underscore (‘`_`’).
+* There is no group hierarchy. HDF5 groups will be flattened. In general, variable names for any non-HDF-EOS5 files should have their group path prefixed before the HDF5 dataset names. The first “`/`” will be stripped off. For HDF-EOS5 files, check section 3.1. An example: HDF5 variable name _velocity.u_ under group _geo-location_  becomes the _geo_location_velocity_u_ in the DAP output. 
+* The handler follows the CF conventions to translate the dimensions and coordinate variables for 
+HDF-EOS5, netCDF-4  and some NASA HDF5 products. 
+* HDF5 integer, floating-point and string datatypes are one-to-one mapped to DAP4. Other datatypes are ignored. 
+* DAP4 coverage is supported. 
 
-H5.IgnoreUnknownTypes::
-  Ignore variables that use data types the handler cannot process. In
-  practice this means 64-bit integers. DAP2 does not support the 64-bit
-  integer type; using this parameter (i.e., setting its value to _yes_
-  or __true__) means that 64-bit integer variables are ignored and the
-  rest of the variables in the file can be read. The default value of
-  this parameter (__no__ or __false__) configures the handler to return
-  an error when a 64-bit integer variable is found.
+A DMR example can be found in Section 3. 
 
-H5.EnableCheckNameClashing::
-  This option checks if there are duplicate variable names when group
-  information is removed and some characters are replaced with
-  underscore character. Although this option is required to ensure that
-  no two variable names are same, the operation is quite costly and thus
-  can degrade the performance significantly. If you are certain that
-  your HDF5 data won't have any duplicate name, you can turn this off to
-  gain the performance of the server. For the NASA HDF5/HDF-EOS5
-  products we tested (AURA OMI/HIRDLS/MLS/TES, MEaSUREs SeaWiFS/Ozone,
-  Aquarius, GOSAT/acos, SMAP), we did not find any name clashing for
-  those objects. So the name clashing check seems unnecessary and this
-  option is turned off by default. The handler will check the name
-  clashing for any products not tested regardless of turning this option
-  on or off.
+=== CF option for DAP2
 
-H5.EnableAddPathAttr::
-  When this option is turned off, the HDF5 handler will not insert the
-  *fullnamepath* and *origname* attribute in DAS output. For example,
-  the DAS output like below:
+The name conventions and dimension/coordinate handlings are the same as the DAP4 implementation. CF-friendly visualization clients such as _Panoply_ can visualize the HDF5 data via DAP2 successfully. Screenshots of NASA HDF5 example files via Hyrax can be found at https://hdfeos.org/zoo/hdf5_handler/index.php . 
 
-----
-     temperature {
-        String units "K";
-        String origname "temperature";
-        String fullnamepath "/HDFEOS/GRIDS/GeoGrid/Data Fields/temperature";
-        String orig_dimname_list "XDim ";
-      }
-----
+However, due to the DAP2 limitation, HDF5 64-bit integer variables and attributes are ignored. Signed 8-bit integer is mapped to 16-bit integer since DAP2 doesn’t support signed 8-bit integer.  The handler doesn’t support DAP2 Grid. Instead, it follows the netCDF data model to use the shared dimensions for variables. 
 
-...will change to...
 
-----
-     temperature {
-        String units "K";
-        String orig_dimname_list "XDim ";
-     }
-----
+DDS and DAS examples can be found in section 4.
 
- H5.EnableDropLongString::
-  NetCDF Java client cannot handle string size bigger than 32767 and
-  will throw an error if such variable is seen. Thus, the HDF5 handler
-  need to hide such long string variables from DAS and DDS output.
-  Setting this option to true will ensure that NetCDF Java OPeNDAP
-  visualization clients such as IDV and Panoply can visualize other
-  important variables.
+=== Default option for DAP4
 
- H5.DisableStructMetaAttr::
-  When this option is true, StructMetadata attribute will not be
-  generated in DAS output.
+To use this option, _H5.EnableCF_ must be set to false in _h5.conf_. 
+ 
+This option tries to map HDF5 to DAP4 in a general way. Unlike the CF option, it is not tuned to  support the NASA data products.  However, instead of flattening the group hierarchy, the HDF5’s group hierarchy are kept by mapping HDF5 groups to DAP4 groups.
 
-=== HDF5 and HDF-EOS to DAP Type Mappings
+Moreover, when another BES key _H5.DefaultHandleDimension_ is also set to true, the HDF5 handler seamlessly translate the dimension names of netCDF-4 or netCDF-4-like files to DAP4 although the HDF5 data model doesn't support netCDF-4 shared dimensions. If the original netCDF-4 or netCDF-4-like files are generated to follow the CF conventions, the DAP4 output should also follow the CF as well as keeping the HDF5’s group hierarchy. [Need to add a panoply example at hdfeos.org]
 
-. _The complete set of mappings for the types in the HDF5 and HDF-EOS5
-data model_
-[width="100%",cols="34%,33%,33%",options="header",]
+In addition to mapping integer, string and floating-point data to DAP4, HDF5 compound datatype, object reference and regional references are also mapped to DAP4.  A DMR example can be found in section 5.
+
+=== Default option for DAP2
+
+To use this option, _H5.EnableCF_ must be set to false in _h5.conf_. The BES key _H5.DefaultHandleDimension_ has no effect for this option. 
+
+HDF5 signed 8-bit integer maps to signed 16-bit integer. 64-bit integer mapping is ignored. 
+
+The HDF5 group hierarchy information is kept in a special DAS container _HDF_ROOT_GROUP_.  The full path of an HDF5 variable is kept as an attribute. DDS and DAS Examples can be found in section 6. 
+
+
+== CF Option for DAP4
+
+=== Name 
+Other than the general name conventions described in section 2.1, variable names of an HDF-EOS5 multi-grid/multi-swath/multi-zonal-average file have the corresponding grid/swath/zonal-average names prefixed before the field names. Variable names of an HDF-EOS5 single grid/swath/zonal-average just use the corresponding field names. The grid/swath/zonal-average names are ignored. 
+
+The original name and the full path of an HDF5 variable are preserved as DAP4 attributes.  A BES key can be used to turn on/off this attribute. See section 7 for more information. Furthermore, For the HDF-EOS5 products,  the original dimension names associated with the variable are also preserved as a DAP4 attribute. This is because the HDF-EOS5 provides the dimension names and those dimension names may be changed to follow the CF conventions. 
+
+Although rarely in NASA HDF5 products, by following the CF conventions, it is possible that the the different HDF5 variables map to DAP4 variables that share the same name and then causes an error.  To avoid this issue, the handler implements a feature to avoid the name clashings. A suffix like '`_1`' is added to the the duplicated variable name. Since this rarely happens and keeping track of the name status may be expensive, a BES key is used for Hyrax service customers to turn on/off this feature. 
+
+=== Datatype
+
+. **HDF5 Datatype to DAP4 for the CF option**
+[width="100%",cols="30%,30%,40%",options="header",]
 |=======================================================================
-|HDF5 data type |DAP2 data name |Notes
+|HDF5 data type |DAP4 data name |Notes
 |8-bit unsigned integer |Byte |
 
-|8-bit signed integer |Int16 |
+|8-bit signed integer |Int8|
 
 |16-bit unsigned integer |UInt16 |
 
@@ -130,10 +91,258 @@ data model_
 
 |32-bit signed integer |Int32 |
 
-|64-bit unsigned integer |N/A |Results in an error unless
-H5.IgnoreUnknownTypes is true. See above.
+|64-bit unsigned integer |UInt64|
 
-|64-bit signed integer |N/A |... H5.IgnoreUnknownTypes ...
+|64-bit signed integer |Int64 |
+
+|32-bit floating point |Float32 |
+
+|64-bit floating point |Float64 |
+
+|String |String |
+
+|Other datatypes |N/A | The handler ignores the mapping of the following datatypes: HDF5 compound, variable length(excluding variable length string), enum,opaque, bitfield and time. |
+
+
+|=======================================================================
+
+=== BES Keys
+H5.EnableCF=true
+
+H5.EnableCFDMR=true
+H5.EnableDAP4Coverage=true
+
+=== DMR Example
+
+An __h5ls__ header of an HDF-EOS5 grid file __grid_1_2d.h5__ : 
+----
+/                        Group
+/HDFEOS                  Group
+/HDFEOS/ADDITIONAL       Group
+/HDFEOS/ADDITIONAL/FILE_ATTRIBUTES Group
+/HDFEOS/GRIDS            Group
+/HDFEOS/GRIDS/GeoGrid    Group
+/HDFEOS/GRIDS/GeoGrid/Data\ Fields   Group
+/HDFEOS/GRIDS/GeoGrid/Data\ Fields/temperature Dataset {4, 8}
+    Attribute: units scalar
+        Type:      1-byte null-terminated ASCII string
+        Data:  "K"
+/HDFEOS\ INFORMATION     Group
+    Attribute: HDFEOSVersion scalar
+        Type:      32-byte null-terminated ASCII string
+        Data:  "HDFEOS_5.1.13"
+/HDFEOS\ INFORMATION/StructMetadata.0 Dataset {SCALAR}
+----
+
+
+The corresponding DMR:
+
+----
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Dataset xmlns="http://xml.opendap.org/ns/DAP/4.0#" dapVersion="4.0" dmrVersion="1.0" name="grid_1_2d.h5">
+    <Dimension name="lon" size="8"/>
+    <Dimension name="lat" size="4"/>
+    <Float32 name="lon">
+        <Dim name="/lon"/>
+        <Attribute name="units" type="String">
+            <Value>degrees_east</Value>
+        </Attribute>
+    </Float32>
+    <Float32 name="lat">
+        <Dim name="/lat"/>
+        <Attribute name="units" type="String">
+            <Value>degrees_north</Value>
+        </Attribute>
+    </Float32>
+    <Float32 name="temperature">
+        <Dim name="/lat"/>
+        <Dim name="/lon"/>
+        <Attribute name="units" type="String">
+            <Value>K</Value>
+        </Attribute>
+        <Attribute name="origname" type="String">
+            <Value>temperature</Value>
+        </Attribute>
+        <Attribute name="fullnamepath" type="String">
+            <Value>/HDFEOS/GRIDS/GeoGrid/Data Fields/temperature</Value>
+        </Attribute>
+        <Attribute name="orig_dimname_list" type="String">
+            <Value>YDim XDim</Value>
+        </Attribute>
+        <Map name="/lat"/>
+        <Map name="/lon"/>
+    </Float32>
+    <String name="StructMetadata_0">
+        <Attribute name="origname" type="String">
+            <Value>StructMetadata.0</Value>
+        </Attribute>
+        <Attribute name="fullnamepath" type="String">
+            <Value>/HDFEOS INFORMATION/StructMetadata.0</Value>
+        </Attribute>
+    </String>
+    <Attribute name="HDFEOS" type="Container"/>
+    <Attribute name="HDFEOS_ADDITIONAL" type="Container"/>
+    <Attribute name="HDFEOS_ADDITIONAL_FILE_ATTRIBUTES" type="Container"/>
+    <Attribute name="HDFEOS_GRIDS" type="Container"/>
+    <Attribute name="HDFEOS_GRIDS_GeoGrid" type="Container"/>
+    <Attribute name="HDFEOS_GRIDS_GeoGrid_Data_Fields" type="Container"/>
+    <Attribute name="HDFEOS_INFORMATION" type="Container">
+        <Attribute name="HDFEOSVersion" type="String">
+            <Value>HDFEOS_5.1.13</Value>
+        </Attribute>
+        <Attribute name="fullnamepath" type="String">
+            <Value>/HDFEOS INFORMATION</Value>
+        </Attribute>
+    </Attribute>
+
+</Dataset>
+    
+----
+
+Note: The CF option retrieves the values of the coordinate variables and add them to DAP4 as variable __lat__ and variable __lon__. The variable name __StructMetadata.0__ becomes the __StructMetadata_0__. The group hierarchy is flattened. Since this is a single HDF-EOS5 grid, only the original variable name is kept. Also one can find 
+----
+<Map name="/lat"/>
+<Map name="/lon"/>
+----
+under the variable __temperature__. This reprsents the DAP4 coverage. The original full path of variable __temperature__ can be found from the attribute __fullnamepath__ of the variable __temperature__ as
+----
+<Attribute name="fullnamepath" type="String">
+    <Value>/HDFEOS/GRIDS/GeoGrid/Data Fields/temperature</Value>
+</Attribute>
+----
+
+HDF5 group information maps to Attribute Container such as:
+----
+<Attribute name="HDFEOS" type="Container"/>
+----
+== CF Option for DAP2 
+
+=== Name
+The same as the CF option for DAP4. See section 3.1.
+
+=== Datatype
+
+. **HDF5 Datatype to DAP2 for the CF option**
+[width="100%",cols="30%,30%,40%",options="header",]
+|=======================================================================
+|HDF5 data type |DAP2 data name |Notes
+|8-bit unsigned integer |Byte |
+
+|8-bit signed integer |Int16|DAP2 doesn't have 8-bit signed integer type, so it maps to 16-bit integer.
+
+|16-bit unsigned integer |UInt16 |
+
+|16-bit signed integer |Int16 |
+
+|32-bit unsigned integer |UInt32 |
+
+|32-bit signed integer |Int32 |
+
+|64-bit unsigned integer |N/A|DAP2 doesn't support 64-bit integer type.
+
+|64-bit signed integer |N/A |
+
+|32-bit floating point |Float32 |
+
+|64-bit floating point |Float64 |
+
+|String |String |
+
+|Other datatypes |N/A |
+The handler ignores the mapping of the following datatypes: HDF5 compound, variable length(excluding variable length string), object and region reference, enum,opaque, bitfield and time. |
+
+|=======================================================================
+=== BES Keys
+Disk DAS cache
+H5.EnableCF=true
+
+
+=== DDS and DAS Examples
+
+The layout of the HDF5 file is the same as section 3.4. 
+
+The DDS is:
+----
+Dataset {
+    Float32 temperature[lat = 4][lon = 8];
+    String StructMetadata_0;
+    Float32 lon[lon = 8];
+    Float32 lat[lat = 4];
+} grid_1_2d.h5;
+----
+
+The DAS is:
+----
+Attributes {
+    HDFEOS {
+    }
+    HDFEOS_ADDITIONAL {
+    }
+    HDFEOS_ADDITIONAL_FILE_ATTRIBUTES {
+    }
+    HDFEOS_GRIDS {
+    }
+    HDFEOS_GRIDS_GeoGrid {
+    }
+    HDFEOS_GRIDS_GeoGrid_Data_Fields {
+    }
+    HDFEOS_INFORMATION {
+        String HDFEOSVersion "HDFEOS_5.1.13";
+        String fullnamepath "/HDFEOS INFORMATION";
+    }
+    temperature {
+        String units "K";
+        String origname "temperature";
+        String fullnamepath "/HDFEOS/GRIDS/GeoGrid/Data Fields/temperature";
+        String orig_dimname_list "YDim XDim";
+    }
+    StructMetadata_0 {
+        String origname "StructMetadata.0";
+        String fullnamepath "/HDFEOS INFORMATION/StructMetadata.0";
+    }
+    lon {
+        String units "degrees_east";
+    }
+    lat {
+        String units "degrees_north";
+    }
+}
+----
+The DDS and DAS shown in this example are equialvent to the DMR output in section 3.4 except the DMR includes the DAP4 coverage information. However, if there is a signed 8-bit integer or 64-bit integer variable in the HDF5 file, DAP4 DMR will show the exact datatype while DAP2 DDS maps the signed 8-bit integer to 16-bit integer and ignores the mapping of 64-bit integer.
+
+
+== Default Option for DAP4 
+
+=== Name
+A number of non-alphanumeric characters (e.g., space, #, +, -) used in
+HDF names are not allowed in the names of DAP objects, object
+components or in URLs. Libdap excapes these characters by replacing them with "%"
+followed by the hexadecimal value of their ASCII code. For
+example, "Raster Image #1" becomes "Raster%20Image%20%231". These
+translations should be transparent to users of the server (but they will
+be visible in the DDS, DAS and in any applications which use a client
+that does not translate the identifiers back to their original form).
+
+=== Datatype
+. **HDF5 Datatype to DAP4**
+[width="100%",cols="30%,30%,40%",options="header",]
+|=======================================================================
+|HDF5 data type |DAP4 data name |Notes
+|8-bit unsigned integer |Byte |
+
+|8-bit signed integer |Int8 |
+
+|16-bit unsigned integer |UInt16 |
+
+|16-bit signed integer |Int16 |
+
+|32-bit unsigned integer |UInt32 |
+
+|32-bit signed integer |Int32 |
+
+|64-bit unsigned integer |Int64 |
+
+|64-bit signed integer |UInt64 |
 
 |32-bit floating point |Float32 |
 
@@ -143,30 +352,258 @@ H5.IgnoreUnknownTypes is true. See above.
 
 |Object/region reference |URL |
 
-|Compound |Structure |HDF5 compound can be mapped to DAP2 under the
+|Compound |Structure |HDF5 compound variable can be mapped to DAP2 under the
 condition that the base members (excluding object/region references) of
 compound can be mapped to DAP2.
 
-|Dataset |Variable |HDF5 dataset can be mapped to DAP2 under the
-condition that the datatype of the HDF5dataset can be mapped to DAP2.
+|Other datatypes |N/A | The handler ignores the mapping of the following datatypes: HDF5 variable length(excluding variable length string), enum,opaque, bitfield and time. |
 
-|Attribute |Attribute |HDF5 attribute can be mapped to DAP2 under the
-condition that the datatype of the HDF5 dataset can be mapped to DAP2,
-and the data is either scalar or one-dimensional array.
-
-|Group |naming convention |A special attribute _HDF5_ROOT_GROUP_ is used
-to represent the HDF5 group structure; The absolute path of the HDF5
-dataset as the DAP2 variable name; HDF5 group can be mapped to DAP2
-under the condition that the file structure is a tree structure.
-
-|HDF-EOS5 grid w/1-D projection |Grid |The latitude and longitude are
-encoded according to CF
-
-|HDF-EOS5 grid w/2-D projection |Arrays |Map data variables to DAP2
-Arrays; generate DAP2 Arrays for latitude and longitude (following CF);
-add a _coordinates_ attribute for each variable providing the names of
-the coordinate variables (following CF).
-
-|HDF-EOS5 Swath |Arrays |Follow the same prescription as with HDF-EOS5
-2-D grids
 |=======================================================================
+
+=== BES Keys
+
+[insert later]
+=== DMR Example
+
+A __ncdump__ header of a netCDF-4 file __nc4_group_atomic.h5__ : 
+----
+netcdf nc4_group_atomic {
+dimensions:
+	dim1 = 2 ;
+variables:
+	int dim1(dim1) ;
+	float d1(dim1) ;
+
+group: g1 {
+  dimensions:
+  	dim2 = 3 ;
+  variables:
+  	int dim2(dim2) ;
+  	float d2(dim1, dim2) ;
+  } // group g1
+}
+----
+
+The corresponding DMR:
+
+----
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Dataset xmlns="http://xml.opendap.org/ns/DAP/4.0#" dapVersion="4.0" dmrVersion="1.0" name="nc4_group_atomic.h5">
+    <Dimension name="dim1" size="2"/>
+    <Int32 name="dim1">
+        <Dim name="/dim1"/>
+    </Int32>
+    <Float32 name="d1">
+        <Dim name="/dim1"/>
+    </Float32>
+    <Group name="g1">
+        <Dimension name="dim2" size="3"/>
+        <Int32 name="dim2">
+            <Dim name="/g1/dim2"/>
+        </Int32>
+        <Float32 name="d2">
+            <Dim name="/dim1"/>
+            <Dim name="/g1/dim2"/>
+        </Float32>
+    </Group>
+</Dataset>
+----
+
+Note: Both the dimension names and the dimension sizes in the original netCDF-4 files are kept as well as the group hierarchy. 
+
+== Default Option for DAP2
+
+=== Name
+Same as section 5.1. 
+
+=== Datatype
+. **HDF5 Datatype to DAP2 for default option**
+[width="100%",cols="30%,30%,40%",options="header",]
+|=======================================================================
+|HDF5 data type |DAP4 data name |Notes
+|8-bit unsigned integer |Byte |
+
+|8-bit signed integer |Int16 | DAP2 doesn't have 8-bit signed integer type, so it maps to 16-bit integer.
+
+|16-bit unsigned integer |UInt16 |
+
+|16-bit signed integer |Int16 |
+
+|32-bit unsigned integer |UInt32 |
+
+|32-bit signed integer |Int32 |
+
+|64-bit unsigned integer |N/A |DAP2 doesn't support 64-bit integer type.
+
+|64-bit signed integer |N/A |
+
+|32-bit floating point |Float32 |
+
+|64-bit floating point |Float64 |
+
+|String |String |
+
+|Object/region reference |URL |
+
+|Compound |Structure |HDF5 compound variable can be mapped to DAP2 under the
+condition that the base members (excluding object/region references) of
+compound can be mapped to DAP2.
+
+|Other datatypes |N/A | The handler ignores the mapping of the following datatypes: HDF5 variable length(excluding variable length string), enum,opaque, bitfield and time. |
+
+|=======================================================================
+
+=== BES Keys
+
+
+=== DDS and DAS Examples
+
+
+The __h5ls__ header of the HDF5 file __d_group.h5__ : 
+----
+/                        Group
+/a                       Group
+/a/b                     Group
+/a/b/c                   Group
+
+----
+
+Since this file doesn't have variables so the DDS is empty. 
+The corresponding DAS:
+----
+Attributes {
+    HDF5_ROOT_GROUP {
+        a {
+            b {
+                c {
+                }
+            }
+        }
+    }
+    /a/ {
+        String HDF5_OBJ_FULLPATH "/a/";
+    }
+    /a/b/ {
+        String HDF5_OBJ_FULLPATH "/a/b/";
+    }
+    /a/b/c/ {
+        String HDF5_OBJ_FULLPATH "/a/b/c/";
+    }
+}
+
+----
+The attribute container __HDF5_ROOT_GROUP__ preserves the information of the group hierarchy. 
+
+Another example show an HDF5 dataset with HDF5 compound datatype. The __h5dump__ header of the HDF5 file __d_compound.h5__:
+----
+HDF5 "d_compound.h5" {
+GROUP "/" {
+   DATASET "compound" {
+      DATATYPE  H5T_COMPOUND {
+         H5T_STD_I32BE "Serial number";
+         H5T_STRING {
+            STRSIZE H5T_VARIABLE;
+            STRPAD H5T_STR_NULLTERM;
+            CSET H5T_CSET_ASCII;
+            CTYPE H5T_C_S1;
+         } "Location";
+         H5T_IEEE_F64BE "Temperature (F)";
+         H5T_IEEE_F64BE "Pressure (inHg)";
+      }
+      DATASPACE  SIMPLE { ( 4 ) / ( 4 ) }
+      ATTRIBUTE "value" {
+         DATATYPE  H5T_COMPOUND {
+            H5T_STD_I32BE "Serial number";
+            H5T_STRING {
+               STRSIZE H5T_VARIABLE;
+               STRPAD H5T_STR_NULLTERM;
+               CSET H5T_CSET_ASCII;
+               CTYPE H5T_C_S1;
+            } "Location";
+            H5T_IEEE_F64BE "Temperature (F)";
+            H5T_IEEE_F64BE "Pressure (inHg)";
+         }
+         DATASPACE  SIMPLE { ( 4 ) / ( 4 ) }
+      }
+   }
+}
+----
+
+The corresponding DDS is:
+----
+Dataset {
+    Structure {
+        Int32 Serial%20number;
+        String Location;
+        Float64 Temperature%20%28F%29;
+        Float64 Pressure%20%28inHg%29;
+    } /compound[4];
+} d_compound.h5;
+----
+
+Note the HDF5 compound variable array __/compound__ maps to DAP's array of Structure. The special characters inside the member names of the compound datatype are changed according to Section 6.1.
+
+== BES Keys
+
+
+=== Keys for all Options
+
+===	CF options
+=== Default values
+This is set  in Hyrax 1.16.5. 
+
+
+
+== Limitations
+
+CF: 
+
+o   For DAP2, generally the mappings of 64-bit integer, time, enum, bitfield, 
+        opaque, compound, array, and reference types are not supported. 
+        The HDF5 variables or attributes with the above datatypes were ignored. 
+     For DAP4, the mapping of HDF5 64-bit integer datatype is supported. But the other datatypes are still unsupported.
+        
+        o HDF5 files containing cyclic groups are not supported. 
+        If such files are encountered, the handler hangs with infinite loops.
+
+        o The handler ignores soft links, external links and comments. 
+        
+
+Default option:
+
+o	No support for HDF5 files that have a '.' in a group/dataset
+	  name.
+
+	o For DAP2 responses, the mappings of HDF5 64-bit integer, time, enum, bitfield, and opaque datatypes are not supported. For DAP4 responses, the mapping of HDF5 64-bit integer is supported. The other datatypes are not supported.
+
+The HDF5 files cyclic groups are not supported. The handler supports the mapping of soft links but not external links.
+
+
+	
+
+== Misc.
+
+=== NASA Products supported and tested by the CF option of the Handler
+
+* HDF-EOS5 products: HIRDLS, MLS, TES, OMI, MOPITT, LANCE AMSR_2, VIIRS, MEaSURES GSSTF
+* netCDF-4/HDF5 : TROP-OMI, AirMSPI, OMPS-NPP,  Atctas-CAR, many MEaSURES, Ocean color,GHRSST, ICESAT-2 ATL/Mable/GLAH 
+* HDF5: SMAP, GPM, OCO2/ACOS/GOSAT, AirMSPI, Aquarius 
+
+Note: the HDF5 handler is supposed to support any netCDF-4/HDF5 products and HDF-EOS5 products. The above just lists the data products the handler explicitly tests. 
+
+
+===	Support netCDF-4  products
+site.conf or change or add the file name suffix to .h5. like foo.nc4 to foo.h5 foo.nc4 to foo.nc4.h5. 
+netCDF handler doesn’t support group. Arrays with shared dimensions are mapped to grid. 
+
+===	Ignored object check
+
+
+== Further Reading 
+
+* HDF5 OPeNDAP handler web page at hdfeos.org https://hdfeos.org/software/hdf5_handler.php
+
+The web page includes pointers to the demo page to access NASA HDF5 products as well as other older but useful documents. 
+
+
+
