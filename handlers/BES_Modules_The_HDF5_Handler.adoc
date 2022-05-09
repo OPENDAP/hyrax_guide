@@ -448,7 +448,7 @@ Note: Both the dimension names and the dimension sizes in the original netCDF-4 
 == Default Option for DAP2
 
 === Default Option: DAP2 Name 
-Same as section 5.1<<Default Option: DAP4 Name>>. 
+Same as section 5.1 <<Default Option: DAP4 Name>>. 
 
 === Default Option: DAP2 Datatype 
 . **HDF5 Datatype to DAP2 for Default Option**
@@ -669,7 +669,7 @@ We find that occassionally that the datatype of attribute _FillValue is differen
  wrong fillvalue until the data producer corrects it in the new release.
  By default, this key is set to true. If the fillvalue is out of the range of the variable type, 
  DAP service stops. 
- **To ignore the fillvalue check**, set this key to false. The service runs normally but
+ To ignore the fillvalue check, set this key to false. The service runs normally but
  the _Fillvalue of some variables may be wrong. netCDF-Java clients may not access the data correctly.
 
 H5.EnableDAP4Coverage::
@@ -824,25 +824,24 @@ H5.EnableEOSGeoCacheFile=false
 == Limitations
 
 CF: 
+// Create a table to summarize this
 
-o   For DAP2, generally the mappings of 64-bit integer, time, enum, bitfield, 
+o For DAP2, generally the mappings of 64-bit integer, time, enum, bitfield, 
         opaque, compound, array, and reference types are not supported. 
-        The HDF5 variables or attributes with the above datatypes were ignored. 
+        The HDF5 variables or attributes with the above datatypes are ignored. 
 	
-o	 For DAP4, the mapping of HDF5 64-bit integer datatype is supported. But the other datatypes are still unsupported.
+o  For DAP4, the mapping of HDF5 64-bit integer datatype is supported. But the other datatypes are still unsupported.
         
-        o HDF5 files containing cyclic groups are not supported. 
-        If such files are encountered, the handler hangs with infinite loops.
+o HDF5 files containing cyclic groups are not supported. If such files are encountered, the handler hangs with infinite loops.
 
-        o The handler ignores soft links, external links and comments. 
+o The handler ignores soft links, external links and comments. 
         
 
 Default option:
 
-o	No support for HDF5 files that have a '.' in a group/dataset
-	  name.
+o	No support for HDF5 files that have a '.' in a group/dataset name.
 
-	o For DAP2 responses, the mappings of HDF5 64-bit integer, time, enum, bitfield, and opaque datatypes are not supported. For DAP4 responses, the mapping of HDF5 64-bit integer is supported. The other datatypes are not supported.
+o For DAP2 responses, the mappings of HDF5 64-bit integer, time, enum, bitfield, and opaque datatypes are not supported. For DAP4 responses, the mapping of HDF5 64-bit integer is supported. The other datatypes are not supported.
 
 The HDF5 files cyclic groups are not supported. The handler supports the mapping of soft links but not external links.
 
@@ -853,9 +852,9 @@ DAP4 coverage is not supported.
 
 === NASA Products supported and tested by the CF option of the Handler
 
-* HDF-EOS5 products: HIRDLS, MLS, TES, OMI, MOPITT, LANCE AMSR_2, VIIRS, MEaSURES GSSTF
-* netCDF-4/HDF5 : TROP-OMI, AirMSPI, OMPS-NPP,  Atctas-CAR, many MEaSURES, Ocean color,GHRSST, ICESAT-2 ATL/Mable/GLAH 
-* HDF5: SMAP, GPM, OCO2/ACOS/GOSAT, AirMSPI, Aquarius 
+* HDF-EOS5 products:: HIRDLS, MLS, TES, OMI, MOPITT, LANCE AMSR_2, VIIRS, MEaSURES GSSTF
+* netCDF-4/HDF5 :: TROP-OMI, AirMSPI, OMPS-NPP,  Atctas-CAR, many MEaSURES, Ocean color,GHRSST, ICESAT-2 ATL/Mable/GLAH 
+* HDF5:: SMAP, GPM, OCO2/ACOS/GOSAT, AirMSPI, Aquarius 
 
 Note: the HDF5 handler is supposed to support any netCDF-4/HDF5 products and HDF-EOS5 products. The above just lists the data products the handler explicitly tests. 
 
