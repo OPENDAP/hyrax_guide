@@ -852,9 +852,9 @@ DAP4 coverage is not supported.
 
 === NASA Products supported and tested by the CF option of the Handler
 
-* HDF-EOS5 products:: HIRDLS, MLS, TES, OMI, MOPITT, LANCE AMSR_2, VIIRS, MEaSURES GSSTF
-* netCDF-4/HDF5 :: TROP-OMI, AirMSPI, OMPS-NPP,  Atctas-CAR, many MEaSURES, Ocean color,GHRSST, ICESAT-2 ATL/Mable/GLAH 
-* HDF5:: SMAP, GPM, OCO2/ACOS/GOSAT, AirMSPI, Aquarius 
+* HDF-EOS5 products: HIRDLS, MLS, TES, OMI, MOPITT, LANCE AMSR_2, VIIRS, MEaSURES GSSTF
+* netCDF-4/HDF5: TROP-OMI, AirMSPI, OMPS-NPP,  Atctas-CAR, many MEaSURES, Ocean color,GHRSST, ICESAT-2 ATL/Mable/GLAH 
+* HDF5: SMAP, GPM, OCO2/ACOS/GOSAT, AirMSPI, Aquarius 
 
 Note: the HDF5 handler is supposed to support any netCDF-4/HDF5 products and HDF-EOS5 products. The above just lists the data products the handler explicitly tests. 
 
