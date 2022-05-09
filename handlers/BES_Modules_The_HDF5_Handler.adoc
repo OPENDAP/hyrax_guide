@@ -116,14 +116,14 @@ The following table lists the mapping from HDF5 to DAP4 for the CF option.
 === CF BES Keys for DAP4
 
 The following two BES keys must be set to true to carry out the mapping of HDF5 to DAP4. In the current release,
-the handler is set to run these keys as true even if they are not set to true. For detailed description of these two keys, check section 7.1 and section 7.2. 
+the handler is set to run these keys as true even if they are not set to true. For detailed description of these two keys, check section 7.1 <<Keys for Both Options>> and section 7.2 <<Keys for CF Option>>. 
 
 ----
 H5.EnableCF=true
 H5.EnableCFDMR=true
 ----
 
-The following BES keys are also important either for performance or for correctly representing the coordinate variables. Hyrax service customers should carefully check the descriptions of these key values before changing them. The detailed description at section 7.1 and 7.2. As software improves, some settings may get changed. So frequently check the latest https://github.com/OPENDAP/bes/blob/master/modules/hdf5_handler/README[README] and comments at the HDF5 handler configuration file https://github.com/OPENDAP/bes/blob/master/modules/hdf5_handler/h5.conf.in[h5.conf.in] at github. 
+The following BES keys are also important either for performance or for correctly representing the coordinate variables. Hyrax service customers should carefully check the descriptions of these key values before changing them. The detailed description at section 7.1 <<Keys for Both Options>> and 7.2 <<Keys for CF Option>>. As software improves, some settings may get changed. So frequently check the latest https://github.com/OPENDAP/bes/blob/master/modules/hdf5_handler/README[README] and comments at the HDF5 handler configuration file https://github.com/OPENDAP/bes/blob/master/modules/hdf5_handler/h5.conf.in[h5.conf.in] at github. 
 
 ----
 H5.EnableDropLongString=true
@@ -134,7 +134,7 @@ H5.MetaDataMemCacheEntries=1000
 H5.EnableEOSGeoCacheFile=false
 ----
 
-More BES keys and their descriptions can also be found at section 7.2.
+More BES keys and their descriptions can also be found at section 7.2 <<Keys for CF Option>>.
 
 === CF DMR Example for DAP4
 
@@ -224,7 +224,7 @@ Note: The CF option retrieves the values of the coordinate variables and adds th
 <Map name="/lat"/>
 <Map name="/lon"/>
 ----
-under the variable __temperature__. This reprsents the DAP4 coverage. The original full path of variable __temperature__ can be found from the attribute __fullnamepath__ of the variable __temperature__ as
+under the variable __temperature__. This represents the DAP4 coverage. The original full path of variable __temperature__ can be found from the attribute __fullnamepath__ of the variable __temperature__ as
 ----
 <Attribute name="fullnamepath" type="String">
     <Value>/HDFEOS/GRIDS/GeoGrid/Data Fields/temperature</Value>
@@ -275,8 +275,7 @@ The handler ignores the mapping of the following datatypes: HDF5 compound, varia
 |=======================================================================
 === CF BES Keys for DAP2
 
-Except that BES Key --H5.EnableCFDMR-- doesn't have effect on the DAP2 mapping, the other BES key information is the same as section 3.3 <<CF BES Keys for DAP4>>.
-
+Except that BES Key __H5.EnableCFDMR__ doesn't have effect on the DAP2 mapping, the other BES key information is the same as section 3.3 <<CF BES Keys for DAP4>>.
 
 
 === CF DDS and DAS Examples for DAP2
@@ -330,7 +329,7 @@ Attributes {
     }
 }
 ----
-The DDS and DAS shown in this example are equialvent to the DMR output in section 3.4 <<CF DMR Example for DAP4>> except the DMR includes the DAP4 coverage information. However, if there is a signed 8-bit integer or 64-bit integer variable in the HDF5 file, DAP4 DMR will show the exact datatype while DAP2 DDS maps the signed 8-bit integer to 16-bit integer and ignores the mapping of 64-bit integer.
+The DDS and DAS shown in this example are equialvent to the DMR output in section 3.4 <<CF DMR Example for DAP4>> except that the DMR includes the DAP4 coverage information. However, if there is a signed 8-bit integer or 64-bit integer variable in the HDF5 file, DAP4 DMR will show the exact datatype while DAP2 DDS maps the signed 8-bit integer to 16-bit integer and ignores the mapping of 64-bit integer.
 
 
 == Default Option for DAP4 
@@ -349,7 +348,7 @@ that does not translate the identifiers back to their original form).
 The following table lists the mapping from HDF5 to DAP4 for the default option.
 
 . **HDF5 Datatype to DAP4 for Default Option*
-[width="100%",cols="30%,30%,40%",options="header",]
+[width="100%",cols="33%,33%,34%",options="header",]
 |=======================================================================
 |HDF5 data type |DAP4 data name |Notes
 |8-bit unsigned integer |Byte |
@@ -443,7 +442,7 @@ Note: Both the dimension names and the dimension sizes in the original netCDF-4 
 == Default Option for DAP2
 
 === Default Option: DAP2 Name 
-Same as section 5.1. 
+Same as section 5.1<<Default Option: DAP4 Name>>. 
 
 === Default Option: DAP2 Datatype 
 . **HDF5 Datatype to DAP2 for Default Option**
@@ -483,7 +482,7 @@ compound can be mapped to DAP2.
 |=======================================================================
 
 === Default Option: DAP4 BES Keys
-The following key must be set as follows to obtain the DAP2 output for the default option. Note netCDF-4-like  dimensions will NOT be handled according to the netCDF data model. 
+The following key must be set as follows to obtain the DAP2 output for the default option. Note netCDF-4-like dimensions will NOT be handled according to the netCDF data model. 
 
 ----
 H5.EnableCF=false
@@ -578,14 +577,14 @@ Note the HDF5 compound variable array __/compound__ maps to DAP's array of Struc
 == BES Keys
 In the course of supporting easy access of NASA HDF5/HDF-EOS5/netCDF4 files via Hyrax, various performance and other optimization tuning options are provided to hyrax service customers via BES keys. In this section, the descriptions for critial BES keys are provided. For the comprehensive BES key description, check the HDF5 handler configuration file https://github.com/OPENDAP/bes/blob/master/modules/hdf5_handler/h5.conf.in[h5.conf.in] at github.
 
-=== Keys for both Options
+=== Keys for Both Options
 
 H5.EnableCF::
  
-  When this key is set to *true* or doesn't show up, The handler handle the HDF5 file by following the CF conventions. The handler is especially tuned to handle NASA HDF5/netCDF4/HDF-EOS5 data products. For the tested NASA products, see <<NASA Products supported and tested by the CF option of the Handler>>. 
+  When this key is set to __true__ or doesn't show up, The handler handle the HDF5 file by following the CF conventions. The handler is especially tuned to handle NASA HDF5/netCDF4/HDF-EOS5 data products. For the tested NASA products, see <<NASA Products supported and tested by the CF option of the Handler>>. 
   The key benefit of this option is to allow OPeNDAP visualization clients to display remote data seamlessly. Please visit
   http://hdfeos.org/software/hdf5_handler/doc/cf.php[here] for details.
-  When this key is set to *false*, the handler handle the HDF5 file by following generic mapping from HDF5 to DAP. If the HDF5 file is a netCDF-4/HDF5 file or follows the netCDF data model, the handler maps the HDF5 to follow the netCDF data model. 
+  When this key is set to __false__, the handler handle the HDF5 file by following generic mapping from HDF5 to DAP. If the HDF5 file is a netCDF-4/HDF5 file or follows the netCDF data model and the DAP4 DMR response is requested, the handler can map the HDF5 to DAP4 by following the netCDF data model. 
   
 H5.MetaDataMemCacheEntries::
 Cache the DDS,DAS and DMR in the memory, the cache will start purging its objects
@@ -759,16 +758,20 @@ H5.EnableDiskDataCache::
   The main concern here is that users may not want to cache all variables 
   either because the disk limitations or the performance gain is less optimal for some variables.
   These BES keys will help mitigate these issues. 
+  
   If H5.DiskCacheComp is true, only compressed HDF5 variables are cached. If compressed variables
   are cached, there is no data decompression time. 
   We further provide more BES keys for users to fine tune according to their specific patterns.
+  
   If H5.DiskCacheFloatOnlyComp is set to be true, only floating-point variables are cached.
+  
   If H5.DiskCacheCompThreshold is set, it should be a floating-point number that is greater than 1. 
   The handler will compare the compression ratio of a variable with this number, 
   only when the compression ratio is smaller than this number, the variable is cached.
   In other words, hard compressed variable usually takes longer decompression time.
   So using disk cache may greatly reduce the processing time.
-   H5.DiskCacheCompVarSize must be a positive integer number. 
+  
+  H5.DiskCacheCompVarSize must be a positive integer number. 
   It represents the variable size in kilobytes. 
   Only the (uncompressed) variable size that is greater than this VarSize, the variable will be cached.
   For example, if this number is 100, only the size of variable that is >100K will be cached.
@@ -819,7 +822,8 @@ CF:
 o   For DAP2, generally the mappings of 64-bit integer, time, enum, bitfield, 
         opaque, compound, array, and reference types are not supported. 
         The HDF5 variables or attributes with the above datatypes were ignored. 
-     For DAP4, the mapping of HDF5 64-bit integer datatype is supported. But the other datatypes are still unsupported.
+	
+o	 For DAP4, the mapping of HDF5 64-bit integer datatype is supported. But the other datatypes are still unsupported.
         
         o HDF5 files containing cyclic groups are not supported. 
         If such files are encountered, the handler hangs with infinite loops.
