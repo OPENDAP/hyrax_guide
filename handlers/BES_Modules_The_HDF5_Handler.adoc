@@ -28,7 +28,7 @@ By definition, the CF option means the handler will follow the https://cfconvent
 Key features for the CF option:
 
 * Follow the CF naming conventions, only alphanumeric characters and underscore (‘`_`’) are allowed for a variable or attribute names. For any character not allowed by CF name conventions, change that character to underscore (‘`_`’).
-* There is no group hierarchy. HDF5 groups will be flattened. In general, variable names for any non-HDF-EOS5 files should have their group path prefixed before the HDF5 dataset names. The first “`/`” will be stripped off. For HDF-EOS5 files, check section 3.1. An example: HDF5 variable name _velocity.u_ under group _geo-location_  becomes the _geo_location_velocity_u_ in the DAP output. 
+* There is no group hierarchy. HDF5 groups will be flattened. In general, variable names for any non-HDF-EOS5 files should have their group path prefixed before the HDF5 dataset names. The first “`/`” will be stripped off. For HDF-EOS5 files, check section 3.1 <<CF Name for DAP4>>. An example: HDF5 variable name _velocity.u_ under group _geo-location_  becomes the _geo_location_velocity_u_ in the DAP output. 
 * The handler follows the CF conventions to translate the dimensions and coordinate variables for 
 HDF-EOS5, netCDF-4 and some NASA HDF5 products. 
 * HDF5 integer, floating-point and string datatypes are one-to-one mapped to DAP4. Other datatypes are ignored. 
@@ -48,7 +48,7 @@ DDS and DAS examples can be found in section 4.4 <<CF DDS and DAS Examples for D
 
 To use this option, _H5.EnableCF_ must be set to false in _h5.conf_. 
 
-IMPORTANT: To obtain DAP4 output from the default option: _H5.EnableCF_ must be set to **false** in _h5.conf_. 
+IMPORTANT: To obtain DAP4 output from the default option: _H5.EnableCF_ must be set to __false__ in _h5.conf_. 
 
 This option tries to map HDF5 to DAP4 in a general way. Unlike the CF option, it is not tuned to support the NASA data products. However, instead of flattening the group hierarchy, the HDF5’s group hierarchy are kept by mapping HDF5 groups to DAP4 groups.
 
@@ -62,7 +62,7 @@ In addition to mapping integer, string and floating-point data to DAP4, HDF5 com
 
 To use this option, _H5.EnableCF_ must be set to false in _h5.conf_. The BES key _H5.DefaultHandleDimension_ has no effect for this option. 
 
-IMPORTANT: To obtain DAP2 output from the default option: _H5.EnableCF_ must be set to **false** in _h5.conf_. 
+IMPORTANT: To obtain DAP2 output from the default option: _H5.EnableCF_ must be set to _false_ in _h5.conf_. 
 
 HDF5 signed 8-bit integer maps to signed 16-bit integer. 64-bit integer mapping is ignored. 
 
@@ -74,7 +74,7 @@ The HDF5 group hierarchy information is kept in a special DAS container _HDF_ROO
 === CF Name for DAP4
 Other than the general name conventions described in section 2.1 <<CF Option for DAP4>>, variable names of an HDF-EOS5 multi-grid/multi-swath/multi-zonal-average file have the corresponding grid/swath/zonal-average names prefixed before the field names. Variable names of an HDF-EOS5 single grid/swath/zonal-average just use the corresponding field names. The grid/swath/zonal-average names are ignored. 
 
-The original name and the full path of an HDF5 variable are preserved as DAP4 attributes.  A BES key can be used to turn on/off these attributes. See section 7 for more information. Furthermore, For the HDF-EOS5 products,  the original dimension names associated with the variable are also preserved as a DAP4 attribute. This is because the HDF-EOS5 provides the dimension names and those dimension names may be changed in DAP4 output in order to follow the CF conventions. 
+The original name and the full path of an HDF5 variable are preserved as DAP4 attributes.  A BES key can be used to turn on/off these attributes. See section 7 <<BES Keys>> for more information. Furthermore, For the HDF-EOS5 products,  the original dimension names associated with the variable are also preserved as a DAP4 attribute. This is because the HDF-EOS5 provides the dimension names and those dimension names may be changed in DAP4 output in order to follow the CF conventions. 
 
 Although rarely in NASA HDF5 products, by following the CF name conventions, it is possible that the DAP4 variables mapped from HDF5 may share the same name and then causes an error.  To avoid this issue, the handler implements a feature to avoid this kind of name clashings. A suffix like '`_1`' is added to the the duplicated variable name. Since this rarely happens and keeping track of the name status may be expensive, a BES key is used for Hyrax service customers to turn on/off this feature. 
 
@@ -83,7 +83,7 @@ Although rarely in NASA HDF5 products, by following the CF name conventions, it 
 The following table lists the mapping from HDF5 to DAP4 for the CF option. 
 
 . **HDF5 Datatype to DAP4 for CF Option**
-[width="100%",cols="30%,30%,40%",options="header",]
+[width="100%",cols="33%,33%,34%",options="header",]
 |=======================================================================
 |HDF5 data type |DAP4 data name |Notes
 |8-bit unsigned integer |Byte |
