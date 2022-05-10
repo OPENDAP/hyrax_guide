@@ -28,12 +28,12 @@ By definition, the CF option means the handler will follow the https://cfconvent
 Key features for the CF option:
 
 * Follow the CF naming conventions, only alphanumeric characters and underscore ("`_`") are allowed for a variable or attribute names. For any character not allowed by CF name conventions, change that character to underscore ("`_`").
-* There is no group hierarchy. HDF5 groups will be flattened. In general, variable names for any non-HDF-EOS5 files should have their group path prefixed before the HDF5 variable names. The first “`/`” will be stripped off. For HDF-EOS5 files, check section 3.1 <<CF Name for DAP4>>. 
+* There is no group hierarchy. HDF5 groups will be flattened. In general, a variable name for any non-HDF-EOS5 file should have its group path prefixed before it. The first “`/`” of the final name will be stripped off. For the HDF-EOS5 variable name rule, check section 3.1 <<CF Name for DAP4>>. 
 +
 ----
 An example:
-HDF5 variable name _velocity.u_ under group _geo-location_  
-becomes the _geo_location_velocity_u_ in the DAP output. 
+HDF5 variable name __velocity.u__ under group __geo-location__  
+becomes the __geo_location_velocity_u__ in the DAP output. 
 ----
 * The handler follows the CF conventions to translate the dimensions and coordinate variables for 
 HDF-EOS5, netCDF-4 and some NASA HDF5 products. 
