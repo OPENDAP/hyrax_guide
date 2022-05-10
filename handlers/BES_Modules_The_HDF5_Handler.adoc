@@ -32,8 +32,8 @@ Key features for the CF option:
 +
 ----
 An example:
-HDF5 variable name __velocity.u__ under group __geo-location__  
-becomes the __geo_location_velocity_u__ in the DAP output. 
+HDF5 variable name velocity.u under group geo-location  
+becomes the geo_location_velocity_u in the DAP output. 
 ----
 * The handler follows the CF conventions to translate the dimensions and coordinate variables for 
 HDF-EOS5, netCDF-4 and some NASA HDF5 products. 
@@ -60,7 +60,7 @@ This option tries to map HDF5 to DAP4 in a general way. Unlike the CF option, it
 
 Moreover, when another BES key _H5.DefaultHandleDimension_ is also set to _true_ or doesn't show up, the HDF5 handler seamlessly translates the dimension names of netCDF-4 or netCDF-4-like files to DAP4 although the HDF5 data model doesn't support netCDF-4 shared dimensions. If the original netCDF-4 or netCDF-4-like files are generated to follow the CF conventions, the DAP4 output should also follow the CF as well as keeping the HDF5’s group hierarchy. 
 
-// TODO: may add a panoply example at hdfeos.org.
+// Later: may add a panoply example at hdfeos.org.
 
 In addition to mapping integer, string and floating-point data to DAP4, HDF5 compound datatype, object reference and regional reference are also mapped to DAP4.  A DMR example can be found in section 5.4 <<Default Option: DMR Example>>.
 
@@ -82,7 +82,7 @@ Other than the general name conventions described in section 2.1 <<CF Option for
 
 The original name and the full path of an HDF5 variable are preserved as DAP4 attributes.  A BES key can be used to turn on/off these attributes. See section 7 <<BES Keys>> for more information. Furthermore, For the HDF-EOS5 products,  the original dimension names associated with the variable are also preserved as a DAP4 attribute. This is because the HDF-EOS5 provides the dimension names and those dimension names may be changed in DAP4 output in order to follow the CF conventions. 
 
-Although rarely in NASA HDF5 products, by following the CF name conventions, it is possible that the DAP4 variables mapped from HDF5 may share the same name and then causes an error.  To avoid this issue, the handler implements a feature to avoid this kind of name clashing. A suffix like '`_1`' is added to the the duplicated variable name. Since this rarely happens and keeping track of the name status may be expensive, a BES key is used for Hyrax service customers to turn on/off this feature. 
+Although rarely happened in NASA HDF5 products, by following the CF name conventions, it is possible that the DAP4 variables mapped from HDF5 may share the same name and then causes an error.  To avoid this issue, the handler implements a feature to avoid this kind of name clashing. A suffix like "`_1`" is added to the the duplicated variable name. Since this rarely happens and keeping track of the name status may be expensive, a BES key is used for Hyrax service customers to turn on/off this feature. 
 
 === CF Datatype for DAP4
 
@@ -121,7 +121,7 @@ The following table lists the mapping from HDF5 to DAP4 for the CF option.
 
 === CF BES Keys for DAP4
 
-The following two BES keys must be set to _true_ to carry out the mapping of HDF5 to DAP4. In the current release,
+The following two BES keys should be set to _true_ to carry out the mapping of HDF5 to DAP4. In the current release,
 the handler is set to run these keys as _true_ even if these two keys are omitted. For detailed description of these two keys, check section 7.1 <<Keys for Both Options>> and section 7.2 <<Keys for CF Option>>. 
 
 ----
@@ -237,7 +237,7 @@ under the variable __temperature__. This represents the DAP4 coverage. The origi
 </Attribute>
 ----
 
-HDF5 group information maps to attribute container such as:
+HDF5 group information maps to attribute containers such as:
 ----
 <Attribute name="HDFEOS" type="Container"/>
 ----
@@ -281,12 +281,12 @@ The handler ignores the mapping of the following datatypes: HDF5 compound, varia
 |=======================================================================
 === CF BES Keys for DAP2
 
-Except that BES Key __H5.EnableCFDMR__ doesn't have effect on the DAP2 mapping, the other BES key information is the same as section 3.3 <<CF BES Keys for DAP4>>.
+Except that BES Key __H5.EnableCFDMR__ doesn't have effect on the DAP2 mapping, the other BES key information is the same as the information described in section 3.3 <<CF BES Keys for DAP4>>.
 
 
 === CF DDS and DAS Examples for DAP2
 
-The layout of the HDF5 file is the same as section 3.4 <<CF DMR Example for DAP4>>. 
+The layout of the HDF5 file is the same as the layout described in section 3.4 <<CF DMR Example for DAP4>>. 
 
 The DDS is:
 ----
@@ -506,7 +506,7 @@ The __h5ls__ header of the HDF5 file __d_group.h5__ :
 ----
 
 Since this file doesn't have variables so the DDS is empty. 
-The corresponding DAS:
+The corresponding DAS is:
 ----
 Attributes {
     HDF5_ROOT_GROUP {
@@ -531,7 +531,7 @@ Attributes {
 ----
 The attribute container __HDF5_ROOT_GROUP__ preserves the information of the group hierarchy. 
 
-Another example show an HDF5 dataset with HDF5 compound datatype. The __h5dump__ header of the HDF5 file __d_compound.h5__:
+Another example show an HDF5 dataset with HDF5 compound datatype. The __h5dump__ header of the HDF5 file __d_compound.h5__ is:
 ----
 HDF5 "d_compound.h5" {
 GROUP "/" {
@@ -600,13 +600,12 @@ H5.MetaDataMemCacheEntries:::
  * Setting the H5.MetaDataMemCacheEntries to a value greater than
  zero enables caching DDS,DAS and DMR responses in memory. Our performance study shows that, by turning on this key, the DDS,DAS or DMR response time is much faster. 
  * The cache uses a LRU policy for purging old entries. It starts purging its objects after the number of entries exceeds the number defined by this key. 
- * Tune its behavior by changing the value and the H5.CachePurgeLevel value below. Note that
+ * One can tune its behavior by changing this value and the H5.CachePurgeLevel value below. Note that
  this feature is on by default. The default value is 1000. 
 
 H5.CachePurgeLevel:::
 
-   * This key determines how much of the in-memory cache is removed when it is purged. The default value is 0.2. With the default value, it configures the software to remove the oldest 20% of items from the cache. 
-You do not need to edit this to use the cache.  
+* This key determines how much of the in-memory cache is removed when it is purged. The default value is 0.2. With the default value, it configures the software to remove the oldest 20% of items from the cache.  
 
 ===	Keys for CF Option
 
