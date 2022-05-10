@@ -27,7 +27,7 @@ By definition, the CF option means the handler will follow the https://cfconvent
 
 Key features for the CF option:
 
-* Follow the CF naming conventions, only alphanumeric characters and underscore (‘`_`’) are allowed for a variable or attribute names. For any character not allowed by CF name conventions, change that character to underscore (‘`_`’).
+* Follow the CF naming conventions, only alphanumeric characters and underscore ("`_`") are allowed for a variable or attribute names. For any character not allowed by CF name conventions, change that character to underscore ("`_`").
 * There is no group hierarchy. HDF5 groups will be flattened. In general, variable names for any non-HDF-EOS5 files should have their group path prefixed before the HDF5 variable names. The first “`/`” will be stripped off. For HDF-EOS5 files, check section 3.1 <<CF Name for DAP4>>. 
 +
 ----
