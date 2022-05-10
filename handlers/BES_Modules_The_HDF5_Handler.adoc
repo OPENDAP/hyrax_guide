@@ -630,9 +630,9 @@ H5.EnableDropLongString:::
 * We find netCDF java has a string size limit(currently 32767). If an HDF5 string dataset
  has an individual element of which the size is greater than this limit, 
  visualization tools(Panoply etc.) that depend on
- the netCDF Java may not open the HDF5 file. So this key is set to be true to
+ the netCDF Java may not open the HDF5 file. So this key is set to __true__ to
  skip the HDF5 string of which size is greater than 32767. Users should set this
- key to false if that long string information is necessary or visualization clients
+ key to __false__ if that long string information is necessary or visualization clients
  are not used.
 
 * NOTE: 
@@ -668,7 +668,7 @@ H5.EnableFillValueCheck:::
  the data center can have an option to continue the service and may use NcML to patch the 
  wrong fillvalue until the data producer corrects the wrong ___fillvalue__ in the new release.
  **  By default, this key is set to __true__. If the fillvalue is out of the range of the variable type, 
- DAP service issues an error and stops. 
+ Hyrax generates an error and the service stops. 
  ** To ignore the ___fillvalue__ check, set this key to __false__. The service runs normally but
  the ___Fillvalue__ of some variables may be wrong and it will cause issues on the client-side.
 
@@ -676,16 +676,12 @@ H5.EnableDAP4Coverage:::
 * If this key is set to __true__, the handler adds the DAP4 coverage information to the DMR. By default, this key is set to __true__. 
  
  H5.EnableCheckNameClashing:::
- * When this key is set to __true__, the handler will check if there exists name clashing among variables and attributes. If name clashing occurs, the handler tries to resolve the
- name clashing by generating unique names for the clashed ones.
- For NASA HDF5 and HDF-EOS5 products, we don't see any
- name clashings for variables and attributes. In fact,
- unlike HDF4, it is very rare to have name clashing for HDF5.
- So to reduce performance overhead, we set this key to __false__ by default. 
+ * When this key is set to __true__, the handler will check if there exists name clashing among variables and attributes. If name clashing occurs, the handler tries to resolve the name clashing by generating unique names for the clashed ones.
+ For NASA HDF5 and HDF-EOS5 products, we don't see any name clashings for variables and attributes. In fact, unlike HDF4, it is very rare to have name clashing for HDF5. So to reduce performance overhead, we set this key to __false__ by default. 
  Users can set this key to __true__ if it becomes necessary.
  
 H5.NoZeroSizeFullnameAttr:::
-* When this key is set to __true__, the fullnamepath attribute will NOT be added if the HDF5 data storage size is 0. This is necessary to generate correct HDF5 DMRRPP files.
+* When this key is set to __true__, the fullnamepath attribute will NOT be added if the HDF5 variable data storage size is 0. This is necessary to generate correct HDF5 DMRRPP files.
 
 H5.EscapeUTF8Attr:::
 * When this key is set to __true__, the attribute values that use UTF-8 character
@@ -695,7 +691,7 @@ H5.EscapeUTF8Attr:::
 H5.EnableDiskMetaDataCache:::
 * If this key is set to __true__, the DAS will be cached into a file.
  The handler will read DAS from the cached file instead of using the HDF5 library to build since the second time.
-* Since Hyrax 1.15, MetaData Store(MDS) has the similar feature as this key achieves. By default, this key is set to __false__. Users are encouraged to check if turning this key on can improve performance before setting this key __true__.
+* Since Hyrax 1.15, MetaData Store(MDS) has the similar feature as this key can achieve. By default, this key is set to __false__. Users are encouraged to check if turning this key on can improve performance before setting this key __true__.
 
 H5.EnableEOSGeoCacheFile:::
 * When this key is set to __true__, HDF-EOS5 Geolocation data is cached to a file.
@@ -710,26 +706,24 @@ H5.EnableEOSGeoCacheFile:::
  to __true__.
  ** The description of these associated keys are: 
  
- *** H5.Cache.latlon.path -  An existing directory with read and write
- permissions of GeoCache files for the BES process.
+ *** H5.Cache.latlon.path -  This key should provide the full path of an existing directory that grants the  read and write
+ permissions for the generated latitude and longitude cached files.
 
- *** H5.Cache.latlon.prefix - The cache file prefix, it must be given
- for the cache to work.
+ *** H5.Cache.latlon.prefix - This key provides a prefix for the cache file. This is required by BES. 
 
- *** H5.Cache.latlon.size - The size of the cache in megabytes, the
- must must be > 0.
+ *** H5.Cache.latlon.size - This key provides the size of the cache in megabytes, the value must be greater than 0.
  
  *** Example:  
  
   H5.EnableEOSGeoCacheFile=true
   H5.Cache.latlon.path=/tmp/latlon
   H5.Cache.latlon.prefix=l
-  H5.Cache.latlon.size=20000
+  H5.Cache.latlon.size=2000
   
 * NOTE: When HDF-EOS5 level 3 Grid products are served by Hyrax, turning on this feature may
   greatly improve the data access performance. Hyrax service customers should take advantage of
-  this feature is the served data products are HDF-EOS5 level 3. Since several BES Keys are involved 
-  when this feature is turned on, by default this key set to __false__.
+  this feature if the served data products are HDF-EOS5 level 3. Since several BES Keys are involved 
+  when this feature is turned on and it takes effort for service people to set these keys, so by default this key is set to __false__.
   
  
 H5.EnableDiskDataCache:::
@@ -740,14 +734,11 @@ H5.EnableDiskDataCache:::
  is set to __true__.
  The description of these associated keys are:
   
-  ** H5.DiskCacheDataPath - An existing directory with read and write
-  permissions for the BES process.
+  ** H5.DiskCacheDataPath - This key should provide the full path of an existing directory that grants the read and 		write permissions for the generated variable cached files.
  
-  ** H5.DiskCacheFilePrefix - The cache file prefix, it must be given
-  for the cache to work. This requirement comes from the BES.
+  ** H5.DiskCacheFilePrefix - This key provides a prefix for the cache file. This is required by BES. 
 
-  ** H5.DiskCacheSize - The size of the cache in megabytes, the value
-  must must be > 0.
+  ** H5.DiskCacheSize - This key provides the size of the cache in megabytes, the value must be greater than 0.
  
   *** Example:
   
@@ -758,17 +749,17 @@ H5.EnableDiskDataCache:::
 H5.DiskCacheComp:::
   
   * This key and its associated keys provide a way for users to fine tune the data to be cached in the disk. 
-  * NOTE: This key will take effect only when the __H5.EnableDiskDataCache__ key to __true__. 
+  * NOTE: This key will take effect only when the __H5.EnableDiskDataCache__ key is set to __true__. 
   * The motive for this key is that users may not want to cache all variables 
-    either because the disk limitations or the performance gain is less optimal for some variables.
+    either because there is disk limitation or the performance gain is less optimal for some variables.
     This key and the following associated keys will help mitigate these issues. 
   ** If this key is set to __true__, only compressed HDF5 variables are cached. If compressed variables
   are cached, there is no data decompression time when retrieving the data. Therefore, performance may get improved. 
-  ** The following keys are provided to further limit the compressed variables of which the data is cached to the disk. 
+  ** The following keys are provided to further limit the compressed variables of which the data is cached to the disk when the H5.DiskCacheComp is set to __true__.
   *** H5.DiskCacheFloatOnlyComp: If this key is set to __true__, only floating-point compressed variables are cached.
-  *** H5.DiskCacheCompThreshold: The value of this key must be a floating-point number that is greater than 1. 
+  *** H5.DiskCacheCompThreshold: To take advange of this key, the value of this key must be a floating-point number that is greater than 1. 
   **** The handler will compare the compression ratio of a variable with this number, 
-  only when the compression ratio is smaller than this number, the variable is cached.
+  only when the compression ratio is smaller than this number(that is: the variable is hard to compress), the variable is cached.
   In other words, hard compressed variable usually takes longer decompression time.
   So using disk cache may greatly reduce the processing time.
   *** H5.DiskCacheCompVarSize: The value of this key represents the variable size in kilobytes. It must be a positive integer number. 
@@ -778,7 +769,7 @@ H5.DiskCacheComp:::
   
 === Keys for Default Option
 H5.DefaultHandleDimension::
-When this key is set to __true__F, the handler follows the netCDF-4 data model to handle the HDF5 dimensions if possible.
+When this key is set to __true__, the handler follows the netCDF-4 data model to handle the HDF5 dimensions if possible.
 
 === Default BES Key Values
 This is the default setting for BES keys in Hyrax 1.16.5. It means that even without setting any BES key values, the handler will generate either DAP2 or DAP4 output as if these BES key values are set. As the software improves, the default setting may get changed. So check the HDF5 handler configuration file https://github.com/OPENDAP/bes/blob/master/modules/hdf5_handler/h5.conf.in[h5.conf.in] at github. 
@@ -813,7 +804,6 @@ H5.EnableEOSGeoCacheFile=false
 ----
 
 
-
 == Limitations
 
 CF Option: 
@@ -842,14 +832,14 @@ Default option:
 * netCDF-4/HDF5 products
 ** TROP-OMI, AirMSPI, OMPS-NPP,  Arctas-CAR, many MEaSURES, Ocean color,GHRSST, ICESAT-2 ATL/Mable/GLAH 
 * HDF5 products
-** SMAP, GPM, OCO2/ACOS/GOSAT, AirMSPI, Aquarius 
+** SMAP, GPM, OCO2/ACOS/GOSAT, Aquarius 
 
-NOTE: The HDF5 handler is supposed to support any netCDF-4/HDF5 products and HDF-EOS5 products. The above just lists the data products the handler explicitly tests. 
+NOTE: The HDF5 handler should support any netCDF-4/HDF5 products and HDF-EOS5 products. The above just lists the data products that the handler explicitly tests. 
 
 
 ===	Support netCDF-4 products
 
-Unless served by customized service like NASA-Compliant General Application Platform(NGAP), by default the netCDF-4 files with the file name suffix like _.nc_ or _.nc4_ will be served by Hyrax's https://github.com/OPENDAP/hyrax_guide/blob/master/handlers/BES_Modules_The_NetCDF_Handler.adoc[netCDF handler]. Unlike the HDF5 handler, the netCDF4 handler only supports netCDF classic data model. The group hierarchy is ignored and the datatypes not supported by the netCDF classic data model are not ignored. 
+Unless served by customized service like NASA-Compliant General Application Platform(NGAP), by default the netCDF-4 files with the file name suffix like _.nc_ or _.nc4_ will be served by Hyrax's https://github.com/OPENDAP/hyrax_guide/blob/master/handlers/BES_Modules_The_NetCDF_Handler.adoc[netCDF handler]. Unlike the HDF5 handler, the netCDF4 handler only supports netCDF classic data model. The group hierarchy is ignored and the datatypes not supported by the netCDF classic data model are also ignored. 
 
 One way to use the HDF5 handler to serve the netCDF4 files is to change the file name suffix to _.h5_ or to add the file name suffix _.h5_. For example, do the following: 
 ----
