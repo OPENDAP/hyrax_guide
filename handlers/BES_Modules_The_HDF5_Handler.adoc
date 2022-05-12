@@ -834,7 +834,7 @@ Default option:
 NOTE: The HDF5 handler should support any netCDF-4/HDF5 products and HDF-EOS5 products. The above just lists the data products that the handler explicitly tests. 
 
 
-===	Support netCDF-4 products
+===	Supporting netCDF-4 products
 
 Unless served by customized service like NASA-Compliant General Application Platform(NGAP), by default the netCDF-4 files with the file name suffix like _.nc_ or _.nc4_ will be served by Hyrax's https://github.com/OPENDAP/hyrax_guide/blob/master/handlers/BES_Modules_The_NetCDF_Handler.adoc[netCDF handler]. Unlike the HDF5 handler, the netCDF4 handler only supports netCDF classic data model. The group hierarchy is ignored and the datatypes not supported by the netCDF classic data model are also ignored. 
 
@@ -863,6 +863,8 @@ Check the DAS output. It will list the ignored HDF5 objects and attributes when 
 
 IMPORTANT: After checking the ignored HDF5 object and attribute information, make sure to change the CheckIgnoreObj key back to _false_.  **H5.CheckIgnoreObj=false**
 
+=== Aggregation Service and Attribute Modification with NcML handler
+One can modify the HDF5 attributes and aggregation HDF5 variables via https://github.com/OPENDAP/hyrax_guide/blob/master/handlers/BES_Modules_NcML_Module.adoc[the NcML handler] . More information and examples on how to use the NcML handler can be found at http://hdfeos.org/examples/ncml.php and https://hdfeos.org/zoo/hdf5_handler/ncml_opendap.php. 
 
 == Further Reading 
 
