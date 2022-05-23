@@ -10,25 +10,31 @@ HDF5 handler not only supports the general mapping from HDF5 to either DAP2 or D
 
 Four different DAP outputs can be generated via the HDF5 handler. 
 
-Section 2 <<Highlights>> gives the highlights of these options. Sections 3 to 6 provide the detailed information on these four options.
+Section <<Highlights>> gives the highlights of these options. The following lists the section that provides detailed information of the four options that generate DAP outputs. 
 
 * <<CF Option for DAP4>>
 * <<CF Option for DAP2>>
 * <<Default Option for DAP4>>
 * <<Default Option for DAP2>>
 
-The HDF5 handler uses the BES keys for the hyrax data service customers to obtain the customized results and to achieve better performance. Section 7 provides the information for the most useful <<BES Keys>>, especially, section 7.3 lists the <<Default BES Key Values>> in the Hyrax source or RPM distributions. Section 8 <<Limitations>> lists the limitations of the handler at the current release. Section 9 provides the <<Miscellaneous Information>>. 
+
+Readers need to be aware that CF conventions continue evolving and the HDF5 handler doesn't keep updating to make it follow the latest CF conventions. For example, since version 1.8, the CF conventions adds the group component into the conventions. But the <<CF Option for DAP4>> and <<CF Option for DAP2>> don't support the group hierarchy as stated in the CF conventions 1.8 and later. In the course of time, as funding permits, the HDF5 handler may be updated to support newer components in the CF conventions. The current status is that the HDF5 handler tries to follow the CF conventions version 1.7 to enable the CF-friendly visualization clients access NASA HDF5 files seamlessly. Hereafter in this document, the CF option means the HDF5 handler tries to follow the CF conventions version 1.7 to map HDF5 to DAP2 or DAP4. 
+
+IMPORTANT: CF option in this document means to follow CF conventions version 1.7.  
+ 
+
+The HDF5 handler uses the BES keys for the hyrax data service customers to obtain the customized results and to achieve better performance. Section <<BES Keys>> provides the information for the most useful BES keys.  Especially the <<Default BES Key Values>> in the Hyrax source or RPM distributions is listed. Section <<Limitations>> lists the limitations of the handler at the current release. The <<Miscellaneous Information>> is provided at last. 
 
 
 == Highlights
 
 === CF option for DAP4
-By definition, the CF option means the handler will follow the https://cfconventions.org/[CF conventions] to translate HDF5 to DAP. The CF option is set in the Hyrax source and RPM distribution since most NASA data centers uses the CF option. To check if the CF option is used, go to _h5.conf_ and see if the BES key _H5.EnableCF_ is set to _true_.
+By definition, the CF option means the handler will follow the https://cfconventions.org/[CF conventions] to translate HDF5 to DAP. The CF option is set in the Hyrax source and RPM distribution since most NASA data centers uses the CF option.  One can find the default value of the BES key _H5.EnableCF_ is set to _true_ from section <<Default BES Key Values>>. 
 
 Key features for the CF option:
 
 * Following the CF naming conventions, only alphanumeric characters and underscore ("`_`") are allowed for a variable or attribute names. For any character not allowed by CF name conventions, change that character to underscore ("`_`").
-* There is no group hierarchy. HDF5 groups will be flattened. In general, a variable name for any non-HDF-EOS5 file should have its group path prefixed before it. The first “`/`” of the final name will be stripped off. For the HDF-EOS5 variable name rule, check section 3.1 <<CF Name for DAP4>>. 
+* There is no group hierarchy. HDF5 groups will be flattened. In general, a variable name for any non-HDF-EOS5 file should have its group path prefixed before it. The first “`/`” of the final name will be stripped off. For the HDF-EOS5 variable name rule, check section <<CF Name for DAP4>>. 
 +
 ----
 An example:
@@ -37,10 +43,10 @@ becomes the geo_location_velocity_u in the DAP output.
 ----
 * The handler follows the CF conventions to translate the dimensions and coordinate variables for 
 HDF-EOS5, netCDF-4 and some NASA HDF5 products. 
-* HDF5 integer, floating-point and string datatypes are one-to-one mapped to DAP4. Other datatypes are ignored. 
+* HDF5 integer, floating-point and string datatypes are one-to-one mapped to DAP4. Other datatypes are omitted. 
 * DAP4 coverage is supported. 
 
-A DMR example can be found in Section 3.4 <<CF DMR Example for DAP4>>. 
+A DMR example can be found in section <<CF DMR Example for DAP4>>. 
 
 === CF Option for DAP2
 
@@ -48,21 +54,21 @@ The name conventions and dimension/coordinate handling are the same as the DAP4 
 
 However, due to the DAP2 limitation, HDF5 64-bit integer variables and attributes are ignored. Signed 8-bit integer is mapped to 16-bit integer since DAP2 doesn’t support signed 8-bit integer.  The handler doesn’t support DAP2 Grid. Instead, it follows the netCDF data model to use the shared dimensions for variables. 
 
-DDS and DAS examples can be found in section 4.4 <<CF DDS and DAS Examples for DAP2>>.
+DDS and DAS examples can be found in section <<CF DDS and DAS Examples for DAP2>>.
 
 === Default Option for DAP4
 
-To use this option, _H5.EnableCF_ must be set to _false_ in _h5.conf_. 
+To use this option, _H5.EnableCF_ must be set to _false_ in _h5.conf_. One should notice that Hyrax provides a way to customize the configuration with _site.conf_. For more information about _site.conf_, check the document  https://github.com/OPENDAP/hyrax_guide/blob/master/Hyrax_site-conf.adoc[site.conf] of the hyrax user's guide. 
 
-IMPORTANT: To obtain DAP4 output from the default option: _H5.EnableCF_ must be set to __false__ in _h5.conf_. 
+IMPORTANT: To obtain DAP4 output from the default option: _H5.EnableCF_ must be set to __false__ in _h5.conf_ or in _site_conf_.  
 
 This option tries to map HDF5 to DAP4 in a general way. Unlike the CF option, it is not tuned to support the NASA data products. Instead of flattening the group hierarchy, the HDF5’s group hierarchy are kept by mapping HDF5 groups to DAP4 groups.
 
-Moreover, when another BES key _H5.DefaultHandleDimension_ is also set to _true_ or does not show up, the HDF5 handler seamlessly translates the dimension names of netCDF-4 or netCDF-4-like files to DAP4 although the HDF5 data model does not support netCDF-4 shared dimensions. If the original netCDF-4 or netCDF-4-like files are generated to follow the CF conventions, the DAP4 output should also follow the CF as well as keeping the HDF5’s group hierarchy. 
+Moreover, when another BES key _H5.DefaultHandleDimension_ is also set to _true_ or is not present in the configuration file, the HDF5 handler seamlessly translates the dimension names of netCDF-4 or netCDF-4-like files to DAP4 although the HDF5 data model does not support netCDF-4 shared dimensions. If the original netCDF-4 or netCDF-4-like files are generated to follow the CF conventions, the DAP4 output should also follow the CF as well as keeping the HDF5’s group hierarchy. 
 
 // Later: may add a panoply example at hdfeos.org.
 
-In addition to mapping integer, string and floating-point data to DAP4, the HDF5 compound datatype, object references and regional references are also mapped to DAP4.  A DMR example can be found in section 5.4 <<Default Option: DMR Example>>.
+In addition to mapping integer, string and floating-point data to DAP4, the HDF5 compound datatype, object references and regional references are also mapped to DAP4.  A DMR example can be found in section <<Default Option: DMR Example>>.
 
 === Default Option for DAP2
 
@@ -72,14 +78,14 @@ IMPORTANT: To obtain DAP2 output from the default option: _H5.EnableCF_ must be 
 
 HDF5 signed 8-bit integer maps to signed 16-bit integer. 64-bit integer mapping is ignored. 
 
-The HDF5 group hierarchy information is kept in a special DAS container _HDF_ROOT_GROUP_.  The full path of an HDF5 variable is kept as an attribute. DDS and DAS Examples can be found in section 6.4 <<Default Option: DDS and DAS Examples>>. 
+The HDF5 group hierarchy information is kept in a special DAS container _HDF_ROOT_GROUP_.  The full path of an HDF5 variable is kept as an attribute. DDS and DAS Examples can be found in section <<Default Option: DDS and DAS Examples>>. 
 
 == CF Option for DAP4
 
 === CF Name for DAP4
-Other than the general name conventions described in section 2.1 <<CF Option for DAP4>>, variable names of an HDF-EOS5 multi-grid/multi-swath/multi-zonal-average file have the corresponding grid/swath/zonal-average names prefixed before the field names. Variable names of an HDF-EOS5 single grid/swath/zonal-average just use the corresponding field names. The grid/swath/zonal-average names are ignored. 
+Other than the general name conventions described in section <<CF Option for DAP4>>, variable names of an HDF-EOS5 multi-grid/multi-swath/multi-zonal-average file have the corresponding grid/swath/zonal-average names prefixed before the field names. Variable names of an HDF-EOS5 single grid/swath/zonal-average just use the corresponding field names. The grid/swath/zonal-average names are ignored. 
 
-The original name and the full path of an HDF5 variable are preserved as DAP4 attributes.  A BES key can be used to turn on/off these attributes. See section 7 <<BES Keys>> for more information. Furthermore, For the HDF-EOS5 products,  the original dimension names associated with the variable are also preserved as a DAP4 attribute. This is because the HDF-EOS5 provides the dimension names and those dimension names may be changed in DAP4 output in order to follow the CF conventions. 
+The original name and the full path of an HDF5 variable are preserved as DAP4 attributes.  A BES key can be used to turn on/off these attributes. See section <<BES Keys>> for more information. Furthermore, For the HDF-EOS5 products,  the original dimension names associated with the variable are also preserved as a DAP4 attribute. This is because the HDF-EOS5 provides the dimension names and those dimension names may be changed in DAP4 output in order to follow the CF conventions. 
 
 Although it rarely happens in NASA HDF5 products, by following the CF name conventions, it is possible that two or more DAP4 variables mapped from HDF5 may share the same name causing an error.  To avoid this issue, the handler implements a feature to avoid this kind of name clashing. A suffix like "`_1`" is added to the duplicated variable name. Since this rarely happens and keeping track of the name status may be expensive, a BES key is used for Hyrax service customers to turn on/off this feature. 
 
@@ -121,14 +127,14 @@ The following table lists the mapping from HDF5 to DAP4 for the CF option.
 === CF BES Keys for DAP4
 
 The following two BES keys should be set to _true_ to carry out the mapping of HDF5 to DAP4. In the current release,
-the handler is set to run these keys as _true_ even if these two keys are omitted. For detailed description of these two keys, check section 7.1 <<Keys for Both Options>> and section 7.2 <<Keys for CF Option>>. 
+the handler is set to run these keys as _true_ even if these two keys are omitted. For detailed description of these two keys, check section <<Keys for Both Options>> and section <<Keys for CF Option>>. 
 
 ----
 H5.EnableCF=true
 H5.EnableCFDMR=true
 ----
 
-The following BES keys are also important either for performance or for correctly representing the coordinate variables. Hyrax service customers should carefully check the descriptions of these key values before changing them. The detailed description can be found at section 7.1 <<Keys for Both Options>> and 7.2 <<Keys for CF Option>>. As software improves, some settings may get changed. So hyrax service customers are encouraged to frequently check the latest https://github.com/OPENDAP/bes/blob/master/modules/hdf5_handler/README[README] and comments at the HDF5 handler configuration file https://github.com/OPENDAP/bes/blob/master/modules/hdf5_handler/h5.conf.in[h5.conf.in] at github. 
+The following BES keys are also important either for performance or for correctly representing the coordinate variables. Hyrax service customers should carefully check the descriptions of these key values before changing them. The detailed description can be found at section <<Keys for Both Options>> and <<Keys for CF Option>>. As software improves, some settings may get changed. So hyrax service customers are encouraged to frequently check the latest https://github.com/OPENDAP/bes/blob/master/modules/hdf5_handler/README[README] and comments at the HDF5 handler configuration file https://github.com/OPENDAP/bes/blob/master/modules/hdf5_handler/h5.conf.in[h5.conf.in] at github. 
 
 ----
 H5.EnableDropLongString=true
@@ -139,7 +145,7 @@ H5.MetaDataMemCacheEntries=1000
 H5.EnableEOSGeoCacheFile=false
 ----
 
-More BES keys and their descriptions can also be found at section 7.2 <<Keys for CF Option>>.
+More BES keys and their descriptions can also be found at section  <<Keys for CF Option>>.
 
 === CF DMR Example for DAP4
 
@@ -243,7 +249,7 @@ HDF5 group information maps to attribute containers such as:
 == CF Option for DAP2 
 
 === CF Name for DAP2
-The same as the CF option for DAP4. See section 3.1 <<CF Name for DAP4>>.
+The same as the CF option for DAP4. See section <<CF Name for DAP4>>.
 
 === CF Datatype for DAP2
 The following table lists the mapping from HDF5 to DAP2 for the CF option. 
@@ -280,12 +286,12 @@ The handler ignores the mapping of the following datatypes: HDF5 compound, varia
 |=======================================================================
 === CF BES Keys for DAP2
 
-Except that BES Key __H5.EnableCFDMR__ does not have effect on the DAP2 mapping, the other BES key information is the same as the information described in section 3.3 <<CF BES Keys for DAP4>>.
+Except that BES Key __H5.EnableCFDMR__ does not have effect on the DAP2 mapping, the other BES key information is the same as the information described in section <<CF BES Keys for DAP4>>.
 
 
 === CF DDS and DAS Examples for DAP2
 
-The layout of the HDF5 file is the same as the layout described in section 3.4 <<CF DMR Example for DAP4>>. 
+The layout of the HDF5 file is the same as the layout described in section <<CF DMR Example for DAP4>>. 
 
 The DDS is:
 ----
@@ -334,7 +340,7 @@ Attributes {
     }
 }
 ----
-The DDS and DAS shown in this example are equivalent to the DMR output in section 3.4 <<CF DMR Example for DAP4>> except that the DMR includes the DAP4 coverage information. However, if there are signed 8-bit integer or 64-bit integer variables in the HDF5 file, DAP4 DMR will show the exact datatype while DAP2 maps the signed 8-bit integer to 16-bit integer and ignores the mapping of 64-bit integers.
+The DDS and DAS shown in this example are equivalent to the DMR output in section <<CF DMR Example for DAP4>> except that the DMR includes the DAP4 coverage information. However, if there are signed 8-bit integer or 64-bit integer variables in the HDF5 file, DAP4 DMR will show the exact datatype while DAP2 maps the signed 8-bit integer to 16-bit integer and ignores the mapping of 64-bit integers.
 
 
 == Default Option for DAP4 
@@ -447,13 +453,13 @@ Note: Both the dimension names and the dimension sizes in the original netCDF-4 
 == Default Option for DAP2
 
 === Default Option: DAP2 Name 
-Same as section 5.1 <<Default Option: DAP4 Name>>. 
+Same as section <<Default Option: DAP4 Name>>. 
 
 === Default Option: DAP2 Datatype 
 . **HDF5 Datatype to DAP2 for Default Option**
 [width="100%",cols="30%,30%,40%",options="header",]
 |=======================================================================
-|HDF5 data type |DAP4 data name |Notes
+|HDF5 data type |DAP2 data name |Notes
 |8-bit unsigned integer |Byte |
 
 |8-bit signed integer |Int16 | DAP2 does not have 8-bit signed integer type, so it maps to 16-bit integer.
@@ -486,7 +492,7 @@ compound can be mapped to DAP2.
 
 |=======================================================================
 
-=== Default Option: DAP4 BES Keys
+=== Default Option: DAP2 BES Keys
 The following key must be set as follows to obtain the DAP2 output for the default option. Note netCDF-4-like dimensions will NOT be handled according to the netCDF data model. 
 
 ----
@@ -577,7 +583,7 @@ Dataset {
 } d_compound.h5;
 ----
 
-Note the HDF5 compound variable array __/compound__ maps to DAP's array of Structure. The special characters inside the member names of the compound datatype are changed according to section 5.1 <<Default Option: DAP4 Name>>.
+Note the HDF5 compound variable array __/compound__ maps to DAP's array of Structure. The special characters inside the member names of the compound datatype are changed according to section <<Default Option: DAP4 Name>>.
 
 == BES Keys
 In the course of supporting easy access to NASA HDF5/HDF-EOS5/netCDF4 files via Hyrax, various performance and other optimization tuning options are provided to hyrax service customers via BES keys. In this section, the descriptions for critical BES keys are provided. For the comprehensive BES key description, check the HDF5 handler configuration file https://github.com/OPENDAP/bes/blob/master/modules/hdf5_handler/h5.conf.in[h5.conf.in] at github.
