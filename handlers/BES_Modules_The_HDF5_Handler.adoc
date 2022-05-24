@@ -850,7 +850,7 @@ Default option:
 
 == Miscellaneous Information
 
-=== NASA Products supported and tested by the CF option of the Handler
+=== NASA Products Supported and Tested by the CF option of the Handler
 
 * HDF-EOS5 products
 ** HIRDLS, MLS, TES, OMI, MOPITT, LANCE AMSR_2, VIIRS, MEaSURES GSSTF
@@ -861,7 +861,7 @@ Default option:
 
 NOTE: The HDF5 handler should support any netCDF-4/HDF5 products and HDF-EOS5 products. The above just lists the data products that the handler explicitly tests. 
 
-===	Supporting netCDF-4 products
+===	Supporting netCDF-4 Products
 
 Unless served by customized service like NASA-Compliant General Application Platform(NGAP), by default the netCDF-4 files with the file name suffix like _.nc_ or _.nc4_ will be served by Hyrax's https://github.com/OPENDAP/hyrax_guide/blob/master/handlers/BES_Modules_The_NetCDF_Handler.adoc[netCDF handler]. Unlike the HDF5 handler, the netCDF4 handler only supports netCDF classic data model. The group hierarchy is elided and the datatypes not supported by the netCDF classic data model are also elided. 
 
