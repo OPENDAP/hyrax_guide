@@ -28,7 +28,7 @@ The HDF5 handler uses the BES keys for the hyrax data service customers to obtai
 
 == Highlights
 
-=== CF Option for DAP4 Highlight
+=== CF for DAP4
 By definition, the CF option means the handler will follow the https://cfconventions.org/[CF conventions] to translate HDF5 to DAP. The CF option is set in the Hyrax source and RPM distribution since most NASA data centers uses the CF option.  One can find the default value of the BES key _H5.EnableCF_ is set to _true_ from section <<Default BES Key Values>>. 
 
 Key features for the CF option:
@@ -48,7 +48,7 @@ HDF-EOS5, netCDF-4 and some NASA HDF5 products.
 
 A DMR example can be found in section <<CF DMR Example for DAP4>>. 
 
-=== CF Option for DAP2 Highlight
+=== CF for DAP2 
 
 The name conventions and dimension/coordinate handling are the same as the DAP4 implementation. CF-friendly visualization clients such as https://www.giss.nasa.gov/tools/panoply/[Panoply] can visualize the HDF5 data via DAP2 successfully. Screenshots of NASA HDF5 example files via Hyrax can be found at https://hdfeos.org/zoo/hdf5_handler/index.php . 
 
@@ -56,7 +56,7 @@ However, due to the DAP2 limitation, HDF5 64-bit integer variables and attribute
 
 DDS and DAS examples can be found in section <<CF DDS and DAS Examples for DAP2>>.
 
-=== Default Option for DAP4 Highlight
+=== Default for DAP4 
 
 To use this option, _H5.EnableCF_ must be set to _false_ in _h5.conf_. One should notice that Hyrax provides a way to customize the configuration with _site.conf_. For more information about _site.conf_, check the document  https://github.com/OPENDAP/hyrax_guide/blob/master/Hyrax_site-conf.adoc[site.conf] of the hyrax user's guide. 
 
@@ -70,7 +70,7 @@ Moreover, when another BES key _H5.DefaultHandleDimension_ is also set to _true_
 
 In addition to mapping integer, string and floating-point data to DAP4, the HDF5 compound datatype, object references and regional references are also mapped to DAP4.  A DMR example can be found in section <<Default Option: DMR Example>>.
 
-=== Default Option for DAP2 Highlight
+=== Default for DAP2 
 
 To use this option, _H5.EnableCF_ must be set to _false_ in _h5.conf_. The BES key _H5.DefaultHandleDimension_ has no effect for this option. 
 
