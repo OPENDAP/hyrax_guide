@@ -60,7 +60,7 @@ DDS and DAS examples can be found in section <<CF DDS and DAS Examples for DAP2>
 
 To use this option, _H5.EnableCF_ must be set to _false_ in _h5.conf_. One should notice that Hyrax provides a way to customize the configuration with _site.conf_. For more information about _site.conf_, check the document  https://github.com/OPENDAP/hyrax_guide/blob/master/Hyrax_site-conf.adoc[site.conf] of the hyrax user's guide. 
 
-IMPORTANT: To obtain DAP4 output from the default option: _H5.EnableCF_ must be set to __false__ in _h5.conf_ or in _site_conf_.  
+IMPORTANT: To obtain DAP4 output from the default option: _H5.EnableCF_ must be set to __false__ in _h5.conf_ or in _site.conf_.  
 
 This option tries to map HDF5 to DAP4 in a general way. Unlike the CF option, it is not tuned to support the NASA data products. Instead of flattening the group hierarchy, the HDF5’s group hierarchy are kept by mapping HDF5 groups to DAP4 groups.
 
