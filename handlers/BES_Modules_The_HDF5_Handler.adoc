@@ -29,7 +29,7 @@ The HDF5 handler uses the BES keys for the hyrax data service customers to obtai
 == Highlights
 
 === CF for DAP4
-By definition, the CF option means the handler will follow the https://cfconventions.org/[CF conventions] to translate HDF5 to DAP. The CF option is set in the Hyrax source and RPM distribution since most NASA data centers uses the CF option.  One can find the default value of the BES key _H5.EnableCF_ is set to _true_ from section <<Default BES Key Values>>. 
+By definition, the CF option means the handler will follow the https://cfconventions.org/[CF conventions] to translate HDF5 to DAP. The CF option is set in the Hyrax source and RPM distribution since most NASA data centers uses the CF option.  One can find that the default value of the BES key _H5.EnableCF_ is set to _true_ from section <<Default BES Key Values>>. 
 
 Key features for the CF option:
 
