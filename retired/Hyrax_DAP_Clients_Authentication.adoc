@@ -504,7 +504,7 @@ When I committed the edit (aka hit Enter) Panoply popped up a dialog box that in
 
 image::Panoply-Shibboleth.png[Panoply Shibboleth Authentication Failure]
 
-== Matlab, Ferret, Other applications that use NetCDF C ==
+== _Matlab, Ferret, Other applications that use NetCDF C_ ==
 Check the version of the netCDF C library that the application uses; once they have updated to 4.3.3.1 or later, authentication configuration should be the same as the _ncdump_ example above. That is, both URS and LDAP-backed HTTP/S-Basic authentication should work by reading credentials from the _.netrc_ file given that the _.dodsrc_ file is set to point to them.
 
 === URS & LDAP ===
@@ -533,7 +533,7 @@ HTTP.NETRC=/Users/jimg/.netrc
 === Shibboleth ===
 This is certain to not work until the netCDF C library is modified to explicitly support it.
 
-== PyDAP ==
+== _PyDAP_ ==
 The PyDAP software (pydap.org) provides one interface for python programs to read from OpenDAP servers (the other is the netCDF4 python module, which uses the netCDF-C library to actually access data, include data from OpenDAP servers). PyDAP includes an extension mechanism so that it can interact with different kinds of authentication systems. This system is very flexible and we were able to use it to add support for both LDAP-backed HTTP/S Basic authentication and ELA/URS. The same scheme could be used to add support for Shibboleth, although it would take additional development work (described in general below).
 
 === URS & LDAP ===
