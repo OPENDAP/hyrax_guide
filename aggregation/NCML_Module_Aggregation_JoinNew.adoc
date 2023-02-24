@@ -1,6 +1,6 @@
 = JoinNew Aggregation
 :Leonard Porrello <lporrel@gmail.com>:
-
+{docdate}
 :numbered:
 :toc:
 
