@@ -1,8 +1,8 @@
-= Hyrax - Running bescmdln - OPeNDAP Documentation
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
 :numbered:
 :toc:
+:Leonard Porrello <lporrel@gmail.com>:
+
+= Hyrax - Running bescmdln - OPeNDAP Documentation
 
 == Running bescmdln - Basic Commands
 

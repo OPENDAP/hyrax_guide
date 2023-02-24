@@ -1,8 +1,10 @@
-= Hyrax Troubleshooting
-:Leonard Porrello <lporrel@gmail.com>:
-{docdate}
 :numbered:
 :toc:
+:Leonard Porrello <lporrel@gmail.com>:
+
+= Hyrax Troubleshooting
+
+{docdate}
 
 :leveloffset: +1
 
