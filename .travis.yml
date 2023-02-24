@@ -2,9 +2,9 @@
 sudo: required
 
 # whitelist
-#branches:
-#  only:
-#    - master
+branches:
+  only:
+    - master
 
 notifications:
   email:
