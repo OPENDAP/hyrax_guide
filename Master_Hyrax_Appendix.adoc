@@ -1,8 +1,8 @@
 = Hyrax Appendix
 :Alexander Porrello <alexporrello@gmail.com>:
+{docdate}
 :numbered:
 :toc:
-{docdate}
 
 // The [appendix] macro gives the following sections the correct numbering 
 

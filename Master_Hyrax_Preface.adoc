@@ -7,7 +7,7 @@
 
 This manual describes the features and operation of the Hyrax data
 server, a data server developed by OPeNDAP, Inc. as a reference server
-for the Data Access Protocol, versions 2 and 4. The Hyrax server is
+for the Data Access Protocol, versions 2 and 4. the Hyrax server is
 modular software with a number of _handlers_ that are loaded into a
 core framework based on the contents of configuration files. Each of
 the server's modules provides a distinct functional capability, such

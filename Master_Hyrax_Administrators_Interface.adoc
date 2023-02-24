@@ -1,8 +1,8 @@
 = Hyrax Administrators Interface
 :Leonard Porrello <lporrel@gmail.com>:
+{docdate}
 :numbered:
 :toc:
-{docdate}
 
 == Administrator's Interface Overview
 

@@ -1,8 +1,8 @@
 = Server Side Processing Functions
 :Leonard Porrello <lporrel@gmail.com>:
+{docdate}
 :numbered:
 :toc:
-{docdate}
 
 == Server Functions, Invocation, and Composition
 

@@ -1,8 +1,8 @@
 = Hyrax WCS Service
 :James Gallagher <jgallagher@opendap.org>:
+{docdate}
 :numbered:
 :toc:
-{docdate}
 
 == Overview
 
