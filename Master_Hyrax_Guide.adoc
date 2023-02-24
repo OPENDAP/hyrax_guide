@@ -1,9 +1,10 @@
 = The Hyrax Data Server Installation and Configuration Guide
 OPeNDAP, Inc.
 vGUIDE_VERSION, {docdate}
-:numbered:
 :toc: left
-:toclevels: 2
+:toclevels: 5
+:numbered:
+:docinfo: shared
 :icons: font
 :tabsize: 4
 :indent: 4

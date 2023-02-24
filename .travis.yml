@@ -38,7 +38,7 @@ script:
   - echo ${GUIDE_VERSION}
   - cat Master_Hyrax_Guide.adoc | sed -e "s|GUIDE_VERSION|${GUIDE_VERSION}|g" > index.adoc
   # Build the Guide as HTML
-  - docker run -v $TRAVIS_BUILD_DIR:/documents/ --name asciidoc-to-html asciidoctor/docker-asciidoctor asciidoctor -D /documents/output index.adoc
+  - docker run -v $TRAVIS_BUILD_DIR:/documents/ --name asciidoc-to-html asciidoctor/docker-asciidoctor asciidoctor -a toc=left -a docinfo=shared -D /documents/output index.adoc
   - mv ./output/index.html ./output/Master_Hyrax_Guide.html
   # - docker run -v $TRAVIS_BUILD_DIR:/documents/ --name asciidoc-to-pdf asciidoctor/docker-asciidoctor asciidoctor-pdf -D /documents/output Master_Hyrax_Guide.adoc
 

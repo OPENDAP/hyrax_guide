@@ -1,6 +1,6 @@
+
 = Hyrax - Running bescmdln - OPeNDAP Documentation
 :Leonard Porrello <lporrel@gmail.com>:
-{docdate}
 :numbered:
 :toc:
 
