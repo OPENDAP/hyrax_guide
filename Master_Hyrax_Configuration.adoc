@@ -1,9 +1,9 @@
 [[Hyrax_Configuration]]
 = Hyrax Configuration
 :Leonard Porrello <lporrel@gmail.com>:
-{docdate}
 :numbered:
 :toc:
+{docdate}
 
 :leveloffset: +1
 include::Hyrax_Configuration.adoc[]

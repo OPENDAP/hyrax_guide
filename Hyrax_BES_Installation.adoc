@@ -1,8 +1,8 @@
 = BES Installation =
 :Leonard Porrello <lporrel@gmail.com>:
-{docdate}
 :numbered:
 :toc:
+{docdate}
 
 ////
 TODO: We should include roughtly the same level of information here for the BES as for the OLFS.

@@ -1,8 +1,8 @@
 = Hyrax Handlers
 :Leonard Porrello <lporrel@gmail.com>:
-{docdate}
 :numbered:
 :toc:
+{docdate}
 
 // Handlers for different data formats - sources of data
 [[csv-handler]]

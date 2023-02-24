@@ -1,8 +1,8 @@
 = User Authentication
 :Leonard Porrello <lporrel@gmail.com>:
-{docdate}
 :numbered:
 :toc:
+{docdate}
 
 == Overview
 

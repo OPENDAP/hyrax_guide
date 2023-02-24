@@ -1,8 +1,8 @@
 = Aggregation
 :Leonard Porrello <lporrel@gmail.com>:
-{docdate}
 :numbered:
 :toc:
+{docdate}
 
 Often it is desirable to treat a collection of data files as if they were
 a single dataset. Hyrax provides two different ways to do this: it enables

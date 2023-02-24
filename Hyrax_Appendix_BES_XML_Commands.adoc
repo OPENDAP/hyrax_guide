@@ -1,8 +1,8 @@
 = BES XML Commands
 :Leonard Porrello <lporrel@gmail.com>:
-{docdate}
 :numbered:
 :toc:
+{docdate}
 
 == BES XML Command Syntax
 

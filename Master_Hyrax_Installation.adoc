@@ -1,8 +1,8 @@
 = Installation =
 :Leonard Porrello <lporrel@gmail.com>:
-{docdate}
 :numbered:
 :toc:
+{docdate}
 
 Installing a Hyrax binary release typically involves the following:
 
