@@ -1,3 +1,10 @@
+# The Hyrax Guide
+
+This repository builds documentation for the official [Hyrax Guide](https://opendap.github.io/hyrax_guide/Master_Hyrax_Guide.html), OPeNDAP's data server.
+
+This manual describes the features and operation of the Hyrax data server, a data server developed by OPeNDAP, Inc. as a reference server for the Data Access Protocol, versions 2 and 4. the Hyrax server is modular software with a number of handlers that are loaded into a core framework based on the contents of configuration files. Each of the server’s modules provides a distinct functional capability, such as reading data from a certain kind of file, encoding data, or processing data in different ways. 
+
+
 
 ## Notes about the meta-documentation files
 
