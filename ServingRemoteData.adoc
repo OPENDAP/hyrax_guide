@@ -9,7 +9,7 @@ There are several ways that Hyrax can serve remotely located data. In this paper
 
 In this scheme the original data files are held in S3 (or any other HTTP service that supports Range GET) as objects. The metadata, along with access information about the S3 object, are held as `dmr++` files on the Hyrax platform.
 
-Each `dmr\++` file needs to know the network location(s) of the objects(s) from which its data will be read. For some representations multiple objects may be used, but for these examples each `dmr++` will be associated with a single web accessible object (held in S3 for this example).
+Each `dmr++` file needs to know the network location(s) of the objects(s) from which its data will be read. For some representations multiple objects may be used, but for these examples each `dmr++` will be associated with a single web accessible object (held in S3 for this example).
 
 === Process
 
@@ -23,7 +23,7 @@ Most of this process is about creating and organizing content for Hyrax.
 
 
 === Portability and data catalog organization.
-Once the `dmr\++` files are built they are "portable" in the sense that they can be arranged in any Hyrax server's "catalog" in any manner desired, as each `dmr++` file is self contained and includes a reference to the data objects HTTP service (S3 in this case) URL. However if the underlying data object is (re)moved then the `dmr++` file will become invalid.
+Once the `dmr++` files are built they are "portable" in the sense that they can be arranged in any Hyrax server's "catalog" in any manner desired, as each `dmr++` file is self contained and includes a reference to the data objects HTTP service (S3 in this case) URL. However if the underlying data object is (re)moved then the `dmr++` file will become invalid.
 
 === Where are the source data?
 Where the source data are located will dictate which program will be used to build the `dmr\++` files.
