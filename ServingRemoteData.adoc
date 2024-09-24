@@ -9,7 +9,9 @@ There are several ways that Hyrax can serve remotely located data. In this paper
 
 In this scheme the original data files are held in S3 (or any other HTTP service that supports Range GET) as objects. The metadata, along with access information about the S3 object, are held as `dmr++` files on the Hyrax platform.
 
-Each `dmr++` file needs to know the network location(s) of the objects(s) from which its data will be read. For some representations multiple objects may be used, but for these examples each `dmr++` will be associated with a single web accessible object (held in S3 for this example).
+Each 
+`dmr++` file needs to know the network location(s) of the objects(s) from which its data will be read. For some representations multiple objects may be used, but for these examples each 
+`dmr++` will be associated with a single web accessible object (held in S3 for this example).
 
 === Process
 
