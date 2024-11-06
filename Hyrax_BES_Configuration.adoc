@@ -9,9 +9,19 @@
 
 Building the BES and its data handlers from source (or installing from
 the Linux RPMs) will provide the default installation with data and a
-valid configuration. This is suitable for testing. The following details
-how you go about customizing it for your data.
+valid configuration. This is suitable for testing. There are two main ways 
+that you can costumize the BES for your data by modifying
 
+1. _bes.conf_ file. Has default configurations, does not persist through updates.
+2. _site.conf_ file. Persists through updates.
+
+Below we first describe the _bes.conf_ file in <<bes_conf>>, and subsequently 
+describe the recommended approach in <<site_conf>>. 
+
+NOTE: The syntax for modifying default values in _bes.conf_ is the same as that
+for modifing _site.conf_ file.
+
+[[bes_conf]]
 === Location of the BES Configuation File ===
 
 The BES configuration file is called _bes.conf_ and can be found in
@@ -51,10 +61,11 @@ the following:
 BES.Include=modules/.*\.conf$
 ----
 
-*Note:* Regular expressions can be used in the _Include_ parameter to
+Note: Regular expressions can be used in the _Include_ parameter to
 match a set of files.
 
-== Custom Module Configuration with _site.conf_
+[[site_conf]]
+=== Custom Module Configuration with _site.conf_
 
 To ensure any costumization persists through updates, it is highly recommended to
 create and modify instead a _site.conf_. The _site.conf_ is a special configuration file
@@ -66,7 +77,7 @@ Hyrax includes the template file _site.conf.proto_ that includes many commonly-m
 For instructions on how to use the template, see its 
 <<site-conf-proto-config, configuration instruction section>>.
 
-== Theory of Operation
+=== Theory of Operation
 
 When you launch your server, the BES loads the module configuration files that reside within `/etc/bes/modules`.
 The BES then loads _site.conf_, which resides in `/etc/bes`.
@@ -77,7 +88,7 @@ the individual module configuration files. For a detailed configuration example,
 see <<site-conf-example-configuration, the example configuration section>>.
 
 [[site-conf-config]]
-=== _site.conf_ Configuration Instructions
+==== _site.conf_ Configuration Instructions
 
 The following details how you can customize a module’s configuration with _site.conf_:
 
@@ -101,7 +112,7 @@ where email is the key and support@opendap.org is the value.
 5. Restart the server.
 
 [[site-conf-example-configuration, site.conf Configuration Example]]
-=== _site.conf_ Configuration Example
+==== _site.conf_ Configuration Example
 
 The following steps detail how you can update the BES’s 
 server administrator configuration parameters with your organization’s information:
@@ -162,7 +173,7 @@ For a site.conf configuration example, see
 
 === Administration & Logging
 
-In the bes.conf file, the _BES.ServerAdministrator_
+In the _bes.conf_ or _site.conf_ file, the _BES.ServerAdministrator_
 parameter is the address used in various mail messages returned to
 clients. Set this so that the email's recipient will be able to fix
 problems and/or respond to user questions. Also set the log file and log
@@ -184,7 +195,7 @@ BES and OLFS (i.e., all of Hyrax) on one machine, do the following:
 
 ==== User and Group Parameters ====
 
-In the bes.conf file, the BES must be started as root. One
+In the bes.conf or _site.conf_ file, the BES must be started as root. One
 of the things that the BES does first is to start a listener that
 listens for requests to the BES. This listener is started as root, but
 then the _User_ and _Group_ of the process is set using parameters in the
@@ -204,7 +215,7 @@ BES.Group=#14
 
 ==== Setting the Networking Parameters
 
-In the bes.conf configuration file, we have settings for how the BES
+In the _bes.conf_ or _site.conf_ configuration file, we have settings for how the BES
 should listen for requests:
 
 ----
