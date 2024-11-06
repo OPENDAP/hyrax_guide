@@ -61,7 +61,7 @@ the following:
 BES.Include=modules/.*\.conf$
 ----
 
-Note: Regular expressions can be used in the _Include_ parameter to
+NOTE: Regular expressions can be used in the _Include_ parameter to
 match a set of files.
 
 [[site_conf]]
