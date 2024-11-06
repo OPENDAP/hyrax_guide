@@ -3,15 +3,13 @@
 
 = Hyrax New Features (1.15.2)
 
-- <<site-conf, site.conf>>
 - <<hyrax-standalone-earthdata-login-client, Hyrax Standalone Earthdata Login Client>>
 - <<mds, Metadata Store (MDS)>>
 - <<cov-json, Coverage JSON>>
 - <<json-ld, JSON-LD>>
 
-include::Hyrax_site-conf.adoc[lines="1..-1", leveloffset=+1]
 
-include::Hyrax_Standalone_Earthdata_Login_Client.adoc[lines="1..-1", leveloffset=+2]
+include::Hyrax_Standalone_Earthdata_Login_Client.adoc[lines="1..-1", leveloffset=+1]
 
 include::Hyrax_MDS.adoc[lines="1..-1", leveloffset=+1]
 
