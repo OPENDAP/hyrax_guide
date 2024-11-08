@@ -7,13 +7,15 @@
 == Overview
 
 With funding from the Australian Bureau of Meteorology we have developed
-prototype JSON data and metadata responses for Hyrax. After reviewing
+prototype JSON data and metadata DAP2 responses for Hyrax. After reviewing
 some the existing JSON encodings for DAP content we chose to implement
 two prototype encodings.
 
+NOTE: JSON responses work only with DAP2.
+
 The first, and most likely the most useful, is based on the
 http://w10n.org/spec/[w10n specification] as
-http://podaac-w10n.jpl.nasa.gov/tutorial/[realized by the good folks at
+https://podaac.jpl.nasa.gov/sites/default/files/content/PODAAC_Documentation/white-paper-w10n-for-earth-science.v1.1.0.pdf[realized by the good folks at
 JPL]. This encoding utilizes an _abstract_ model to capture the
 structure of the dataset and it's metadata. In this model the properties
 of the JSON object are made of a controlled vocabulary. This means that
