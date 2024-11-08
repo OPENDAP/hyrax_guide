@@ -149,28 +149,6 @@ https://scm.opendap.org/svn/branch/olfs/release/hyrax-1.9/
 Let
 datasetUrl=http://54.84.172.19:8080/opendap/data/nc/coads_climatology.nc
 
-==== DAP4 Requests
-
-Using the DAP4 URLs to request both the DMR and the Data responses in a
-JSON encoding.
-
-*NB:* _Currently what is returned is really a JSON encoding of the DAP
-data (.dods) and metadata (.ddx) objects. When we have full DAP4 within
-Hyrax these responses will return JSON version of the DAP4 DMR and Data
-objects._
-
- DAP4 w10n JSON Metadata request ::
-  datasetUrl.dmr.json
-
- DAP4 w10n JSON Data request ::
-  datasetUrl.dap.json
-
- DAP4 Instance Object Metadata request ::
-  datasetUrl.dmr.ijsn
-
- DAP4 Instance Object Data request ::
-  datasetUrl.dap.ijsn
-
 ==== DAP2 requests
 
  DAP2 w10n JSON Data request ::
@@ -184,6 +162,8 @@ objects._
     datasetUrl.ijsn
    Just the variable named "COADSX" ;;
     datasetUrl.ijsn?COADSX
+
+
 
 === Examples
 
