@@ -147,7 +147,7 @@ https://scm.opendap.org/svn/branch/olfs/release/hyrax-1.9/
 ==== Soliciting the JSON Response
 
 Let
-datasetUrl=http://54.84.172.19:8080/opendap/data/nc/coads_climatology.nc
+datasetUrl=http://test.opendap.org/dap/data/nc/coads_climatology.nc
 
 ==== DAP2 requests
 
@@ -165,12 +165,9 @@ datasetUrl=http://54.84.172.19:8080/opendap/data/nc/coads_climatology.nc
 
 
 
-=== Examples
+=== DAP2 Examples
 
 ==== Dataset - coads_climatology.nc
-
-(I'm putting in the DAP2 dataset descriptions for now, the DAP4 will
-follow)
 
 ===== DDS
 
