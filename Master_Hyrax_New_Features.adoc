@@ -4,11 +4,6 @@
 = Hyrax New Features (1.15.2)
 
 - <<mds, Metadata Store (MDS)>>
-- <<cov-json, Coverage JSON>>
-- <<json-ld, JSON-LD>>
 
 include::Hyrax_MDS.adoc[lines="1..-1", leveloffset=+1]
 
-include::Hyrax_CoverageJSON.adoc[lines="1..-1", leveloffset=+1]
-
-include::Hyrax_JSON-LD.adoc[lines="1..-1", leveloffset=+1]

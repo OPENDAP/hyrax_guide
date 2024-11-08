@@ -910,12 +910,12 @@ Response ::
 ----
 
 
-=== CoverageJSON
+== CoverageJSON
 
 CoverageJSON uses heuristics to determine if a data set is suitable for CoverageJSON expression.
 You can take advantage of the CoverageJSON feature in the following ways:
 
-==== Using the DAP2 Data Request Form
+=== Using the DAP2 Data Request Form
 
 On the DAP2 form, this option shows as a button.
 
@@ -933,8 +933,46 @@ http://test.opendap.org:8080/opendap/data/nc/coads_climatology.nc
 ** *After:*
 http://test.opendap.org:8080/opendap/data/nc/coads_climatology.nc.covjson
 
-==== DAP4
+=== DAP4
 
 In DAP4, there is no such button, but adding the `.covjson` to the URL, it downloads
 the data response in json form (full dataset). It is a secondary  encoding of the primary 
-DAP4 response, so it's url expression 
+DAP4 response.
+
+
+== JSON-LD
+
+This release Hyrax adds link:https://json-ld.org[JSON-LD]
+content to every browser-navigable catalog page 
+(i.e. _*/contents.html_") and to every dataset/granule OPeNDAP 
+Data Access Form. Along with the site map generation,
+this feature can be used to assist search engines to
+catalog, index, and find the data that you want the world to access.
+
+=== Theory of Operation
+
+The JSON-LD is dynamically built from the metadata. It uses the MDS metadata if it is there; otherwise, it loads it from the file.
+
+=== Configuration Instructions
+
+//Talk about how to disable, maybe?
+
+The server ships with this feature enabled. By default the publisher information 
+is set to OPeNDAP:
+
+----
+BES.ServerAdministrator=email:support@opendap.org
+BES.ServerAdministrator+=organization:OPeNDAP Inc.
+BES.ServerAdministrator+=street:165 NW Dean Knauss Dr.
+BES.ServerAdministrator+=city:Narragansett
+BES.ServerAdministrator+=region:RI
+BES.ServerAdministrator+=postalCode:02882
+BES.ServerAdministrator+=country:US
+BES.ServerAdministrator+=telephone:+1.401.575.4835
+BES.ServerAdministrator+=website:http://www.opendap.org
+----
+
+This information can and should be updated to your organization's information.
+You can update the information in `/etc/bes/bes.conf`;
+however, you should configure the parameters in `site.conf`.
+For more information, see the <<#site_conf,site.conf section>>.
