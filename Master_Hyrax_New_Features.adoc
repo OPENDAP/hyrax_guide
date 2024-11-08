@@ -1,9 +1,5 @@
 :Alexander Porrello <alexporrello@gmail.com>:
 :toc:
 
-= Hyrax New Features (1.15.2)
-
-- <<mds, Metadata Store (MDS)>>
-
-include::Hyrax_MDS.adoc[lines="1..-1", leveloffset=+1]
+= Hyrax New Features (1.17)
 
