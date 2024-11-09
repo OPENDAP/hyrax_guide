@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14058553.svg)](https://doi.org/10.5281/zenodo.14058553)
+
 # The Hyrax Guide
 
 This repository builds documentation for the official [Hyrax Guide](https://opendap.github.io/hyrax_guide/Master_Hyrax_Guide.html), OPeNDAP's data server.
@@ -5,26 +7,26 @@ This repository builds documentation for the official [Hyrax Guide](https://open
 This manual describes the features and operation of the Hyrax data server, a data server developed by OPeNDAP, Inc. as a reference server for the Data Access Protocol, versions 2 and 4. the Hyrax server is modular software with a number of handlers that are loaded into a core framework based on the contents of configuration files. Each of the server’s modules provides a distinct functional capability, such as reading data from a certain kind of file, encoding data, or processing data in different ways. 
 
 
+## How to Contribute
+The documentation is built automatically from the source `AsciiDoc` files (`*.adoc`). To propose any change you need to create a new branch, and submit a PR with the proposed changes for review. Before submitting a new PR, we suggest to tryout to build the documentation on a local machine. Thus the minimal requirements are:
+- Clone the Repository
+- Install `AsciiDoctor` on your workstation (test purposes).
+
+### Instructions
+- Optional: Navigate to the root directory. `Master_Hyrax_Guide.adoc` should be there.
+- Make changes (using a new branch - do not commit on `main`).
+- Test the proposed changes by running on the command line
+```
+asciidoctor -a toc=left -a docinfo=shared Master_Hyrax_Guide.adoc
+````
+NOTE: In some cases there may be some errors during the build (unrelated to the new changes). Verify your changes were added correctly:
+- The command above should generate a new file `Master_Hyrax_Guide.html`. You can inspect it with a brower, e.g. `open DAP4.html`.
+- Add and commit the new changes, and push to Request a `Pull Request` review. Once approved, the changes should be published automatically by `Travis`.
+
+
 
 ## Notes about the meta-documentation files
 
-**book-multi.txt** is an example of the multipart book format for
-asciidoc.
-
-**edits.txt** How I made lots of edits w/o mind-numbing manual
-  searching and stuff
-
-**link_loc.txt** Holds the current location of all the places that use
-  the asciidoc _link_ macro. In most cases these should be fixed
-  because they are k=links to the *.adoc files, but those won't be
-  present when we build the HTML or PDF documentation files.  Instead,
-  these should probably be section references (using anchors).
-
-**note_loc.txt** I found a bunch of places where the text says,
-  "Note:" in one way or another. Asciidoc has a special way of doing
-  this that looks good (using 'NOTE:' with no indentation). 
-
-**warnings.txt** Same as above, but for 'WARNING:'
 
 Added jhrg 9/17/17
 * Use `----` for the delimeters for source code
