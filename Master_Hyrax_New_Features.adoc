@@ -10,7 +10,6 @@
 
 
 include::Hyrax_installationNew.adoc[lines="1..-1", leveloffset=+1]
-include::Hyrax_DMRppNew.adoc[lines="1..-1", leveloffset=+1]
 include::Hyrax_ConfigurationNew.adoc[lines="1..-1", leveloffset=+1]
 include::Hyrax_S3New.adoc[lines="1..-1", leveloffset=+1]
 include::Hyrax_EDLNew.adoc[lines="1..-1", leveloffset=+1]
