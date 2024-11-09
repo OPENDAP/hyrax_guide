@@ -2,9 +2,15 @@
 = S3 Support 
 
 
-+++ DMR++ +++ provides direct access to data in S3, and we have made significant advances to supporting HDF5 files in the +++ DMR++ +++ builder and interpreter.  We still have two gaps: support for certain Compound variables and support for some kinds of string arrays. This new release of Hyrax brings support for direct I/O transfers from HDF5 to NetCDF4 when using +++ DMR++ +++ .
++++ DMR++ +++ provides direct access to data in S3, and we have made significant advances to supporting HDF5 files in the +++ DMR++ +++ builder and interpreter.  We still have two gaps: support for certain Compound variables and support for some kinds of string arrays. This new release of Hyrax brings support for direct I/O transfers from HDF5 to NetCDF4 when using +++ DMR++ +++.
 
 We have added generic Memory and File caching, tailored specifically toward the cases that arise when serving data from S3 using the +++ DMR++ +++ system. We have added a BES module that can work with S3 using the +++ DMR++ +++ system. This provides a data flow that is similar to the one we provide for Hyrax in the Cloud as developer for NASA, but this new module does not make use of the NASA/ESDIS CMR system to resolve ‘NASA Granules’ to URLs. This will enable other groups to use the +++ DMR++ +++ system to serve data from S3.
+
+We improved the performance of finding the effective URL for a data item when it is accessed via a series of redirect operations, the last of which is a signed AWS URL. This is a common case for data stored in S3.
+
+We have added generic Memory and File caching, tailored specifically toward the cases that arise when serving data from S3 using the +++ DMR++ +++ system.
+
+The BES can sign S3 URLs using the AWS V4 signing scheme. This uses the Credentials Manager system.
 
 As of 1.16.8, we have added experimental support for +++ DMR++ +++ Aggregations in which multi file aggregations can be described in a single +++ DMR++ +++ file, reaping all of the efficiency benefits (and pitfalls) of +++ DMR++ +++. Furthermore, Hyrax can generate signed S3 requests when processing +++ DMR++ +++ files whose data content live in S3 when the correct credentials are provided (injected) into the server.
 
@@ -25,3 +31,5 @@ The dmr++ production chain: get_dmrpp, build_dmrpp, check_dmrpp, merge_dmrpp, an
 
 
 Lastly, we have added support for S3 hosted granules to get_dmrpp. Added regression test suite for get_dmrpp.
+
+Improved S3 reliability by adding retry efforts for common S3 error responses that indicate a retry is worth pursuing (because S3 just fails sometimes and a retry is suggested). We have also added caching of S3 “effective” URLs obtained from NGAP service chain.

@@ -6,7 +6,7 @@
 - <<build, Installation>>
 - <<config, Configuration>>
 - <<s3, S3 Support>>
-- <<auth, EDL Authentication>>
+- <<edl, EDL Authentication>>
 
 
 include::Hyrax_installationNew.adoc[lines="1..-1", leveloffset=+1]
