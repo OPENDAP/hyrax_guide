@@ -1,0 +1,8 @@
+[[edl]]
+= EDL Authentication
+
+As of Hyrax 1.16.8 we have added extensive support for Earthdata Login User Authentication. 
+
+For configurations that require Hyrax to authenticate to access various remote resources, Hyrax can now utilize `~/.netrc` (or a `netrc` file may be specified in `site.conf`) and Hyrax will use the appropriate credentials, if they are present.
+
+As of Hyrax `1.16.8` we implemented support for EDL token chaining, and in the latest version Hyrax 1.17, we have fixed NASA/ESDIS Earthdata Login (EDL) token handling so that redirected are not issued and session (aka cookie) management is not required of the client.

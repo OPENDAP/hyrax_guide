@@ -1,4 +1,0 @@
-./Master_Hyrax_Administrators_Interface.adoc:107:. Using a self-signed certificate is fine, but you will see a warning
-./Master_Hyrax_Administrators_Interface.adoc:110:that warning or, although it involves some expense, you can get a
-./Master_Hyrax_Customizing_Hyrax.adoc:34:Warning::
-./Master_Hyrax_Secure_Installation_Guidelines.adoc:17:*Disclaimer:* At OPeNDAP we consider security to be a top priority.

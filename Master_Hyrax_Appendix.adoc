@@ -31,6 +31,10 @@ include::Hyrax_Appendix_Aggregation.adoc[lines="1,6..-1", leveloffset=+1]
 [[user_specified_aggregation]]
 include::Hyrax_Appendix_Aggregation_enhancements.adoc[lines="1,6..-1",leveloffset=+1]
 
+[appendix]
+[[metadata_data_store]]
+include::Hyrax_Appendix_MDS.adoc[lines="1,6..-1",leveloffset=+1]
+
 // The default server-side processing functions that are distributed with Hyrax
 [appendix]
 [[Server_Side_Processing_Functions]]

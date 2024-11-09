@@ -7,13 +7,15 @@
 == Overview
 
 With funding from the Australian Bureau of Meteorology we have developed
-prototype JSON data and metadata responses for Hyrax. After reviewing
+prototype JSON data and metadata DAP2 responses for Hyrax. After reviewing
 some the existing JSON encodings for DAP content we chose to implement
 two prototype encodings.
 
+NOTE: JSON responses work only with DAP2.
+
 The first, and most likely the most useful, is based on the
 http://w10n.org/spec/[w10n specification] as
-http://podaac-w10n.jpl.nasa.gov/tutorial/[realized by the good folks at
+https://podaac.jpl.nasa.gov/sites/default/files/content/PODAAC_Documentation/white-paper-w10n-for-earth-science.v1.1.0.pdf[realized by the good folks at
 JPL]. This encoding utilizes an _abstract_ model to capture the
 structure of the dataset and it's metadata. In this model the properties
 of the JSON object are made of a controlled vocabulary. This means that
@@ -109,65 +111,10 @@ result. Subsetting by index, selection of variables, and subsetting by
 value (where supported) will control what variables and what parts of
 variables will be returned in the response.
 
-=== Installation
-
-The JSON functionality is implemented as components of the OLFS and the
-BES. The OLFS JSON code is built into the OLFS and is not an add-on. In
-the BES the JSON support is contained in the
-https://scm.opendap.org/svn/trunk/fileout_json/[fileout_json module].
-The file out_json module is now part of the Hyrax trunk (the
-https://scm.opendap.org/trac/browser/trunk/shrew[shrew] project) and
-part of the
-https://scm.opendap.org/trac/browser/branch/shrew/hyrax_1.9_release[Hyrax-1.9
-release] branch. The next minor release of the Hyrax server will contain
-the JSON response capability.
-
-==== From Subversion Trunk
-
-* Check out fileout_json from subversion:
-https://scm.opendap.org/svn/trunk/fileout_json
-* Compile and install it like any other BES module.
-* Check out the latest OLFS: https://scm.opendap.org/svn/trunk/olfs
-* Compile and install as normal.
-* Start Hyrax and try it out.
-
-==== From the Hyrax-1.9 Release Branch
-
-* Check out fileout_json from subversion:
-https://scm.opendap.org/svn/branch/fileout_json/hyrax_1.9_release/
-* Compile and install it like any other BES module (be sure to use the
-Hyrax-1.9 release BES)
-* Check out the latest OLFS:
-https://scm.opendap.org/svn/branch/olfs/release/hyrax-1.9/
-* Compile and install as normal.
-* Start Hyrax and try it out.
-
 ==== Soliciting the JSON Response
 
 Let
-datasetUrl=http://54.84.172.19:8080/opendap/data/nc/coads_climatology.nc
-
-==== DAP4 Requests
-
-Using the DAP4 URLs to request both the DMR and the Data responses in a
-JSON encoding.
-
-*NB:* _Currently what is returned is really a JSON encoding of the DAP
-data (.dods) and metadata (.ddx) objects. When we have full DAP4 within
-Hyrax these responses will return JSON version of the DAP4 DMR and Data
-objects._
-
- DAP4 w10n JSON Metadata request ::
-  datasetUrl.dmr.json
-
- DAP4 w10n JSON Data request ::
-  datasetUrl.dap.json
-
- DAP4 Instance Object Metadata request ::
-  datasetUrl.dmr.ijsn
-
- DAP4 Instance Object Data request ::
-  datasetUrl.dap.ijsn
+datasetUrl=http://test.opendap.org/dap/data/nc/coads_climatology.nc
 
 ==== DAP2 requests
 
@@ -183,12 +130,11 @@ objects._
    Just the variable named "COADSX" ;;
     datasetUrl.ijsn?COADSX
 
-=== Examples
+
+
+=== DAP2 Examples
 
 ==== Dataset - coads_climatology.nc
-
-(I'm putting in the DAP2 dataset descriptions for now, the DAP4 will
-follow)
 
 ===== DDS
 
@@ -583,315 +529,11 @@ Attributes {
 </Dataset>
 ----
 
-===== DMR
-
-Coming Soon...
-
-==== w10n JSON (Abstract Model)
-
-===== Metadata Responses
-
-===== Single Variable Selection
-
- DAP4 Request URL ::
-  _datasetURL**.dmr.json?dap4.ce=COADSX**_
-
-Response ::
-
-----
-
-{
-  "name": "coads_climatology.nc",
-  "attributes": [
-    {
-      "name": "NC_GLOBAL",
-      "attributes": [
-        {"name": "history", "value": ["FERRET V4.30 (debug/no GUI) 15-Aug-96"]}
-      ]
-    },
-    {
-      "name": "DODS_EXTRA",
-      "attributes": [
-        {"name": "Unlimited_Dimension", "value": ["TIME"]}
-      ]
-    }
-  ],
-  "leaves": [
-    {
-      "name": "COADSX",
-      "type": "f",
-      "attributes": [
-        {"name": "units", "value": ["degrees_east"]},
-        {"name": "modulo", "value": [" "]},
-        {"name": "point_spacing", "value": ["even"]}
-      ],
-      "shape": [180]
-    }
-  ],
-  "nodes": []
-}
-----
-
-===== Entire Dataset
-
- DAP4 Request URL ::
-  _datasetURL**.dmr.json**_
-
-Response ::
-
-----
-
-{
-  "name": "coads_climatology.nc",
-  "attributes": [
-    {
-      "name": "NC_GLOBAL",
-      "attributes": [
-        {"name": "history", "value": ["FERRET V4.30 (debug/no GUI) 15-Aug-96"]}
-      ]
-    },
-    {
-      "name": "DODS_EXTRA",
-      "attributes": [
-        {"name": "Unlimited_Dimension", "value": ["TIME"]}
-      ]
-    }
-  ],
-  "leaves": [
-    {
-      "name": "COADSX",
-      "type": "f",
-      "attributes": [
-        {"name": "units", "value": ["degrees_east"]},
-        {"name": "modulo", "value": [" "]},
-        {"name": "point_spacing", "value": ["even"]}
-      ],
-      "shape": [180]
-    },
-    {
-      "name": "COADSY",
-      "type": "f",
-      "attributes": [
-        {"name": "units", "value": ["degrees_north"]},
-        {"name": "point_spacing", "value": ["even"]}
-      ],
-      "shape": [90]
-    },
-    {
-      "name": "TIME",
-      "type": "f",
-      "attributes": [
-        {"name": "units", "value": ["hour since 0000-01-01 00:00:00"]},
-        {"name": "time_origin", "value": ["1-JAN-0000 00:00:00"]},
-        {"name": "modulo", "value": [" "]}
-      ],
-      "shape": [12]
-    }
-  ],
-  "nodes": [
-    {
-      "name": "SST",
-      "attributes": [],
-      "leaves": [
-        {
-          "name": "SST",
-          "type": "f",
-          "attributes": [
-            {"name": "missing_value", "value": [-9.99999979e+33]},
-            {"name": "_FillValue", "value": [-9.99999979e+33]},
-            {"name": "long_name", "value": ["SEA SURFACE TEMPERATURE"]},
-            {"name": "history", "value": ["From coads_climatology"]},
-            {"name": "units", "value": ["Deg C"]}
-          ],
-          "shape": [12,90,180]
-        },
-        {
-          "name": "TIME",
-          "type": "f",
-          "attributes": [
-            {"name": "units", "value": ["hour since 0000-01-01 00:00:00"]},
-            {"name": "time_origin", "value": ["1-JAN-0000 00:00:00"]},
-            {"name": "modulo", "value": [" "]}
-          ],
-          "shape": [12]
-        },
-        {
-          "name": "COADSY",
-          "type": "f",
-          "attributes": [
-            {"name": "units", "value": ["degrees_north"]},
-            {"name": "point_spacing", "value": ["even"]}
-          ],
-          "shape": [90]
-        },
-        {
-          "name": "COADSX",
-          "type": "f",
-          "attributes": [
-            {"name": "units", "value": ["degrees_east"]},
-            {"name": "modulo", "value": [" "]},
-            {"name": "point_spacing", "value": ["even"]}
-          ],
-          "shape": [180]
-        }
-      ],
-      "nodes": []
-    }
-    {
-      "name": "AIRT",
-      "attributes": [],
-      "leaves": [
-        {
-          "name": "AIRT",
-          "type": "f",
-          "attributes": [
-            {"name": "missing_value", "value": [-9.99999979e+33]},
-            {"name": "_FillValue", "value": [-9.99999979e+33]},
-            {"name": "long_name", "value": ["AIR TEMPERATURE"]},
-            {"name": "history", "value": ["From coads_climatology"]},
-            {"name": "units", "value": ["DEG C"]}
-          ],
-          "shape": [12,90,180]
-        },
-        {
-          "name": "TIME",
-          "type": "f",
-          "attributes": [
-            {"name": "units", "value": ["hour since 0000-01-01 00:00:00"]},
-            {"name": "time_origin", "value": ["1-JAN-0000 00:00:00"]},
-            {"name": "modulo", "value": [" "]}
-          ],
-          "shape": [12]
-        },
-        {
-          "name": "COADSY",
-          "type": "f",
-          "attributes": [
-            {"name": "units", "value": ["degrees_north"]},
-            {"name": "point_spacing", "value": ["even"]}
-          ],
-          "shape": [90]
-        },
-        {
-          "name": "COADSX",
-          "type": "f",
-          "attributes": [
-            {"name": "units", "value": ["degrees_east"]},
-            {"name": "modulo", "value": [" "]},
-            {"name": "point_spacing", "value": ["even"]}
-          ],
-          "shape": [180]
-        }
-      ],
-      "nodes": []
-    }
-    {
-      "name": "UWND",
-      "attributes": [],
-      "leaves": [
-        {
-          "name": "UWND",
-          "type": "f",
-          "attributes": [
-            {"name": "missing_value", "value": [-9.99999979e+33]},
-            {"name": "_FillValue", "value": [-9.99999979e+33]},
-            {"name": "long_name", "value": ["ZONAL WIND"]},
-            {"name": "history", "value": ["From coads_climatology"]},
-            {"name": "units", "value": ["M/S"]}
-          ],
-          "shape": [12,90,180]
-        },
-        {
-          "name": "TIME",
-          "type": "f",
-          "attributes": [
-            {"name": "units", "value": ["hour since 0000-01-01 00:00:00"]},
-            {"name": "time_origin", "value": ["1-JAN-0000 00:00:00"]},
-            {"name": "modulo", "value": [" "]}
-          ],
-          "shape": [12]
-        },
-        {
-          "name": "COADSY",
-          "type": "f",
-          "attributes": [
-            {"name": "units", "value": ["degrees_north"]},
-            {"name": "point_spacing", "value": ["even"]}
-          ],
-          "shape": [90]
-        },
-        {
-          "name": "COADSX",
-          "type": "f",
-          "attributes": [
-            {"name": "units", "value": ["degrees_east"]},
-            {"name": "modulo", "value": [" "]},
-            {"name": "point_spacing", "value": ["even"]}
-          ],
-          "shape": [180]
-        }
-      ],
-      "nodes": []
-    }
-    {
-      "name": "VWND",
-      "attributes": [],
-      "leaves": [
-        {
-          "name": "VWND",
-          "type": "f",
-          "attributes": [
-            {"name": "missing_value", "value": [-9.99999979e+33]},
-            {"name": "_FillValue", "value": [-9.99999979e+33]},
-            {"name": "long_name", "value": ["MERIDIONAL WIND"]},
-            {"name": "history", "value": ["From coads_climatology"]},
-            {"name": "units", "value": ["M/S"]}
-          ],
-          "shape": [12,90,180]
-        },
-        {
-          "name": "TIME",
-          "type": "f",
-          "attributes": [
-            {"name": "units", "value": ["hour since 0000-01-01 00:00:00"]},
-            {"name": "time_origin", "value": ["1-JAN-0000 00:00:00"]},
-            {"name": "modulo", "value": [" "]}
-          ],
-          "shape": [12]
-        },
-        {
-          "name": "COADSY",
-          "type": "f",
-          "attributes": [
-            {"name": "units", "value": ["degrees_north"]},
-            {"name": "point_spacing", "value": ["even"]}
-          ],
-          "shape": [90]
-        },
-        {
-          "name": "COADSX",
-          "type": "f",
-          "attributes": [
-            {"name": "units", "value": ["degrees_east"]},
-            {"name": "modulo", "value": [" "]},
-            {"name": "point_spacing", "value": ["even"]}
-          ],
-          "shape": [180]
-        }
-      ],
-      "nodes": []
-    }
- 
-  ]
-}
-----
 
 ==== Data Responses
 
 ===== Single Variable Selection
 
- DAP4 Request URL ::
-  _datasetURL**.dap.json?dap4.ce=COADSX**_
  DAP2 Request URL ::
   _datasetURL**.json?COADSX**_
 
@@ -934,8 +576,6 @@ Response ::
 
 ===== Entire Dataset
 
- DAP4 Request URL ::
-  _datasetURL**.dap.json**_
  DAP2 Request URL ::
   _datasetURL**.json**_
 
@@ -1209,281 +849,11 @@ Response ::
 
 === Instance Model JSON
 
-==== Metadata Responses
-
-===== Single Variable Selection
-
- DAP4 Request URL ::
-  _datasetURL**.dmr.ijsn?dap4.ce=COADSX**_
-
-Response ::
-
----- 
-{
- "name": "coads_climatology.nc",
- "NC_GLOBAL": {
-   "history": ["FERRET V4.30 (debug/no GUI) 15-Aug-96"]
- },
- "DODS_EXTRA": {
-   "Unlimited_Dimension": ["TIME"]
- },
- "COADSX":  {
-   "units": ["degrees_east"],
-   "modulo": [" "],
-   "point_spacing": ["even"]
- }
-}
-----
-
-===== Entire Dataset
-
- DAP4 Request URL ::
-  _datasetURL**.dmr.ijsn**_
-
-Response ::
-
----- 
-{
- "name": "coads_climatology.nc",
- "NC_GLOBAL": {
-   "history": ["FERRET V4.30 (debug/no GUI) 15-Aug-96"]
- },
- "DODS_EXTRA": {
-   "Unlimited_Dimension": ["TIME"]
- },
- "COADSX":  {
-   "units": ["degrees_east"],
-   "modulo": [" "],
-   "point_spacing": ["even"]
- },
- "COADSY":  {
-   "units": ["degrees_north"],
-   "point_spacing": ["even"]
- },
- "TIME":  {
-   "units": ["hour since 0000-01-01 00:00:00"],
-   "time_origin": ["1-JAN-0000 00:00:00"],
-   "modulo": [" "]
- },
- "SST": {
-  "SST":  {
-    "missing_value": [-9.99999979e+33],
-    "_FillValue": [-9.99999979e+33],
-    "long_name": ["SEA SURFACE TEMPERATURE"],
-    "history": ["From coads_climatology"],
-    "units": ["Deg C"]
-  },
-  "TIME":  {
-    "units": ["hour since 0000-01-01 00:00:00"],
-    "time_origin": ["1-JAN-0000 00:00:00"],
-    "modulo": [" "]
-  },
-  "COADSY":  {
-    "units": ["degrees_north"],
-    "point_spacing": ["even"]
-  },
-  "COADSX":  {
-    "units": ["degrees_east"],
-    "modulo": [" "],
-    "point_spacing": ["even"]
-  }
- },
- "AIRT": {
-  "AIRT":  {
-    "missing_value": [-9.99999979e+33],
-    "_FillValue": [-9.99999979e+33],
-    "long_name": ["AIR TEMPERATURE"],
-    "history": ["From coads_climatology"],
-    "units": ["DEG C"]
-  },
-  "TIME":  {
-    "units": ["hour since 0000-01-01 00:00:00"],
-    "time_origin": ["1-JAN-0000 00:00:00"],
-    "modulo": [" "]
-  },
-  "COADSY":  {
-    "units": ["degrees_north"],
-    "point_spacing": ["even"]
-  },
-  "COADSX":  {
-    "units": ["degrees_east"],
-    "modulo": [" "],
-    "point_spacing": ["even"]
-  }
- },
- "UWND": {
-  "UWND":  {
-    "missing_value": [-9.99999979e+33],
-    "_FillValue": [-9.99999979e+33],
-    "long_name": ["ZONAL WIND"],
-    "history": ["From coads_climatology"],
-    "units": ["M/S"]
-  },
-  "TIME":  {
-    "units": ["hour since 0000-01-01 00:00:00"],
-    "time_origin": ["1-JAN-0000 00:00:00"],
-    "modulo": [" "]
-  },
-  "COADSY":  {
-    "units": ["degrees_north"],
-    "point_spacing": ["even"]
-  },
-  "COADSX":  {
-    "units": ["degrees_east"],
-    "modulo": [" "],
-    "point_spacing": ["even"]
-  }
- },
- "VWND": {
-  "VWND":  {
-    "missing_value": [-9.99999979e+33],
-    "_FillValue": [-9.99999979e+33],
-    "long_name": ["MERIDIONAL WIND"],
-    "history": ["From coads_climatology"],
-    "units": ["M/S"]
-  },
-  "TIME":  {
-    "units": ["hour since 0000-01-01 00:00:00"],
-    "time_origin": ["1-JAN-0000 00:00:00"],
-    "modulo": [" "]
-  },
-  "COADSY":  {
-    "units": ["degrees_north"],
-    "point_spacing": ["even"]
-  },
-  "COADSX":  {
-    "units": ["degrees_east"],
-    "modulo": [" "],
-    "point_spacing": ["even"]
-  }
- }
-}
-----
-
----- 
-{
- "name": "coads_climatology.nc",
- "NC_GLOBAL": {
-   "history": ["FERRET V4.30 (debug/no GUI) 15-Aug-96"]
- },
- "DODS_EXTRA": {
-   "Unlimited_Dimension": ["TIME"]
- },
- "COADSX":  {
-   "units": ["degrees_east"],
-   "modulo": [" "],
-   "point_spacing": ["even"]
- },
- "COADSY":  {
-   "units": ["degrees_north"],
-   "point_spacing": ["even"]
- },
- "TIME":  {
-   "units": ["hour since 0000-01-01 00:00:00"],
-   "time_origin": ["1-JAN-0000 00:00:00"],
-   "modulo": [" "]
- },
- "SST": {
-  "SST":  {
-    "missing_value": [-9.99999979e+33],
-    "_FillValue": [-9.99999979e+33],
-    "long_name": ["SEA SURFACE TEMPERATURE"],
-    "history": ["From coads_climatology"],
-    "units": ["Deg C"]
-  },
-  "TIME":  {
-    "units": ["hour since 0000-01-01 00:00:00"],
-    "time_origin": ["1-JAN-0000 00:00:00"],
-    "modulo": [" "]
-  },
-  "COADSY":  {
-    "units": ["degrees_north"],
-    "point_spacing": ["even"]
-  },
-  "COADSX":  {
-    "units": ["degrees_east"],
-    "modulo": [" "],
-    "point_spacing": ["even"]
-  }
- },
- "AIRT": {
-  "AIRT":  {
-    "missing_value": [-9.99999979e+33],
-    "_FillValue": [-9.99999979e+33],
-    "long_name": ["AIR TEMPERATURE"],
-    "history": ["From coads_climatology"],
-    "units": ["DEG C"]
-  },
-  "TIME":  {
-    "units": ["hour since 0000-01-01 00:00:00"],
-    "time_origin": ["1-JAN-0000 00:00:00"],
-    "modulo": [" "]
-  },
-  "COADSY":  {
-    "units": ["degrees_north"],
-    "point_spacing": ["even"]
-  },
-  "COADSX":  {
-    "units": ["degrees_east"],
-    "modulo": [" "],
-    "point_spacing": ["even"]
-  }
- },
- "UWND": {
-  "UWND":  {
-    "missing_value": [-9.99999979e+33],
-    "_FillValue": [-9.99999979e+33],
-    "long_name": ["ZONAL WIND"],
-    "history": ["From coads_climatology"],
-    "units": ["M/S"]
-  },
-  "TIME":  {
-    "units": ["hour since 0000-01-01 00:00:00"],
-    "time_origin": ["1-JAN-0000 00:00:00"],
-    "modulo": [" "]
-  },
-  "COADSY":  {
-    "units": ["degrees_north"],
-    "point_spacing": ["even"]
-  },
-  "COADSX":  {
-    "units": ["degrees_east"],
-    "modulo": [" "],
-    "point_spacing": ["even"]
-  }
- },
- "VWND": {
-  "VWND":  {
-    "missing_value": [-9.99999979e+33],
-    "_FillValue": [-9.99999979e+33],
-    "long_name": ["MERIDIONAL WIND"],
-    "history": ["From coads_climatology"],
-    "units": ["M/S"]
-  },
-  "TIME":  {
-    "units": ["hour since 0000-01-01 00:00:00"],
-    "time_origin": ["1-JAN-0000 00:00:00"],
-    "modulo": [" "]
-  },
-  "COADSY":  {
-    "units": ["degrees_north"],
-    "point_spacing": ["even"]
-  },
-  "COADSX":  {
-    "units": ["degrees_east"],
-    "modulo": [" "],
-    "point_spacing": ["even"]
-  }
- }
-}
-----
 
 ==== Data Responses
 
 ===== Single Variable Selection
 
- DAP4 Request URL ::
-  _datasetURL.dap**.ijsn?dap4.ce=COADSX**_
  DAP2 Request URL ::
   _datasetURL**.ijsn?COADSX**_
 
@@ -1499,8 +869,6 @@ Response ::
 
 ===== Entire Dataset
 
- DAP4 Request URL ::
-  _datasetURL**.dap.ijsn**_
  DAP2 Request URL ::
   _datasetURL**.ijsn**_
 
@@ -1541,3 +909,70 @@ Response ::
 
 ----
 
+
+== CoverageJSON
+
+CoverageJSON uses heuristics to determine if a data set is suitable for CoverageJSON expression.
+You can take advantage of the CoverageJSON feature in the following ways:
+
+=== Using the DAP2 Data Request Form
+
+On the DAP2 form, this option shows as a button.
+
+* Click the _Get as CoverageJSON_ button in the Data Request Form:
++
+image:covjson_button.png[CovJSON file,500,auto]
+
+To get the covjson response you
+
+* Append `.covjson` to the URL:
+
+** *Before:*
+http://test.opendap.org:8080/opendap/data/nc/coads_climatology.nc
+
+** *After:*
+http://test.opendap.org:8080/opendap/data/nc/coads_climatology.nc.covjson
+
+=== DAP4
+
+In DAP4, there is no such button, but adding the `.covjson` to the URL, it downloads
+the data response in json form (full dataset). It is a secondary  encoding of the primary 
+DAP4 response.
+
+
+== JSON-LD
+
+This release Hyrax adds link:https://json-ld.org[JSON-LD]
+content to every browser-navigable catalog page 
+(i.e. _*/contents.html_") and to every dataset/granule OPeNDAP 
+Data Access Form. Along with the site map generation,
+this feature can be used to assist search engines to
+catalog, index, and find the data that you want the world to access.
+
+=== Theory of Operation
+
+The JSON-LD is dynamically built from the metadata. It uses the MDS metadata if it is there; otherwise, it loads it from the file.
+
+=== Configuration Instructions
+
+//Talk about how to disable, maybe?
+
+The server ships with this feature enabled. By default the publisher information 
+is set to OPeNDAP:
+
+----
+BES.ServerAdministrator=email:support@opendap.org
+BES.ServerAdministrator+=organization:OPeNDAP Inc.
+BES.ServerAdministrator+=street:165 NW Dean Knauss Dr.
+BES.ServerAdministrator+=city:Narragansett
+BES.ServerAdministrator+=region:RI
+BES.ServerAdministrator+=postalCode:02882
+BES.ServerAdministrator+=country:US
+BES.ServerAdministrator+=telephone:+1.401.575.4835
+BES.ServerAdministrator+=website:http://www.opendap.org
+----
+
+This information can and should be updated to your organization's information.
+You can update the information in `/etc/bes/bes.conf`;
+however, you should configure the parameters in `site.conf`.
+For more information, see the <<#site_conf,site.conf section>>.
