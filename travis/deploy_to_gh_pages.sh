@@ -30,6 +30,16 @@ cp -R ../images images
 # Here we add an index.html that redirects to Master_Hyrax_Guide.html
 echo "${index_html}" | tee index.html
 
+sed -i '/<\/head>/i\
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RG7LQNLXQL"></script>\
+<script>\
+window.dataLayer = window.dataLayer || [];\
+function gtag(){dataLayer.push(arguments);}\
+gtag("js", new Date());\
+gtag("config", "G-RG7LQNLXQL");\
+</script>' Master_Hyrax_Guide.html
+
+
 #cat ${GUIDE_FILE} | sed -e "s/GUIDE_VERSION_TEMPLATE/${GUIDE_VERSION}/g" > foo
 #mv -f foo ${GUIDE_FILE}
 #head -25 ${GUIDE_FILE}
