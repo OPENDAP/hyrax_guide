@@ -4,15 +4,29 @@
 :numbered:
 :toc:
 
-Installing a Hyrax binary release typically involves the following:
+There are broadly three ways to install and run Hyrax Data Server
 
-* https://www.opendap.org/software/hyrax-data-server[Download the
+- <<dockerhub, Docker Hub>>
+- <<binaries, (pre-compiled) Binaries>>
+- <<source, Github source files>>
+
+
+[[dockerhub]]
+include::Hyrax_DockerHub_Installation.adoc[lines="1,6..-1", leveloffset=+1]
+
+
+[[binaries]]
+== (pre-compiled) Binaries
+
+Installing a Hyrax binary release typically involves the following steps
+
+. https://www.opendap.org/software/hyrax-data-server[Download the
   latest Hyrax release] usually composed of:
-** 2 RPM files (one for _libdap_, one for the _BES_).
-** The OLFS binary distribution file.
-* Install the _libdap_ RPM.
-* Install the _BES_ RPM.
-* Unpack the OLFS distribution file, and install the _opendap.war_
+.. 2 RPM files (one for _libdap_, one for the _BES_).
+.. The OLFS binary distribution file.
+. Install the _libdap_ RPM.
+. Install the _BES_ RPM.
+. Unpack the OLFS distribution file, and install the _opendap.war_
   file into your Tomcat instance's _webapps_ directory.
 
 TIP: The detailed download and installation instructions for Hyrax are
@@ -21,9 +35,19 @@ the latest release and its associated installation details on
 https://www.opendap.org/software/hyrax-data-server[the Hyrax downloads
 page].
 
-include::Hyrax_BES_Installation.adoc[lines="1,6..-1", leveloffset=+1]
+include::Hyrax_BES_Installation.adoc[lines="1,6..-1", leveloffset=+2]
 
-include::Hyrax_OLFS_Installation.adoc[lines="1,6..-1", leveloffset=+1]
+include::Hyrax_OLFS_Installation.adoc[lines="1,6..-1", leveloffset=+2]
+
+[[source]]
+== Github Source Code
+
+If you are interested in working on Hyrax or want to build the
+server from source code (as opposed to using the prebuilt binaries that we
+provide), you can get signed source distributions from the
+https://www.opendap.org/software/hyrax-data-server[download page]
+referenced above. See also the <<for-developers, For Software Developers>>
+section below.
 
 == WCS Installation
 
@@ -32,11 +56,4 @@ For more information about configuring WCS with your installation of Hyrax,
 please refer to the <<WCS_installation_guide, WCS Installation Guide>> that
 appears later in this document.
 
-== Source Code Builds
 
-If you are interested in working on Hyrax or want to build the
-server from source code (as opposed to using the prebuilt binaries that we
-provide), you can get signed source distributions from the
-https://www.opendap.org/software/hyrax-data-server[download page]
-referenced above. See also the <<for-developers, For Software Developers>>
-section below.
