@@ -4,6 +4,8 @@
 :numbered:
 :toc:
 
+Hyrax is a data server that implements the DAP2 and DAP4 protocols, works with a number of different data formats and supports a wide variety of customization options from tailoring the look of the server's web pages to complex server-side processing operations. This page describes how to build the server's source code. If you're working on a Linux or OS/X computer, the process is similar so we describe only the linux case; we do not support building the server on Windows operating systems.
+
 There are broadly three ways to install and run Hyrax Data Server
 
 - <<dockerhub, Docker Hub>>
@@ -18,16 +20,21 @@ include::Hyrax_DockerHub_Installation.adoc[lines="1,6..-1", leveloffset=+1]
 [[binaries]]
 == (pre-compiled) Binaries
 
+Prerequisites:
+
+. `Java>=11`
+. `Tomcat>=9`
+
 Installing a Hyrax binary release typically involves the following steps
 
-. https://www.opendap.org/software/hyrax-data-server[Download the
-  latest Hyrax release] usually composed of:
-.. 2 RPM files (one for _libdap_, one for the _BES_).
-.. The OLFS binary distribution file.
-. Install the _libdap_ RPM.
-. Install the _BES_ RPM.
-. Unpack the OLFS distribution file, and install the _opendap.war_
-  file into your Tomcat instance's _webapps_ directory.
+. **Download the latest Hyrax release** (https://www.opendap.org/hyrax-1-17/[Hyrax 1.17]). It is composed of:
+.. 2 RPM files (one for `libdap`, one for the `BES`).
+.. The OLFS binary distribution file. You can also install the `OLFS Automatic robots.txt`, if available.
+. **Install the `libdap` RPM.**
+. **Install the `BES` RPM**.
+. **Unpack the `OLFS` distribution file**, and install the `opendap.war`
+  file into your Tomcat instance's `webapps` directory.
+. (optional) `ncWMS2`.  You will need to use the https://reading-escience-centre.github.io/edal-java/[EDAL] web page to locate the latest `ncWMS2` “Servlet Container” software bundle as a WAR file. Install it into the same Tomcat instance as the OLFS. See https://opendap.github.io/hyrax_guide/Master_Hyrax_Guide.html#WMS_Service[here for more instructions].
 
 TIP: The detailed download and installation instructions for Hyrax are
 published on the download page for each release of the server. Find
@@ -40,7 +47,9 @@ include::Hyrax_BES_Installation.adoc[lines="1,6..-1", leveloffset=+2]
 include::Hyrax_OLFS_Installation.adoc[lines="1,6..-1", leveloffset=+2]
 
 [[source]]
-== Github Source Code
+include::Hyrax_Source_Installation.adoc[lines="1,6..-1", leveloffset=+1]
+
+
 
 If you are interested in working on Hyrax or want to build the
 server from source code (as opposed to using the prebuilt binaries that we

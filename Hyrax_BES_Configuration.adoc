@@ -7,16 +7,13 @@
 [[bess-configuration]]
 == BES Configuration ==
 
-Building the BES and its data handlers from source (or installing from
-the Linux RPMs) will provide the default installation with data and a
-valid configuration. This is suitable for testing. There are two main ways 
-that you can costumize the BES for your data by modifying
+Once Hyrax is installed and running, you are free to keep the `Default` configurations 
+or costumize it to best fit your need and that of your data users. For the `BES`, there are two main ways that you can costumize the `BES` for your data by modifying
 
-1. _bes.conf_ file. Has default configurations, does not persist through updates.
-2. _site.conf_ file. Persists through updates.
+<<bes_conf, Modifying the bes.conf file (Not Recommended)>>
 
-Below we first describe the _bes.conf_ file in <<bes_conf>>, and subsequently 
-describe the recommended approach in <<site_conf>>. 
+<<site_conf, Changing the site.conf file (Recommended)>>
+
 
 NOTE: The syntax for modifying default values in _bes.conf_ is the same as that
 for modifing _site.conf_ file.
@@ -24,10 +21,10 @@ for modifing _site.conf_ file.
 [[bes_conf]]
 === Location of the BES Configuation File ===
 
-The BES configuration file is called _bes.conf_ and can be found in
-_$prefix/etc/bes/_ if you built the software from source or in
-_/etc/bes/_ if you used our RPM packages. By default _$prefix_ is in
-_/usr/local_.
+The `BES` default configuration file is called `bes.conf` and can be found in
+`$prefix/etc/bes/` if you built the software from source or in
+`/etc/bes/` if you used our RPM packages. By default `$prefix` is in
+`/usr/local`.
 
 === Basic format of parameters ===
 

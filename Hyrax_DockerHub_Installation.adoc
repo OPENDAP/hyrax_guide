@@ -1,19 +1,19 @@
-= Installing via Docker Hub =
+= Docker Installation (Recommended) =
 :Miguel Jimenez-Urias <mjimenez@opendap.org>:
 {docdate}
 :numbered:
 :toc:
 
+This is the simplest way to install and use the latest release of Hyrax. 
 
+== Prerequisites
 
-This is the simplest way to install and get the latest Hyrax data server Running. Before doing so, we make the following assumptions about your system:
-
-. Have `Docker` running in the background.
-. You have a data folder under the directory `~/opendap/data/` .
-. Your data is stored in HDF5/NetCDF4 format.
+. `Docker` is running in the background.
+. You have a data folder. In this guide, we will assume it is `~/tmp/data/` .
+. Your data is stored in HDF5/NetCDF4 format, csv, or any other file format for which Hyrax has a data Handler (https://www.opendap.org/software/hyrax-data-server/[see all supported file formats by Hyrax])
 . OSX or Linux platform.
 
-== 3 Easy Steps to run Hyrax and serve data 
+== Run Hyrax and serve data
 
 . **Open a terminal and get the latest snapshot of hyrax**
 
@@ -21,18 +21,20 @@ This is the simplest way to install and get the latest Hyrax data server Running
 docker pull opendap/hyrax:snapshot
 ```
 
-This will download the latest stable, complete build of Hyrax (1.17.0). 
+TIP: Do not use `hyrax:latest`. We use Travis for CI/CD and `hyrax:snapshot` is fully tested, and packs with the correct versions needed to build Hyrax. Using `latest`, ironically may pull an older version of Hyrax.
+
+This will download the latest stable, complete build of Hyrax. 
 [start=2]
 . **Run Hyrax and make your data available on port `8080`**
 
 ```
 docker run -d -h hyrax -p 8080:8080 \
 --platform linux/amd64 \
---volume ~/opendap/data:/usr/share/hyrax \
+--volume ~/tmp/data:/usr/share/hyrax \
 --name=hyrax opendap/hyrax:snapshot
 ```
 
-The command above identifies the location of the data volume and assigns it to `/usr/share/hyrax`.
+The command above identifies the location of your data volume (`~/tmp/data`) and assigns it to `/usr/share/hyrax`, which is where Hyrax looks for data in the docker container.
 [start=3]
 . **Check data is available on local host**
 
@@ -40,7 +42,7 @@ By now, you can paste onto any browser the following url to see Hyrax's landing 
 ```
 http://localhost:8080/opendap/hyrax
 ```
-Make sure all your data is available.
+Make sure all your data is available and try to download some of it.
 
-If you want to learn how change the different configurations, check the overview on the xref:Hyrax_Configuration[Configuration]
+The installation of Hyrax comes with various default configutations. If you want to learn how to change the various default configurations, check the overview on the xref:Hyrax_Configuration[Configuration]
 
