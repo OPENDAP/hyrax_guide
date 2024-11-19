@@ -46,6 +46,12 @@ include::Hyrax_BES_Installation.adoc[lines="1,6..-1", leveloffset=+2]
 
 include::Hyrax_OLFS_Installation.adoc[lines="1,6..-1", leveloffset=+2]
 
+
+WARNING: If you are upgrading Hyrax from any previous installation older than 1.16.5, **read this!** The internal format of the `olfs.xml` file has been revised. No previous version of this file will work with Hyrax >=1.16.5. In order to upgrade your system, move your old configuration directory aside (`mv /etc/olfs ~/olfs-OLD`) and then follow the instruction to install a new `OLFS`. Once you have it installed and running you will need to review your old configuration and make the appropriate changes to the new `olfs.xml` to restore your server's behavior. The other `OLFS` configuration files have not undergone any structural changes and you may simply replace the new ones that were installed with copies of your previously working ones.
+
+NOTE: To make the server restart with when host boots, use `systemctl enable besd` and `systemctl enable tomcat`, or `chkconfig besd on` and `chkconfig tomcat on` depending on the specifics of your Linux distribution.
+
+
 [[source]]
 include::Hyrax_Source_Installation.adoc[lines="1,6..-1", leveloffset=+1]
 

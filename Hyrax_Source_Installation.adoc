@@ -15,7 +15,7 @@ To build and install the server, you need to perform two steps:
 [[setup]]
 == Setup Rocky 8 (RHEL8) to build source code
 
-The latest version of Hyrax (1.17.0) is build and tested using RHEL8. Below we describe the tools needed to build source code.
+The latest version of Hyrax (1.17.0) is build and tested using RHEL8. Below we describe the tools needed to build source code, and how to install them on Linux.
 
 . **Get the commands `ps`, `which`, etc.**
 

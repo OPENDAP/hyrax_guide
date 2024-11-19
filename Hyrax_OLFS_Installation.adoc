@@ -152,3 +152,9 @@ server's output, make sure to run the command `bin/shutdown.sh`
 to shutdown Tomcat. If you don't, you may get errors when you next try
 to start the Tomcat server.
 ////
+
+
+
+NOTE: If you are installing the `OLFS` in conjunction with `ncWMS2` version 2.0 or higher, copy both the `opendap.war` and the `ncWMS2.war` files into the Tomcat `webapps` directory. (Re)Start Tomcat.
+
+
