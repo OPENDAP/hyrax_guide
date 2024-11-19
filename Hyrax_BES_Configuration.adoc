@@ -8,7 +8,7 @@
 == BES Configuration ==
 
 Once Hyrax is installed and running, you are free to keep the `Default` configurations 
-or costumize it to best fit your need and that of your data users. For the `BES`, there are two main ways that you can costumize the `BES` for your data by modifying
+or customize it to best fit your need and that of your data users. For the `BES`, there are two main ways that you can costumize the `BES` for your data by modifying
 
 <<bes_conf, Modifying the bes.conf file (Not Recommended)>>
 

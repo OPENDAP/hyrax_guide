@@ -100,7 +100,7 @@ This helps so that the server builds an installation locally, something that str
 source spath.sh 
 ```
 
-WARNING: Many of the problems people have with the build stem from not setting the shell correctly for the build. In the above section, make sure you run source spath.sh before you run any of the building/compiling/testing commands that use the source code or build files.
+WARNING: Many of the problems people have with the build stem from not setting the shell correctly for the build. In the above section, make sure you run `source spath.sh` before you run any of the building/compiling/testing commands that use the source code or build files.
 
 [start=4]
 . **Clone the three code repos for the server plus the hyrax dependencies**
