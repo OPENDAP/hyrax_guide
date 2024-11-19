@@ -21,17 +21,14 @@ document Master_Hyrax_OLFS_Installation.
 
 It is necessary that you download and install both the _libdap_ and _BES_ binaries.
 
-. Visit the 
-  https://www.opendap.org/software/hyrax-data-server#block-hyraxversions-menu[Hyrax
-  Data Server Page].
-. Select the most recent in the list of *Available Versions*.
+. Visit the official OPeNDAP website and go to *Latest Release*.
 . Scroll down the following page until you reach the section entitled 
-  *Binaries for Hyrax x.x.x*, then continue scrolling until you
+  *Linux Binaries*, then continue scrolling until you
   see the heading titled *BES*.
-. You need to download both the _libdap_ and _BES_ RPMs which should be named
-  _libdap-x.x.x_ and _bes-x.x.x_.
+. You need to download both the `libdap` and `BES` RPMs which should be named
+  `libdap-x.x.x` and `bes-x.x.x`.
 . The downloaded files should be named something like
-  _libdap-x.x.x.el6.x86_64.rpm_ and _bes-x.x.x.static.el6.x86_64.rpm_.
+  `libdap-x.x.x.el6.x86_64.rpm` and `bes-x.x.x.static.el6.x86_64.rpm`.
 
 WARNING: In order to install the RPMs on your system, you *must* be running
 a 64bit OS. If you are running 32bit OS, attempting to install the 
@@ -43,9 +40,10 @@ from the Hyrax install page.
 ////
 == Install
 
-. Use yum to install the libdap and bes RPMs: +
-  `sudo yum install libdap-3.x.x.rpm bes-3.x.x.rpm`).
-. At this point you can test the BES by typing the following into a terminal:
+. **Install the libdap and bes RPMs**: +
+  `sudo yum install libdap-3.x.x.rpm bes-3.x.x.rpm`
+
+. **Test the `BES`**:
 .. start it: +
    `sudo service besd start` +
    (Or use the script in _/etc/init.d with sudo_: _/etc/init.d/besd start_)

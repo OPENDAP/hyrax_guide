@@ -35,7 +35,7 @@ include::Master_Hyrax_Overview.adoc[lines="1,8..-1"]
 
 // This document explains how to install Hyrax.
 [[Download_and_Install_Hyrax]]
-include::Master_Hyrax_Installation.adoc[lines="1,8..-1"]
+include::Master_Hyrax_Installation.adoc[lines="1,7..-1"]
 
 // General configuration informat
 include::Master_Hyrax_Configuration.adoc[lines="1,6..-1"]

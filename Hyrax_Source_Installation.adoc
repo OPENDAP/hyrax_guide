@@ -1,0 +1,160 @@
+= Hyrax GitHub Source Build
+:Miguel Jimenez-Urias <mjimenez@opendap.org>:
+{docdate}
+:numbered:
+:toc:
+
+This describes how to get and build Hyrax from our GitHub repositories.
+
+To build and install the server, you need to perform two steps:
+
+. <<setup, Set up the computer to build source code>> (Install a `Java` compiler; install a `C/C++` compiler; add some other tools)
+. <<semiauto, Build Hyrax using shell scripts>>
+
+
+[[setup]]
+== Setup Rocky 8 (RHEL8) to build source code
+
+The latest version of Hyrax (1.17.0) is build and tested using RHEL8. Below we describe the tools needed to build source code, and how to install them on Linux.
+
+. **Get the commands `ps`, `which`, etc.**
+
+```
+dnf install -y procps
+```
+
+[start=2]
+. **Get the `C++` environment plus build tools.**
+
+```
+dnf install -y git gcc-c++ flex bison cmake autoconf automake libtool emacs bzip2 vim bc
+```
+
+[start=3]
+. **Development library versions**
+
+```
+dnf install -y openssl-devel libuuid-devel readline-devel zlib-devel bzip2-devel libjpeg-devel libxml2-devel curl-devel libicu-devel libtirpc-devel
+```
+
+[start=4]
+. **Install Java**
+
+```
+dnf install -y java-17-openjdk java-17-openjdk-devel ant 
+```
+
+[start=5]
+. **Setup `DNF` so that we can load in some obscure packages from `EPEL`, etc., repos.**
+
+```
+dnf install dnf-plugins-core
+dnf install epel-release
+dnf config-manager --set-enabled powertools
+```
+
+[start=6]
+. **Install `CppUnit` and some more development libraries.**
+
+
+```
+dnf install -y cppunit cppunit-devel openjpeg2-devel jasper-devel
+```
+
+[start=7]
+. **Install the RPM tools**
+
+```
+dnf install -y rpm-devel rpm-build redhat-rpm-config
+```
+
+[start=8]
+. **Install the AWS CLI **
+
+```
+dnf install -y awscli
+```
+
+
+[[semiauto]]
+== Build Hyrax using semi-automatic build tools from repo
+
+Once the tools are installed on your local Linux (RHEL8) machine, we proceed to
+
+[start=1]
+. **Clone the Hyrax project repo**.
+```
+git clone https://github.com/OPENDAP/hyrax.git
+```
+and then `cd hyrax`.
+
+[start=2]
+. **Use `bash`.**
+The shell scripts in this repo assume you are using bash.
+
+[start=3]
+. **Set up some environment variables**. 
+This helps so that the server builds an installation locally, something that streamlines development.
+
+```
+source spath.sh 
+```
+
+WARNING: Many of the problems people have with the build stem from not setting the shell correctly for the build. In the above section, make sure you run `source spath.sh` before you run any of the building/compiling/testing commands that use the source code or build files.
+
+[start=4]
+. **Clone the three code repos for the server plus the hyrax dependencies**
+Because Hyrax data server is composed of https://github.com/OPENDAP/bes[BES], https://github.com/OPENDAP/olfs[OLFS] and https://github.com/OPENDAP/libdap4[libdap], each with their own separate repository, each needs to be compiled. The simple following shell scrips clones and downloads the repos:
+```
+./hyrax_clone.sh -v
+```
+
+[start=5]
+. **Build the code**, including the dependencies.
+
+```
+./hyrax_build.sh -v
+```
+
+[start=6]
+. **Test the Server**
+
+We strongly recommend to test the server. For that, do:
+
+[loweralpha, start=1]
+.. Start the `BES` with
+
+```
+besctl start
+```
+
+[loweralpha, start=2]
+.. Start the `OLFS` by:
+
+```
+./build/apache-tomcat-7.0.57/bin/startup.sh
+```
+
+[loweralpha, start=3]
+.. Look at Hyrax's landing page on localhost, i.e. paste the following URL on a browser:
+
+```
+http://localhost:8080/opendap
+```
+
+You should see a directory named `data` and following that link should lead to more data. The server will be accessible to clients other than a web browser.
+
+[loweralpha, start=4]
+.. To test the `BES` function independently of the front end, use
+
+```
+bescmdln
+```
+This snhould start the `BESClient>`. Then do:
+```
+BESClient> show version
+```
+and exit as follows:
+```
+BESClient> exit
+```
