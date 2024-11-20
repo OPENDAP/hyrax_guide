@@ -113,13 +113,6 @@ where email is the key and support@opendap.org is the value.
 4. Save your updates to _site.conf_.
 5. Restart the server.
 
-[[site-conf-example-configuration0, site.conf Configuration Example: Using Hyrax to serve Data with Groups]]
-=== _site.conf_ Configuration Example: Using Hyrax to serve that with Groups
-
-
-
-
-
 [[site-conf-example-configuration, site.conf Configuration Example: Administrator parameters]]
 === _site.conf_ Configuration Example: Administrator parameters
 
