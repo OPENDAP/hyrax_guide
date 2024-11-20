@@ -113,6 +113,37 @@ where email is the key and support@opendap.org is the value.
 4. Save your updates to _site.conf_.
 5. Restart the server.
 
+[[site-conf-example-configuration0, site.conf Configuration Example: Groups in NetCDF4 and HDF5]]
+=== _site.conf_ Configuration Example: Groups in NetCDF4 and HDF5
+
+By default, the `Group` representation on a dataset is flattened to accomodate https://cfconventions.org/cf-conventions/cf-conventions.pdf[CF 1.7 conventions]. In addition, the default `NC-handler` that is used for any `.nc4` dataset is based on "_Classic NetCDF model_" (`netCDF-3`), which does not incorporate many of the Enhanced NetCDF model (`netCDF4`) features. As a result, to serve `.nc4` data that may contain DAP4 elements not present in DAP2 (see https://opendap.github.io/dap4-specification/DAP4.html#_how_dap4_differs_from_dap2[diagram] for comparison with DAP2), or serve H5 datasets with unflattened `Group` representation, one must make the following changes to the default configuration:
+
+. Set `H5.EnableCF=false` and `H5.EnableCFDMR=true`.
+. Assign the h5 handler when serving `.nc4` data via Hyrax.
+
+
+To enable these changes the `site.conf` must have the following parameters:
+
+----
+BES.Catalog.catalog.TypeMatch=
+BES.Catalog.catalog.TypeMatch+=csv:.*\.csv(\.bz2|\.gz|\.Z)?$;
+BES.Catalog.catalog.TypeMatch+=reader:.*\.(dds|dods|data_ddx|dmr|dap)$;
+BES.Catalog.catalog.TypeMatch+=dmrpp:.*\.(dmrpp)(\.bz2|\.gz|\.Z)?$;
+BES.Catalog.catalog.TypeMatch+=ff:.*\.dat(\.bz2|\.gz|\.Z)?$;
+BES.Catalog.catalog.TypeMatch+=gdal:.*\.(tif|TIF)$|.*\.grb\.(bz2|gz|Z)?$|.*\.jp2$|.*/gdal/.*\.jpg$;
+BES.Catalog.catalog.TypeMatch+=h4:.*\.(hdf|HDF|eos|HDFEOS)(\.bz2|\.gz|\.Z)?$;
+BES.Catalog.catalog.TypeMatch+=ncml:.*\.ncml(\.bz2|\.gz|\.Z)?$;
+
+BES.Catalog.catalog.TypeMatch+=h5:.*\.(HDF5|h5|he5|H5)(\.bz2|\.gz|\.Z)?$;
+BES.Catalog.catalog.TypeMatch+=h5:.*\.nc4(\.bz2|\.gz|\.Z)?$;
+
+H5.EnableCF=false
+H5.EnableCFDMR=true
+----
+
+
+
+
 [[site-conf-example-configuration, site.conf Configuration Example: Administrator parameters]]
 === _site.conf_ Configuration Example: Administrator parameters
 
