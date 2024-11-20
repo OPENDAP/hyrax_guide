@@ -5,10 +5,17 @@
 :numbered:
 :toc:
 
+
+When you install Hyrax for the first time it is pre-configured
+to serve test data sets that come with each of the installed
+data handlers. This will allow you to test the server and
+make sure it is functioning correctly. After that you can customize it for your data.
+
+
 :leveloffset: +1
-include::Hyrax_Configuration.adoc[]
 include::Hyrax_BES_Configuration.adoc[]
 include::Hyrax_OLFS_Configuration.adoc[]
+include::Hyrax_Configuration.adoc[]
 include::Hyrax_Configuring_The_OLFS_To_Work_With_Multiple_BES's.adoc[]
 include::Hyrax_Logging_Configuration.adoc[]
 include::Hyrax_THREDDS_Configuration.adoc[]
