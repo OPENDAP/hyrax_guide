@@ -6,7 +6,7 @@
 
 //!!!NOTE: The external tomcat links in this doc do not work.
 [[logging-configuration]]
-== Logging Configuration Introduction
+= Logging Configuration Introduction
 
 We see logging activities falling into two categories:
 
@@ -24,7 +24,7 @@ internal problem with Hyrax, you should enable different aspects of
 the instrumentation at you site, so that we can review the output to
 determine the issue.
 
-=== Access Logging
+== Access Logging
 
 Many people will want to record access logs for their Hyrax server. *We*
 want you to keep access logs for your Hyrax server. The easiest way to
@@ -32,7 +32,7 @@ get a simple access log for Hyrax is to utilize the Tomcat/Catalina
 http://tomcat.apache.org/tomcat-5.0-doc/config/valve.html[Valve
 Component].
 
-==== AccessLogValve
+=== AccessLogValve
 
 Since Hyrax's public facade is provided by the OLFS running inside of
 the Tomcat servlet container, you may utilize Tomcat's handy access
@@ -128,7 +128,7 @@ output that looks like the example below:
 The last column is the time in milliseconds it took to service the
 request and the next to the last column is the number of bytes returned.
 
-=== Informational and Debug Logging (Using the Logback implementation of Log4j)
+== Informational and Debug Logging (Using the Logback implementation of Log4j)
 
 In general you shouldn't have to modify the default logging
 configuration for Hyrax. It may become necessary if you encounter
@@ -156,7 +156,7 @@ NOTE: We strongly recommend that you take the time to
 http://logback.qos.ch/manual/index.html[read about Logback and Log4j]
 before you attempt to manipulate the Logback configuration.
 
-==== Configuration File Location
+=== Configuration File Location
 
 Logback gets its configuration from an XML file. Hyrax locates this
 file in the following manner:
@@ -195,7 +195,7 @@ persistent content directory
 (<<OLFS-config-location, set by either the OLFS_CONFIG_DIR environment variable or in /etc/olfs>>)
 and editing that copy.
 
-==== Configuration
+=== Configuration
 
 Did you http://logback.qos.ch/manual/index.html[read about LogBack and
 Log4j]? Great!

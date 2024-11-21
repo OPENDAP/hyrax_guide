@@ -4,8 +4,10 @@
 //:numbered:
 //:toc:
 
+When you install Hyrax for the first time it is pre-configured to serve test data sets that come with each of the installed data handlers. This will allow you to test the server and make sure it is functioning correctly. After that you can customize it for your data.
+
 [[bess-configuration]]
-== BES Configuration ==
+= BES Configuration =
 
 Once Hyrax is installed and running, you are free to keep the `Default` configurations 
 or customize it to best fit your need and that of your data users. For the `BES`, there are two main ways that you can costumize the `BES` for your data by modifying
@@ -14,31 +16,31 @@ or customize it to best fit your need and that of your data users. For the `BES`
 
 <<site_conf, Changing the site.conf file (Recommended)>>
 
+WARNING: We based our recommendation on the fact that any modification of
+default parameters via the `site.conf file will persist through Hyrax updates.
 
-NOTE: The syntax for modifying default values in _bes.conf_ is the same as that
-for modifing _site.conf_ file.
+
 
 [[bes_conf]]
-=== Location of the BES Configuation File ===
+== Location of the BES Configuation File
 
 The `BES` default configuration file is called `bes.conf` and can be found in
 `$prefix/etc/bes/` if you built the software from source or in
-`/etc/bes/` if you used our RPM packages. By default `$prefix` is in
-`/usr/local`.
+`/etc/bes/` if you used our RPM packages or the docker installation. 
+By default `$prefix` is in `/usr/local`.
 
-=== Basic format of parameters ===
+== Basic format of parameters
 
 Parameters set in the BES configuration file have the following format:
 
 ----
-Name=Value
+Name=Value1
 ----
 
 If you wish to add to the value of a parameter, then you would use +=
 instead of =
 
 ----
-Name=Value1
 Name+=Value2
 ----
 
@@ -62,19 +64,19 @@ NOTE: Regular expressions can be used in the _Include_ parameter to
 match a set of files.
 
 [[site_conf]]
-=== Custom Module Configuration with _site.conf_
+== Custom Module Configuration with _site.conf_
 
-To ensure any costumization persists through updates, it is highly recommended to
-create and modify instead a _site.conf_. The _site.conf_ is a special configuration file
-that persists through updates, where you can store custom module configurations. 
-To start using site.conf, see its 
+The _site.conf_ is a special configuration file that persists through Hyrax updates Here, you can store custom module configurations.  To start using `site.conf`, see its 
 <<site-conf-config, configuration instruction section>>.
+
+
+
 
 Hyrax includes the template file _site.conf.proto_ that includes many commonly-modified settings.
 For instructions on how to use the template, see its 
 <<site-conf-proto-config, configuration instruction section>>.
 
-=== Theory of Operation
+== Theory of Operation
 
 When you launch your server, the BES loads the module configuration files that reside within `/etc/bes/modules`.
 The BES then loads _site.conf_, which resides in `/etc/bes`.
@@ -85,7 +87,10 @@ the individual module configuration files. For a detailed configuration example,
 see <<site-conf-example-configuration, the example configuration section>>.
 
 [[site-conf-config]]
-==== _site.conf_ Configuration Instructions
+=== _site.conf_ Configuration Instructions
+
+NOTE: The syntax for modifying default values in _site.conf_ is the same as that
+for modifing _bes.conf_ file.
 
 The following details how you can customize a module’s configuration with _site.conf_:
 
@@ -108,8 +113,39 @@ where email is the key and support@opendap.org is the value.
 4. Save your updates to _site.conf_.
 5. Restart the server.
 
-[[site-conf-example-configuration, site.conf Configuration Example]]
-==== _site.conf_ Configuration Example
+[[site-conf-example-configuration0, site.conf Configuration Example: Groups in NetCDF4 and HDF5]]
+=== _site.conf_ Configuration Example: Groups in NetCDF4 and HDF5
+
+By default, the `Group` representation on a dataset is flattened to accomodate https://cfconventions.org/cf-conventions/cf-conventions.pdf[CF 1.7 conventions]. In addition, the default `NC-handler` that is used for any `.nc4` dataset is based on "_Classic NetCDF model_" (`netCDF-3`), which does not incorporate many of the Enhanced NetCDF model (`netCDF4`) features. As a result, to serve `.nc4` data that may contain DAP4 elements not present in DAP2 (see https://opendap.github.io/dap4-specification/DAP4.html#_how_dap4_differs_from_dap2[diagram] for comparison with DAP2), or serve H5 datasets with unflattened `Group` representation, one must make the following changes to the default configuration:
+
+. Set `H5.EnableCF=false` and `H5.EnableCFDMR=true`.
+. Assign the h5 handler when serving `.nc4` data via Hyrax.
+
+
+To enable these changes the `site.conf` must have the following parameters:
+
+----
+BES.Catalog.catalog.TypeMatch=
+BES.Catalog.catalog.TypeMatch+=csv:.*\.csv(\.bz2|\.gz|\.Z)?$;
+BES.Catalog.catalog.TypeMatch+=reader:.*\.(dds|dods|data_ddx|dmr|dap)$;
+BES.Catalog.catalog.TypeMatch+=dmrpp:.*\.(dmrpp)(\.bz2|\.gz|\.Z)?$;
+BES.Catalog.catalog.TypeMatch+=ff:.*\.dat(\.bz2|\.gz|\.Z)?$;
+BES.Catalog.catalog.TypeMatch+=gdal:.*\.(tif|TIF)$|.*\.grb\.(bz2|gz|Z)?$|.*\.jp2$|.*/gdal/.*\.jpg$;
+BES.Catalog.catalog.TypeMatch+=h4:.*\.(hdf|HDF|eos|HDFEOS)(\.bz2|\.gz|\.Z)?$;
+BES.Catalog.catalog.TypeMatch+=ncml:.*\.ncml(\.bz2|\.gz|\.Z)?$;
+
+BES.Catalog.catalog.TypeMatch+=h5:.*\.(HDF5|h5|he5|H5)(\.bz2|\.gz|\.Z)?$;
+BES.Catalog.catalog.TypeMatch+=h5:.*\.nc4(\.bz2|\.gz|\.Z)?$;
+
+H5.EnableCF=false
+H5.EnableCFDMR=true
+----
+
+
+
+
+[[site-conf-example-configuration, site.conf Configuration Example: Administrator parameters]]
+=== _site.conf_ Configuration Example: Administrator parameters
 
 The following steps detail how you can update the BES’s 
 server administrator configuration parameters with your organization’s information:
@@ -154,7 +190,7 @@ BES.ServerAdministrator+=website:http://www.mogogogo.org
 5. Restart the server.
 
 [[site-conf-proto-config,configuration instructions section]]
-=== _site.conf.proto_ Configuration Instructions
+== _site.conf.proto_ Configuration Instructions
 
 The _site.conf.proto_ template resides in `\etc\bes`.
 If you want to take advantage of the template, 
@@ -168,7 +204,7 @@ Uncomment the configuration parameters that you want to modify and update them.
 For a site.conf configuration example, see
 <<site-conf-example-configuration, the previous section>>.
 
-=== Administration & Logging
+== Administration & Logging
 
 In the _bes.conf_ or _site.conf_ file, the _BES.ServerAdministrator_
 parameter is the address used in various mail messages returned to
@@ -190,7 +226,7 @@ Because the BES is a server in its own right, you will need to tell it
 which network port and interface to use. Assuming you are running the
 BES and OLFS (i.e., all of Hyrax) on one machine, do the following:
 
-==== User and Group Parameters ====
+=== User and Group Parameters
 
 In the bes.conf or _site.conf_ file, the BES must be started as root. One
 of the things that the BES does first is to start a listener that
@@ -210,7 +246,7 @@ BES.User=#172
 BES.Group=#14
 ----
 
-==== Setting the Networking Parameters
+=== Setting the Networking Parameters
 
 In the _bes.conf_ or _site.conf_ configuration file, we have settings for how the BES
 should listen for requests:
@@ -242,7 +278,7 @@ _BES.ServerPort_ value.
 NOTE: The OLFS always uses only the TCP socket, even if the UNIX 
 socket is present.
 
-=== Debugging Tip
+== Debugging Tip
 
 In _bes.conf_, use the _BES.ProcessManagerMethod_
 parameter to control whether the BES acts like a normal Unix server.
@@ -255,7 +291,7 @@ greatly simplifying troubleshooting.
 BES.ProcessManagerMethod=multiple
 ----
 
-==== Controlling how compressed files are treated
+=== Controlling how compressed files are treated
 
 Compression parameters are configured in the bes.conf configuration
 file.
@@ -294,7 +330,7 @@ the cache holds more data than this value. Ideally this value should be
 several times the size of the largest file you plan to serve.
 
 [[Loading_Modules]]
-==== Loading Software Modules
+=== Loading Software Modules
 
 Virtually all of the BES's functions are contained in modules that are
 loaded when the server starts up. Each module is a shared-object
@@ -334,7 +370,7 @@ file. For example, any parameters specific to the netcdf data handler
 will be included in the _nc.conf_ file.
 
 [[Pointing_to_data]]
-==== Pointing to data
+=== Pointing to data
 
 There are two parameters that can be used to tell the BES where your
 data are stored. Which one you use depends on whether you are setting up
@@ -429,7 +465,7 @@ BES.Catalog.catalog.Include=;
 BES.Catalog.catalog.Exclude=^\..*;
 ----
 
-==== Symbolic Links
+=== Symbolic Links
 
 If you would like symbolic links to be followed when retrieving data
 and for viewing catalog entries, then you need to set the following two
@@ -455,7 +491,7 @@ And this one is set in the dap.conf file in the modules directory:
 BES.Catalog.catalog.FollowSymLinks=No|Yes
 ----
 
-==== Parameters for Specific Handlers
+=== Parameters for Specific Handlers
 
 Parameters for specific modules can be added to the BES configuration
 file for that specific module. No module-specific parameters should be

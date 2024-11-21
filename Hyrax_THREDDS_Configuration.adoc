@@ -5,7 +5,7 @@
 //:toc:
 
 [[THREDDS-config]]
-== THREDDS Configuration Overview
+= THREDDS Configuration Overview
 
 Hyrax now uses its own implementation of the THREDDS catalog services
 and supports most of the THREDDS catalog service stack. The
@@ -37,9 +37,9 @@ as a tool for altering the catalog presentation of any part of the BES
 catalog. These alterations include (but are not limited too) renaming,
 auto proxy generation, filtering, and metadata injection.
 
-include::THREDDS_using_XSLT.adoc[lines="1,8..-1", leveloffset=+2]
+include::THREDDS_using_XSLT.adoc[lines="1,8..-1", leveloffset=+1]
 
-=== THREDDS Catalog Documentation
+== THREDDS Catalog Documentation
 
 Rather than provide an exhaustive explanation of the THREDDS catalog
 functionality and configuration, we will appeal to the existing documents
@@ -60,7 +60,7 @@ Element]
 * http://www.unidata.ucar.edu/software/thredds/v4.6/tds/reference/DatasetScan.html[_datasetScan_
 configuration] (applies to Hyrax as well).
 
-=== Configuration Instructions
+== Configuration Instructions
 
 * The current default (<<OLFS-config, olfs.xml>>)
 file comes with THREDDS configured correctly.
@@ -68,7 +68,7 @@ file comes with THREDDS configured correctly.
 _$CATALINA_HOME/content/opendap/catalog.xml_. It can be edited to provide
 additional static catalog access.
 
-=== datasetScan Support
+== datasetScan Support
 
 The _datasetScan_ element is a powerful tool that can be used to sculpt
 the catalog's presentation of the BES catalog content. The Hyrax
@@ -76,7 +76,7 @@ implementation has a couple of key points that need to be considered
 when developing an instance of the _datasetScan_ element in your THREDDS
 catalog.
 
-==== _location_ attribute
+=== _location_ attribute
 
 The _location_ attribute specifies the place in the BES catalog graph
 where the _datasetScan_ will be rooted. This value _must be_ expressed
@@ -93,13 +93,13 @@ value of _/data/nc_:
 <datasetScan name="DatasetScanExample" path="hyrax" location="/data/nc">
 ----
 
-==== _name_ attribute
+=== _name_ attribute
 
 The _name_ attribute specifies the name that will be used in the
 presentation (HTML) view for the catalog containing the _datasetScan_.
 //is viewed.
 
-==== _path_ attribute
+=== _path_ attribute
 
 The _path_ attribute specifies the place in the THREDDS catalog graph
 that the _datasetScan_ will be rooted. It is effectively a relative URL
@@ -108,7 +108,7 @@ rooted at the server and port of the web server. The values of the
 _path_ attribute should *never* contain "catalog.xml" or "catalog.html".
 The service will create these endpoints dynamically.
 
-===== Relative path example
+==== Relative path example
   
 Consider a catalog accessed with the URL
 http://localhost:8080/opendap/thredds/v27/Landsat/catalog.xml and that
@@ -134,7 +134,7 @@ element:
 And the top of _datasetScan_ catalog graph will be found at the URL
 http://localhost:8080/opendap/thredds/v27/Landsat/hyrax/catalog.xml.
 
-===== Absolute path examples
+==== Absolute path examples
 
 Consider a catalog accessed with the URL
 http://localhost:8080/opendap/thredds/v27/Landsat/catalog.xml and that
@@ -191,7 +191,7 @@ http://localhost:8080/opendap/thredds/myDatasetScan/catalog.xml,
 which keeps the URL referencing the Hyrax THREDDS service and not some
 other part of the web service stack.
 
-==== _useHyraxServices_ attribute
+=== _useHyraxServices_ attribute
 
 The Hyrax version of the _datasetScan_ element employs the extra
 attribute _useHyraxServices_. This allows the _datasetScan_ to
@@ -213,13 +213,13 @@ _datasetScan_ will have _no service definitions or access elements_.
 
 By default _useHyraxServices_ is set to true.
 
-==== Functions
+=== Functions
 
 http://www.unidata.ucar.edu/software/thredds/v4.6/tds/reference/DatasetScan.html[DatasetScan
 allows you to apply the following functions to the names of the datasets
 in the datasetScan catalog graph.]
 
-===== _filter_
+==== _filter_
 
 A datasetScan element can specify which files and directories it will
 include with a filter element (also
@@ -242,7 +242,7 @@ collection attributes.
 </filter>
 ----
 
-===== _sort_
+==== _sort_
 
 Datasets at each collection level are listed in ascending order by name.
 With a sort element you can specify that they are to be sorted in
@@ -254,7 +254,7 @@ reverse order:
 </sort>
 ----
 
-===== _namer_
+==== _namer_
 
 If no namer element is specified, all datasets are named with the
 corresponding BES catalog dataset name. By adding a namer element, you
@@ -269,7 +269,7 @@ can specify more human readable dataset names.
 </namer>
 ----
 
-===== _addTimeCoverage_
+==== _addTimeCoverage_
 
 A datasetScan element may contain an addTimeCoverage element. The
 addTimeCoverage element indicates that a timeCoverage metadata element
