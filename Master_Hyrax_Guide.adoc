@@ -37,11 +37,8 @@ include::Master_Hyrax_Overview.adoc[lines="1,8..-1"]
 [[Download_and_Install_Hyrax]]
 include::Master_Hyrax_Installation.adoc[lines="1,7..-1"]
 
-// General configuration informat
-include::Master_Hyrax_Configuration.adoc[lines="1,6..-1"]
-
 // Customize the way the server looks when used with a web browser.
-include::Master_Hyrax_Customizing_Hyrax.adoc[lines="1,8..-1"]
+include::Master_Hyrax_Customizing_Hyrax.adoc[lines="1,6..-1"]
 
 // Integrate Hyrax with the Apache web demon.
 [[apache-integration]]

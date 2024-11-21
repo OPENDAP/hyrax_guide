@@ -1,16 +1,13 @@
-= Customizing Hyrax
+= Configuring and Customizing Hyrax
 :Leonard Porrello <lporrel@gmail.com>:
 {docdate}
 :numbered:
 :toc:
 
-== Introduction
 
-There are several ways in which Hyrax can be customized:
+// General configuration informat
+include::Master_Hyrax_Configuration.adoc[lines="1,6..-1"]
 
-* Web interface look and feel can be changed, as can the pages served.
-* Custom DispatchHandlers for the OLFS
-* Custom RequestHandlers for the BES.
 
 == Webpage Customization
 
