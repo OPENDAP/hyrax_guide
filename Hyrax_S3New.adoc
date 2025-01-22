@@ -19,7 +19,7 @@ Hyrax now implements lazy evaluation of +++ DMR++ +++ files. This change greatly
 Added version and configuration information to dmr++ files built using the `build_dmrpp` and get_dmrpp applications. This will enable people to recreate and understand the conditions which resulted in a particular +++ DMR++ +++ instance. This also includes a -z switch for get_dmrpp which will return its version.
 
 
-The dmr++ production chain: get_dmrpp, build_dmrpp, check_dmrpp, merge_dmrpp, and reduce_mdf received the following updates:
+The +++ DMR++ +++production chain: get_dmrpp, build_dmrpp, check_dmrpp, merge_dmrpp, and reduce_mdf received the following updates:
 
 	* Support for injecting configuration modifications to allow fine tuning of the dataset representation in the produced +++ DMR++ +++ file.
 
@@ -33,3 +33,6 @@ The dmr++ production chain: get_dmrpp, build_dmrpp, check_dmrpp, merge_dmrpp, an
 Lastly, we have added support for S3 hosted granules to get_dmrpp. Added regression test suite for get_dmrpp.
 
 Improved S3 reliability by adding retry efforts for common S3 error responses that indicate a retry is worth pursuing (because S3 just fails sometimes and a retry is suggested). We have also added caching of S3 “effective” URLs obtained from NGAP service chain.
+
+
+For more on +++ DMR++ +++, read the https://opendap.github.io/DMRpp-wiki/DMRpp.html[DMR++ wiki].

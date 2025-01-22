@@ -13,14 +13,14 @@ The documentation is built automatically from the source `AsciiDoc` files (`*.ad
 - Install `AsciiDoctor` on your workstation (test purposes).
 
 ### Instructions
-- Optional: Navigate to the root directory. `Master_Hyrax_Guide.adoc` should be there.
+- Navigate to the root directory. `Master_Hyrax_Guide.adoc` should be there.
 - Make changes (using a new branch - do not commit on `main`).
 - Test the proposed changes by running on the command line
 ```
 asciidoctor -a toc=left -a docinfo=shared Master_Hyrax_Guide.adoc
 ````
 NOTE: In some cases there may be some errors during the build (unrelated to the new changes). Verify your changes were added correctly:
-- The command above should generate a new file `Master_Hyrax_Guide.html`. You can inspect it with a brower, e.g. `open DAP4.html`.
+- The command above should generate a new file `Master_Hyrax_Guide.html`. You can inspect it with a brower, e.g. `open Master_Hyrax_Guide.html`.
 - Add and commit the new changes, and push to Request a `Pull Request` review. Once approved, the changes should be published automatically by `Travis`.
 
 

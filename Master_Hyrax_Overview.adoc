@@ -42,6 +42,27 @@ image::HyraxArchitecture.jpg[]
 
 == Features
 
+* **+++ DMR++ +++**: +++ DMR++ +++ provides direct access to data in S3, 
+  and so Hyrax supports direct I/O transfers from HDF5 to NetCDF4 when 
+  using +++ DMR++ +++. Hyrax can find the effective URL for a data item 
+  when it is accessed via a series of redirect operations, the last of 
+  which is a signed AWS URL. This is a common case for data stored in S3. 
+  In addition, the BES can sign S3 URLs using the AWS V4 signing scheme. 
+  Hyrax implements lazy evaluation of +++ DMR++ +++ files. This improves 
+  the efficiency/speed for requests that subset a dataset that contains 
+  a large number of variables as only the variables requested will have 
+  their Chunk information read and parsed. 
+
+
+* **EDL: EarthDataLogin**
+  Hyrax has extensitve support for Earthdata Login Authentication. For
+  configurations that require Hyrax to authenticate remote resources, Hyrax
+  can now utilize `~/.netrc` (or a `netrc` file may be specified in `site.conf`)
+  and Hyrax will use the appropriate credentials. Moreover, Hyrax supports
+  EDL token chaining and the handling of tokens is much improved so that 
+  redirected are not issues and session (cookie) management is not required 
+  of the client.
+
 * *THREDDS Catalog Support:*
   Hyrax supports the THREDDS catalogs. It can serve user supplied static
   catalogs and it will dynamically generate THREDDS catalogs of it's
