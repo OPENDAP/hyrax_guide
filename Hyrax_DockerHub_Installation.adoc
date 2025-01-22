@@ -35,7 +35,6 @@ docker pull opendap/hyrax:snapshot
 Both of the options above are fully tested using Travis for CI/CD, and pack with the correct versions needed to build Hyrax.
 
 
-This will download the latest stable, complete build of Hyrax. 
 [start=2]
 . **Run Hyrax and make your data available on port `8080`**
 

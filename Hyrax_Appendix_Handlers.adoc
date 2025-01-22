@@ -67,3 +67,6 @@ WCS. All these services have their own web API.
 [[gateway-service]]
 include::./handlers/Gateway_Service.adoc[lines="1,6..-1", leveloffset=+1]
 
+[[freeform-data-handler]]
+include::./handlers/Hyrax_Appendix_FreeForm_Data_Handler.adoc[leveloffset=+1]
+
