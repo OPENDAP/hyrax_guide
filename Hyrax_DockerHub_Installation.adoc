@@ -15,22 +15,34 @@ This is the simplest way to install and use the latest release of Hyrax.
 
 == Run Hyrax and serve data
 
-. **Open a terminal and get the latest snapshot of hyrax**
+
+
+. **Open a terminal and download hyrax via DockerHub**
+
+You have two options. To download the latest official release of Hyrax data server run:
+
+```
+docker pull opendap/hyrax:latest
+```
+This will install the version of Hyrax as described on the official https://www.opendap.org/software/hyrax-data-server/[Hyrax data server page]. The official releases are labor intensive to produce and only happen once or twice a year. 
+
+You can also download the absolute most recent version of Hyrax data server, i.e. that associated with the latest merged commit to the Master branch on Github, by running:
 
 ```
 docker pull opendap/hyrax:snapshot
 ```
 
-TIP: Do not use `hyrax:latest`. We use Travis for CI/CD and `hyrax:snapshot` is fully tested, and packs with the correct versions needed to build Hyrax. The `latest` tag is associated with the "latest" official release of the Hyrax server. Official releases are labor intensive to produce and only happen once or twice a year. To get the most recent and up-to-date software, get the `snapshot` tag.
+Both of the options above are fully tested using Travis for CI/CD, and pack with the correct versions needed to build Hyrax.
 
-This will download the latest stable, complete build of Hyrax. 
+
 [start=2]
 . **Run Hyrax and make your data available on port `8080`**
 
+Say, in the case you installed the `latest` using DockerHub,
 ```
 docker run -d -h hyrax -p 8080:8080 \
 --volume ~/tmp/data:/usr/share/hyrax \
---name=hyrax opendap/hyrax:snapshot
+--name=hyrax opendap/hyrax:latest
 ```
 
 NOTE: If you are on an OSX system running on Apple silicon (M-series CPUs) docker deployment, you will need the following extra line: `--platform linux/amd64 \`.

@@ -1,16 +1,24 @@
 :Miguel Jimenez-Urias <mjimenez@opendap.org>:
 :toc:
 
-= Hyrax New Features (1.17)
+= Hyrax New Features (1.17.1)
 
-- <<build, Installation>>
+// I moved all of S3 on previous version 1.17.0 to Appendix. I added a broad summary of it on 2.1 Features. I also moved all of EDL from version 1.17.0 to the same 2.1 features. The content below is from the official page release.
+
+The new release of Hyrax contains many improvements to the +++ DMR++ +++ build, generation and testing process, as well as a broader coverage for many of NASA’s HDF4 / HDF4-EOS2 / HDF5 datasets. In particular, the scripts to generate +++ DMR++ +++ have major improvements in performance, with better testing, checks, and improved documentation on how to generate the +++ DMR++ +++ files and map the variables inside these files to the mature and broadly used OPeNDAP DAP4 protocol.
+
+In this new version of Hyrax, +++ DMR++ +++ now supports a wide range of HDF5, HDF4, and HDF4-EOS2 features, allowing for direct data access in the cloud for many of NASA’s datasets. This means that +++ DMR++ +++ files can be generated for a wide range of NASA’s datasets, including those that may have missing grid information. The +++ DMR++ +++ software includes better support for DAP4, including mapping HDF4 Grids to DAP4 Groups and dimensions. When CF grid variables are missing, these grid variables are generated and embedded in the +++ DMR++ +++. In addition to more complete support for these archival data file formats, various optimizations to the dmrpp generator have been included to improve the generation, checks, and testing of +++ DMR++ +++.
+
++++ DMR++ +++ increases its support for HDF5 by supporting (compressed) compound data types, arrays of strings, and subsetting of HDF5 compact arrays. In addition, there are various fixes to how +++ DMR++ +++ reads variable string data. Lastly, this release provides a fix to reported issues when building +++ DMR++ +++ from NetCDF-4 datasets with enable-CF option set true.
+
+Some minor fixes to Hyrax’s HDF5 handler are incorporated in the new version, along with an improved testsuite. Hyrax’s HDF4 handler is greatly expanded to directly support the DAP4 protocol for NASA’s HDF4 and HDF4-EOS2 datasets. Previously, DAP4 support was available by translating the DAP2 objects, which meant important features of DAP4 were not available. This new 'native' DAP4 implementation continues to support CF grids/variables and the default options of the older software. Finally, the overall performance of the HDF4 handler has been improved resulting in shorter response times.
+
+Various fixes are now incorporated to Hyrax to improve performance and support for DAP4 and DAP4 to DAP2 mappings for various NetCDF cases. Lastly, a better handling of BES Error types and exception cases and improvements to the BESLog has been implemented resulting in more meaningful error messages and timing data for BES commands.
+
+For those with NASA access to JIRA, see the completed issue list for this release: https://bugs.earthdata.nasa.gov/projects/HYRAX/versions/35207[NASA JIRA]
+
 - <<config, Configuration>>
-- <<s3, S3 Support>>
-- <<edl, EDL Authentication>>
 
 
-include::Hyrax_installationNew.adoc[lines="1..-1", leveloffset=+1]
 include::Hyrax_ConfigurationNew.adoc[lines="1..-1", leveloffset=+1]
-include::Hyrax_S3New.adoc[lines="1..-1", leveloffset=+1]
-include::Hyrax_EDLNew.adoc[lines="1..-1", leveloffset=+1]
 
