@@ -95,8 +95,8 @@ Although it rarely happens in NASA HDF5 products, by following the CF name conve
 
 The following table lists the mapping from HDF5 to DAP4 for the CF option. 
 
-. **HDF5 Datatype to DAP4 for CF Option**
-[width="100%",cols="33%,33%,34%",options="header",]
+.**HDF5 Datatype to DAP4 for CF Option**
+[width="100%",cols="33%,33%,34%",options="header",stripes=even]
 |=======================================================================
 |HDF5 data type |DAP4 data name |Notes
 |8-bit unsigned integer |Byte |
@@ -121,9 +121,9 @@ The following table lists the mapping from HDF5 to DAP4 for the CF option.
 
 |String |String |
 
-|Other datatypes |Not supported | The handler elides the mapping of the following datatypes: HDF5 compound, object and region references, variable length(excluding variable length string), enum,opaque, bitfield and time. |
-
-
+|Other datatypes |Not supported 
+a| 
+The handler elides the mapping of the following datatypes: HDF5 compound, object and region references, variable length(excluding variable length string), enum,opaque, bitfield and time.
 |=======================================================================
 
 === CF BES Keys for DAP4
@@ -256,8 +256,8 @@ The same as the CF option for DAP4. See section <<CF Name for DAP4>>.
 === CF Datatype for DAP2
 The following table lists the mapping from HDF5 to DAP2 for the CF option. 
 
-. **HDF5 Datatype to DAP2 for CF Option**
-[width="100%",cols="33%,33%,34%",options="header",]
+.**HDF5 Datatype to DAP2 for CF Option**
+[width="100%",cols="33%,33%,34%",options="header",stripes=even]
 |=======================================================================
 |HDF5 data type |DAP2 data name |Notes
 |8-bit unsigned integer |Byte |
@@ -282,10 +282,11 @@ The following table lists the mapping from HDF5 to DAP2 for the CF option.
 
 |String |String |
 
-|Other datatypes |N/A |
-The handler elides the mapping of the following datatypes: HDF5 compound, variable length(excluding variable length string), object and region reference, enum,opaque, bitfield and time. |
-
+|Other datatypes |N/A 
+a|
+The handler elides the mapping of the following datatypes: HDF5 compound, variable length(excluding variable length string), object and region reference, enum,opaque, bitfield and time.
 |=======================================================================
+
 === CF BES Keys for DAP2
 
 Except that BES Key __H5.EnableCFDMR__ does not have effect on the DAP2 mapping, the other BES key information is the same as the information described in section <<CF BES Keys for DAP4>>.
@@ -360,8 +361,8 @@ that does not translate the identifiers back to their original form).
 === Default Option: DAP4 Datatype 
 The following table lists the mapping from HDF5 to DAP4 for the default option.
 
-. **HDF5 Datatype to DAP4 for Default Option**
-[width="100%",cols="33%,33%,34%",options="header",]
+.**HDF5 Datatype to DAP4 for Default Option**
+[width="100%",cols="33%,33%,34%",options="header",stripes=even]
 |=======================================================================
 |HDF5 data type |DAP4 data name |Notes
 |8-bit unsigned integer |Byte |
@@ -388,12 +389,15 @@ The following table lists the mapping from HDF5 to DAP4 for the default option.
 
 |Object/region reference |URL |
 
-|Compound |Structure |HDF5 compound variable can be mapped to DAP4 under the
+|Compound |Structure 
+a|
+HDF5 compound variable can be mapped to DAP4 under the
 condition that the base members (excluding object/region references) of
 compound can be mapped to DAP4.
 
-|Other datatypes |Not Supported | The handler elides the mapping of the following datatypes: HDF5 variable length(excluding variable length string), enum,opaque, bitfield and time. |
-
+|Other datatypes |Not Supported 
+a|
+The handler elides the mapping of the following datatypes: HDF5 variable length(excluding variable length string), enum,opaque, bitfield and time.
 |=======================================================================
 
 === Default Option: DAP4 BES Keys 
@@ -458,8 +462,8 @@ Note: Both the dimension names and the dimension sizes in the original netCDF-4 
 Same as section <<Default Option: DAP4 Name>>. 
 
 === Default Option: DAP2 Datatype 
-. **HDF5 Datatype to DAP2 for Default Option**
-[width="100%",cols="30%,30%,40%",options="header",]
+.**HDF5 Datatype to DAP2 for Default Option**
+[width="100%",cols="30%,30%,40%",options="header",stripes=even]
 |=======================================================================
 |HDF5 data type |DAP2 data name |Notes
 |8-bit unsigned integer |Byte |
@@ -474,9 +478,13 @@ Same as section <<Default Option: DAP4 Name>>.
 
 |32-bit signed integer |Int32 |
 
-|64-bit unsigned integer |Not Supported |DAP2 does not support 64-bit unsigned integer type.
+|64-bit unsigned integer |Not Supported 
+a|
+DAP2 does not support 64-bit unsigned integer type.
 
-|64-bit signed integer |Not Supported |DAP2 does not support 64-bit signed integer type.
+|64-bit signed integer |Not Supported 
+a|
+DAP2 does not support 64-bit signed integer type.
 
 |32-bit floating point |Float32 |
 
@@ -486,12 +494,15 @@ Same as section <<Default Option: DAP4 Name>>.
 
 |Object/region reference |URL |
 
-|Compound |Structure |HDF5 compound variable can be mapped to DAP2 under the
+|Compound |Structure 
+a|
+HDF5 compound variable can be mapped to DAP2 under the
 condition that the base members (excluding object/region references) of
 compound can be mapped to DAP2.
 
-|Other datatypes |Not Supported | The handler elides the mapping of the following datatypes: HDF5 variable length(excluding variable length string), enum,opaque, bitfield and time. |
-
+|Other datatypes |Not Supported 
+a|
+The handler elides the mapping of the following datatypes: HDF5 variable length(excluding variable length string), enum,opaque, bitfield and time.
 |=======================================================================
 
 === Default Option: DAP2 BES Keys
