@@ -69,7 +69,7 @@ mapping is nearly complete.
 supported in both models.
 
 . Simple Types Type Map
-[width="100%",cols="50%,50%",options="header",]
+[width="100%",cols="50%,50%",options="header",stripes=even]
 |===================
 |DAP Type |w10n Type
 |Byte |
@@ -539,6 +539,7 @@ Attributes {
 
 Response ::
 
+[source, json]
 ----
 
 {
@@ -581,6 +582,7 @@ Response ::
 
  Response ::
 
+[source, json]
 ----
 
 {
@@ -859,6 +861,7 @@ Response ::
 
 Response ::
 
+[source, json]
 ----
 
 {
@@ -874,6 +877,7 @@ Response ::
 
 Response ::
 
+[source,json]
 ----
 
 {

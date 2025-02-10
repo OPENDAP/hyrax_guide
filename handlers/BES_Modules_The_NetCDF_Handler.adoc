@@ -176,11 +176,8 @@ NC.PromoteByteToShort=true
 
 === NetCDF to DAP Type Mappings
 
-. _The complete set of mappings for the types in the netCDF 4 data
-model +
-_ (entries in gray are new types not currently supported; entries in
-green are new types that are supported)
-[width="100%",cols="20%,20%,20%,20%,20%",options="header",]
+.The complete set of mappings for the types in the netCDF 4 data model to DAP2
+[width="100%",cols="20%,20%,20%,20%,20%",options="header",stripes=even]
 |=======================================================================
 |netCDF type name |netCDF type description |DAP2 type name |DAP2 type
 description |Notes
@@ -207,9 +204,9 @@ integer |
 |NC_UINT |32-bit unsigned integer |dods_uint32 |32-bit unsigned integer
 |
 
-|NC_INT64 |64-bit signed integer |None | |Not supported
+|NC_INT64 |64-bit signed integer | [.red]#None# | |[.red]#Not supported#
 
-|NC_UINT64 |64-bit unsigned integer |None | |Not supported
+|NC_UINT64 |64-bit unsigned integer | [.red]#None# | | [.red]#Not supported#
 
 |NC_FLOAT |32-bit floating point |dods_float32 |32-bit floating point |
 
@@ -241,5 +238,5 @@ _DAP2_OriginalNetCDFTypeName_ attributes +
 Enums with 64-bit +
  integer base types are not supported.
 
-|NC_VLEN |variable length arrays |None | |
+|NC_VLEN |variable length arrays | [.red]#None# | [.red]#Not supported# |
 |=======================================================================

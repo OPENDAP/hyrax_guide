@@ -45,7 +45,7 @@ copy of the _docs_ directory has been made as described above.*
 ==== HTML Files
 
 .The HTML files provide the static content of a Hyrax server
-[width="100%",cols="20%,20%,60%"]
+[width="100%",cols="20%,20%,60%", stripes=even]
 |=======================================================================
 | File | Location | Description
 
@@ -83,7 +83,7 @@ generates an **Bad Gateway**. (Associated with an HTML status of 502)
 ==== CSS Files
 
 .The CSS Files provide style information for the HTML pages
-[width="100%",cols="20%,20%,60%"]
+[width="100%",cols="20%,20%,60%", stripes=even]
 |=======================================================================
 |File | Location | Description
 
@@ -104,7 +104,7 @@ associated with the Hyrax server.
 ==== Image Files
 
 .The Image Files provide a way to change logos and other images
-[width="100%",cols="40%,20%,40%"]
+[width="100%",cols="40%,20%,40%", stripes=even]
 |=======================================================================
 |File | Location |Description
 
@@ -138,7 +138,7 @@ They are intimately tied to the functions of Hyrax. The likelihood that
 you can change these files and not break Hyrax is fairly low.
 
 .Current Operational XSLT
-[width="100%",cols="15%,20%,65%"]
+[width="100%",cols="15%,20%,65%", stripes=odd]
 |=======================================================================
 |File |Location |Description
 
@@ -180,7 +180,7 @@ number shown in the public interface.
 |=======================================================================
 
 .Experimental XSLT
-[width="100%",cols="20%,20%,60%"]
+[width="100%",cols="20%,20%,60%", stripes=even]
 |=======================================================================
 |File | Location |Description
 
