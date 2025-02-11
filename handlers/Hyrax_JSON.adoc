@@ -69,7 +69,7 @@ mapping is nearly complete.
 supported in both models.
 
 . Simple Types Type Map
-[width="100%",cols="50%,50%",options="header",]
+[width="100%",cols="50%,50%",options="header",stripes=even]
 |===================
 |DAP Type |w10n Type
 |Byte |
@@ -239,8 +239,8 @@ Attributes {
 
 ===== DDX
 
+[source,xml]
 ----
-
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <Dataset name="coads_climatology.nc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xml.opendap.org/ns/DAP/3.2# http://xml.opendap.org/dap/dap3.2.xsd" xmlns:grddl="http://www.w3.org/2003/g/data-view#" grddl:transformation="http://xml.opendap.org/transforms/ddxToRdfTriples.xsl" xmlns="http://xml.opendap.org/ns/DAP/3.2#" xmlns:dap="http://xml.opendap.org/ns/DAP/3.2#" dapVersion="3.2" xmlns:xml="http://www.w3.org/XML/1998/namespace" xml:base="http://54.84.172.19:8080/opendap/data/nc/coads_climatology.nc">
     <Attribute name="NC_GLOBAL" type="Container">
@@ -539,6 +539,7 @@ Attributes {
 
 Response ::
 
+[source, json]
 ----
 
 {
@@ -581,6 +582,7 @@ Response ::
 
  Response ::
 
+[source, json]
 ----
 
 {
@@ -859,6 +861,7 @@ Response ::
 
 Response ::
 
+[source, json]
 ----
 
 {
@@ -874,6 +877,7 @@ Response ::
 
 Response ::
 
+[source,json]
 ----
 
 {

@@ -23,6 +23,7 @@ structure of the data we will want to modify (which may be slightly
 different than the wrapped dataset due to legacy issues with how shared
 dimensions are represented, etc):
 
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf location="data/ncml/agg/grids/f97182070958.hdf" title="This file results in a Grid">
@@ -197,6 +198,7 @@ First, let's add the "ncml_location" into the HDF_GLOBAL attribute
 container. To do this, we need to specify the "scope" of the HDF_GLOBAL
 attribute container (called a Structure in NcML):
 
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf location="data/ncml/agg/grids/f97182070958.hdf" title="This file results in a Grid">
@@ -252,6 +254,7 @@ HDF_GLOBAL as desired.
 Next, we want to add the same attribute to the top-level *dsp_band_1*
 Grid variable. Here's the NcML:
 
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf location="data/ncml/agg/grids/f97182070958.hdf" title="This file results in a Grid">
@@ -312,6 +315,7 @@ We have denoted the injected metadata with a 2).
 As a learning exercise, let's say we made a mistake and tried to use
 <attribute> to specify the *dsp_band_1* attribute table:
 
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf location="data/ncml/agg/grids/f97182070958.hdf" title="This file results in a Grid">
@@ -333,6 +337,7 @@ As a learning exercise, let's say we made a mistake and tried to use
 
 Then we get a Parse Error...
 
+[source,xml]
 ----
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <response xmlns="http://xml.opendap.org/ns/bes/1.0#" reqID="some_unique_value">
@@ -355,6 +360,7 @@ the actual data Array inside the Grid (say we know we will be projecting
 it out with a constraint and don't want to lose this metadata). The NcML
 now becomes:
 
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf location="data/ncml/agg/grids/f97182070958.hdf" title="This file results in a Grid">
@@ -425,6 +431,7 @@ Attributes {
 Next, we will add the units to both of the map vectors in the next
 version of our NcML:
 
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf location="data/ncml/agg/grids/f97182070958.hdf" title="This file results in a Grid">

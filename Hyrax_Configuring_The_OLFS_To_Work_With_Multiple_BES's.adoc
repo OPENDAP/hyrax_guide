@@ -283,6 +283,7 @@ tree that the BES on server0.test.org is exposing.
 
 == Complete olfs.xml with multiple BES installations example
 
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <OLFSConfig>

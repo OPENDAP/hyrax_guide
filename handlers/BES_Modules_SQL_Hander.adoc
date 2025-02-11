@@ -39,7 +39,7 @@ The problem type code is: <type code>__.
 // http://publib.boulder.ibm.com/infocenter/dzichelp/v2r2/index.jsp?topic=%2Fcom.ibm.db2.doc.odbc%2Fbjneappl1009305.htm
 
 .The Mapping between ODBC and DAP datatypes 
-[cols="2*",options="header"]
+[cols="2*",options="header",stripes=even]
 |===
 |ODBC Type |DAP Type
 |SQL_C_CHAR |Str

@@ -74,6 +74,7 @@ aggregation data.
 
 Here's a simple example:
 
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf title="Example of joinNew Grid aggregation using the scan element.">
@@ -121,6 +122,7 @@ as to any regular files in the base directory.
 For example, continuing our previous example, but giving a higher level
 location:
 
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf title="joinNew Grid aggregation using the scan element.">
@@ -149,6 +151,7 @@ default recursion. For example, if recursion is *NOT* desired, but only
 files with the given suffix in the given directory are required, the
 following will do that:
 
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf title="joinNew Grid aggregation using the scan element.">
@@ -183,6 +186,7 @@ For example, if we are following our previous example, but we suspect a
 new HDF file may be written at any time and usually takes 5 minutes to
 do so, we might use the following NcML:
 
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf title="joinNew Grid aggregation using the scan element.">
@@ -234,6 +238,7 @@ Consider the following, basic examples:
 Here's an example where we use a subdirectory search to find ".hdf"
 files in all subdirectories named "grids":
 
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf title="Example of joinNew Grid aggregation using the scan element with a regexp">
@@ -287,6 +292,7 @@ files that start with "f" we have seen in our examples. We still want
 just the files starting with "f" to filter out the others. Here's an
 example for that:
 
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf title="Example of joinNew Grid aggregation using the scan element with a regexp">
@@ -335,6 +341,7 @@ data/ncml/agg/dated/CG2006158_150000h_usfc.nc
 
 Here's the NcML:
 
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf title="Test of joinNew aggregation using the scan element and dateFormatMark">

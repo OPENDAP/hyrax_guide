@@ -27,7 +27,7 @@ Prerequisites:
 
 Installing a Hyrax binary release typically involves the following steps
 
-. **Download the latest Hyrax release** (https://www.opendap.org/hyrax-1-17/[Hyrax 1.17]). It is composed of:
+. **Download the latest Hyrax release** (https://www.opendap.org/download-hyrax-1-17-1/[Hyrax 1.17-1]). It is composed of:
 .. 2 RPM files (one for `libdap`, one for the `BES`).
 .. The OLFS binary distribution file. You can also install the `OLFS Automatic robots.txt`, if available.
 . **Install the `libdap` RPM.**

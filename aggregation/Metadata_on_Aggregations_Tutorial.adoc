@@ -24,6 +24,7 @@ variable and giving its values. In these cases, the metadata is added to
 the new coordinate variable exactly like any other variable. Let's see
 the example again:
 
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf title="joinNew Grid aggregation with explicit map">
@@ -99,6 +100,7 @@ dynamic aggregations.
 
 Here's a trivial example using the default case of the filename:
 
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf title="Test of adding metadata to the new map vector in a joinNew Grid aggregation">
@@ -171,6 +173,7 @@ metadata.
 We can also use this syntax in the case that _netcdf@coordValue_ was
 used to autogenerate the coordinate variable:
 
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf title="joinNew Grid aggregation with coordValue and metadata">
@@ -266,6 +269,7 @@ similar and simpler and this case will cover those as well.
 
 Let's start from this example aggregation:
 
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf> 
@@ -327,6 +331,7 @@ well.
 Here's the NcML we will use. Note we have added units data to the
 subparts of the Grid, and also added some metadata to the grid itself.
 
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf title="Showing how to add metadata to all parts of an aggregated grid">
