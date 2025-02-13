@@ -71,16 +71,16 @@ The `site.conf` is a special configuration file that can persist through Hyrax u
 === Configuration Instructions
 The following instructions work generally for any way you install Hyrax. In addition, <<site-conf-config-docker, we provide instructions for using site.conf when running Hyrax via Docker>>.
 
-1. Create an empty `site.conf` in `$prefix\etc\bes` with the following command:
+1. *Create an empty `site.conf` in `$prefix\etc\bes` with the following command:*
 +
 ....
 sudo touch site.conf
 ....
 +
-2. Locate the [.red]#default# `.conf` file for the module that you would like to customize in `$prefix/etc/bes/modules`. 
-3. Copy the configuration parameters that you would like to customize from the module’s configuration file into the `site.conf`.
-4. Save your updates to `site.conf`.
-5. Restart the server.
+2. *Locate the [.red]#default# `.conf` file for the module that you would like to customize in `$prefix/etc/bes/modules`*. 
+3. *Copy the configuration parameters that you would like to customize from the module’s configuration file into the `site.conf`.*
+4. *Save your updates to `site.conf`.*
+5. *Restart the server.*
 
 NOTE: Included in `$prefix/etc/bes/` is a template `site.conf` file, called `site.conf.proto`. To take advantage of this template you can simply copy it with the following command `cp site.conf.proto site.conf`. Then, uncomment the configuration parameters that you want to modify and update them.
 
@@ -90,14 +90,14 @@ NOTE: Included in `$prefix/etc/bes/` is a template `site.conf` file, called `sit
 
 If you will be running Hyrax with <<dockerhub,Docker>>, you can first create an empty `site.conf` file on your machine, and point to it when running hyrax. [.red]#This will allow the `site.conf` file to persist through any Hyrax update/restart#. For this, follow the (similar) steps as before:
 
-1. Create a local `site.conf` file. 
-2. Run Hyrax via Docker adding the following line in Step 2 of the (see <<dockerhub,Docker Hub installation instructions>>):
+1. *Create a local `site.conf` file*. 
+2. *Run Hyrax via Docker adding the following line in Step 2 of the (see <<_run_hyrax_and_serve_data,Docker Hub installation instructions>>):*
 +
 ....
 --volume $prefix/path_to_your_configuration/site.conf:/etc/bes/site.conf \
 ....
 +
-3. Activate's the docker container's bash shell, by running:
+3. *Activate's the docker container's bash shell, by running:*
 +
 ....
 docker exec -it hyrax bash
@@ -105,8 +105,8 @@ docker exec -it hyrax bash
 +
 This will allow you to navigate the docker container, and therefore Hyrax's directory. 
 +
-4. Resume Steps 2-4 in <<site-conf-config,general configuration instructions>>.
-5. Restarting the server is no longer needed. When running the server again, make sure to do Step 2.
+4. *Resume Steps 2-4 in <<site-conf-config,general configuration instructions>>*.
+5. *Restarting the server is optional / no longer needed. When running the server again, make sure to do Step 2*.
 
 
 [[site-conf-example-configuration-data, site.conf Configuration Example: Groups in NetCDF4 and HDF5]]
@@ -241,7 +241,7 @@ BES.Catalog.catalog.Exclude=^\..*;
 The following steps detail how you can update the BES’s 
 server administrator configuration parameters with your organization’s information:
 
-1. Locate the existing server administrator configuration in `/etc/bes/bes.conf`:
+1. *Locate the existing server administrator configuration in `/etc/bes/bes.conf`:*
 +
 ....
 BES.ServerAdministrator=email:support@opendap.org
@@ -262,8 +262,8 @@ adding new configuration parameters, rather than replacing those
 that were already loaded. Had we used just + in the above example, 
 the only configured parameter would have been website.
 +
-2. Copy the above block of text from its default _.conf_ file to _site.conf_.
-3. In _site.conf_, update the block of text with your organization’s information; for example...
+2. *Copy the above block of text from its default _.conf_ file to _site.conf_.*
+3. *In _site.conf_, update the block of text with your organization’s information; for example...*
 +
 ....
 BES.ServerAdministrator=email:smootchy@woof.org
@@ -277,8 +277,8 @@ BES.ServerAdministrator+=telephone:+1.800.555.1212
 BES.ServerAdministrator+=website:http://www.mogogogo.org
 ....
 +
-4. Save your changes to _site.conf_.
-5. Restart the server.
+4. *Save your changes to _site.conf_.*
+5. *Restart the server.*
 
 
 == Administration & Logging
