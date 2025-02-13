@@ -21,9 +21,6 @@ The main advantages of having a separate [.red]#site.conf# file are:
 * The `site.conf` file can persist through Hyrax updates.
 * The `bes.conf` is static (unaltered), allowing to check the default configurations.
 
-Hyrax includes the template file `site.conf.proto` that includes many commonly-modified settings.
-For instructions on <<site-conf-proto-config, how to use the site.conf.proto template>>, see its configuration instruction section.
-
 
 == Basic format of parameters
 
