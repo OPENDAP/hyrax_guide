@@ -8,45 +8,35 @@
 [[bess-configuration]]
 = BES Configuration =
 
-When you launch your Hyrax Data Server, the `BES` loads the [.blue]#default# module configuration. This [.blue]#default# configuration is defined in the file `bes.conf` located in `$prefix/etc/bes/`. There are many configuration parameters, and each `BES` module comes with its own set of options. You can inspect all the options on the `.conf` file in each of `$prefix/etc/bes/modules` (e.g. the `$prefix/etc/bes/modules/h5.conf` file declares all configuration options for the HDF5 handler).
+When you launch your Hyrax Data Server, the `BES` loads the `bes.conf` located in `$prefix/etc/bes/`, which instructs to read all the configuration files defined for each module, located in `$prefix/etc/bes/modules/`. There are 27 configuration files! For example, the `$prefix/etc/bes/modules/h5.conf` file declares all configuration options for the HDF5 handler. 
 
 NOTE: By default `$prefix` is in `/usr/local` in Linux, or simply `/` if you followed the docker installation.
 
+The last final directive in the `bes.conf` file is to read the `$prefix/etc/bes/site.conf` file, if it exists. And so, when the default configurations do not suit your needs, or that of your data users, the [.red]#configuration of the `BES` can be customized by create a `site.conf` and re-defining configuration parameters there#. Any configuration reset in the `site.conf` file will override those set in the `bes.conf` file. 
 
-In the case the default configurations do not suit your needs, or that of your data users, the configuration of the `BES` can be customized. [.red]#To change the default configurations#, users *must create* a `site.conf` file, and place it next to the `bes.conf` file (i.e. in `$prefix/etc/bes/`). The Hyrax Data server will (attempt to) read the `site.conf` last, and configuration choices set there will override those set in the `bes.conf` file. Note that if there is no `site.conf` file, then Hyrax will simply use the default configurations.
+NOTE: By default, there is no `site.conf` file, and thus Hyrax uses the default configurations.
 
 
 The main advantages of having a separate [.red]#site.conf# file are:
 
-* The `site.conf` file can persist through Hyrax updates.
-* The `bes.conf` is static (unaltered), allowing to check the default configurations.
+* The `bes.conf` is static (unaltered), providing a way to check the default configurations.
+* The `site.conf` file consolidates all of the used configurations into a single file. This is preferable over making changes across multiple files.
+* The `site.conf` file persists through Hyrax updates.
 
+To learn how to create and configure such `site.conf`, along with many examples, jump to <<site_conf, Custom Module Configuration >>subsection below.
 
 == Basic format of parameters
 
-Parameters set in the BES configuration file have the following format:
+One way in which the parameters are set in the BES configuration file, is:
 
 ----
 Name=Value1
-----
-
-If you wish to add to the value of a parameter, then you would use +=
-instead of =
-
-----
 Name+=Value2
 ----
 
-The above would return the values Value1 and Value2 in the software.
+The above assigns both `Value1` and `Value2` to `Name`, due to the +++ += +++ operator. If instead of +++ += +++ you have =, then `Name` would be overwritten in the second line, taking only the value of `Value2`.
 
-And if you would like to include another configuration file you would
-use the following:
-
-----
-BES.Include=/path/to/configuration/file/blee.conf
-----
-
-The bes.conf file includes all .conf files in the modules directory with
+The `bes.conf` file includes all `.conf` files in the modules directory with
 the following:
 
 ----
@@ -56,15 +46,37 @@ BES.Include=modules/.*\.conf$
 NOTE: Regular expressions can be used in the _Include_ parameter to
 match a set of files.
 
-NOTE: Configuration parameters are generally a key/value pair; 
-for example, the default server administrator email parameter is email:support@opendap.org, 
-where email is the key and support@opendap.org is the value.
+And if you would like to include another configuration file you would
+use the following:
+
+----
+BES.Include=/path/to/configuration/file/blee.conf
+----
+
+Another way to define configuration parameters, is by using key/value pairs. This applies to many of the parameters avaiable, but not all. For example:
+
+----
+SupportEmail = support@opendap.org
+
+BES.ServerAdministrator = email:support@opendap.org
+BES.ServerAdministrator += organization:OPeNDAP Inc.
+BES.ServerAdministrator += street:165 NW Dean Knauss Dr.
+BES.ServerAdministrator += city:Narragansett
+BES.ServerAdministrator+=region:RI
+BES.ServerAdministrator+=postalCode:02882
+BES.ServerAdministrator+=country:US
+BES.ServerAdministrator+=telephone:+1.401.575.4835
+BES.ServerAdministrator+=website:http://www.opendap.org
+----
+
+NOTE: parser for the configuration ignores spaces around the '=' and '+=' operators.
 
 
 [[site_conf]]
 == Custom Module Configuration via _site.conf_
 
-The `site.conf` is a special configuration file that can persist through Hyrax updates, and here you can store custom module configurations.  The <<site-conf-config, configuration instructions>> below detail how to customize a module’s configuration with `site.conf` 
+The `site.conf` is a special configuration file that persists through Hyrax updates, 
+and here you can store custom module configurations.  The <<site-conf-config, configuration instructions>> below detail how to customize a module’s configuration with `site.conf` 
 
 
 [[site-conf-config]]
@@ -74,6 +86,7 @@ The following instructions work generally for any way you install Hyrax. In addi
 1. *Create an empty `site.conf` in `$prefix\etc\bes` with the following command:*
 +
 ....
+cd $prefix/etc/bes/
 sudo touch site.conf
 ....
 +
@@ -88,7 +101,7 @@ NOTE: Included in `$prefix/etc/bes/` is a template `site.conf` file, called `sit
 [[site-conf-config-docker]]
 === Instructions When Running Hyrax via Docker
 
-If you will be running Hyrax with <<dockerhub,Docker>>, you can first create an empty `site.conf` file on your machine, and point to it when running hyrax. [.red]#This will allow the `site.conf` file to persist through any Hyrax update/restart#. For this, follow the (similar) steps as before:
+If you will be running Hyrax with <<dockerhub,Docker>>, you can first create an empty `site.conf` file on your machine, and point to it when running hyrax. [.red]#This will allow the `site.conf` file to persist through any Hyrax update/restart, and even in accidental removing of Hyrax#. For this, follow the (similar) steps as before:
 
 1. *Create a local `site.conf` file*. 
 2. *Run Hyrax via Docker adding the following line in Step 2 of the (see <<_run_hyrax_and_serve_data,Docker Hub installation instructions>>):*
@@ -109,10 +122,101 @@ This will allow you to navigate the docker container, and therefore Hyrax's dire
 5. *Restarting the server is optional / no longer needed. When running the server again, make sure to do Step 2*.
 
 
+[[Pointing_to_data, `site.conf` Configuration Example: Pointing to data]]
+=== Example: Pointing to data
+
+There are two general ways to point to data, which depends on your preferred
+way to install and run Hyrax. When <<dockerhub,installing/running Hyrax
+via Docker>>, [.red]#Step 2# describes the instruction to point data to Hyrax. Namely, 
+add the following line to your docker run command:
+
+----
+--volume </full/path/data/root/directory>:/usr/share/hyrax
+----
+
+By default, Hyrax will read data from `/usr/share/hyrax`. The `</full/path/data/root/directory>` should be the root directory of your data catalog.
+
+
+When installing Hyrax from Source or (pre-compiled) Binaries, you will have to set the value
+
+----
+BES.Catalog.catalog.RootDirectory=/full/path/data/root/directory
+BES.Data.RootDirectory=/dev/null
+----
+
+in the `site.conf`.
+
+
+The next step, is to (re)configure any mapping between data source names and data 
+handlers. This is usually taken care of for you already, so you probably won't
+have to set this parameter unless you would like to set a new configuration. *Each data handler module* ([.blue]#netcdf, hdf4, hdf5, freeform#, etc...) will have this set depending on the extension of the data files for the data.
+
+For example, in [.red]#nc.conf#, for the netcdf data handler module, you'll find the line:
+
+----
+BES.Catalog.catalog.TypeMatch+=nc:.*\.nc(\.bz2|\.gz|\.Z)?$;
+----
+
+The following is imported by the default `bes.conf` configuration file.
+
+
+NOTE: When the BES is asked to perform some commands on a particular data
+source, it uses regular expressions to figure out which data handler should be used to carry out the commands. The value of the [.red]#BES.Catalog.catalog.TypeMatch# parameter holds the set of regular expressions. The value of this parameter is a list of handlers and expressions in the form handler _expression_. The regular expressions used by the BES are like those used by `grep` on Unix and are somewhat cryptic, but once you see the pattern it's not that bad. 
+
+For example, in the following 3 examples, the [.red]#TypeMatch# parameter is being told the following:
+
+[[nc-example]]
+. *Any data source with a name that ends in [.red]#.nc# should be handled by 
+the [.blue]#netcdf (nc-) handler#.*
++
+----
+BES.Catalog.catalog.TypeMatch+=nc:.*\.nc(\.bz2|\.gz|\.Z)?$;
+----
++
+. *Any file with a [.red]#.hdf#, [.red]#.HDF#, or [.red]#.eos# suffix should be processed 
+using the [.blue]#HDF4 handler# (note that case matters)*
++
+----
+BES.Catalog.catalog.TypeMatch+=h4:.*\.(hdf|HDF|eos)(\.bz2|\.gz|\.Z)?$;
+----
++
+. *Data sources ending in [.red]#.dat# should use the [.blue]#FreeForm handler#*.
++
+----
+BES.Catalog.catalog.TypeMatch+=ff:.*\.dat(\.bz2|\.gz|\.Z)?$;
+----
+
+
+If you fail to configure this correctly, the BES will return error
+messages stating that the type information has to be provided. It won't 
+tell you this, however when it starts, only when the OLFS (or some other
+software) makes a data request. This is because it is possible
+to use BES commands in place of these regular expressions, although the
+Hyrax won't.
+
+
+==== NetCDF-4 files and the HDF5 Handler
+
+In the <<nc-example,NetCDF example>> above, although not explicitly, the [.red]#.nc# suffix refers to NetCDF-3 files (i.e. NetCDF classic). NetCDF-3 is an older data model, and as such does not incorporate many of the DataTypes now widely used by the scientific community. As a result, data producers opt to use instead the Enhanced Data Model, i.e. the [.red]#NetCDF-4#. *Unfortunately, both NetCDF3 and NetCDF4 data file formats have the identical suffix*, [.red]#.nc#, even though it is now becoming a common practice to assign the [.red]#.nc4 suffix to NetCDF4 files#.
+
+Nonetheless, many NetCDF-4 files have a [.red]#.nc# suffix. Since Hyrax's [.blue]#netcdf handler# only covers the NetCDF3 model, any attributes or variable types that are only part of the NetCDF-4 data model will not be properly handled by Hyrax's data server. At worst, *Hyrax will be unable to serve* the dataset.
+
+To successfully serve NetCDF4 data, [.red]#the HDF5 handler should be assigned# to any such file. The reason behind this successfull approach is that the NetCDF-4 uses HDF5 library as its backend. *However, in the case where your data has both NetCDF3 and NetCDF4, we strongly recommend to* [.red]#rename any NetCDF4 to include the .nc4 suffix#. This will facilitate the mapping between NetCDF4 data and HDF5 handler. To find out whether your .nc data file is NetCDF3 or NetCDF4, you can use `ncdump`.
+
+The mapping assigning the HDF5 handler to any .nc4 file should be defined in the `site.conf` file as follows:
+
+----
+BES.Catalog.catalog.TypeMatch+=h5:.*\.nc4(\.bz2|\.gz|\.Z)?$;
+----
+
+
+Below, we provide a concrete example of a `site.conf` file when <<site-conf-example-configuration-data, serving NetCDF-4 datasets with Groups>>. Groups are part of both NetCDF4 and HDF5 data models.
+
+
 [[site-conf-example-configuration-data, site.conf Configuration Example: Groups in NetCDF4 and HDF5]]
 === Example: Groups in NetCDF4 and HDF5
 
-By default, the `Group` representation on a dataset is flattened to accomodate https://cfconventions.org/cf-conventions/cf-conventions.pdf[CF 1.7 conventions]. In addition, the default `NC-handler` that is used for any `.nc4` dataset is based on "_Classic NetCDF model_" (`netCDF-3`), which does not incorporate many of the Enhanced NetCDF model (`netCDF4`) features. As a result, to serve `.nc4` data that may contain DAP4 elements not present in DAP2 (see https://opendap.github.io/dap4-specification/DAP4.html#_how_dap4_differs_from_dap2[diagram] for comparison with DAP2), or serve H5 datasets with unflattened `Group` representation, one must make the following changes to the default configuration:
+By default, the `Group` representation on a dataset is flattened to accomodate https://cfconventions.org/cf-conventions/cf-conventions.pdf[CF 1.7 conventions]. In addition, the default `NC-handler` that is used for any `.nc4` dataset is based on "_Classic NetCDF model_" (`netCDF-3`), which does not incorporate many of the Enhanced NetCDF model (`netCDF4`) features. As a result, to serve `.nc4` data that may contain DAP4 elements not present in DAP2 (see https://opendap.github.io/dap4-specification/DAP4.html#_how_dap4_differs_from_dap2[diagram] for comparison with DAP2), or serve H5 datasets with unflattened `Group` representation, one must make the following 2 changes to the default configuration:
 
 . Set `H5.EnableCF=false` and `H5.EnableCFDMR=true`.
 . Assign the h5 handler when serving `.nc4` data via Hyrax.
@@ -138,84 +242,6 @@ H5.EnableCFDMR=true
 ----
 
 
-[[Pointing_to_data, `site.conf` Configuration Example: Pointing to data]]
-=== Example: Pointing to data
-
-There are two parameters that can be used to tell the BES where your
-data are stored. Which one you use depends on whether you are setting up
-the BES to work as part of Hyrax (and thus with THREDDS catalogs) or as
-a standalone server. In either case, set the value of the
-`.RootDirectory` parameter to point to the root directory of your data
-files (only one may be specified). If the BES is being used as part of Hyrax, 
-use `BES.Catalog.catalog.RootDirectory` in `dap.conf`, which is stored 
-in the `modules` directory; otherwise, use `BES.Data.RootDirectory` in `bes.conf` itself. 
-
-So, if you are setting up Hyrax, set the value of 
-`BES.Catalog.catalog.RootDirectory` but be *sure* to set `BES.Data.RootDirectory` 
-to some value or the BES will not start.
-
-In `site.conf` file, set the following:
-
-----
-BES.Data.RootDirectory=/full/path/data/root/directory
-----
-
-Also in `site.conf` set the following if using Hyrax (usually the case):
-
-----
-BES.Catalog.catalog.RootDirectory=/full/path/data/root/directory
-----
-
-By default, the _RootDirectory_ parameters are set to point to the test
-data supplied with the data handlers.
-
-Next, configure the mapping between data source names and data handlers.
-This is usually taken care of for you already, so you probably won't
-have to set this parameter. Each data handler module (_netcdf_, _hdf4_,
-_hdf5_, _freeform_, etc...) will have this set depending on the extension of
-the data files for the data.
-
-For example, in nc.conf, for the netcdf data handler module, you'll find
-the line:
-
-----
-BES.Catalog.catalog.TypeMatch+=nc:.*\.nc(\.bz2|\.gz|\.Z)?$;
-----
-
-When the BES is asked to perform some commands on a particular data
-source, it uses regular expressions to figure out which data handler
-should be used to carry out the commands. The value of the
-_BES.Catalog.catalog.TypeMatch_ parameter holds the set of regular
-expressions. The value of this parameter is a list of handlers and
-expressions in the form handler _expression;_. Note that these regular
-expressions are like those used by `grep` on Unix and are somewhat
-cryptic, but once you see the pattern it's not that bad. Below, the
-_TypeMatch_ parameter is being told the following:
-
-* Any data source with a name that ends in `.nc` should be handled by 
-the _nc_ (netcdf) handler (see _BES.module.nc_ above)
-* Any file with a `.hdf`, `.HDF` or `.eos` suffix should be processed 
-using the HDF4 handler (note that case matters)
-* Data sources ending in `.dat` should use the FreeForm handler
-
-Here's the one for the hdf4 data handler module:
-
-----
-BES.Catalog.catalog.TypeMatch+=h4:.*\.(hdf|HDF|eos)(\.bz2|\.gz|\.Z)?$;
-----
-
-And for the FreeForm handler:
-
-----
-BES.Catalog.catalog.TypeMatch+=ff:.*\.dat(\.bz2|\.gz|\.Z)?$;
-----
-
-If you fail to configure this correctly, the BES will return error
-messages stating that the type information has to be provided. It won't 
-tell you this, however when it starts, only when the OLFS (or some other
-software) makes a data request. This is because it is possible
-to use BES commands in place of these regular expressions, although the
-Hyrax won't.
 
 ==== Including and Excluding files and directories
 
