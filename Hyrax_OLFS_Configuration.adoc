@@ -182,7 +182,7 @@ Configures the behavior of the pool of client connections that the OLFS
 maintains with this particular BES. These connections are pooled for 
 efficiency and speed: `<ClientPool maximum="200" maxCmds="2000" />`.
 +
---
+
 Notice that this element has two attributes, `maximum` and `maxCmds`:
 
 ** The `maximum` attribute specifies the maximum number of concurrent
