@@ -106,28 +106,6 @@ initial launch) in the file...
 
 `$CATALINA_HOME/webapps/ncWMS2/WEB-INF/web.xml`
 
-This configuration stipulates that access to the _ncWMS2/admin_ pages
-must be over a secure transport and that there will be no access without
-authentication  in the *`manager`* role:
-
-[source,xml]
-----
-<!-- Define a Security Constraint on the Admin command and user interfaces -->
-<security-constraint>
-    <web-resource-collection>
-        <web-resource-name>admin</web-resource-name>
-        <url-pattern>/admin/*</url-pattern>
-    </web-resource-collection>
- 
-    <auth-constraint>
-        <role-name>manager</role-name>
-    </auth-constraint>
- 
-    <user-data-constraint>
-        <transport-guarantee>CONFIDENTIAL</transport-guarantee>
-    </user-data-constraint>
-</security-constraint>
-----
 
 .Your choices
 

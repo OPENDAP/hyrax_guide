@@ -38,9 +38,6 @@ available through the Docs servlet, the data provider can further
 customize the appearance and layout of the Hyrax server web pages, making them
 conform better to their parent organization's visual identity. The Docs
 servlet has no specific configuration file.
-* <<admin-interface, *Admin Interface Servlet*>> - The Hyrax Administration 
-Interface (HAI) provides server administrators with a GUI for monitoring,
-controlling, and configuring the server.
 * <<gateway-service, *Gateway Servlet*>> - The Gateway Servlet provides 
 a gateway service that allows Hyrax to be configured to
 retrieve files (that the server recognizes as data) from the web and
@@ -397,17 +394,6 @@ _Example:_
 
 If the <ClientPool> element is missing, the pool size defaults to 200.
 
-==== *<adminPort>* element (optional)
-
-This child element of the <__BES__> element contains the port on the BES
-system that can be used by the Hyrax Admin Interface to control the BES.
-THe BES must also be configured to open and utilize this admin port.
-
-_Example:_
-
----- 
-<adminPort>11002</adminPort>
-----
 
 ==== Example BESManager Configuration Element
 

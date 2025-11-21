@@ -175,9 +175,8 @@ server.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The BES supports a flexible run-time instrumentation system that you can
-access using besstandalone (there are other ways too, see the
-link:../index.php/Hyrax_Admin_Interface[Hyrax Admin Interface]). Here's
-an example of instrumentation:
+access using besstandalone.
+Here's an example of instrumentation:
 
 code,de1--------------------------------------------------------------------
 code,de1
