@@ -1,0 +1,8 @@
+[[build]]
+= Installation requirements
+
+We have adopted +++ C++-14 +++ as aggressively as we can, resulting in fewer lines of code, better memory management and more efficient code. Now require ++C++-14++ to build the code.
+
+The OLFS now uses Java17 (jdk17).
+
+Hyrax is now build on RHEL8 (Rocky8). This means we have removed support for RHEL 7 (CentOS 7) and CentOS 6.

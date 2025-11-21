@@ -1,59 +1,28 @@
-
 sudo: required
-
-# whitelist
 branches:
   only:
-    - master
-
+  - main
 notifications:
   email:
-    - ndp@opendap.org
-    - jgallagher@opendap.org
-env:
-  global:
-    # DOCKER_HUB_UID for our DockerHub account
-    - secure: "ZftSYLtJ7JUrajD2vW8GTYOpiOQXYf4Qtjcp8NWyWvCW0PlXR0UtyILAdZGIAip3DNhPWiJGjTCAwENhbkrjdhwY+SChBzIGylEq8flaerzN1jJ6yBAzVCKS1pB71QWHKNWDC2TwIMS1qWnXO5Q/t+4CoytoCIqGQdaTEwDnkHAG/zg+VFjynIC5MBlY3UBKXvy17mLBJJZdwoJojWZAP2QEHcPHn8e9RRWTD658Y355mppHXds2/gdWPqwFIY5qqnZyYWmZJ3/pG7nmpjrS9BoEdCanRrKcc50mheBpaEhcoiIS4b1aMfq/pVqX9r7Pn3KnFL+29fuWKLHjZoqrYHELQIcDgwkkxtzMVSxRA0swrN2GwVdD7M9lTdTZW0vOziglYSV83+wie8Hyi752V4mB6AzPzL6dAk0aZZge5ibStJPz7lLTiBPGcYSVFpQy7fMkgrTKwefnZi0Zor8TbBHzhK6Im3QAy31rwmyJE29YMpjk5/xdJ4edcbI+/30ADXUwwASj2nYLl6860WPrxwqKMyDM5UzzuD1EwfdlT9z6yTpSGJe0D8OFracfYc+UheD7EbcI9pOxTDo7CwnhEvTFhwRYsZ2B7dpd4bT+ViqjZxt94meYd6aAXa5t1lTXI2MqDUkb7t40FPazWf0AjNx+0w2KBdpT0tkO7COiOOM="
-    # DOCKER_HUB_PSWD for our DockerHub account
-    - secure: "SR2drAEGlDi7F7yVAflRKsBamSRNdDQWA8yffmPqx3tmOpASwdNx7qzELSyScAs8wTHes5ZiyaAh9Xc4lEUQAwS0528hC48E8XCPvEruQp0AEJc3to9sNffwFQjJ7fFDxtc1kCihrIR4+HjYZKX0VSoSlgi307lbrhU5+F9n8NyDiG6qLpGGFpcJQc9tUBBveIwkFpBn92pHFs8pfwHw+m+4RkpanmhYKAyUuYLScRWprFsOLevGF31gtaRs/VVRXotmEta44ENud6odGiVLHsyA9CL6MH+OyE2srfu4WMNgSOairUZCDusbl0RQNVw+qHknoILSFTI6gOmCEYDQU6iVn0LB3VRf58zAzr4eYr1a/Ik2Z7raJ9EOrsDb1dnuzeXc8gJzSb4CxU8mQBCxnhd+Gc0EiIAQ2WHeCF3YtuQK2bIoXDrM02ACqWqIJSVBBLTWxvHGIFaZA5l2ZALIL0EKdLLz9K77PzdNN7zzkn+h3VGOXUVUcrtZv411/OoZrFRHS+qkmwumdtoi68xLwBZibEci2b59jb904CaSmotG+JmuoYr9dVHo1E7ZRSJw1wCNAsxKUpqPzvS8S8mw4wyqILvJ20AFT/b5tb+9tab390gZEy0kYK+bkkGceJyF0OKY6NAAnhOkxhZ94lfg9I+mi3TE51vE0RXIYTaVDcY="
-    # GIT_UID
-    - secure: "mdJZfmb5eoyoRVkd7wJBKwHH1glNfLm6VHUKPzIByw+0W6xf1Ru9BiYPgI/s6LdGSy5w3ggwjWjWzJjrnOdjNqOSTgpfd5JibgRRmW/s047i1p7j+mxKXWdkzAUtB0rCycE4pqRL6G7RRMLMtbb9QwVfdCVrWLVT9K/VooM240BZ2fjnWngJ8Tm9hpZsUuHMGgZ4xWjnK8zahIcb4u2p0B5QEwgLQH/eDyIFrP12VO2ffFBYSBQy/0De7r1E60zpzuZVrLsVwkY5NHh/MkV9MS12qzGatvMVlSLhzLPk7cjj4BP10uyNun5+w9jYkz/zQ7sd3Ukta++KHmxQnRVSkNbN9xCnX5uNwi6/TP3MysiSB3mr4KJQxGQzo4cuci5+RaUalvntAkZrzpNBapxTJi6Oa2fCi4wtvhj7cWVPxLVySNRKp+cYCxkW7W0ILMpDlnptxYx8Gx4YJNIJDORFGeKRb8fdQCjQw+AQWy/bacDsnWb6sAYwb8/asMDygk3M3gLr2lRLwjaax4M3zgvrxS0aErCthmfYKxXzr3uWbwddbJPF3FsVWEBbcJ5/VihG6p1F+ASLuM0zmZWvqrGgvLGe6oj2Y1bKwG8WL+JZqFIPdwF0oK5ddk0iQNLQlNM051yWrK2kmYxMX24saYROJtyQLZUrmiMHDgnWK+3eT20="
-    # GIT_TOKEN
-    - secure: "Ee8x6gPumMFPBTlxDb0NlmkI+kRDMYU9C/3G/dNlrcnk8Mq38NV4cuTZNIetcuQ3KSHVPTAww8bvoNsi5wc5vUIov9nXq+DIe4hQk9CTPyzhq89gU0WyEuYuuodmLjxu6BJbmR+u8JrI4f+qj1oYWuEN7HW38IUOcq18oCppxPG3Y0QlMQ6AKF3lDcXk2zT1hT9y8v8rToFS7wFPJ1rqJI7qmtBCiiV0QwVHAmCH0ZL5pHxWASl4ZTGHoYT9WmGuCb2W1HL+/HET8rwUsnexHWjYzCDUdKDr2cnevO1b1R+OKIPe+GC+2mcQYjybndkdxADS6MZODwujfFFKcTp/3T+H8O0+sZBJfvhdb+WAYJMUe3OC9ywVCn/75dHqYCHnxcMz6gwd8Ks9aeq7d34Po0HTsXxmvExHH8ar0d5uHXjYTcWF2WV3hVtlOJamnbLSLfgCU6qmZ2bW3XzO0+aOJjxHo0H8+3txKQebXEBV/DLdmkvS+DLwjhX86yMY7E1G8iqyLDAtQBMzIoDH/BTti26T1InFX6HjuVUa0kazEMrGUmBFqK5EMTkXIbQ9UR7pBwfLoU6ayJZ51le5+fdOYda/CswHteMFz4j8h3u5TzZCQ/jFNaeqYMIbY4nOal54hhm07uCjlRwIHaZ4XypPHJIeTTckmHoyq5pj9K1lrAg="
+  - ndp@opendap.org
+  - jgallagher@opendap.org
+  - "{GIT_USER_EMAIL}"
 
 services:
-  - docker                  
-
+- docker
 before_install:
-  - echo $DOCKER_HUB_PSWD | docker login -u $DOCKER_HUB_UID --password-stdin
-  - mkdir -p output
-  - docker pull asciidoctor/docker-asciidoctor
-
-# Name the file explicitly until we sort out the organization of the 'documentation'
-# project.
-
+- mkdir -p output
+- docker pull asciidoctor/docker-asciidoctor
 script:
-  # Inject the version information
-  - GUIDE_VERSION=`cat VERSION`"-${TRAVIS_BUILD_NUMBER}"
-  - echo ${GUIDE_VERSION}
-  - cat Master_Hyrax_Guide.adoc | sed -e "s|GUIDE_VERSION|${GUIDE_VERSION}|g" > index.adoc
-  # Build the Guide as HTML
-  - docker run -v $TRAVIS_BUILD_DIR:/documents/ --name asciidoc-to-html asciidoctor/docker-asciidoctor asciidoctor -a toc=left -a docinfo=shared -D /documents/output index.adoc
-  - mv ./output/index.html ./output/Master_Hyrax_Guide.html
-  # - docker run -v $TRAVIS_BUILD_DIR:/documents/ --name asciidoc-to-pdf asciidoctor/docker-asciidoctor asciidoctor-pdf -D /documents/output Master_Hyrax_Guide.adoc
-
-after_error: 
-  - docker logs asciidoc-to-html
-  #- docker logs asciidoc-to-pdf
-
+- GUIDE_VERSION=`cat VERSION`"-${TRAVIS_BUILD_NUMBER}"
+- echo ${GUIDE_VERSION}
+- cat Master_Hyrax_Guide.adoc | sed -e "s|GUIDE_VERSION|${GUIDE_VERSION}|g" > index.adoc
+- docker run -v $TRAVIS_BUILD_DIR:/documents/ --name asciidoc-to-html asciidoctor/docker-asciidoctor
+  asciidoctor -a toc=left -a docinfo=shared -D /documents/output index.adoc
+- mv ./output/index.html ./output/Master_Hyrax_Guide.html
+after_error:
+- docker logs asciidoc-to-html
 after_failure:
-  - docker logs asciidoc-to-html
-  #- docker logs asciidoc-to-pdf
-
-# This is a bit different than the 'after_success' section in the 'documentation'
-# repo because that build installs the github.io index.html page from its
-# README.adoc file. I extracted the Hyrax Guide from that repo because of problems
-# getting the images to work in the online version of the Hyrax Guide. jhrg 10/11/17
-
-after_success:      
-  - ./travis/deploy_to_gh_pages.sh
+- docker logs asciidoc-to-html
+after_success:
+- ./travis/deploy_to_gh_pages.sh

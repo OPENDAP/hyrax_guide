@@ -1,5 +1,9 @@
-[[mds]]
 = MetaData Store (MDS)
+:Miguel Jimenez <mjimenez@opendap.org>:
+{docdate}
+:numbered:
+:toc:
+
 
 A new cache, the MetaData Store (MDS), has been added to the BES for 
 metadata responses. This cache is unlike the other 
@@ -62,7 +66,7 @@ DAP.GlobalMetadataStore.ledger = /usr/share/mds_ledger.txt
 == Configure the MDS
 
 The MDS' parameters should be configured in `site.conf`. 
-For more information, please see <<site-conf,the site.conf section>>. 
+For more information, please see <<#site_conf,the site.conf section>>. 
 
 To configure the MDS to work as a store, rather than a cache, 
 set the `Dap.GlobalMetadataSote.size` to 0.
@@ -80,4 +84,4 @@ By default the metadata files are stored in `usr/share/mds`.
 You can change this location by modifying the 
 `DAP.GlobalMetadataStore.path`. You can modify this parameter
 in _dap.conf_, but you should modify it in _site.conf_.
-For more information, please see <<site-conf,the site.conf section>>. 
+For more information, please see <<#site_conf,the site.conf section>>. 

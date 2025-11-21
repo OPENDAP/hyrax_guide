@@ -5,13 +5,13 @@
 //:toc:
 
 [[config-hyrax-mult-BESs]]
-== Configuring The OLFS To Work With Multiple BES's
+= Configuring The OLFS To Work With Multiple BES's
 
 Configuring Hyrax to use multiple BES backends is straight forward. It
 will require that you edit the *olfs.xml* file and possible the
 *catalog.xml* file.
 
-=== Top Level (__root__) BES
+== Top Level (__root__) BES
 
 Every installation of Hyrax requires a top level (or _root_ level)
 BES. This BES has a _prefix_ of "/" (the forward slash character). The
@@ -31,7 +31,7 @@ __Note:__ The word _root_ here has *absolutely nothing* to do with
 the login account called root associated with the super user or system
 administrator.
 
-=== Single BES Example (Default)
+== Single BES Example (Default)
 
 Here is the <__Handler__> element in an *olfs.xml* that defines the
 opendap.bes.BESManager file that configures the OLFS to use a single
@@ -64,7 +64,7 @@ collections | catalogs that the BES exposes at the above URI.
 __*Remember*__: There *must* be one (but only one) BES configured with
 the <__prefix__> set to "/" in your *olf.xml* file.
 
-=== Multiple BES examples
+== Multiple BES examples
 
 Here is a BESManager <__Handler__> element that defines two BES's:
 
@@ -158,7 +158,7 @@ server2.test.org
 server3.test.org
 * The BES at server0.test.org would handle everything else.
 
-=== Mount Points
+== Mount Points
 
 In a multiple BES installation each additional BES must have a _mount
 point_ within the exposed hierarchy of collections for it to be visible
@@ -281,8 +281,9 @@ the BES on server2.test.org is exposing.
 "GlobalTemperature/Europe/France" relative to the top of the directory
 tree that the BES on server0.test.org is exposing.
 
-=== Complete olfs.xml with multiple BES installations example
+== Complete olfs.xml with multiple BES installations example
 
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <OLFSConfig>

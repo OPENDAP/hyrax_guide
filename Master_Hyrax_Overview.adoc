@@ -4,6 +4,7 @@
 :numbered:
 :toc:
 
+
 This section describes the installation, configuration,
 and operation of the _Hyrax Data server_, a data server that integrates
 structured data with the world wide web. Hyrax is one example of a
@@ -41,6 +42,27 @@ them to serve site specific data.
 image::HyraxArchitecture.jpg[]
 
 == Features
+
+* **+++ DMR++ +++**: +++ DMR++ +++ provides direct access to data in S3, 
+  and so Hyrax supports direct I/O transfers from HDF5 to NetCDF4 when 
+  using +++ DMR++ +++. Hyrax can find the effective URL for a data item 
+  when it is accessed via a series of redirect operations, the last of 
+  which is a signed AWS URL. This is a common case for data stored in S3. 
+  In addition, the BES can sign S3 URLs using the AWS V4 signing scheme. 
+  Hyrax implements lazy evaluation of +++ DMR++ +++ files. This improves 
+  the efficiency/speed for requests that subset a dataset that contains 
+  a large number of variables as only the variables requested will have 
+  their Chunk information read and parsed. 
+
+
+* **EDL: EarthDataLogin**
+  Hyrax has extensitve support for Earthdata Login Authentication. For
+  configurations that require Hyrax to authenticate remote resources, Hyrax
+  can now utilize `~/.netrc` (or a `netrc` file may be specified in `site.conf`)
+  and Hyrax will use the appropriate credentials. Moreover, Hyrax supports
+  EDL token chaining and the handling of tokens is much improved so that 
+  redirected are not issues and session (cookie) management is not required 
+  of the client.
 
 * *THREDDS Catalog Support:*
   Hyrax supports the THREDDS catalogs. It can serve user supplied static
@@ -124,30 +146,6 @@ image::HyraxArchitecture.jpg[]
   first.)
 
 
-////
-Seems to be duplicate content. This is covered in greater detail in 
-Master_Hyrax_Installation
-
-[[Download_and_Install_Hyrax]]
-== Downloading and Installation
-
-The download and installation instructions are kept together. For the
-latest release look at https://www.opendap.org/software/hyrax-data-server[the Hyrax
-downloads page].
-
-If you are interested in working on Hyrax or want to build the
-server from source code (as opposed to using the prebuilt binaries we
-provide), you can get signed source distributions from the
-https://www.opendap.org/software/hyrax-data-server[download page]
-referenced above. See also the <<for-developers, 
-_For Software Developers_>> section below.
-
-If you want to learn how to configure Hyrax, please see the
-<<Hyrax_Configuration, Hyrax Configuration Instructions>> that 
-appear later in this manual.
-
-////
-
 == Modules
 
 Hyrax has a number of modules that provide the actual functionality of
@@ -172,29 +170,6 @@ facing) part of the server.
 
 * <<WMS_Service, WMS>> - Web Mapping Service via integration with ncWMS.
 * <<user_specified_aggregation, Aggregation enhancements>>
-
-[[for-developers]]
-=== For Software Developers
-
-If you would like to build Hyrax from source code, you can get signed
-source distributions from the
-https://www.opendap.org/software/hyrax-data-server[download page]
-referenced above. In addition, you can get the source code for the
-server from GitHub, either using the
-https://github.com/opendap/hyrax[Hyrax project] or by following the
-http://docs.opendap.org/index.php/Hyrax_GitHub_Source_Build[directions
-on our developer's wiki].
-
-* link:http://docs.opendap.org/index.php/How_to_use_Eclipse_with_Hyrax_Source_Code[How to use
-Eclipse with Hyrax Source Code]. Note that this is a a work in progress,
-but it will help with some of the odd steps that Eclipse seems to require.
-
-==== BES Development Information
-
-We maintain a wiki with a section deveoted to
-http://docs.opendap.org/index.php/Developer_Info[Developer
-Information] specific to our software and development process. You can
-find information there about developing your own modules for Hyrax.
 
 ==== Reference Documentation
 

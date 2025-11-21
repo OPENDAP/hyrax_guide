@@ -6,14 +6,15 @@
 
 == Introduction
 
-The OLFS comes with a default configuration that is compatible with the
-default configuration of the BES. If you perform a default installation
+The `OLFS` comes with a default configuration that is compatible with the
+default configuration of the `BES`. If you perform a default installation
 of both, you should get a running Hyrax server that will be pre-populated
 with test data suitable for running integrity tests.
 
 == Install Tomcat
 
-. Use yum to install tomcat.noarch: `sudo yum install tomcat.noarch`.
+. **Install tomcat.noarch**: 
+  `sudo yum install tomcat.noarch`.
 . Create the directory `/etc/olfs`, change its group to tomcat, 
 and set it _group writable:_
 +
@@ -30,25 +31,24 @@ install it wherever you'd like--for example, `/usr/local/`.
 
 Follow the steps below to download the latest OLFS distribution:
 
-. Visit the 
-  https://www.opendap.org/software/hyrax-data-server#block-hyraxversions-menu[Hyrax
-  Data Server Page].
-. Select the most recent in the list of _Available Versions_.
-. Scroll down the following page until you reach the section titled 
-  _Binaries for Hyrax x.x.x_.
-. Directly underneath, you should see the OLFS download link, 
-  named something like _OLFS_x.x.x._Web_Archive_File_. Click to download.
-. The downloaded file will be named something like: _olfs-x.x.x-webapp.tgz_.
+. Visit the official OPeNDAP website and go to *Latest Release*.
+. Scroll down the following page until you reach the section entitled 
+  *Linux Binaries*
+. Directly underneath, you should see the `OLFS` download link, 
+  named something like `OLFS_x.x.x._Web_Archive_File`. Click to download.
+. The downloaded file will be named something like: `olfs-x.x.x-webapp.tgz`.
 
 == Unpack
 
-Unpack the jar file with the command `tar -xvf olfs-x.x.x-webapp.tgz`,
-which will unpack the files directory called _olfs-x.x.x-webapp_.
+Unpack the jar file with the command
+`tar -xvf olfs-x.x.x-webapp.tgz`
+
+This will unpack the files directory called `olfs-x.x.x-webapp`.
 
 == Install
 
-Inside of the _olfs-x.x.x-webapp_ directory, locate opendap.war and copy it into
-Tomcat's _webapps_ directory:
+Inside of the `olfs-x.x.x-webapp` directory, locate `opendap.war` and copy it into
+Tomcat's `webapps` directory:
 
 ....
 cp opendap.war /usr/share/tomcat/webapps
@@ -152,3 +152,9 @@ server's output, make sure to run the command `bin/shutdown.sh`
 to shutdown Tomcat. If you don't, you may get errors when you next try
 to start the Tomcat server.
 ////
+
+
+
+NOTE: If you are installing the `OLFS` in conjunction with `ncWMS2` version 2.0 or higher, copy both the `opendap.war` and the `ncWMS2.war` files into the Tomcat `webapps` directory. (Re)Start Tomcat.
+
+

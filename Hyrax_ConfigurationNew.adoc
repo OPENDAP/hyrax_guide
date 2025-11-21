@@ -1,0 +1,44 @@
+[[config]]
+= Configuration and behavior updates
+
+As of Hyrax 1.16.8 we have deprecated the following 
+
+----
+DEPRECATED: <UseDAP2ResourceUrlResponse />. 
+----
+
+Instead, we recommend to use
+
+a). `<DatasetUrlResponse type="..." /> ` +
+where the default type above is `download` to configure the type of response that the server will generate when a client attempts to access the unadorned Dataset URL. The type of response is controlled by the value of the type attribute.
+
+*Allowed values:* +
+
+* `download` (default) +
+	If the configuration parameter `AllowDirectDataSourceAccess` is set (present) then the source data file will be returned for the dataset URL. If the configuration parameter `AllowDirectDataSourceAccess` is not present then a 403 forbidden will be returned for the dataset URL. (This is basically a file retrieval service, any constraint expression submitted with the unadorned dataset URL will be ignored.)
+
+* `dsr`. +
+The dap4 DSR response will be returned for the dataset URL. 
+
+NOTE: This setting is not compatible with DataRequestForm type of “dap2” as the DSR response URL collides with the DAP2 Data Request Form URL.
+
+* `requestForm` +
+The Hyrax Data Request Form Page will be returned for the dataset URL. Which form is returned is controlled by the _DataRequestForm_ configuration element
+
+
+b) `<DataRequestForm type="..." />` +
+
+Defines the target DAP data model for the dataset links in the “blue-bar” catalog.html pages. These links point to the DAP Data Request Form for each dataset. This element also determines the type of Data request form page returned when the DatasetUrlResponse type=”requestForm” and the request is for the Dataset URL
+
+*Allowed values*: `dap2` or `dap4`
+
+
+c) `<AllowDirectDataSourceAccess />` +
+
+When enabled users will be able to use Hyrax as a file server and download the underlying data files/granules/objects directly, without utilizing the DAP APIs.
+* default: `disabled`
+
+d) `<ForceDataRequestFormLinkToHttps />` +
+
+The presence of this element will cause the Data Request Form interfaces to “force” the dataset URL to HTTPS. This is useful for situations where the sever is sitting behind a connection management tool (like AWS CloudFront) whose outward facing connections are HTTPS but Hyrax is not using HTTPS. Thus the internal URLs being received by Hyrax are on HTTP. When these URLs are exposed via the Data Request Forms they can cause some client’s to have issues with session dropping because the protocols are not consistent.
+Default: `disabled`

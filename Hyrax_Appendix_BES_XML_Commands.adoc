@@ -104,6 +104,7 @@ conform to is controlled by the dap_format context. It is possible
 
 ===== Request Example
 
+[source,xml]
 ----
    <?xml version="1.0" encoding="UTF-8"?>
    <request reqID ="####" >
@@ -121,6 +122,7 @@ Normally no response. May return a <<bes-error-response, BESError>>.
 
 ==== Request Example
 
+[source,xml]
 ----
    <?xml version="1.0" encoding="UTF-8"?>
    <request reqID ="####" >
@@ -139,6 +141,7 @@ Normally no response. May return a <<bes-error-response, BESError>>.
 
 ==== Request Example
 
+[source,xml]
 ----
    <?xml version="1.0" encoding="UTF-8"?>
    <request reqID ="####" >
@@ -182,6 +185,7 @@ Type:
 
 ==== Request Example
 
+[source,xml]
 ----
    <?xml version="1.0" encoding="UTF-8"?>
    <request reqID ="####" >
@@ -196,6 +200,7 @@ Multiple command transaction resulting in a DDS (non XML DAP2) response:
 
 ==== Request Example
 
+[source,xml]
 ----
    <?xml version="1.0" encoding="UTF-8"?>
    <request reqID ="####" >
@@ -218,6 +223,7 @@ Multiple command transaction resulting in a DDS (non XML DAP2) response:
 
 ==== Request Example
 
+[source,xml]
 ----
    <?xml version="1.0" encoding="UTF-8"?>
    <request reqID ="####" >
@@ -259,6 +265,7 @@ Current:
 
 Proposed:
 
+[source,xml]
 ----
    <?xml version="1.0" encoding="UTF-8"?>
    <response reqID="####">
@@ -282,6 +289,7 @@ Proposed:
 
 ==== Request Example
 
+[source,xml]
 ----
    <?xml version="1.0" encoding="UTF-8"?>
    <request reqID ="####" >
@@ -291,6 +299,7 @@ Proposed:
 
 ==== Response Example
 
+[source,xml]
 ----
   <?xml version="1.0" encoding="UTF-8"?>
    <response  reqID="####">
@@ -311,6 +320,7 @@ This is available only if the BES is compiled in developer mode. A
 
 ==== Request Example
 
+[source,xml]
 ----
    <?xml version="1.0" encoding="UTF-8"?>
    <request reqID ="####" >
@@ -320,6 +330,7 @@ This is available only if the BES is compiled in developer mode. A
 
 ==== Response Example
 
+[source,xml]
 ----
    <?xml version="1.0" encoding="UTF-8"?>
    <response reqID="####">
@@ -338,6 +349,7 @@ This is available only if the BES is compiled in developer mode. A
 
 ==== Request Example
 
+[source,xml]
 ----
    <?xml version="1.0" encoding="UTF-8"?>
    <request reqID ="####" >
@@ -347,6 +359,7 @@ This is available only if the BES is compiled in developer mode. A
 
 ==== Response Example
 
+[source,xml]
 ----
    <?xml version="1.0" encoding="UTF-8"?>
    <response reqID="####">
@@ -364,6 +377,7 @@ This is available only if the BES is compiled in developer mode. A
 
 ==== Request Example
 
+[source,xml]
 ----
    <?xml version="1.0" encoding="UTF-8"?>
    <request reqID ="####" >
@@ -373,6 +387,7 @@ This is available only if the BES is compiled in developer mode. A
 
 ==== Response Example
 
+[source,xml]
 ----
    <?xml version="1.0" encoding="UTF-8"?>
    <response reqID="####">
@@ -388,6 +403,7 @@ This is available only if the BES is compiled in developer mode. A
 
 ==== Request Example
 
+[source,xml]
 ----
    <?xml version="1.0" encoding="UTF-8"?>
    <request reqID ="####" >
@@ -397,6 +413,7 @@ This is available only if the BES is compiled in developer mode. A
 
 ==== Response Example
 
+[source,xml]
 ----
    <?xml version="1.0" encoding="UTF-8"?>
    <response  reqID="####">
@@ -414,6 +431,7 @@ This is available only if the BES is compiled in developer mode. A
 
 ==== Request Example
 
+[source,xml]
 ----
    <?xml version="1.0" encoding="UTF-8"?>
    <request reqID ="####" >
@@ -434,6 +452,7 @@ Normally no response. May return a <<bes-error-response, BESError>>.
 
 ==== Request Example
 
+[source,xml]
 ----
    <?xml version="1.0" encoding="UTF-8"?>
    <request reqID ="####" >
@@ -443,6 +462,7 @@ Normally no response. May return a <<bes-error-response, BESError>>.
 
 ==== Response Example
 
+[source,xml]
 ----
    <?xml version="1.0" encoding="UTF-8"?>
    <response  reqID="####">
@@ -463,6 +483,7 @@ Normally no response. May return a <<bes-error-response, BESError>>.
 
 ==== Request Example
 
+[source,xml]
 ----
    <?xml version="1.0" encoding="UTF-8"?>
    <request reqID ="####" >
@@ -472,6 +493,7 @@ Normally no response. May return a <<bes-error-response, BESError>>.
 
 ==== Response Example
 
+[source,xml]
 ----
   <?xml version="1.0" encoding="UTF-8"?>
   <response reqID ="####" >
@@ -490,6 +512,7 @@ Normally no response. May return a <<bes-error-response, BESError>>.
 
 ==== Request
 
+[source,xml]
 ----
    <?xml version="1.0" encoding="UTF-8"?>
    <request reqID="####" >
@@ -504,6 +527,7 @@ for the rdh catalog.
 
 ==== Response
 
+[source,xml]
 ----
   <?xml version="1.0" encoding="UTF-8"?>
    <response reqID="####" >
@@ -535,6 +559,7 @@ for the rdh catalog.
 
 ==== Request
 
+[source,xml]
 ----
    <?xml version="1.0" encoding="UTF-8"?>
    <request reqID="####" >
@@ -544,6 +569,7 @@ for the rdh catalog.
 
 ==== Current Response
 
+[source,xml]
 ----
    <?xml version="1.0" encoding="UTF-8"?>
    <response reqID="####">
@@ -561,6 +587,7 @@ for the rdh catalog.
    </response>
 ----
 
+[source,xml]
 ----
    <?xml version="1.0" encoding="UTF-8"?>
    <response reqID="####">
@@ -579,6 +606,7 @@ for the rdh catalog.
 
 ==== Proposed Response
 
+[source,xml]
 ----
    <dataset name="testfile.nc" size="43392" lastModified="YYYY-MM-DDThh:mm:ss" catalog="catalog" 
                     node="true|false" count="#ofChildDatSets">
@@ -590,6 +618,7 @@ for the rdh catalog.
 
 ==== Request
 
+[source,xml]
 ----
    <?xml version="1.0" encoding="UTF-8"?>
    <request reqID="####" >
@@ -599,6 +628,7 @@ for the rdh catalog.
 
 ==== Response
 
+[source,xml]
 ----
    <?xml version="1.0" encoding="UTF-8"?>
    <response reqID="####">

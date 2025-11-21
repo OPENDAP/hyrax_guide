@@ -114,6 +114,7 @@ use, then starts the BES. Note that developer mode is turned on.
 Type 'exit' to exit the command line client and 'help' or '?' to display the help screen
 ----
 
+[source,xml]
 ----
 BESClient>show version;
 <?xml version="1.0" encoding="ISO-8859-1"?>
@@ -130,6 +131,7 @@ BESClient>show version;
 </response>
 ----
 
+[source,xml]
 ----
 BESClient>show status;
 <?xml version="1.0" encoding="ISO-8859-1"?>
@@ -184,6 +186,7 @@ commands against the BES to retrieve data. But first, make sure that
 everything is installed properly. I won't show all the responses to the
 commands here, but some of it.
 
+[source,xml]
 ----
 % besctl start
 % bescmdln -h localhost -p 10022
@@ -345,6 +348,7 @@ we can talk with the BES.
 Type 'exit' to exit the command line client and 'help' or '?' to display the help screen
 ----
 
+[source,xml]
 ----
 BESClient>show version;
 <?xml version="1.0" encoding="ISO-8859-1"?>
@@ -361,6 +365,7 @@ BESClient>show version;
 </response>
 ----
 
+[source,xml]
 ----
 BESClient>show status;
 <?xml version="1.0" encoding="ISO-8859-1"?>
@@ -398,6 +403,7 @@ modules.
 
 The BES is now ready to serve hdf4 data and return data as netcdf files.
 
+[source,xml]
 ----
 % besctl start
 % bescmdln -h localhost -p 1000\22

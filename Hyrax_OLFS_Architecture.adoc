@@ -698,6 +698,7 @@ Hyrax does not currently support HTTP POST requests.
 
 === Example olfs.xml File
 
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <OLFSConfig>
@@ -1188,6 +1189,7 @@ to the content of the _web-app_ element. This would cause your externally
 held security configuration to be included in the _web.xml_ file.
 
 ._ENTITY_ configuration:
+
 [source,xml]
 ----
 <?xml version="1.0" encoding="ISO-8859-1"?>

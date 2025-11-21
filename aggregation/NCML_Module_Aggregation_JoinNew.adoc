@@ -85,6 +85,7 @@ values for **V**.
 
 Here's our NcML, with comments to describe what we are doing:
 
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 
@@ -173,6 +174,7 @@ module generates unique names for the virtual datasets in the output.
 We could also have specified the value for the dataset using the
 _netcdf@coordValue_ attribute:
 
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 
@@ -226,6 +228,7 @@ member, but changing the coordValue's. Also notice that we have
 specified that _both_ the *u* and *v* variables be aggregated using the
 same new dimension name __source__.
 
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <netcdf title="joinNew Aggregation with explicit string coordValue.">

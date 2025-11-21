@@ -78,6 +78,7 @@ dimension we may join along (it is an error to specify an inner). Given
 some number of granules with this same shape, consider the following
 explicit joinExisting aggregation:
 
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
  
@@ -96,6 +97,7 @@ explicit joinExisting aggregation:
 Here's the same aggregation using the _scan_ element instead of
 explicitly listing each file:
 
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
  
@@ -212,6 +214,7 @@ be this value, as if the datasets were each listed explicitly with this
 value of the attribute. Here's an example of using the syntactic sugar
 that results in the same exact aggregation as the previous explicit one:
 
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- joinExisting test on netcdf granules using scan@ncoords extension-->

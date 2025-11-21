@@ -20,8 +20,8 @@ include::Hyrax_Appendix_WCS_Service.adoc[lines="1,8..-1", leveloffset=+1]
 include::Hyrax_Appendix_Handlers.adoc[lines="1,6..-1", leveloffset=+1]
 
 [appendix]
-[[freeform-data-handler]]
-include::Hyrax_Appendix_FreeForm_Data_Handler.adoc[leveloffset=+1]
+[[DMRpp]]
+include::Hyrax_S3New.adoc[leveloffset=+1]
 
 // Install and configure Hyrax's support for user specified aggregations of data.
 [appendix]
@@ -30,6 +30,10 @@ include::Hyrax_Appendix_Aggregation.adoc[lines="1,6..-1", leveloffset=+1]
 [appendix]
 [[user_specified_aggregation]]
 include::Hyrax_Appendix_Aggregation_enhancements.adoc[lines="1,6..-1",leveloffset=+1]
+
+[appendix]
+[[metadata_data_store]]
+include::Hyrax_Appendix_MDS.adoc[lines="1,6..-1",leveloffset=+1]
 
 // The default server-side processing functions that are distributed with Hyrax
 [appendix]
