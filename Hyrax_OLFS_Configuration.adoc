@@ -116,7 +116,6 @@ of the `<BESManager>` element:
         <timeOut>300</timeOut>
         <maxResponseSize>0</maxResponseSize>
         <ClientPool maximum="10" maxCmds="2000" />
-        <adminPort>11002</adminPort>
     </BES>
     <NodeCache maxEntries="20000" refreshInterval="600"/>
     <SiteMapCache cacheFile="/tmp/SiteMap.cache" refreshInterval="600" />

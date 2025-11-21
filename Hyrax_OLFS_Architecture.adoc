@@ -406,7 +406,6 @@ If the <ClientPool> element is missing, the pool size defaults to 200.
         <timeOut>300</timeOut>
         <maxResponseSize>0</maxResponseSize>
         <ClientPool maximum="10" maxCmds="2000" />
-        <adminPort>11002</adminPort>
     </BES>
 </BESManager >
 ----
@@ -710,8 +709,6 @@ Hyrax does not currently support HTTP POST requests.
             <port>10022</port>
  
             <timeOut>300</timeOut>
- 
-            <adminPort>11002</adminPort>
  
             <maxResponseSize>0</maxResponseSize>
             <ClientPool maximum="200" maxCmds="2000" />
