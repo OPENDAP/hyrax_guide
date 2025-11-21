@@ -34,13 +34,7 @@ _"The service is removed from chkconfig management, and any symbolic links in /e
 
 The _besctl_ command is used to control the BES daemon. For Hyrax
 version 1.7 and earlier, this the only way to control the BES.
-Starting with Hyrax 1.8 (release date tentatively set for fall 2011)
-//For some reason this link does not work.
-the <<admin-interface, Hyrax Admin Interface>>
-can be used to start, stop, reconfigure and debug the BES
-once the master daemon is started using this command. The Hyrax Admin
-Interface also provides for both hard and soft restarts of Hyrax while
-the _besctl_ command does not.
+
 
 == Most Common Uses of _besctl_
 
@@ -117,9 +111,7 @@ dropped.
 
 === restart
 
-This is the same as using the stop and start commands separately. If you
-want to issue a 'soft' restart of Hyrax, use the Hyrax Admin Interface,
-which will be available in Hyrax 1.8.
+This is the same as using the stop and start commands separately.
 
 === status
 

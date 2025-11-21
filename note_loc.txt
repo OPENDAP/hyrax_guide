@@ -75,12 +75,6 @@
 ./Hyrax_JSON.adoc:155:*NB:* _Currently what is returned is really a JSON encoding of the DAP
 ./Hyrax_Logging_Configuration.adoc:171:Note that this configuration will not be persistent across new
 ./Hyrax_Starting_and_stopping_the_BES.adoc:169:option switches. Note that this option doesn't work when you supply an
-./Master_Hyrax_Administrators_Interface.adoc:21:followed by an explanation of its features. Note that the interface is
-./Master_Hyrax_Administrators_Interface.adoc:35:of Hyrax - the BES and OLFS. Be sure to skim the Configuration Notes
-./Master_Hyrax_Administrators_Interface.adoc:101:=== Configuration Notes
-./Master_Hyrax_Administrators_Interface.adoc:103:. Note that because the HAI is a web-based interface, with secure
-./Master_Hyrax_Administrators_Interface.adoc:157:Hyrax. Note that the control panel provides a way to set the logging
-./Master_Hyrax_Administrators_Interface.adoc:186:instance of Hyrax. Note that in these pictures we have only one BES
 ./Master_Hyrax_Apache_Integration.adoc:62:NB: It's possible to embed these in a _VirtualHost_ directive.
 ./Master_Hyrax_Apache_Integration.adoc:197:NB: You may wish review Tomcat documentation for the AJP Connector as
 ./Master_Hyrax_OLFS_Installation.adoc:82: **Usage Note**: If you use _ctrl-c_ to stop watching the tail of the

@@ -104,10 +104,6 @@ image::HyraxArchitecture.jpg[]
   be customized using CSS and XSL. You can add your organizations logo
   and specialize the colors and fonts in the presentation of data sets.
 
-* *Administrator's interface:*
-  Control and dynamically update Hyrax from a convenient web interface.
-  <<admin-interface, See the Admin interface documentation>>.
-
  * *WMS services:*
    <<WMS_Service, Hyrax now supports WMS services via integration with ncWMS.>>
 

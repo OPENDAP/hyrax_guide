@@ -194,12 +194,7 @@ can be issued over a particular `BESClient` connection. The default is 2000.
  
 If the `<ClientPool>` element is missing, the pool (`maximum`) size defaults
 to 200 and `maxCmds` defaults to 2000.
---
 
-* *`<adminPort>` element (optional)*: 
-Contains the port on the BES system that can be used by the Hyrax Admin Interface
-to control the BES, such as `<adminPort>11002</adminPort>`.
-The BES must also be configured to open and use this admin port.
 
 === `<NodeCache>` Child Element (optional)
 The NodeCache element controls the state of the in-memory LRU cache for BES

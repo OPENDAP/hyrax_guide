@@ -118,10 +118,6 @@ Part of _Configuration_
 
 No includes or notes. Part of _Operation_
 
-#### Master\_Hyrax\_Administrators\_Interface.adoc
-
-Part of _Operation_
-
 ### Security
 
 #### Master\_Hyrax\_Secure\_Installation\_Guidelines.adoc

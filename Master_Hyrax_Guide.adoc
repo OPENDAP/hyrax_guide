@@ -61,10 +61,6 @@ NOTE: TODO Add information about configuration of the server so it starts automa
 [[start-and-stop-BES]]
 include::Hyrax_Starting_and_stopping_the_BES.adoc[lines="1,8..-1"]
 
-// The web GUI that enables an administrator to control the various parts of a Hyrax server.
-[[admin-interface]]
-include::Master_Hyrax_Administrators_Interface.adoc[lines="1,8..-1"]
-
 :leveloffset: -1
 include::Master_Hyrax_Security.adoc[lines="1,6..-1"]
 :leveloffset: +1

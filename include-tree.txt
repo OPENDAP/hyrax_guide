@@ -20,8 +20,7 @@ Master_Hyrax_Table_of_Contents.adoc
 	Master_Hyrax_Customizing_Hyrax.adoc
 	Master_Hyrax_Apache_Integration.adoc
 	Hyrax_Starting_and_stopping_the_BES.adoc
-	Master_Hyrax_Administrators_Interface.adoc
-	Master_Hyrax_Security.adoc	
+	Master_Hyrax_Security.adoc
 		Master_Hyrax_Secure_Installation_Guidelines.adoc
 		Master_Hyrax_User_Authentication.adoc
 		DAP_Clients_Authentication.adoc
