@@ -1,4 +1,3 @@
-sudo: required
 
 branches:
   only:
@@ -25,8 +24,6 @@ script:
     asciidoctor -a toc=left -a docinfo=shared -D /documents/output index.adoc
   - mv ./output/index.html ./output/Master_Hyrax_Guide.html
 
-after_error:
-  - docker logs asciidoc-to-html
 
 after_failure:
   - docker logs asciidoc-to-html
