@@ -8,7 +8,7 @@ notifications:
   email:
     - ndp@opendap.org
     - jgallagher@opendap.org
-    - "{GIT_USER_EMAIL}"
+    - "${GIT_USER_EMAIL}"
 
 services:
   - docker
