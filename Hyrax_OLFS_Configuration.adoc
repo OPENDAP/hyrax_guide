@@ -589,7 +589,7 @@ Example:
 == Viewers Service (`viewers.xml` file)
 
 The Viewers service provides, for each dataset, an HTML page that contains
-links to Java WebStart applications and to WebServices, such as WMS and WCS,
+links to Java WebStart applications and to WebServices, such as WMS,
 that can be used in conjunction with the dataset. The Viewers
 service is configured via the contents of the `viewers.xml` file, typically located
 at the following location: `/etc/olfs/viewers.xml`.

@@ -209,16 +209,6 @@ of a DAP 3.3 DDX. _Not currently in use._
 This XSLT can be used to filter documents so that only
 elements in a particular namespace are returned. _Not currently in use._
 
-|*wcs_coveragePage.xsl*|_$CATALINA_HOME/content/opendap/docs/xsl_|
-This XSLT is used by the prototype CEOP WCS gateway
-client to produce an HTML page with coverage details. _Not currently in
-use._
-
-|*wcs_coveragesList.xsl*|_$CATALINA_HOME/content/opendap/docs/xsl_|
-This XSLT is used by the prototype CEOP WCS gateway
-client to produce an HTML page with a list of available coverages. _Not
-currently in use._
-
 |*xmlToDapAttributes.xsl*|_$CATALINA_HOME/content/opendap/docs/xsl_|
 This XSLT can be used to covert any XML content into a
 set of specially encoded DAP Attributes. The resulting Attribute
