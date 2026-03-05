@@ -1,28 +1,35 @@
 sudo: required
+
 branches:
   only:
   - main
+
 notifications:
   email:
-  - ndp@opendap.org
-  - jgallagher@opendap.org
-  - "{GIT_USER_EMAIL}"
+    - ndp@opendap.org
+    - jgallagher@opendap.org
+    - "{GIT_USER_EMAIL}"
 
 services:
-- docker
+  - docker
+
 before_install:
-- mkdir -p output
-- docker pull asciidoctor/docker-asciidoctor
+  - mkdir -p output
+  - docker pull asciidoctor/docker-asciidoctor
+
 script:
-- GUIDE_VERSION=`cat VERSION`"-${TRAVIS_BUILD_NUMBER}"
-- echo ${GUIDE_VERSION}
-- cat Master_Hyrax_Guide.adoc | sed -e "s|GUIDE_VERSION|${GUIDE_VERSION}|g" > index.adoc
-- docker run -v $TRAVIS_BUILD_DIR:/documents/ --name asciidoc-to-html asciidoctor/docker-asciidoctor
-  asciidoctor -a toc=left -a docinfo=shared -D /documents/output index.adoc
-- mv ./output/index.html ./output/Master_Hyrax_Guide.html
+  - GUIDE_VERSION=`cat VERSION`"-${TRAVIS_BUILD_NUMBER}"
+  - echo ${GUIDE_VERSION}
+  - cat Master_Hyrax_Guide.adoc | sed -e "s|GUIDE_VERSION|${GUIDE_VERSION}|g" > index.adoc
+  - docker run -v $TRAVIS_BUILD_DIR:/documents/ --name asciidoc-to-html asciidoctor/docker-asciidoctor
+    asciidoctor -a toc=left -a docinfo=shared -D /documents/output index.adoc
+  - mv ./output/index.html ./output/Master_Hyrax_Guide.html
+
 after_error:
-- docker logs asciidoc-to-html
+  - docker logs asciidoc-to-html
+
 after_failure:
-- docker logs asciidoc-to-html
+  - docker logs asciidoc-to-html
+
 after_success:
-- ./travis/deploy_to_gh_pages.sh
+  - ./travis/deploy_to_gh_pages.sh
