@@ -16,13 +16,21 @@ before_install:
   - mkdir -p output
   - docker pull asciidoctor/docker-asciidoctor
 
-script:
-  - GUIDE_VERSION=`cat VERSION`"-${TRAVIS_BUILD_NUMBER}"
-  - echo ${GUIDE_VERSION}
-  - cat Master_Hyrax_Guide.adoc | sed -e "s|GUIDE_VERSION|${GUIDE_VERSION}|g" > index.adoc
-  - docker run -v $TRAVIS_BUILD_DIR:/documents/ --name asciidoc-to-html asciidoctor/docker-asciidoctor
-    asciidoctor -a toc=left -a docinfo=shared -D /documents/output index.adoc
-  - mv ./output/index.html ./output/Master_Hyrax_Guide.html
+
+stages:
+  - name: build
+
+jobs:
+  include:
+    - stage: build
+      name: "check"
+      script:
+        - GUIDE_VERSION=`cat VERSION`"-${TRAVIS_BUILD_NUMBER}"
+        - echo ${GUIDE_VERSION}
+        - cat Master_Hyrax_Guide.adoc | sed -e "s|GUIDE_VERSION|${GUIDE_VERSION}|g" > index.adoc
+        - docker run -v $TRAVIS_BUILD_DIR:/documents/ --name asciidoc-to-html asciidoctor/docker-asciidoctor
+          asciidoctor -a toc=left -a docinfo=shared -D /documents/output index.adoc
+        - mv ./output/index.html ./output/Master_Hyrax_Guide.html
 
 
 after_failure:
