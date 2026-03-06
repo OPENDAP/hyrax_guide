@@ -72,11 +72,4 @@ a section devoted to http://docs.opendap.org/index.php/Developer_Info[Developer
 Information] specific to our software and the development process. You can
 find information there about developing your own modules for Hyrax.
 
-== WCS Installation
-
-The WCS 2 service comes bundled as part of Hyrax-1.14.0 and newer.
-For more information about configuring WCS with your installation of Hyrax,
-please refer to the <<WCS_installation_guide, WCS Installation Guide>> that
-appears later in this document.
-
 
