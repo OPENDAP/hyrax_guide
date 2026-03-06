@@ -31,14 +31,13 @@ jobs:
         - docker run -v $TRAVIS_BUILD_DIR:/documents/ --name asciidoc-to-html asciidoctor/docker-asciidoctor
           asciidoctor -a toc=left -a docinfo=shared -D /documents/output index.adoc
         - mv ./output/index.html ./output/Master_Hyrax_Guide.html
+        - ls -l ./output/Master_Hyrax_Guide.html
+        - head ./output/Master_Hyrax_Guide.html
 
 
 after_failure:
   - docker logs asciidoc-to-html
 
-#after_success:
-#  - ./travis/deploy_to_gh_pages.sh
-#
 deploy:
   - provider: script
     script:
