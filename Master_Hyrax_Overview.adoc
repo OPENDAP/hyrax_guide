@@ -132,12 +132,6 @@ image::HyraxArchitecture.jpg[]
  * *JSON responses:*
    <<hyrax-json, Both metadata and data are now available in a JSON encoding.>>
 
- * *w10n:*
-  Hyrax comes with a complete w10n service stack. W10n navigation is
-  supported through the default catalog where all datasets and
-  "structure" variables appear as graph nodes. Data can be acquired for
-  atomic types or arrays of atomic types in a number of formats.
-
 //The subscribe link doesn't seem to work -ACP
 * *Feature Request:*
   If there is a feature you would like to see but don't, let us know:
