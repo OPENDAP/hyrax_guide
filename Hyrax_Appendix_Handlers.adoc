@@ -39,28 +39,12 @@ include::./handlers/BES_Modules_FileOut_GDAL.adoc[lines="1,6..-1", leveloffset=+
 [[hyrax-json]]
 include::./handlers/Hyrax_JSON.adoc[lines="1,6..-1", leveloffset=+1]
 
-// Special handlers
-
-// I moved the aggregation stuff (NCML module) all to its own
-// appendix. jhrg 9/14/17
-// 
-// NOTE: Some of this overlaps with the Appendix on Aggregation.
-// include::./handlers/BES_Modules_NcML_Module.adoc[lines="1,8..-1"]
-
-NOTE: Maybe this should its own own Appendix - just like Server
-functions and aggregations which are really loaded in via the module
-system, get their own appendix
-
-[[gateway-module]]
-include::./handlers/BES_Modules_Gateway_Module.adoc[lines="1,6..-1", leveloffset=+1]
 
 NOTE: I think we should group all the 'other services' that Hyrax provides
 so that it's obvious that's what's going on. The server provides the DAP API,
 but it also provides the Gateway service, Aggregation service, and WMS.
 All these services have their own web API.
 
-[[gateway-service]]
-include::./handlers/Gateway_Service.adoc[lines="1,6..-1", leveloffset=+1]
 
 [[freeform-data-handler]]
 include::./handlers/Hyrax_Appendix_FreeForm_Data_Handler.adoc[leveloffset=+1]
