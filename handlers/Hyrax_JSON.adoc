@@ -13,18 +13,7 @@ two prototype encodings.
 
 NOTE: JSON responses work only with DAP2.
 
-The first, and most likely the most useful, is based on the
-http://w10n.org/spec/[w10n specification] as
-https://podaac.jpl.nasa.gov/sites/default/files/content/PODAAC_Documentation/white-paper-w10n-for-earth-science.v1.1.0.pdf[realized by the good folks at
-JPL]. This encoding utilizes an _abstract_ model to capture the
-structure of the dataset and it's metadata. In this model the properties
-of the JSON object are made of a controlled vocabulary. This means that
-clients utilizing these responses can always "know" what to look for in
-each returned object. No matter what dataset is being accessed the
-client has a consistent mechanism for extracting variable names and
-values.
-
-The second encoding utilizes an "instance" representation model wherein
+The JSON encoding utilizes an "instance" representation model wherein
 the datasets variable names are used to create the properties of the
 returned object. This means that each dataset potentially has a
 different set of properties and that client software must be written to
@@ -34,95 +23,22 @@ clients that can work with these data. However since the variable names
 form the dataset become JSON properties there is no promise that the
 JSON objects will actually be valid as variable names in DAP datasets
 have few content restriction and the JSON property names must be valid
-Javascript variable names. Because of this this second representation
+Javascript variable names. Because of this second representation
 probably doesn't have the required flexibility to become an official
 JSON representation for the DAP.
 
-The intention is to develop this work (in particular the w10n
-representation) into a DAP4 extension that defines the JSON
+The intention is to develop this work into a DAP4 extension that defines the JSON
 representation for the DAP4 data and metadata responses.
 
-=== Details
-
-==== Data Type Transform
-
-w10n ::
-  The w10n data model views the world as a directed graph of *nodes* and
-  **leaves**. This view starts at the catalog level and continues into
-  the structure of the datasets.
-  +
-  * Only leaves are allowed to have data.
-  * Both nodes and leaves have metadata (attributes).
-  * Leaf data must be transmittable as either a single value, or an
-  N-dimensional array of values, of a simple type.
-  +
-  Simple Types ;;
-    *f* - Floating point value
-
-This means that only DAP arrays of simple types and instances of simple
-types may be represented as leaves. Everything else must be a node.
-
-Since the DAP data model also can be seen as a directed graph the
-mapping is nearly complete.
-
-* There may be incomplete matching with type space of the simple types
-supported in both models.
-
-. Simple Types Type Map
-[width="100%",cols="50%,50%",options="header",stripes=even]
-|===================
-|DAP Type |w10n Type
-|Byte |
-|Int16 |
-|UInt16 |
-|Int32 |
-|UInt32 |
-|Float32 |f
-|Float64 |
-|String |
-|Url |
-|===================
-
-(**Needed**: __A complete type list from w10n - In
-http://w10n.org/spec/w10n-draft-20091228.html#anchor17[section 5.2.2 of
-the w10n spec.] the *type* property for the leaf response is identified
-but there is no listing of the allowed values presented. We are
-expecting to get this information from JPL by 08/18/2014 at which point
-I will complete this section and update the code to reflect the mapping
-as stated here.__)
-
-===== Unmapped Types
-
-* The DAP allows arrays of complex types like structures and grids. No
-w10n representation for this if offered.
-
-==== Navigation
-
-W10n defines a navigation component that allows the user to traverse the
-directed graph of a collection of dataset holdings on the server. This
-work is focused not on implementing the collection navigation aspects of
-the w10n standard but rather on the JSON data and metadata
-representations. Thus, DAP request URLs (and alternately HTTP Accepts
-headers received from the requesting client) are used here to solicit
-JSON encoded responses from the server. The use of DAP constraint
-expressions (i.e. query strings) in the regular DAP manner in
-conjunction with the DAP URL will have the typical effects on the
-result. Subsetting by index, selection of variables, and subsetting by
-value (where supported) will control what variables and what parts of
-variables will be returned in the response.
-
-==== Soliciting the JSON Response
+== Soliciting the JSON Response
 
 Let
+[source]
+----
 datasetUrl=http://test.opendap.org/dap/data/nc/coads_climatology.nc
+----
 
-==== DAP2 requests
-
- DAP2 w10n JSON Data request ::
-   Entire Dataset ;;
-    datasetUrl.json
-   Just the variable named "COADSX" ;;
-    datasetUrl.json?COADSX
+=== DAP2 requests
 
  DAP2 Instance Object JSON Data request ::
    Entire Dataset ;;
@@ -961,7 +877,7 @@ The JSON-LD is dynamically built from the metadata. It uses the MDS metadata if 
 
 //Talk about how to disable, maybe?
 
-The server ships with this feature enabled. By default the publisher information 
+The server ships with this feature enabled. By default, the publisher information
 is set to OPeNDAP:
 
 ----

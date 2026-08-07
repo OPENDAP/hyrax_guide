@@ -301,47 +301,6 @@ before returning the result to the requesting client.
 This attribute has a default value of `false`.
 --
 
-=== `<GatewayService>` (optional)
-
-Directs requests to the <<gateway-service, Gateway Service>>:
-
-[source,xml]
-----
-<GatewayService  prefix="gateway" useMemoryCache="true" />
-----
-
-The following are the attributes of `<GatewayService>`:
-
-* *`prefix` attribute (optional)*: Sets location of the gateway service
-in the URI space serviced by Hyrax. For example, if the prefix is `gateway`,
-then `http://localhost:8080/opendap/gateway/` should give you the
-Gateway Service page. This attribute's default value is `gateway`.
-
-* *`useMemoryCache` attribute (optional)*:
-See <<useMemoryCacheAttribute,the previous section>> for more information.
-
-=== [.line-through]##`<UseDAP2ResourceUrlResponse />` element (DEPRECATED)##
-The  `UseDAP2ResourceUrlResponse` key has been deprecated.
-
-Use `DatasetUrlResponse` and `DataRequestForm` to determine what kind of
-response Hyrax will return for the dataset URL.
-
-[.line-through]##This element controls the type of response that Hyrax will provide to a client's request
-for the data resource URL:##
-
-[.line-through]##`<UseDAP2ResourceUrlResponse />`##
-
-[.line-through]##When this element is present, the server will respond to
-requests for data resource URLs by returning the DAP2 response
-(either an error or the underlying data object). Commenting out or removing
-the `<UseDAP2ResourceUrlResponse />` element will cause the server to return the
-DAP4 DSR response when a dataset resource URL is requested.##
-
-[.line-through]##NOTE: DAP2 responses are not clearly defined by any specification, whereas DAP4 DSR
-responses are well-defined by a specification.##
-
-[.line-through]##This element has no attributes or child elements and is enabled by default.##
-
 === `<DatasetUrlResponse type="download|requestForm|dsr"/>`
 
 The `DatasetUrlResponse` configuration element is used to configure the type of response
