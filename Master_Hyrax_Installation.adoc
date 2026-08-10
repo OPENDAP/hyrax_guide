@@ -34,7 +34,6 @@ Installing a Hyrax binary release typically involves the following steps
 . **Install the `BES` RPM**.
 . **Unpack the `OLFS` distribution file**, and install the `opendap.war`
   file into your Tomcat instance's `webapps` directory.
-. (optional) `ncWMS2`.  You will need to use the https://reading-escience-centre.github.io/edal-java/[EDAL] web page to locate the latest `ncWMS2` “Servlet Container” software bundle as a WAR file. Install it into the same Tomcat instance as the OLFS. See https://opendap.github.io/hyrax_guide/Master_Hyrax_Guide.html#WMS_Service[here for more instructions].
 
 TIP: The detailed download and installation instructions for Hyrax are
 published on the download page for each release of the server. Find

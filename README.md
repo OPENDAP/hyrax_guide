@@ -159,8 +159,6 @@ Part of _Troubleshooting_
 
 ### Appendices
 
-#### Master\_Hyrax\_WMS.adoc
-
 Appendix A, does not include files.
 
 #### Master\_Handlers.adoc

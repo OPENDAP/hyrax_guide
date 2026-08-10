@@ -15,7 +15,7 @@ provide WMS services for all of it's appropriate holdings.
 
 In an instance of the ncWMS2 WMS server, a Dynamic Service is configured
 that points to a Hyrax server. This allows the ncWMS2 instance to access
-all of the holdings of the DAP server. However, the ncWMS2 does not
+all the holdings of the DAP server. However, the ncWMS2 does not
 "crawl" or "discover" or in any other way catalog or inventory the DAP
 server. Instead, the user configures the Hyrax server to add the WMS
 service to its catalogs and services content. Hyrax then directs WMS
