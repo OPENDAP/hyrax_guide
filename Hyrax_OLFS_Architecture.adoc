@@ -956,7 +956,7 @@ there is a problem to analyze).
 === Viewers Servlet (**viewers.xml** file)
 
 The Viewers servlet provides, for each dataset, an HTML page containing
-links to Java WebStart applications and to WebServices (such as WMS)
+links to Java WebStart applications and to WebService
 that can be utilized in conjunction with the dataset. The Viewers
 servlet is configured via the contents of the *viewers.xml* file located
 in the persistent content directory _$CATALINA_HOME/content/opendap_.
@@ -970,30 +970,19 @@ in the persistent content directory _$CATALINA_HOME/content/opendap_.
 
 ===== Example Configuration:
 
+[source,xml]
 ----
 <ViewersConfig>
- 
     <JwsHandler className="opendap.webstart.IdvViewerRequestHandler">
         <JnlpFileName>idv.jnlp</JnlpFileName>
     </JwsHandler>
- 
+
     <JwsHandler className="opendap.webstart.NetCdfToolsViewerRequestHandler">
         <JnlpFileName>idv.jnlp</JnlpFileName>
     </JwsHandler>
- 
+
     <JwsHandler className="opendap.webstart.AutoplotRequestHandler" />
- 
-    <WebServiceHandler className="opendap.viewers.NcWmsService" serviceId="ncWms" >
-        <applicationName>Web Mapping Service</applicationName>
-        <NcWmsService href="/ncWMS/wms" base="/ncWMS/wms" ncWmsDynamicServiceId="lds" />
-    </WebServiceHandler>
- 
-    <WebServiceHandler className="opendap.viewers.GodivaWebService" serviceId="godiva" >
-        <applicationName>Godiva WMS GUI</applicationName>
-        <NcWmsService href="http://localhost:8080/ncWMS/wms" base="/ncWMS/wms" ncWmsDynamicServiceId="lds"/>
-        <Godiva href="/ncWMS/godiva2.html" base="/ncWMS/godiva2.html"/>
-    </WebServiceHandler>
- 
+
 </ViewersConfig>
 ----
 

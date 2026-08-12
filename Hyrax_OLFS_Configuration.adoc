@@ -548,8 +548,7 @@ Example:
 == Viewers Service (`viewers.xml` file)
 
 The Viewers service provides, for each dataset, an HTML page that contains
-links to Java WebStart applications and to WebServices, such as WMS,
-that can be used in conjunction with the dataset. The Viewers
+links to Java WebStart applications and to WebServices can be used in conjunction with the dataset. The Viewers
 service is configured via the contents of the `viewers.xml` file, typically located
 at the following location: `/etc/olfs/viewers.xml`.
 
@@ -566,28 +565,17 @@ The following is an example configuration:
 [source,xml]
 ----
 <ViewersConfig>
- 
+
     <JwsHandler className="opendap.webstart.IdvViewerRequestHandler">
         <JnlpFileName>idv.jnlp</JnlpFileName>
     </JwsHandler>
- 
+
     <JwsHandler className="opendap.webstart.NetCdfToolsViewerRequestHandler">
         <JnlpFileName>idv.jnlp</JnlpFileName>
     </JwsHandler>
- 
+
     <JwsHandler className="opendap.webstart.AutoplotRequestHandler" />
- 
-    <WebServiceHandler className="opendap.viewers.NcWmsService" serviceId="ncWms">
-        <applicationName>Web Mapping Service</applicationName>
-        <NcWmsService href="/ncWMS/wms" base="/ncWMS/wms" ncWmsDynamicServiceId="lds" />
-    </WebServiceHandler>
- 
-    <WebServiceHandler className="opendap.viewers.GodivaWebService" serviceId="godiva">
-        <applicationName>Godiva WMS GUI</applicationName>
-        <NcWmsService href="http://localhost:8080/ncWMS/wms" base="/ncWMS/wms" ncWmsDynamicServiceId="lds"/>
-        <Godiva href="/ncWMS/godiva2.html" base="/ncWMS/godiva2.html"/>
-    </WebServiceHandler>
- 
+
 </ViewersConfig>
 ----
 

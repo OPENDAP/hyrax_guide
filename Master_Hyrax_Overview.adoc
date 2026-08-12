@@ -126,9 +126,6 @@ image::HyraxArchitecture.jpg[]
   be customized using CSS and XSL. You can add your organizations logo
   and specialize the colors and fonts in the presentation of data sets.
 
- * *WMS services:*
-   <<WMS_Service, Hyrax now supports WMS services via integration with ncWMS.>>
-
  * *JSON responses:*
    <<hyrax-json, Both metadata and data are now available in a JSON encoding.>>
 
@@ -162,7 +159,6 @@ facing) part of the server.
 
 ==== Additional Java Modules that use the BES
 
-* <<WMS_Service, WMS>> - Web Mapping Service via integration with ncWMS.
 * <<user_specified_aggregation, Aggregation enhancements>>
 
 ==== Reference Documentation
